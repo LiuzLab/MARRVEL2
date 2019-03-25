@@ -1,0 +1,51 @@
+<!-- OMIM starts -->
+<h3 class="mb-3">OMIM</h3>
+<!--   1. OMIM summary -->
+<div class="row mb-3">
+  <div class="col-12">
+    <p class="mt-0 d-table">
+      <mat-icon class="d-table-cell align-top"
+        matTooltip="MARRVEL's comment" matTooltipPosition="above"
+      >insert_comment</mat-icon>
+      <span class="d-table-cell pl-2">
+        There are
+        <strong appUnit [count]="data.phenotypes.length" unit="phenotype"></strong>
+        associated with {{ gene.symbol }} and
+        <strong appUnit [count]="data.allelicVariants.length" unit="reported allele"></strong>
+        from OMIM.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non arcu tincidunt.
+      </span>
+    </p>
+  </div>
+</div>
+<!--   2. OMIM text description -->
+<div class="row mb-3">
+  <div class="col-12">
+    <h4 class="mb-3">OMIM Description of {{ gene.symbol }}</h4>
+    <p class="mt-0 mb-3">{{ data.title }}</p>
+    <p class="e2e-intter-html-bound mt-0 mb-3" [innerHTML]="data.description"></p>
+  </div>
+</div>
+
+<!--   3. OMIM phenotypes -->
+<div class="row mb-3">
+  <div class="col-12">
+    <h4 class="mb-3">
+      Disease/Phenotype Associated with {{ gene.symbol }} curated by OMIM
+      (<span appUnit [count]="data.phenotypes.length" unit="Phenotype"></span>)
+    </h4>
+    <app-omim-phenotypes [data]="data.phenotypes"></app-omim-phenotypes>
+  </div>
+</div>
+
+<!--   3. OMIM phenotypes -->
+<div class="row mb-3">
+  <div class="col-12">
+    <h4 class="mb-3">
+      Reported Alleles with {{ gene.symbol }} curated by OMIM
+      (<span appUnit [count]="data.allelicVariants.length" unit="Allele"></span>)
+    </h4>
+    <app-omim-alleles [data]="data.allelicVariants"></app-omim-alleles>
+  </div>
+</div>
+<!-- OMIM ends -->

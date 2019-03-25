@@ -1,0 +1,89 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$MARRVEL-brand: (
+  50 : #effaf9,
+  100 : #d8f2ef,
+  200 : #bee9e5,
+  300 : #a3e0db,
+  400 : #90dad3,
+  500 : #7cd3cb,
+  600 : #74cec6,
+  700 : #69c8be,
+  800 : #5fc2b8,
+  900 : #4cb7ac,
+  A100 : #ffffff,
+  A200 : #e0fffc,
+  A400 : #adfff6,
+  A700 : #94fff3,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #000000,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$MARRVEL-primary: mat-palette($MARRVEL-brand);
+$MARRVEL-accent: mat-palette($mat-pink, A200, A100, A400);
+$MARRVEL-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$MARRVEL-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$MARRVEL-theme: mat-light-theme($MARRVEL-primary, $MARRVEL-accent, $MARRVEL-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($MARRVEL-theme);
+
+// Define an alternate dark theme.
+$MARRVEL-dark-primary: mat-palette($MARRVEL-brand);
+$MARRVEL-dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$MARRVEL-dark-warn:    mat-palette($mat-deep-orange);
+$MARRVEL-dark-theme:   mat-dark-theme($MARRVEL-dark-primary, $MARRVEL-dark-accent, $MARRVEL-dark-warn);
+
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.MARRVEL-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.MARRVEL-dark-theme {
+  @include angular-material-theme($MARRVEL-dark-theme);
+  $primary: mat-color($MARRVEL-dark-primary);
+  $primary-darker: mat-color($MARRVEL-dark-primary, darker);
+  a, .link-primary {
+    color: $primary;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a:hover, a:active, .link-primary:hover, .link-primary:active {
+    color: $primary-darker;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .color-primary {
+    color: $primary;
+  }
+  body, p, h1, h2, h3, h4, h5 { color: rgba(255,255,255, 0.4); }
+}

@@ -1,0 +1,120 @@
+.page-header-section {
+  text-align: center;
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+.page-header-headline h2 {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  margin: 15px 0 25px 0;
+}
+.page-header-buttons {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.brand img {
+  width: 125px;
+  height: auto;
+  margin-bottom: 10px;
+}
+.brand .title {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 56px;
+  margin: 15px 0 15px 0;
+  vertical-align: middle;
+  font-weight: 300;
+}
+.page-header-headline .subtitle {
+  font-size: 1em;
+  color: hsla(0,0%,100%,.6);
+}
+
+.page-footer {
+  background: #222;
+  color: hsla(0,0%,100%,.6);
+  font-size: 0.8rem;
+  padding-left: 3rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.divider-small {
+  height: 5px;
+  width: 70px;
+  background-color: #222;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg-gray {
+  background-color: #fafafa;
+}
+.bg-dark-gray {
+  background-color: #222;
+}
+.bg-dark, .bg-dark-gray, .text-white {
+  color: rgba(255,255,255,.75);
+}
+.bg-dark button, .bg-dark-gray button {
+  color: initial;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+.text-w-400 {
+  font-weight: 400 !important;
+}
+
+.mat-button, .mat-raised-button {
+padding-left: 48px;
+padding-right: 48px;
+padding-top: 8px;
+padding-bottom: 8px;
+font-size: 1em;
+font-weight: 400;
+}
+
+
+a:not(:last-child) > .sponsor {
+  margin-right: 100px;
+}
+
+.sponsor {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -webkit-transition: .3s ease-in-out;
+  -moz-filter: grayscale(100%);
+  -moz-transition: .3s ease-in-out;
+  -o-filter: grayscale(100%);
+  -o-transition: .3s ease-in-out;
+}
+.sponsor:hover {
+  filter: grayscale(0%);
+  -webkit-filter: grayscale(0%);
+  -webkit-transition: .3s ease-in-out;
+  -moz-filter: grayscale(0%);
+  -moz-transition: .3s ease-in-out;
+  -o-filter: grayscale(0%);
+  -o-transition: .3s ease-in-out;
+}
+
+.sponsor img {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-height: 120px;
+  max-width: 120px;
+}

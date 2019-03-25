@@ -1,0 +1,64 @@
+.actions {
+  position: fixed;
+  top: 0px;
+  height: 64px;
+  width: 100%;
+  padding: 0px 16px;
+  background-color: rgb(49, 49, 49);
+}
+.actions button {
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 12px;
+}
+
+.content {
+  padding: 1em 24px 0px 24px;
+  margin-top: 64px;
+}
+
+h4 {
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  font-size: 0.7em;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+}
+
+.closed .menu .rest {
+  display: none;
+}
+.closed h4,
+.closed .input-detail {
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+ul, ul.menu {
+  list-style: none;
+  padding: 0;
+}
+.menu li {
+  padding: 1em 32px;
+  margin: 0 -24px;
+  height: 3em;
+}
+.opened .menu li:hover {
+  background-color: rgb(49,49,49);
+}
+.closed .menu li {
+  border-radius: 100%;
+  background-color: rgba(0,0,0,0.15);
+  padding: 0.9em;
+  width: 2.7em;
+  height: 2.7em;
+  text-align: center;
+  line-height: 1;
+  margin-left: -10px;
+  margin-bottom: 0.3em;
+  font-weight: 600;
+}
+.closed .menu li:hover {
+  border-radius: 100%;
+  background-color: rgba(123, 209, 205, 0.15);
+}

@@ -1,0 +1,97 @@
+<div class="text-center" *ngIf="!compact">
+  <div class="row mb-3">
+    <div class="col-2 mb-10px">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Input Type</mat-label>
+        <select matNativeControl [(ngModel)]="selectedInputType" (change)="onInputTypeChange($event)" name="inputType">
+          <option value="gene" selected>Gene</option>
+          <option value="protein">Protein</option>
+        </select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-10" *ngIf="selectedInputType == 'gene'">
+      <mat-form-field appearance="outline" class="w-100" id="geneInputFormField">
+        <mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
+        <mat-chip-list #geneChipList>
+          <mat-chip
+            *ngIf="gene"
+            removable
+            (removed)="removeGene(gene)"
+          >
+            {{ gene.symbol }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+        <input matInput
+          #geneInput
+          [formControl]="geneInputCtrl"
+          (input)="onGeneInput($event)"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="geneChipList"
+          matChipInputAddOnBlur
+          (matChipInputTokenEnd)="addGene($event)"
+        >
+        <mat-hint align="start"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
+      </mat-form-field>
+      
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">
+        <mat-option *ngFor="let aGene of geneSuggestion; let idx = index" [attr.data-index]='idx' [value]="idx">
+          <span class="text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
+          <span class="ml-0">{{ aGene.symbol.substr(geneKeyword.length) }}</span>
+          <span class="float-right text-muted">{{ aGene.name }}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+    <div class="col-10" *ngIf="selectedInputType == 'protein'">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Human Protein</mat-label>
+        <input matInput [(ngModel)]="protein">
+      </mat-form-field>
+    </div>
+
+    <div class="col-12" *ngIf="selectedInputType == 'gene'">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Human Variant (hg19)</mat-label>
+        <input matInput [(ngModel)]="variant">
+      </mat-form-field>
+    </div>
+
+
+    <div class="col-12 text-left search-box-example">
+      <mat-hint *ngIf="selectedInputType === 'gene'">
+        Example: 
+        <a href="/human/pair/26235/6:99365567T>C">6:99365567 T>C / FBXL4</a>
+        or
+        <a href="/human/variant/6:99365567T>C">6:99365567 T>C</a>
+        or
+        <a href="/human/gene/26235">FBXL4</a>
+        or
+        <a href="/human/variant/NM_012160.3:c.541A>G">NM_012160.3:c.541A>G</a>
+      </mat-hint>
+
+      <mat-hint *ngIf="selectedInputType === 'protein'">
+        Example:
+        <a href="/human/protein/IRF2BPL:p.Pro372Arg">IRF2BPL:p.Pro372Arg</a>,
+        <a href="/human/protein/IRF2BPL:p.P372R">IRF2BPL:p.P372R</a>,
+        <a href="/human/protein/IRF2BPL:p.Gln126*">IRF2BPL:p.Gln126*</a>
+      </mat-hint>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <button mat-flat-button	color="primary"
+    (click)="search()"
+    [disabled]="!((selectedInputType === 'gene' && (gene != null || variant != ''))
+      || (selectedInputType === 'protein' && protein != ''))"
+  >
+      Search
+    </button>
+  </div>
+</div>
+
+<div class="text-center" *ngIf="compact">
+  <button mat-icon-button>
+    <mat-icon aria-label="search">search</mat-icon>
+  </button>
+</div>

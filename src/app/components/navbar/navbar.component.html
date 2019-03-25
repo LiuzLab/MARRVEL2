@@ -1,0 +1,48 @@
+<mat-toolbar class="nav">
+  <a class="nav-link home" href="/">
+    <img alt="Home" src="../../../assets/img/marrvel.svg" title="Home" class="nav-logo">
+  </a>
+
+  <div>
+    <ul role="navigation">
+      <li class="nav-button-item">
+        <a class="nav-link" routerLink="/human" routerLinkActive="active-page" title="Human Search" >
+          <span class="nav-link-inner">Human Search</span>
+        </a>
+      </li>
+      <li class="nav-button-item">
+        <a class="nav-link" routerLink="/model" routerLinkActive="active-page" title="Model Search">
+          <span class="nav-link-inner">Model Search</span>
+        </a>
+      </li>
+
+      <li class="nav-button-item">
+        <a class="nav-link" routerLink="/about" routerLinkActive="active-page" title="About">
+          <span class="nav-link-inner">About</span>
+        </a>
+      </li>
+      <li class="nav-button-item">
+        <a class="nav-link" routerLink="/faq" routerLinkActive="active-page" title="FAQ">
+          <span class="nav-link-inner">FAQ</span>
+        </a>
+      </li>
+      <li class="nav-button-item">
+        <a class="nav-link" href="/doc" routerLinkActive="active-page" title="FAQ">
+          <span class="nav-link-inner">Feedback</span>
+        </a>
+      </li>
+      <li class="nav-button-item">
+        <a class="nav-link" href="/doc" routerLinkActive="active-page" title="FAQ">
+          <span class="nav-link-inner">API</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <span class="flex-spacer"></span>
+
+  <span class="nav-search-button" *ngIf="showSearch">
+    <app-search-box compact="true"></app-search-box>
+  </span>
+
+</mat-toolbar>

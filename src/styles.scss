@@ -1,0 +1,158 @@
+@import './theme.scss';
+@include angular-material-theme($MARRVEL-theme);
+$primary-palette: map-get($MARRVEL-theme, primary);
+/* You can add global styles to this file, and also import other style files */
+
+/********************
+ * Spacing
+ * bootstrap
+ * Section styling
+ * Text styling
+ * Form
+ * Table
+ * Misc.
+ */
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+  color: #333333;
+  line-height: 1.4;
+}
+h1, h2, h3, h4, h5 {
+  font-weight: 500;
+  margin: 0;
+}
+a, .link-primary {
+  color: mat-color($primary-palette, 700);
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover, a:active, .link-primary:hover, .link-primary:active {
+  color: mat-color($primary-palette, 900);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.color-primary {
+  color: mat-color($primary-palette);
+}
+
+.bg-light-gray {
+  background-color: #f8f8f8;
+}
+.bg-light-brand {
+  background-color: mat-color($primary-palette, 50);
+}
+.bg-dark-gray {
+  background-color: #222;
+}
+.bg-black {
+  background-color: #0f0f0f;
+}
+
+.mat-flat-button.mat-primary {
+  color: rgba(255,255,255,0.9);
+}
+
+/********************
+ * Spacing
+ */
+$spacePxAmounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100);
+$sides: (top, bottom, left, right); // Leave this variable alone
+
+@each $space in $spacePxAmounts {
+  @each $side in $sides {
+    .m#{str-slice($side, 0, 1)}-#{$space}px {
+      margin-#{$side}: #{$space}px !important;
+    }
+  
+    .p#{str-slice($side, 0, 1)}-#{$space}px {
+      padding-#{$side}: #{$space}px !important;
+    }
+  }
+}
+
+/********************
+ * bootstrap
+ */
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+@import "../node_modules/bootstrap/scss/bootstrap-grid";
+@import "../node_modules/bootstrap/scss/utilities";
+
+
+/********************
+ * Section styling
+ */
+.section-block {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  color: #5f5f5f;
+  font-size: 14px;
+}
+.section-block h2 {
+  color: #222;
+  margin-bottom: 40px;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0em;
+  line-height: 1.4;
+}
+.section-more {
+  float: right !important;
+  margin-top: 7px;
+  color: #999;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-decoration: none;
+  -webkit-transition: all 0.27s cubic-bezier(0.000, 0.000, 0.580, 1.000);
+  -moz-transition: all 0.27s cubic-bezier(0.000, 0.000, 0.580, 1.000);
+  -o-transition: all 0.27s cubic-bezier(0.000, 0.000, 0.580, 1.000);
+  -ms-transition: all 0.27s cubic-bezier(0.000, 0.000, 0.580, 1.000);
+  transition: all 0.27s cubic-bezier(0.000, 0.000, 0.580, 1.000);
+}
+
+.section-more .mat-icon {
+  vertical-align: middle;
+  margin-left: -7px;
+  font-weight: lighter;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+/********************
+ * Text styling
+ */
+ .text-uppercase {
+   text-transform: uppercase;
+ }
+
+/********************
+ * Form
+ */
+.mat-form-field-type-mat-chip-list .mat-form-field-infix {
+  padding: 0.7em 0 0.7em 0 !important;
+}
+
+/********************
+ * Table
+ */
+#human-result-container .mat-table {
+  background: #fbfbfb !important;
+}
+
+#human-result-container tr.mat-row:hover {
+  background: #f7f7f7 !important;
+}
+
+/********************
+ * Misc.
+ */
+.mat-drawer-container strong {
+  font-weight: 400;
+}

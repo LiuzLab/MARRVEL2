@@ -1,0 +1,200 @@
+<app-navbar></app-navbar>
+
+<div class="container pt-5 pb-5">
+    <h1>About MARRVEL</h1>
+    <h2>Paper</h2>
+    <p>Wang J, Al-Ouran R, Hu Y, Kim SY, Wan YW, Wangler MF, Yamamoto S, Chao HT, UDN Consortium, Comjean A, Mohr SE,
+      Perrimon N, Liu Z, Bellen HJ (2017) MARRVEL: integration of human and model organism genetic resources to facilitate
+      functional annotation of the human genome. American Journal of Human Genetics. doi:<a href="https://doi.org/10.1016/j.ajhg.2017.04.010">10.1016/j.ajhg.2017.04.010</a>&nbsp;PMID:<a
+        href="https://www.ncbi.nlm.nih.gov/pubmed/28502612">28502612</a></p>
+    <h2>Goal</h2>
+    <p>MARRVEL (<strong>M</strong>odel organism <strong>A</strong>ggregated <strong>R</strong>esources for <strong>R</strong>are
+      <strong>V</strong>ariant <strong>E</strong>xp<strong>L</strong>oration) aims to facilitate the use of public genetic
+      resources to prioritize rare human gene variants for study in model organisms. To facilitate the search process and
+      gather all the data in a simple display we extract data from human data bases (OMIM, ExAC, ClinVar, Geno2MP, DGV, and
+      DECIPHER) for efficient variant prioritization. The protein sequences for eight organisms (S. cerevisiae, S. pombe,
+      C. elegans, D. melanogaster, D. rerio, M. musculus, R. norvegicus, and H. sapiens) are aligned with highlighted
+      protein domain information via collaboration with <a href="http://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl">DIOPT</a>.
+      The key biological and genetic features are then extracted from existing model organism databases (SGD, PomBase,
+      WormBase, FlyBase, ZFIN, MGI, and RGD).</p>
+    <h2>Background and Significance</h2>
+    <p>As whole exome and genome sequencing are incorporated into personal health care, we are faced with an abundance of
+      rare variants of unknown function. The lack of in vivo functional studies of variants further increases the
+      difficulty in interpreting sequencing data and results in on average 30% genetic diagnostic rate. To understand the
+      impact of these human variants and to increase the rate of diagnosis, it is critical to gather knowledge about the
+      gene and the variant that helps us determine the significance of the findings. This information can be found in human
+      genetic data sets as well as molecular, biological, and phenotypic data generated in a variety of genetic model
+      organisms. Once this information is gathered and analyzed, it sets the stage for diagnostic interpretation and in
+      depth studies of novel pathogenic mechanisms.</p>
+    <h2>Overview of the System flow</h2>
+    <p>Patients with undiagnosed diseases with possible underlying genetic etiology are increasingly being sent for Whole
+      Exome Sequencing or Whole Genome Sequencing. The result of the sequencing can produce a long list of possible
+      candidate variants. Starting from a candidate human variant that may be disease causing, MARRVEL allows simultaneous
+      collection of data from multiple sources that are used to determine how likely a variant can cause a rare genetic
+      disease. Furthermore, we aim to guide the variant analysis further by transitioning to model organisms. In
+      collaboration with Nobert Perrimon’s lab, we examine the conservation of the specific variant of interest in
+      homologs/orthologs across model organisms and provide a concise summary of what is known about these genes. This is
+      an important process to select the appropriate model organism to study candidate genes and variants.</p>
+    <p>In order to most efficiently utilize limited time and resources, MARRVEL aggregates several key public resources
+      used to prioritize how likely a variant may be pathogenic. These resources become especially valuable for discovering
+      rare genetic disease genes and together comprise a rich source of information for new disease gene discovery. The
+      next stage of MARRVEL’s analysis is to curate information available for candidate genes and variants across multiple
+      model organisms to evaluate conservation and assess what is already known about the homologous genes in model
+      organisms.</p>
+    <p>For MARRVEL’s first set of data describing variants of interest, we selected the following 5 core public human
+      genetics databases: OMIM, ExAC, ClinVar, Geno2MP, DGV, DECIPHER. These databases are useful for determining allele
+      frequency of the variant of interest and if individuals with the variant exhibit similar phenotypes as the patient of
+      interest. Additional databases will be added as they become available. In our interface, we collect and curated the
+      critical information used for variant prioritization.</p>
+    <p>MARRVEL’s second set of data facilitates variant analysis in model organisms by providing known functional data and
+      pursue further gene function annotation. In collaboration with Nobert Perrimon’s team, we have expanded the tools to:
+      (1) Identify potential orthologs in 6 model organisms (budding yeast, fission yeast, worm, fly, zebrafish, mouse, and
+      rat) via DIOPT (DRSC Integrative Ortholog Prediction Tool), (2) align model organism protein sequences and annotate
+      protein domains and amino acid change of interest for conservation analysis, and (3) provide experimental evidence
+      supported gene ontology and tissue expression pattern.</p>
+    <h2>Team members and Collaborators</h2>
+    <h3>Team:<br></h3>
+    <p><strong>Julia Wang <br>
+        Rami Al-Ouran <br>
+        Yanhui (Claire) Hu <br>
+        Seon Young Kim <br></strong>Dongxue Mao <br>
+      Sasidhar Pasupuleti<br>
+      Naveen Manoharan <br>
+      Ying-Wooi Wan <br>
+      Michael Wangler <br>
+      Shinya Yamamoto <br>
+      Hsiao-Tuan Chao <br>
+      Aram Comjean <br>
+      Stephanie Mohr <br>
+      Norbert Perrimon <br>
+      Hugo Bellen <br>
+      Zhandong Liu</p>
+    <h2>Acknowledgements</h2>
+    <h3>Databases</h3>
+    <h4>OMIM</h4>
+    <p>Online Mendelian Inheritance in Man, OMIM®. McKusick-Nathans Institute of Genetic Medicine, Johns Hopkins University
+      (Baltimore, MD), October 2016. World Wide Web URL: https://omim.org/</p>
+    <h4>ExAC and gnomAD</h4>
+    <p>Lek, M., Karczewski, K. J., Minikel, E. V., Samocha, K. E., Banks, E., Fennell, T., … Consortium, E. A. (2016).
+      Analysis of protein-coding genetic variation in 60,706 humans. Nature, 536(7616), 285–291.<br>
+      <a href="http://doi.org/10.1038/nature19057">http://doi.org/10.1038/nature19057</a><br>
+      The authors would like to thank the Exome Aggregation Consortium and the groups that provided
+      exome variant data for comparison. A full list of contributing groups can be found at
+      http://exac.broadinstitute.org/about.</p>
+    <h4>IMPC</h4>
+    <p>Dickinson ME, Flenniken AM, Ji X, Teboul L, Wong MD, White JK, Meehan TF, Weninger WJ, Westerberg H, Adissu H, Baker
+      CN, Bower L, Brown JM, Caddle LB, Chiani F, Clary D, Cleak J, Daly MJ, Denegre JM, Doe B, Dolan ME, Edie SM, Fuchs H,
+      Gailus-Durner V, Galli A, Gambadoro A, Gallegos J, Guo S, Horner NR, Hsu CW, Johnson SJ, Kalaga S, Keith LC, Lanoue
+      L, Lawson TN, Lek M, Mark M, Marschall S, Mason J, McElwee ML, Newbigging S, Nutter LM, Peterson KA, Ramirez-Solis R,
+      Rowland DJ, Ryder E, Samocha KE, Seavitt JR, Selloum M, Szoke-Kovacs Z, Tamura M, Trainor AG, Tudose I, Wakana S,
+      Warren J, Wendling O, West DB, Wong L, Yoshiki A, International Mouse Phenotyping Consortium, Jackson Laboratory,
+      Infrastructure Nationale PHENOMIN, Institut Clinique de la Souris (ICS), Charles River Laboratories, MRC Harwell,
+      Toronto Centre for Phenogenomics, Wellcome Trust Sanger Institute, RIKEN BioResource Center, MacArthur DG,
+      Tocchini-Valentini GP, Gao X, Flicek P, Bradley A, Skarnes WC, Justice MJ, Parkinson HE, Moore M, Wells S, Braun RE,
+      Svenson KL, de Angelis MH, Herault Y, Mohun T, Mallon AM, Henkelman RM, Brown SD, Adams DJ, Lloyd KC, McKerlie C,
+      Beaudet AL, Bućan M, Murray SA.<br>
+      <a href="https://www.nature.com/articles/nature19356">High-throughput discovery of novel developmental phenotypes</a><br>
+      Nature 537, 508–514 (22 September 2016)<br>
+      PMID: 27626380<br>
+      DOI:10.1038/nature19356</p>
+    <h4>Monarch</h4>
+    <p>Mungall, Christopher J., Julie A. McMurry, Sebastian Köhler, James P. Balhoff, Charles Borromeo, Matthew Brush, Seth
+      Carbon, et al. 2017.
+      “The Monarch Initiative: An Integrative Data and Analytic Platform Connecting Phenotypes to Genotypes across
+      Species.” Nucleic Acids Research 45 (D1): D712–22.<br></p>
+    <h4>ClinVar</h4>
+    <p>Landrum MJ, Lee JM, Benson M, Brown G, Chao C, Chitipiralla S, Gu B, Hart J, Hoffman D, Hoover J, Jang W, Katz K,
+      Ovetsky M, Riley G, Sethi A, Tully R, Villamarin-Salomon R, Rubinstein W, Maglott DR. ClinVar: public archive of
+      interpretations of clinically relevant variants. Nucleic Acids Res. 2015 Nov 17. PubMed PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/26582918">26582918</a>.</p>
+    <h4>Geno2MP</h4>
+    <p><a href="http://geno2mp.gs.washington.edu">Geno2MP, NHGRI/NHLBI University of Washington-Center for Mendelian
+        Genomics (UW-CMG), Seattle, WA.</a><br>
+      The authors would like to thank the University of Washington Center for Mendelian Genomics and all
+      contributors to Geno2MP for use of data included in Geno2MP.</p>
+    <h4>DGV</h4>
+    <p>MacDonald JR, Ziman R, Yuen RK, Feuk L, Scherer SW. The database of genomic variants: a curated
+      collection of structural variation in the human genome.&nbsp;Nucleic Acids Res.&nbsp;2013 Oct 29. PubMed
+      PMID:&nbsp;<a href="https://www.ncbi.nlm.nih.gov/pubmed/24174537">24174537</a></p>
+    <h4>DECIPHER</h4>
+    <p>DECIPHER: Database of Chromosomal Imbalance and Phenotype in Humans using Ensembl Resources.
+      Firth, H.V. et al (2009). Am.J.Hum.Genet 84, 524-533 (DOI:&nbsp;dx.doi.org/10/1016/j.ajhg.2009.03.010)</p>
+    <p>This study makes use of data generated by the DECIPHER community. A full list of centres who
+      contributed to the generation of the data is available from&nbsp;http://decipher.sanger.ac.uk&nbsp;and via email
+      from&nbsp;decipher@sanger.ac.uk. Funding for the project was provided by the Wellcome Trust.</p>
+    <p>We thank the expert advice and feedback from: <br>
+      Undiagnosed Diseases Network Model Organism Working Group and Coordinating Center <br>
+      Jim Lupski, Richard Gibbs, Zeynep Akdemir, John Seavitt, George Eisenhoffer, Swathi Arur, and
+      Grezegorz Ira</p>
+    <h4>DIOPT</h4>
+    <p>Hu Y, Flockhart I, Vinayagam A, et al. An integrative approach to ortholog prediction for disease-focused and other
+      functional studies. BMC Bioinformatics. 2011;12(1):357.</p>
+    <h4><a href="https://mutalyzer.nl/">Mutalyzer</a></h4>
+    <p>Wildeman M et al. (2008). Improving sequence variant descriptions in mutation databases and literature using the
+      Mutalyzer sequence variation nomenclature checker. Hum Mutat 29, 6-13 Hum Mutat 29:6-13 (2008) (PMID: 18000842).</p>
+    <h3>Model Organism Databases</h3>
+    <h4><a href="http://www.yeastgenome.org/">SGD</a></h4>
+    <p>Cherry JM, Hong EL, Amundsen C, Balakrishnan R, Binkley G, Chan ET, Christie KR, Costanzo MC, Dwight SS, Engel SR,
+      Fisk DG, Hirschman JE, Hitz BC, Karra K, Krieger CJ, Miyasato SR, Nash RS, Park J, Skrzypek MS, Simison M, Weng S,
+      Wong ED (2012) Saccharomyces Genome Database: the genomics resource of budding yeast. Nucleic Acids Res.
+      Jan;40(Database issue):D700-5. [PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/22110037">22110037</a>]</p>
+    <h4><a href="https://www.pombase.org/">PomBase</a></h4>
+    <p>McDowall MD, Harris MA, Lock A, Rutherford K, Staines DM, Bähler J, Kersey PJ, Oliver SG, Wood V. (2015) PomBase
+      2015: updates to the fission yeast database.<br>
+      Nucleic Acids Res. 43:D656-61.<br>
+      PMID:<a href="https://www.ncbi.nlm.nih.gov/pubmed/22039153">22039153</a> DOI: 10.1093/nar/gkr853</p>
+    <h4><a href="http://www.wormbase.org/">WormBase</a></h4>
+    <p>Kevin L. Howe, Bruce J. Bolt, Scott Cain, Juancarlos Chan, Wen J. Chen, Paul Davis, James Done, Thomas Down,
+      SibylGao, Christian Grove, Todd W. Harris, Ranjana Kishore, Raymond Lee, Jane Lomax, Yuling Li, Hans-Michael Muller,
+      Cecilia Nakamura, Paulo Nuin, Michael Paulini, Daniela Raciti, Gary Schindelman, Eleanor Stanley, Mary Ann Tuli,
+      Kimberly Van Auken, Daniel Wang, Xiaodong Wang, Gary Williams, Adam Wright, Karen Yook, Matthew Berriman, Paul
+      Kersey, Tim Schedl, Lincoln Stein, Paul W. Sternberg (2016)
+      Nucleic Acids Res, 44, D774-80.<br>
+      PMID:<a href="https://www.ncbi.nlm.nih.gov/pubmed/26578572">26578572</a></p>
+    <h4><a href="http://flybase.org">FlyBase</a></h4>
+    <p>Attrill H, Falls K, Goodman JL, Millburn GH, Antonazzo G, Rey AJ, Marygold SJ; the FlyBase Consortium. (2016)
+      FlyBase: establishing a Gene Group resource for Drosophila melanogaster. <br>
+      Nucleic Acids Res. 44(D1):D786-D792<br>
+      PMID:<a href="https://www.ncbi.nlm.nih.gov/pubmed/26467478">26467478</a></p>
+    <h4><a href="http://zfin.org/">ZFin</a></h4>
+    <p>Ruzicka et al., ZFIN, The zebrafish model organism database: Updates and new directions.<br>
+      Genesis. 2015 53(8):498-509.<br>
+      PMID:<a href="https://www.ncbi.nlm.nih.gov/pubmed/26097180">26097180</a></p>
+    <h4><a href="http://www.informatics.jax.org">MGI</a></h4>
+    <p>Eppig JT, Blake JA, Bult CJ, Kadin JA, Richardson JE;; The Mouse Genome Database Group. 2015. The Mouse Genome
+      Database (MGD): facilitating mouse as a model for human biology and disease. Nucleic Acids Res. 2015 Jan
+      28;43(Database issue):D726-36.<br>
+      PMID:<a href="https://www.ncbi.nlm.nih.gov/pubmed/25348401">25348401</a></p>
+    <h4><a href="http://rgd.mcw.edu">RGD</a></h4>
+    <p>Shimoyama M, De Pons J, Hayman GT, Laulederkind SJ, Liu W, Nigam R, Petri V, Smith JR, Tutaj M, Wang SJ, Worthey E,
+      Dwinell M, Jacob H.<br>
+      Nucleic Acids Res. 2015 Jan 28;43(Database issue):D743-50.<br>
+      PMID:<a href="https://www.ncbi.nlm.nih.gov/pubmed/25355511">25355511</a></p>
+    <h4>We thank the expert advice and feedback from:</h4>
+    <p>Undiagnosed Diseases Network Model Organism Working Group and Coordinating Center <br>
+      Jim Lupski, Richard Gibbs, Zeynep Akdemir, John Seavitt, George Eisenhoffer, Swathi Arur, and Grzegorz Ira</p>
+    <h3>Funding</h3>
+    <p><a href="https://undiagnosed.hms.harvard.edu/">Undiagnosed Diseases Network</a></p>
+</div>
+
+<section id="about" class="section-block bg-light-brand">
+  <div class="container">
+    <h2>What's new</h2>
+    <ul>
+      <li>
+        <b>v1.1.0</b>:
+        Added gnomAD variant frequencies, Monarch Initiative link for human gene
+      </li>
+      <li>v1.0.1: Added IMPC link for mouse homologs</li>
+      <li>v1.0.0: Added the other model organisms</li>
+      <li>Beta v0.3.2: Added model organism(mouse and fly) search</li>
+      <li>Beta v0.3.1: Rat, GTEx, HGVS nomenclature by Mutalyzer</li>
+      <li>Beta v0.3.0: ClinVar, human GO term, multiple protein alignment, DIOPT v6</li>
+      <li>Beta v0.2.0: Model organisms (yeast, fission yeast, worm, fly, zebrafish, mouse)</li>
+      <li>Beta v0.1.0: ExAC, Geno2MP, DGV, DECIPHER</li>
+    </ul>
+  </div>
+</section>
+
+<app-mailchimp></app-mailchimp>
+
+<app-footer></app-footer>

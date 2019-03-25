@@ -1,0 +1,81 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+.mat-drawer-container {
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.77);
+  font-weight: 300;
+}
+
+.section h1, .section h2, .section h3, .section h4,
+.title h1,
+.subtitle h4 {
+  margin: 0px !important;
+}
+.title h1 {
+  display: inline-block;
+  color: rgba(0,0,0,.77);
+  font-size: 2em;
+  font-weight: 600;
+}
+.subtitle h4 {
+  font-weight: 300;
+  font-size: 0.85em;
+  line-height: 1.6;
+  color: rgba(0,0,0,.6)
+}
+h2 {
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  color: rgba(0,0,0,0.35);
+}
+.label {
+  font-weight: 500;
+  margin-right: 0.5em;
+}
+
+@include media-breakpoint-down(sm) {
+  .sidenav, .mat-sidenav {
+    display: none !important;
+  }
+}
+.sidenav {
+  font-weight: 300;
+  background-color: rgb(58, 58, 58);
+  color: rgba(255,255,255,0.4);
+}
+.mat-sidenav-container {
+  height: 100vh;
+  background: none;
+}
+
+mat-sidenav-content.sidenav-closed {
+  margin-right: 250px !important;
+  -webkit-transition: margin 0.1s ease-in-out;
+  -moz-transition: margin 0.1s ease-in-out;
+  -o-transition: margin 0.1s ease-in-out;
+  transition: margin 0.1s ease-in-out;
+}
+mat-sidenav-content.sidenav-closed {
+  margin-right: 72px !important;
+  -webkit-transition: margin 0.1s ease-in-out;
+  -moz-transition: margin 0.1s ease-in-out;
+  -o-transition: margin 0.1s ease-in-out;
+  transition: margin 0.1s ease-in-out;
+}
+
+mat-sidenav.opened {
+  width: 250px;
+  -webkit-transition: width 0.1s ease-in-out;
+  -moz-transition: width 0.1s ease-in-out;
+  -o-transition: width 0.1s ease-in-out;
+  transition: width 0.1s ease-in-out;
+}
+mat-sidenav.closed {
+  width: 72px;
+  -webkit-transition: width 0.1s ease-in-out;
+  -moz-transition: width 0.1s ease-in-out;
+  -o-transition: width 0.1s ease-in-out;
+  transition: width 0.1s ease-in-out;
+}
