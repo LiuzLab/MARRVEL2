@@ -1,0 +1,13 @@
+<div class="filter-wrapper d-table w-100"
+  [ngClass]="{ 'focused': isFocused }"
+  (click)="focusInputBox()"
+>
+  <mat-icon class="d-table-cell" (click)="focusInputBox()">search</mat-icon>
+  <input class="filter-input d-table-cell"
+    #inputBox
+    placeholder="{{ placeholder }}"
+    (keyup)="onKeyup($event)"
+    (blur)="isFocused = false"
+    (focus)="isFocused = true"
+  >
+</div>

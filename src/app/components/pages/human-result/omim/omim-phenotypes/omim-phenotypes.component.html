@@ -1,3 +1,21 @@
+<div class="d-table w-100">
+  <div class="pb-3 d-table-cell">
+    <h4>
+      Disease/Phenotype Associated with {{ symbol }} curated by OMIM
+      (<span appUnit [count]="data.length" unit="Phenotype"></span>)
+    </h4>
+  </div>
+  <div class="pb-1 d-table-cell text-right">
+    <button mat-icon-button [color]="showFilters? 'primary' : ''" (click)="toggleFilters()">
+      <mat-icon
+        aria-label="Toggle filter"
+        matTooltip="Toggle filter" matTooltipPosition="above"
+      >
+        filter_list
+      </mat-icon>
+    </button>
+  </div>
+</div>
 <table class="w-100"
   mat-table
   [dataSource]="dataSource"
@@ -9,26 +27,58 @@
   <!-- Phenotype column -->
   <ng-container matColumnDef="phenotype">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Phenotype</th>
-    <td mat-cell *matCellDef="let element">{{ element.phenotype }}</td>
+    <td mat-cell *matCellDef="let element"
+      [innerHTML]="element.phenotype | highlight: filtersToApply['phenotype']"
+    ></td>
   </ng-container>
 
   <!-- Phenotype mimNumber column -->
   <ng-container matColumnDef="phenotypeMimNumber">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Phenotype mimNumber</th>
     <td mat-cell *matCellDef="let element">
-      <a href="https://www.omim.org/entry/{{ element.phenotypeMimNumber }}">
-        {{ element.phenotypeMimNumber }}
-      </a>
+      <a href="https://www.omim.org/entry/{{ element.phenotypeMimNumber }}"
+        [innerHTML]="element.phenotypeMimNumber | highlight: filtersToApply['phenotypeMimNumber']"
+      ></a>
     </td>
   </ng-container>
 
   <!-- Inheritance column -->
   <ng-container matColumnDef="phenotypeInheritance">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Inheritance</th>
-    <td mat-cell *matCellDef="let element">{{ element.phenotypeInheritance }}</td>
+    <td mat-cell *matCellDef="let element"
+      [innerHTML]="element.phenotypeInheritance | highlight: filtersToApply['phenotypeInheritance']"
+    ></td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <!-- filter columns -->
+  <ng-container matColumnDef="phenotypeFilter">
+    <th mat-header-cell *matHeaderCellDef class="filter-cell">
+      <app-filter-input
+        placeholder="Phenotype"
+        (keyup)="filter('phenotype', $event.target.value)"
+        [value]="filtersToApply['phenotype']"
+      ></app-filter-input>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="phenotypeMimNumberFilter">
+    <th mat-header-cell *matHeaderCellDef class="filter-cell">
+      <app-filter-input
+        placeholder="Phenotype mimNumber"
+        (keyup)="filter('phenotypeMimNumber', $event.target.value)"
+      ></app-filter-input>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="phenotypeInheritanceFilter">
+    <th mat-header-cell *matHeaderCellDef class="filter-cell">
+      <app-filter-input
+        placeholder="Inheritance"
+        (keyup)="filter('phenotypeInheritance', $event.target.value)"
+      ></app-filter-input>
+    </th>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="showFilters ? filtersColumns : displayedColumns" [@slideIn]></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 

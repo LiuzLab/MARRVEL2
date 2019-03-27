@@ -1,0 +1,35 @@
+.filter-wrapper {
+  border: solid 1px;
+  border-radius: 2px;
+  border-color: #e4e4e4;
+  background-color: #fefefe;
+}
+.filter-wrapper:hover {
+  cursor: text;
+}
+.filter-wrapper.focused {
+  border-color: #7cd3cb;
+}
+.filter-wrapper .mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  vertical-align: middle;
+}
+.filter-input {
+  width: 100%;
+  height: 2.2em;
+  border: none;
+  outline: none !important;
+  background-color: transparent;
+  font-size: 1.1em;
+}
+input.filter-input::placeholder,
+input.filter-input:-ms-input-placeholder,
+input.filter-input::-ms-input-placeholder {
+  font-size: 1.1em;
+  color: #bbb;
+  opacity: 1;
+}

@@ -30,11 +30,7 @@
 <!--   3. OMIM phenotypes -->
 <div class="row mb-3">
   <div class="col-12">
-    <h4 class="mb-3">
-      Disease/Phenotype Associated with {{ gene.symbol }} curated by OMIM
-      (<span appUnit [count]="data.phenotypes.length" unit="Phenotype"></span>)
-    </h4>
-    <app-omim-phenotypes [data]="data.phenotypes"></app-omim-phenotypes>
+    <app-omim-phenotypes [symbol]="gene.symbol" [data]="data.phenotypes"></app-omim-phenotypes>
   </div>
 </div>
 

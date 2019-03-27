@@ -132,6 +132,11 @@ $sides: (top, bottom, left, right); // Leave this variable alone
    text-transform: uppercase;
  }
 
+.text-highlight {
+  background-color: rgba(105, 200, 190, 0.6);
+}
+
+
 /********************
  * Form
  */

@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HighlightSearch } from './highlight';
+
 import {
   MatButtonModule,
   MatInputModule,
@@ -37,6 +39,7 @@ import { OmimComponent } from './components/pages/human-result/omim/omim.compone
 import { OmimPhenotypesComponent } from './components/pages/human-result/omim/omim-phenotypes/omim-phenotypes.component';
 import { UnitDirective } from './directives/unit.directive';
 import { OmimAllelesComponent } from './components/pages/human-result/omim/omim-alleles/omim-alleles.component';
+import { FilterInputComponent } from './components/filter-input/filter-input.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import { OmimAllelesComponent } from './components/pages/human-result/omim/omim-
     OmimPhenotypesComponent,
     UnitDirective,
     OmimAllelesComponent,
+    FilterInputComponent,
+    HighlightSearch
   ],
   imports: [
     BrowserModule,
@@ -78,7 +83,8 @@ import { OmimAllelesComponent } from './components/pages/human-result/omim/omim-
     MatSortModule
   ],
   exports: [
-    MatButtonModule
+    MatButtonModule,
+    HighlightSearch
   ],
   providers: [],
   bootstrap: [AppComponent]
