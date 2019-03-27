@@ -16,7 +16,7 @@ export class HumanResultComponent implements OnInit {
   proteinInput: string | null;
 
   gene: HumanGene | null;
-  omimLoading = false;
+  omimLoading = true;
   omim: object | null;
 
   constructor(
@@ -26,13 +26,19 @@ export class HumanResultComponent implements OnInit {
   ) { }
 
   requestAPIs() {
-    this.omimLoading = true;
-    this.api.getOMIMByMimNumber(this.gene.xref.omimId)
-      .subscribe((res) => {
-        console.log(res);
-        this.omimLoading = false;
-        this.omim = res;
-      });
+    if (this.gene.xref.omimId) {
+      this.omimLoading = true;
+      this.api.getOMIMByMimNumber(this.gene.xref.omimId)
+        .subscribe((res) => {
+          console.log(res);
+          this.omimLoading = false;
+          this.omim = res;
+        });
+    }
+    else {
+      this.omimLoading = false;
+      this.omim = null;
+    }
   }
 
   ngOnInit() {

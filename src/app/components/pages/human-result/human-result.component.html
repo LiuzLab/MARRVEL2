@@ -39,7 +39,8 @@
       </h2>
 
       <div class="row section mb-5">
-        <div class="col-12" *ngIf="!omimLoading && omim">
+        <div class="col-12" *ngIf="!omimLoading">
+          <!-- OMIM starts -->
           <app-omim [data]="omim" [gene]="gene"></app-omim>
         </div>
       </div>

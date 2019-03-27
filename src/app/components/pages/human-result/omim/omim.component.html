@@ -1,25 +1,34 @@
-<!-- OMIM starts -->
-<h3 class="mb-3">OMIM</h3>
 <!--   1. OMIM summary -->
 <div class="row mb-3">
   <div class="col-12">
+    <h3 class="mb-3">OMIM</h3>
     <p class="mt-0 d-table">
       <mat-icon class="d-table-cell align-top"
         matTooltip="MARRVEL's comment" matTooltipPosition="above"
       >insert_comment</mat-icon>
       <span class="d-table-cell pl-2">
-        There are
-        <strong appUnit [count]="data.phenotypes.length" unit="phenotype"></strong>
-        associated with {{ gene.symbol }} and
-        <strong appUnit [count]="data.allelicVariants.length" unit="reported allele"></strong>
-        from OMIM.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non arcu tincidunt.
+        <span *ngIf="!data">
+          {{ gene.symbol }} has no OMIM match,
+          which means it is not a part of the known Mendelian phenotype
+          whose molecular basis is known.
+          It can be a candidate for novel gene discovery
+        </span>
+        <span *ngIf="data">
+          There are
+          <strong appUnit [count]="(data.phenotypes || []).length" unit="phenotype"></strong>
+          associated with {{ gene.symbol }} and
+          <strong appUnit [count]="(data.allelicVariants || []).length" unit="reported allele"></strong>
+          from OMIM.
+        </span>
+        <span *ngIf="data && (!data.phenotypes || !data.phenotypes.length)">
+          Since there is no reproted phenotype associated, there is an opportunity to provide a phenotypic expansion.
+        </span>
       </span>
     </p>
   </div>
 </div>
 <!--   2. OMIM text description -->
-<div class="row mb-3">
+<div class="row mb-3" *ngIf="data">
   <div class="col-12">
     <h4 class="mb-3">OMIM Description of {{ gene.symbol }}</h4>
     <p class="mt-0 mb-3">{{ data.title }}</p>
@@ -28,7 +37,7 @@
 </div>
 
 <!--   3. OMIM phenotypes -->
-<div class="row mb-3">
+<div class="row mb-3" *ngIf="data && data.phenotypes">
   <div class="col-12">
     <app-basic-datatable
       [data]="data.phenotypes"
@@ -44,7 +53,7 @@
 </div>
 
 <!--   3. OMIM phenotypes -->
-<div class="row mb-3">
+<div class="row mb-3" *ngIf="data && data.allelicVariants">
   <div class="col-12">
     <app-basic-datatable
       [data]="data.allelicVariants"
@@ -58,4 +67,3 @@
     ></app-basic-datatable>
   </div>
 </div>
-<!-- OMIM ends -->
