@@ -36,10 +36,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HumanResultComponent } from './components/pages/human-result/human-result.component';
 import { SidenavComponent } from './components/pages/human-result/sidenav/sidenav.component';
 import { OmimComponent } from './components/pages/human-result/omim/omim.component';
-import { OmimPhenotypesComponent } from './components/pages/human-result/omim/omim-phenotypes/omim-phenotypes.component';
 import { UnitDirective } from './directives/unit.directive';
-import { OmimAllelesComponent } from './components/pages/human-result/omim/omim-alleles/omim-alleles.component';
 import { FilterInputComponent } from './components/filter-input/filter-input.component';
+import { BasicDatatableComponent } from './components/basic-datatable/basic-datatable.component';
 
 @NgModule({
   declarations: [
@@ -53,11 +52,10 @@ import { FilterInputComponent } from './components/filter-input/filter-input.com
     HumanResultComponent,
     SidenavComponent,
     OmimComponent,
-    OmimPhenotypesComponent,
     UnitDirective,
-    OmimAllelesComponent,
     FilterInputComponent,
-    HighlightSearch
+    HighlightSearch,
+    BasicDatatableComponent
   ],
   imports: [
     BrowserModule,

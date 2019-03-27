@@ -30,18 +30,32 @@
 <!--   3. OMIM phenotypes -->
 <div class="row mb-3">
   <div class="col-12">
-    <app-omim-phenotypes [symbol]="gene.symbol" [data]="data.phenotypes"></app-omim-phenotypes>
+    <app-basic-datatable
+      [data]="data.phenotypes"
+      title="Disease/Phenotype Associated with {{ gene.symbol }} curated by OMIM"
+      unit="Phenotype"
+      [displayedColumns]="['phenotype', 'phenotypeMimNumber', 'phenotypeInheritance']"
+      [columnNames]="['Phenotype', 'Phenotype mimNumber', 'Inheritance']"
+      sortActive="phenotype"
+      [url]="[false, true, false]"
+      [urlPrefixes]="['', 'https://www.omim.org/entry/', '']"
+    ></app-basic-datatable>
   </div>
 </div>
 
 <!--   3. OMIM phenotypes -->
 <div class="row mb-3">
   <div class="col-12">
-    <h4 class="mb-3">
-      Reported Alleles with {{ gene.symbol }} curated by OMIM
-      (<span appUnit [count]="data.allelicVariants.length" unit="Allele"></span>)
-    </h4>
-    <app-omim-alleles [data]="data.allelicVariants"></app-omim-alleles>
+    <app-basic-datatable
+      [data]="data.allelicVariants"
+      title="Reported Alleles with {{ gene.symbol }} curated by OMIM"
+      unit="Allele"
+      [displayedColumns]="['name', 'mutations', 'dbSnps']"
+      [columnNames]="['Phenotype', 'Mutation', 'dbSNP']"
+      sortActive="name"
+      [url]="[false, false, true]"
+      [urlPrefixes]="['', '', 'http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?searchType=adhoc_search&type=rs&rs=']"
+    ></app-basic-datatable>
   </div>
 </div>
 <!-- OMIM ends -->
