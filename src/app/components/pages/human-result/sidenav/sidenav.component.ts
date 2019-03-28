@@ -9,12 +9,16 @@ export class SidenavComponent implements OnInit {
   @Input() gene: object | null;
   @Input() variant: string | null;
   @Output() change: EventEmitter<any> = new EventEmitter();
+  @Input() startOpened = false;
 
-  sidenavOpened = true;
+  sidenavOpened = false;
 
   constructor() { }
 
   ngOnInit() {
+    this.change.emit({
+      sidenavOpened: this.sidenavOpened
+    });
   }
 
   toggleSidenav() {

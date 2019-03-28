@@ -9,7 +9,7 @@ import { ApiService } from '../../../services/api.service';
 })
 export class HumanResultComponent implements OnInit {
   pageLoading = true;
-  sidenavOpened = true;
+  sidenavOpened = false;
 
   geneEntrezId: number | null;
   variantInput: string | null;

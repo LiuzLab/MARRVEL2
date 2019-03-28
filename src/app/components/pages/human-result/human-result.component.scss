@@ -79,3 +79,7 @@ mat-sidenav.closed {
   -o-transition: width 0.1s ease-in-out;
   transition: width 0.1s ease-in-out;
 }
+
+mat-sidenav-content.sidenav-opened {
+  margin-right: 250px !important;
+}
