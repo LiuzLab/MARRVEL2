@@ -1,3 +1,9 @@
 .filter-cell, td.mat-cell {
   padding-right: 24px;
 }
+
+@media(max-width: 768px) {
+  td.mat-cell {
+    word-break: break-all;
+  }
+}

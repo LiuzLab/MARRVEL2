@@ -50,6 +50,7 @@ h2 {
   background: none;
 }
 
+@media(min-width: 768px) {
 mat-sidenav-content.sidenav-closed {
   margin-right: 250px !important;
   -webkit-transition: margin 0.1s ease-in-out;
@@ -80,6 +81,10 @@ mat-sidenav.closed {
   transition: width 0.1s ease-in-out;
 }
 
-mat-sidenav-content.sidenav-opened {
-  margin-right: 250px !important;
+  mat-sidenav-content.sidenav-opened {
+    margin-right: 250px !important;
+  }
+  mat-sidenav-content.sidenav-closed {
+    margin-right: 72px !important;
+  }
 }
