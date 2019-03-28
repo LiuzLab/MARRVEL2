@@ -18,6 +18,8 @@ export class HumanResultComponent implements OnInit {
   gene: HumanGene | null;
   omimLoading = true;
   omim: object | null;
+  clinVarLoading = true;
+  clinVar: object[] | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +41,14 @@ export class HumanResultComponent implements OnInit {
       this.omimLoading = false;
       this.omim = null;
     }
+
+    this.clinVarLoading = true;
+    this.api.getClinVarByEntrezId(this.gene.entrezId)
+      .subscribe((res) => {
+        console.log(res);
+        this.clinVar = res;
+        this.clinVarLoading = false;
+      })
   }
 
   ngOnInit() {

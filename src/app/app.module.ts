@@ -39,6 +39,7 @@ import { OmimComponent } from './components/pages/human-result/omim/omim.compone
 import { UnitDirective } from './directives/unit.directive';
 import { FilterInputComponent } from './components/filter-input/filter-input.component';
 import { BasicDatatableComponent } from './components/basic-datatable/basic-datatable.component';
+import { ClinvarComponent } from './components/pages/human-result/clinvar/clinvar.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { BasicDatatableComponent } from './components/basic-datatable/basic-data
     UnitDirective,
     FilterInputComponent,
     HighlightSearch,
-    BasicDatatableComponent
+    BasicDatatableComponent,
+    ClinvarComponent
   ],
   imports: [
     BrowserModule,

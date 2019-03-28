@@ -45,6 +45,13 @@
         </div>
       </div>
 
+      <div class="row section mb-5">
+        <div class="col-12" *ngIf="!omimLoading">
+          <!-- ClinVar starts -->
+          <app-clinvar [data]="clinVar" [gene]="gene"></app-clinvar>
+        </div>
+      </div>
+
       <mat-divider class="mb-5"></mat-divider>
 
       <h2 class="mb-3 text-uppercase">Control Data</h2>

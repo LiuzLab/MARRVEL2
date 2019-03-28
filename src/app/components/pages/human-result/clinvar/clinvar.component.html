@@ -1,0 +1,34 @@
+<div class="row mb-3">
+  <div class="col-12">
+    <h3 class="mb-3">ClinVar</h3>
+    <p class="mt-0 mb-0 d-table" *ngIf="data">
+      <mat-icon class="d-table-cell align-top"
+        matTooltip="MARRVEL's comment" matTooltipPosition="above"
+      >insert_comment</mat-icon>
+      <span class="d-table-cell pl-2">
+        <span *ngIf="data && data.length > 0">
+          {{ gene.symbol }} has
+          <span appUnit [count]="data.length" unit="reported variant"></span>.
+        </span>
+        <span *ngIf="significance">
+          <span appUnit [count]="significance['pathogenic']" unit="allele"></span>
+          are reported as pathogenic, and
+          <span appUnit [count]="significance['likely pathogenic']" unit="allele"></span>
+          are reported as likely pathogenic.
+        </span>
+      </span>
+    </p>
+  </div>
+</div>
+
+<div class="row mb-3" *ngIf="data && data.length > 0">
+  <div class="col-12">
+    <app-basic-datatable
+      [data]="data"
+      [displayedColumns]="['title', 'location', 'condition', 'significanceText', 'reviewStatus']"
+      [columnNames]="['Variation', 'Location', 'Condition(s)', 'Clinical Significance', 'Reveiw Status']"
+      title="Reported Alleles From ClinVar"
+      unit="Allele"
+    ></app-basic-datatable>
+  </div>
+</div>

@@ -46,4 +46,14 @@ export class ApiService {
     });
   }
 
+  getClinVarByEntrezId(entrezId: string | number): Observable<any> {
+    const url = `${environment.apiHost}/clinVar/entrezId/${entrezId}`;
+    return Observable.create(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
 }
