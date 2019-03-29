@@ -35,6 +35,7 @@
         <a
           *ngIf="url && url[idx]"
           href="{{ urlPrefixes[idx] || '' }}{{ element[colId] }}{{ urlPostfixes[idx] || '' }}"
+          target="_blank"
           [innerHTML]="element[colId] | highlight: filtersToApply[colId]"
         ></a>
         <span

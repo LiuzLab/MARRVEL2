@@ -31,14 +31,15 @@ export class ClinvarComponent implements OnChanges {
         item.significanceText = item.significance.description;
         item.reviewStatus = item.significance.reviewStatus;
 
-        item.significanceText.split('/').forEach(S => {
-          S = S.toLowerCase();
+        item.significanceText.split(/[\/,]/).forEach(S => {
+          S = S.toLowerCase().trim();
           if (!(S in this.significance)) {
             this.significance[S] = 0;
           }
           this.significance[S] += 1;
         });
       }
+      console.log(Object.keys(this.significance));
     }
   }
 
