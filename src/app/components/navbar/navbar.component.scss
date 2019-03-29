@@ -43,3 +43,20 @@
   margin-right: 12px;
   height: 14px;
 }
+
+.nav-search-box {
+  height: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-color: rgba(124, 211, 203, 0.1);
+  transition: 1s;
+}
+
+.nav-search-box.closed {
+  display: none;
+  transform: scaleY(0) translateY(-100%);
+}
+.nav-search-box.opened {
+  display: block;
+  transform: scaleY(1) translateY(0%);
+}

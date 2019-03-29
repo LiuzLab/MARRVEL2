@@ -16,6 +16,15 @@ export const Animations = {
       animate('200ms ease-in', style({ transform: 'translateX(-100%)' }))
     ])
   ]),
+  slideVInOut: trigger('slideVInOut', [
+    transition(':enter', [
+      style({ transform: 'translateY(-100%)' }),
+      animate('200ms ease-in', style({ transform: 'translateY(0%)' }))
+    ]),
+    transition(':leave', [
+      animate('200ms ease-in', style({ transform: 'translateY(-100%)' }))
+    ])
+  ]),
   fadeInOut: trigger('fadeInOut', [
     state('void', style({
       opacity: 0

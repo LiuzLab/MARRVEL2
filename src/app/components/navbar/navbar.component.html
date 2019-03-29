@@ -41,8 +41,18 @@
 
   <span class="flex-spacer"></span>
 
-  <span class="nav-search-button" *ngIf="showSearch">
-    <app-search-box compact="true"></app-search-box>
-  </span>
-
+  <button class="nav-search-button d-none d-sm-block" *ngIf="showSearch"
+    mat-icon-button aria-label="Do another search"
+    (click)="searchOpened = !searchOpened"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
 </mat-toolbar>
+
+<div class="nav-search-box d-none d-sm-block" *ngIf="searchOpened"
+    [@toggle]="searchOpened" 
+>
+  <div class="container-fluid px-sm-5">
+    <app-search-box [compact]="true"></app-search-box>
+  </div>
+</div>

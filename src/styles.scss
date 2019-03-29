@@ -161,3 +161,21 @@ $sides: (top, bottom, left, right); // Leave this variable alone
 .mat-drawer-container strong {
   font-weight: 400;
 }
+.select-field-compact .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+  margin: 0 !important;
+}
+.select-field-compact .mat-form-field-flex {
+  padding: 0 .25em 0 .25em !important;
+}
+.select-field-compact .mat-form-field-outline-start,
+.select-field-compact .mat-form-field-outline-gap,
+.select-field-compact .mat-form-field-outline-end,
+.select-field-compact span.mat-form-field-label-wrapper {
+  display: none !important;
+}
+.select-field-compact .mat-form-field-infix {
+  width: auto !important;
+  padding-top: 0.25em !important;
+  padding-bottom: 0.5em !important;
+}

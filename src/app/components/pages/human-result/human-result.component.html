@@ -12,7 +12,7 @@
     [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
   >
     <app-navbar showSearch="true" showMenuButton="true"></app-navbar>
-    <div *ngIf="gene !== null || variantInput" class="container-fluid py-5 px-5">
+    <div *ngIf="gene !== null || variantInput" class="container-fluid py-5 px-md-5">
 
       <div class="title" *ngIf="gene || variantInput">
         <h1 *ngIf="gene" >{{ gene.symbol }}</h1>

@@ -1,7 +1,15 @@
-<div class="text-center" *ngIf="!compact">
-  <div class="row mb-3">
-    <div class="col-2 mb-10px">
-      <mat-form-field appearance="outline" class="w-100">
+<div class="text-center" [ngClass]="{ 'compact': compact }">
+  <div class="row mb-3" [ngClass]="{'pr-xs-15px': compact}">
+    <div [ngClass]="{
+      'col-12 col-md-2 mb-10px': !compact,
+      'col-12 text-left': compact
+    }">
+      <mat-form-field appearance="outline"
+        [ngClass]="{
+          'select-field-compact': compact,
+          'w-100': !compact
+        }"
+      >
         <mat-label>Input Type</mat-label>
         <select matNativeControl [(ngModel)]="selectedInputType" (change)="onInputTypeChange($event)" name="inputType">
           <option value="gene" selected>Gene</option>
@@ -10,7 +18,10 @@
       </mat-form-field>
     </div>
 
-    <div class="col-10" *ngIf="selectedInputType == 'gene'">
+    <div [ngClass]="{
+      'col-12 col-md-10': !compact,
+      'col-12 col-lg-5 pr-0': compact
+    }" *ngIf="selectedInputType == 'gene'">
       <mat-form-field appearance="outline" class="w-100" id="geneInputFormField">
         <mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
         <mat-chip-list #geneChipList>
@@ -32,7 +43,7 @@
           matChipInputAddOnBlur
           (matChipInputTokenEnd)="addGene($event)"
         >
-        <mat-hint align="start"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
+        <mat-hint align="start" *ngIf="!compact"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
       </mat-form-field>
       
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">
@@ -43,14 +54,20 @@
         </mat-option>
       </mat-autocomplete>
     </div>
-    <div class="col-10" *ngIf="selectedInputType == 'protein'">
+    <div [ngClass]="{
+      'col-12 col-md-10': !compact,
+      'col-10 col-lg-11 pr-0': compact
+    }" *ngIf="selectedInputType == 'protein'">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Human Protein</mat-label>
         <input matInput [(ngModel)]="protein">
       </mat-form-field>
     </div>
 
-    <div class="col-12" *ngIf="selectedInputType == 'gene'">
+    <div [ngClass]="{
+      'col-12': !compact,
+      'col-10 col-lg-5 pr-0': compact
+    }" *ngIf="selectedInputType == 'gene'">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Human Variant (hg19)</mat-label>
         <input matInput [(ngModel)]="variant">
@@ -58,7 +75,7 @@
     </div>
 
 
-    <div class="col-12 text-left search-box-example">
+    <div class="col-12 text-left search-box-example mb-5" *ngIf="!compact">
       <mat-hint *ngIf="selectedInputType === 'gene'">
         Example: 
         <a href="/human/pair/26235/6:99365567T>C">6:99365567 T>C / FBXL4</a>
@@ -77,21 +94,19 @@
         <a href="/human/protein/IRF2BPL:p.Gln126*">IRF2BPL:p.Gln126*</a>
       </mat-hint>
     </div>
+    <div [ngClass]="{
+      'col-12 text-center': !compact,
+      'col-2 pr-0 text-left': compact
+     }">
+      <button mat-flat-button	color="primary"
+      [ngClass]="{'button-compact': compact}"
+      (click)="search()"
+      [disabled]="!((selectedInputType === 'gene' && (gene != null || variant != ''))
+        || (selectedInputType === 'protein' && protein != ''))"
+    >
+        <span *ngIf="!compact">Search</span>
+        <mat-icon *ngIf="compact">search</mat-icon>
+      </button>
+    </div>
   </div>
-
-  <div class="text-center mt-5">
-    <button mat-flat-button	color="primary"
-    (click)="search()"
-    [disabled]="!((selectedInputType === 'gene' && (gene != null || variant != ''))
-      || (selectedInputType === 'protein' && protein != ''))"
-  >
-      Search
-    </button>
-  </div>
-</div>
-
-<div class="text-center" *ngIf="compact">
-  <button mat-icon-button>
-    <mat-icon aria-label="search">search</mat-icon>
-  </button>
 </div>
