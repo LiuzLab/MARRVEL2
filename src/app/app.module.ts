@@ -40,6 +40,7 @@ import { UnitDirective } from './directives/unit.directive';
 import { FilterInputComponent } from './components/filter-input/filter-input.component';
 import { BasicDatatableComponent } from './components/basic-datatable/basic-datatable.component';
 import { ClinvarComponent } from './components/pages/human-result/clinvar/clinvar.component';
+import { ScrollTopButtonComponent } from './components/scroll-top-button/scroll-top-button.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ClinvarComponent } from './components/pages/human-result/clinvar/clinva
     FilterInputComponent,
     HighlightSearch,
     BasicDatatableComponent,
-    ClinvarComponent
+    ClinvarComponent,
+    ScrollTopButtonComponent
   ],
   imports: [
     BrowserModule,

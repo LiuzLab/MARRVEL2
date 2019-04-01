@@ -11,6 +11,7 @@
   <mat-sidenav-content id="human-result-container"
     [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
   >
+    <div id="TOP"></div>
     <app-navbar showSearch="true" showMenuButton="true"></app-navbar>
     <div *ngIf="gene !== null || variantInput" class="container-fluid py-5 px-md-5">
 
@@ -59,3 +60,7 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<app-scroll-top-button
+  [right]="sidenavOpened ? '262px' : '84px'"
+></app-scroll-top-button>
