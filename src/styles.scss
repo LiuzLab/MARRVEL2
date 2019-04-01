@@ -136,6 +136,9 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   background-color: rgba(105, 200, 190, 0.6);
 }
 
+.text-underline-dashed {
+  text-decoration: underline dashed #888;
+}
 
 /********************
  * Form

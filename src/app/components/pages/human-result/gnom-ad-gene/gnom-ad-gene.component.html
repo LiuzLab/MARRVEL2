@@ -1,0 +1,101 @@
+<p class="mt-0 mb-3 d-table" *ngIf="data">
+  <mat-icon class="d-table-cell align-top"
+    matTooltip="MARRVEL's comment" matTooltipPosition="above"
+  >insert_comment</mat-icon>
+
+  <span class="d-table-cell pl-2">
+    <span>
+      The LoF o/e (loss-of-function observed/expected) score for
+      {{ symbol }} is {{ data.lof.oe.toFixed(2) }}. 
+    </span>
+
+    <span *ngIf="(data.lof.oeUpper - data.lof.oeLower) > 0.35">
+      <br>
+      Since the upper bound of the confidence interval of LoF o/e score is above 0.35,
+      {{ symbol }} is tolerant of LoF alleles.
+      The loss of one copy of {{ symbol }} is <strong>likely not lethal</strong> in humans.
+    </span>
+
+    <span *ngIf="(data.lof.oeUpper - data.lof.oeLower) <= 0.35">
+      <br>
+      Since the upper bound of the confidence interval of LoF o/e score is eqaul to or below 0.35,
+      {{ symbol }} is intolerant of LoF alleles.
+    </span>
+  </span>
+</p>
+
+<table
+  class="mat-table w-100"
+  *ngIf="data"
+>
+  <thead>
+    <tr class="mat-header-row">
+      <th class="mat-header-cell">Category</th>
+      <th class="mat-header-cell number">Exp. no. SNVs</th>
+      <th class="mat-header-cell number">Obs. no. SNVs</th>
+      <th class="mat-header-cell" colspan="3">Constraint metrics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="mat-row">
+      <td class="mat-cell">Synonymouse</td>
+      <td class="mat-cell number">{{ data.syn.exp.toFixed(1) }}</td>
+      <td class="mat-cell number">{{ data.syn.obs }}</td>
+      <td class="mat-cell">Z={{ data.syn.z.toFixed(2) }}</td>
+      <td class="mat-cell">
+        <span class="text-underline-dashed" matTooltip="o/e (with 90% CI) = o/e = observed / expected. If the upper bound of the Loss-of-function o/e CI < 0.35, then there is a high likelihood of intolerance of loss-of-function/haploinsufficiency">
+          o/e
+        </span>={{ data.syn.oe.toFixed(2) }}<br>
+        ({{ data.syn.oeLower.toFixed(2) }} - {{ data.syn.oeUpper.toFixed(2) }})
+      </td>
+      <td class="mat-cell">
+        <app-gnom-ad-gene-visual
+          [oe]="data.syn.oe"
+          [oeLower]="data.syn.oeLower"
+          [oeUpper]="data.syn.oeUpper"
+        ></app-gnom-ad-gene-visual>
+      </td>
+    </tr>
+    <tr class="mat-row">
+      <td class="mat-cell">Missense</td>
+      <td class="mat-cell number">{{ data.mis.exp.toFixed(1) }}</td>
+      <td class="mat-cell number">{{ data.mis.obs }}</td>
+      <td class="mat-cell">Z={{ data.mis.z.toFixed(2) }}</td>
+      <td class="mat-cell">
+        <span class="text-underline-dashed" matTooltip="o/e (with 90% CI) = o/e = observed / expected. If the upper bound of the Loss-of-function o/e CI < 0.35, then there is a high likelihood of intolerance of loss-of-function/haploinsufficiency">
+          o/e
+        </span>={{ data.mis.oe.toFixed(2) }}<br>
+        ({{ data.mis.oeLower.toFixed(2) }} - {{ data.mis.oeUpper.toFixed(2) }})
+      </td>
+      <td class="mat-cell">
+        <app-gnom-ad-gene-visual
+          [oe]="data.mis.oe"
+          [oeLower]="data.mis.oeLower"
+          [oeUpper]="data.mis.oeUpper"
+        ></app-gnom-ad-gene-visual>
+      </td>
+    </tr>
+    <tr class="mat-row">
+      <td class="mat-cell">LoF</td>
+      <td class="mat-cell number">{{ data.lof.exp.toFixed(1) }}</td>
+      <td class="mat-cell number">{{ data.lof.obs }}</td>
+      <td class="mat-cell">
+        <span class="text-underline-dashed" matTooltip="pLI = this metric estimates the probability that a gene falls into the class of">
+          pLI
+        </span>={{ data.lof.pLI.toFixed(2) }}</td>
+      <td class="mat-cell">
+        <span class="text-underline-dashed" matTooltip="o/e (with 90% CI) = o/e = observed / expected. If the upper bound of the Loss-of-function o/e CI < 0.35, then there is a high likelihood of intolerance of loss-of-function/haploinsufficiency">
+          o/e
+        </span>={{ data.lof.oe.toFixed(2) }}<br>
+        ({{ data.lof.oeLower.toFixed(2) }} - {{ data.lof.oeUpper.toFixed(2) }})
+      </td>
+      <td class="mat-cell">
+        <app-gnom-ad-gene-visual
+          [oe]="data.lof.oe"
+          [oeLower]="data.lof.oeLower"
+          [oeUpper]="data.lof.oeUpper"
+        ></app-gnom-ad-gene-visual>
+      </td>
+    </tr>
+  </tbody>
+</table>

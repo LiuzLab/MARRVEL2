@@ -56,4 +56,15 @@ export class ApiService {
       });
     });
   }
+
+  getGnomADGeneByEntrezId(entrezId: string | number): Observable<any> {
+    const url = `${environment.apiHost}/gnomAD/gene/entrezId/${entrezId}`;
+    return Observable.create(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
 }

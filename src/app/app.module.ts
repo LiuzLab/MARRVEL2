@@ -41,6 +41,9 @@ import { FilterInputComponent } from './components/filter-input/filter-input.com
 import { BasicDatatableComponent } from './components/basic-datatable/basic-datatable.component';
 import { ClinvarComponent } from './components/pages/human-result/clinvar/clinvar.component';
 import { ScrollTopButtonComponent } from './components/scroll-top-button/scroll-top-button.component';
+import { GnomADComponent } from './components/pages/human-result/gnom-ad/gnom-ad.component';
+import { GnomADGeneComponent } from './components/pages/human-result/gnom-ad-gene/gnom-ad-gene.component';
+import { GnomADGeneVisualComponent } from './components/pages/human-result/gnom-ad-gene/gnom-ad-gene-visual/gnom-ad-gene-visual.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { ScrollTopButtonComponent } from './components/scroll-top-button/scroll-
     HighlightSearch,
     BasicDatatableComponent,
     ClinvarComponent,
-    ScrollTopButtonComponent
+    ScrollTopButtonComponent,
+    GnomADComponent,
+    GnomADGeneComponent,
+    GnomADGeneVisualComponent
   ],
   imports: [
     BrowserModule,

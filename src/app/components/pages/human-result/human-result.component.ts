@@ -20,6 +20,10 @@ export class HumanResultComponent implements OnInit {
   omim: object | null;
   clinVarLoading = true;
   clinVar: object[] | null;
+  gnomADLoading = true;
+  gnomAD: object | null;
+  gnomADGeneLoading = true;
+  gnomADGene: object | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,7 +52,15 @@ export class HumanResultComponent implements OnInit {
         console.log(res);
         this.clinVar = res;
         this.clinVarLoading = false;
-      })
+      });
+
+    this.gnomADGeneLoading = true;
+    this.api.getGnomADGeneByEntrezId(this.gene.entrezId)
+      .subscribe((res) => {
+        console.log(res);
+        this.gnomADGene = res;
+        this.gnomADGeneLoading = false;
+      });
   }
 
   ngOnInit() {
@@ -90,8 +102,11 @@ interface Gene {
   status?: string;
   alias?: string[];
   locusType?: string;
+  chr?: string;
+  location?: string;
+  type?: string;
 }
 
 interface HumanGene extends Gene {
-  hgncId: number;
+  hgncId?: number;
 }
