@@ -14,17 +14,30 @@
   <h4 class="mt-5">Disease Databases</h4>
   <ul class="menu">
     <li
+      *ngIf="gene"
       matTooltip="OMIM"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
+      (click)="scrollTo('OMIM')"
     >
       <span class="initial">O</span>
       <span class="rest">MIM</span>
     </li>
     <li
+      *ngIf="variant"
+      matTooltip="Prediction scores"
+      [matTooltipDisabled]="sidenavOpened"
+      matTooltipPosition="left"
+      (click)="scrollTo('DbNSFP')"
+    >
+      <span class="initial">P</span>
+      <span class="rest">rediction Scroes</span>
+    </li>
+    <li
       matTooltip="ClinVar"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
+      (click)="scrollTo('ClinVar')"
     >
       <span class="initial">C</span>
       <span class="rest">linVar</span>
@@ -33,9 +46,19 @@
       matTooltip="Geno2MP"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
+      (click)="scrollTo('Geno2MP')"
     >
       <span class="initial">G</span>
       <span class="rest">eno2MP</span>
+    </li>
+    <li
+      matTooltip="DECIPHER"
+      [matTooltipDisabled]="sidenavOpened"
+      matTooltipPosition="left"
+      (click)="scrollTo('')"
+    >
+      <span class="initial">D</span>
+      <span class="rest">ECIPHER</span>
     </li>
   </ul>
   <h4 class="mt-4">Control Databases</h4>
@@ -44,6 +67,7 @@
       matTooltip="gnomAD"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
+      (click)="scrollTo('GnomAD')"
     >
       <span class="initial">g</span>
       <span class="rest">nomAD</span>
@@ -52,6 +76,7 @@
       matTooltip="ExAC"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
+      (click)="scrollTo('ExAC')"
     >
       <span class="initial">E</span>
       <span class="rest">xAC</span>
@@ -60,17 +85,19 @@
       matTooltip="DGV"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
+      (click)="scrollTo('DGV')"
     >
       <span class="initial">D</span>
       <span class="rest">GV</span>
     </li>
     <li
-      matTooltip="DECIPHER"
+      matTooltip="DECIPHER (Control)"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
+      (click)="scrollTo('')"
     >
       <span class="initial">D</span>
-      <span class="rest">ECIPHER</span>
+      <span class="rest">ECIPHER (Control)</span>
     </li>
   </ul>
   <h4 class="mt-4">Protein</h4>

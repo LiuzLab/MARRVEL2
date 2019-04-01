@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-sidenav',
@@ -26,6 +27,10 @@ export class SidenavComponent implements OnInit {
     this.change.emit({
       sidenavOpened: this.sidenavOpened
     });
+  }
+
+  scrollTo(id: string) {
+    window.document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
 }

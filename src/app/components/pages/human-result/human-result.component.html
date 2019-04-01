@@ -38,14 +38,14 @@
         Disease Data
       </h2>
 
-      <div class="row section mb-5">
+      <div class="row section mb-5" id="OMIM">
         <div class="col-12" *ngIf="!omimLoading">
           <!-- OMIM starts -->
           <app-omim [data]="omim" [gene]="gene"></app-omim>
         </div>
       </div>
 
-      <div class="row section mb-5">
+      <div class="row section mb-5" id="ClinVar">
         <div class="col-12" *ngIf="!omimLoading">
           <!-- ClinVar starts -->
           <app-clinvar [data]="clinVar" [gene]="gene"></app-clinvar>
