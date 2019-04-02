@@ -44,6 +44,8 @@ import { ScrollTopButtonComponent } from './components/scroll-top-button/scroll-
 import { GnomADComponent } from './components/pages/human-result/gnom-ad/gnom-ad.component';
 import { GnomADGeneComponent } from './components/pages/human-result/gnom-ad-gene/gnom-ad-gene.component';
 import { GnomADGeneVisualComponent } from './components/pages/human-result/gnom-ad-gene/gnom-ad-gene-visual/gnom-ad-gene-visual.component';
+import { DbnsfpComponent } from './components/pages/human-result/dbnsfp/dbnsfp.component';
+import { RankscoreVisualComponent } from './components/pages/human-result/dbnsfp/rankscore-visual/rankscore-visual.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { GnomADGeneVisualComponent } from './components/pages/human-result/gnom-
     ScrollTopButtonComponent,
     GnomADComponent,
     GnomADGeneComponent,
-    GnomADGeneVisualComponent
+    GnomADGeneVisualComponent,
+    DbnsfpComponent,
+    RankscoreVisualComponent
   ],
   imports: [
     BrowserModule,

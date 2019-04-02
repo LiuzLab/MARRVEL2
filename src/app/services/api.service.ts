@@ -79,4 +79,16 @@ export class ApiService {
       });
     });
   }
+
+  getDbNSFP(variant: Variant): Observable<any> {
+    const url = `${environment.apiHost}/dbNSFP/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    return Observable.create(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
+
 }

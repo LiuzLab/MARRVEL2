@@ -35,6 +35,8 @@ export class HumanResultComponent implements OnInit {
   gnomAD: object | null;
   gnomADGeneLoading = true;
   gnomADGene: object | null;
+  dbNSFPLoading = true;
+  dbNSFP: object | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -73,11 +75,45 @@ export class HumanResultComponent implements OnInit {
   }
 
   requestVariantData() {
+    this.gnomADLoading = true;
     this.api.getGnomADVaraint(this.variant)
       .subscribe((res) => {
-        console.log(res);
         this.gnomAD = res;
         this.gnomADLoading = false;
+      });
+
+    this.dbNSFPLoading = true;
+    this.api.getDbNSFP(this.variant)
+      .subscribe((res) => {
+        if (res.scores.MCAP.prediction === 'T') {
+          res.scores.MCAP.prediction = 'Tolerated';
+        }
+        else if (res.scores.MCAP.prediction === 'D') {
+          res.scores.MCAP.prediction = 'Damaging';
+        }
+
+        if (res.scores.Polyphen2HDIV.prediction === 'B') {
+          res.scores.Polyphen2HDIV.prediction = 'Benign';
+        }
+        else if (res.scores.Polyphen2HDIV.prediction === 'P') {
+          res.scores.Polyphen2HDIV.prediction = 'Possibly Damaging';
+        }
+        else if (res.scores.Polyphen2HDIV.prediction === 'D') {
+          res.scores.Polyphen2HDIV.prediction = 'Probably Damaging';
+        }
+
+        if (res.scores.Polyphen2HVAR.prediction === 'B') {
+          res.scores.Polyphen2HVAR.prediction = 'Benign';
+        }
+        else if (res.scores.Polyphen2HVAR.prediction === 'P') {
+          res.scores.Polyphen2HVAR.prediction = 'Possibly Damaging';
+        }
+        else if (res.scores.Polyphen2HVAR.prediction === 'D') {
+          res.scores.Polyphen2HVAR.prediction = 'Probably Damaging';
+        }
+
+        this.dbNSFP = res;
+        this.dbNSFPLoading = false;
       });
   }
 

@@ -47,6 +47,13 @@
         </div>
       </div>
 
+      <div class="row section mb-5" id="DbNSFP">
+        <div class="col-12" *ngIf="!dbNSFPLoading">
+          <!-- dbNSFP starts -->
+          <app-dbnsfp [data]="dbNSFP"></app-dbnsfp>
+        </div>
+      </div>
+
       <div class="row section mb-5" id="ClinVar">
         <div class="col-12" *ngIf="!omimLoading">
           <!-- ClinVar starts -->
