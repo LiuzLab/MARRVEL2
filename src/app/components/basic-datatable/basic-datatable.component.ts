@@ -65,6 +65,8 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
   ngOnChanges() {
     this.dataSource = new MatTableDataSource(this.data);
     this.initFilters();
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit() {

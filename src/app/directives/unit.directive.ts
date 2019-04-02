@@ -1,16 +1,16 @@
-import { Directive, Input, ElementRef, OnInit } from '@angular/core';
+import { Directive, Input, ElementRef, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[appUnit]'
 })
-export class UnitDirective implements OnInit {
+export class UnitDirective implements OnChanges {
   @Input() count: number;
   @Input() unit: string;
   @Input() plural: string;
 
   constructor(private el: ElementRef) { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.plural = this.plural || (this.unit + 's');
     this.count = this.count || 0;
     if (this.unit === '') {
