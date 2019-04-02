@@ -3,7 +3,8 @@
     [ngClass]="{ 'opened': sidenavOpened, 'closed': !sidenavOpened }"
   >
     <app-sidenav
-      [variant]="variantInput" [gene]="gene"
+      [variant]="variant ? 'Chr' + variant.chr + ':' + variant.pos + ' ' + variant.ref + '>' + variant.alt : null"
+      [gene]="gene"
       (change)="toggleSidenav($event)"
     ></app-sidenav>
   </mat-sidenav>
@@ -17,8 +18,8 @@
 
       <div class="title" *ngIf="gene || variantInput">
         <h1 *ngIf="gene" >{{ gene.symbol }}</h1>
-        <h1 *ngIf="gene && variantInput">&nbsp;/&nbsp;</h1>
-        <h1 *ngIf="variantInput">{{ variantInput }}</h1>
+        <h1 *ngIf="gene && variant">&nbsp;/&nbsp;</h1>
+        <h1 *ngIf="variant">Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}</h1>
       </div>
       <div class="title" *ngIf="proteinInput">
         <h1>{{ proteinInput }}</h1>

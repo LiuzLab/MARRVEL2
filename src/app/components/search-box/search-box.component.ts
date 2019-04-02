@@ -22,7 +22,26 @@ export class SearchBoxComponent implements OnInit {
 
   geneInputCtrl = new FormControl();
   variantInputCtrl = new FormControl('', [
-    Validators.pattern('(^(Chr)?(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|X|Y|M)\s*:\s*([0-9]+)\s*(A|C|G|T)+\s*>\s*(A|C|G|T)+$)|(^(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|X|Y|M)-[0-9]+-(A|C|G|T)+-(A|C|G|T)+$)|(^[[0-9a-zA-Z]_\.]+:c\.[0-9]+(A|C|G|T)+>(A|C|G|T)+$)')
+    Validators.pattern(
+        '(' +
+          '^(Chr)?' +
+          '(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|X|Y|M)' + '\s*:\s*' +
+          '([0-9]+)' + '\\s*' +
+          '([ACGT]+)' + '\\s*>\\s*' +
+          '([ACGT]+)$' +
+        ')|' +
+
+        '(' +
+          '^(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|X|Y|M)-' +
+          '([0-9]+)-' +
+          '([ACGT]+)-' +
+          '([ACGT]+)$' +
+        ')|' +
+
+        '(' +
+          '^[0-9a-zA-Z_\.]+:c\.[0-9]+(A|C|G|T)+>(A|C|G|T)+$' +
+        ')'
+    )
   ]);
   geneSuggestion = [];
   @ViewChild('geneInput') geneInput: ElementRef<HTMLInputElement>;

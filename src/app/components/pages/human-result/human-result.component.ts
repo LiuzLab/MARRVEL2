@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 
+import { HumanGene } from '../../../interfaces/gene';
+import { Variant } from '../../../interfaces/variant';
+
+import { VariantService } from '../../../services/variant.service';
+
 @Component({
   selector: 'app-human-result',
   templateUrl: './human-result.component.html',
@@ -11,11 +16,16 @@ export class HumanResultComponent implements OnInit {
   pageLoading = true;
   sidenavOpened = false;
 
+  // Input
   geneEntrezId: number | null;
   variantInput: string | null;
   proteinInput: string | null;
 
-  gene: HumanGene | null;
+  // Processed input
+  gene: HumanGene | null = null;
+  variant: Variant | null = null;
+
+  // Data from server
   omimLoading = true;
   omim: object | null;
   clinVarLoading = true;
@@ -28,15 +38,15 @@ export class HumanResultComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    private variantService: VariantService
   ) { }
 
-  requestAPIs() {
+  requestGeneData() {
     if (this.gene.xref.omimId) {
       this.omimLoading = true;
       this.api.getOMIMByMimNumber(this.gene.xref.omimId)
         .subscribe((res) => {
-          console.log(res);
           this.omimLoading = false;
           this.omim = res;
         });
@@ -49,7 +59,6 @@ export class HumanResultComponent implements OnInit {
     this.clinVarLoading = true;
     this.api.getClinVarByEntrezId(this.gene.entrezId)
       .subscribe((res) => {
-        console.log(res);
         this.clinVar = res;
         this.clinVarLoading = false;
       });
@@ -57,10 +66,12 @@ export class HumanResultComponent implements OnInit {
     this.gnomADGeneLoading = true;
     this.api.getGnomADGeneByEntrezId(this.gene.entrezId)
       .subscribe((res) => {
-        console.log(res);
         this.gnomADGene = res;
         this.gnomADGeneLoading = false;
       });
+  }
+
+  requestVariantData() {
   }
 
   ngOnInit() {
@@ -73,10 +84,26 @@ export class HumanResultComponent implements OnInit {
         this.api.getGeneByEntrezId(this.geneEntrezId)
           .subscribe((res) => {
             this.gene = res;
-            console.log(this.gene);
 
-            this.requestAPIs();
+            this.requestGeneData();
           });
+      }
+
+      if (this.variantInput !== null && this.variantInput !== '') {
+        const parsed = this.variantService.parse(this.variantInput);
+        if (!parsed.valid) {
+          // TODO: error
+        }
+        else if (parsed.type === 'hgvs') {
+          // TODO: Request hgvs --> coordinate
+        }
+        else if (parsed.type === 'coord') {
+          this.variant = parsed.variant;
+          this.requestVariantData();
+        }
+        else {
+          // TODO: error
+        }
       }
     });
   }
@@ -84,29 +111,4 @@ export class HumanResultComponent implements OnInit {
   toggleSidenav(e) {
     this.sidenavOpened = e.sidenavOpened;
   }
-}
-
-interface XRef {
-  ucscId?: string;
-  omimId?: number;
-  vegaId?: string;
-  ensemblId?: string;
-}
-
-interface Gene {
-  taxonId: number;
-  symbol: string;
-  entrezId: number;
-  xref?: XRef;
-  name?: string;
-  status?: string;
-  alias?: string[];
-  locusType?: string;
-  chr?: string;
-  location?: string;
-  type?: string;
-}
-
-interface HumanGene extends Gene {
-  hgncId?: number;
 }
