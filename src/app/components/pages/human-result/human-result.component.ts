@@ -24,6 +24,7 @@ export class HumanResultComponent implements OnInit {
   // Processed input
   gene: HumanGene | null = null;
   variant: Variant | null = null;
+  variantString: string;
 
   // Data from server
   omimLoading = true;
@@ -72,6 +73,12 @@ export class HumanResultComponent implements OnInit {
   }
 
   requestVariantData() {
+    this.api.getGnomADVaraint(this.variant)
+      .subscribe((res) => {
+        console.log(res);
+        this.gnomAD = res;
+        this.gnomADLoading = false;
+      });
   }
 
   ngOnInit() {
@@ -99,6 +106,7 @@ export class HumanResultComponent implements OnInit {
         }
         else if (parsed.type === 'coord') {
           this.variant = parsed.variant;
+          this.variantString = `Chr${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`;
           this.requestVariantData();
         }
         else {

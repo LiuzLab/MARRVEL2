@@ -3,7 +3,7 @@
     [ngClass]="{ 'opened': sidenavOpened, 'closed': !sidenavOpened }"
   >
     <app-sidenav
-      [variant]="variant ? 'Chr' + variant.chr + ':' + variant.pos + ' ' + variant.ref + '>' + variant.alt : null"
+      [variant]="variantString"
       [gene]="gene"
       (change)="toggleSidenav($event)"
     ></app-sidenav>
@@ -14,12 +14,12 @@
   >
     <div id="TOP"></div>
     <app-navbar showSearch="true" showMenuButton="true"></app-navbar>
-    <div *ngIf="gene !== null || variantInput" class="container-fluid py-5 px-md-5">
+    <div *ngIf="gene !== null || variant" class="container-fluid py-5 px-md-5">
 
-      <div class="title" *ngIf="gene || variantInput">
+      <div class="title" *ngIf="gene || variant">
         <h1 *ngIf="gene" >{{ gene.symbol }}</h1>
         <h1 *ngIf="gene && variant">&nbsp;/&nbsp;</h1>
-        <h1 *ngIf="variant">Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}</h1>
+        <h1 *ngIf="variant">{{ variantString }}</h1>
       </div>
       <div class="title" *ngIf="proteinInput">
         <h1>{{ proteinInput }}</h1>
@@ -77,12 +77,19 @@
             </div>
           </div>
 
-          <div class="row mb-3" *ngIf="!gnomADLoading">
+          <!-- gnomAD variant -->
+          <div class="row mb-3" *ngIf="variant && !gnomADLoading">
             <div class="col-12">
-              <app-gnom-ad></app-gnom-ad>
+              <h4 class="mt-0 mb-3">
+                Population Allele Frequencies of {{ variantString }} from gnomAD
+              </h4>
+              <app-gnom-ad
+                [data]="gnomAD"
+              ></app-gnom-ad>
             </div>
           </div>
 
+          <!-- gnomAD gene -->
           <div class="row" *ngIf="gene && !gnomADGeneLoading">
             <div class="col-12">
               <h4 class="mt-0 mb-3">
