@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatAutocomplete, MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
 
 import { ApiService } from '../../services/api.service';
@@ -18,8 +18,12 @@ export class SearchBoxComponent implements OnInit {
   geneKeyword = '';
   protein  = '';
   variant  = '';
+  variantType: string | null = null;
 
   geneInputCtrl = new FormControl();
+  variantInputCtrl = new FormControl('', [
+    Validators.pattern('(^(Chr)?(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|X|Y|M)\s*:\s*([0-9]+)\s*(A|C|G|T)+\s*>\s*(A|C|G|T)+$)|(^(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|X|Y|M)-[0-9]+-(A|C|G|T)+-(A|C|G|T)+$)|(^[[0-9a-zA-Z]_\.]+:c\.[0-9]+(A|C|G|T)+>(A|C|G|T)+$)')
+  ]);
   geneSuggestion = [];
   @ViewChild('geneInput') geneInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -37,6 +41,8 @@ export class SearchBoxComponent implements OnInit {
     this.geneKeyword = '';
     this.protein = '';
     this.variant = '';
+    this.variantInputCtrl.setValue('');
+    this.variantType = null;
   }
 
   onGeneInput(e) {
@@ -82,6 +88,26 @@ export class SearchBoxComponent implements OnInit {
   removeGene(gene) {
     this.gene = null;
     this.geneKeyword = '';
+  }
+
+
+  onVariantInput(e) {
+    this.variant = e.target.value;
+  }
+
+  validateInput() {
+    if (this.selectedInputType === 'gene') {
+      if (this.gene != null) {
+        return this.variantInputCtrl.valid;
+      }
+      else {
+        return this.variantInputCtrl.valid && this.variant !== '';
+      }
+    }
+    else if (this.selectedInputType === 'protein') {
+      return this.protein.trim() !== '';
+    }
+    return false;
   }
 
   search() {

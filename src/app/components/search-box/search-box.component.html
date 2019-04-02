@@ -70,7 +70,13 @@
     }" *ngIf="selectedInputType == 'gene'">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Human Variant (hg19)</mat-label>
-        <input matInput [(ngModel)]="variant">
+        <input matInput
+          [formControl]="variantInputCtrl"
+          (input)="onVariantInput($event)"
+        >
+        <mat-error *ngIf="!variantInputCtrl.valid">
+          Please check your variant format.
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -101,8 +107,7 @@
       <button mat-flat-button	color="primary"
       [ngClass]="{'button-compact': compact}"
       (click)="search()"
-      [disabled]="!((selectedInputType === 'gene' && (gene != null || variant != ''))
-        || (selectedInputType === 'protein' && protein != ''))"
+      [disabled]="!validateInput()"
     >
         <span *ngIf="!compact">Search</span>
         <mat-icon *ngIf="compact">search</mat-icon>
