@@ -60,7 +60,10 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10"></mat-paginator>
+  <mat-paginator
+    *ngIf="data.length > 5"
+    [pageSizeOptions]="[5, 10, 20]" [pageSize]="10"
+  ></mat-paginator>
 </div>
 <div *ngIf="data && !data.length">
   <p>No {{ unit.toLowerCase() || 'data' }} found</p>
