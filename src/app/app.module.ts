@@ -46,6 +46,7 @@ import { GnomADGeneComponent } from './components/pages/human-result/gnom-ad-gen
 import { GnomADGeneVisualComponent } from './components/pages/human-result/gnom-ad-gene/gnom-ad-gene-visual/gnom-ad-gene-visual.component';
 import { DbnsfpComponent } from './components/pages/human-result/dbnsfp/dbnsfp.component';
 import { RankscoreVisualComponent } from './components/pages/human-result/dbnsfp/rankscore-visual/rankscore-visual.component';
+import { DbnsfpScoreCellComponent } from './components/pages/human-result/dbnsfp/dbnsfp-score-cell/dbnsfp-score-cell.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { RankscoreVisualComponent } from './components/pages/human-result/dbnsfp
     GnomADGeneComponent,
     GnomADGeneVisualComponent,
     DbnsfpComponent,
-    RankscoreVisualComponent
+    RankscoreVisualComponent,
+    DbnsfpScoreCellComponent
   ],
   imports: [
     BrowserModule,

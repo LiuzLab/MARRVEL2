@@ -1,0 +1,42 @@
+.color-1 {
+  color: rgb(2, 120, 187);
+}
+.color-2 {
+  color: rgb(18,115,159);
+}
+.color-3{
+  color: rgb(36,57,80);
+}
+.color-4 {
+  color: rgb(52, 52, 52);
+}
+.color-5 {
+  color: rgb(66,55,59);
+}
+.color-6 {
+  color: rgb(131,28,30);
+}
+.color-7 {
+  color: rgb(145, 31, 37);
+}
+
+.pred-prediction,
+.pred-score {
+  display: block;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  font-weight: 600;
+}
+.pred-score {
+  font-size: 2.5em;
+}
+.pred-prediction {
+  font-size: 2em;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: 400;
+  margin-right: 0.5em;
+}

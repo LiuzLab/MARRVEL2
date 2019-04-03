@@ -1,205 +1,103 @@
 <div class="row mb-3">
   <div class="col-12">
-    <h3 class="mb-3 d-inline-block align-middle">
-      dbNSFP: Single-Nucleotide Variant Functional Prediction
+    <h3 class="d-inline-block align-middle">
+      Single-Nucleotide Variant Functional Prediction from dbNSFP
     </h3>
   </div>
 </div>
 
-<div class="row mb-3" *ngIf="data">
-  <div class="col-12">
-    <table class="mat-table w-100">
-      <thead>
-        <tr class="mat-header-row">
-          <th class="mat-header-cell">
-            Prediction tool
-          </th>
-          <th class="mat-header-cell">
-            Score / Prediction
-          </th>
-          <th class="mat-header-cell">
-            Rank Score
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr class="mat-row" *ngIf="data.scores.CADD && data.scores.CADD.phred">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Uses 63 annotations (949 features)."
-            >
-              CADD phred
-            </span>
-          </td>
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Range = 0 (least damaging) to 50 (most damaging)"
-            >
-              {{ data.scores.CADD.phred }}
-            </span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              [rankscore]="data.scores.CADD.rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-
-        <tr class="mat-row" *ngIf="data.scores.REVEL && data.scores.REVEL.score">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Ensemble method of 13 tools."
-            >
-              REVEL
-            </span>
-          </td>
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Range = 0 (least damaging) to 1 (most damaging)"
-            >
-              {{ data.scores.REVEL.score }}
-            </span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              [rankscore]="data.scores.REVEL.rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-
-        <tr class="mat-row" *ngIf="data.scores.MCAP && data.scores.MCAP.prediction">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Uses conservation data and trained on mutations linked to Mendelian diseases."
-            >
-              M-CAP
-            </span>
-          </td>
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Possible scores are: Tolerated or Damaging"
-            >
-              {{ data.scores.MCAP.prediction }}
-            </span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              [rankscore]="data.scores.MCAP.rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-
-        <tr class="mat-row" *ngIf="data.scores.Polyphen2HDIV && data.scores.Polyphen2HDIV.prediction">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Uses eight sequence-based and three structure-based predictive features. Trained with Mendelian disease mutations and SNVs from close mammalian homolog proteins."
-            >
-              Polyphen-2 HumDiv
-            </span>
-          </td>
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging"
-            >
-              {{ data.scores.Polyphen2HDIV.prediction }}
-            </span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              [rankscore]="data.scores.Polyphen2HDIV.rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-
-        <tr class="mat-row" *ngIf="data.scores.Polyphen2HVAR && data.scores.Polyphen2HVAR.prediction">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Uses eight sequence-based and three structure-based predictive features. Trained with disease associated and common SNVs."
-            >
-              Polyphen-2 HumVar
-            </span>
-          </td>
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging"
-            >
-              {{ data.scores.Polyphen2HVAR.prediction }}
-            </span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              [rankscore]="data.scores.Polyphen2HVAR.rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-
-        <tr class="mat-row" *ngIf="data.scores['GERP++RS'] && data.scores['GERP++RS'].score">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Uses multiple alignments and phylogenetic tree of 34 mammals."
-            >
-              GERP++
-            </span>
-          </td>
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="-12.3 (least conserved) to 6.17 (most conserved)"
-            >
-              {{ data.scores['GERP++RS'].score }}
-            </span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              [rankscore]="data.scores['GERP++RS'].rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-
-        <tr class="mat-row" *ngIf="data.scores.phyloP100wayVertebrate && data.scores.phyloP100wayVertebrate.score">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Uses multiple alignments and phylogenetic tree of 100 vertebrates."
-            >
-              phyloP 100way Vertebrate
-            </span>
-          </td>
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Range =- 20.0 (least conserved) to 10.003 (most conserved)"
-            >
-              {{ data.scores.phyloP100wayVertebrate.score }}
-            </span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              [rankscore]="data.scores.phyloP100wayVertebrate.rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-
-        <tr class="mat-row" *ngIf="data.scores.phyloP30wayMammalian && data.scores.phyloP30wayMammalian.score">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="conservation score based on the multiple alignments of 30 mammalian genomes (including human)."
-            >
-                phyloP 30way Mammalian
-            </span>
-          </td>
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="Scores range from -20 to 1.312. The larger the score, the more conserved the site."
-            >
-              {{ data.scores.phyloP30wayMammalian.score }}
-            </span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              [rankscore]="data.scores.phyloP30wayMammalian.rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="row mb-5" *ngIf="data">
+  <div class="col-6 col-md-3 col-lg-2 py-3 text-center" *ngIf="data.scores && data.scores.CADD && data.scores.CADD.phred">
+    <app-dbnsfp-score-cell
+      methodName="CADD phred"
+      methodTooltip="Uses 63 annotations (949 features)."
+      [score]="data.scores.CADD.phred"
+      [rankscore]="data.scores.CADD.rankscore"
+      minValue="0"
+      maxValue="50"
+      scoreTooltip="Range = 0 (least damaging) to 50 (most damaging)"
+    ></app-dbnsfp-score-cell>
   </div>
+
+  <div class="col-6 col-md-3 col-lg-2 py-3 text-center" *ngIf="data.scores && data.scores.REVEL && data.scores.REVEL.score">
+    <app-dbnsfp-score-cell
+      methodName="REVEL"
+      methodTooltip="Ensemble method of 13 tools."
+      [score]="data.scores.REVEL.score"
+      [rankscore]="data.scores.REVEL.score"
+      minValue="0"
+      maxValue="1"
+      scoreTooltip="Range = 0 (least damaging) to 1 (most damaging)"
+    ></app-dbnsfp-score-cell>
+  </div>
+
+  <div class="col-6 col-md-3 col-lg-2 py-3 text-center" *ngIf="data.scores && data.scores['GERP++RS'] && data.scores['GERP++RS'].score">
+    <app-dbnsfp-score-cell
+      methodName="GERP++"
+      methodTooltip="Uses multiple alignments and phylogenetic tree of 34 mammals."
+      [score]="data.scores['GERP++RS'].score"
+      [rankscore]="data.scores['GERP++RS'].rankscore"
+      minValue="-12.3"
+      maxValue="6.17"
+      scoreTooltip="-12.3 (least conserved) to 6.17 (most conserved)"
+    ></app-dbnsfp-score-cell>
+  </div>
+
+  <div class="col-6 col-md-3 col-lg-2 py-3 text-center" *ngIf="data.scores && data.scores.phyloP100wayVertebrate && data.scores.phyloP100wayVertebrate.score">
+    <app-dbnsfp-score-cell
+      methodName="phyloP 100way Vertebrate"
+      methodTooltip="Uses multiple alignments and phylogenetic tree of 100 vertebrates."
+      [score]="data.scores.phyloP100wayVertebrate.score"
+      [rankscore]="data.scores.phyloP100wayVertebrate.rankscore"
+      minValue="-20.0"
+      maxValue="10.003"
+      scoreTooltip="Range =- 20.0 (least conserved) to 10.003 (most conserved)"
+    ></app-dbnsfp-score-cell>
+  </div>
+
+  <div class="col-6 col-md-3 col-lg-2 py-3 text-center" *ngIf="data.scores && data.scores.phyloP30wayMammalian && data.scores.phyloP30wayMammalian.score">
+    <app-dbnsfp-score-cell
+      methodName="phyloP 30way Mammalian"
+      methodTooltip="conservation score based on the multiple alignments of 30 mammalian genomes (including human)."
+      [score]="data.scores.phyloP30wayMammalian.score"
+      [rankscore]="data.scores.phyloP30wayMammalian.rankscore"
+      minValue="-20"
+      maxValue="1.312"
+      scoreTooltip="Scores range from -20 to 1.312. The larger the score, the more conserved the site."
+    ></app-dbnsfp-score-cell>
+  </div>
+
+  <div class="col-6 col-md-3 col-lg-2 py-3 text-center" *ngIf="data.scores && data.scores.MCAP && data.scores.MCAP.prediction">
+    <app-dbnsfp-score-cell
+      methodName="M-CAP"
+      methodTooltip="Uses conservation data and trained on mutations linked to Mendelian diseases."
+      [prediction]="data.scores.MCAP.prediction"
+      [predictionColorClass]="{ 'Tolerated': 'color-1', 'Damaging': 'color-7' }"
+      scoreTooltip="Possible scores are: Tolerated or Damaging"
+      [rankscore]="data.scores.MCAP.rankscore"
+    ></app-dbnsfp-score-cell>
+  </div>
+
+  <div class="col-6 col-md-3 col-lg-2 py-3 text-center" *ngIf="data.scores && data.scores.Polyphen2HDIV && data.scores.Polyphen2HDIV.prediction">
+    <app-dbnsfp-score-cell
+      methodName="Polyphen-2 HumDiv"
+      methodTooltip="Uses eight sequence-based and three structure-based predictive features. Trained with Mendelian disease mutations and SNVs from close mammalian homolog proteins."
+      [prediction]="data.scores.Polyphen2HDIV.prediction"
+      [predictionColorClass]="{ 'Benign': 'color-1', 'Possibly Damaging': 'color-4', 'Probably Damaging': 'color-7' }"
+      scoreTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging"
+      [rankscore]="data.scores.Polyphen2HDIV.rankscore"
+    ></app-dbnsfp-score-cell>
+  </div>
+
+  <div class="col-6 col-md-3 col-lg-2 py-3 text-center" *ngIf="data.scores && data.scores.Polyphen2HVAR && data.scores.Polyphen2HVAR.prediction">
+    <app-dbnsfp-score-cell
+      methodName="Polyphen-2 HumVar"
+      methodTooltip="Uses eight sequence-based and three structure-based predictive features. Trained with disease associated and common SNVs."
+      [prediction]="data.scores.Polyphen2HVAR.prediction"
+      [predictionColorClass]="{ 'Benign': 'color-1', 'Possibly Damaging': 'color-4', 'Probably Damaging': 'color-7' }"
+      scoreTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging"
+      [rankscore]="data.scores.Polyphen2HVAR.rankscore"
+    ></app-dbnsfp-score-cell>
+  </div>
+
 </div>
