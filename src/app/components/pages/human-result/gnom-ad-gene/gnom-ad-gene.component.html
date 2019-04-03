@@ -1,4 +1,4 @@
-<p class="mt-0 mb-3 d-table" *ngIf="data">
+<p class="mt-0 mb-3 d-table" *ngIf="data && data.lof">
   <mat-icon class="d-table-cell align-top"
     matTooltip="MARRVEL's comment" matTooltipPosition="above"
   >insert_comment</mat-icon>
@@ -26,7 +26,7 @@
 
 <table
   class="mat-table w-100"
-  *ngIf="data"
+  *ngIf="data && data.lof"
 >
   <thead>
     <tr class="mat-header-row">
