@@ -85,31 +85,33 @@ export class HumanResultComponent implements OnInit {
     this.dbNSFPLoading = true;
     this.api.getDbNSFP(this.variant)
       .subscribe((res) => {
-        if (res.scores.MCAP.prediction === 'T') {
-          res.scores.MCAP.prediction = 'Tolerated';
-        }
-        else if (res.scores.MCAP.prediction === 'D') {
-          res.scores.MCAP.prediction = 'Damaging';
-        }
+        if (res && res.scores) {
+          if (res.scores.MCAP.prediction === 'T') {
+            res.scores.MCAP.prediction = 'Tolerated';
+          }
+          else if (res.scores.MCAP.prediction === 'D') {
+            res.scores.MCAP.prediction = 'Damaging';
+          }
 
-        if (res.scores.Polyphen2HDIV.prediction === 'B') {
-          res.scores.Polyphen2HDIV.prediction = 'Benign';
-        }
-        else if (res.scores.Polyphen2HDIV.prediction === 'P') {
-          res.scores.Polyphen2HDIV.prediction = 'Possibly Damaging';
-        }
-        else if (res.scores.Polyphen2HDIV.prediction === 'D') {
-          res.scores.Polyphen2HDIV.prediction = 'Probably Damaging';
-        }
+          if (res.scores.Polyphen2HDIV.prediction === 'B') {
+            res.scores.Polyphen2HDIV.prediction = 'Benign';
+          }
+          else if (res.scores.Polyphen2HDIV.prediction === 'P') {
+            res.scores.Polyphen2HDIV.prediction = 'Possibly Damaging';
+          }
+          else if (res.scores.Polyphen2HDIV.prediction === 'D') {
+            res.scores.Polyphen2HDIV.prediction = 'Probably Damaging';
+          }
 
-        if (res.scores.Polyphen2HVAR.prediction === 'B') {
-          res.scores.Polyphen2HVAR.prediction = 'Benign';
-        }
-        else if (res.scores.Polyphen2HVAR.prediction === 'P') {
-          res.scores.Polyphen2HVAR.prediction = 'Possibly Damaging';
-        }
-        else if (res.scores.Polyphen2HVAR.prediction === 'D') {
-          res.scores.Polyphen2HVAR.prediction = 'Probably Damaging';
+          if (res.scores.Polyphen2HVAR.prediction === 'B') {
+            res.scores.Polyphen2HVAR.prediction = 'Benign';
+          }
+          else if (res.scores.Polyphen2HVAR.prediction === 'P') {
+            res.scores.Polyphen2HVAR.prediction = 'Possibly Damaging';
+          }
+          else if (res.scores.Polyphen2HVAR.prediction === 'D') {
+            res.scores.Polyphen2HVAR.prediction = 'Probably Damaging';
+          }
         }
 
         this.dbNSFP = res;

@@ -13,8 +13,8 @@ export class UnitDirective implements OnChanges {
   ngOnChanges() {
     this.plural = this.plural || (this.unit + 's');
     this.count = this.count || 0;
-    if (this.unit === '') {
-      this.el.nativeElement = this.count;
+    if (!this.unit || this.unit === '') {
+      this.el.nativeElement.innerHTML = '' + this.count;
     }
     else if (this.count >= 2) {
       this.el.nativeElement.innerHTML = `${this.count} ${this.plural}`;

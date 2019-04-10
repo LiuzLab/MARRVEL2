@@ -47,6 +47,8 @@ import { GnomADGeneVisualComponent } from './components/pages/human-result/gnom-
 import { DbnsfpComponent } from './components/pages/human-result/dbnsfp/dbnsfp.component';
 import { RankscoreVisualComponent } from './components/pages/human-result/dbnsfp/rankscore-visual/rankscore-visual.component';
 import { DbnsfpScoreCellComponent } from './components/pages/human-result/dbnsfp/dbnsfp-score-cell/dbnsfp-score-cell.component';
+import { Geno2mpComponent } from './components/pages/human-result/geno2mp/geno2mp.component';
+import { DECIPHERComponent } from './components/pages/human-result/decipher/decipher.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { DbnsfpScoreCellComponent } from './components/pages/human-result/dbnsfp
     GnomADGeneVisualComponent,
     DbnsfpComponent,
     RankscoreVisualComponent,
-    DbnsfpScoreCellComponent
+    DbnsfpScoreCellComponent,
+    Geno2mpComponent,
+    DECIPHERComponent
   ],
   imports: [
     BrowserModule,

@@ -91,4 +91,25 @@ export class ApiService {
     });
   }
 
+  getDECIPHERByVariant(variant: Variant): Observable< any > {
+    const url = `${environment.apiHost}/DECIPHER/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    return Observable.create(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
+
+  getGeno2MPByVariant(variant: Variant): Observable< any > {
+    const url = `${environment.apiHost}/Geno2MP/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    return Observable.create(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
 }
