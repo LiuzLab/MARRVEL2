@@ -4,12 +4,14 @@
   >insert_comment</mat-icon>
 
   <span class="d-table-cell pl-2">
-    Chr{{ data.chr }}:{{ data.pos }} {{ data.ref }}>{{ data.alt }} is found
-    <strong appUnit [count]="data.exome.alleleCount + data.genome.alleleCount" unit="time"></strong>
-    in the control population (may contain adult-onset diseases).
-    There are
-    <strong appUnit [count]="data.exome.homCount + data.genome.homCount" unit="individual"></strong>
-    who are <strong>homozygous</strong> for this variant.
+    <span *ngIf="data && data.exome && data.genome">
+      Chr{{ data.chr }}:{{ data.pos }} {{ data.ref }}>{{ data.alt }} is found
+      <strong appUnit [count]="data.exome.alleleCount + data.genome.alleleCount" unit="time"></strong>
+      in the control population (may contain adult-onset diseases).
+      There are
+      <strong appUnit [count]="data.exome.homCount + data.genome.homCount" unit="individual"></strong>
+      who are <strong>homozygous</strong> for this variant.
+    </span>
   </span>
 </p>
 
@@ -17,9 +19,9 @@
   <thead>
     <tr class="mat-header-row">
       <th class="mat-header-cell"></th>
+      <th class="mat-header-cell number">Total</th>
       <th class="mat-header-cell number">Exomes</th>
       <th class="mat-header-cell number">Genomes</th>
-      <th class="mat-header-cell number">Total</th>
     </tr>
   </thead>
   <tbody>
@@ -28,13 +30,13 @@
         Allele Count
       </td>
       <td class="mat-cell number">
+        {{ data.exome.alleleCount + data.genome.alleleCount }}
+      </td>
+      <td class="mat-cell number">
         {{ data.exome.alleleCount }}
       </td>
       <td class="mat-cell number">
         {{ data.genome.alleleCount }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.exome.alleleCount + data.genome.alleleCount }}
       </td>
     </tr>
 
@@ -43,39 +45,39 @@
         Allele Number
       </td>
       <td class="mat-cell number">
+        {{ data.exome.alleleNum + data.genome.alleleNum }}
+      </td>
+      <td class="mat-cell number">
         {{ data.exome.alleleNum }}
       </td>
       <td class="mat-cell number">
         {{ data.genome.alleleNum }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.exome.alleleNum + data.genome.alleleNum }}
       </td>
     </tr>
 
     <tr class="mat-row">
       <td class="mat-header-cell">Homozygous Count</td>
       <td class="mat-cell number">
+        {{ data.exome.homCount + data.genome.homCount }}
+      </td>
+      <td class="mat-cell number">
         {{ data.exome.homCount }}
       </td>
       <td class="mat-cell number">
         {{ data.genome.homCount }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.exome.homCount + data.genome.homCount }}
       </td>
     </tr>
 
     <tr class="mat-row">
       <td class="mat-header-cell">Allele Frequency</td>
       <td class="mat-cell number">
+        {{ ((data.exome.alleleCount + data.genome.alleleCount) / (data.exome.alleleNum + data.genome.alleleNum)).toFixed(6) }}
+      </td>
+      <td class="mat-cell number">
         {{ (data.exome.alleleCount / data.exome.alleleNum).toFixed(6) }}
       </td>
       <td class="mat-cell number">
         {{ (data.genome.alleleCount / data.genome.alleleNum).toFixed(6) }}
-      </td>
-      <td class="mat-cell number">
-        {{ ((data.exome.alleleCount + data.genome.alleleCount) / (data.exome.alleleNum + data.genome.alleleNum)).toFixed(6) }}
       </td>
     </tr>
   </tbody>

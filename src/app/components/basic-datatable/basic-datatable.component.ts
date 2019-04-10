@@ -2,7 +2,6 @@ import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit } from '@
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 
 import { Animations } from '../../animations';
-import { PrefixNot } from '@angular/compiler';
 
 @Component({
   selector: 'app-basic-datatable',
