@@ -4,7 +4,6 @@ import { ApiService } from '../../../../services/api.service';
 
 import { HumanGene } from '../../../../interfaces/gene';
 import { Variant } from '../../../../interfaces/variant';
-import { request } from 'https';
 
 @Component({
   selector: 'app-geno2mp',

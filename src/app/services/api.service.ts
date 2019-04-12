@@ -112,4 +112,26 @@ export class ApiService {
       });
     });
   }
+
+  getDGVByVariant(variant: Variant): Observable< any > {
+    const url = `${environment.apiHost}/DGV/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    return Observable.create(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
+
+  getDGVByEntrezId(entrezId: number | string): Observable< any > {
+    const url = `${environment.apiHost}/DGV/gene/entrezId/${entrezId}`;
+    return Observable.create(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
 }

@@ -1,0 +1,52 @@
+<div class="row mb-3">
+  <div class="col-12">
+    <h3 class="mb-3 d-inline-block align-middle">DGV</h3>
+    <a class="mb-3 d-inline-block ml-3 align-middle"
+      *ngIf="gene || variant"
+      [attr.href]="
+        variant?
+        'http://dgv.tcag.ca/gb2/gbrowse/dgv2_hg19/?name=chr' + variant.chr + '%3A' + variant.pos + '-' + variant.pos + ';search=Search'
+        :
+        'http://dgv.tcag.ca/gb2/gbrowse/dgv2_hg19/?name=' + gene.symbol + ';search=Search'
+      "
+      target="_blank"
+    >
+      <button mat-button color="primary">
+        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+        More on DGV
+      </button>
+    </a>
+
+    <p class="mt-0 mb-0 d-table" *ngIf="data">
+      <mat-icon class="d-table-cell align-top"
+        matTooltip="MARRVEL's comment" matTooltipPosition="above"
+      >insert_comment</mat-icon>
+      <span class="d-table-cell pl-2">
+        COMMENT HERE
+      </span>
+    </p>
+  </div>
+</div>
+
+<div class="row" *ngIf="!loading && data && data.length">
+  <div class="col-12">
+    <app-basic-datatable
+      [title]="tableTitle"
+      [data]="data"
+      [displayedColumns]="['hg19Chr', 'hg19Start', 'hg19Stop', 'size', 'type', 'subType', 'frequency', 'gain', 'loss', 'sampleSize', 'reference', 'geneSymbols']"
+      [columnNames]="['Chr', 'Start', 'End', 'Size', 'Type', 'Subtype', 'Frequency', 'Gain', 'Loss', 'Sample Size', 'References', 'Genes']"
+      [url]="[ false, false, false, false, false, false, false, false, false, false, true, false]"
+      [urlPrefixes]="[ null, null, null, null, null, null, null, null, null, null, 'http://www.ncbi.nlm.nih.gov/pubmed/', null]"
+
+      [types]="['int', 'int', 'int', 'int', '', '', 'float', 'int', 'int', 'int', 'url', '']"
+      sortActive="size"
+      sortDirection="desc"
+    ></app-basic-datatable>
+  </div>
+</div>
+
+<div class="row" *ngIf="!loading && (!data || data.length == 0)">
+  <div class="col-12">
+    <p class="text-muted my-0">There were no matches found for {{ variant.chr }}:{{ variant.pos }}</p>
+  </div>
+</div>

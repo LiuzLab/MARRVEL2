@@ -23,14 +23,19 @@
     [dataSource]="dataSource"
     matSort
     [matSortActive]="sortActive"
-    matSortDirection="asc"
+    [matSortDirection]="sortDirection"
     disableClear
   >
     <!-- data column -->
     <ng-container *ngFor="let colId of displayedColumns; index as idx" [matColumnDef]="colId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ columnNames[idx] }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header
+        [ngClass]="{ 'number': types && types[idx] && (types[idx] == 'int' || types[idx] == 'float') }"
+      >
+        {{ columnNames[idx] }}
+      </th>
       <td mat-cell
         *matCellDef="let element"
+        [ngClass]="{ 'text-right': types && types[idx] && (types[idx] == 'int' || types[idx] == 'float') }"
       >
         <a
           *ngIf="url && url[idx]"
@@ -39,9 +44,19 @@
           [innerHTML]="element[colId] | highlight: filtersToApply[colId]"
         ></a>
         <span
-          *ngIf="!url || !url[idx]"
+          *ngIf="(!url || !url[idx]) && (!types || !types[idx])"
           [innerHTML]="element[colId] | highlight: filtersToApply[colId]"
         ></span>
+        <span
+          *ngIf="types && types[idx] == 'float'"
+        >
+          {{ toFixed(element[colId]) | highlight: filtersToApply[colId] }}
+        </span>
+        <span
+          *ngIf="types && types[idx] == 'int'"
+        >
+          {{ (element[colId] || '0') | highlight: filtersToApply[colId] }}
+        </span>
       </td>
     </ng-container>
 

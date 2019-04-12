@@ -17,6 +17,7 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
   @Input() unit: string;
 
   @Input() sortActive: string;
+  @Input() sortDirection = 'asc';
   @Input() displayedColumns: string[];
   @Input() columnNames: string[];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
@@ -28,6 +29,8 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
   @Input() url: boolean[];
   @Input() urlPrefixes: string[] = [];
   @Input() urlPostfixes: string[] = [];
+
+  @Input() types: boolean[];
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -80,6 +83,10 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
   filter(colName: string, filterValue: string) {
     this.filtersToApply[colName] = filterValue;
     this.dataSource.filter = JSON.stringify(this.filtersToApply);
+  }
+
+  toFixed(num: number) {
+    return (typeof num) === 'number' ? num.toFixed(6) : null;
   }
 
 }

@@ -49,6 +49,7 @@ import { RankscoreVisualComponent } from './components/pages/human-result/dbnsfp
 import { DbnsfpScoreCellComponent } from './components/pages/human-result/dbnsfp/dbnsfp-score-cell/dbnsfp-score-cell.component';
 import { Geno2mpComponent } from './components/pages/human-result/geno2mp/geno2mp.component';
 import { DECIPHERComponent } from './components/pages/human-result/decipher/decipher.component';
+import { DgvComponent } from './components/pages/human-result/dgv/dgv.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { DECIPHERComponent } from './components/pages/human-result/decipher/deci
     RankscoreVisualComponent,
     DbnsfpScoreCellComponent,
     Geno2mpComponent,
-    DECIPHERComponent
+    DECIPHERComponent,
+    DgvComponent
   ],
   imports: [
     BrowserModule,
