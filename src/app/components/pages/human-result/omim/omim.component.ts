@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 import { ApiService } from '../../../../services/api.service';
 
@@ -13,6 +13,8 @@ export class OmimComponent implements OnChanges {
   loading = false;
   data;
 
+  @Output() dataChange: EventEmitter< any > = new EventEmitter();
+
   constructor(
     private api: ApiService
   ) { }
@@ -25,7 +27,9 @@ export class OmimComponent implements OnChanges {
         .subscribe((res) => {
           this.data = res;
           this.loading = false;
-        })
+
+          this.dataChange.emit(this.data);
+        });
     }
   }
 

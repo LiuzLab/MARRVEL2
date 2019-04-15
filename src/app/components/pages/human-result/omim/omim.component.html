@@ -37,14 +37,6 @@
     </p>
   </div>
 </div>
-<!--   2. OMIM text description -->
-<div class="row mb-3" *ngIf="data">
-  <div class="col-12">
-    <h4 class="mb-3">OMIM Description of {{ gene.symbol }}</h4>
-    <p class="mt-0 mb-3">{{ data.title }}</p>
-    <p class="e2e-intter-html-bound mt-0 mb-3" [innerHTML]="data.description"></p>
-  </div>
-</div>
 
 <!--   3. OMIM phenotypes -->
 <div class="row mb-3" *ngIf="data && data.phenotypes">

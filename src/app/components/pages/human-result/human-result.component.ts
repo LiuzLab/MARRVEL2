@@ -26,6 +26,9 @@ export class HumanResultComponent implements OnInit {
   variant: Variant | null = null;
   variantString: string;
 
+  // Data from server
+  omimData: object | null;
+
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
@@ -63,6 +66,10 @@ export class HumanResultComponent implements OnInit {
         }
       }
     });
+  }
+
+  omimDataChange(e) {
+    this.omimData = e;
   }
 
   toggleSidenav(e) {
