@@ -1,22 +1,34 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+
+import { ApiService } from '../../../../services/api.service';
+import { Variant } from '../../../../interfaces/variant';
 
 @Component({
   selector: 'app-gnom-ad',
   templateUrl: './gnom-ad.component.html',
   styleUrls: ['./gnom-ad.component.scss']
 })
-export class GnomADComponent implements OnInit, OnChanges {
-  @Input() data: GnomADVariantData;
+export class GnomADComponent implements OnChanges {
+  @Input() variant: Variant;
 
-  constructor() { }
+  loading = false;
+  data: GnomADVariantData;
 
-  ngOnInit() {
-  }
-  ngOnChanges() {
-    if (this.data) {
-      console.log('gnomAD:', this.data);
-      this.data.exome = this.data.exome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
-      this.data.genome = this.data.genome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
+  constructor(
+    private api: ApiService
+  ) { }
+
+  ngOnChanges(change: SimpleChanges) {
+    if (change.variant && change.variant.currentValue) {
+      this.loading = true;
+      this.api.getGnomADVaraint(this.variant)
+        .subscribe((res) => {
+          res.exome = res.exome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
+          res.genome = res.genome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
+
+          this.data = res;
+          this.loading = false;
+        });
     }
   }
 

@@ -41,23 +41,23 @@
       </h2>
 
       <div class="row section mb-5" id="OMIM">
-        <div class="col-12" *ngIf="!omimLoading">
+        <div class="col-12">
           <!-- OMIM starts -->
-          <app-omim [data]="omim" [gene]="gene"></app-omim>
+          <app-omim [gene]="gene"></app-omim>
         </div>
       </div>
 
       <div class="row section mb-5" id="DbNSFP">
-        <div class="col-12" *ngIf="!dbNSFPLoading">
+        <div class="col-12">
           <!-- dbNSFP starts -->
-          <app-dbnsfp [data]="dbNSFP"></app-dbnsfp>
+          <app-dbnsfp [variant]="variant"></app-dbnsfp>
         </div>
       </div>
 
       <div class="row section mb-5" id="ClinVar">
-        <div class="col-12" *ngIf="!omimLoading">
+        <div class="col-12">
           <!-- ClinVar starts -->
-          <app-clinvar [data]="clinVar" [gene]="gene"></app-clinvar>
+          <app-clinvar [gene]="gene"></app-clinvar>
         </div>
       </div>
 
@@ -86,7 +86,7 @@
       <div class="row section mb-5" id="GnomAD">
         <div class="col-12 mb-3">
           <!-- gnomAD starts -->
-          <div class="row" *ngIf="!gnomAdLoading">
+          <div class="row">
             <div class="col-12">
               <h3 class="mb-3 d-inline-block align-middle">gnomAD</h3>
               <a class="mb-3 d-inline-block ml-3 align-middle"
@@ -103,26 +103,25 @@
           </div>
 
           <!-- gnomAD variant -->
-          <div class="row mb-3" *ngIf="variant && !gnomADLoading">
+          <div class="row mb-3">
             <div class="col-12">
               <h4 class="mt-0 mb-3">
                 Population Allele Frequencies of {{ variantString }} from gnomAD
               </h4>
               <app-gnom-ad
-                [data]="gnomAD"
+                [variant]="variant"
               ></app-gnom-ad>
             </div>
           </div>
 
           <!-- gnomAD gene -->
-          <div class="row" *ngIf="gene && !gnomADGeneLoading">
+          <div class="row">
             <div class="col-12">
               <h4 class="mt-0 mb-3">
                 Control Population Summary of {{ gene.symbol }} from gnomAD
               </h4>
               <app-gnom-ad-gene
-                [symbol]="gene.symbol"
-                [data]="gnomADGene"
+                [gene]="gene"
               ></app-gnom-ad-gene>
             </div>
           </div>

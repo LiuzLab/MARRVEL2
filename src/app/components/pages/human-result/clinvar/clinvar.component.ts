@@ -1,4 +1,6 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { ApiService } from '../../../../services/api.service';
+import { HumanGene } from '../../../../interfaces/gene';
 
 interface ClinVarVariant {
   variantion: string;
@@ -14,32 +16,41 @@ interface ClinVarVariant {
   styleUrls: ['./clinvar.component.scss']
 })
 export class ClinvarComponent implements OnChanges {
-  @Input() data;
-  @Input() gene;
+  @Input() gene: HumanGene;
+
+  loading = false;
+  data;
   significance;
 
-  constructor() { }
+  constructor(
+    private api: ApiService
+  ) { }
 
-  ngOnChanges() {
-    if (this.data) {
-      this.significance = {};
-      for (const item of this.data) {
-        item.location = `Chr${item.chr}:${item.start}`;
-        if (item.start !== item.stop) {
-          item.location = item.location + `-${item.stop}`;
-        }
-        item.significanceText = item.significance.description;
-        item.reviewStatus = item.significance.reviewStatus;
+  ngOnChanges(change: SimpleChanges) {
+    if (change.gene && change.gene.currentValue && change.gene.currentValue['entrezId']) {
+      this.loading = true;
+      this.api.getClinVarByEntrezId(this.gene.entrezId)
+        .subscribe((res) => {
+          this.significance = {};
+          for (const item of res) {
+            item.location = `Chr${item.chr}:${item.start}`;
+            if (item.start !== item.stop) {
+              item.location = item.location + `-${item.stop}`;
+            }
+            item.significanceText = item.significance.description;
+            item.reviewStatus = item.significance.reviewStatus;
 
-        item.significanceText.split(/[\/,]/).forEach(S => {
-          S = S.toLowerCase().trim();
-          if (!(S in this.significance)) {
-            this.significance[S] = 0;
+            item.significanceText.split(/[\/,]/).forEach(S => {
+              S = S.toLowerCase().trim();
+              if (!(S in this.significance)) {
+                this.significance[S] = 0;
+              }
+              this.significance[S] += 1;
+            });
           }
-          this.significance[S] += 1;
+          this.data = res;
+          this.loading = false;
         });
-      }
-      console.log(Object.keys(this.significance));
     }
   }
 

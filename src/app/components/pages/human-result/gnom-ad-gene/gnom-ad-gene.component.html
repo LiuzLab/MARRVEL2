@@ -1,4 +1,4 @@
-<p class="mt-0 mb-3 d-table" *ngIf="data && data.lof">
+<p class="mt-0 mb-3 d-table" *ngIf="!loading && data && data.lof">
   <mat-icon class="d-table-cell align-top"
     matTooltip="MARRVEL's comment" matTooltipPosition="above"
   >insert_comment</mat-icon>
@@ -6,20 +6,20 @@
   <span class="d-table-cell pl-2">
     <span>
       The LoF o/e (loss-of-function observed/expected) score for
-      {{ symbol }} is {{ data.lof.oe.toFixed(2) }}. 
+      {{ gene.symbol }} is {{ data.lof.oe.toFixed(2) }}. 
     </span>
 
     <span *ngIf="(data.lof.oeUpper - data.lof.oeLower) > 0.35">
       <br>
       Since the upper bound of the confidence interval of LoF o/e score is above 0.35,
-      {{ symbol }} is tolerant of LoF alleles.
-      The loss of one copy of {{ symbol }} is <strong>likely not lethal</strong> in humans.
+      {{ gene.symbol }} is tolerant of LoF alleles.
+      The loss of one copy of {{ gene.symbol }} is <strong>likely not lethal</strong> in humans.
     </span>
 
     <span *ngIf="(data.lof.oeUpper - data.lof.oeLower) <= 0.35">
       <br>
       Since the upper bound of the confidence interval of LoF o/e score is eqaul to or below 0.35,
-      {{ symbol }} is intolerant of LoF alleles.
+      {{ gene.symbol }} is intolerant of LoF alleles.
     </span>
   </span>
 </p>

@@ -25,7 +25,7 @@ export class DgvComponent implements OnChanges {
   ) { }
 
   ngOnChanges(change: SimpleChanges) {
-    if (change.gene && change.gene.currentValue['entrezId']) {
+    if (change.gene && change.gene.currentValue && change.gene.currentValue['entrezId']) {
       if (this.searchBy === 'gene') {
         this.loading = true;
         this.data = null;
