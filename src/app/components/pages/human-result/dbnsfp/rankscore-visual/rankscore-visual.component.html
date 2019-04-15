@@ -4,7 +4,8 @@
   <circle
     [attr.cx]="rankscore * 34 + 13"
     cy="20" r="3"
-    stroke-width="1" stroke="#000" fill="#fff"
+    stroke-width="1" stroke="#000"
+    [attr.fill]="getColor(rankscore)"
   ></circle>
   <text x="60" y="25" font-size="12px" text-anchor="end">1</text>
   <text
