@@ -22,7 +22,8 @@ import {
   MatChipsModule,
   MatTableModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -50,6 +51,7 @@ import { DbnsfpScoreCellComponent } from './components/pages/human-result/dbnsfp
 import { Geno2mpComponent } from './components/pages/human-result/geno2mp/geno2mp.component';
 import { DECIPHERComponent } from './components/pages/human-result/decipher/decipher.component';
 import { DgvComponent } from './components/pages/human-result/dgv/dgv.component';
+import { Geno2mpGeneTableComponent } from './components/pages/human-result/geno2mp/geno2mp-gene-table/geno2mp-gene-table.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,8 @@ import { DgvComponent } from './components/pages/human-result/dgv/dgv.component'
     DbnsfpScoreCellComponent,
     Geno2mpComponent,
     DECIPHERComponent,
-    DgvComponent
+    DgvComponent,
+    Geno2mpGeneTableComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ import { DgvComponent } from './components/pages/human-result/dgv/dgv.component'
     MatChipsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatButtonModule,
