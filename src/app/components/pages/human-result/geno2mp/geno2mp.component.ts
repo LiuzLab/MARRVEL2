@@ -1,10 +1,11 @@
-import { Component, OnChanges, Input, SimpleChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { ApiService } from '../../../../services/api.service';
 
 import { HumanGene } from '../../../../interfaces/gene';
 import { Variant } from '../../../../interfaces/variant';
+import { Geno2MPResult } from '../../../../interfaces/data';
 
 import { FUNCANNO_TO_CAT_NUM, CAT_NUM_TO_CAT_NAME } from './categories';
 
@@ -21,7 +22,7 @@ import { FUNCANNO_TO_CAT_NUM, CAT_NUM_TO_CAT_NAME } from './categories';
     ])
   ]
 })
-export class Geno2mpComponent implements OnChanges, OnInit {
+export class Geno2mpComponent implements OnChanges {
   @Input() variant: Variant | null;
   @Input() gene: HumanGene | null;
 
@@ -39,8 +40,6 @@ export class Geno2mpComponent implements OnChanges, OnInit {
     private api: ApiService
   ) { }
 
-  ngOnInit() {
-  }
   ngOnChanges(change: SimpleChanges) {
     if (change.gene && change.gene.currentValue && this.gene.entrezId) {
       this.loading = true;
@@ -53,14 +52,14 @@ export class Geno2mpComponent implements OnChanges, OnInit {
             res[i]['category'] = CAT_NUM_TO_CAT_NAME[catNum];
             res[i]['nHpoProfiles'] = res[i].hpoProfiles.length;
 
-            this.geneSummary[catNum] += 1;
+            this.geneSummary[catNum] += res[i].hpoProfiles.length;
           }
+          console.log(res);
           this.geneData = res;
           this.loading = false;
-
-          console.log(this.geneData);
         });
     }
+
     if (change.variant && change.variant.currentValue && this.variant.chr) {
       this.loading = true;
       this.api.getGeno2MPByVariant(this.variant)
@@ -70,42 +69,10 @@ export class Geno2mpComponent implements OnChanges, OnInit {
             res.hpoProfiles[i]['mediumTerm'] = res.hpoProfiles[i].medium.hpoTerm || '';
             res.hpoProfiles[i]['narrowTerm'] = res.hpoProfiles[i].narrow.hpoTerm || '';
           }
-          console.log(res);
           this.variantData = res;
           this.loading = false;
         });
     }
   }
 
-
-}
-
-interface Geno2MPResult {
-  hg19Chr: string;
-  hg19Pos: number;
-  ref: string;
-  alt: string;
-  genes: [{
-    entrezId: number;
-    symbol: string;
-  }];
-  homCount: number;
-  hetCount: number;
-  hpoCount: number;
-  hpoProfiles: [{
-    narrow: {
-      hpoId: string;
-      hpoTerm: string;
-    },
-    medium: {
-      hpoId: string;
-      hpoTerm: string;
-    },
-    broad: {
-      hpoId: string;
-      hpoTerm: string;
-    },
-    affectedStatus: string;
-  }];
-  funcAnno: string;
 }

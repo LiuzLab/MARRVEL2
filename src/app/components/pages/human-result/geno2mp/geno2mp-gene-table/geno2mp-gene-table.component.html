@@ -1,4 +1,4 @@
-<div class="row mt-3">
+<div class="row">
   <div class="col-12 col-lg-6 pb-1" *ngFor="let idx of [3, 2, 0, 1]">
     <mat-slide-toggle
       [checked]="categoriesVisible[idx]"
@@ -12,6 +12,9 @@
 
 <div class="row mt-3" *ngIf="data && data.length">
   <div class="col-12">
+    <p>
+      <strong>Total # HPO profiles:</strong> {{ hpoProfiles }}
+    </p>
     <table class="w-100"
       mat-table
       [dataSource]="dataSource"
@@ -19,17 +22,81 @@
       matSortActive="nHpoProfiles"
       matSortDirection="desc"
     >
-      <ng-container
-        *ngFor="let colId of displayedColumns; index as colIdx"
-        [matColumnDef]="colId"
-      >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ columnNames[colIdx] }}
+
+      <ng-container matColumnDef="hg19Chr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-wrap fit-cell">
+          Chr
         </th>
-        <td mat-cell
-          *matCellDef="let element"
-        >
-          {{ element[colId] }}
+        <td mat-cell *matCellDef="let element" class="no-wrap fit-cell">
+          {{ element.hg19Chr }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hg19Pos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-wrap fit-cell number">
+          Pos
+        </th>
+        <td mat-cell *matCellDef="let element" class="number">
+          {{ element.hg19Pos }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ref">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Ref
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.ref }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="alt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Alt
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.alt }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nHpoProfiles">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="fit-cell number">
+          # HPO Profiles
+        </th>
+        <td mat-cell *matCellDef="let element" class="number">
+          <a
+            href="http://geno2mp.gs.washington.edu/Geno2MP/#/variant/{{ element.hg19Chr }}/{{ element.hg19Pos }}/{{ element.ref }}%253E{{ element.alt }}/snp"
+            target="_blank"
+          >
+            {{ element.nHpoProfiles }}
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="homCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-wrap fit-cell number">
+          # Hom
+        </th>
+        <td mat-cell *matCellDef="let element" class="number">
+          {{ element.homCount }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hetCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-wrap fit-cell number">
+          # Het
+        </th>
+        <td mat-cell *matCellDef="let element" class="number">
+          {{ element.hetCount }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="funcAnno">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Annotations
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.funcAnno }}
         </td>
       </ng-container>
 

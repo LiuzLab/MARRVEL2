@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, AfterViewInit, SimpleChanges } from '@angular/core';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+
+import { Geno2MPResult } from '../../../../../interfaces/data';
 
 @Component({
   selector: 'app-geno2mp-gene-table',
@@ -10,8 +12,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
   @Input() data: any[] | null;
 
-  displayedColumns = [ 'hg19Chr', 'hg19Pos', 'ref', 'alt', 'funcAnno', 'nHpoProfiles', 'homCount', 'hetCount' ];
-  columnNames = [ 'Chr', 'Position', 'Ref', 'Alt', 'Annotations', '# HPO Profiles', '# Hom', '# Het'];
+  displayedColumns = [ 'hg19Chr', 'hg19Pos', 'ref', 'alt', 'nHpoProfiles', 'homCount', 'hetCount', 'funcAnno' ];
   dataSource: MatTableDataSource<Geno2MPResult> = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('geno2mpGenePaginator') paginator: MatPaginator;
@@ -23,6 +24,7 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
     'Splice/Frameshift/Nonsense/Stop Loss',
   ];
   categoriesVisible = [ false, false, false, true ];
+  hpoProfiles: number;
 
   constructor() { }
 
@@ -33,7 +35,17 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data && changes.data.currentValue) {
+      this.sumHpos();
       this.initDataTable();
+    }
+  }
+
+  sumHpos() {
+    this.hpoProfiles = 0;
+    for (const e of this.data) {
+      if (this.categoriesVisible[e.categoryNum]) {
+        this.hpoProfiles += e.nHpoProfiles;
+      }
     }
   }
 
@@ -45,7 +57,7 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
   }
   initFilters() {
     this.dataSource.filterPredicate = (data, filter) => {
-      return (this.categoriesVisible[data.categoryNum]);
+      return (this.categoriesVisible[data['categoryNum']]);
     };
     this.dataSource.filter = ' ';
   }
@@ -53,38 +65,7 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
   onCategoryChange(idx, e: MatSlideToggleChange) {
     this.categoriesVisible[idx] = e.checked;
     this.dataSource.filter = ' ';
+    this.sumHpos();
   }
 
-}
-
-interface Geno2MPResult {
-  hg19Chr: string;
-  hg19Pos: number;
-  ref: string;
-  alt: string;
-  genes: [{
-    entrezId: number;
-    symbol: string;
-  }];
-  homCount: number;
-  hetCount: number;
-  hpoCount: number;
-  hpoProfiles: [{
-    narrow: {
-      hpoId: string;
-      hpoTerm: string;
-    },
-    medium: {
-      hpoId: string;
-      hpoTerm: string;
-    },
-    broad: {
-      hpoId: string;
-      hpoTerm: string;
-    },
-    affectedStatus: string;
-  }];
-  funcAnno: string;
-  categoryNum: number;
-  category: string;
 }

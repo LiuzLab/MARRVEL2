@@ -52,6 +52,7 @@ import { Geno2mpComponent } from './components/pages/human-result/geno2mp/geno2m
 import { DECIPHERComponent } from './components/pages/human-result/decipher/decipher.component';
 import { DgvComponent } from './components/pages/human-result/dgv/dgv.component';
 import { Geno2mpGeneTableComponent } from './components/pages/human-result/geno2mp/geno2mp-gene-table/geno2mp-gene-table.component';
+import { Geno2mpVariantTableComponent } from './components/pages/human-result/geno2mp/geno2mp-variant-table/geno2mp-variant-table.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { Geno2mpGeneTableComponent } from './components/pages/human-result/geno2
     Geno2mpComponent,
     DECIPHERComponent,
     DgvComponent,
-    Geno2mpGeneTableComponent
+    Geno2mpGeneTableComponent,
+    Geno2mpVariantTableComponent
   ],
   imports: [
     BrowserModule,

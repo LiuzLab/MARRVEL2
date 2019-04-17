@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col-12">
-    <h3 class="mb-3 d-inline-block align-middle">Geno2MP</h3>
-    <a class="mb-3 d-inline-block ml-3 align-middle"
+    <h3 class="d-inline-block align-middle">Geno2MP</h3>
+
+    <a class="d-inline-block ml-3 align-middle"
       *ngIf="searchBy == 'variant' && variant"
       href="http://geno2mp.gs.washington.edu/Geno2MP/#/gene/{{ variant.chr }}%253A{{ variant.pos }}/chrLoc/{{ variant.pos }}/{{ variant.pos }}/{{ variant.chr }}"
       target="_blank"
@@ -11,7 +12,7 @@
         More on Geno2MP
       </button>
     </a>
-    <a class="mb-3 d-inline-block ml-3 align-middle"
+    <a class="d-inline-block ml-3 align-middle"
       *ngIf="searchBy == 'gene' && gene"
       href="http://geno2mp.gs.washington.edu/Geno2MP/#/gene/{{ gene.symbol }}/gene/0/0/0"
       target="_blank"
@@ -22,6 +23,9 @@
       </button>
     </a>
   </div>
+</div>
+
+<div class="row mt-3">
   <div class="col-12">
     <mat-form-field>
       <mat-label>Search by</mat-label>
@@ -37,34 +41,27 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-12">
-    <p class="mt-0 mb-3 d-table" *ngIf="searchBy == 'variant' && variantData">
-      <mat-icon class="d-table-cell align-top"
-        matTooltip="MARRVEL's comment" matTooltipPosition="above"
-      >insert_comment</mat-icon>
-      <span class="d-table-cell pl-2">
-        COMMENT HERE
-      </span>
-    </p>
-
-    <p class="mt-0 mb-3 d-table" *ngIf="searchBy == 'gene' && geneData">
-      <mat-icon class="d-table-cell align-top"
-        matTooltip="MARRVEL's comment" matTooltipPosition="above"
-      >insert_comment</mat-icon>
-      <span class="d-table-cell pl-2">
-        COMMENT HERE
-      </span>
-    </p>
-  </div>
-</div>
-
 <div
   *ngIf="searchBy == 'gene' && geneData"
   [@toggle]="searchBy == 'gene' && geneData"
 >
-  <div class="row summary">
-    <div class="col-6 pb-3">
+  <!-- Geno2MP - Gene: Comment -->
+  <div class="row">
+    <div class="col-12">
+      <p class="mt-0 mb-0 d-table" *ngIf="searchBy == 'gene' && geneData">
+        <mat-icon class="d-table-cell align-top"
+          matTooltip="MARRVEL's comment" matTooltipPosition="above"
+        >insert_comment</mat-icon>
+        <span class="d-table-cell pl-2">
+          COMMENT HERE
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Geno2MP - Gene: summary -->
+  <div class="row summary mt-3">
+    <div class="col-6">
       <span class="label mb-1">
         # <span class="text-underline-dashed" matTooltip="Human Phenotype Ontology">HPO</span>
         Profiles of Splice/Frameshift/Nonsense/Stop Loss Variant
@@ -74,7 +71,7 @@
       </span>
     </div>
 
-    <div class="col-6 pb-3">
+    <div class="col-6">
       <span class="label mb-1">
         # <span class="text-underline-dashed" matTooltip="Human Phenotype Ontology">HPO</span>
         Profiles of Missense/Other Indel Variant
@@ -83,10 +80,10 @@
         {{ geneSummary[2] }}
       </span>
     </div>
-
   </div>
 
-  <div class="row">
+  <!-- Geno2MP - Gene: variants -->
+  <div class="row mt-3">
     <div class="col-12">
       <button mat-button class="px-0 no-overlay"
         color="primary" disableRipple="true"
@@ -97,7 +94,7 @@
         <mat-icon *ngIf="geneVariantVisible">expand_less</mat-icon>
       </button>
 
-      <div
+      <div class="mt-3"
         *ngIf="geneVariantVisible"
         [@toggle]="geneVariantVisible" 
       >
@@ -109,63 +106,62 @@
   </div>
 </div>
 
-<div class="row mb-3"
+<div
   *ngIf="searchBy == 'variant' && variantData"
   [@toggle]="searchBy == 'variant' && variantData"
 >
-  <div class="col-12">
-    <div class="row summary">
-      <div class="col-6 col-md-3 col-lg-2 py-3">
-        <span class="label">
-          Number of
-          <span class="text-underline-dashed" matTooltip="Human Phenotype Ontology">HPO</span>
-          profiles
+  <!-- Geno2MP - Gene: comment -->
+  <div class="row">
+    <div class="col-12">
+      <p class="mt-0 mb-0 d-table" *ngIf="searchBy == 'variant' && variantData">
+        <mat-icon class="d-table-cell align-top"
+          matTooltip="MARRVEL's comment" matTooltipPosition="above"
+        >insert_comment</mat-icon>
+        <span class="d-table-cell pl-2">
+          COMMENT HERE
         </span>
-        <span class="data">
-          {{ variantData.hpoCount }}
-        </span>
-      </div>
+      </p>
+    </div>
+  </div>
 
-      <div class="col-6 col-md-3 col-lg-2 py-3">
-        <span class="label">
-          Homozygous count
-        </span>
-        <span class="data">
-          {{ variantData.homCount }}
-        </span>
-      </div>
-
-      <div class="col-6 col-md-3 col-lg-2 py-3">
-        <span class="label">
-          Heterozygous count
-        </span>
-        <span class="data">
-          {{ variantData.hetCount }}
-        </span>
-      </div>
-
-      <div class="col-6 col-md-3 col-lg-6 py-3">
-        <span class="label">
-          Functional annotation
-        </span>
-        <span class="data text-capitalize">
-        {{ variantData.funcAnno.replace('-', ' ') }}
-        </span>
-      </div>
-
+  <!-- Geno2MP - Gene: summary -->
+  <div class="row summary mt-3">
+    <div class="col-4 col-sm-3 col-lg-2">
+      <span class="label">
+        Number of
+        <span class="text-underline-dashed" matTooltip="Human Phenotype Ontology">HPO</span>
+        profiles
+      </span>
+      <span class="data">
+        {{ variantData.hpoCount }}
+      </span>
     </div>
 
-  </div>
-</div>
+    <div class="col-4 col-sm-3 col-lg-2">
+      <span class="label">
+        Homozygous count
+      </span>
+      <span class="data stick-bottom">
+        {{ variantData.homCount }}
+      </span>
+    </div>
 
-<div class="row mb-3" *ngIf="searchBy == 'variant' && variantData">
-  <div class="col-12">
-    <app-basic-datatable
-      [data]="variantData.hpoProfiles"
-      sortActive="broadTerm"
-      [displayedColumns]="['affectedStatus', 'broadTerm', 'mediumTerm', 'narrowTerm']"
-      [columnNames]="['Sample Status', 'Broad Term', 'Medium Term', 'Narrow Term']"
-      [title]="'Gene-Phenotype Relationships'"
-    ></app-basic-datatable>
+    <div class="col-4 col-sm-3 col-lg-2 min-h-70px">
+      <span class="label">
+        Functional annotation
+      </span>
+      <span class="data stick-bottom text-capitalize">
+      {{ variantData.funcAnno.replace('-', ' ') }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Geno2MP - Gene: variant table -->
+  <div class="row mt-3" *ngIf="searchBy == 'variant' && variantData">
+    <div class="col-12">
+      <app-geno2mp-variant-table
+        [data]="variantData.hpoProfiles"
+      ></app-geno2mp-variant-table>
+    </div>
   </div>
 </div>
