@@ -12,14 +12,17 @@ export interface Geno2MPResult {
   hpoCount: number;
   hpoProfiles: [{
     narrow: {
+      hpoIds: string[];
       hpoId: string;
       hpoTerm: string;
     },
     medium: {
+      hpoIds: string[];
       hpoId: string;
       hpoTerm: string;
     },
     broad: {
+      hpoIds: string[];
       hpoId: string;
       hpoTerm: string;
     },

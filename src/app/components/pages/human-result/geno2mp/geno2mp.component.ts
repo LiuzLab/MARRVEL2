@@ -1,5 +1,6 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { ApiService } from '../../../../services/api.service';
 
@@ -8,6 +9,7 @@ import { Variant } from '../../../../interfaces/variant';
 import { Geno2MPResult } from '../../../../interfaces/data';
 
 import { FUNCANNO_TO_CAT_NUM, CAT_NUM_TO_CAT_NAME } from './categories';
+import { HPO_BROAD_TO_CAT } from '../../../../category';
 
 @Component({
   selector: 'app-geno2mp',
@@ -32,9 +34,21 @@ export class Geno2mpComponent implements OnChanges {
   variantData: Geno2MPResult;
   geneData: Geno2MPResult[];
 
+  phenotypes: object;
+
+  // For variant data
+  includeRelated = false;
+
   // For gene data
   geneSummary = { 0: 0, 1: 0, 2: 0, 3: 0 };
   geneVariantVisible = false;
+  varCategoryNames = [ 'Non-Coding', 'Synonymous/Unknown', 'Missense/Other Indel', 'Splice/Frameshift/Nonsense/Stop Loss' ];
+  varCategoriesVisible = {
+    'Non-Coding': false,
+    'Synonymous/Unknown': false,
+    'Missense/Other Indel': false,
+    'Splice/Frameshift/Nonsense/Stop Loss': true
+  };
 
   constructor(
     private api: ApiService
@@ -54,9 +68,9 @@ export class Geno2mpComponent implements OnChanges {
 
             this.geneSummary[catNum] += res[i].hpoProfiles.length;
           }
-          console.log(res);
           this.geneData = res;
           this.loading = false;
+          this.countPhenotypes(this.geneData);
         });
     }
 
@@ -73,6 +87,28 @@ export class Geno2mpComponent implements OnChanges {
           this.loading = false;
         });
     }
+  }
+
+  countPhenotypes(variants: Geno2MPResult[]) {
+    const phenotypes = {};
+    for (const variant of variants) {
+      if (this.varCategoriesVisible[variant['category']]) {
+        for (const hpoProfile of variant.hpoProfiles) {
+          if (hpoProfile.affectedStatus === 'affected') {
+            for (const hpoId of hpoProfile.broad.hpoIds) {
+              const catName = HPO_BROAD_TO_CAT[hpoId];
+              phenotypes[catName] = (phenotypes[catName] || 0) + 1;
+            }
+          }
+        }
+      }
+    }
+    this.phenotypes = phenotypes;
+  }
+
+  onCategoryChange(catName, e: MatSlideToggleChange) {
+    this.varCategoriesVisible[catName] = e.checked;
+    this.countPhenotypes(this.geneData);
   }
 
 }

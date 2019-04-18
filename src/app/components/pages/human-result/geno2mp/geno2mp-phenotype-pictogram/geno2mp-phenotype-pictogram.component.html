@@ -1,0 +1,7 @@
+<div class="cat-icon-wrapper" *ngFor="let category of categories">
+  <img class="cat-icon"
+    [ngClass]="{ 'color-primary': categoryStatus[category] > 0 }"
+    [matTooltip]="category + ( categoryStatus[category] > 0 ? ': ' + categoryStatus[category] + ' profiles' : '')"
+    src="../../../../../../assets/icons/{{ catToIcon[category] }}.svg"
+  >
+</div>

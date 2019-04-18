@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, ViewChild, AfterViewInit, SimpleChanges } from '@angular/core';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { Geno2MPResult } from '../../../../../interfaces/data';
 
@@ -11,20 +10,23 @@ import { Geno2MPResult } from '../../../../../interfaces/data';
 })
 export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
   @Input() data: any[] | null;
+  @Input() showNonCoding = false;
+  @Input() showSynonymous = false;
+  @Input() showMissense = false;
+  @Input() showNonsense = true;
 
   displayedColumns = [ 'hg19Chr', 'hg19Pos', 'ref', 'alt', 'nHpoProfiles', 'homCount', 'hetCount', 'funcAnno' ];
   dataSource: MatTableDataSource<Geno2MPResult> = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('geno2mpGenePaginator') paginator: MatPaginator;
 
-  categoryNames = [
-    'Non-Coding',
-    'Synonymouse/Unknown',
-    'Missense/Ohter Indel',
-    'Splice/Frameshift/Nonsense/Stop Loss',
-  ];
-  categoriesVisible = [ false, false, false, true ];
   hpoProfiles: number;
+  categoriesVisible = {
+    'Non-Coding': false,
+    'Synonymous/Unknown': false,
+    'Missense/Other Indel': false,
+    'Splice/Frameshift/Nonsense/Stop Loss': true
+  };
 
   constructor() { }
 
@@ -38,12 +40,37 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
       this.sumHpos();
       this.initDataTable();
     }
+
+    if (changes.showNonCoding) {
+      this.categoriesVisible['Non-Coding'] = this.showNonCoding;
+
+      this.sumHpos();
+      this.dataSource.filter = ' ';
+    }
+    if (changes.showSynonymous) {
+      this.categoriesVisible['Synonymous/Unknown'] = this.showSynonymous;
+
+      this.sumHpos();
+      this.dataSource.filter = ' ';
+    }
+    if (changes.showMissense) {
+      this.categoriesVisible['Missense/Other Indel'] = changes.showMissense.currentValue;
+
+      this.sumHpos();
+      this.dataSource.filter = ' ';
+    }
+    if (changes.showNonsense) {
+      this.categoriesVisible['Splice/Frameshift/Nonsense/Stop Loss'] = this.showNonsense;
+
+      this.sumHpos();
+      this.dataSource.filter = ' ';
+    }
   }
 
   sumHpos() {
     this.hpoProfiles = 0;
     for (const e of this.data) {
-      if (this.categoriesVisible[e.categoryNum]) {
+      if (this.categoriesVisible[e.category]) {
         this.hpoProfiles += e.nHpoProfiles;
       }
     }
@@ -55,17 +82,11 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
+
   initFilters() {
     this.dataSource.filterPredicate = (data, filter) => {
-      return (this.categoriesVisible[data['categoryNum']]);
+      return (this.categoriesVisible[data['category']]);
     };
     this.dataSource.filter = ' ';
   }
-
-  onCategoryChange(idx, e: MatSlideToggleChange) {
-    this.categoriesVisible[idx] = e.checked;
-    this.dataSource.filter = ' ';
-    this.sumHpos();
-  }
-
 }

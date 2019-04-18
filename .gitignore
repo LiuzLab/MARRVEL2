@@ -49,6 +49,9 @@ backup/
 logs/
 *.log
 
+# Static files
+src/assets
+
 # misc
 /.sass-cache
 /connect.lock

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort, MatTableDataSource, MatPaginator, MatSlideToggleChange } from '@angular/material';
 
 import { Animations } from '../../../../../animations';
 
+import { HPO_BROAD_TO_CAT } from './../../../../../category';
 
 @Component({
   selector: 'app-geno2mp-variant-table',
@@ -12,9 +13,11 @@ import { Animations } from '../../../../../animations';
     Animations.slideIn
   ]
 })
-export class Geno2mpVariantTableComponent implements OnInit, OnChanges, AfterViewInit {
+export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
   @Input() data: any[] | null;
-  @Input() title: string;
+  phenotypes: object = {};
+
+  affectedProfiles = 0;
 
   displayedColumns = ['affectedStatus', 'broadTerm', 'mediumTerm', 'narrowTerm'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
@@ -56,13 +59,18 @@ export class Geno2mpVariantTableComponent implements OnInit, OnChanges, AfterVie
       }
       return isMatched;
     };
-  }
-
-  ngOnInit() {
+    this.dataSource.filter = JSON.stringify(this.filtersToApply);
   }
 
   ngOnChanges() {
     this.dataSource = new MatTableDataSource(this.data);
+    for (const profile of this.data) {
+      if (profile.affectedStatus === 'affected') {
+        this.affectedProfiles += 1;
+      }
+    }
+    this.countPhenotypes();
+
     this.initFilters();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -75,6 +83,7 @@ export class Geno2mpVariantTableComponent implements OnInit, OnChanges, AfterVie
 
   onCategoryChange(e: MatSlideToggleChange) {
     this.showOnlyAffected = e.checked;
+    this.countPhenotypes();
     this.dataSource.filter = JSON.stringify(this.filtersToApply);
   }
 
@@ -85,5 +94,18 @@ export class Geno2mpVariantTableComponent implements OnInit, OnChanges, AfterVie
   filter(colName: string, filterValue: string) {
     this.filtersToApply[colName] = filterValue;
     this.dataSource.filter = JSON.stringify(this.filtersToApply);
+  }
+
+  countPhenotypes() {
+    const phenotypes = {};
+    for (const hpoProfile of this.data) {
+      if (this.showOnlyAffected && hpoProfile.affectedStatus !== 'affected') continue;
+
+      for (const hpoId of hpoProfile.broad.hpoIds) {
+        const catName = HPO_BROAD_TO_CAT[hpoId];
+        phenotypes[catName] = (phenotypes[catName] || 0) + 1;
+      }
+    }
+    this.phenotypes = phenotypes;
   }
 }

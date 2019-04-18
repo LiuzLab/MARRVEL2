@@ -1,7 +1,9 @@
 <div class="d-table w-100">
   <div class="d-table-cell">
     <h4>
-      Gene-Phenotype Relationships ({{ data.length }})
+      Gene-Phenotype Relationships
+      ({{ showOnlyAffected ? affectedProfiles : data.length }}
+      Affected{{ !showOnlyAffected ? ' and Related' : ''}})
     </h4>
   </div>
 </div>
@@ -15,6 +17,14 @@
     >
       Show only affected (exclude related)
     </mat-slide-toggle>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-12">
+    <app-geno2mp-phenotype-pictogram
+      [categoryStatus]="phenotypes"
+    ></app-geno2mp-phenotype-pictogram>
   </div>
 </div>
 

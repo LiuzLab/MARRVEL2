@@ -82,6 +82,28 @@
     </div>
   </div>
 
+  <div class="row mt-3">
+    <div class="col-12">
+      <h4 class="mb-3">Phenotypes Represented (Affected Individuals)</h4>
+
+      <app-geno2mp-phenotype-pictogram
+        [categoryStatus]="phenotypes"
+      ></app-geno2mp-phenotype-pictogram>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12 col-lg-6 pb-1" *ngFor="let idx of [3, 2, 0, 1]">
+      <mat-slide-toggle
+        [checked]="varCategoriesVisible[varCategoryNames[idx]]"
+        (change)="onCategoryChange(varCategoryNames[idx], $event)"
+        color="primary"
+      >
+        {{ varCategoryNames[idx] }}
+      </mat-slide-toggle>
+    </div>
+  </div>
+
   <!-- Geno2MP - Gene: variants -->
   <div class="row mt-3">
     <div class="col-12">
@@ -100,6 +122,10 @@
       >
         <app-geno2mp-gene-table
           [data]="geneData"
+          [showMissense]="varCategoriesVisible['Missense/Other Indel']"
+          [showNonsense]="varCategoriesVisible['Splice/Frameshift/Nonsense/Stop Loss']"
+          [showNonCoding]="varCategoriesVisible['Non-Coding']"
+          [showSynonymous]="varCategoriesVisible['Synonymous/Unknown']"
         ></app-geno2mp-gene-table>
       </div>
     </div>
@@ -110,7 +136,7 @@
   *ngIf="searchBy == 'variant' && variantData"
   [@toggle]="searchBy == 'variant' && variantData"
 >
-  <!-- Geno2MP - Gene: comment -->
+  <!-- Geno2MP - Variant: comment -->
   <div class="row">
     <div class="col-12">
       <p class="mt-0 mb-0 d-table" *ngIf="searchBy == 'variant' && variantData">
@@ -124,7 +150,7 @@
     </div>
   </div>
 
-  <!-- Geno2MP - Gene: summary -->
+  <!-- Geno2MP - Variant: summary -->
   <div class="row summary mt-3">
     <div class="col-4 col-sm-3 col-lg-2">
       <span class="label">
@@ -156,7 +182,7 @@
     </div>
   </div>
 
-  <!-- Geno2MP - Gene: variant table -->
+  <!-- Geno2MP - Variant: variant table -->
   <div class="row mt-3" *ngIf="searchBy == 'variant' && variantData">
     <div class="col-12">
       <app-geno2mp-variant-table

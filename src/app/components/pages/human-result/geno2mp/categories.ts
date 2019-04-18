@@ -30,7 +30,7 @@ export const FUNCANNO_TO_CAT_NUM = {
 
 export const CAT_NUM_TO_CAT_NAME = [
     'Non-Coding',
-    'Synonymouse/Unknown',
+    'Synonymous/Unknown',
     'Missense/Other Indel',
     'Splice/Frameshift/Nonsense/Stop Loss'
 ];
