@@ -145,4 +145,15 @@ export class ApiService {
       });
     });
   }
+
+  getOrthologByEntrezId(entrezId: number | string): Observable< any > {
+    const url = `${environment.apiHost}/diopt/ortholog/entrezId/${entrezId}`;
+    return Observable.create(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
 }

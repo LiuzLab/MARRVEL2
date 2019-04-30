@@ -31,4 +31,11 @@ export const Animations = {
     })),
     transition('void <=> *', animate(200)),
   ]),
+  toggle: [
+    trigger('toggle', [
+      state('true', style({ opacity: 1 })),
+      state('false', style({ opacity: 0, height: '0px' })),
+      transition('true <=> false', animate(300)),
+    ])
+  ]
 };

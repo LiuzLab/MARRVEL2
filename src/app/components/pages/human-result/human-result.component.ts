@@ -28,6 +28,8 @@ export class HumanResultComponent implements OnInit {
 
   // Data from server
   omimData: object | null;
+  orthologsLoading = false;
+  orthologs: object[] | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +48,8 @@ export class HumanResultComponent implements OnInit {
           .subscribe((res) => {
             this.gene = res;
             console.log(this.gene);
+
+            this.getOrthologs();
           });
       }
 
@@ -66,6 +70,17 @@ export class HumanResultComponent implements OnInit {
         }
       }
     });
+  }
+
+  getOrthologs() {
+    this.orthologsLoading = true;
+    this.api.getOrthologByEntrezId(this.gene.entrezId)
+      .subscribe((res) => {
+        this.orthologs = res;
+        this.orthologsLoading = false;
+
+        console.log(res);
+      });
   }
 
   omimDataChange(e) {

@@ -1,0 +1,133 @@
+<h3>Phenotypes</h3>
+
+<div class="mt-3" *ngIf="gene">
+  <div class="mb-3">
+    <mat-slide-toggle
+      [checked]="showOnlyBest"
+      (change)="showOnlyBest = !showOnlyBest"
+      color="primary"
+    >
+      Show only best DIOPT score gene
+    </mat-slide-toggle>
+  </div>
+  <div id="phenotypes-vis" class="mb-3 mr-3">
+    <div class="org-row org-row-header">
+      <div class="org-icon-wrapper"></div>
+      <div class="org-name-wrapper"></div>
+      <div class="org-gene-wrapper"></div>
+      <div class="org-diopt-score-wrapper"></div>
+      <div class="org-best-wrapper"></div>
+      <div class="org-header-cell-wrapper"
+        *ngFor="let cat of categories"
+      >
+        <img src="../../../../../assets/icons/{{ catNameToIcon[cat.name] }}.svg"
+          [matTooltip]="cat.name"
+        >
+      </div>
+    </div>
+
+    <div class="org-row">
+      <div class="org-icon-wrapper">
+        <img src="../../../../../assets/icons/001-user.svg">
+      </div>
+      <div class="org-name-wrapper">
+        <span>
+          Human
+        </span>
+      </div>
+      <div class="org-gene-wrapper">
+        <span>
+          {{ gene.symbol }}
+        </span>
+      </div>
+      <div class="org-diopt-score-wrapper"></div>
+      <div class="org-best-wrapper"></div>
+      <div
+        *ngFor="let cat of categories"
+      >
+        <div class="org-cat-cell-wrapper org-cell-bg-blue"
+          *ngIf="phenotypes['human'] && phenotypes['human'][cat.name] && phenotypes['human'][cat.name].length"
+          [matTooltip]="phenotypes['human'][cat.name].length + ' phenotypes'"
+          (click)="selectCategory('human', null, cat.name)"
+        ></div>
+        <div class="org-cat-cell-wrapper"
+          *ngIf="!phenotypes['human'] || !phenotypes['human'][cat.name] || !phenotypes['human'][cat.name].length"
+          [ngClass]="{ 'org-cell-bg-gray': !phenotypes['human'] }"
+        ></div>
+      </div>
+    </div>
+
+
+    <div 
+      *ngFor="let aGenePheno of phenotypes['mouse']; index as idx"
+    >
+      <div class="org-row"
+        [@toggle]="!showOnlyBest || aGenePheno.bestScore"
+      >
+        <div class="org-icon-wrapper">
+          <img src="../../../../../assets/icons/002-mouse.svg">
+        </div>
+        <div class="org-name-wrapper">
+          <span>
+            Mouse
+          </span>
+        </div>
+        <div class="org-gene-wrapper">
+          <span>
+            {{ aGenePheno.gene.symbol }}
+          </span>
+        </div>
+        <div class="org-diopt-score-wrapper text-right">
+          <span>
+            {{ aGenePheno.score }}/16
+          </span>
+        </div>
+        <div class="org-best-wrapper text-center">
+          <span [ngClass]="{ 'text-bold-blue': aGenePheno.bestScore }">
+            {{ aGenePheno.bestScore ? 'Y' : 'N' }}
+          </span>
+        </div>
+        <div *ngFor="let cat of categories">
+          <div class="org-cat-cell-wrapper org-cell-bg-blue"
+            *ngIf="aGenePheno.phenotypes && aGenePheno.phenotypes[cat.name] && aGenePheno.phenotypes[cat.name].length"
+            [matTooltip]="aGenePheno.phenotypes[cat.name].length + ' phenotypes'"
+            (click)="selectCategory('mouse', idx, cat.name)"
+            [ngClass]="{ 'selected': selected && selected.org === 'mouse' && selected.idx === idx && selected.category === cat.name }"
+          ></div>
+          <div class="org-cat-cell-wrapper"
+            *ngIf="!aGenePheno.phenotypes || !aGenePheno.phenotypes[cat.name] || !aGenePheno.phenotypes[cat.name].length"
+            [ngClass]="{ 'org-cell-bg-gray': !aGenePheno.phenotypes }"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phenotypes-detail"
+    *ngIf="selected && selected.org === 'mouse'"
+  >
+    <h4 class="mt-0">Mammalian Phenotypes associated with {{ phenotypes[selected.org][selected.idx].gene.symbol }} related to {{ selected.category }}</h4>
+    <ul>
+      <li
+        *ngFor="let mp of phenotypes[selected.org][selected.idx].phenotypes[selected.category]"
+        class="text-capitalize"
+      >{{ mp.name }}</li>
+    </ul>
+  </div>
+
+  <div class="phenotypes-detail"
+    *ngIf="selected && selected.org === 'human'"
+  >
+    <h4 class="mt-0">Human Phenotypes associated with {{ gene.symbol }} related to {{ selected.category }}</h4>
+    <ul>
+      <li
+        *ngFor="let hpo of phenotypes[selected.org][selected.category]"
+        class="text-capitalize"
+      >
+        <a href="https://hpo.jax.org/app/browse/term/{{ hpo.id }}" target="_blank">
+          {{ hpo.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

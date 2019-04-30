@@ -1,0 +1,92 @@
+.org-row div {
+  display: inline-block;
+  font-size: 13px;
+  vertical-align: middle;
+}
+.org-row-header {
+  margin-bottom: 2px;
+}
+.org-icon-wrapper,
+.org-name-wrapper,
+.org-gene-wrapper,
+.org-diopt-score-wrapper,
+.org-best-wrapper,
+.org-header-cell-wrapper,
+.org-cat-cell-wrapper {
+  min-height: 24px;
+}
+.org-header-cell-wrapper,
+.org-cat-cell-wrapper {
+  width: 24px;
+  height: 24px;
+  margin: 1px;
+  padding: 2px;
+}
+.org-header-cell-wrapper img,
+.org-icon-wrapper img {
+  width: 20px;
+  height: 20px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+.org-icon-wrapper img {
+  opacity: 0.35;
+}
+
+.org-icon-wrapper {
+  width: 24px;
+}
+.org-name-wrapper {
+  width: 60px;
+}
+.org-gene-wrapper {
+  width: 70px;
+}
+.org-diopt-score-wrapper {
+  width: 50px;
+}
+.org-best-wrapper {
+  width: 24px;
+}
+
+.org-cat-cell-wrapper {
+  border-radius: 2px;
+  background-color: #f3f3f3;
+}
+.org-cell-bg-blue {
+  background-color: #66c6be;
+}
+.org-cell-bg-blue:hover {
+  background-color: #66c6be;
+  filter: brightness(1.05);
+  transition: linear;
+  cursor: pointer;
+}
+.org-cell-bg-blue.selected {
+  transform: translate(-1px, -1px);
+  box-shadow: 1px 1px 3px #afafaf;
+  filter: brightness(1.05);
+  transition: linear;
+}
+.org-cell-bg-gray {
+  background-color: #aaa;
+}
+
+.text-bold-blue {
+  font-weight: 500;
+  color: #66c6be;
+}
+
+#phenotypes-vis {
+  display: inline-block;
+  vertical-align: top;
+}
+.phenotypes-detail {
+  display: inline-block;
+  width: 500px;
+}
+.phenotypes-detail ul {
+  font-size: 0.9em;
+  list-style: none;
+  padding-left: 0px;
+}

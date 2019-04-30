@@ -16,4 +16,19 @@ export interface Gene {
 
 export interface HumanGene extends Gene {
   hgncId?: number;
+  phenotypes?: [{
+    id: string;
+    name: string;
+    ontology: {
+      category: {
+        id: number;
+        name: string;
+      },
+      name?: string;
+      id?: string;
+      def?: string;
+      is_a?: string[];
+      synonym?: string[];
+    };
+  }];
 }
