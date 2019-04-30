@@ -78,11 +78,13 @@ export class Geno2mpComponent implements OnChanges {
       this.loading = true;
       this.api.getGeno2MPByVariant(this.variant)
         .subscribe((res: Geno2MPResult) => {
-          for (let i = 0; i < res.hpoProfiles.length; ++i) {
-            res.hpoProfiles[i]['broadTerm'] = res.hpoProfiles[i].broad.hpoTerm || '';
-            res.hpoProfiles[i]['mediumTerm'] = res.hpoProfiles[i].medium.hpoTerm || '';
-            res.hpoProfiles[i]['narrowTerm'] = res.hpoProfiles[i].narrow.hpoTerm || '';
-          }
+          if (res && res.hpoProfiles) {
+            for (let i = 0; i < res.hpoProfiles.length; ++i) {
+              res.hpoProfiles[i]['broadTerm'] = res.hpoProfiles[i].broad.hpoTerm || '';
+              res.hpoProfiles[i]['mediumTerm'] = res.hpoProfiles[i].medium.hpoTerm || '';
+              res.hpoProfiles[i]['narrowTerm'] = res.hpoProfiles[i].narrow.hpoTerm || '';
+            }
+          } 
           this.variantData = res;
           this.loading = false;
         });
