@@ -1,6 +1,6 @@
 <div class="d-table w-100">
   <div class="pb-3 d-table-cell">
-    <h4>
+    <h4 *ngIf="title">
       {{ title }}
       (<span appUnit [count]="data.length" [unit]="unit"></span>)
     </h4>

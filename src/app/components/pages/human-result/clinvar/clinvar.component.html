@@ -1,7 +1,7 @@
-<div class="row mb-3">
+<div class="row">
   <div class="col-12">
-    <h3 class="mb-3 d-inline-block align-middle">ClinVar</h3>
-    <a class="mb-3 d-inline-block ml-3 align-middle"
+    <h3 class="mb-0 d-inline-block align-middle">ClinVar</h3>
+    <a class="mb-0 d-inline-block ml-3 align-middle"
       *ngIf="gene && gene.xref && gene.xref.omimId"
       href="https://www.ncbi.nlm.nih.gov/clinvar/?term={{ gene.symbol }}%5Bgene%5D"
       target="_blank"
@@ -11,7 +11,7 @@
         More on ClinVar
       </button>
     </a>
-    <p class="mt-0 mb-0 d-table" *ngIf="data">
+    <p class="mt-3 mb-0 d-table" *ngIf="data">
       <mat-icon class="d-table-cell align-top"
         matTooltip="MARRVEL's comment" matTooltipPosition="above"
       >insert_comment</mat-icon>
@@ -31,14 +31,65 @@
   </div>
 </div>
 
-<div class="row mb-3" *ngIf="data && data.length > 0">
+<div class="row summary mt-3"  *ngIf="significance">
+  <div class="col-6 col-md-3">
+    <span class="label mb-1">
+      Pathogenic
+    </span>
+    <span class="data">
+      {{ significance['pathogenic'] }}
+    </span>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <span class="label mb-1">
+      Likely Pathogenic
+    </span>
+    <span class="data">
+      {{ significance['likely pathogenic'] }}
+    </span>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <span class="label mb-1">
+      Likely Benign
+    </span>
+    <span class="data">
+      {{ significance['likely benign'] }}
+    </span>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <span class="label mb-1">
+      Benign
+    </span>
+    <span class="data">
+      {{ significance['benign'] }}
+    </span>
+  </div>
+</div>
+
+<div class="row mt-3" *ngIf="data && data.length > 0">
   <div class="col-12">
-    <app-basic-datatable
-      [data]="data"
-      [displayedColumns]="['title', 'location', 'condition', 'significanceText', 'reviewStatus']"
-      [columnNames]="['Variation', 'Location', 'Condition(s)', 'Clinical Significance', 'Reveiw Status']"
-      title="Reported Alleles From ClinVar"
-      unit="Allele"
-    ></app-basic-datatable>
+    <button mat-button class="px-0 no-overlay"
+      color="primary" disableRipple="true"
+      (click)="alleleVisible = !alleleVisible"
+    >
+      {{ alleleVisible ? 'Hide alleles' : 'Show alleles' }}
+      <mat-icon *ngIf="!alleleVisible">expand_more</mat-icon>
+      <mat-icon *ngIf="alleleVisible">expand_less</mat-icon>
+    </button>
+
+    <div class="mt-2"
+      [@toggle]="alleleVisible"
+    >
+      <app-basic-datatable
+        [data]="data"
+        [displayedColumns]="['title', 'location', 'condition', 'significanceText', 'reviewStatus']"
+        [columnNames]="['Variation', 'Location', 'Condition(s)', 'Clinical Significance', 'Reveiw Status']"
+        title="Reported Alleles From ClinVar"
+        unit="Allele"
+      ></app-basic-datatable>
+    </div>
   </div>
 </div>

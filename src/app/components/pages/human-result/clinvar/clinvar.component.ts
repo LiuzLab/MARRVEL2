@@ -2,6 +2,8 @@ import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
 
+import { Animations } from '../../../../animations';
+
 interface ClinVarVariant {
   variantion: string;
   location: string;
@@ -13,7 +15,8 @@ interface ClinVarVariant {
 @Component({
   selector: 'app-clinvar',
   templateUrl: './clinvar.component.html',
-  styleUrls: ['./clinvar.component.scss']
+  styleUrls: ['./clinvar.component.scss'],
+  animations: [ Animations.toggle ]
 })
 export class ClinvarComponent implements OnChanges {
   @Input() gene: HumanGene;
@@ -21,6 +24,8 @@ export class ClinvarComponent implements OnChanges {
   loading = false;
   data;
   significance;
+
+  alleleVisible = false;
 
   constructor(
     private api: ApiService
@@ -48,6 +53,7 @@ export class ClinvarComponent implements OnChanges {
               this.significance[S] += 1;
             });
           }
+          console.log(this.significance);
           this.data = res;
           this.loading = false;
         });

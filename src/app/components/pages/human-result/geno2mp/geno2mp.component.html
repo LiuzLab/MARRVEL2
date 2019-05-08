@@ -30,7 +30,7 @@
     <mat-form-field>
       <mat-label>Search by</mat-label>
       <mat-select [(value)]="searchBy">
-        <mat-option value="gene">
+        <mat-option value="gene" *ngIf="gene">
           {{ gene.symbol }}
         </mat-option>
         <mat-option value="variant">
@@ -177,7 +177,7 @@
         Functional annotation
       </span>
       <span class="data stick-bottom text-capitalize">
-      {{ variantData.funcAnno.replace('-', ' ') }}
+        {{ (variantData.funcAnno || '').replace('-', ' ') }}
       </span>
     </div>
   </div>
