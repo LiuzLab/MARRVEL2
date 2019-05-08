@@ -10,18 +10,23 @@
       Show only best DIOPT score gene
     </mat-slide-toggle>
   </div>
-  <div id="phenotypes-vis" class="mb-3 mr-3">
+  <div id="phenotypes-vis" class="mb-3 mr-3"
+    [ngStyle]="{ 'height': (showOnlyBest ? bestHeight : height) + 'px' }"
+    (mouseleave)="mouseoverCat = null"
+  >
     <div class="org-row org-row-header">
       <div class="org-icon-wrapper"></div>
       <div class="org-name-wrapper"></div>
-      <div class="org-gene-wrapper"></div>
-      <div class="org-diopt-score-wrapper"></div>
-      <div class="org-best-wrapper"></div>
+      <div class="org-gene-wrapper">Gene</div>
+      <div class="org-diopt-score-wrapper">DIOPT Score</div>
+      <div class="org-best-wrapper">Best Score</div>
       <div class="org-header-cell-wrapper"
         *ngFor="let cat of categories"
       >
         <img src="../../../../../assets/icons/{{ catNameToIcon[cat.name] }}.svg"
+          [ngClass]="{ 'accent': mouseoverCat === cat.name }"
           [matTooltip]="cat.name"
+          (mouseenter)="selectCategory(null, null, cat.name, true)"
         >
       </div>
     </div>
@@ -49,19 +54,23 @@
           *ngIf="phenotypes['human'] && phenotypes['human'][cat.name] && phenotypes['human'][cat.name].length"
           [matTooltip]="phenotypes['human'][cat.name].length + ' phenotypes'"
           (click)="selectCategory('human', null, cat.name)"
+          [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'selected': selected && selected.org === 'human' && selected.category === cat.name }"
+          (mouseenter)="selectCategory('human', null, cat.name, true)"
         ></div>
         <div class="org-cat-cell-wrapper"
           *ngIf="!phenotypes['human'] || !phenotypes['human'][cat.name] || !phenotypes['human'][cat.name].length"
-          [ngClass]="{ 'org-cell-bg-gray': !phenotypes['human'] }"
+          [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'org-cell-bg-gray': !phenotypes['human'] }"
+          (mouseenter)="selectCategory('human', null, cat.name, true)"
         ></div>
       </div>
     </div>
 
-
+    <!-- Mouse phenotype starts -->
     <div 
       *ngFor="let aGenePheno of phenotypes['mouse']; index as idx"
     >
       <div class="org-row"
+        *ngIf="!showOnlyBest || aGenePheno.bestScore"
         [@toggle]="!showOnlyBest || aGenePheno.bestScore"
       >
         <div class="org-icon-wrapper">
@@ -74,7 +83,9 @@
         </div>
         <div class="org-gene-wrapper">
           <span>
-            {{ aGenePheno.gene.symbol }}
+            <a href="http://www.informatics.jax.org/marker/{{ aGenePheno.gene.mgiId }}" target="_blank">
+              {{ aGenePheno.gene.symbol }}
+            </a>
           </span>
         </div>
         <div class="org-diopt-score-wrapper text-right">
@@ -92,15 +103,69 @@
             *ngIf="aGenePheno.phenotypes && aGenePheno.phenotypes[cat.name] && aGenePheno.phenotypes[cat.name].length"
             [matTooltip]="aGenePheno.phenotypes[cat.name].length + ' phenotypes'"
             (click)="selectCategory('mouse', idx, cat.name)"
-            [ngClass]="{ 'selected': selected && selected.org === 'mouse' && selected.idx === idx && selected.category === cat.name }"
+            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'selected': selected && selected.org === 'mouse' && selected.idx === idx && selected.category === cat.name }"
+            (mouseenter)="selectCategory('mouse', null, cat.name, true)"
           ></div>
           <div class="org-cat-cell-wrapper"
             *ngIf="!aGenePheno.phenotypes || !aGenePheno.phenotypes[cat.name] || !aGenePheno.phenotypes[cat.name].length"
-            [ngClass]="{ 'org-cell-bg-gray': !aGenePheno.phenotypes }"
+            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'org-cell-bg-gray': !aGenePheno.phenotypes }"
+            (mouseenter)="selectCategory('mouse', null, cat.name, true)"
           ></div>
         </div>
       </div>
     </div>
+    <!-- Mouse phenotype ends -->
+
+    <!-- Worm phenotype starts -->
+    <div 
+      *ngFor="let aGenePheno of phenotypes['worm']; index as idx"
+    >
+      <div class="org-row"
+        [@toggle]="!showOnlyBest || aGenePheno.bestScore"
+      >
+        <div class="org-icon-wrapper">
+          <img src="../../../../../assets/icons/006-worm.svg">
+        </div>
+        <div class="org-name-wrapper">
+          <span>
+            Worm
+          </span>
+        </div>
+        <div class="org-gene-wrapper">
+          <span>
+            <a href="http://www.informatics.jax.org/marker/{{ aGenePheno.gene.mgiId }}" target="_blank">
+              {{ aGenePheno.gene.symbol }}
+            </a>
+          </span>
+        </div>
+        <div class="org-diopt-score-wrapper text-right">
+          <span>
+            {{ aGenePheno.score }}/16
+          </span>
+        </div>
+        <div class="org-best-wrapper text-center">
+          <span [ngClass]="{ 'text-bold-blue': aGenePheno.bestScore }">
+            {{ aGenePheno.bestScore ? 'Y' : 'N' }}
+          </span>
+        </div>
+        <div *ngFor="let cat of categories">
+          <div class="org-cat-cell-wrapper org-cell-bg-blue"
+            *ngIf="aGenePheno.phenotypes && aGenePheno.phenotypes[cat.name] && aGenePheno.phenotypes[cat.name].length"
+            [matTooltip]="aGenePheno.phenotypes[cat.name].length + ' phenotypes'"
+            (click)="selectCategory('worm', idx, cat.name)"
+            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'selected': selected && selected.org === 'worm' && selected.idx === idx && selected.category === cat.name }"
+            (mouseenter)="selectCategory('worm', null, cat.name, true)"
+          ></div>
+          <div class="org-cat-cell-wrapper"
+            *ngIf="!aGenePheno.phenotypes || !aGenePheno.phenotypes[cat.name] || !aGenePheno.phenotypes[cat.name].length"
+            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'org-cell-bg-gray': !aGenePheno.phenotypes }"
+            (mouseenter)="selectCategory('worm', null, cat.name, true)"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <!-- Worm phenotype ends -->
+
   </div>
 
   <div class="phenotypes-detail"

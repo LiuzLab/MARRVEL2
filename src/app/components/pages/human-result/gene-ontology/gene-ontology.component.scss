@@ -1,0 +1,100 @@
+.go-header-row {
+  padding-top: 133px;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+.go-org-icon-wrapper,
+.go-gene-symbol-cell,
+.go-row div,
+.go-name-cell,
+.go-cat-cell {
+  display: inline-block;
+}
+.go-gene-symbol-cell {
+  vertical-align: top;
+  padding-top: 3px;
+  padding-left: 0.5em;
+  width: 70px;
+  font-size: 12px;
+  height: 20px;
+}
+
+.go-name-cell,
+.go-cat-cell {
+  width: 18px;
+  height: 18px;
+  margin: 1px;
+}
+.go-name-cell {
+  padding-top: 4px;
+  padding-left: 2px;
+
+  white-space: nowrap;
+}
+.go-name-cell .label {
+  text-transform: capitalize;
+
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.go-name-cell.other,
+.go-cat-cell-wrapper.other {
+  margin-right: 11px;
+}
+
+.go-row, .go-header-row {
+  width: 1345px;
+}
+.go-row {
+  vertical-align: middle;
+}
+.go-row, .go-row .go-cat-cell-wrapper {
+  height: 20px;
+}
+.go-cat-cell {
+  border-radius: 2px;
+  background-color: #f3f3f3;
+}
+.go-cat-cell.bg-blue {
+  background-color: #66c6be;
+}
+.go-cat-cell.bg-blue:hover {
+  background-color: #66c6be;
+  filter: brightness(1.05) !important;
+  transition: linear;
+  cursor: pointer;
+}
+.go-cat-cell.bg-blue.selected {
+  transform: translate(-1px, -1px);
+  box-shadow: 1px 1px 3px #afafaf;
+  filter: brightness(1.05);
+  transition: linear;
+}
+.go-cat-cell.bg-gray {
+  background-color: #aaa;
+}
+
+.go-org-icon-wrapper  {
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+}
+.go-org-icon-wrapper img {
+  width: 18px;
+  height: 18px;
+  opacity: 0.35;
+}
+
+.go-row:hover .go-cat-cell,
+.go-cat-cell.col-highlight,
+.go-cat-cell.bg-gray.col-highlight {
+  filter: brightness(0.95);
+}
+
+.go-reference:not(:last-child)::after {
+  content: ", "
+}
+
+.color-primary {
+  color:#66c6be
+}

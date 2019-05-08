@@ -118,7 +118,9 @@
           </div>
 
           <!-- gnomAD gene -->
-          <div class="row">
+          <div class="row"
+            *ngIf="gene"
+          >
             <div class="col-12">
               <h4 class="mt-0 mb-3">
                 Control Population Summary of {{ gene.symbol }} from gnomAD
@@ -158,6 +160,14 @@
         </div>
       </div>
 
+      <div class="row section mb-5" id="gene-ontology">
+        <div class="col-12">
+          <app-gene-ontology
+            [gene]="gene"
+            [orthologs]="orthologs"
+          ></app-gene-ontology>
+        </div>
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

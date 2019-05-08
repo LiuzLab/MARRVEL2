@@ -22,15 +22,34 @@
   margin: 1px;
   padding: 2px;
 }
+.org-icon-wrapper img {
+  opacity: 0.35;
+}
 .org-header-cell-wrapper img,
 .org-icon-wrapper img {
   width: 20px;
   height: 20px;
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
 }
-.org-icon-wrapper img {
-  opacity: 0.35;
+img.accent {
+  filter: grayscale(0%) !important;
+  -webkit-filter: grayscale(0%) !important;
+  opacity: 1 !important;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+.org-row-header,
+.org-row {
+  width: 712px;
+}
+#phenotypes-vis {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .org-icon-wrapper {
@@ -39,14 +58,27 @@
 .org-name-wrapper {
   width: 60px;
 }
+.org-row-header .org-gene-wrapper {
+  font-size: 12px;
+}
 .org-gene-wrapper {
   width: 70px;
+}
+.org-row-header .org-diopt-score-wrapper {
+  font-size: 12px;
+  line-height: 1;
+  text-align: right;
 }
 .org-diopt-score-wrapper {
   width: 50px;
 }
+.org-row-header .org-best-wrapper {
+  font-size: 12px;
+  line-height: 1;
+  padding-left: 0.5em;
+}
 .org-best-wrapper {
-  width: 24px;
+  width: 40px;
 }
 
 .org-cat-cell-wrapper {
@@ -58,7 +90,7 @@
 }
 .org-cell-bg-blue:hover {
   background-color: #66c6be;
-  filter: brightness(1.05);
+  filter: brightness(1.05) !important;
   transition: linear;
   cursor: pointer;
 }
@@ -70,6 +102,10 @@
 }
 .org-cell-bg-gray {
   background-color: #aaa;
+}
+.org-row:hover .org-cat-cell-wrapper,
+.org-cat-cell-wrapper.mouseover {
+  filter: brightness(0.95);
 }
 
 .text-bold-blue {

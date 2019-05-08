@@ -55,6 +55,7 @@ import { Geno2mpGeneTableComponent } from './components/pages/human-result/geno2
 import { Geno2mpVariantTableComponent } from './components/pages/human-result/geno2mp/geno2mp-variant-table/geno2mp-variant-table.component';
 import { Geno2mpPhenotypePictogramComponent } from './components/pages/human-result/geno2mp/geno2mp-phenotype-pictogram/geno2mp-phenotype-pictogram.component';
 import { PhenotypesComponent } from './components/pages/human-result/phenotypes/phenotypes.component';
+import { GeneOntologyComponent } from './components/pages/human-result/gene-ontology/gene-ontology.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { PhenotypesComponent } from './components/pages/human-result/phenotypes/
     Geno2mpGeneTableComponent,
     Geno2mpVariantTableComponent,
     Geno2mpPhenotypePictogramComponent,
-    PhenotypesComponent
+    PhenotypesComponent,
+    GeneOntologyComponent
   ],
   imports: [
     BrowserModule,

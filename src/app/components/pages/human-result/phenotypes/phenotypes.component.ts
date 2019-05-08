@@ -5,7 +5,8 @@ import { Animations } from '../../../../animations';
 
 import { CATEGORIES, CAT_TO_ICON } from '../../../../category';
 const TAXONID_TO_NAME = {
-  10090: 'mouse'
+  10090: 'mouse',
+  6239: 'worm'
 };
 
 @Component({
@@ -19,8 +20,12 @@ export class PhenotypesComponent implements OnChanges {
   @Input() orthologs;
 
   phenotypes = {};
-  showOnlyBest = false;
+  showOnlyBest = true;
   selected = null;
+  mouseoverCat = null;
+
+  height = 60;
+  bestHeight = 60;
 
   categories = CATEGORIES;
   catNameToIcon = CAT_TO_ICON;
@@ -49,9 +54,15 @@ export class PhenotypesComponent implements OnChanges {
     }
 
     if (changes.orthologs && changes.orthologs.currentValue) {
+      this.height = this.bestHeight = 60;
       for (const ortholog of this.orthologs) {
         const orgName = TAXONID_TO_NAME[ortholog['taxonId2']];
         if (orgName) {
+          this.height += 26;
+          this.bestHeight += (ortholog.bestScore ? 26 : 0);
+          if (ortholog.bestScore) {
+            console.log(' >', ortholog);
+          }
           const aGenePheno = {};
           for (const phenotype of ortholog.gene2.phenotypes) {
             if (phenotype.ontology && phenotype.ontology.category) {
@@ -77,20 +88,28 @@ export class PhenotypesComponent implements OnChanges {
       if (this.phenotypes['mouse']) {
         this.phenotypes['mouse'].sort((a, b) => a.score < b.score ? 1 : a.score > b.score ? -1 : 0);
       }
+      if (this.phenotypes['worm']) {
+        this.phenotypes['worm'].sort((a, b) => a.score < b.score ? 1 : a.score > b.score ? -1 : 0);
+      }
       console.log(this.phenotypes);
     }
   }
 
-  selectCategory(org: string, idx: number, category: string ) {
-    if (this.selected && this.selected.org === org && this.selected.idx === idx && this.selected.category === category) {
-      this.selected = null;
+  selectCategory(org: string, idx: number, category: string, hover?: boolean) {
+    if (!hover) {
+      if (this.selected && this.selected.org === org && this.selected.idx === idx && this.selected.category === category) {
+        this.selected = null;
+      }
+      else {
+        this.selected = {
+          org: org,
+          idx: idx,
+          category: category
+        };
+      }
     }
     else {
-      this.selected = {
-        org: org,
-        idx: idx,
-        category: category
-      };
+      this.mouseoverCat = category;
     }
   }
 

@@ -31,4 +31,17 @@ export interface HumanGene extends Gene {
       synonym?: string[];
     };
   }];
+  gos?: [{
+    goId: string;
+    ontology: {
+      id: string;
+      name: string;
+      namespace: string;
+      agrSlimGoId?: string;
+    };
+    assignedBy?: string;
+    date?: string;
+    eviCode?: string;
+    references?: string[];
+  }];
 }
