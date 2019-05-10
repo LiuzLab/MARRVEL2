@@ -116,6 +116,58 @@
     </div>
     <!-- Mouse phenotype ends -->
 
+    <!-- Rat phenotype starts -->
+    <div 
+      *ngFor="let aGenePheno of phenotypes['rat']; index as idx"
+    >
+      <div class="org-row"
+        *ngIf="!showOnlyBest || aGenePheno.bestScore"
+        [@toggle]="!showOnlyBest || aGenePheno.bestScore"
+      >
+        <div class="org-icon-wrapper">
+          <img src="../../../../../assets/icons/003-rat.svg">
+        </div>
+        <div class="org-name-wrapper">
+          <span>
+            Rat
+          </span>
+        </div>
+        <div class="org-gene-wrapper">
+          <span>
+            <a href="https://rgd.mcw.edu/rgdweb/report/gene/main.html?id={{ aGenePheno.gene.rgdId }}" target="_blank">
+              {{ aGenePheno.gene.symbol }}
+            </a>
+          </span>
+        </div>
+        <div class="org-diopt-score-wrapper text-right">
+          <span>
+            {{ aGenePheno.score }}/16
+          </span>
+        </div>
+        <div class="org-best-wrapper text-center">
+          <span [ngClass]="{ 'text-bold-blue': aGenePheno.bestScore }">
+            {{ aGenePheno.bestScore ? 'Y' : 'N' }}
+          </span>
+        </div>
+        <div *ngFor="let cat of categories">
+          <div class="org-cat-cell-wrapper org-cell-bg-blue"
+            *ngIf="aGenePheno.phenotypes && aGenePheno.phenotypes[cat.name] && aGenePheno.phenotypes[cat.name].length"
+            [matTooltip]="aGenePheno.phenotypes[cat.name].length + ' phenotypes'"
+            (click)="selectCategory('rat', idx, cat.name)"
+            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'selected': selected && selected.org === 'rat' && selected.idx === idx && selected.category === cat.name }"
+            (mouseenter)="selectCategory('rat', null, cat.name, true)"
+          ></div>
+          <div class="org-cat-cell-wrapper"
+            *ngIf="!aGenePheno.phenotypes || !aGenePheno.phenotypes[cat.name] || !aGenePheno.phenotypes[cat.name].length"
+            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'org-cell-bg-gray': !aGenePheno.phenotypes }"
+            (mouseenter)="selectCategory('rat', null, cat.name, true)"
+            [matTooltip]="!aGenePheno.phenotypes ? 'Gene-phenotype data is not available' : null"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <!-- Rat phenotype ends -->
+
     <!-- Worm phenotype starts -->
     <div 
       *ngFor="let aGenePheno of phenotypes['worm']; index as idx"
@@ -133,7 +185,7 @@
         </div>
         <div class="org-gene-wrapper">
           <span>
-            <a href="http://www.informatics.jax.org/marker/{{ aGenePheno.gene.mgiId }}" target="_blank">
+            <a href="https://www.wormbase.org/species/c_elegans/gene/{{ aGenePheno.gene.wormBaseId }}" target="_blank">
               {{ aGenePheno.gene.symbol }}
             </a>
           </span>
@@ -168,31 +220,25 @@
 
   </div>
 
-  <div class="phenotypes-detail"
-    *ngIf="selected && selected.org === 'mouse'"
-  >
-    <h4 class="mt-0">Mammalian Phenotypes associated with {{ phenotypes[selected.org][selected.idx].gene.symbol }} related to {{ selected.category }}</h4>
-    <ul>
-      <li
-        *ngFor="let mp of phenotypes[selected.org][selected.idx].phenotypes[selected.category]"
-        class="text-capitalize"
-      >{{ mp.name }}</li>
-    </ul>
+  <div class="phenotypes-detail" *ngIf="selected">
+
+    <h4 class="mt-0">
+      {{ orgNameToTermName[selected.org] }}
+      Associated with
+      {{ selected.org === 'human' ? gene.symbol : phenotypes[selected.org][selected.idx].gene.symbol }}
+      Related to
+      {{ selected.category }}
+    </h4>
+
+    <div class="row mt-3">
+      <div class="col-sm-12 col-md-6 col-lg-4 text-capitalize"
+        *ngFor="let po of (selected.org === 'human' ? phenotypes[selected.org] : phenotypes[selected.org][selected.idx].phenotypes)[selected.category]"
+      >
+        <a href="{{ getTermDetailUrl(po.id) }}" target="_blank">
+          {{ po.name }}
+        </a>
+      </div>
+    </div>
   </div>
 
-  <div class="phenotypes-detail"
-    *ngIf="selected && selected.org === 'human'"
-  >
-    <h4 class="mt-0">Human Phenotypes associated with {{ gene.symbol }} related to {{ selected.category }}</h4>
-    <ul>
-      <li
-        *ngFor="let hpo of phenotypes[selected.org][selected.category]"
-        class="text-capitalize"
-      >
-        <a href="https://hpo.jax.org/app/browse/term/{{ hpo.id }}" target="_blank">
-          {{ hpo.name }}
-        </a>
-      </li>
-    </ul>
-  </div>
 </div>

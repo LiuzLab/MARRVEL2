@@ -6,6 +6,7 @@ import { Animations } from '../../../../animations';
 import { CATEGORIES, CAT_TO_ICON } from '../../../../category';
 const TAXONID_TO_NAME = {
   10090: 'mouse',
+  10116: 'rat',
   6239: 'worm'
 };
 
@@ -30,14 +31,21 @@ export class PhenotypesComponent implements OnChanges {
   categories = CATEGORIES;
   catNameToIcon = CAT_TO_ICON;
 
+  orgNameToTermName = {
+    human: 'Human Phenotypes',
+    mouse: 'Mammalian Phenotypes',
+    rat: 'Mammalian Phenotypes',
+    worm: 'Worm Phenotypes'
+  };
+
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.gene && changes.gene.currentValue) {
-      if (this.gene.phenotypes) {
-        this.phenotypes['human'] = {};
+      if (this.gene.phenotypes && this.gene.phenotypes.length) {
         for (const phenotype of this.gene.phenotypes) {
           if (phenotype.ontology && phenotype.ontology.category) {
+            this.phenotypes['human'] = this.phenotypes['human'] || {};
             const catName = phenotype.ontology.category.name;
             if (!(catName in this.phenotypes['human'])) {
               this.phenotypes['human'][catName] = [];
@@ -56,6 +64,7 @@ export class PhenotypesComponent implements OnChanges {
     if (changes.orthologs && changes.orthologs.currentValue) {
       this.height = this.bestHeight = 60;
       for (const ortholog of this.orthologs) {
+        let relExists = false;
         const orgName = TAXONID_TO_NAME[ortholog['taxonId2']];
         if (orgName) {
           this.height += 26;
@@ -68,6 +77,7 @@ export class PhenotypesComponent implements OnChanges {
             if (phenotype.ontology && phenotype.ontology.category) {
               const catName = phenotype.ontology.category.name;
               if (!(catName in aGenePheno)) aGenePheno[catName] = [];
+              relExists = true;
               aGenePheno[catName].push({
                 id: phenotype.id,
                 name: phenotype.ontology.name
@@ -78,7 +88,7 @@ export class PhenotypesComponent implements OnChanges {
           if (!(orgName in this.phenotypes)) this.phenotypes[orgName] = [];
           this.phenotypes[orgName].push({
             gene: ortholog.gene2,
-            phenotypes: aGenePheno,
+            phenotypes: relExists ? aGenePheno : null,
             score: ortholog.score,
             bestScore: ortholog.bestScore
           });
@@ -110,6 +120,18 @@ export class PhenotypesComponent implements OnChanges {
     }
     else {
       this.mouseoverCat = category;
+    }
+  }
+
+  getTermDetailUrl(poId: string) {
+    if (poId.substr(0, 3) === 'HP:') {
+      return `https://hpo.jax.org/app/browse/term/${poId}`;
+    }
+    if (poId.substr(0, 3) === 'MP:') {
+      return `http://www.informatics.jax.org/vocab/mp_ontology/${poId}`;
+    }
+    if (poId.substr(0, 12) === 'WBPhenotype:') {
+      return `https://www.wormbase.org/species/all/phenotype/${poId}`;
     }
   }
 
