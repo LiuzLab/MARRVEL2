@@ -25,16 +25,17 @@ export const Animations = {
       animate('200ms ease-in', style({ transform: 'translateY(-100%)' }))
     ])
   ]),
-  fadeInOut: trigger('fadeInOut', [
-    state('void', style({
-      opacity: 0
-    })),
-    transition('void <=> *', animate(200)),
-  ]),
   toggle: [
     trigger('toggle', [
       state('true', style({ opacity: 1 })),
       state('false', style({ opacity: 0, height: '0px' })),
+      transition('true <=> false', animate(300)),
+    ])
+  ],
+  fadeInOut: [
+    trigger('fadeInOut', [
+      state('true', style({ opacity: 1 })),
+      state('false', style({ opacity: 0 })),
       transition('true <=> false', animate(300)),
     ])
   ]

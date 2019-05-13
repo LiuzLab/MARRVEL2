@@ -1,0 +1,16 @@
+<!-- OMIM text description start -->
+<div class="row">
+  <div class="col-12" [ngClass]="{ 'skeleton': loading }">
+    <div [@fadeInOut]="!loading && gene && data">
+      <h4 class="m-0 title">
+        OMIM Description of {{ gene.symbol }}
+      </h4>
+      <p class="mt-3 mb-0">
+        {{ data.title ? data.title : '' }}
+      </p>
+
+      <p class="e2e-intter-html-bound mt-3 mb-0" [innerHTML]="data.description"></p>
+    </div>
+  </div>
+</div>
+<!-- OMIM text description ends -->

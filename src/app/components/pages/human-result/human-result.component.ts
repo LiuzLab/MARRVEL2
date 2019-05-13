@@ -27,6 +27,7 @@ export class HumanResultComponent implements OnInit {
   variantString: string;
 
   // Data from server
+  omimLoading = false;
   omimData: object | null;
   orthologsLoading = false;
   orthologs: object[] | null;
@@ -47,6 +48,7 @@ export class HumanResultComponent implements OnInit {
         this.api.getGeneByEntrezId(this.geneEntrezId)
           .subscribe((res) => {
             this.gene = res;
+            this.omimLoading = true;
             console.log(this.gene);
 
             this.getOrthologs();
@@ -84,7 +86,8 @@ export class HumanResultComponent implements OnInit {
   }
 
   omimDataChange(e) {
-    this.omimData = e;
+    if (e.target === 'data') this.omimData = e.data;
+    if (e.target === 'loading') this.omimLoading = e.data;
   }
 
   toggleSidenav(e) {

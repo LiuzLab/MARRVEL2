@@ -23,12 +23,23 @@ export class OmimComponent implements OnChanges {
     console.log(change);
     if (change.gene && change.gene.currentValue && change.gene.currentValue.xref && change.gene.currentValue.xref.omimId) {
       this.loading = true;
+      this.dataChange.emit({
+        target: 'loading',
+        data: this.loading
+      });
       this.api.getOMIMByMimNumber(this.gene.xref.omimId)
         .subscribe((res) => {
           this.data = res;
           this.loading = false;
 
-          this.dataChange.emit(this.data);
+          this.dataChange.emit({
+            target: 'data',
+            data: this.data
+          });
+          this.dataChange.emit({
+            target: 'loading',
+            data: this.loading
+          });
         });
     }
   }

@@ -36,20 +36,17 @@
         </h4>
       </div>
 
-      <!--   2. OMIM text description -->
-      <div class="row mb-5" *ngIf="gene && omimData && omimData.description">
-        <div class="col-12">
-          <h4 class="mb-3">OMIM Description of {{ gene.symbol }}</h4>
-          <p class="mt-0 mb-3" *ngIf="omimData['title']">{{ omimData['title'] }}</p>
-          <p class="e2e-intter-html-bound mt-0 mb-3" [innerHTML]="omimData.description"></p>
-        </div>
-      </div>
+      <app-omim-text-description
+        [gene]="gene"
+        [loading]="omimLoading"
+        [data]="omimData"
+      ></app-omim-text-description>
 
-      <h2 class="mb-3 text-uppercase">
+      <h2 class="mt-5 text-uppercase">
         Disease Data
       </h2>
 
-      <div class="row section mb-5" id="OMIM">
+      <div class="row section mt-3 mb-5" id="OMIM">
         <div class="col-12">
           <!-- OMIM starts -->
           <app-omim
