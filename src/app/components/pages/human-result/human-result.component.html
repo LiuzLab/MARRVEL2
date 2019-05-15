@@ -42,12 +42,10 @@
         [data]="omimData"
       ></app-omim-text-description>
 
-      <h2 class="mt-5 text-uppercase">
-        Disease Data
-      </h2>
+      <h2 class="mt-5 text-uppercase">Disease Data</h2>
 
-      <div class="row section mt-3 mb-5" id="OMIM">
-        <div class="col-12">
+      <div class="row section mt-3" id="OMIM">
+        <div class="col-12" [ngClass]="{ 'skeleton': omimLoading }">
           <!-- OMIM starts -->
           <app-omim
             [gene]="gene"
@@ -56,7 +54,7 @@
         </div>
       </div>
 
-      <div class="row section mb-5" id="DbNSFP">
+      <div class="row section mt-5 mb-5" id="DbNSFP">
         <div class="col-12">
           <!-- dbNSFP starts -->
           <app-dbnsfp [variant]="variant"></app-dbnsfp>

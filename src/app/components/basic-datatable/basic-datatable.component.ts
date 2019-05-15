@@ -8,13 +8,15 @@ import { Animations } from '../../animations';
   templateUrl: './basic-datatable.component.html',
   styleUrls: ['./basic-datatable.component.scss'],
   animations: [
-    Animations.slideIn
+    Animations.slideIn,
+    Animations.fadeInOut
   ]
 })
 export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() data: any[] | null;
   @Input() title: string;
   @Input() unit: string;
+  @Input() loading: boolean | null = null;
 
   @Input() sortActive: string;
   @Input() sortDirection = 'asc';

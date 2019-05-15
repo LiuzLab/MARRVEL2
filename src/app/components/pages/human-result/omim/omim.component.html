@@ -1,9 +1,9 @@
-<!--   1. OMIM summary -->
-<div class="row" *ngIf="!loading && data">
+<div class="row">
+  <!-- OMIM title -->
   <div class="col-12">
-    <h3 class="mb-3 d-inline-block align-middle">OMIM</h3>
-    <a class="mb-3 d-inline-block ml-3 align-middle"
-      *ngIf="gene && gene.xref && gene.xref.omimId"
+    <h3 class="d-inline-block align-middle">OMIM</h3>
+    <a class="d-inline-block ml-3 align-middle"
+      *ngIf="!loading && gene && gene.xref && gene.xref.omimId" [@fadeInOut]
       href="https://www.omim.org/entry/{{ gene.xref.omimId }}"
       target="_blank"
     >
@@ -12,11 +12,19 @@
         More on OMIM
       </button>
     </a>
-    <p class="mt-0 d-table">
-      <mat-icon class="d-table-cell align-top"
-        matTooltip="MARRVEL's comment" matTooltipPosition="above"
-      >insert_comment</mat-icon>
-      <span class="d-table-cell pl-2">
+  </div>
+
+  <!-- OMIM Comment -->
+  <div class="col-12">
+    <div class="mt-3 d-table comment">
+      <div class="d-table-cell align-top comment-icon-wrapper">
+        <mat-icon
+          matTooltip="MARRVEL's comment" matTooltipPosition="above"
+          *ngIf="!loading"
+        >insert_comment</mat-icon>
+      </div>
+
+      <span class="d-table-cell pl-2" *ngIf="!loading">
         <span *ngIf="!data">
           {{ gene.symbol }} has no OMIM match,
           which means it is not a part of the known Mendelian phenotype
@@ -34,13 +42,12 @@
           Since there is no reproted phenotype associated, there is an opportunity to provide a phenotypic expansion.
         </span>
       </span>
-    </p>
-  </div>
-</div>
 
-<!--   3. OMIM phenotypes -->
-<div class="row mb-3" *ngIf="data && data.phenotypes">
-  <div class="col-12">
+    </div>
+  </div>
+
+  <!--  3. OMIM phenotypes -->
+  <div class="col-12 mt-3" *ngIf="!loading" [@fadeInOut]>
     <app-basic-datatable
       [data]="data.phenotypes"
       title="Disease/Phenotype Associated with {{ gene.symbol }} curated by OMIM"
@@ -50,13 +57,12 @@
       sortActive="phenotype"
       [url]="[false, true, false]"
       [urlPrefixes]="['', 'https://www.omim.org/entry/', '']"
+      [loading]="loading"
     ></app-basic-datatable>
   </div>
-</div>
 
-<!--   3. OMIM phenotypes -->
-<div class="row mb-3" *ngIf="data && data.allelicVariants">
-  <div class="col-12">
+  <!--   3. OMIM phenotypes -->
+  <div class="col-12 mt-3" *ngIf="!loading" [@fadeInOut]>
     <app-basic-datatable
       [data]="data.allelicVariants"
       title="Reported Alleles with {{ gene.symbol }} curated by OMIM"

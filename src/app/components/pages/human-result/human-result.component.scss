@@ -88,3 +88,52 @@ mat-sidenav.closed {
     margin-right: 72px !important;
   }
 }
+
+#OMIM .skeleton {
+  width: 100%;
+  height: 350px;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ), // light
+    radial-gradient(circle 12px at 12px,#f3f3f3 100%, transparent 0), // comment icon
+    linear-gradient( #f3f3f3 40px, transparent 0 ), // comment
+    linear-gradient( #f3f3f3 22px, transparent 0 ), // title 1
+    linear-gradient( #f3f3f3 80px, transparent 0 ), // table contents 1
+    linear-gradient( #f3f3f3 22px, transparent 0 ), // title 2
+    linear-gradient( #f3f3f3 80px, transparent 0 ); // table contents 2
+  background-repeat: no-repeat;
+  background-size:
+    50px 216px, // light
+    24px 24px,  // comment icon
+    80% 40px, // comment
+    70% 22px,  // title
+    100% 80px, // content
+    70% 22px,  // title 2
+    100% 80px; // content 2
+  background-position:
+    15px 42px,
+    15px 42px,  // comment icon
+    47px 42px, // comment
+    15px 98px, // title 1
+    15px 136px,  // table contents 1
+    15px 232px, // title 2
+    15px 270px;  // table contents 2
+  animation: shine-omim 1s infinite;
+}
+
+@keyframes shine-omim {
+  to {
+    background-position:
+      100% 42px,
+      15px 42px,  // comment icon
+      47px 42px, // comment
+      15px 98px, // title 1
+      15px 136px,  // table contents 1
+      15px 232px, // title 2
+      15px 270px;  // table contents 2
+  }
+}

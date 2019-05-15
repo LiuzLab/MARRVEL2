@@ -1,7 +1,7 @@
 <!-- OMIM text description start -->
 <div class="row">
   <div class="col-12" [ngClass]="{ 'skeleton': loading }">
-    <div [@fadeInOut]="!loading && gene && data">
+    <div  *ngIf="!loading && gene && data" [@fadeInOut]>
       <h4 class="m-0 title">
         OMIM Description of {{ gene.symbol }}
       </h4>
