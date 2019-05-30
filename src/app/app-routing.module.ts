@@ -6,9 +6,7 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { HumanResultComponent } from './components/pages/human-result/human-result.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'human', pathMatch: 'full' },
-
-  { path: 'human', component: HomeComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'human/gene/:gene', component: HumanResultComponent },
   { path: 'human/variant/:variant', component: HumanResultComponent },
   { path: 'human/pair/:gene/:variant', component: HumanResultComponent },
