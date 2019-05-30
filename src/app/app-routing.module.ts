@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/pages/home/home.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { HumanResultComponent } from './components/pages/human-result/human-result.component';
+import { BatchComponent } from './components/pages/batch/batch.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'human', pathMatch: 'full' },
@@ -13,6 +14,8 @@ const routes: Routes = [
   { path: 'human/variant/:variant', component: HumanResultComponent },
   { path: 'human/pair/:gene/:variant', component: HumanResultComponent },
   { path: 'human/protein/:protein', component: HumanResultComponent },
+
+  { path: 'human/batch', component: BatchComponent },
 
   { path: 'about', component: AboutComponent },
 ];

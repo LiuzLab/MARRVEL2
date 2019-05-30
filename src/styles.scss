@@ -154,12 +154,12 @@ span.mat-slide-toggle-content {
 /********************
  * Table
  */
-#human-result-container .mat-table {
+.mat-table {
   background: #fbfbfb !important;
 }
 
-#human-result-container tr.mat-row:hover {
-  background: #f7f7f7 !important;
+.mat-table .mat-row:hover {
+  filter: brightness(0.95) !important;
 }
 
 /********************
@@ -206,4 +206,9 @@ span.mat-slide-toggle-content {
 }
 .h-auto {
   height: auto;
+}
+
+#vcfField .mat-form-field-infix {
+  display: flex !important;
+  padding: 0em 0em 0.55em 0em !important;
 }

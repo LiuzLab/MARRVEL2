@@ -1,0 +1,296 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5 pt-5" *ngIf="!hideUpBox" [@toggle]>
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-xs-12 text-center">
+      <img src="../../../../assets/img/marrvel.svg" class="w-75">
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <app-vcf-upload-box
+        (dataChange)="onVariantDataChange($event)"
+      ></app-vcf-upload-box>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid py-5 px-md-5" *ngIf="variants && variants.length > 0" [@toggle]>
+  <div class="row">
+    <div class="col-12">
+      <a class="e2e-trusted-url"
+        role="button"
+        [href]="tsvPageDownloadUrl"
+        mat-flat-button color="primary"
+        [disabled]="loading || !tsvPageDownloadUrl"
+      >
+        <mat-icon class="icon-18px mr-1 spin" *ngIf="loading || !tsvPageDownloadUrl">autorenew</mat-icon>
+        <mat-icon class="icon-18px mr-1" *ngIf="!loading && tsvPageDownloadUrl">save_alt</mat-icon>
+        Export this page (.tsv)
+      </a>
+
+      <mat-paginator
+        [length]="variants.length"
+        [pageSize]="vPerPage"
+        [pageSizeOptions]="[10, 30, 50]"
+        [pageIndex]="curPage"
+        (page)="onPageChange($event)"
+      ></mat-paginator>
+
+      <mat-table class="w-100" [dataSource]="dataSource">
+        <ng-container matColumnDef="variant">
+          <mat-header-cell *matHeaderCellDef>Variant</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="break-word">
+            {{ element.variant.replace('>', '&gt;') }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gnomADAC">
+          <mat-header-cell *matHeaderCellDef class="number border-left">
+            <span class="text-underline-dashed" matTooltip="Allele Count">
+              AC
+            </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.gnomADVar">
+              {{ element.gnomADVar.alleleCount }}
+            </span>
+            <span *ngIf="!element.gnomADVar" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gnomADAN">
+          <mat-header-cell *matHeaderCellDef class="number">
+            <span class="text-underline-dashed" matTooltip="Allele Number">
+              AN
+            </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.gnomADVar">
+              {{ element.gnomADVar.alleleNum }}
+            </span>
+            <span *ngIf="!element.gnomADVar" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gnomADAF">
+          <mat-header-cell *matHeaderCellDef class="number">
+            <span class="text-underline-dashed" matTooltip="Allele Frequency">AF</span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.gnomADVar">
+              {{ element.gnomADVar.alleleFreq.toFixed(3) }}
+            </span>
+            <span *ngIf="!element.gnomADVar" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gnomADHom">
+          <mat-header-cell *matHeaderCellDef class="number">
+            <span class="text-underline-dashed" matTooltip="Homozygous count">Hom</span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.gnomADVar">
+              {{ element.gnomADVar.homCount }}
+            </span>
+            <span *ngIf="!element.gnomADVar" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="geno2mpHpo">
+          <mat-header-cell *matHeaderCellDef class="number border-left">
+            <span class="text-underline-dashed" matTooltip="Number of HPO profiles">
+              #HPO
+            </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.geno2mp">
+              {{ element.geno2mp.hpoCount }}
+            </span>
+            <span *ngIf="!element.geno2mp" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="geno2mpHom">
+          <mat-header-cell *matHeaderCellDef class="number">
+            <span class="text-underline-dashed" matTooltip="Homozygous count">
+              Hom
+            </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.geno2mp">
+              {{ element.geno2mp.homCount }}
+            </span>
+            <span *ngIf="!element.geno2mp" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="geno2mpHet">
+          <mat-header-cell *matHeaderCellDef class="number">
+            <span class="text-underline-dashed" matTooltip="Heterozygot count">
+              Het
+            </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.geno2mp">
+              {{ element.geno2mp.hetCount }}
+            </span>
+            <span *ngIf="!element.geno2mp" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="geno2mpFuncAnno">
+          <mat-header-cell *matHeaderCellDef class="">
+            <span class="text-underline-dashed" matTooltip="Functional annotation">
+              Anno
+            </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="">
+            <span *ngIf="element.geno2mp">
+              {{ element.geno2mp.funcAnno }}
+            </span>
+            <span *ngIf="!element.geno2mp" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dgvVarLoss">
+          <mat-header-cell *matHeaderCellDef class="number border-left justify-content-center">
+            Total #Loss
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dgvVarLoss">
+              {{ element.dgvVarLoss }}
+            </span>
+            <span *ngIf="!element.dgvVarLoss" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="clinvarSig">
+          <mat-header-cell *matHeaderCellDef class="border-left justify-content-center">
+            Significance
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="">
+            <span *ngIf="element.clinvar">
+              {{ element.clinvar.significance.description }}
+            </span>
+            <span *ngIf="!element.clinvar" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbnsfpCadd">
+          <mat-header-cell *matHeaderCellDef class="number border-left">
+            <span>CADD Phred</span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dbnsfp && element.dbnsfp.scores && element.dbnsfp.scores.CADD">
+              {{ element.dbnsfp.scores.CADD.phred }}
+            </span>
+            <span *ngIf="!element.dbnsfp || !element.dbnsfp.scores || !element.dbnsfp.scores.CADD" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbnsfpRevel">
+          <mat-header-cell *matHeaderCellDef class="number"><span>REVEL</span></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dbnsfp && element.dbnsfp.scores && element.dbnsfp.scores.REVEL">
+              {{ element.dbnsfp.scores.REVEL.score }}
+            </span>
+            <span *ngIf="!element.dbnsfp || !element.dbnsfp.scores || !element.dbnsfp.scores.REVEL || !element.dbnsfp.scores.REVEL.score" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbnsfpMcap">
+          <mat-header-cell *matHeaderCellDef class="number"><span>M-CAP</span></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dbnsfp && element.dbnsfp.scores && element.dbnsfp.scores.MCAP">
+              {{ element.dbnsfp.scores.MCAP.prediction }}
+            </span>
+            <span *ngIf="!element.dbnsfp || !element.dbnsfp.scores || !element.dbnsfp.scores.MCAP || !element.dbnsfp.scores.MCAP.prediction" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbnsfpPHumDiv" >
+          <mat-header-cell *matHeaderCellDef class="number"><span>Polyphen-2 HumDiv</span></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dbnsfp && element.dbnsfp.scores && element.dbnsfp.scores.Polyphen2HDIV">
+              {{ element.dbnsfp.scores.Polyphen2HDIV.prediction }}
+            </span>
+            <span *ngIf="!element.dbnsfp || !element.dbnsfp.scores || !element.dbnsfp.scores.Polyphen2HDIV || !element.dbnsfp.scores.Polyphen2HDIV.prediction" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbnsfpPHumVar">
+          <mat-header-cell *matHeaderCellDef class="number"><span>Polyphen-2 HumVar</span></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dbnsfp && element.dbnsfp.scores && element.dbnsfp.scores.Polyphen2HVAR">
+              {{ element.dbnsfp.scores.Polyphen2HVAR.prediction }}
+            </span>
+            <span *ngIf="!element.dbnsfp || !element.dbnsfp.scores || !element.dbnsfp.scores.Polyphen2HVAR || !element.dbnsfp.scores.Polyphen2HVAR.prediction" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbnsfpGerp">
+          <mat-header-cell *matHeaderCellDef class="number"><span>GERP++</span></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dbnsfp && element.dbnsfp.scores && element.dbnsfp.scores['GERP++']">
+              {{ element.dbnsfp.scores['GERP++'].score }}
+            </span>
+            <span *ngIf="!element.dbnsfp || !element.dbnsfp.scores || !element.dbnsfp.scores['GERP++']" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbnsfpPPV">
+          <mat-header-cell *matHeaderCellDef class="number"><span>phyloP 100way Vertebrate</span></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dbnsfp && element.dbnsfp.scores && element.dbnsfp.scores.phyloP100wayVertebrate">
+              {{ element.dbnsfp.scores.phyloP100wayVertebrate.score }}
+            </span>
+            <span *ngIf="!element.dbnsfp || !element.dbnsfp.scores || !element.dbnsfp.scores.phyloP100wayVertebrate || !element.dbnsfp.scores.phyloP100wayVertebrate.score" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dbnsfpPPM">
+          <mat-header-cell *matHeaderCellDef class="number"><span>phyloP 30way Mammalian</span></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="number">
+            <span *ngIf="element.dbnsfp && element.dbnsfp.scores && element.dbnsfp.scores.phyloP30wayMammalian">
+              {{ element.dbnsfp.scores.phyloP30wayMammalian.score }}
+            </span>
+            <span *ngIf="!element.dbnsfp || !element.dbnsfp.scores || !element.dbnsfp.scores.phyloP30wayMammalian || !element.dbnsfp.scores.phyloP30wayMammalian.score" class="na">NA</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container *matHeaderRowDef="displayedColumns">
+          <div class="mat-header-row header-group-row">
+            <div class="mat-header-cell" role="columnheader"></div>
+            <div class="mat-header-cell header-group border-left text-center justify-content-center" role="columnheader" style="flex: 4">gnomAD</div>
+            <div class="mat-header-cell header-group border-left text-center justify-content-center" role="columnheader" style="flex: 4">Geno2MP</div>
+            <div class="mat-header-cell border-left text-center justify-content-center" role="columnheader">DGV</div>
+            <div class="mat-header-cell border-left text-center justify-content-center" role="columnheader">ClinVar</div>
+            <div class="mat-header-cell header-group border-left text-center justify-content-center" role="columnheader" style="flex: 8">dbNSFP</div>
+          </div>
+          <mat-header-row class="align-items-stretch"></mat-header-row>
+        </ng-container>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+
+      <div *ngIf="loading">
+        <div class="table-row-loading-wrapper w-100" *ngFor="let variant of variants.slice(vFrom, vTo)">
+          <div class="table-row-loading w-100">
+            <div class="table-cell-loading">
+              {{ variant.replace('>', '&gt;') }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-paginator
+        [length]="variants.length"
+        [pageSize]="vPerPage"
+        [pageSizeOptions]="[10, 30, 50]"
+        [pageIndex]="curPage"
+        (page)="onPageChange($event)"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

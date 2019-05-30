@@ -23,7 +23,8 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -57,6 +58,8 @@ import { Geno2mpPhenotypePictogramComponent } from './components/pages/human-res
 import { PhenotypesComponent } from './components/pages/human-result/phenotypes/phenotypes.component';
 import { GeneOntologyComponent } from './components/pages/human-result/gene-ontology/gene-ontology.component';
 import { OmimTextDescriptionComponent } from './components/pages/human-result/omim/omim-text-description/omim-text-description.component';
+import { VcfUploadBoxComponent } from './components/vcf-upload-box/vcf-upload-box.component';
+import { BatchComponent } from './components/pages/batch/batch.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +93,9 @@ import { OmimTextDescriptionComponent } from './components/pages/human-result/om
     Geno2mpPhenotypePictogramComponent,
     PhenotypesComponent,
     GeneOntologyComponent,
-    OmimTextDescriptionComponent
+    OmimTextDescriptionComponent,
+    VcfUploadBoxComponent,
+    BatchComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +119,8 @@ import { OmimTextDescriptionComponent } from './components/pages/human-result/om
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatProgressBarModule
   ],
   exports: [
     MatButtonModule,
