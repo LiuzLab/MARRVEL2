@@ -12,8 +12,9 @@
       >
         <mat-label>Input Type</mat-label>
         <select matNativeControl [(ngModel)]="selectedInputType" (change)="onInputTypeChange($event)" name="inputType">
-          <option value="gene" selected>Gene</option>
-          <option value="protein">Protein</option>
+          <option value="gene">Human Gene</option>
+          <option value="protein">Human Protein</option>
+          <option value="vcf">Upload VCF File</option>
         </select>
       </mat-form-field>
     </div>
@@ -105,10 +106,10 @@
       'col-2 pr-0 text-left': compact
      }">
       <button mat-flat-button	color="primary"
-      [ngClass]="{'button-compact': compact}"
-      (click)="search()"
-      [disabled]="!validateInput()"
-    >
+        [ngClass]="{'button-compact': compact}"
+        (click)="search()"
+        [disabled]="!validateInput()"
+      >
         <span *ngIf="!compact">Search</span>
         <mat-icon *ngIf="compact">search</mat-icon>
       </button>

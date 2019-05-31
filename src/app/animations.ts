@@ -32,6 +32,15 @@ export const Animations = {
       transition('true <=> false', animate(300)),
     ])
   ],
+  toggleInOut: trigger('toggle', [
+    transition(':enter', [
+      style({ opacity: 0, height: '0px' }),
+      animate('300ms ease-in', style({ opacity: 1, height: 'auto' }))
+    ]),
+    transition(':leave', [
+      animate('300ms ease-in', style({ opacity: 0, height: '0px' }))
+    ])
+  ]),
   fadeInOut: trigger('fadeInOut', [
     transition(':enter', [
       style({ opacity: 1 }),

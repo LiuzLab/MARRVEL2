@@ -1,0 +1,38 @@
+<div class="d-flex flex-row">
+  <mat-form-field class="flex-grow-1" id="vcfField"
+    appearance="outline"
+    [formGroup]="fileFormGroup"
+  >
+    <mat-error *ngIf="!fileFormGroup.valid">
+      It must be a VCF file size less than or equal to 50 MB
+    </mat-error>
+
+    <mat-label>{{ file ? '' : 'Please select a ' }}VCF file (*.vcf, size ≤ 50MB)</mat-label>
+    <input matInput type="text" readonly="true"
+      placeholder="Please select a VCF file (*.vcf, size ≤ 50MB)"
+      (click)="fileInput.click()"
+      formControlName="fileDisp"
+      #displayInput
+    >
+    <button class="align-self-start"
+      mat-flat-button color="primary"
+      (click)="fileInput.click()"
+    >
+      <mat-icon>attachment</mat-icon>
+    </button>
+  </mat-form-field>
+  <input type="file" hidden #fileInput accept=".vcf"
+    (change)="onFileChange($event.target.files)"
+  >
+</div>
+<div class="w-100 text-center">
+  <button mat-flat-button	color="primary"
+    [disabled]="!file"
+    (click)="processVCF()"
+  >Upload</button>
+</div>
+
+<div class="w-100" *ngIf="parsing" [@fadeInOut]>
+  <h5 class="mb-1 text-left">Parsing VCF file... ({{ fileProgress.toFixed(1) }} %)</h5>
+  <mat-progress-bar mode="determinate" [value]="fileProgress"></mat-progress-bar>
+</div>

@@ -16,7 +16,7 @@ export class ApiService {
 
   getGenesBySymbolPrefix(taxonId: number, prefix: string): Observable<any> {
     const url = `${environment.apiHost}/gene/taxonId/${taxonId}/prefix/${prefix}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -27,7 +27,7 @@ export class ApiService {
 
   getGeneByEntrezId(entrezId: string | number): Observable<any> {
     const url = `${environment.apiHost}/gene/taxonId/9606/entrezId/${entrezId}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -38,7 +38,7 @@ export class ApiService {
 
   getOMIMByMimNumber(mimNumber: string | number): Observable<any> {
     const url = `${environment.apiHost}/omim/mimNumber/${mimNumber}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -49,7 +49,7 @@ export class ApiService {
 
   getClinVarByEntrezId(entrezId: string | number): Observable<any> {
     const url = `${environment.apiHost}/clinVar/entrezId/${entrezId}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -60,7 +60,7 @@ export class ApiService {
 
   getGnomADGeneByEntrezId(entrezId: string | number): Observable<any> {
     const url = `${environment.apiHost}/gnomAD/gene/entrezId/${entrezId}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -71,7 +71,7 @@ export class ApiService {
 
   getGnomADVaraint(variant: Variant): Observable<any> {
     const url = `${environment.apiHost}/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -82,7 +82,7 @@ export class ApiService {
 
   getDbNSFP(variant: Variant): Observable<any> {
     const url = `${environment.apiHost}/dbNSFP/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -93,7 +93,7 @@ export class ApiService {
 
   getDECIPHERByVariant(variant: Variant): Observable< any > {
     const url = `${environment.apiHost}/DECIPHER/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -104,7 +104,7 @@ export class ApiService {
 
   getGeno2MPByVariant(variant: Variant): Observable< any > {
     const url = `${environment.apiHost}/Geno2MP/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -115,7 +115,7 @@ export class ApiService {
 
   getGeno2MPByGeneEntrezId(entrezId: string | number): Observable< any > {
     const url = `${environment.apiHost}/Geno2MP/gene/entrezId/${entrezId}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -126,7 +126,7 @@ export class ApiService {
 
   getDGVByVariant(variant: Variant): Observable< any > {
     const url = `${environment.apiHost}/DGV/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -137,7 +137,7 @@ export class ApiService {
 
   getDGVByEntrezId(entrezId: number | string): Observable< any > {
     const url = `${environment.apiHost}/DGV/gene/entrezId/${entrezId}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
@@ -148,8 +148,19 @@ export class ApiService {
 
   getOrthologByEntrezId(entrezId: number | string): Observable< any > {
     const url = `${environment.apiHost}/diopt/ortholog/entrezId/${entrezId}`;
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
+
+  getBatchByArray(data): Observable< any > {
+    const url = `${environment.apiHost}/batch/variants`;
+    return new Observable(observer => {
+      this.http.get(url, { params: { variants: data } }).subscribe((res) => {
         observer.next(res);
       }, (err) => {
         throw err;
