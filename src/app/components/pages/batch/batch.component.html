@@ -29,7 +29,33 @@
         <mat-icon class="icon-18px mr-1" *ngIf="!loading && tsvPageDownloadUrl">save_alt</mat-icon>
         Export this page (.tsv)
       </a>
+      <button class="ml-1"
+        mat-flat-button color="primary"
+        *ngIf="!tsvWholeDownloadUrl"
+        (click)="createDownloadUrl('.tsv', true)"
+      >
+        <mat-icon class="icon-18px mr-1">cloud_download</mat-icon>
+        Start download all (.tsv)
+      </button>
+      <a class="ml-1 e2e-trusted-url" role="button"
+        mat-flat-button color="accent"
+        [href]="tsvWholeDownloadUrl"
+        *ngIf="tsvWholeDownloadUrl"
+        [@toggle]
+      >
+        <mat-icon class="icon-18px mr-1">save_alt</mat-icon>
+        Download all (.tsv)
+      </a>
+    </div>
 
+    <div class="col-12 mt-3" *ngIf="wholeLoading" [@toggle]>
+      <h5 class="mb-1 text-left">Fetching data from server...</h5>
+      <mat-progress-bar mode="buffer"
+        [value]="wholeVarsHaveData / variants.length * 100"
+      ></mat-progress-bar>
+    </div>
+
+    <div class="col-12">
       <mat-paginator
         [length]="variants.length"
         [pageSize]="vPerPage"

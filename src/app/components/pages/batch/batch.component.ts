@@ -3,6 +3,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/operator/first';
+
 import { Animations } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
 import { DbNSFPData } from 'src/app/interfaces/data';
@@ -35,6 +39,10 @@ export class BatchComponent implements OnInit {
   ];
 
   tsvPageDownloadUrl = null;
+  wholeLoading = false;
+  wholeVarsHaveData = 0;
+  wholeVarsPrepared = 0;
+  tsvWholeDownloadUrl = null;
 
   constructor(
     private api: ApiService,
@@ -53,7 +61,12 @@ export class BatchComponent implements OnInit {
 
   onVariantDataChange(e) {
     this.variants = e;
+
+    this.tsvPageDownloadUrl = null;
+    this.tsvWholeDownloadUrl = null;
+
     this.vFrom = 0;
+    this.curPage = 0;
     this.updateSliceAndData(0);
     this.hideUpBox = true;
   }
@@ -71,33 +84,74 @@ export class BatchComponent implements OnInit {
     this.tsvPageDownloadUrl = null;
     this.api.getBatchByArray(this.variants.slice(vFrom, vTo))
       .subscribe((res: VariantResult[]) => {
-        for (const row of res) {
-          if (row.gnomADVar) {
-            row.gnomADVar.alleleCount = ((row.gnomADVar.genome || {}).alleleCount || 0) + ((row.gnomADVar.exome || {}).alleleCount || 0);
-            row.gnomADVar.alleleNum = ((row.gnomADVar.genome || {}).alleleNum || 0) + ((row.gnomADVar.exome || {}).alleleNum || 0);
-            row.gnomADVar.alleleFreq = row.gnomADVar.alleleCount / row.gnomADVar.alleleNum;
-            row.gnomADVar.homCount = ((row.gnomADVar.genome || {}).homCount || 0) + ((row.gnomADVar.exome || {}).homCount || 0);
-          }
+        for (const row of res) { this.processDataRow(row); }
 
-          if (row.dgv) {
-            row['dgvVarLoss'] = 0;
-            for (const dgv of row.dgv) {
-              row['dgvVarLoss'] += dgv.loss;
-            }
-          }
-        }
         this.dataSource = new MatTableDataSource< VariantResult >(res);
         this.loading = false;
         this.tsvPageDownloadUrl = this.createDownloadUrl('.tsv');
       });
   }
 
-  createDownloadUrl(fileType: string, whole?: boolean) {
-    let dataToDownload: VariantResult[] = [];
-    if (!whole) {
-      dataToDownload = this.dataSource.data;
+  processDataRow(row: VariantResult) {
+    if (row.gnomADVar) {
+      row.gnomADVar.alleleCount = ((row.gnomADVar.genome || {}).alleleCount || 0) + ((row.gnomADVar.exome || {}).alleleCount || 0);
+      row.gnomADVar.alleleNum = ((row.gnomADVar.genome || {}).alleleNum || 0) + ((row.gnomADVar.exome || {}).alleleNum || 0);
+      row.gnomADVar.alleleFreq = row.gnomADVar.alleleCount / row.gnomADVar.alleleNum;
+      row.gnomADVar.homCount = ((row.gnomADVar.genome || {}).homCount || 0) + ((row.gnomADVar.exome || {}).homCount || 0);
     }
+    if (row.dgv) {
+      row['dgvVarLoss'] = 0;
+      for (const dgv of row.dgv) {
+        row['dgvVarLoss'] += dgv.loss;
+      }
+    }
+  }
 
+  createDownloadUrl(fileType: string, whole?: boolean) {
+    if (!whole) {
+      return this.getBlobUrl(fileType, this.dataSource.data);
+    }
+    else {
+      let dataToDownload: VariantResult[] = [];
+
+      this.wholeLoading = true;
+      this.tsvWholeDownloadUrl = null;
+
+      const nPage = this.variants.length / this.vPerPage;   // Total number of pages with current 'varaint per page' setting
+      const tasks: Observable< any >[] = [];
+      for (let page = 0; page < nPage; ++page) {
+        const vFrom = page * this.vPerPage;
+        const vTo = Math.min(vFrom + this.vPerPage, this.variants.length);
+
+        this.wholeVarsPrepared += vTo - vFrom;
+
+        if (page === this.curPage && !this.loading) {    // not fetching data again for current page
+          dataToDownload = dataToDownload.concat(this.dataSource.data);
+          this.wholeVarsHaveData += vTo - vFrom;
+        }
+        else {
+          tasks.push(
+            new Observable(observer => {
+              this.api.getBatchByArray(this.variants.slice(vFrom, vTo))
+                .subscribe(res => {
+                  this.wholeVarsHaveData += vTo - vFrom;
+                  observer.next(res);
+                });
+            }).first()
+          );
+        }
+      }
+      Observable.forkJoin(...tasks).subscribe(results => {
+        for (const res of results) {
+          dataToDownload = dataToDownload.concat(res);
+        }
+        this.tsvWholeDownloadUrl = this.getBlobUrl(fileType, dataToDownload);
+        this.wholeLoading = false;
+      });
+    }
+  }
+
+  getBlobUrl(fileType, dataToDownload) {
     let dataString = '';
     let mediaType = '';
     switch (fileType) {
@@ -109,6 +163,8 @@ export class BatchComponent implements OnInit {
                       'dbnsfp_polyphen2_humvar\tdbnsfp_gerp\tdbnsfp_phylop_100way_vertebrate\t' +
                       'dbnsfp_phylop_30way_mammalian\n';
         for (const row of dataToDownload) {
+          this.processDataRow(row);
+
           dataString = dataString +
             `${row.variant}\t` +
             `${row.gnomADVar ? row.gnomADVar.alleleCount : ''}\t` +
