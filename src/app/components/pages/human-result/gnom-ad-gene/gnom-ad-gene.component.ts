@@ -23,6 +23,7 @@ export class GnomADGeneComponent implements OnChanges {
       this.loading = true;
       this.api.getGnomADGeneByEntrezId(this.gene.entrezId)
         .subscribe((res) => {
+          console.log(res);
           this.data = res;
           this.loading = false;
         });

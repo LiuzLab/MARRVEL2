@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
 import { ApiService } from '../../../services/api.service';
+import { VariantService } from '../../../services/variant.service';
 
 import { HumanGene } from '../../../interfaces/gene';
 import { Variant } from '../../../interfaces/variant';
 
-import { VariantService } from '../../../services/variant.service';
+import { Animations } from 'src/app/animations';
+import { MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-human-result',
   templateUrl: './human-result.component.html',
-  styleUrls: ['./human-result.component.scss']
+  styleUrls: ['./human-result.component.scss'],
+  animations: [ Animations.fadeInOut, Animations.toggleInOut ]
 })
 export class HumanResultComponent implements OnInit {
-  pageLoading = true;
+  geneLoading = true;
   sidenavOpened = false;
 
   // Input
@@ -27,8 +31,11 @@ export class HumanResultComponent implements OnInit {
   variantString: string;
 
   // Data from server
-  omimLoading = false;
-  omimData: object | null;
+  geneCandidates: HumanGene[] | null = null;
+
+  omimLoading = true;
+  omimData = null;
+
   orthologsLoading = false;
   orthologs: object[] | null;
 
@@ -45,13 +52,10 @@ export class HumanResultComponent implements OnInit {
       this.proteinInput = param.protein || null;
 
       if (this.geneEntrezId !== null) {
+        this.geneLoading = true;
         this.api.getGeneByEntrezId(this.geneEntrezId)
           .subscribe((res) => {
-            this.gene = res;
-            this.omimLoading = true;
-            console.log(this.gene);
-
-            this.getOrthologs();
+            this.onGeneLoad(res);
           });
       }
 
@@ -66,6 +70,18 @@ export class HumanResultComponent implements OnInit {
         else if (parsed.type === 'coord') {
           this.variant = parsed.variant;
           this.variantString = `Chr${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`;
+
+          if (!this.geneEntrezId && !this.gene) {
+            this.geneLoading = true;
+            this.geneCandidates = null;
+            this.api.getGeneByGenomicLocation(this.variant)
+              .subscribe((res: HumanGene[]) => {
+                this.geneCandidates = res;
+                if (res && res.length) {
+                  this.onGeneLoad(res[0]);
+                }
+              });
+          }
         }
         else {
           // TODO: error
@@ -74,20 +90,44 @@ export class HumanResultComponent implements OnInit {
     });
   }
 
+  onGeneSelectionChange(e: MatSelectChange) {
+    this.onGeneLoad(e.value);
+  }
+
+  onGeneLoad(gene) {
+    this.gene = gene;
+    this.geneLoading = false;
+
+    this.getOMIM();
+    this.getOrthologs();
+  }
+
+  getOMIM() {
+    if (!this.gene || !this.gene.xref || !this.gene.xref.omimId) {
+      this.omimData = null;
+      this.omimLoading = false;
+      return;
+    }
+
+    this.omimLoading = true;
+    this.api.getOMIMByMimNumber(this.gene.xref.omimId)
+      .subscribe(res => {
+        this.omimData = res;
+        this.omimLoading = false;
+      }, err => {
+        console.log(err);
+        this.omimData = null;
+        this.omimLoading = false;
+      });
+  }
+
   getOrthologs() {
     this.orthologsLoading = true;
     this.api.getOrthologByEntrezId(this.gene.entrezId)
       .subscribe((res) => {
         this.orthologs = res;
         this.orthologsLoading = false;
-
-        console.log(res);
       });
-  }
-
-  omimDataChange(e) {
-    if (e.target === 'data') this.omimData = e.data;
-    if (e.target === 'loading') this.omimLoading = e.data;
   }
 
   toggleSidenav(e) {

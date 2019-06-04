@@ -74,12 +74,14 @@ export class GeneOntologyComponent implements OnChanges, AfterViewInit {
     if (changes.gene && changes.gene.currentValue) {
       this.gos = this.gos || {};
       this.gos['human'] = { gos: {} };
-      for (const go of this.gene.gos) {
-        if (go.eviCode in EXP_EVICODES && go.ontology) {
-          const slimGoId = go.ontology.agrSlimGoId || NAMESPACE_TO_GOID[go.ontology.namespace];
-          if (slimGoId) {
-            this.gos['human']['gos'][slimGoId] = this.gos['human']['gos'][slimGoId] || [];
-            this.gos['human']['gos'][slimGoId].push(go);
+      if (this.gene.gos) {
+        for (const go of this.gene.gos) {
+          if (go.eviCode in EXP_EVICODES && go.ontology) {
+            const slimGoId = go.ontology.agrSlimGoId || NAMESPACE_TO_GOID[go.ontology.namespace];
+            if (slimGoId) {
+              this.gos['human']['gos'][slimGoId] = this.gos['human']['gos'][slimGoId] || [];
+              this.gos['human']['gos'][slimGoId].push(go);
+            }
           }
         }
       }

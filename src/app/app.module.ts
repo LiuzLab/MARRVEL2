@@ -57,7 +57,6 @@ import { Geno2mpVariantTableComponent } from './components/pages/human-result/ge
 import { Geno2mpPhenotypePictogramComponent } from './components/pages/human-result/geno2mp/geno2mp-phenotype-pictogram/geno2mp-phenotype-pictogram.component';
 import { PhenotypesComponent } from './components/pages/human-result/phenotypes/phenotypes.component';
 import { GeneOntologyComponent } from './components/pages/human-result/gene-ontology/gene-ontology.component';
-import { OmimTextDescriptionComponent } from './components/pages/human-result/omim/omim-text-description/omim-text-description.component';
 import { VcfUploadBoxComponent } from './components/vcf-upload-box/vcf-upload-box.component';
 import { BatchComponent } from './components/pages/batch/batch.component';
 
@@ -93,7 +92,6 @@ import { BatchComponent } from './components/pages/batch/batch.component';
     Geno2mpPhenotypePictogramComponent,
     PhenotypesComponent,
     GeneOntologyComponent,
-    OmimTextDescriptionComponent,
     VcfUploadBoxComponent,
     BatchComponent
   ],

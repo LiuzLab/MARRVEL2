@@ -36,6 +36,17 @@ export class ApiService {
     });
   }
 
+  getGeneByGenomicLocation(variant: Variant): Observable< any > {
+    const url = `${environment.apiHost}/gene/chr/${variant.chr}/pos/${variant.pos}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
+
   getOMIMByMimNumber(mimNumber: string | number): Observable<any> {
     const url = `${environment.apiHost}/omim/mimNumber/${mimNumber}`;
     return new Observable(observer => {

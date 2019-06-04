@@ -37,7 +37,7 @@
       Pathogenic
     </span>
     <span class="data">
-      {{ significance['pathogenic'] }}
+      {{ significance['pathogenic'] || 0 }}
     </span>
   </div>
 
@@ -46,7 +46,7 @@
       Likely Pathogenic
     </span>
     <span class="data">
-      {{ significance['likely pathogenic'] }}
+      {{ significance['likely pathogenic'] || 0 }}
     </span>
   </div>
 
@@ -55,7 +55,7 @@
       Likely Benign
     </span>
     <span class="data">
-      {{ significance['likely benign'] }}
+      {{ significance['likely benign'] || 0 }}
     </span>
   </div>
 
@@ -64,7 +64,7 @@
       Benign
     </span>
     <span class="data">
-      {{ significance['benign'] }}
+      {{ significance['benign'] || 0 }}
     </span>
   </div>
 </div>

@@ -37,7 +37,7 @@ export class DgvComponent implements OnChanges {
           });
       }
     }
-    if (change.variant && change.variant.currentValue['chr']) {
+    if (change.variant && change.variant.currentValue && change.variant.currentValue['chr']) {
       if (!this.gene && this.searchBy === 'gene') {
         this.searchBy = 'variant';
       }

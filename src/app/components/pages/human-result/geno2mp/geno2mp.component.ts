@@ -8,6 +8,7 @@ import { HumanGene } from '../../../../interfaces/gene';
 import { Variant } from '../../../../interfaces/variant';
 import { Geno2MPResult } from '../../../../interfaces/data';
 
+import { Animations } from './../../../../animations';
 import { FUNCANNO_TO_CAT_NUM, CAT_NUM_TO_CAT_NAME } from './categories';
 import { HPO_BROAD_TO_CAT } from '../../../../category';
 
@@ -15,14 +16,7 @@ import { HPO_BROAD_TO_CAT } from '../../../../category';
   selector: 'app-geno2mp',
   templateUrl: './geno2mp.component.html',
   styleUrls: ['./geno2mp.component.scss'],
-  animations: [
-    trigger('toggle', [
-      state('true', style({ opacity: 1 })),
-      state('void', style({ opacity: 0, height: '0px' })),
-      transition(':enter', animate('500ms ease-in-out')),
-      transition(':leave', animate('500ms ease-in-out'))
-    ])
-  ]
+  animations: [ Animations.toggleInOut ]
 })
 export class Geno2mpComponent implements OnChanges {
   @Input() variant: Variant | null;

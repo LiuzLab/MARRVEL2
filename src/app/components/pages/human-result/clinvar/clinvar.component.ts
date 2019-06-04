@@ -38,8 +38,10 @@ export class ClinvarComponent implements OnChanges {
         .subscribe((res) => {
           this.significance = {};
           for (const item of res) {
-            item.location = `Chr${item.chr}:${item.start}`;
-            if (item.start !== item.stop) {
+            item.location = '';
+            if (item.chr) item.location = `Chr${item.chr}`;
+            if (item.start) item.location = item.location + `:${item.start}`;
+            if (item.stop && item.start !== item.stop) {
               item.location = item.location + `-${item.stop}`;
             }
             item.significanceText = item.significance.description;

@@ -49,8 +49,8 @@
   <!--  3. OMIM phenotypes -->
   <div class="col-12 mt-3" *ngIf="!loading" [@fadeInOut]>
     <app-basic-datatable
-      [data]="data.phenotypes"
-      title="Disease/Phenotype Associated with {{ gene.symbol }} curated by OMIM"
+      [data]="data ? data.phenotypes : []"
+      [title]="'Disease/Phenotype Associated with ' + gene.symbol + ' curated by OMIM'"
       unit="Phenotype"
       [displayedColumns]="['phenotype', 'phenotypeMimNumber', 'phenotypeInheritance']"
       [columnNames]="['Phenotype', 'Phenotype mimNumber', 'Inheritance']"
@@ -64,8 +64,8 @@
   <!--   3. OMIM phenotypes -->
   <div class="col-12 mt-3" *ngIf="!loading" [@fadeInOut]>
     <app-basic-datatable
-      [data]="data.allelicVariants"
-      title="Reported Alleles with {{ gene.symbol }} curated by OMIM"
+      [data]="data ? data.allelicVariants : []"
+      [title]="'Reported Alleles with ' + gene.symbol + ' curated by OMIM'"
       unit="Allele"
       [displayedColumns]="['name', 'mutations', 'dbSnps']"
       [columnNames]="['Phenotype', 'Mutation', 'dbSNP']"

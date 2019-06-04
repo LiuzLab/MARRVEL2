@@ -24,6 +24,8 @@
   </span>
 </p>
 
+<p *ngIf="!loading && (!data || !data.lof)">No matches found</p>
+
 <table
   class="mat-table w-100"
   *ngIf="data && data.lof"
