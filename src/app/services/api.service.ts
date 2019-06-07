@@ -158,7 +158,18 @@ export class ApiService {
   }
 
   getOrthologByEntrezId(entrezId: number | string): Observable< any > {
-    const url = `${environment.apiHost}/diopt/ortholog/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/diopt/ortholog/gene/entrezId/${entrezId}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
+
+  getAlignmentByEntrezId(entrezId: number | string): Observable< any > {
+    const url = `${environment.apiHost}/diopt/alignment/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);

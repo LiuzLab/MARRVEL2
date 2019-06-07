@@ -59,6 +59,7 @@ import { PhenotypesComponent } from './components/pages/human-result/phenotypes/
 import { GeneOntologyComponent } from './components/pages/human-result/gene-ontology/gene-ontology.component';
 import { VcfUploadBoxComponent } from './components/vcf-upload-box/vcf-upload-box.component';
 import { BatchComponent } from './components/pages/batch/batch.component';
+import { DioptAlignmentComponent } from './components/pages/human-result/diopt-alignment/diopt-alignment.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { BatchComponent } from './components/pages/batch/batch.component';
     PhenotypesComponent,
     GeneOntologyComponent,
     VcfUploadBoxComponent,
-    BatchComponent
+    BatchComponent,
+    DioptAlignmentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,56 @@
+<h3 class="mt-0 mb-0">
+  Multiple Protein Alignment for {{ gene? gene.symbol : '' }}&nbsp;
+  <span class="badge badge-secondary" style="font-size: 0.4em; vertical-align: middle;">DIOPT v7.1</span>
+</h3>
+
+<div class="mt-3 w-100" style="overflow-x: scroll; font-size: 0.9em;"
+  *ngIf="!loading && data"
+>
+  <div class="row mb-3" *ngIf="species">
+    <div class="col-12">
+      Highlight from
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="highlightFrom">
+      </mat-form-field>
+      to
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="highlightTo">
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      Highlight for
+      <mat-slide-toggle
+        *ngFor="let speciesTag of species"
+        [matTooltip]="speciesTagToName[speciesTag]"
+        [(ngModel)]="speciesToHighlight[speciesTag]"
+        color="primary"
+        class="mr-3"
+      >{{ speciesTag }}</mat-slide-toggle>
+    </div>
+  </div>
+
+  <div class="text-monospace" *ngFor="let row of data" style="width: 950px">
+    <div *ngIf="row.species !== 'mark'">
+      <div class="species-tag d-inline-block align-middle">
+        <span>{{ row.species }}{{ row.sIdx }}</span>
+      </div>
+      <span
+        class="d-inline-block"
+        *ngFor="let protein of row['proteins']; let idx = index"
+        [style]="getStyle(row['style'][idx])"
+        [ngClass]="{ 'text-highlight': speciesToHighlight[row.species] && highlightFrom <= row.realIdx[idx] && row.realIdx[idx] <= highlightTo }"
+      >{{ protein }}</span>
+      <span class="ml-2">[{{ row.endIdx }}]</span>
+    </div>
+
+    <div class="mb-2" *ngIf="row.species === 'mark'">
+      <div class="species-tag d-inline-block align-middle">&nbsp;</div>
+      <span class="">{{ row.mark.substr(4) }}</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="mt-3" *ngIf="!loading && !data">
+  <p>No matches found</p>
+</div>

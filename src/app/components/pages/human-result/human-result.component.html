@@ -18,8 +18,10 @@
   >
     <div id="TOP"></div>
     <app-navbar showSearch="true" showMenuButton="true"></app-navbar>
+
     <div *ngIf="gene !== null || variant" class="container-fluid py-5 px-md-5">
 
+      <!-- Gene, Input information starts -->
       <div class="row">
         <div class="col-12">
           <div class="title" *ngIf="gene || variant">
@@ -69,12 +71,13 @@
         <!-- OMIM text description ends -->
 
       </div>
+      <!-- Gene, Input information ends -->
 
       <h2 class="mt-5 text-uppercase">Disease Data</h2>
 
+      <!-- OMIM starts -->
       <div class="row section mt-3" id="OMIM">
         <div class="col-12" [ngClass]="{ 'skeleton': omimLoading }">
-          <!-- OMIM starts -->
           <app-omim
             [gene]="gene"
             [loading]="omimLoading"
@@ -82,22 +85,26 @@
           ></app-omim>
         </div>
       </div>
+      <!-- OMIM ennds -->
 
-      <div class="row section mt-5 mb-5" id="DbNSFP">
+      <!-- dbNSFP starts -->
+      <div class="row section mt-5" id="DbNSFP" *ngIf="variant">
         <div class="col-12">
-          <!-- dbNSFP starts -->
           <app-dbnsfp [variant]="variant"></app-dbnsfp>
         </div>
       </div>
+      <!-- dbNSFP ends -->
 
-      <div class="row section mb-5" id="ClinVar">
+      <!-- ClinVar starts -->
+      <div class="row section mt-5" id="ClinVar">
         <div class="col-12">
-          <!-- ClinVar starts -->
           <app-clinvar [gene]="gene"></app-clinvar>
         </div>
       </div>
+      <!-- ClinVar ends -->
 
-      <div class="row section mb-5" id="Geno2MP">
+      <!-- Geno2MP starts -->
+      <div class="row section mt-5" id="Geno2MP">
         <div class="col-12">
           <app-geno2mp
             [gene]="gene"
@@ -105,59 +112,50 @@
           ></app-geno2mp>
         </div>
       </div>
+      <!-- Geno2MP ends -->
 
-      <mat-divider class="mb-5"></mat-divider>
+      <mat-divider class="mt-5"></mat-divider>
 
-      <h2 class="mb-3 text-uppercase">Control Data</h2>
+      <h2 class="mt-5 text-uppercase">Control Data</h2>
 
-      <div class="row section mb-5" id="GnomAD">
-        <div class="col-12 mb-3">
-          <!-- gnomAD starts -->
-          <div class="row">
-            <div class="col-12">
-              <h3 class="mb-3 d-inline-block align-middle">gnomAD</h3>
-              <a class="mb-3 d-inline-block ml-3 align-middle"
-                *ngIf="gene && gene.xref && gene.xref.ensemblId"
-                href="https://gnomad.broadinstitute.org/gene/{{ gene.xref.ensemblId }}"
-                target="_blank"
-              >
-                <button mat-button color="primary">
-                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                  More on gnomAD
-                </button>
-              </a>
-            </div>
-          </div>
-
-          <!-- gnomAD variant -->
-          <div class="row mb-3">
-            <div class="col-12">
-              <h4 class="mt-0 mb-3">
-                Population Allele Frequencies of {{ variantString }} from gnomAD
-              </h4>
-              <app-gnom-ad
-                [variant]="variant"
-              ></app-gnom-ad>
-            </div>
-          </div>
-
-          <!-- gnomAD gene -->
-          <div class="row"
-            *ngIf="gene"
+      <!-- gnomAD starts -->
+      <div class="row section mt-3" id="GnomAD">
+        <div class="col-12">
+          <h3 class="mb-0 d-inline-block align-middle">gnomAD</h3>
+          <a class="mb-0 d-inline-block ml-3 align-middle"
+            *ngIf="gene && gene.xref && gene.xref.ensemblId"
+            href="https://gnomad.broadinstitute.org/gene/{{ gene.xref.ensemblId }}"
+            target="_blank"
           >
-            <div class="col-12">
-              <h4 class="mt-0 mb-3">
-                Control Population Summary of {{ gene.symbol }} from gnomAD
-              </h4>
-              <app-gnom-ad-gene
-                [gene]="gene"
-              ></app-gnom-ad-gene>
-            </div>
-          </div>
+            <button mat-button color="primary">
+              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+              More on gnomAD
+            </button>
+          </a>
+        </div>
+
+        <!-- gnomAD variant -->
+        <div class="col-12 mt-3" *ngIf="variant">
+          <h4 class="mt-0 mb-3">
+            Population Allele Frequencies of {{ variantString }} from gnomAD
+          </h4>
+          <app-gnom-ad
+            [variant]="variant"
+          ></app-gnom-ad>
+        </div>
+
+        <!-- gnomAD gene -->
+        <div class="col-12 mt-3" *ngIf="gene">
+          <h4 class="mt-0 mb-3">Control Population Summary of {{ gene.symbol }} from gnomAD</h4>
+          <app-gnom-ad-gene
+            [gene]="gene"
+          ></app-gnom-ad-gene>
         </div>
       </div>
+      <!-- gnomAD ends -->
 
-      <div class="row section mb-5" id="DGV">
+      <!-- DGV starts -->
+      <div class="row section mt-5" id="DGV">
         <div class="col-12">
           <app-dgv
             [variant]="variant"
@@ -165,8 +163,10 @@
           ></app-dgv>
         </div>
       </div>
+      <!-- DGV ends -->
 
-      <div class="row section mb-5" id="DECIPHER-Control">
+      <!-- DECIPHER Control starts -->
+      <div class="row section mt-5" id="DECIPHER-Control" *ngIf="variant">
         <div class="col-12">
           <app-decipher
             [gene]="gene"
@@ -174,8 +174,9 @@
           ></app-decipher>
         </div>
       </div>
+      <!-- DECIPHER Control ends -->
 
-      <div class="row section mb-5" id="phenotypes">
+      <div class="row section mt-5" id="phenotypes">
         <div class="col-12">
           <app-phenotypes
             [gene]="gene"
@@ -184,7 +185,7 @@
         </div>
       </div>
 
-      <div class="row section mb-5" id="gene-ontology">
+      <div class="row section mt-5" id="gene-ontology">
         <div class="col-12">
           <app-gene-ontology
             [gene]="gene"
@@ -192,6 +193,17 @@
           ></app-gene-ontology>
         </div>
       </div>
+
+      <!-- Alignment starts -->
+      <div class="row section mt-5" id="alignment">
+        <div class="col-12">
+          <app-diopt-alignment
+            [gene]="gene"
+          ></app-diopt-alignment>
+        </div>
+      </div>
+      <!-- Alignment ends -->
+
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
