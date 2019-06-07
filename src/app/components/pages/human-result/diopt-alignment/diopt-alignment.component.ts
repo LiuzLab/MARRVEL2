@@ -14,7 +14,8 @@ import { Animations } from './../../../../animations';
 export class DioptAlignmentComponent implements OnChanges {
   @Input() gene: Gene;
   data = null;
-  loading = false;
+  domainData = null;
+  loading = true;
 
   species = null;
   speciesTagToName = {
@@ -45,20 +46,24 @@ export class DioptAlignmentComponent implements OnChanges {
       this.loading = true;
       this.api.getAlignmentByEntrezId(this.gene.entrezId)
         .subscribe(res => {
-          const speciesObj = {};
-          for (const row of res.data) {
-            if (row.species in this.speciesToHighlight) {
-              speciesObj[row.species] = true;
+          console.log(res);
+
+          if (res && res.data && res.data.length) {
+            const speciesObj = {};
+            for (const row of res.data) {
+              if (row.species in this.speciesToHighlight) {
+                speciesObj[row.species] = true;
+              }
+              row.display = row.species in this.speciesToHighlight;
             }
+            this.species = Object.keys(speciesObj);
+            console.log(this.species);
           }
-          this.species = Object.keys(speciesObj);
-          console.log(this.species);
 
-          this.data = res.data;
+          this.data = res ? res.data : null;
+          this.domainData = res ? res.domain : null;
           this.loading = false;
-
-          console.log(this.data);
-        });
+        }, err => { this.loading = false; });
     }
   }
 
@@ -66,4 +71,20 @@ export class DioptAlignmentComponent implements OnChanges {
     return this.sanitizer.bypassSecurityTrustStyle(styleString);
   }
 
+  highlightDomain(e) {
+    this.setHighlightFrom(e.from);
+    this.setHighlightTo(e.to);
+  }
+
+  setHighlightFrom(from) {
+    from = parseInt(from);
+    this.highlightFrom = from >= 0 ? from : null;
+  }
+  setHighlightTo(to) {
+    to = parseInt(to);
+    this.highlightTo = to >= 0 ? to : null;
+  }
+  scrollToAlignment() {
+    window.document.getElementById('alignment-highlight').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }

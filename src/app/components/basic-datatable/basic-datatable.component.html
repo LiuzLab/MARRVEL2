@@ -2,7 +2,7 @@
   <div class="d-table-cell title">
     <h4 *ngIf="title && !loading" [@fadeInOut]>
       {{ title }}
-      (<span appUnit [count]="data.length" [unit]="unit"></span>)
+      (<span appUnit [count]="data && data.length ? data.length : 0" [unit]="unit"></span>)
     </h4>
   </div>
   <div class="d-table-cell text-right" *ngIf="data && data.length && !loading">

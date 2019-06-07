@@ -60,6 +60,7 @@ import { GeneOntologyComponent } from './components/pages/human-result/gene-onto
 import { VcfUploadBoxComponent } from './components/vcf-upload-box/vcf-upload-box.component';
 import { BatchComponent } from './components/pages/batch/batch.component';
 import { DioptAlignmentComponent } from './components/pages/human-result/diopt-alignment/diopt-alignment.component';
+import { ProteinDomainComponent } from './components/pages/human-result/diopt-alignment/protein-domain/protein-domain.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { DioptAlignmentComponent } from './components/pages/human-result/diopt-a
     GeneOntologyComponent,
     VcfUploadBoxComponent,
     BatchComponent,
-    DioptAlignmentComponent
+    DioptAlignmentComponent,
+    ProteinDomainComponent
   ],
   imports: [
     BrowserModule,
