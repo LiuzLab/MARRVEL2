@@ -55,3 +55,16 @@ export interface DbNSFPData {
     phyloP30wayMammalian?: MethodScore;
   };
 }
+
+export interface PhenotypePopulated {
+  id: string;
+  ontology: {
+    id: string;
+    name: string;
+    category: {
+      id: number,
+      name: string
+    };
+  };
+}
+

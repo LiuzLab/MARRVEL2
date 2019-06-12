@@ -61,6 +61,7 @@ import { VcfUploadBoxComponent } from './components/vcf-upload-box/vcf-upload-bo
 import { BatchComponent } from './components/pages/batch/batch.component';
 import { DioptAlignmentComponent } from './components/pages/human-result/diopt-alignment/diopt-alignment.component';
 import { ProteinDomainComponent } from './components/pages/human-result/diopt-alignment/protein-domain/protein-domain.component';
+import { DecipherDiseaseComponent } from './components/pages/human-result/decipher/decipher-disease/decipher-disease.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { ProteinDomainComponent } from './components/pages/human-result/diopt-al
     VcfUploadBoxComponent,
     BatchComponent,
     DioptAlignmentComponent,
-    ProteinDomainComponent
+    ProteinDomainComponent,
+    DecipherDiseaseComponent
   ],
   imports: [
     BrowserModule,
