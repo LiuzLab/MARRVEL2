@@ -62,6 +62,7 @@ import { BatchComponent } from './components/pages/batch/batch.component';
 import { DioptAlignmentComponent } from './components/pages/human-result/diopt-alignment/diopt-alignment.component';
 import { ProteinDomainComponent } from './components/pages/human-result/diopt-alignment/protein-domain/protein-domain.component';
 import { DecipherDiseaseComponent } from './components/pages/human-result/decipher/decipher-disease/decipher-disease.component';
+import { GtexBoxplotComponent } from './components/pages/human-result/gtex-boxplot/gtex-boxplot.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { DecipherDiseaseComponent } from './components/pages/human-result/deciph
     BatchComponent,
     DioptAlignmentComponent,
     ProteinDomainComponent,
-    DecipherDiseaseComponent
+    DecipherDiseaseComponent,
+    GtexBoxplotComponent
   ],
   imports: [
     BrowserModule,

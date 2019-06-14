@@ -1,0 +1,30 @@
+<h3 class="my-0 d-inline-block">Human Expression of {{ gene ? gene.symbol : '' }} from GTEx</h3>
+<a *ngIf="gene" class="d-inline-block" [attr.href]="'https://gtexportal.org/home/gene/' + gene.symbol" target="_blank">
+  <button mat-button color="primary">
+    <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+    More on GTEx
+  </button>
+</a>
+
+<div class="w-100 scroll-x">
+  <svg id="boxplot" #boxplot [attr.width]="width" [attr.height]="height"></svg>
+</div>
+
+<!--div id="gtex-legend" class="row">
+  <div class="col-12 mb-3">
+    <h5>Organs (Click to toggle)</h5>
+  </div>
+  <div class="col-sm-4 col-md-3 col-lg-2"
+    *ngFor="let organ of organs; let idx = index"
+  >
+    <div class="legend" (click)="toggleOrgan(idx)">
+      <div class="mr-2 legend-color"
+        [ngStyle]="{ 'background-color': organLabelColors[idx] }"
+        [ngClass]="{ 'hidden': !organVisibility[idx] }"
+      ></div>
+      <div class="legend-label"
+        [ngClass]="{ 'hidden': !organVisibility[idx] }"
+      >{{ organ }}</div>
+      </div>
+    </div>
+</div-->
