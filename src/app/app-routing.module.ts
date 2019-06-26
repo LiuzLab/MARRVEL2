@@ -6,6 +6,9 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { HumanResultComponent } from './components/pages/human-result/human-result.component';
 import { BatchComponent } from './components/pages/batch/batch.component';
 
+// TODO: Remove below
+import { GtexBoxplotComponent } from './components/pages/human-result/gtex-boxplot/gtex-boxplot.component';
+
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'human/gene/:gene', component: HumanResultComponent },
@@ -16,6 +19,9 @@ const routes: Routes = [
   { path: 'human/batch', component: BatchComponent },
 
   { path: 'about', component: AboutComponent },
+
+  { path: 'plot', component: GtexBoxplotComponent },    // TO DO: remove this
+
 ];
 
 @NgModule({

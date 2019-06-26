@@ -245,3 +245,38 @@ span.mat-slide-toggle-content {
 .text-monospace {
   font-family: monospace !important;
 }
+
+div.plot-tooltip {
+  position: absolute;
+  text-align: left;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: rgba(0,0,0,0.2);
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 9998;
+  font-size: 10pt;
+  color: #fff;
+}
+
+.legend:hover {
+  cursor: pointer;
+}
+.legend-label {
+  display: inline-block;
+  font-size: 0.85em;
+  vertical-align: middle;
+}
+.legend-color {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+.legend-label.hidden,
+.legend-color.hidden {
+  opacity: 0.5;
+}

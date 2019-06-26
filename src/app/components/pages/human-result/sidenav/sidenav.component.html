@@ -94,8 +94,19 @@
   <h4 class="mt-4">Protein</h4>
   <ul class="menu">
   </ul>
+
   <h4 class="mt-4">Model Organisms</h4>
   <ul class="menu">
+    <li
+      matTooltip="Expression"
+      [matTooltipDisabled]="sidenavOpened"
+      matTooltipPosition="left"
+      (click)="scrollTo('expression')"
+    >
+      <span class="initial">E</span>
+      <span class="rest">xpression</span>
+    </li>
+
     <li
       matTooltip="Phentoypes"
       [matTooltipDisabled]="sidenavOpened"
