@@ -20,10 +20,10 @@ export interface HumanGene extends Gene {
     id: string;
     name: string;
     ontology: {
-      category: {
+      categories: [{
         id: number;
         name: string;
-      },
+      }],
       name?: string;
       id?: string;
       def?: string;

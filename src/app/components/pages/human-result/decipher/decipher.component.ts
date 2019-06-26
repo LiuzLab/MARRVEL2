@@ -39,8 +39,8 @@ export class DECIPHERComponent implements OnChanges {
           }
 
           res[i]['size'] = res[i].hg19Stop - res[i].hg19Start + 1;
-          res[i]['delObs'] = res[i].deletion.obs || 0;
-          res[i]['dupObs'] = res[i].duplication.obs || 0;
+          res[i]['delObs'] = res[i].deletion ? (res[i].deletion.obs || 0) : 0;
+          res[i]['dupObs'] = res[i].duplication ? (res[i].duplication.obs || 0) : 0;
         }
         console.log(res);
         this.data = res;

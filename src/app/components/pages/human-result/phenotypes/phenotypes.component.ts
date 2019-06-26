@@ -7,7 +7,8 @@ import { CATEGORIES, CAT_TO_ICON } from '../../../../category';
 const TAXONID_TO_NAME = {
   10090: 'mouse',
   10116: 'rat',
-  6239: 'worm'
+  6239: 'worm',
+  7227: 'fly',
 };
 
 @Component({
@@ -44,19 +45,20 @@ export class PhenotypesComponent implements OnChanges {
     if (changes.gene && changes.gene.currentValue) {
       if (this.gene.phenotypes && this.gene.phenotypes.length) {
         for (const phenotype of this.gene.phenotypes) {
-          if (phenotype.ontology && phenotype.ontology.category) {
-            this.phenotypes['human'] = this.phenotypes['human'] || {};
-            const catName = phenotype.ontology.category.name;
-            if (!(catName in this.phenotypes['human'])) {
-              this.phenotypes['human'][catName] = [];
+          if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
+            for (const cat of phenotype.ontology.categories) {
+              this.phenotypes['human'] = this.phenotypes['human'] || {};
+              const catName = cat.name;
+              if (!(catName in this.phenotypes['human'])) {
+                this.phenotypes['human'][catName] = [];
+              }
+              this.phenotypes['human'][catName].push({
+                id: phenotype.id,
+                name: phenotype.ontology.name
+              });
             }
-            this.phenotypes['human'][catName].push({
-              id: phenotype.id,
-              name: phenotype.ontology.name
-            });
           }
         }
-
         console.log(this.phenotypes);
       }
     }
@@ -69,19 +71,18 @@ export class PhenotypesComponent implements OnChanges {
         if (orgName) {
           this.height += 26;
           this.bestHeight += (ortholog.bestScore ? 26 : 0);
-          if (ortholog.bestScore) {
-            console.log(' >', ortholog);
-          }
           const aGenePheno = {};
           for (const phenotype of ortholog.gene2.phenotypes) {
-            if (phenotype.ontology && phenotype.ontology.category) {
-              const catName = phenotype.ontology.category.name;
-              if (!(catName in aGenePheno)) aGenePheno[catName] = [];
-              relExists = true;
-              aGenePheno[catName].push({
-                id: phenotype.id,
-                name: phenotype.ontology.name
-              });
+            if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
+              for (const cat of phenotype.ontology.categories) {
+                const catName = cat.name;
+                if (!(catName in aGenePheno)) aGenePheno[catName] = [];
+                relExists = true;
+                aGenePheno[catName].push({
+                  id: phenotype.id,
+                  name: phenotype.ontology.name
+                });
+              }
             }
           }
 
@@ -132,6 +133,9 @@ export class PhenotypesComponent implements OnChanges {
     }
     if (poId.substr(0, 12) === 'WBPhenotype:') {
       return `https://www.wormbase.org/species/all/phenotype/${poId}`;
+    }
+    if (poId.substr(0, 5) === 'FBcv:') {
+      return `http://flybase.org/cgi-bin/cvreport.pl?id=${poId}`;
     }
   }
 
