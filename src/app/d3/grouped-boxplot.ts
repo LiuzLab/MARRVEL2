@@ -37,7 +37,7 @@ export class GroupedBoxplot {
 
     this.data = data;
 
-    const svg = d3.select('svg');
+    const svg = d3.select('#boxplot');
     this.svg = svg;
 
     this.groupHidden = {};
@@ -56,7 +56,6 @@ export class GroupedBoxplot {
       delete G.data;
     }
     this.totalBoxesVisible = this.totalBoxes;
-    console.log(this.groupedData);
 
     // set x scale for each group
     this.initXScale(this.groupedData, this.totalBoxes);

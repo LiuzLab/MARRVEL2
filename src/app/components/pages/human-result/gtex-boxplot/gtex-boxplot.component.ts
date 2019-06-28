@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { take } from 'rxjs/operators';
+
+import { ApiService } from 'src/app/services/api.service';
 
 import { HumanGene } from 'src/app/interfaces/gene';
-import { GTEX_SAMPLE } from 'src/app/gtex-sample-data';
 import { Point } from 'src/app/d3/interfaces';
 import { GroupedBoxplot } from 'src/app/d3/grouped-boxplot';
 
@@ -22,24 +24,31 @@ export class GtexBoxplotComponent implements OnInit {
   organLabelColors;
   organVisibility = [];
 
-  constructor() { }
+  constructor(
+    private api: ApiService
+  ) { }
 
   ngOnInit() {
-    this.points = this.parseData(GTEX_SAMPLE['data']);
-    this.boxplot = new GroupedBoxplot(this.points,
-      {
-        width: this.width, height: this.height,
-        x: { label: 'Tissues', },
-        y: { label: 'TPM' }
-      }
-    );
+    this.api.getGtexByEntrezId(this.gene.entrezId)
+      .pipe(take(1))
+      .subscribe(res => {
+        console.log(' > gtex:', res);
+        this.points = this.parseData(res['data']);
+        this.boxplot = new GroupedBoxplot(this.points,
+          {
+            width: this.width, height: this.height,
+            x: { label: 'Tissues', },
+            y: { label: 'TPM' }
+          }
+        );
 
-    this.organLabelColors = [];
-    this.organVisibility = [];
-    for (const organ of this.organs) {
-      this.organLabelColors.push(this.boxplot.getGroupColor(organ));
-      this.organVisibility.push(true);
-    }
+        this.organLabelColors = [];
+        this.organVisibility = [];
+        for (const organ of this.organs) {
+          this.organLabelColors.push(this.boxplot.getGroupColor(organ));
+          this.organVisibility.push(true);
+        }
+      });
   }
 
   toggleOrgan(organIdx) {

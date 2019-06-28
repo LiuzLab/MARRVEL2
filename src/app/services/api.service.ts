@@ -168,6 +168,17 @@ export class ApiService {
     });
   }
 
+  getGtexByEntrezId(entrezId: number | string): Observable< any > {
+    const url = `${environment.apiHost}/gtex/gene/entrezId/${entrezId}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
+
   getOrthologByEntrezId(entrezId: number | string): Observable< any > {
     const url = `${environment.apiHost}/diopt/ortholog/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
