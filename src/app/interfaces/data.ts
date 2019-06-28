@@ -61,10 +61,10 @@ export interface PhenotypePopulated {
   ontology: {
     id: string;
     name: string;
-    category: {
+    categories: [{
       id: number,
       name: string
-    };
+    }];
   };
 }
 
