@@ -16,7 +16,7 @@ export class ProteinDomainComponent implements OnChanges {
   @Output() highlight: EventEmitter< any > = new EventEmitter();
 
   dataSource: MatTableDataSource< DomainData > = new MatTableDataSource();
-  displayedColumns = [ 'index', 'domainName', 'domainStart', 'domainStop', 'domainDescription', 'proteinId', 'externalId' ];
+  displayedColumns = [ 'domainName', 'domainStart', 'domainStop', 'domainDescription', 'proteinId', 'externalId' ];
 
   constructor() { }
 

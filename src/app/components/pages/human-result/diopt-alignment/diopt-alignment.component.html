@@ -44,7 +44,6 @@
       <span
         class="d-inline-block"
         *ngFor="let protein of row['proteins']; let idx = index"
-        [style]="getStyle(row['style'][idx])"
         [ngClass]="{ 'text-highlight': speciesToHighlight[row.species] && highlightFrom <= row.realIdx[idx] && row.realIdx[idx] <= highlightTo }"
       >{{ protein }}</span>
       <span class="ml-2">[{{ row.endIdx }}]</span>
