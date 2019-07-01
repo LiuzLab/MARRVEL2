@@ -1,6 +1,6 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, Input, SimpleChanges, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
 
@@ -18,7 +18,7 @@ import { HPO_BROAD_TO_CAT } from '../../../../category';
   styleUrls: ['./geno2mp.component.scss'],
   animations: [ Animations.toggleInOut ]
 })
-export class Geno2mpComponent implements OnChanges {
+export class Geno2mpComponent implements OnInit {
   @Input() variant: Variant | null;
   @Input() gene: HumanGene | null;
 
@@ -40,7 +40,7 @@ export class Geno2mpComponent implements OnChanges {
   varCategoriesVisible = {
     'Non-Coding': false,
     'Synonymous/Unknown': false,
-    'Missense/Other Indel': false,
+    'Missense/Other Indel': true,
     'Splice/Frameshift/Nonsense/Stop Loss': true
   };
 
@@ -48,10 +48,11 @@ export class Geno2mpComponent implements OnChanges {
     private api: ApiService
   ) { }
 
-  ngOnChanges(change: SimpleChanges) {
-    if (change.gene && change.gene.currentValue && this.gene.entrezId) {
+  ngOnInit() {
+    if (this.gene) {
       this.loading = true;
       this.api.getGeno2MPByGeneEntrezId(this.gene.entrezId)
+        .pipe(take(1))
         .subscribe((res: Geno2MPResult[]) => {
           this.geneSummary = { 0: 0, 1: 0, 2: 0, 3: 0 };
           for (let i = 0; i < res.length; ++i) {
@@ -68,9 +69,10 @@ export class Geno2mpComponent implements OnChanges {
         });
     }
 
-    if (change.variant && change.variant.currentValue && this.variant.chr) {
+    if (this.variant && this.variant.chr) {
       this.loading = true;
       this.api.getGeno2MPByVariant(this.variant)
+        .pipe(take(1))
         .subscribe((res: Geno2MPResult) => {
           if (res && res.hpoProfiles) {
             for (let i = 0; i < res.hpoProfiles.length; ++i) {
@@ -78,7 +80,7 @@ export class Geno2mpComponent implements OnChanges {
               res.hpoProfiles[i]['mediumTerm'] = res.hpoProfiles[i].medium.hpoTerm || '';
               res.hpoProfiles[i]['narrowTerm'] = res.hpoProfiles[i].narrow.hpoTerm || '';
             }
-          } 
+          }
           this.variantData = res;
           this.loading = false;
         });

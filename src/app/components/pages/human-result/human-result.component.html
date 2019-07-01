@@ -98,7 +98,10 @@
       <!-- ClinVar starts -->
       <div class="row section mt-5" id="ClinVar">
         <div class="col-12">
-          <app-clinvar [gene]="gene"></app-clinvar>
+          <app-clinvar
+            *ngIf="!geneLoading && gene"
+            [gene]="gene"
+          ></app-clinvar>
         </div>
       </div>
       <!-- ClinVar ends -->
@@ -107,6 +110,7 @@
       <div class="row section mt-5" id="Geno2MP">
         <div class="col-12">
           <app-geno2mp
+            *ngIf="!geneLoading"
             [gene]="gene"
             [variant]="variant"
           ></app-geno2mp>
@@ -118,6 +122,7 @@
       <div class="row section mt-5" id="DECIPHER">
         <div class="col-12">
           <app-decipher-disease
+            *ngIf="!geneLoading"
             [gene]="gene"
             [variant]="variant"
           ></app-decipher-disease>
@@ -159,6 +164,7 @@
         <div class="col-12 mt-3" *ngIf="gene">
           <h4 class="mt-0 mb-3">Control Population Summary of {{ gene.symbol }} from gnomAD</h4>
           <app-gnom-ad-gene
+            *ngIf="!geneLoading"
             [gene]="gene"
           ></app-gnom-ad-gene>
         </div>
@@ -169,6 +175,7 @@
       <div class="row section mt-5" id="DGV">
         <div class="col-12">
           <app-dgv
+            *ngIf="!geneLoading"
             [variant]="variant"
             [gene]="gene"
           ></app-dgv>
@@ -180,7 +187,6 @@
       <div class="row section mt-5" id="DECIPHER-Control" *ngIf="variant">
         <div class="col-12">
           <app-decipher
-            [gene]="gene"
             [variant]="variant"
           ></app-decipher>
         </div>
@@ -190,6 +196,7 @@
       <div class="row section mt-5" id="expression">
         <div class="col-12">
           <app-gtex-boxplot
+            *ngIf="!geneLoading"
             [gene]="gene"
           ></app-gtex-boxplot>
         </div>
@@ -198,6 +205,7 @@
       <div class="row section mt-5" id="phenotypes">
         <div class="col-12">
           <app-phenotypes
+            *ngIf="!geneLoading && !orthologsLoading"
             [gene]="gene"
             [orthologs]="orthologs"
           ></app-phenotypes>
@@ -207,6 +215,7 @@
       <div class="row section mt-5" id="gene-ontology">
         <div class="col-12">
           <app-gene-ontology
+            *ngIf="!geneLoading && !orthologsLoading"
             [gene]="gene"
             [orthologs]="orthologs"
           ></app-gene-ontology>
@@ -217,6 +226,7 @@
       <div class="row section mt-5" id="alignment">
         <div class="col-12">
           <app-diopt-alignment
+            *ngIf="!geneLoading"
             [gene]="gene"
           ></app-diopt-alignment>
         </div>

@@ -1,6 +1,5 @@
-import { Component, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ApiService } from '../../../../services/api.service';
 import { Animations } from './../../../../animations';
 
 @Component({
@@ -9,16 +8,11 @@ import { Animations } from './../../../../animations';
   styleUrls: ['./omim.component.scss'],
   animations: [ Animations.fadeInOut ]
 })
-export class OmimComponent implements OnChanges {
+export class OmimComponent {
   @Input() gene;
   @Input() loading;
   @Input() data;
 
-  constructor(
-    private api: ApiService
-  ) { }
-
-  ngOnChanges(change: SimpleChanges) {
-  }
+  constructor() { }
 
 }

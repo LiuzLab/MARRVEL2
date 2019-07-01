@@ -1,4 +1,5 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
 
@@ -10,7 +11,7 @@ import { Variant } from '../../../../interfaces/variant';
   templateUrl: './dgv.component.html',
   styleUrls: ['./dgv.component.scss']
 })
-export class DgvComponent implements OnChanges {
+export class DgvComponent implements OnInit {
   @Input() variant: Variant;
   @Input() gene: HumanGene;
 
@@ -24,12 +25,13 @@ export class DgvComponent implements OnChanges {
     private api: ApiService
   ) { }
 
-  ngOnChanges(change: SimpleChanges) {
-    if (change.gene && change.gene.currentValue && change.gene.currentValue['entrezId']) {
+  ngOnInit() {
+    if (this.gene && this.gene.entrezId) {
       if (this.searchBy === 'gene') {
         this.loading = true;
         this.data = null;
         this.api.getDGVByEntrezId(this.gene.entrezId)
+          .pipe(take(1))
           .subscribe((res) => {
             this.tableTitle = `Copy Number Variation In Control Population of ${this.gene.symbol} from DGV`;
             this.data = this.processGeno2MPData(res);
@@ -37,7 +39,7 @@ export class DgvComponent implements OnChanges {
           });
       }
     }
-    if (change.variant && change.variant.currentValue && change.variant.currentValue['chr']) {
+    if (this.variant && this.variant.chr) {
       if (!this.gene && this.searchBy === 'gene') {
         this.searchBy = 'variant';
       }
@@ -46,6 +48,7 @@ export class DgvComponent implements OnChanges {
         this.loading = true;
         this.data = null;
         this.api.getDGVByVariant(this.variant)
+          .pipe(take(1))
           .subscribe((res) => {
             this.tableTitle = `Copy Number Variation In Control Population of ${this.variant.chr}:${this.variant.pos} from DGV`;
             this.data = this.processGeno2MPData(res);

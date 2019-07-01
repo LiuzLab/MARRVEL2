@@ -1,5 +1,6 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
+import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
 
@@ -16,7 +17,7 @@ import { Animations } from 'src/app/animations';
   styleUrls: ['./decipher-disease.component.scss'],
   animations: [ Animations.toggleInOut ]
 })
-export class DecipherDiseaseComponent implements OnChanges {
+export class DecipherDiseaseComponent {
   @Input() gene: HumanGene;
   @Input() variant: Variant;
 
@@ -32,18 +33,17 @@ export class DecipherDiseaseComponent implements OnChanges {
 
   showSnvs = true;
   showCnvs = false;
+  hasSnvResult = false;
 
   categories = CATEGORIES;
   categoryNameToCounts = null;
 
   constructor(private api: ApiService) { }
 
-  ngOnChanges(changes: SimpleChanges) {
-  }
-
   getData() {
     this.loading = true;
     this.api.getDECIPHERDiseaseByVariant(this.variant)
+      .pipe(take(1))
       .subscribe(res => {
         this.setData(res);
         this.setTableTitle();
@@ -71,6 +71,7 @@ export class DecipherDiseaseComponent implements OnChanges {
       if (D.hg19Start !== D.hg19Stop) D['variant'] += `-${D.hg19Stop}`;
       if (D.ref && D.alt) D['variant'] += ` ${D.ref}>${D.alt}`;
       D['varType'] = D.cnvType === 1 ? 'CNV' : 'SNV';
+      this.hasSnvResult = D.cnvType !== 1 ? true : this.hasSnvResult;
     });
     const filteredData = data.filter(D => this.showCnvs && D.cnvType === 1 || this.showSnvs && D.cnvType === -1);
     this.dataSource = new MatTableDataSource(filteredData);
@@ -83,8 +84,8 @@ export class DecipherDiseaseComponent implements OnChanges {
     for (const row of data) {
       if (row.phenotypes) {
         for (const phenotype of row.phenotypes) {
-          if (phenotype.ontology && phenotype.ontology.category) {
-            counts[phenotype.ontology.category.name] = (counts[phenotype.ontology.category.name] || 0) + 1;
+          if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
+            counts[phenotype.ontology.categories[0].name] = (counts[phenotype.ontology.categories[0].name] || 0) + 1;
           }
         }
       }

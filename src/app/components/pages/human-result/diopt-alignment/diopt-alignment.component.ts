@@ -1,4 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
+
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { ApiService } from 'src/app/services/api.service';
@@ -11,7 +13,7 @@ import { Animations } from './../../../../animations';
   styleUrls: ['./diopt-alignment.component.scss'],
   animations: [ Animations.toggleInOut ]
 })
-export class DioptAlignmentComponent implements OnChanges {
+export class DioptAlignmentComponent implements OnInit {
   @Input() gene: Gene;
   data = null;
   domainData = null;
@@ -41,10 +43,11 @@ export class DioptAlignmentComponent implements OnChanges {
     private sanitizer: DomSanitizer
   ) { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.gene && changes.gene.currentValue) {
+  ngOnInit() {
+    if (this.gene && this.gene.entrezId) {
       this.loading = true;
       this.api.getAlignmentByEntrezId(this.gene.entrezId)
+        .pipe(take(1))
         .subscribe(res => {
           console.log(res);
 

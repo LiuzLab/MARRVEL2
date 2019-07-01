@@ -1,4 +1,5 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
 
@@ -10,9 +11,8 @@ import { Variant } from '../../../../interfaces/variant';
   templateUrl: './decipher.component.html',
   styleUrls: ['./decipher.component.scss']
 })
-export class DECIPHERComponent implements OnChanges {
+export class DECIPHERComponent implements OnInit {
   @Input() variant: Variant;
-  @Input() gene: Gene;
 
   loading = false;
   data: DECIPHERData[] | null;
@@ -21,9 +21,8 @@ export class DECIPHERComponent implements OnChanges {
     private api: ApiService
   ) { }
 
-  ngOnChanges(change: SimpleChanges) {
-    console.log(change);
-    if (change.variant && change.variant.currentValue.chr) {
+  ngOnInit() {
+    if (this.variant && this.variant.chr) {
       this.requestData();
     }
   }
@@ -31,6 +30,7 @@ export class DECIPHERComponent implements OnChanges {
   requestData() {
     this.loading = true;
     this.api.getDECIPHERByVariant(this.variant)
+      .pipe(take(1))
       .subscribe((res: DECIPHERData[]) => {
         for (let i = 0; i < res.length; ++i) {
           res[i]['position'] = `${res[i].hg19Chr}:${res[i].hg19Start}`;

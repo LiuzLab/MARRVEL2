@@ -1,4 +1,5 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 import { Variant } from './../../../../interfaces/variant';
 import { ApiService } from '../../../../services/api.service';
@@ -23,6 +24,7 @@ export class DbnsfpComponent implements OnChanges {
     if (change.variant && change.variant.currentValue && this.variant.chr) {
       this.loading = true;
       this.api.getDbNSFP(this.variant)
+        .pipe(take(1))
         .subscribe((res) => {
           this.data = this.changePredictionLabel(res);
           this.loading = false;

@@ -91,7 +91,7 @@
       ></app-geno2mp-phenotype-pictogram>
     </div>
 
-    <div class="col-12 col-lg-6 pb-1 mt-3" *ngFor="let idx of [3, 2, 0, 1]">
+    <div class="col-12 col-lg-6 pb-1 mt-3" *ngFor="let idx of [2, 3, 0, 1]">
       <mat-slide-toggle
         [checked]="varCategoriesVisible[varCategoryNames[idx]]"
         (change)="onCategoryChange(varCategoryNames[idx], $event)"

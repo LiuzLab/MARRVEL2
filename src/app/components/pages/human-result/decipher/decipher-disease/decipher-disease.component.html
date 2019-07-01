@@ -20,22 +20,28 @@
   </div>
 
   <div class="col-12 mt-3">
-    <h4 class="mb-3">Phenotypes Represented</h4>
+    <h4 class="my-0">Phenotypes Represented</h4>
+  </div>
 
+  <div class="col-12 mt-3" *ngIf="showSnvs && !showCnvs && !hasSnvResult">
+    No SNV result for {{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}
+  </div>
+
+  <div class="col-12 mt-3" *ngIf="showCnvs || hasSnvResult" [@toggle]>
     <app-geno2mp-phenotype-pictogram
       [categoryStatus]="categoryNameToCounts"
     ></app-geno2mp-phenotype-pictogram>
-  </div>
 
-  <div class="col-12 mt-3">
-    <button mat-button class="px-0 no-overlay"
-      color="primary" disableRipple="true"
-      (click)="variantTableVisible = !variantTableVisible"
-    >
-      {{ variantTableVisible ? 'Hide variants' : 'Show variants' }}
-      <mat-icon *ngIf="!variantTableVisible">expand_more</mat-icon>
-      <mat-icon *ngIf="variantTableVisible">expand_less</mat-icon>
-    </button>
+    <div class="mt-3">
+      <button mat-button class="px-0 no-overlay"
+        color="primary" disableRipple="true"
+        (click)="variantTableVisible = !variantTableVisible"
+      >
+        {{ variantTableVisible ? 'Hide variants' : 'Show variants' }}
+        <mat-icon *ngIf="!variantTableVisible">expand_more</mat-icon>
+        <mat-icon *ngIf="variantTableVisible">expand_less</mat-icon>
+      </button>
+    </div>
 
     <div class="mt-3 w-100" *ngIf="variantTableVisible" [@toggle]>
       <app-basic-datatable

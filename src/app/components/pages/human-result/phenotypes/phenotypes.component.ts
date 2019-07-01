@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { HumanGene } from '../../../../interfaces/gene';
 import { Animations } from '../../../../animations';
@@ -17,7 +17,7 @@ const TAXONID_TO_NAME = {
   styleUrls: ['./phenotypes.component.scss'],
   animations: [ Animations.toggle ]
 })
-export class PhenotypesComponent implements OnChanges {
+export class PhenotypesComponent implements OnInit {
   @Input() gene: HumanGene;
   @Input() orthologs;
 
@@ -41,29 +41,26 @@ export class PhenotypesComponent implements OnChanges {
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.gene && changes.gene.currentValue) {
-      if (this.gene.phenotypes && this.gene.phenotypes.length) {
-        for (const phenotype of this.gene.phenotypes) {
-          if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
-            for (const cat of phenotype.ontology.categories) {
-              this.phenotypes['human'] = this.phenotypes['human'] || {};
-              const catName = cat.name;
-              if (!(catName in this.phenotypes['human'])) {
-                this.phenotypes['human'][catName] = [];
-              }
-              this.phenotypes['human'][catName].push({
-                id: phenotype.id,
-                name: phenotype.ontology.name
-              });
+  ngOnInit() {
+    if (this.gene && this.gene.phenotypes && this.gene.phenotypes.length) {
+      for (const phenotype of this.gene.phenotypes) {
+        if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
+          for (const cat of phenotype.ontology.categories) {
+            this.phenotypes['human'] = this.phenotypes['human'] || {};
+            const catName = cat.name;
+            if (!(catName in this.phenotypes['human'])) {
+              this.phenotypes['human'][catName] = [];
             }
+            this.phenotypes['human'][catName].push({
+              id: phenotype.id,
+              name: phenotype.ontology.name
+            });
           }
         }
-        console.log(this.phenotypes);
       }
     }
 
-    if (changes.orthologs && changes.orthologs.currentValue) {
+    if (this.orthologs && this.orthologs.length) {
       this.height = this.bestHeight = 60;
       for (const ortholog of this.orthologs) {
         let relExists = false;
@@ -102,7 +99,6 @@ export class PhenotypesComponent implements OnChanges {
       if (this.phenotypes['worm']) {
         this.phenotypes['worm'].sort((a, b) => a.score < b.score ? 1 : a.score > b.score ? -1 : 0);
       }
-      console.log(this.phenotypes);
     }
   }
 

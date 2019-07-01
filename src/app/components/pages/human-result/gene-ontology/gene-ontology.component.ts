@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, SimpleChanges, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 
 import { Animations } from '../../../../animations';
@@ -43,7 +43,7 @@ const NAMESPACE_TO_GOID = {
   styleUrls: ['./gene-ontology.component.scss'],
   animations: [ Animations.toggle ]
 })
-export class GeneOntologyComponent implements OnChanges, AfterViewInit {
+export class GeneOntologyComponent implements OnInit, AfterViewInit {
   @Input() gene: HumanGene;
   @Input()  orthologs;
 
@@ -70,8 +70,8 @@ export class GeneOntologyComponent implements OnChanges, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.gene && changes.gene.currentValue) {
+  ngOnInit() {
+    if (this.gene) {
       this.gos = this.gos || {};
       this.gos['human'] = { gos: {} };
       if (this.gene.gos) {
@@ -86,7 +86,7 @@ export class GeneOntologyComponent implements OnChanges, AfterViewInit {
         }
       }
     }
-    if (changes.orthologs && changes.orthologs.currentValue) {
+    if (this.orthologs && this.orthologs.length) {
       this.visHeight = 200;
       this.visHeightOnlyBest = 200;
       this.gos = this.gos || {};
@@ -117,8 +117,6 @@ export class GeneOntologyComponent implements OnChanges, AfterViewInit {
           gos: D
         });
       }
-
-      console.log(this.gos);
     }
   }
 

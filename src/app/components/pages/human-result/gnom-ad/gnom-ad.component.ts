@@ -1,4 +1,5 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
 import { Variant } from '../../../../interfaces/variant';
@@ -8,7 +9,7 @@ import { Variant } from '../../../../interfaces/variant';
   templateUrl: './gnom-ad.component.html',
   styleUrls: ['./gnom-ad.component.scss']
 })
-export class GnomADComponent implements OnChanges {
+export class GnomADComponent implements OnInit {
   @Input() variant: Variant;
 
   loading = false;
@@ -18,10 +19,11 @@ export class GnomADComponent implements OnChanges {
     private api: ApiService
   ) { }
 
-  ngOnChanges(change: SimpleChanges) {
-    if (change.variant && change.variant.currentValue) {
+  ngOnInit() {
+    if (this.variant) {
       this.loading = true;
       this.api.getGnomADVaraint(this.variant)
+        .pipe(take(1))
         .subscribe((res) => {
           res.exome = res.exome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
           res.genome = res.genome || { alleleCount: 0, alleleNum: 0, homCount: 0 };

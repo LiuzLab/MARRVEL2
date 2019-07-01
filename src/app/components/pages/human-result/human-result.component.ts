@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../services/api.service';
 import { VariantService } from '../../../services/variant.service';
@@ -54,6 +55,7 @@ export class HumanResultComponent implements OnInit {
       if (this.geneEntrezId !== null) {
         this.geneLoading = true;
         this.api.getGeneByEntrezId(this.geneEntrezId)
+          .pipe(take(1))
           .subscribe((res) => {
             this.onGeneLoad(res);
           });
@@ -75,6 +77,7 @@ export class HumanResultComponent implements OnInit {
             this.geneLoading = true;
             this.geneCandidates = null;
             this.api.getGeneByGenomicLocation(this.variant)
+              .pipe(take(1))
               .subscribe((res: HumanGene[]) => {
                 this.geneCandidates = res;
                 if (res && res.length) {
@@ -111,6 +114,7 @@ export class HumanResultComponent implements OnInit {
 
     this.omimLoading = true;
     this.api.getOMIMByMimNumber(this.gene.xref.omimId)
+      .pipe(take(1))
       .subscribe(res => {
         this.omimData = res;
         this.omimLoading = false;
@@ -124,6 +128,7 @@ export class HumanResultComponent implements OnInit {
   getOrthologs() {
     this.orthologsLoading = true;
     this.api.getOrthologByEntrezId(this.gene.entrezId)
+      .pipe(take(1))
       .subscribe((res) => {
         this.orthologs = res;
         this.orthologsLoading = false;

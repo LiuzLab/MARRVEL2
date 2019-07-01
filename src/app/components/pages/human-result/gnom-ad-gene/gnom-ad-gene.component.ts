@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
@@ -8,7 +8,7 @@ import { HumanGene } from '../../../../interfaces/gene';
   templateUrl: './gnom-ad-gene.component.html',
   styleUrls: ['./gnom-ad-gene.component.scss']
 })
-export class GnomADGeneComponent implements OnChanges {
+export class GnomADGeneComponent implements OnInit {
   @Input() gene: HumanGene;
 
   loading = false;
@@ -18,8 +18,8 @@ export class GnomADGeneComponent implements OnChanges {
     private api: ApiService
   ) { }
 
-  ngOnChanges(change: SimpleChanges) {
-    if (change.gene && change.gene.currentValue && this.gene.entrezId) {
+  ngOnInit() {
+    if (this.gene && this.gene.entrezId) {
       this.loading = true;
       this.api.getGnomADGeneByEntrezId(this.gene.entrezId)
         .subscribe((res) => {
