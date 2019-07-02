@@ -35,26 +35,8 @@
 
 <div class="mt-3 w-100 text-monospace" style="overflow-x: scroll; font-size: 0.9em;"
   *ngIf="!loading && data"
+  [innerHtml]="getHtml()"
 >
-  <div *ngFor="let row of data" style="width: 950px">
-    <div *ngIf="row.species !== 'mark' && row.display">
-      <div class="species-tag d-inline-block align-middle">
-        <span>{{ row.species }}{{ row.sIdx }}</span>
-      </div>
-      <span
-        class="d-inline-block"
-        *ngFor="let protein of row['proteins']; let idx = index"
-        [ngClass]="{ 'text-highlight': speciesToHighlight[row.species] && highlightFrom <= row.realIdx[idx] && row.realIdx[idx] <= highlightTo }"
-      >{{ protein }}</span>
-      <span class="ml-2">[{{ row.endIdx }}]</span>
-    </div>
-
-    <div class="mb-2" *ngIf="row.species === 'mark'">
-      <div class="species-tag d-inline-block align-middle">&nbsp;</div>
-      <span class="">{{ row.mark.substr(4) }}</span>
-    </div>
-
-  </div>
 </div>
 
 <div class="mt-3" *ngIf="!loading && !data">

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { take } from 'rxjs/operators';
-
 import { DomSanitizer } from '@angular/platform-browser';
+import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
 import { Gene } from './../../../../interfaces/gene';
@@ -57,10 +56,9 @@ export class DioptAlignmentComponent implements OnInit {
               if (row.species in this.speciesToHighlight) {
                 speciesObj[row.species] = true;
               }
-              row.display = row.species in this.speciesToHighlight;
+              row.display = row.species === 'mark' || row.species in this.speciesToHighlight;
             }
             this.species = Object.keys(speciesObj);
-            console.log(this.species);
           }
 
           this.data = res ? res.data : null;
@@ -70,8 +68,32 @@ export class DioptAlignmentComponent implements OnInit {
     }
   }
 
-  getStyle(styleString) {
-    return this.sanitizer.bypassSecurityTrustStyle(styleString);
+  getHtml() {
+    let htmlString = '';
+    for (const row of this.data) {
+      if (!row.display) continue;
+
+      if (row.species !== 'mark') {
+        htmlString += '<div>';
+        htmlString += `<div class="species-tag d-inline-block align-middle"><span>${ row.species }${ row.sIdx }</span></div>`;
+        for (let idx = 0; idx < row.proteins.length; ++idx) {
+          if (this.speciesToHighlight[row.species] &&
+            this.highlightFrom <= row.realIdx[idx] && row.realIdx[idx] <= this.highlightTo) {
+            htmlString += `<span class="d-inline-block text-highlight ${row.style[idx]}">${row.proteins[idx]}</span>`;
+          }
+          else {
+            htmlString += `<span class="d-inline-block ${row.style[idx]}">${row.proteins[idx]}</span>`;
+          }
+        }
+        htmlString += `<span class="ml-2 d-inline-block">[${ row.endIdx }]</span></div>`;
+      }
+      else {
+        htmlString += `<div class="mb-2">
+          <span class="mark d-inline-block">${ row.mark.substring(4) }</span>
+        </div>`;
+      }
+    }
+    return htmlString;
   }
 
   highlightDomain(e) {

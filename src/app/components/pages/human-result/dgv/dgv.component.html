@@ -47,6 +47,7 @@
 
 <div class="row" *ngIf="!loading && (!data || data.length == 0)">
   <div class="col-12">
-    <p class="text-muted my-0">There were no matches found for {{ variant.chr }}:{{ variant.pos }}</p>
+    <p class="text-muted my-0" *ngIf="searchBy === 'variant'">There were no matches found for {{ variant.chr }}:{{ variant.pos }}</p>
+    <p class="text-muted my-0" *ngIf="searchBy === 'gene'">There were no matches found for {{ gene.symbol }}</p>
   </div>
 </div>

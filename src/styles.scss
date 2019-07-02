@@ -280,3 +280,19 @@ div.plot-tooltip {
 .legend-color.hidden {
   opacity: 0.5;
 }
+.species-tag {
+  width: 36px;
+  overflow: hidden;
+}
+.mark {
+  margin-left: 36px;
+}
+.mark-dot {
+  color: green;
+}
+.mark-colon {
+  color: blue;
+}
+.mark-asterisk {
+  color: red;
+}
