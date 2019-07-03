@@ -1,9 +1,13 @@
-<app-protein-domain
-  [loading]="loading"
-  [gene]="gene"
-  [data]="domainData"
-  (highlight)="highlightDomain($event); scrollToAlignment()"
-></app-protein-domain>
+<div class="row">
+  <div class="col-12">
+    <app-protein-domain
+      *ngIf="!loading"
+      [gene]="gene"
+      [data]="domainData"
+      (highlight)="highlightDomain($event); scrollToAlignment()"
+    ></app-protein-domain>
+  </div>
+</div>
 
 <h3 class="mt-5 mb-0">
   Multiple Protein Alignment for {{ gene? gene.symbol : '' }}&nbsp;

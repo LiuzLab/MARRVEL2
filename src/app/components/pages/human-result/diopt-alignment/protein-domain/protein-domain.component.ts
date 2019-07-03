@@ -1,5 +1,6 @@
-import { Component, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+
 
 import { HumanGene } from './../../../../../interfaces/gene';
 
@@ -8,27 +9,32 @@ import { HumanGene } from './../../../../../interfaces/gene';
   templateUrl: './protein-domain.component.html',
   styleUrls: ['./protein-domain.component.scss']
 })
-export class ProteinDomainComponent implements OnChanges {
-  @Input() loading: boolean;
+export class ProteinDomainComponent implements OnInit, AfterViewInit {
   @Input() gene: HumanGene;
   @Input() data: DomainData[];
 
   @Output() highlight: EventEmitter< any > = new EventEmitter();
 
   dataSource: MatTableDataSource< DomainData > = new MatTableDataSource();
-  displayedColumns = [ 'domainName', 'domainStart', 'domainStop', 'domainDescription', 'proteinId', 'externalId' ];
+  displayedColumns = [ 'domainName', 'domainStart', 'domainStop', 'domainDescription', 'proteinId' ];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.data && changes.data.currentValue) {
-      this.dataSource = new MatTableDataSource(this.data);
-    }
+  ngOnInit() {
+    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   onDomainClick(from, to) {
     this.highlight.emit({
-      from: from,
+      from: (from && from.length && from[0] === '<') ? from.substr(1) : from,
       to: to
     });
   }
