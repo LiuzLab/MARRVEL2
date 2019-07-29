@@ -270,7 +270,7 @@
 
   </div>
 
-  <div class="phenotypes-detail" *ngIf="selected">
+  <div class="phenotypes-detail" *ngIf="selected" [@toggle]>
 
     <h4 class="mt-0">
       {{ orgNameToTermName[selected.org] }}
