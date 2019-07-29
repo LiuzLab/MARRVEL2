@@ -1,0 +1,59 @@
+<h3>Expression of Ortholog Genes of {{ gene ? gene.symbol : '' }}</h3>
+
+<div class="row mt-3">
+  <div class="col-12">
+    <mat-slide-toggle
+      [checked]="showOnlyBest"
+      (change)="showOnlyBest = !showOnlyBest"
+      color="primary"
+    >
+      Show only best DIOPT<span class="badge badge-secondary" style="margin-left: 2px; font-size: 0.4em; vertical-align: middle;">v7.1</span> score gene
+    </mat-slide-toggle>
+  </div>
+
+  <div class="scroll-x"
+    *ngIf="!loading && data"
+    style="padding-bottom: 24px;"
+  >
+    <div class="agr-header-row" style="width: 1170px; padding-top: 155px;">
+      <div class="agr-org-icon-wrapper">
+      </div>
+      <div class="agr-gene-symbol-cell"></div>
+      <div class="agr-group" *ngFor="let group of expressionTerms">
+        <div class="agr-name-cell"
+          *ngFor="let term of group"
+        >
+          <div class="label" [ngClass]="{ 'color-primary': term === hoverTerm || term === selected, 'font-weight-bold': term === selected }">
+            {{ term }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let taxonId of taxonIds">
+      <div *ngFor="let row of data[taxonId]">
+        <div class="agr-row" style="width: 1170px;" *ngIf="!showOnlyBest || row.bestScore">
+          <div class="agr-org-icon-wrapper">
+            <img [attr.src]="taxonIdToInfo[taxonId].icon" [matTooltip]="taxonIdToInfo[taxonId].name">
+          </div>
+          <div class="agr-gene-symbol-cell">
+            <a href="row.url" target="_blank">{{ row.symbol }}</a>
+          </div>
+          <div class="agr-group" *ngFor="let group of expressionTerms">
+            <div class="agr-cat-cell-wrapper" *ngFor="let term of group">
+              <div class="agr-cat-cell bg-blue"
+                *ngIf="row.expression[term]"
+                [ngClass]="{ 'col-highlight': term === hoverTerm }"
+                [matTooltip]="row.symbol + '-' + term + ': ' + row.expression[term]"
+              ></div>
+              <div class="agr-cat-cell"
+                *ngIf="!row.expression[term]"
+                [ngClass]="{ 'col-highlight': term === hoverTerm }"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

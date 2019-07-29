@@ -179,6 +179,17 @@ export class ApiService {
     });
   }
 
+  getAgrExpByEntrezId(entrezId: number | string): Observable< any > {
+    const url = `${environment.apiHost}/expression/orthologs/gene/entrezId/${entrezId}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        throw err;
+      });
+    });
+  }
+
   getOrthologByEntrezId(entrezId: number | string): Observable< any > {
     const url = `${environment.apiHost}/diopt/ortholog/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
