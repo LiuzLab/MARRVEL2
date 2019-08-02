@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
@@ -18,11 +19,13 @@ export class ClinvarComponent implements OnInit {
   loading = false;
   data;
   significance;
+  sigFourTotal;
 
   alleleVisible = false;
 
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -33,8 +36,8 @@ export class ClinvarComponent implements OnInit {
         this.significance = {};
         for (const item of res) {
           item.location = '';
-          if (item.chr) item.location = `Chr${item.chr}`;
-          if (item.start) item.location = item.location + `:${item.start}`;
+          if (item.chr) item.location = `Chr${item.chr}:`;
+          if (item.start) item.location = item.location + `${item.start}`;
           if (item.stop && item.start !== item.stop) {
             item.location = item.location + `-${item.stop}`;
           }
@@ -49,10 +52,17 @@ export class ClinvarComponent implements OnInit {
             this.significance[S] += 1;
           });
         }
+        this.sigFourTotal =
+          this.significance['pathogenic'] + this.significance['likely pathogenic'] +
+          this.significance['likely benign'] + this.significance['benign'];
         console.log(this.significance);
         this.data = res;
         this.loading = false;
       });
+  }
+
+  getWidthPercStyle(num: number, total: number) {
+    return this.sanitizer.bypassSecurityTrustStyle(`width: ${(num / total * 100).toFixed(3)}%`);
   }
 
 }
