@@ -307,6 +307,10 @@ div.plot-tooltip {
 .agr-org-icon-wrapper,
 .go-gene-symbol-cell,
 .agr-gene-symbol-cell,
+.go-diopt-score-wrapper,
+.agr-diopt-score-wrapper,
+.go-best-wrapper,
+.agr-best-wrapper,
 .go-row div,
 .agr-row div,
 .go-name-cell,
@@ -315,6 +319,7 @@ div.plot-tooltip {
 .agr-cat-cell,
 .agr-group {
   display: inline-block;
+  vertical-align: middle;
 }
 .go-gene-symbol-cell,
 .agr-gene-symbol-cell {
@@ -393,6 +398,11 @@ div.plot-tooltip {
 .agr-cat-cell.bg-gray {
   background-color: #aaa;
 }
+.agr-row:hover .agr-gene-symbol-cell,
+.agr-row:hover .agr-diopt-score-cell,
+.agr-row:hover .agr-best-cell {
+  font-weight: 500;
+}
 
 .go-org-icon-wrapper,
 .agr-org-icon-wrapper {
@@ -405,6 +415,31 @@ div.plot-tooltip {
   width: 18px;
   height: 18px;
   opacity: 0.35;
+}
+.agr-header-row .agr-diopt-score-wrapper,
+.agr-row .agr-diopt-score-cell {
+  font-size: 12px;
+  line-height: 1;
+  text-align: right;
+}
+.agr-diopt-score-wrapper,
+.agr-diopt-score-cell {
+  width: 50px;
+}
+.agr-header-row .agr-best-wrapper,
+.agr-row .agr-best-cell {
+  font-size: 12px;
+  line-height: 1;
+  padding-left: 0.5em;
+}
+.agr-best-wrapper,
+.agr-best-cell {
+  width: 40px;
+}
+
+.text-bold-blue {
+  font-weight: 500;
+  color: #66c6be;
 }
 
 .go-row:hover .go-cat-cell,
