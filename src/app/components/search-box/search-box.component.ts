@@ -57,8 +57,11 @@ export class SearchBoxComponent implements OnInit {
 
   onInputTypeChange(e) {
     console.log(e);
-    if (this.selectedInputType) {
-      this.router.navigate(['human', 'batch' ]);
+    if (this.selectedInputType === 'vcf') {
+      this.router.navigate(['human', 'batch', 'vcf' ]);
+    }
+    else if (this.selectedInputType === 'multigenes') {
+      this.router.navigate(['human', 'batch', 'genes' ]);
     }
     this.gene = null;
     this.geneKeyword = '';

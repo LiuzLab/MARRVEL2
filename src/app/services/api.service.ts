@@ -222,4 +222,16 @@ export class ApiService {
       });
     });
   }
+
+  getGeneBatchByArray(data): Observable< any > {
+    const url = `${environment.apiHost}/batch/genes`;
+    return new Observable(observer => {
+      this.http.get(url, { params: { entrezIds: data.map(d => d.entrezId) } })
+        .subscribe((res) => {
+          observer.next(res);
+        }, err => {
+          throw err;
+        });
+    });
+  }
 }

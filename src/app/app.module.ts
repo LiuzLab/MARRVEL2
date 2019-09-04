@@ -64,6 +64,8 @@ import { ProteinDomainComponent } from './components/pages/human-result/diopt-al
 import { DecipherDiseaseComponent } from './components/pages/human-result/decipher/decipher-disease/decipher-disease.component';
 import { GtexBoxplotComponent } from './components/pages/human-result/gtex-boxplot/gtex-boxplot.component';
 import { AgrExpressionComponent } from './components/pages/human-result/agr-expression/agr-expression.component';
+import { MultipleGeneBoxComponent } from './components/multiple-gene-box/multiple-gene-box.component';
+import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/multiple-genes.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +105,9 @@ import { AgrExpressionComponent } from './components/pages/human-result/agr-expr
     ProteinDomainComponent,
     DecipherDiseaseComponent,
     GtexBoxplotComponent,
-    AgrExpressionComponent
+    AgrExpressionComponent,
+    MultipleGeneBoxComponent,
+    MultipleGenesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-12 mb-3">
+    <mat-form-field appearance="outline" class="w-100" id="geneInputFormField">
+      <mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
+      <mat-chip-list #geneChipList>
+        <mat-chip
+          *ngFor="let gene of genes"
+          removable
+          (removed)="removeGene(gene)"
+        >
+          {{ gene.symbol }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+
+      <input matInput
+        #geneInput
+        [formControl]="geneInputCtrl"
+        (input)="onGeneInput($event)"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="geneChipList"
+        matChipInputAddOnBlur
+      >
+      <mat-hint align="start" *ngIf="!compact"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
+    </mat-form-field>
+    
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">
+      <mat-option *ngFor="let aGene of geneSuggestion; let idx = index" [attr.data-index]='idx' [value]="idx">
+        <span class="text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
+        <span class="ml-0">{{ aGene.symbol.substr(geneKeyword.length) }}</span>
+        <span class="float-right text-muted">{{ aGene.name }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+
+  <div class="col-12 text-center">
+    <button mat-flat-button	color="primary"
+      (click)="search()"
+      [disabled]="!validateInput()"
+    >
+      Search
+    </button>
+  </div>
+</div>
