@@ -20,7 +20,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -31,7 +31,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -42,7 +42,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -53,7 +53,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -64,7 +64,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -75,7 +75,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -86,7 +86,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -97,7 +97,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -108,7 +108,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -119,7 +119,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -130,7 +130,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -141,7 +141,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -152,7 +152,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -163,7 +163,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -174,7 +174,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -185,7 +185,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -196,7 +196,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -207,7 +207,7 @@ export class ApiService {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -218,7 +218,7 @@ export class ApiService {
       this.http.get(url, { params: { variants: data } }).subscribe((res) => {
         observer.next(res);
       }, (err) => {
-        throw err;
+        observer.error(err);
       });
     });
   }
@@ -230,7 +230,7 @@ export class ApiService {
         .subscribe((res) => {
           observer.next(res);
         }, err => {
-          throw err;
+          observer.error(err);
         });
     });
   }

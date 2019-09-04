@@ -1,8 +1,22 @@
-<h3>
-  Expression of
-  DIOPT Ortholog Genes of {{ gene ? gene.symbol : '' }}
-  from AGR
-</h3>
+<div class="row">
+  <div class="col-12">
+    <h3 class="mb-3 d-inline-block align-middle">
+      Expression of
+      DIOPT Ortholog Genes of {{ gene ? gene.symbol : '' }}
+      from AGR
+    </h3>
+    <a class="mb-3 d-inline-block ml-3 align-middle"
+      *ngIf="gene && gene.hgncId"
+      [attr.href]="'https://www.alliancegenome.org/gene/HGNC:' + gene.hgncId"
+      target="_blank"
+    >
+      <button mat-button color="primary">
+        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+        More on AGR
+      </button>
+    </a>
+  </div>
+</div>
 
 <div class="row mt-3">
   <div class="col-12">

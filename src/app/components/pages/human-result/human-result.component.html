@@ -73,11 +73,10 @@
       </div>
       <!-- Gene, Input information ends -->
 
-      <h2 class="mt-5 text-uppercase">Disease Data</h2>
-
       <!-- OMIM starts -->
-      <div class="row section mt-3" id="OMIM">
+      <div class="row section mt-5" id="OMIM">
         <div class="col-12" [ngClass]="{ 'skeleton': omimLoading }">
+          <h2 class="mb-1 text-uppercase">Disease Data</h2>
           <app-omim
             [gene]="gene"
             [loading]="omimLoading"
@@ -85,11 +84,12 @@
           ></app-omim>
         </div>
       </div>
-      <!-- OMIM ennds -->
+      <!-- OMIM ends -->
 
       <!-- dbNSFP starts -->
       <div class="row section mt-5" id="DbNSFP" *ngIf="variant">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Disease Data</h2>
           <app-dbnsfp [variant]="variant"></app-dbnsfp>
         </div>
       </div>
@@ -98,6 +98,7 @@
       <!-- ClinVar starts -->
       <div class="row section mt-5" id="ClinVar">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Disease Data</h2>
           <app-clinvar
             *ngIf="!geneLoading && gene"
             [gene]="gene"
@@ -109,6 +110,7 @@
       <!-- Geno2MP starts -->
       <div class="row section mt-5" id="Geno2MP">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Disease Data</h2>
           <app-geno2mp
             *ngIf="!geneLoading"
             [gene]="gene"
@@ -121,6 +123,7 @@
       <!-- DECIPHER starts -->
       <div class="row section mt-5" id="DECIPHER">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Disease Data</h2>
           <app-decipher-disease
             *ngIf="!geneLoading"
             [gene]="gene"
@@ -132,11 +135,11 @@
 
       <mat-divider class="mt-5"></mat-divider>
 
-      <h2 class="mt-5 text-uppercase">Control Data</h2>
-
       <!-- gnomAD starts -->
-      <div class="row section mt-3" id="GnomAD">
+      <div class="row section mt-5" id="GnomAD">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
+
           <h3 class="mb-0 d-inline-block align-middle">gnomAD</h3>
           <a class="mb-0 d-inline-block ml-3 align-middle"
             *ngIf="gene && gene.xref && gene.xref.ensemblId"
@@ -152,6 +155,7 @@
 
         <!-- gnomAD variant -->
         <div class="col-12 mt-3" *ngIf="variant">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
           <h4 class="mt-0 mb-3">
             Population Allele Frequencies of {{ variantString }} from gnomAD
           </h4>
@@ -174,6 +178,7 @@
       <!-- DGV starts -->
       <div class="row section mt-5" id="DGV">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
           <app-dgv
             *ngIf="!geneLoading"
             [variant]="variant"
@@ -186,6 +191,7 @@
       <!-- DECIPHER Control starts -->
       <div class="row section mt-5" id="DECIPHER-Control" *ngIf="variant">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
           <app-decipher
             [variant]="variant"
           ></app-decipher>
@@ -195,6 +201,7 @@
 
       <div class="row section mt-5" id="expression">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
           <app-gtex-boxplot
             *ngIf="!geneLoading"
             [gene]="gene"
@@ -202,6 +209,7 @@
         </div>
 
         <div class="col-12 mt-5">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
           <app-agr-expression
             *ngIf="!geneLoading"
             [gene]="gene"
@@ -211,6 +219,7 @@
 
       <div class="row section mt-5" id="phenotypes">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
           <app-phenotypes
             *ngIf="!geneLoading && !orthologsLoading"
             [gene]="gene"
@@ -221,6 +230,7 @@
 
       <div class="row section mt-5" id="gene-ontology">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
           <app-gene-ontology
             *ngIf="!geneLoading && !orthologsLoading"
             [gene]="gene"
@@ -232,6 +242,7 @@
       <!-- Alignment starts -->
       <div class="row section mt-5" id="alignment">
         <div class="col-12">
+          <h2 class="mb-1 text-uppercase">Control Data</h2>
           <app-diopt-alignment
             *ngIf="!geneLoading"
             [gene]="gene"

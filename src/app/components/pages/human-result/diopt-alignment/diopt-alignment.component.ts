@@ -64,7 +64,12 @@ export class DioptAlignmentComponent implements OnInit {
           this.data = res ? res.data : null;
           this.domainData = res ? res.domain : null;
           this.loading = false;
-        }, err => { this.loading = false; });
+        }, err => {
+          console.log(' > error alignment');
+          this.loading = false;
+          this.data = null;
+          this.domainData = null;
+        });
     }
   }
 

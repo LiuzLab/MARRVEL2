@@ -1,4 +1,35 @@
-<h3 class="mt-0 d-inline-block">DECIPHER</h3>
+<div class="row mb-3">
+  <div class="col-12">
+    <h3 class="mb-3 d-inline-block align-middle">DECIPHER (Disease)</h3>
+    <a class="mb-3 d-inline-block ml-3 align-middle"
+      *ngIf="gene || variant"
+      [attr.href]="variant?
+      'https://decipher.sanger.ac.uk/search?q=' + variant.chr + ':' + variant.pos + '-' + variant.pos + '#consented-patients/results'
+      :
+      'https://decipher.sanger.ac.uk/search?q=' + gene.symbol + '#consented-patients/results'
+      "
+      target="_blank"
+    >
+      <button mat-button color="primary">
+        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+        More on DECIPHER
+      </button>
+    </a>
+
+    <!--p class="mt-0 mb-0 d-table" *ngIf="data">
+      <mat-icon class="d-table-cell align-top"
+        matTooltip="MARRVEL's comment" matTooltipPosition="above"
+      >insert_comment</mat-icon>
+      <span class="d-table-cell pl-2">
+        COMMENT HERE
+      </span>
+    </p-->
+  </div>
+</div>
+
+<div class="mt-3" *ngIf="!loading && !data" [@toggle]>
+  <p>No DECIPHER Disease group data found.</p>
+</div>
 <div class="row mt-3" *ngIf="concent && !loading && data" [@toggle]>
   <div class="col-12">
     <mat-slide-toggle
