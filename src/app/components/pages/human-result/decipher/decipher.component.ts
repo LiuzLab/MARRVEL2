@@ -12,6 +12,7 @@ import { Variant } from '../../../../interfaces/variant';
   styleUrls: ['./decipher.component.scss']
 })
 export class DECIPHERComponent implements OnInit {
+  @Input() gene: Gene;
   @Input() variant: Variant;
 
   loading = false;

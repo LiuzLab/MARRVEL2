@@ -15,7 +15,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getGenesBySymbolPrefix(taxonId: number, prefix: string): Observable<any> {
-    const url = `${environment.apiHost}/gene/taxonId/${taxonId}/prefix/${prefix}`;
+    const url = `${environment.apiHost}/data/gene/taxonId/${taxonId}/prefix/${prefix}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   getGeneByEntrezId(entrezId: string | number): Observable<any> {
-    const url = `${environment.apiHost}/gene/taxonId/9606/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/gene/taxonId/9606/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -37,7 +37,7 @@ export class ApiService {
   }
 
   getGeneByGenomicLocation(variant: Variant): Observable< any > {
-    const url = `${environment.apiHost}/gene/chr/${variant.chr}/pos/${variant.pos}`;
+    const url = `${environment.apiHost}/data/gene/chr/${variant.chr}/pos/${variant.pos}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -48,7 +48,7 @@ export class ApiService {
   }
 
   getOMIMByMimNumber(mimNumber: string | number): Observable<any> {
-    const url = `${environment.apiHost}/omim/mimNumber/${mimNumber}`;
+    const url = `${environment.apiHost}/data/omim/mimNumber/${mimNumber}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -59,7 +59,7 @@ export class ApiService {
   }
 
   getClinVarByEntrezId(entrezId: string | number): Observable<any> {
-    const url = `${environment.apiHost}/clinVar/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/clinVar/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -70,7 +70,7 @@ export class ApiService {
   }
 
   getGnomADGeneByEntrezId(entrezId: string | number): Observable<any> {
-    const url = `${environment.apiHost}/gnomAD/gene/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/gnomAD/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -81,7 +81,7 @@ export class ApiService {
   }
 
   getGnomADVaraint(variant: Variant): Observable<any> {
-    const url = `${environment.apiHost}/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    const url = `${environment.apiHost}/data/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -92,7 +92,7 @@ export class ApiService {
   }
 
   getDbNSFP(variant: Variant): Observable<any> {
-    const url = `${environment.apiHost}/dbNSFP/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    const url = `${environment.apiHost}/data/dbNSFP/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -103,7 +103,7 @@ export class ApiService {
   }
 
   getDECIPHERByVariant(variant: Variant): Observable< any > {
-    const url = `${environment.apiHost}/DECIPHER/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    const url = `${environment.apiHost}/data/DECIPHER/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -114,7 +114,7 @@ export class ApiService {
   }
 
   getDECIPHERDiseaseByVariant(variant: Variant): Observable< any > {
-    const url = `${environment.apiHost}/DECIPHERDisease/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    const url = `${environment.apiHost}/data/DECIPHERDisease/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -125,7 +125,7 @@ export class ApiService {
   }
 
   getGeno2MPByVariant(variant: Variant): Observable< any > {
-    const url = `${environment.apiHost}/Geno2MP/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    const url = `${environment.apiHost}/data/Geno2MP/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -136,7 +136,7 @@ export class ApiService {
   }
 
   getGeno2MPByGeneEntrezId(entrezId: string | number): Observable< any > {
-    const url = `${environment.apiHost}/Geno2MP/gene/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/Geno2MP/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -147,7 +147,7 @@ export class ApiService {
   }
 
   getDGVByVariant(variant: Variant): Observable< any > {
-    const url = `${environment.apiHost}/DGV/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    const url = `${environment.apiHost}/data/DGV/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -158,7 +158,7 @@ export class ApiService {
   }
 
   getDGVByEntrezId(entrezId: number | string): Observable< any > {
-    const url = `${environment.apiHost}/DGV/gene/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/DGV/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -169,7 +169,7 @@ export class ApiService {
   }
 
   getGtexByEntrezId(entrezId: number | string): Observable< any > {
-    const url = `${environment.apiHost}/gtex/gene/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/gtex/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -180,7 +180,7 @@ export class ApiService {
   }
 
   getAgrExpByEntrezId(entrezId: number | string): Observable< any > {
-    const url = `${environment.apiHost}/expression/orthologs/gene/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/expression/orthologs/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -191,7 +191,7 @@ export class ApiService {
   }
 
   getOrthologByEntrezId(entrezId: number | string): Observable< any > {
-    const url = `${environment.apiHost}/diopt/ortholog/gene/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/diopt/ortholog/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -202,7 +202,7 @@ export class ApiService {
   }
 
   getAlignmentByEntrezId(entrezId: number | string): Observable< any > {
-    const url = `${environment.apiHost}/diopt/alignment/gene/entrezId/${entrezId}`;
+    const url = `${environment.apiHost}/data/diopt/alignment/gene/entrezId/${entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
@@ -213,7 +213,7 @@ export class ApiService {
   }
 
   getBatchByArray(data): Observable< any > {
-    const url = `${environment.apiHost}/batch/variants`;
+    const url = `${environment.apiHost}/data/batch/variants`;
     return new Observable(observer => {
       this.http.get(url, { params: { variants: data } }).subscribe((res) => {
         observer.next(res);
@@ -224,7 +224,7 @@ export class ApiService {
   }
 
   getGeneBatchByArray(data): Observable< any > {
-    const url = `${environment.apiHost}/batch/genes`;
+    const url = `${environment.apiHost}/data/batch/genes`;
     return new Observable(observer => {
       this.http.get(url, { params: { entrezIds: data.map(d => d.entrezId) } })
         .subscribe((res) => {

@@ -42,6 +42,8 @@ transvar/
 _transvar/
 
 # Credentials
+/app/config/*/
+/app/config/*/
 src/config/*
 
 # Logs and backups

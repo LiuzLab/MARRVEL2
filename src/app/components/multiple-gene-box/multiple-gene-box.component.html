@@ -21,7 +21,7 @@
         [matChipInputFor]="geneChipList"
         matChipInputAddOnBlur
       >
-      <mat-hint align="start" *ngIf="!compact"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
+      <mat-hint align="start"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
     </mat-form-field>
     
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">

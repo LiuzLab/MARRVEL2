@@ -2,7 +2,7 @@
 
 ## Install / Prepare to Run
 1. Create the credential files below:
-    * server/config/aws/{environment}.json
+    * app/config/aws/{environment}.json
     
     ```json
     {
@@ -10,7 +10,7 @@
       "secretAccessKey": "your secret key"
     }
     ```
-    * server/config/mongo/{environment}.json
+    * app/config/mongo/{environment}.json
     ```json
     {
       "host": "host",
@@ -20,11 +20,11 @@
       "database": "database name for identification and retrieving data"
     }
     ```
-    * server/config/omim/{environment}.json
+    * app/config/omim/{environment}.json
     ```json
     "your omim key"
     ```
-    * server/config/recaptcha/{environment}.json
+    * app/config/recaptcha/{environment}.json
     ```json
     "reCAPTCHA key"
     ```
@@ -37,14 +37,15 @@
     ```sh
     $ npm install
     ```
-    
-## Run
-Command to run API server:
+## Build
+Command to build
 ```sh
-$ node MARRVEL_API/app.js
+$ ng build --prod
 ```
-Command to run client server:
+
+## Run
+Command to run the server:
 ```sh
-$ ng serve
+$ node app
 ```
 
