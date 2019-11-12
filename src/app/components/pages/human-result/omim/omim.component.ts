@@ -6,7 +6,7 @@ import { Animations } from './../../../../animations';
   selector: 'app-omim',
   templateUrl: './omim.component.html',
   styleUrls: ['./omim.component.scss'],
-  animations: [ Animations.fadeInOut ]
+  animations: [ Animations.fadeInOut, Animations.toggleInOut ]
 })
 export class OmimComponent {
   @Input() gene;

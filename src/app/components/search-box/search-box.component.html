@@ -13,7 +13,7 @@
         <mat-label>Input Type</mat-label>
         <select matNativeControl [(ngModel)]="selectedInputType" (change)="onInputTypeChange($event)" name="inputType">
           <option value="gene">Human gene</option>
-          <option value="protein" disabled>Human protein</option>
+          <option value="protein">Human protein</option>
           <option value="vcf">Upload VCF file</option>
           <option value="multigenes" disabled>Multiple human genes</option>
         </select>
@@ -86,7 +86,7 @@
     <div class="col-12 text-left search-box-example mb-5" *ngIf="!compact">
       <mat-hint *ngIf="selectedInputType === 'gene'">
         Example: 
-        <a href="/human/pair/26235/6:99365567T>C">6:99365567 T>C / FBXL4</a>
+        <a href="/human/gene/26235/variant/6:99365567T>C">6:99365567 T>C / FBXL4</a>
         or
         <a href="/human/variant/6:99365567T>C">6:99365567 T>C</a>
         or

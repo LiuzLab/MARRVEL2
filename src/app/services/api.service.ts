@@ -47,6 +47,18 @@ export class ApiService {
     });
   }
 
+  getGenomLocByProteinVar(protein): Observable< any > {
+    const url = `${environment.apiHost}/data/transvar/protein/${protein}`;
+    return new Observable(observer => {
+      this.http.get(url)
+        .subscribe((res) => {
+          observer.next(res);
+        }, err => {
+          observer.error(err);
+        });
+    });
+  }
+
   getOMIMByMimNumber(mimNumber: string | number): Observable<any> {
     const url = `${environment.apiHost}/data/omim/mimNumber/${mimNumber}`;
     return new Observable(observer => {

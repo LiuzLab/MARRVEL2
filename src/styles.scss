@@ -145,6 +145,13 @@ span.mat-slide-toggle-content {
   font-size: 0.9em;
 }
 
+span.text-warning {
+  color: #E5893E !important;
+}
+span.text-error {
+  color: red !important;
+}
+
 /********************
  * Form
  */
@@ -157,6 +164,10 @@ span.mat-slide-toggle-content {
  */
 .mat-table {
   background: #fbfbfb !important;
+}
+
+.mat-paginator {
+  background-color: #fbfbfb !important;
 }
 
 .mat-table .mat-row:hover {

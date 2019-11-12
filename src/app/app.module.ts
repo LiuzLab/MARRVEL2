@@ -24,7 +24,7 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatSlideToggleModule,
-  MatProgressBarModule
+  MatProgressBarModule,
 } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -66,6 +66,7 @@ import { GtexBoxplotComponent } from './components/pages/human-result/gtex-boxpl
 import { AgrExpressionComponent } from './components/pages/human-result/agr-expression/agr-expression.component';
 import { MultipleGeneBoxComponent } from './components/multiple-gene-box/multiple-gene-box.component';
 import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/multiple-genes.component';
+import { ReverseAnnotationCandidatesComponent } from './components/reverse-annotation-candidates/reverse-annotation-candidates.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/
     GtexBoxplotComponent,
     AgrExpressionComponent,
     MultipleGeneBoxComponent,
-    MultipleGenesComponent
+    MultipleGenesComponent,
+    ReverseAnnotationCandidatesComponent
   ],
   imports: [
     BrowserModule,
@@ -132,7 +134,7 @@ import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/
     MatPaginatorModule,
     MatSortModule,
     MatSlideToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   exports: [
     MatButtonModule,

@@ -46,6 +46,20 @@
     </div>
   </div>
 
+  <!-- OMIM text description start -->
+  <div class="col-12 mt-3" id="OMIMText"
+    [ngClass]="{ 'skeleton': loading }"
+    *ngIf="loading || data" [@toggle]
+  >
+    <h4 class="m-0 title" *ngIf="data">OMIM Description of {{ gene.symbol }}</h4>
+    <p class="mt-3 mb-0" *ngIf="data">{{ data['title'] || '' }}</p>
+
+    <p class="e2e-intter-html-bound mt-3 mb-0"
+      [innerHTML]="data['description'] || ''" *ngIf="data"
+    ></p>
+  </div>
+  <!-- OMIM text description ends -->
+
   <!--  3. OMIM phenotypes -->
   <div class="col-12 mt-3" *ngIf="!loading" [@fadeInOut]>
     <app-basic-datatable

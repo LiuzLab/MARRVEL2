@@ -6,14 +6,21 @@ const config = {
   development: {
     env: env,
     root: rootPath,
-    port: process.env.PORT || 8080
+    port: process.env.PORT || 8080,
+    transvar: {
+      path: '../env/bin/transvar'
+    }
   },
 
   production: {
     env: env,
     root: rootPath,
     port: 8080,
-    host: 'marrvel.org'
+    host: 'marrvel.org',
+    transvar: {
+      path: 'transvar'
+    }
+
   }
 };
 

@@ -1,0 +1,75 @@
+<app-navbar showSearch="true" showMenuButton="true"></app-navbar>
+
+<div class="container-fluid py-5 px-md-5">
+  <div class="row">
+    <div class="col-12 title">
+      <h1>Reverse Annotation Candidates</h1>
+    </div>
+    <div class="col-12 subtitle">
+      <h4>{{ protein }}</h4>
+    </div>
+
+    <div class="col-12 mt-3">
+      <span class="text-warning">
+        MARRVEL is currently only compatible with nonsense and missense SNVs (Single Nucleotide Variants).
+        For all other variants, please use genomic coordinates or HGVS nomenclature.
+      </span>
+    </div>
+
+    <div class="col-12 text-center mt-3" *ngIf="loading">
+      loading...
+    </div>
+
+    <div class="col-12 mt-3" *ngIf="!loading && data">
+      <table class="mat-table w-100">
+        <thead>
+          <tr class="mat-header-row">
+            <th class="mat-header-cell">Gene</th>
+            <th class="mat-header-cell">Coordinate</th>
+            <th class="mat-header-cell">Variant Type</th>
+            <th class="mat-header-cell">Transcripts</th>
+            <th class="mat-header-cell"></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="data.candidates && data.candidates.length">
+          <tr *ngFor="let candidate of data.candidates" class="mat-row">
+            <td class="mat-cell">{{ candidate.gene.symbol }}</td>
+            <td class="mat-cell">{{ candidate.coord }}</td>
+            <td class="mat-cell text-uppercase">{{ candidate.type }}</td>
+            <td class="mat-cell">
+              <ul *ngIf="candidate.transcripts && candidate.transcripts.length" style="padding-left: 1rem">
+                <li *ngFor="let transcript of candidate.transcripts">
+                  <a target="_blank" *ngIf="transcript[0] === 'E'"
+                    [attr.href]="'https://useast.ensembl.org/Homo_sapiens/Transcript/Summary?t=' + transcript"
+                  >{{ transcript }}</a>
+                  <a target="_blank" *ngIf="transcript[0] === 'N'"
+                    [attr.href]="'https://www.ncbi.nlm.nih.gov/nuccore/' + transcript"
+                  >{{ transcript }}</a>
+                </li>
+              </ul>
+            </td>
+            <td class="mat-cell">
+              <a [attr.href]="'/human/protein/' + protein + '/gene/' + candidate.gene.entrezId + '/variant/' + candidate.coord"
+                mat-flat-button color="primary"
+              >MARRVEL it</a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="data.errors && data.errors.length">
+          <tr class="mat-row" *ngFor="let err of data.errors">
+            <td colspan="5" class="mat-cell">
+              <span class="text-error text-capitalize">{{ err }}</span>
+            </td>
+          </tr>
+        </tfoot>
+        <tfoot *ngIf="(!data.candidates || !data.candidates.length) && (!data.errors || !data.errors.length)">
+          <tr class="mat-row">
+            <td colspan="5" class="mat-cell">
+              <span class="text-capitalize">Could not find any SNV candidates</span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

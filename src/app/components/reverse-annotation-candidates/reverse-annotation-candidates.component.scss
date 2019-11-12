@@ -1,0 +1,45 @@
+.title h1,
+.subtitle h4 {
+  margin: 0px;
+}
+.title h1 {
+  display: inline-block;
+  color: rgba(0,0,0,.77);
+  font-size: 2em;
+  font-weight: 600;
+}
+.subtitle h4 {
+  font-weight: 300;
+  font-size: 0.85em;
+  line-height: 1.6;
+  color: rgba(0,0,0,.6)
+}
+h2 {
+  font-size: 0.85em;
+  letter-spacing: 0.025em;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.mat-table {
+  border-collapse: collapse;
+}
+.mat-header-cell {
+  text-align: left;
+}
+.mat-header-cell.number,
+.mat-cell.number {
+  text-align: right;
+}
+.mat-cell, .mat-header-cell {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.mat-row, .mat-header-row, .mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+.mat-row, .mat-header-row {
+  height: 56px;
+}

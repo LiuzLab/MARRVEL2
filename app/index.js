@@ -24,7 +24,6 @@ app.use((req, res, next) => {
 // Use routers for API
 const routes = glob.sync(config.root + '/routers/*.js');
 routes.forEach((router) => {
-  console.log(router);
   app.use('/data', require(router));
 });
 

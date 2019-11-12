@@ -24,13 +24,20 @@
       <!-- Gene, Input information starts -->
       <div class="row">
         <div class="col-12">
-          <div class="title" *ngIf="gene || variant">
+          <div class="title" *ngIf="!proteinInput">
             <h1 *ngIf="geneEntrezId && gene">{{ gene.symbol }}</h1>
             <h1 *ngIf="geneEntrezId && variant">&nbsp;/&nbsp;</h1>
             <h1 *ngIf="variant">{{ variantString }}</h1>
           </div>
+
           <div class="title" *ngIf="proteinInput">
-            <h1>{{ proteinInput }}</h1>
+            <h1 class="d-block">{{ proteinInput }}</h1>
+            <h4 class="d-inline-block" style="font-weight: 300; font-size: 0.95em;" *ngIf="gene" [@fadeInOut]>
+              <span class="label">Gene</span>{{ gene.symbol }}
+            </h4>
+            <h4 class="d-inline-block ml-3" style="font-weight: 300; font-size: 0.95em;" *ngIf="variant" [@fadeInOut]>
+              <span class="label">Variant</span>{{ variantString }}
+            </h4>
           </div>
         </div>
 
@@ -45,7 +52,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-12 subtitle mt-4">
+        <div class="col-12 subtitle mt-3">
           <h4 *ngIf="gene" [@fadeInOut]>
             <span class="label">Name</span>
             {{ gene.name }}
@@ -56,20 +63,6 @@
           </h4>
         </div>
 
-        <!-- OMIM text description start -->
-        <div class="col-12 mt-3" id="OMIMText"
-          [ngClass]="{ 'skeleton': omimLoading }"
-          *ngIf="geneLoading || omimLoading || omimData" [@toggle]
-        >
-          <h4 class="m-0 title" *ngIf="omimData">OMIM Description of {{ gene.symbol }}</h4>
-          <p class="mt-3 mb-0" *ngIf="omimData">{{ omimData['title'] || '' }}</p>
-
-          <p class="e2e-intter-html-bound mt-3 mb-0"
-            [innerHTML]="omimData['description'] || ''" *ngIf="omimData"
-          ></p>
-        </div>
-        <!-- OMIM text description ends -->
-
       </div>
       <!-- Gene, Input information ends -->
 
@@ -77,6 +70,7 @@
       <div class="row section mt-5" id="OMIM">
         <div class="col-12" [ngClass]="{ 'skeleton': omimLoading }">
           <h2 class="mb-1 text-uppercase">Disease Data</h2>
+
           <app-omim
             [gene]="gene"
             [loading]="omimLoading"
