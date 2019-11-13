@@ -65,11 +65,27 @@ export class HumanResultComponent implements OnInit {
         const parsed = this.variantService.parse(this.variantInput);
         if (!parsed.valid) {
           // TODO: error
-        }
-        else if (parsed.type === 'hgvs') {
+        } else if (parsed.type === 'hgvs') {
           // TODO: Request hgvs --> coordinate
-        }
-        else if (parsed.type === 'coord') {
+          this.api.getGenomLocByHgvsVar(this.variantInput)
+            .pipe(take(1))
+            .subscribe(res => {
+              this.geneEntrezId = res.gene.entrezId;
+              this.variant = {
+                chr: res.chr,
+                pos: res.pos,
+                ref: res.ref,
+                alt: res.alt
+              };
+              this.variantString = `Chr${res.chr}:${res.pos} ${res.ref}>${res.alt}`;
+              this.gene = res.gene;
+              this.geneLoading = false;
+              this.onGeneLoad(res.gene);
+            }, err => {
+              console.log(err);
+              // TODO: error
+            });
+        } else if (parsed.type === 'coord') {
           this.variant = parsed.variant;
           this.variantString = `Chr${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`;
 
@@ -85,8 +101,7 @@ export class HumanResultComponent implements OnInit {
                 }
               });
           }
-        }
-        else {
+        } else {
           // TODO: error
         }
       }

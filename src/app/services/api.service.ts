@@ -36,6 +36,17 @@ export class ApiService {
     });
   }
 
+  getGenomLocByHgvsVar(hgvsVariant: string): Observable< any > {
+    const url = `${environment.apiHost}/data/mutalyzer/hgvs/${hgvsVariant}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
+
   getGeneByGenomicLocation(variant: Variant): Observable< any > {
     const url = `${environment.apiHost}/data/gene/chr/${variant.chr}/pos/${variant.pos}`;
     return new Observable(observer => {

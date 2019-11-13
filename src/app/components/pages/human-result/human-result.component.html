@@ -28,6 +28,7 @@
             <h1 *ngIf="geneEntrezId && gene">{{ gene.symbol }}</h1>
             <h1 *ngIf="geneEntrezId && variant">&nbsp;/&nbsp;</h1>
             <h1 *ngIf="variant">{{ variantString }}</h1>
+            <h1 *ngIf="variantInput.indexOf(':c.') != -1">&nbsp;({{ variantInput }})</h1>
           </div>
 
           <div class="title" *ngIf="proteinInput">

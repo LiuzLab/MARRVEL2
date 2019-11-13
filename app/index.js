@@ -38,7 +38,8 @@ mongoose.connect(config.mongo.url + '?authSource=admin', {
   dbName: config.mongo.database,
   user: config.mongo.username,
   pass: config.mongo.password,
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
   .then(() => {
     console.log('Connected to Mongo DB');
