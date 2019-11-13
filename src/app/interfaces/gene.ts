@@ -16,6 +16,7 @@ export interface Gene {
 
 export interface HumanGene extends Gene {
   hgncId?: number;
+  entrezSummary?: string;
   phenotypes?: [{
     id: string;
     name: string;
