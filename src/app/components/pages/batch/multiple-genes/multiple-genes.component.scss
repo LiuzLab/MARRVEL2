@@ -1,0 +1,192 @@
+a.mat-flat-button {
+  text-decoration: none;
+}
+
+tr.mat-header-row {
+  min-height: 56px;
+}
+tr.mat-footer-row, tr.mat-row {
+  min-height: 48px;
+}
+.break-word {
+  word-break: break-word;
+}
+
+.data:empty {
+  background-image: 
+    linear-gradient( #f3f3f3 20px, transparent 0 );
+  background-repeat: no-repeat;
+  background-size: 90% 90%;
+  background-position: 0 0;
+}
+
+.mat-header-cell.number,
+.mat-cell.number {
+  text-align: right;
+}
+.number span {
+  width: 100%;
+  padding-right: 0.8em;
+}
+.na {
+  color: #999;
+}
+
+.mat-header-cell .border-left {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+.border-top {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* CSS ADDED TO SUPPORT MULTI-COLUMNS AND COLSPAN */
+.mat-header-cell {
+  flex: 1;
+}
+.header-group-row .mat-header-cell {
+  align-items: center;
+  display: flex;
+  align-items: flex-end;
+}
+.header-group {
+  display: flex;
+}
+.header-group-row {
+  min-height: 2em;
+  border: none;
+  align-items: stretch;
+  display: flex;
+}
+.header-group-row .mat-header-cell:first-of-type {
+  padding-left: 24px;
+}
+.header-group-row .mat-header-cell:last-of-type {
+  padding-right: 24px;
+}
+
+.spin {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.table-row-loading-wrapper {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 24px;
+  background-color: #fbfbfb;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-style: solid;
+  font-size: 14px;
+}
+.table-cell-loading {
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  width: 5%;
+  word-break: break-all;
+}
+.table-row-loading {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 ),
+    linear-gradient( #f3f3f3 20px, transparent 0 )
+  ;
+  background-repeat: no-repeat;
+  background-size:
+    50px 48px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px,
+    4.5% 20px
+  ;
+  background-position:
+    0 0,
+    5.555555556% 14px,
+    11.11111111% 14px,
+    16.66666667% 14px,
+    22.22222222% 14px,
+    27.77777778% 14px,
+    33.33333333% 14px,
+    38.88888889% 14px,
+    44.44444444% 14px,
+    50% 14px,
+    55.55555556% 14px,
+    61.11111111% 14px,
+    66.66666667% 14px,
+    72.22222222% 14px,
+    77.77777778% 14px,
+    83.33333333% 14px,
+    88.88888889% 14px,
+    94.44444444% 14px,
+    100% 14px
+  ;
+  animation: tc-shine 1s infinite;
+}
+@keyframes tc-shine {
+  to {
+    background-position:
+      100% 0,
+      5.555555556% 14px,
+      11.11111111% 14px,
+      16.66666667% 14px,
+      22.22222222% 14px,
+      27.77777778% 14px,
+      33.33333333% 14px,
+      38.88888889% 14px,
+      44.44444444% 14px,
+      50% 14px,
+      55.55555556% 14px,
+      61.11111111% 14px,
+      66.66666667% 14px,
+      72.22222222% 14px,
+      77.77777778% 14px,
+      83.33333333% 14px,
+      88.88888889% 14px,
+      94.44444444% 14px,
+      100% 14px
+  }
+}

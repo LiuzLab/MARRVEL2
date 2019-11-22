@@ -2,6 +2,49 @@ const Promise = require('bluebird');
 const utils = require('../../utils');
 
 const GnomAD = require('../../models/gnomAD.model');
+const GnomADGene = require('../../models/gnomADGene.model');
+const Genes = require('../../models/genes.model');
+
+const getByEntrezId = (entrezId) => {
+  return new Promise((resolve, reject) => {
+    Genes.findOne({ entrezId: entrezId }, { '_id': 1 })
+      .then((doc) => {
+        return (doc || { '_id': null })['_id'];
+      }).then((geneId) => {
+        if (!geneId) {
+          return null;
+        }
+        else {
+          return GnomADGene.findOne({ geneId: geneId }, { '_id': 0, geneId: 0 });
+        }
+      }).then((doc) => {
+        resolve(doc);
+      }).catch((err) => {
+        reject(err);
+      });
+  });
+};
+exports.getByEntrezId = getByEntrezId;
+
+exports.getByGeneSymbol = (symbol) => {
+  return new Promise((resolve, reject) => {
+    Genes.findOne({ taxonId: 9606, symbol: new RegExp('^' + symbol + '$', 'i') }, { '_id': 1 })
+      .then((doc) => {
+        return (doc || { '_id': null })['_id'];
+      }).then((geneId) => {
+        if (!geneId) {
+          return null;
+        }
+        else {
+          return GnomADGene.findOne({ geneId: geneId }, { '_id': 0, geneId: 0 });
+        }
+      }).then((doc) => {
+        resolve(doc);
+      }).catch((err) => {
+        reject(err);
+      });
+  });
+};
 
 exports.getByVariant = (variant, projection) => {
   return new Promise((resolve, reject) => {

@@ -35,33 +35,13 @@ exports.findByVariant = (req, res) => {
 exports.findByGeneSymbol = (req, res) => {
   const symbol = req.params.symbol;
 
-  Genes.findOne({ taxonId: 9606, symbol: new RegExp('^' + symbol + '$', 'i') }, { '_id': 1 })
-    .then((doc) => {
+  db.gnomAD.getByGeneSymbol(symbol)
+    .then(doc => {
       if (!doc) {
-        return null;
-      }
-      else {
-        return doc['_id'];
-      }
-    }).then((geneId) => {
-      if (!geneId) {
         return res.json({});
       }
       else {
-        GnomADGene.findOne({ geneId: geneId }, { '_id': 0, geneId: 0 })
-          .then((doc) => {
-            if (!doc) {
-              return res.json({});
-            }
-            else {
-              return res.json(doc);
-            }
-          }).catch((err) => {
-            console.log(err);
-            return res.status(500).send({
-              message: 'Server error occured'
-            });
-          });
+        return res.json(doc);
       }
     }).catch((err) => {
       console.log(err);
@@ -70,36 +50,17 @@ exports.findByGeneSymbol = (req, res) => {
       });
     });
 };
+
 exports.findByGeneEntrezId = (req, res) => {
   const entrezId = req.params.entrezId;
 
-  Genes.findOne({ entrezId: entrezId }, { '_id': 1 })
+  db.gnomAD.getByEntrezId(entrezId)
     .then((doc) => {
       if (!doc) {
-        return null;
-      }
-      else {
-        return doc['_id'];
-      }
-    }).then((geneId) => {
-      if (!geneId) {
         return res.json({});
       }
       else {
-        GnomADGene.findOne({ geneId: geneId }, { '_id': 0, geneId: 0 })
-          .then((doc) => {
-            if (!doc) {
-              return res.json({});
-            }
-            else {
-              return res.json(doc);
-            }
-          }).catch((err) => {
-            console.log(err);
-            return res.status(500).send({
-              message: 'Server error occured'
-            });
-          });
+        return res.json(doc);
       }
     }).catch((err) => {
       console.log(err);

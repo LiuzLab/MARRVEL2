@@ -1,6 +1,7 @@
 const Promise = require('bluebird');
 
 const Dgv = require('../../models/dgv.model');
+const Genes = require('../../models/genes.model');
 
 exports.getByVariant = (variant, projection, excludeGene) => {
   return new Promise((resolve, reject) => {
@@ -23,3 +24,39 @@ exports.getByVariant = (variant, projection, excludeGene) => {
     });
   });
 };
+
+const getByEntrezId = (entrezId) => {
+  return new Promise((resolve, reject) => {
+    Genes.findOne({ entrezId: parseInt(entrezId) }, { 'dgvIds': 1 })
+      .populate({
+        path: 'dgvIds',
+        select: '-_id',
+        populate: {
+          path: 'genes',
+          select: 'entrezId symbol -_id'
+        }
+      }).then((doc) => {
+        resolve((doc || { dgvIds: null }).dgvIds);
+      }).catch((err) => {
+        reject(err);
+      });
+  });
+};
+exports.getByEntrezId = getByEntrezId;
+
+exports.getCountsByEntrezId = (entrezId) => {
+  return new Promise((resolve, reject) => {
+    getByEntrezId(entrezId)
+      .then(docs => {
+        const counts = { gains: 0, losses: 0 };
+        for (var i = 0; i< docs.length; ++i) {
+          counts.gains += docs[i].gain;
+          counts.losses += docs[i].loss;
+        }
+        resolve(counts);
+      }).catch(err => {
+        reject(err);
+      });
+  });
+};
+

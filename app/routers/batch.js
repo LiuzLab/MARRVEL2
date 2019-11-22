@@ -7,9 +7,45 @@ const Promise = require('bluebird');
 const utils = require('../utils');
 const db = require('../utils/db');
 
+const gene = require('../utils/gene');
+
+router.get('/batch/genes', (req, res) => {
+  var entrezIds = req.query.entrezIds || [];
+  Promise.all(entrezIds)
+    .map(entrezId => {
+      return Promise.all([
+        gene.getByEntrezId(entrezId),
+        db.omim.getByEntrezId(entrezId),
+        db.clinvar.getCountsByEntrezId(entrezId),
+        db.geno2mp.getCountsByEntrezId(entrezId),
+        db.gnomAD.getByEntrezId(entrezId),
+        db.dgv.getCountsByEntrezId(entrezId),
+      ]);
+    }).map(docs => {
+      return {
+        entrezId: docs[0].entrezId,
+        symbol: docs[0].symbol,
+        omim: docs[1] ? {
+          numPhenos: (docs[1].phenotypes || []).length,
+          numVars: (docs[1].allelicVariants || []).length
+        } : null,
+        clinvar: docs[2],
+        geno2mp: docs[3],
+        gnomad: docs[4],
+        dgv: docs[5],
+      };
+    }).then(doc => {
+      res.json(doc);
+    }).catch(err => {
+      console.error(err);
+      res.status(500).send({
+        message: 'Server error occured'
+      });
+    });
+});
+
 router.get('/batch/variants', (req, res) => {
   var variants = req.query.variants || [];
-  console.log(variants);
   Promise.all(variants)
     .map((variantStr) => {
       const variant = utils.variant.validateAndParseVariant(variantStr);

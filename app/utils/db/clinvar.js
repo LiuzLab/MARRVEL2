@@ -44,7 +44,7 @@ exports.getByGeneSymbol = (symbol) => {
   });
 };
 
-exports.getByGeneEntrezId = (entrezId) => {
+const getByGeneEntrezId = (entrezId) => {
   return new Promise((resolve, reject) => {
     Genes.findOne({ entrezId: parseInt(entrezId) }, { 'clinVarIds': 1 })
       .populate({ path: 'clinVar', select: { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, '_id': 0 } })
@@ -52,6 +52,28 @@ exports.getByGeneEntrezId = (entrezId) => {
         if (!doc || !doc.clinVar) resolve([]);
         else resolve(doc.clinVar);
       }).catch((err) => {
+        reject(err);
+      });
+  });
+};
+exports.getByGeneEntrezId = getByGeneEntrezId;
+
+exports.getCountsByEntrezId = (entrezId) => {
+  return new Promise((resolve, reject) => {
+    getByGeneEntrezId(entrezId)
+      .then(docs => {
+        const counts = { 'pathogenic': 0, 'likely pathogenic': 0, 'likely benign': 0, 'benign': 0 };
+        for (var i = 0; i < docs.length; ++i) {
+          const sig = docs[i].significance.description.toLowerCase();
+          counts[sig] = (counts[sig] || 0) + 1;
+        }
+        resolve({
+          pathogenic: counts['pathogenic'],
+          likelyPathogenic: counts['likely pathogenic'],
+          likelyBenign: counts['likely benign'],
+          benign: counts['benign']
+        });
+      }).catch(err => {
         reject(err);
       });
   });
