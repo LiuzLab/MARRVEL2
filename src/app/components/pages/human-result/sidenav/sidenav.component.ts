@@ -12,7 +12,7 @@ export class SidenavComponent implements OnInit {
   @Output() change: EventEmitter<any> = new EventEmitter();
   @Input() startOpened = false;
 
-  sidenavOpened = false;
+  sidenavOpened = true;
 
   constructor() { }
 

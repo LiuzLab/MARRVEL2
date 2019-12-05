@@ -25,8 +25,10 @@ export class GnomADComponent implements OnInit {
       this.api.getGnomADVaraint(this.variant)
         .pipe(take(1))
         .subscribe((res) => {
-          res.exome = res.exome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
-          res.genome = res.genome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
+          if (res) {
+            res.exome = res.exome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
+            res.genome = res.genome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
+          }
 
           this.data = res;
           this.loading = false;

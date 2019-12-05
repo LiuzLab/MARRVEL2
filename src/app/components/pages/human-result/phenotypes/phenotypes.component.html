@@ -234,7 +234,7 @@
           </span>
         </div>
         <div class="org-gene-wrapper">
-          <span>
+          <span *ngIf="aGenePheno.gene">
             <a href="https://www.wormbase.org/species/c_elegans/gene/{{ aGenePheno.gene.wormBaseId }}" target="_blank">
               {{ aGenePheno.gene.symbol }}
             </a>

@@ -69,16 +69,18 @@ export class PhenotypesComponent implements OnInit {
           this.height += 26;
           this.bestHeight += (ortholog.bestScore ? 26 : 0);
           const aGenePheno = {};
-          for (const phenotype of ortholog.gene2.phenotypes) {
-            if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
-              for (const cat of phenotype.ontology.categories) {
-                const catName = cat.name;
-                if (!(catName in aGenePheno)) aGenePheno[catName] = [];
-                relExists = true;
-                aGenePheno[catName].push({
-                  id: phenotype.id,
-                  name: phenotype.ontology.name
-                });
+          if (ortholog.gene2) {
+            for (const phenotype of ortholog.gene2.phenotypes) {
+              if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
+                for (const cat of phenotype.ontology.categories) {
+                  const catName = cat.name;
+                  if (!(catName in aGenePheno)) aGenePheno[catName] = [];
+                  relExists = true;
+                  aGenePheno[catName].push({
+                    id: phenotype.id,
+                    name: phenotype.ontology.name
+                  });
+                }
               }
             }
           }

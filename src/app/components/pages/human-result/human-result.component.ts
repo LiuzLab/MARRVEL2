@@ -19,7 +19,7 @@ import { MatSelectChange } from '@angular/material';
 })
 export class HumanResultComponent implements OnInit {
   geneLoading = true;
-  sidenavOpened = false;
+  sidenavOpened = true;
 
   // Input
   geneEntrezId: number | null;

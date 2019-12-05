@@ -90,9 +90,11 @@ export class AgrExpressionComponent implements OnInit {
         bestScore: row.bestScore,
         expression: {}
       };
-      for (const group of row.gene2.agrExpressions.expressionSummary.groups) {
-        for (const term of group.terms) {
-          D.expression[term.name] = term.numberOfAnnotations;
+      if (row.gene2.agrExpressions && row.gene2.agrExpressions.expressionSummary) {
+        for (const group of row.gene2.agrExpressions.expressionSummary.groups) {
+          for (const term of group.terms) {
+            D.expression[term.name] = term.numberOfAnnotations;
+          }
         }
       }
       res[row.taxonId2] = res[row.taxonId2] || [];
