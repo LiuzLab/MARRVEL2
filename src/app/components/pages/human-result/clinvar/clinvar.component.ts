@@ -33,7 +33,7 @@ export class ClinvarComponent implements OnInit {
     this.api.getClinVarByEntrezId(this.gene.entrezId)
       .pipe(take(1))
       .subscribe((res) => {
-        this.significance = {};
+        this.significance = { 'pathogenic': 0, 'likely pathogenic': 0, 'likely benign': 0, 'benign': 0 };
         for (const item of res) {
           item.location = '';
           if (item.chr) item.location = `Chr${item.chr}:`;

@@ -37,6 +37,7 @@
   -webkit-box-orient: vertical !important;
   -webkit-box-direction: normal !important;
   flex-direction: column !important;
+  overflow: hidden;
 }
 .bar-chart .bar:not(:last-child) {
   border-right: solid 4px #ffffff;
