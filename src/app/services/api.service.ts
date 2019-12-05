@@ -257,4 +257,15 @@ export class ApiService {
         });
     });
   }
+
+  getPharosTargetsByEntrezId(entrezId: number | string): Observable< any > {
+    const url = `${environment.apiHost}/data/pharos/targets/gene/entrezId/${entrezId}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
 }

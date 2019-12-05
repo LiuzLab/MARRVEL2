@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-12">
+    <h3 class="mb-3 d-inline-block align-middle">Approved Drugs and Active Ligands from PHAROS</h3>
+    <a class="mb-3 d-inline-block ml-3 align-middle" target="_blank"
+      *ngIf="gene"
+      [attr.href]="'https://pharos.nih.gov/search?q=%22' + gene.symbol + '%22'" target="_blank"
+    >
+      <button mat-button color="primary">
+        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+        More on PHAROS
+      </button>
+    </a>
+
+    <!--p class="mt-0 mb-0 d-table" *ngIf="data">
+      <mat-icon class="d-table-cell align-top"
+        matTooltip="MARRVEL's comment" matTooltipPosition="above"
+      >insert_comment</mat-icon>
+      <span class="d-table-cell pl-2">
+        COMMENT HERE
+      </span>
+    </p-->
+  </div>
+</div>
+
+<div class="" *ngIf="!loading && (!data || !data.length)" [@toggle]>
+  <p>No data found.</p>
+</div>
+
+<div class="row" *ngIf="!loading && data && data.length" [@toggle]>
+  <div class="col-12" #pharosColumn>
+    <mat-accordion class="w-100">
+      <mat-expansion-panel
+        *ngFor="let target of data; index as idx"
+        [expanded]="idx === 0"
+        class="pb-2 w-100"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ target.accession}}/{{ target.name }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ target.idgFamily }},&nbsp;
+            <span class="text-underline-dashed" [matTooltip]="idgDevLevTrans[target.idgTDL]">
+              {{ target.idgTDL }}
+            </span>,
+            {{ (target.drugs || []).length || 0 }} approved drugs and
+            {{ (target.ligands || []).length }} active ligands found
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <h3 class="mt-2 mb-3">Approved Drugs ({{ target.drugs ? (target.drugs.length || 0) : 0 }})</h3>
+        <div *ngIf="target.drugs && target.drugs.length" style="margin-left: -24px; margin-right: -24px;">
+          <app-pharos-ligand-table [ligands]="target.drugs"></app-pharos-ligand-table>
+        </div>
+        <p *ngIf="!target.drugs || !target.drugs.length">
+          No drug found for {{ target.accession }}/{{ target.name }}
+        </p>
+
+        <h3 class="mt-5 mb-3">Active Ligands ({{ target.ligands ? (target.ligands.length || 0) : 0 }})</h3>
+        <div *ngIf="target.ligands && target.ligands.length" style="margin-left: -24px; margin-right: -24px;">
+          <app-pharos-ligand-table [ligands]="target.ligands"></app-pharos-ligand-table>
+        </div>
+        <p *ngIf="!target.ligands || !target.ligands.length">
+          No active ligand found for {{ target.accession }}/{{ target.name }}
+        </p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

@@ -200,6 +200,17 @@
       </div>
       <!-- DECIPHER Control ends -->
 
+      <!-- Pharos starts -->
+      <div class="row section mt-5" id="pharos">
+        <div class="col-12">
+          <app-pharos
+            [gene]="gene"
+            *ngIf="!geneLoading"
+          ></app-pharos>
+        </div>
+      </div>
+      <!-- Pharos Control ends -->
+
       <div class="row section mt-5" id="expression">
         <div class="col-12">
           <h2 class="mb-1 text-uppercase">Control Data</h2>

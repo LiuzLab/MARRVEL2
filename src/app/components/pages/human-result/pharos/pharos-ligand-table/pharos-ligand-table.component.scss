@@ -1,0 +1,10 @@
+.mat-cell, .mat-header-cell {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.mat-row > .mat-header-cell {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}

@@ -43,7 +43,8 @@ const geneSchema = mongoose.Schema({
   geno2mpIds: [{
     type: mongoose.ObjectId,
     ref: 'Geno2MP'
-  }]
+  }],
+  pharosTargetIds: [Number]
 }, { collection: 'Genes', toJSON: { virtuals: true } });
 
 geneSchema.virtual('gos.ontology', {
@@ -68,6 +69,11 @@ geneSchema.virtual('agrExpressions', {
   localField: 'entrezId',
   foreignField: 'entrezId',
   justOne: true
+});
+geneSchema.virtual('pharosTargets', {
+  ref: 'PharosTargets',
+  localField: 'pharosTargetIds',
+  foreignField: 'id'
 });
 
 module.exports = mongoose.model('Genes', geneSchema);

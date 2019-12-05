@@ -7,4 +7,5 @@ module.exports = {
   decipherDisease: require('./decipher-disease'),
   clinvar: require('./clinvar'),
   dbnsfp: require('./dbnsfp'),
+  pharos: require('./pharos'),
 };

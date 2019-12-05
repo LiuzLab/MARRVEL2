@@ -25,6 +25,7 @@ import {
   MatSortModule,
   MatSlideToggleModule,
   MatProgressBarModule,
+  MatExpansionModule
 } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -67,6 +68,8 @@ import { AgrExpressionComponent } from './components/pages/human-result/agr-expr
 import { MultipleGeneBoxComponent } from './components/multiple-gene-box/multiple-gene-box.component';
 import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/multiple-genes.component';
 import { ReverseAnnotationCandidatesComponent } from './components/reverse-annotation-candidates/reverse-annotation-candidates.component';
+import { PharosComponent } from './components/pages/human-result/pharos/pharos.component';
+import { PharosLigandTableComponent } from './components/pages/human-result/pharos/pharos-ligand-table/pharos-ligand-table.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +112,9 @@ import { ReverseAnnotationCandidatesComponent } from './components/reverse-annot
     AgrExpressionComponent,
     MultipleGeneBoxComponent,
     MultipleGenesComponent,
-    ReverseAnnotationCandidatesComponent
+    ReverseAnnotationCandidatesComponent,
+    PharosComponent,
+    PharosLigandTableComponent
   ],
   imports: [
     BrowserModule,
@@ -135,6 +140,7 @@ import { ReverseAnnotationCandidatesComponent } from './components/reverse-annot
     MatSortModule,
     MatSlideToggleModule,
     MatProgressBarModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
