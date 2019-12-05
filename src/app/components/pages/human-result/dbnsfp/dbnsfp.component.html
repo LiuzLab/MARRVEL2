@@ -4,9 +4,29 @@
       Variant Functional Prediction Scores from dbNSFP
     </h3>
   </div>
+
+  <div class="col-12 mt-3" *ngIf="!loading && data && rankAverage != null" [@toggle]>
+    <div class="d-table comment">
+      <div class="d-table-cell align-top comment-icon-wrapper">
+        <mat-icon matTooltip="MARRVEL's comment" matTooltipPosition="above">insert_comment</mat-icon>
+      </div>
+
+      <span class="d-table-cell pl-2">
+        For the variant of interest, the average dbNSFP rank score is {{ rankAverage.toFixed(3) }}.
+        This means that the variant of interest is more likely to be damaging
+        than {{ (rankAverage * 100).toFixed(1) }} % of all possible coding variants.
+      </span>
+    </div>
+  </div>
 </div>
 
-<div class="row mb-3" *ngIf="data">
+<div class="row" *ngIf="!loading && !data">
+  <div class="col-12">
+    <p class="m-0">No data found for Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}</p>
+  </div>
+</div>
+
+<div class="row" *ngIf="!loading && data">
   <div class="col-12">
     <table class="mat-table w-100">
       <thead>
@@ -24,7 +44,7 @@
       </thead>
 
       <tbody>
-        <tr class="mat-row" *ngIf="data.scores.CADD && data.scores.CADD.phred">
+        <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
               matTooltip="Uses 63 annotations (949 features)."
@@ -34,19 +54,22 @@
           </td>
           <td class="mat-cell number">
             <span class="text-underline-dashed"
+              *ngIf="data.scores.CADD && data.scores.CADD.phred"
               matTooltip="Range = 0 (least damaging) to 50 (most damaging)"
             >
-              {{ data.scores.CADD.phred }}
-            </span>&nbsp;
+              {{ data.scores.CADD.phred }}&nbsp;
+            </span>
+            <span class="text-muted" *ngIf="!data.scores.CADD || !data.scores.CADD.phred">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
+              *ngIf="data.scores.CADD && data.scores.CADD.phred"
               [rankscore]="data.scores.CADD.rankscore"
             ></app-rankscore-visual>
           </td>
         </tr>
 
-        <tr class="mat-row" *ngIf="data.scores.REVEL && data.scores.REVEL.score">
+        <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
               matTooltip="Ensemble method of 13 tools."
@@ -55,20 +78,22 @@
             </span>
           </td>
           <td class="mat-cell number">
-            <span class="text-underline-dashed"
+            <span class="text-underline-dashed" *ngIf="data.scores.REVEL && data.scores.REVEL.score"
               matTooltip="Range = 0 (least damaging) to 1 (most damaging)"
             >
               {{ data.scores.REVEL.score }}
             </span>
+            <span class="text-muted" *ngIf="!data.scores.REVEL || !data.scores.REVEL.score">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
+              *ngIf="data.scores.REVEL && data.scores.REVEL.score"
               [rankscore]="data.scores.REVEL.rankscore"
             ></app-rankscore-visual>
           </td>
         </tr>
 
-        <tr class="mat-row" *ngIf="data.scores.MCAP && data.scores.MCAP.prediction">
+        <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
               matTooltip="Uses conservation data and trained on mutations linked to Mendelian diseases."
@@ -77,20 +102,22 @@
             </span>
           </td>
           <td class="mat-cell number">
-            <span class="text-underline-dashed"
+            <span class="text-underline-dashed" *ngIf="data.scores.MCAP && data.scores.MCAP.prediction"
               matTooltip="Possible scores are: Tolerated or Damaging"
             >
               {{ data.scores.MCAP.prediction }}
             </span>
+            <span class="text-muted" *ngIf="!data.scores.MCAP || !data.scores.MCAP.prediction">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
+              *ngIf="data.scores.MCAP && data.scores.MCAP.prediction"
               [rankscore]="data.scores.MCAP.rankscore"
             ></app-rankscore-visual>
           </td>
         </tr>
 
-        <tr class="mat-row" *ngIf="data.scores.Polyphen2HDIV && data.scores.Polyphen2HDIV.prediction">
+        <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
               matTooltip="Uses eight sequence-based and three structure-based predictive features. Trained with Mendelian disease mutations and SNVs from close mammalian homolog proteins."
@@ -100,19 +127,22 @@
           </td>
           <td class="mat-cell number">
             <span class="text-underline-dashed"
+              *ngIf="data.scores.Polyphen2HDIV && data.scores.Polyphen2HDIV.prediction"
               matTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging"
             >
               {{ data.scores.Polyphen2HDIV.prediction }}
             </span>
+            <span class="text-muted" *ngIf="!data.scores.Polyphen2HDIV || !data.scores.Polyphen2HDIV.prediction">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
+              *ngIf="data.scores.Polyphen2HDIV && data.scores.Polyphen2HDIV.prediction"
               [rankscore]="data.scores.Polyphen2HDIV.rankscore"
             ></app-rankscore-visual>
           </td>
         </tr>
 
-        <tr class="mat-row" *ngIf="data.scores.Polyphen2HVAR && data.scores.Polyphen2HVAR.prediction">
+        <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
               matTooltip="Uses eight sequence-based and three structure-based predictive features. Trained with disease associated and common SNVs."
@@ -122,19 +152,22 @@
           </td>
           <td class="mat-cell number">
             <span class="text-underline-dashed number"
+              *ngIf="data.scores.Polyphen2HVAR && data.scores.Polyphen2HVAR.prediction"
               matTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging"
             >
               {{ data.scores.Polyphen2HVAR.prediction }}
             </span>
+            <span class="text-muted" *ngIf="!data.scores.Polyphen2HVAR || !data.scores.Polyphen2HVAR.prediction">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
+              *ngIf="data.scores.Polyphen2HVAR && data.scores.Polyphen2HVAR.prediction"
               [rankscore]="data.scores.Polyphen2HVAR.rankscore"
             ></app-rankscore-visual>
           </td>
         </tr>
 
-        <tr class="mat-row" *ngIf="data.scores['GERP++RS'] && data.scores['GERP++RS'].score">
+        <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
               matTooltip="Uses multiple alignments and phylogenetic tree of 34 mammals."
@@ -144,19 +177,20 @@
           </td>
           <td class="mat-cell number">
             <span class="text-underline-dashed number"
+              *ngIf="data.scores['GERP++RS'] && data.scores['GERP++RS'].score"
               matTooltip="-12.3 (least conserved) to 6.17 (most conserved)"
-            >
-              {{ data.scores['GERP++RS'].score }}
-            </span>&nbsp;
+            >{{ data.scores['GERP++RS'].score }}</span>&nbsp;
+            <span class="text-muted number" *ngIf="!data.scores['GERP++RS'] || !data.scores['GERP++RS'].score">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
+              *ngIf="data.scores['GERP++RS'] && data.scores['GERP++RS'].score"
               [rankscore]="data.scores['GERP++RS'].rankscore"
             ></app-rankscore-visual>
           </td>
         </tr>
 
-        <tr class="mat-row" *ngIf="data.scores.phyloP100wayVertebrate && data.scores.phyloP100wayVertebrate.score">
+        <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
               matTooltip="Uses multiple alignments and phylogenetic tree of 100 vertebrates."
@@ -166,19 +200,22 @@
           </td>
           <td class="mat-cell number">
             <span class="text-underline-dashed"
+              *ngIf="data.scores.phyloP100wayVertebrate && data.scores.phyloP100wayVertebrate.score"
               matTooltip="Range =- 20.0 (least conserved) to 10.003 (most conserved)"
             >
               {{ data.scores.phyloP100wayVertebrate.score }}
             </span>
+            <span class="text-muted" *ngIf="!data.scores.phyloP100wayVertebrate || !data.scores.phyloP100wayVertebrate.score">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
+              *ngIf="data.scores.phyloP100wayVertebrate && data.scores.phyloP100wayVertebrate.score"
               [rankscore]="data.scores.phyloP100wayVertebrate.rankscore"
             ></app-rankscore-visual>
           </td>
         </tr>
 
-        <tr class="mat-row" *ngIf="data.scores.phyloP30wayMammalian && data.scores.phyloP30wayMammalian.score">
+        <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
               matTooltip="conservation score based on the multiple alignments of 30 mammalian genomes (including human)."
@@ -188,13 +225,16 @@
           </td>
           <td class="mat-cell number">
             <span class="text-underline-dashed"
+              *ngIf="data.scores.phyloP30wayMammalian && data.scores.phyloP30wayMammalian.score"
               matTooltip="Scores range from -20 to 1.312. The larger the score, the more conserved the site."
             >
               {{ data.scores.phyloP30wayMammalian.score }}
             </span>
+            <span class="text-muted" *ngIf="!data.scores.phyloP30wayMammalian || !data.scores.phyloP30wayMammalian.score">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
+              *ngIf="data.scores.phyloP30wayMammalian && data.scores.phyloP30wayMammalian.score"
               [rankscore]="data.scores.phyloP30wayMammalian.rankscore"
             ></app-rankscore-visual>
           </td>

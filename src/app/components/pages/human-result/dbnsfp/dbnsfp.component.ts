@@ -1,35 +1,48 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { Variant } from './../../../../interfaces/variant';
 import { ApiService } from '../../../../services/api.service';
 import { DbNSFPData } from 'src/app/interfaces/data';
+import { Animations } from 'src/app/animations';
 
 @Component({
   selector: 'app-dbnsfp',
   templateUrl: './dbnsfp.component.html',
-  styleUrls: ['./dbnsfp.component.scss']
+  styleUrls: ['./dbnsfp.component.scss'],
+  animations: [ Animations.toggleInOut ]
 })
-export class DbnsfpComponent implements OnChanges {
+export class DbnsfpComponent implements OnInit {
   @Input() variant: Variant;
 
   loading = false;
   data: DbNSFPData;
+  rankAverage: number | null = null;
 
   constructor(
     private api: ApiService
   ) { }
 
-  ngOnChanges(change: SimpleChanges) {
-    if (change.variant && change.variant.currentValue && this.variant.chr) {
-      this.loading = true;
-      this.api.getDbNSFP(this.variant)
-        .pipe(take(1))
-        .subscribe((res) => {
-          this.data = this.changePredictionLabel(res);
-          this.loading = false;
-        });
-    }
+  ngOnInit() {
+    this.loading = true;
+    this.api.getDbNSFP(this.variant)
+      .pipe(take(1))
+      .subscribe((res) => {
+        if (res && res.scores) {
+          const predTools = Object.keys(res.scores) || [];
+          this.rankAverage = 0;
+          let toolCounts = 0;
+          for (const toolName of predTools) {
+            if (res.scores[toolName].rankscore) {
+              this.rankAverage += res.scores[toolName].rankscore;
+              ++toolCounts;
+            }
+          }
+          this.rankAverage = toolCounts > 0 ? this.rankAverage / toolCounts : null;
+        }
+        this.data = this.changePredictionLabel(res);
+        this.loading = false;
+      });
   }
 
   changePredictionLabel(res) {
