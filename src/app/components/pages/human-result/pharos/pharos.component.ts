@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { HumanGene } from 'src/app/interfaces/gene';
 import { ApiService } from 'src/app/services/api.service';
@@ -10,13 +10,12 @@ import { Animations } from 'src/app/animations';
   styleUrls: ['./pharos.component.scss'],
   animations: [ Animations.toggleInOut ]
 })
-export class PharosComponent implements OnInit, AfterViewInit {
+export class PharosComponent implements OnInit {
   @Input() gene: HumanGene;
 
   loading = false;
   data;
 
-  @ViewChild('pharosColumn') pharosColumn: ElementRef;
   idgDevLevTrans = {
     'Tdark': 'Little is known about this target',
     'Tbio': 'No known drugs for this target',
@@ -25,10 +24,6 @@ export class PharosComponent implements OnInit, AfterViewInit {
   };
 
   constructor(private api: ApiService) { }
-
-  ngAfterViewInit() {
-    console.log(this.pharosColumn);
-  }
 
   ngOnInit() {
     this.loading = true;

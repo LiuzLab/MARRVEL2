@@ -10,20 +10,11 @@
         More on PHAROS
       </button>
     </a>
-
-    <!--p class="mt-0 mb-0 d-table" *ngIf="data">
-      <mat-icon class="d-table-cell align-top"
-        matTooltip="MARRVEL's comment" matTooltipPosition="above"
-      >insert_comment</mat-icon>
-      <span class="d-table-cell pl-2">
-        COMMENT HERE
-      </span>
-    </p-->
   </div>
 </div>
 
 <div class="" *ngIf="!loading && (!data || !data.length)" [@toggle]>
-  <p>No data found.</p>
+  <p class="m-0">No data found.</p>
 </div>
 
 <div class="row" *ngIf="!loading && data && data.length" [@toggle]>
