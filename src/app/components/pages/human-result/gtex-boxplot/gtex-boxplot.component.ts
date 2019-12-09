@@ -32,7 +32,6 @@ export class GtexBoxplotComponent implements OnInit {
     this.api.getGtexByEntrezId(this.gene.entrezId)
       .pipe(take(1))
       .subscribe(res => {
-        console.log(' > gtex:', res);
         this.points = this.parseData(res['data']);
         this.boxplot = new GroupedBoxplot(this.points,
           {

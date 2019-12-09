@@ -55,7 +55,6 @@ export class ClinvarComponent implements OnInit {
         this.sigFourTotal =
           this.significance['pathogenic'] + this.significance['likely pathogenic'] +
           this.significance['likely benign'] + this.significance['benign'];
-        console.log(this.significance);
         this.data = res;
         this.loading = false;
       });

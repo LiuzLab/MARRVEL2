@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class PharosLigandTableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() ligands;
 
-  displayedColumns: string[] = [ 'name', 'structure', 'idgTarget', 'idgTargetFamily', 'idgDevLevel', 'targetProperties', 'extLink' ];
+  displayedColumns: string[] = [ 'name', 'structure', 'targetProperties', 'extLink' ];
   dataSource = new MatTableDataSource< any >();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   idgDevLevTrans = {

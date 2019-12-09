@@ -19,8 +19,8 @@ export class PharosComponent implements OnInit {
   idgDevLevTrans = {
     'Tdark': 'Little is known about this target',
     'Tbio': 'No known drugs for this target',
-    'Tchem': 'Target has at least one CHEMBL compound',
-    'Tclin': 'Target has at least one approved drug'
+    'Tchem': 'This target has at least one CHEMBL compound',
+    'Tclin': 'This target has at least one approved drug'
   };
 
   constructor(private api: ApiService) { }
@@ -29,13 +29,16 @@ export class PharosComponent implements OnInit {
     this.loading = true;
     this.api.getPharosTargetsByEntrezId(this.gene.entrezId)
       .subscribe(res => {
-        console.log(res);
         this.data = res;
         this.loading = false;
       }, err => {
         this.data = null;
         this.loading = false;
       });
+  }
+
+  getDevTrans(devTag, targetName) {
+    return this.idgDevLevTrans[devTag].replace(/this\starget/i, targetName);
   }
 
 }

@@ -136,8 +136,30 @@ export class ApiService {
     });
   }
 
+  getDECIPHERByGenomLoc(hg19Chr: string, hg19Start: number, hg19Stop: number): Observable< any > {
+    const url = `${environment.apiHost}/data/DECIPHER/genomloc/${hg19Chr}/${hg19Start}/${hg19Stop}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
+
   getDECIPHERDiseaseByVariant(variant: Variant): Observable< any > {
     const url = `${environment.apiHost}/data/DECIPHERDisease/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
+
+  getDECIPHERDiseaseByGenomLoc(hg19Chr: string, hg19Start: number, hg19Stop: number): Observable< any > {
+    const url = `${environment.apiHost}/data/DECIPHERDisease/genomloc/${hg19Chr}/${hg19Start}/${hg19Stop}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);

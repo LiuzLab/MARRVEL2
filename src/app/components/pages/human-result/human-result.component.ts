@@ -47,13 +47,13 @@ export class HumanResultComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.geneLoading = true;
     this.route.params.subscribe((param) => {
       this.geneEntrezId = param.gene ? +param.gene : null;
       this.variantInput = param.variant || null;
       this.proteinInput = param.protein || null;
 
       if (this.geneEntrezId !== null) {
-        this.geneLoading = true;
         this.api.getGeneByEntrezId(this.geneEntrezId)
           .pipe(take(1))
           .subscribe((res) => {
@@ -79,7 +79,6 @@ export class HumanResultComponent implements OnInit {
               };
               this.variantString = `Chr${res.chr}:${res.pos} ${res.ref}>${res.alt}`;
               this.gene = res.gene;
-              this.geneLoading = false;
               this.onGeneLoad(res.gene);
             }, err => {
               console.log(err);
@@ -90,7 +89,6 @@ export class HumanResultComponent implements OnInit {
           this.variantString = `Chr${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`;
 
           if (!this.geneEntrezId && !this.gene) {
-            this.geneLoading = true;
             this.geneCandidates = null;
             this.api.getGeneByGenomicLocation(this.variant)
               .pipe(take(1))
@@ -98,6 +96,10 @@ export class HumanResultComponent implements OnInit {
                 this.geneCandidates = res;
                 if (res && res.length) {
                   this.onGeneLoad(res[0]);
+                }
+                else {
+                  this.geneLoading = false;
+                  this.gene = null;
                 }
               });
           }

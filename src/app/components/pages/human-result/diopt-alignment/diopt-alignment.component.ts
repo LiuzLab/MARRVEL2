@@ -48,8 +48,6 @@ export class DioptAlignmentComponent implements OnInit {
       this.api.getAlignmentByEntrezId(this.gene.entrezId)
         .pipe(take(1))
         .subscribe(res => {
-          console.log(res);
-
           if (res && res.data && res.data.length) {
             const speciesObj = {};
             for (const row of res.data) {

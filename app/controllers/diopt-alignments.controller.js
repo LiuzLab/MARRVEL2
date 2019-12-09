@@ -10,22 +10,24 @@ exports.findByEntrezId = (req, res) => {
   DIOPTAlignments.findOne({ entrezId: entrezId }, { '_id': 0 })
     .lean()
     .then((doc) => {
-      for (var i=0; i<doc.data.length; ++i) {
-        const style = doc.data[i].style;
-        if (!style) continue;
+      if (doc && doc.data) {
+        for (var i=0; i<doc.data.length; ++i) {
+          const style = doc.data[i].style;
+          if (!style) continue;
 
-        for (var j=0; j<style.length; ++j) {
-          var clsStr = '';
-          if (style[j].indexOf('color: blue') !== -1) {
-            clsStr = 'mark-colon';
+          for (var j=0; j<style.length; ++j) {
+            var clsStr = '';
+            if (style[j].indexOf('color: blue') !== -1) {
+              clsStr = 'mark-colon';
+            }
+            else if (style[j].indexOf('color: red') !== -1) {
+              clsStr = 'mark-asterisk';
+            }
+            else if (style[j].indexOf('color: purple') === -1) {
+              clsStr = 'mark-dot';
+            }
+            style[j] = clsStr;
           }
-          else if (style[j].indexOf('color: red') !== -1) {
-            clsStr = 'mark-asterisk';
-          }
-          else if (style[j].indexOf('color: purple') === -1) {
-            clsStr = 'mark-dot';
-          }
-          style[j] = clsStr;
         }
       }
       return res.json(doc);

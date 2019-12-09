@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5 {
   margin: 0;
 }
 a, .link-primary {
-  color: mat-color($primary-palette, 700);
+  color: mat-color($primary-palette, 900);
   text-decoration: none;
   cursor: pointer;
 }
@@ -470,4 +470,8 @@ div.plot-tooltip {
 
 .color-primary {
   color:#66c6be
+}
+
+#human-result-container .mat-button.mat-primary {
+  color: #4cb7ac !important;
 }

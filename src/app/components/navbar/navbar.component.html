@@ -38,9 +38,7 @@
   </button>
 </mat-toolbar>
 
-<div class="nav-search-box d-none d-sm-block" *ngIf="searchOpened"
-    [@toggle]="searchOpened" 
->
+<div class="nav-search-box d-none d-sm-block" *ngIf="searchOpened" [@toggle]="searchOpened">
   <div class="container-fluid px-sm-5">
     <app-search-box [compact]="true"></app-search-box>
   </div>

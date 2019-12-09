@@ -1,7 +1,9 @@
 <div class="row mb-3">
   <div class="col-12">
     <h3 class="d-inline-block align-middle">
-      Variant Functional Prediction Scores from dbNSFP
+      Variant Functional Prediction Scores of
+      Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}
+      from dbNSFP
     </h3>
   </div>
 
@@ -12,9 +14,11 @@
       </div>
 
       <span class="d-table-cell pl-2">
-        For the variant of interest, the average dbNSFP rank score is {{ rankAverage.toFixed(3) }}.
-        This means that the variant of interest is more likely to be damaging
-        than {{ (rankAverage * 100).toFixed(1) }} % of all possible coding variants.
+        For Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }},
+        the average dbNSFP rank score is {{ rankAverage.toFixed(3) }}.
+        This means that Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}
+        is <strong>more likely to be damaging
+        than {{ (rankAverage * 100).toFixed(1) }}% of all possible coding variants</strong>.
       </span>
     </div>
   </div>
@@ -38,7 +42,9 @@
             Score / Prediction
           </th>
           <th class="mat-header-cell">
-            dbNSFP Rank Score
+            <span class="text-underline-dashed" matTooltip="The Rank Score is provided by dbNSFP to allow comparison between different scores. It is between 0 and 1 and a score of 0.9 means it is more likely to be damaging than 90% of all potential nsSNVs predicted by that method.">
+              dbNSFP Rank Score
+            </span>
           </th>
         </tr>
       </thead>
