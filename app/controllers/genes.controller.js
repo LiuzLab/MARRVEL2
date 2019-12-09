@@ -81,7 +81,7 @@ exports.findByGenomicLocation = (req, res) => {
   }
   Genes.find(
     { chr: chr, hg19Start: { $lte: pos }, hg19Stop: { $gte: pos } },
-    { symbol: 1, entrezId: 1, hgncId: 1, name: 1, xref: 1, status: 1, type: 1, chr: 1, hg19Start: 1, hg19Stop: 1, location: 1, alias: 1, '_id': 0 }
+    { '_id': 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0 }
   ).lean(true)
     .then((docs) => {
       if (!docs) return res.json([]);

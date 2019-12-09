@@ -30,7 +30,6 @@ const queryByVariant = (variant) => {
         '        gene_id\n' +
         '        gene_symbol\n' +
         '        transcript_id\n' +
-        '        protein_id\n' +
         '      }\n' +
         '    }\n' +
         '  }\n' +
