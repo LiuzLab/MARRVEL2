@@ -1,0 +1,508 @@
+<div id="TOP"></div>
+
+<app-navbar></app-navbar>
+
+<div class="container pt-5 pb-5">
+  <div class="">
+    <h1 class="m-0">FAQ</h1>
+    <ol class="mt-3 pl-4">
+      <li>
+        <a (click)="scrollTo('faq1')">
+          How to cite MARRVEL
+        </a>
+      </li>
+      <li>
+        <a  (click)="scrollTo('faq2')">
+          What does MARRVEL stand for?
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq3')">
+          How do I use MARRVEL?
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq4')">
+          How do I search MARRVEL by non-human, model organism genes?
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq5')">
+          What variant formats are allowed?
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq6')">
+          Which version of the human genome is used?
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq7')">
+          Where is the data from? (Which files were used?)
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq8')">
+          How is MARRVEL related to Undiagnosed Diseases Network (UDN)?
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq9')">
+          How does the UDN use MARRVEL?
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq10')">
+          How can MARRVEL outputs be used to analyze human variants?
+        </a>
+      </li>
+      <li>
+        <a (click)="scrollTo('faq11')">
+          Where do I report an error or provide suggestions?
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <div class="faq-section" id="faq1">
+    <h1 class="faq-title">
+      How to cite MARRVEL
+    </h1>
+    <p class="faq-content">
+      Please cite use of MARRVEL by:
+    </p>
+    <p class="faq-content">
+      Julia Wang*, Rami Al-Ouran*, Yanhui Hu*, Seon-Young Kim*, Ying-Wooi Wan, Michael F. Wangler, Shinya Yamamoto, Hsiao-Tuan Chao, Aram Comjean, Stephanie E. Mohr, UDN, Norbert Perrimon, Zhandong Liu, Hugo J. Bellen. “MARRVEL: Integration of Human and Model Organism Genetic Resources to Facilitate Functional Annotation of the Human Genome.” The American Journal of Human Genetics 100, 1–11, 2017 June 1. doi:<a href="https://doi.org/10.1016/j.ajhg.2017.04.010">10.1016/j.ajhg.2017.04.010</a>
+    </p>
+    <p class="faq-content">
+      Julia Wang, Dongxue Mao, Fatima Fazal, Seon-Young Kim, Shinya Yamamoto, Hugo Bellen, and Zhandong Liu. "Using MARRVEL v1. 2 for Bioinformatics Analysis of Human Genes and Variant Pathogenicity." Current protocols in bioinformatics 67, no. 1 (2019). doi:<a href="https://doi.org/10.1016/10.3791/59542">10.3791/59542</a>
+    </p>
+    <p class="faq-content">
+      Julia Wang, Zhandong Liu, Hugo J. Bellen, and Shinya Yamamoto. "Navigating MARRVEL, a Web-Based Tool that Integrates Human Genomics and Model Organism Genetics Information." Journal of visualized experiments: JoVE 150 (2019). doi:<a target="_blank" href="https://doi.org/10.1002/cpbi.85">10.1002/cpbi.85</a>
+    </p>
+  </div>
+
+  <div class="faq-section" id="faq2">
+    <h1 class="faq-title">
+      What does MARRVEL stand for?
+    </h1>
+    <p class="faq-content">
+      MARRVEL stands for Model organism Aggregated Resources for Rare Variant ExpLoration.
+    </p>
+  </div>
+
+  <div class="faq-section" id="faq3">
+    <h1 class="faq-title">
+      How do I use MARRVEL?
+    </h1>
+    <p class="faq-content">
+      You can insert either a human variant (multiple formats allowed) and gene, or search for a single gene. You can select from five databases (OMIM, ExAC, Geno2MP, DGV and DECIPHER).
+    </p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/AKp9AByfuo4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+  </div>
+
+  <div class="faq-section" id="faq4">
+    <h1 class="faq-title">
+      How do I search MARRVEL by non-human, model organism genes?
+    </h1>
+    <p class="faq-content">
+      To search by non-human genes (ie. Mouse, fly, yeast, etc), start by clicking on the “Model Organisms Search Tab.” Select the model organism of your choice and enter the gene symbol. Clicking “Search” will bring you to a list of putative human orthologs. Click “MARRVEL it” when you have decided which human ortholog you would like information for.
+    </p>
+  </div>
+
+  <div class="faq-section" id="faq5">
+    <h1 class="faq-title">
+      What variant formats are allowed?
+    </h1>
+    <p class="faq-content">
+      Currently, the search field will accept the following nomenclature:
+    </p>
+    <ol>
+      <li>
+        Genomic Coordinates
+        <ul>
+          <li>17-29490284-C-G</li>
+          <li>Chr17: 29490284C&gt;G</li>
+          <li>17: 29490284C&gt;G</li>
+        </ul>
+      </li>
+      <li>
+        HGVS (Human Genome Variation Society)
+        <ul>
+          <li>NM_012160.3:c.541A&gt;G</li>
+        </ul>
+      </li>
+      <li>
+        Protein/Amino acid
+        <ul>
+          <li>IRF2BPL:p.Pro372Arg</li>
+          <li>IRF2BPL:p.P372R</li>
+          <li>IRF2BPL:p.Gjkuln126*</li>
+        </ul>
+      </li>
+    </ol>
+    <p class="faq-content">
+      If you see no results across multiple databases,
+      then we recommend that you first check if your variant coordinates, gene name,
+      and reference nucleotide are correct by using&nbsp;
+      <a target="_blank" href="http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19">UCSC Genome Browser on GRCh37/hg19 Assembly
+      </a>
+      &nbsp;or&nbsp;
+      <a target="_blank" href="https://mutalyzer.nl/">Mutalyzer</a>.
+    </p>
+    <p class="faq-content">
+      For amino acid changes, check your nomenclature at&nbsp;
+      <a target="_blank" href="https://bioinformatics.mdanderson.org/transvar/">TransVar</a>.
+    </p>
+    <p class="faq-content">
+      If these information are correct, then please submit a feedback report for our team to review.
+    </p>
+
+  <div class="faq-section" id="faq6">
+    <h1 class="faq-title">
+      Which version of the human genome is used?
+    </h1>
+    <p class="faq-content">
+      GRCh 37 (hg19)
+    </p>
+  </div>
+
+  <div class="faq-section" id="faq7">
+    <h1 class="faq-title">
+      Where is the data from? (Which files were used?)
+    </h1>
+    <h3 class="faq-subtitle">
+      OMIM
+    </h3>
+    <p class="faq-content">
+      We used the OMIM API to retrieve OMIM data after obtaining the license from OMIM.
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Ensembl ID by gene symbol from:
+    </h3>
+    <p class="faq-content">
+      Ensembl GRCh37 REST API (<a target="_blank" href="http://grch37.rest.ensembl.org/">http://grch37.rest.ensembl.org</a>)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      HGNC ID and Entrez ID by gene symbol or Ensembl ID from:
+    </h3>
+    <p class="faq-content">
+      HGNC REST API (<a target="_blank" href="http://www.genenames.org/help/rest-web-service-help">http://www.genenames.org/help/rest-web-service-help</a>)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      ClinVar
+    </h3>
+    <p class="faq-content">
+      We search ClinVar by HGNC identifier for human gene and provide Variant, Location, Condition(s), Frequency, Clinical Significance, and Review Status. This data is updated every 2 weeks.
+    </p>
+    
+    <h3 class="faq-subtitle">
+      ExAC
+    </h3>
+    <p class="faq-content">
+      We downloaded the variant sites file in VCF format for release 0.3.1.<br>
+      File available at: ExAC FTP(release 0.3.1)<br>
+      ExAC database: <a target="_blank" href="http://exac.broadinstitute.org/">http://exac.broadinstitute.org</a><br>
+      Assembly: GRCh 37 (hg19)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      gnomAD
+    </h3>
+    <p class="faq-content">
+      We fetched data from gnomAD databse: <a target="_blank" href="http://gnomad.broadinstitute.org/">http://gnomad.broadinstitute.org/</a><br>
+      Assembly: GRCh 37 (hg19)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Monarch
+    </h3>
+    <p class="faq-content">
+      Directly from <a target="_blank" href="monarchinitiative.org">Monarch</a> Gene page (https://monarchinitiative.org/gene/[HGNC:id]#compare)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      IMPC
+    </h3>
+    <p class="faq-content">
+      Directly from <a target="_blank" href="mousephenotype.org">IMPC</a> Gene page (https://www.mousephenotype.org/data/genes/[MGI:id])
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Geno2MP
+    </h3>
+    <p class="faq-content">
+    We downloaded the variant sites VCF file: “Geno2MP.variants.vcf”. The VCF file was last updated on October 10, 2016.<br>
+    VCF file available at: <a target="_blank" href="http://geno2mp.gs.washington.edu/Geno2MP/#/terms">http://geno2mp.gs.washington.edu/Geno2MP/#/terms</a><br>
+    Geno2MP database: <a target="_blank" href="http://geno2mp.gs.washington.edu/">http://geno2mp.gs.washington.edu</a><br>
+    Assembly: GRCh 37 (hg19)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Geno2MP Phenotype information:
+    </h3>
+    <p class="faq-content">
+      Directly from Geno2MP website<br>
+      Last update: Oct 15 15:46 UTC 
+    </p>
+
+    <h3 class="faq-subtitle">
+      DGV
+    </h3>
+    <p class="faq-content">
+      We downloaded the DGV variants file available as a tab delimited text file.<br>
+      File available at: <a target="_blank" href="http://dgv.tcag.ca/dgv/docs/GRCh37_hg19_variants_2016-05-15.txt">http://dgv.tcag.ca/dgv/docs/GRCh37_hg19_variants_2016-05-15.txt</a><br>
+      Release date: 2016-05-15<br>
+      Database: <a target="_blank" href="http://dgv.tcag.ca/dgv/app/home">http://dgv.tcag.ca/dgv/app/home</a><br>
+      Assembly: GRCh 37 (hg19)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      DECIPHER control data
+    </h3>
+    <p class="faq-content">
+      We downloaded the “Population Copy-Number Variation Frequencies” file on Sep-7-2016.<br>
+      File available at: <a target="_blank" href="https://decipher.sanger.ac.uk/about#downloads/data">https://decipher.sanger.ac.uk/about#downloads/data</a><br>
+      Database: <a target="_blank" href="https://decipher.sanger.ac.uk/">https://decipher.sanger.ac.uk</a><br>
+      Assembly: GRCh 37 (hg19)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      TransVar
+    </h3>
+    <p class="faq-content">
+      We downloaded version 2.4.0 from <a target="_blank" href="https://github.com/zwdzwd/transvar">https://github.com/zwdzwd/transvar</a>
+    </p>
+    
+    <h3 class="faq-subtitle">
+      dbNSFP
+    </h3>
+    <p class="faq-content">
+      We downloaded version dbNSFP4.0b1a from <a target="_blank" href="https://sites.google.com/site/jpopgen/dbNSFP">https://sites.google.com/site/jpopgen/dbNSFP</a>
+    </p>
+    
+    <h3 class="faq-subtitle">
+    GO terms
+    </h3>
+    <p class="faq-content">
+      Human:<br>
+      EMBL-EBI QuickGO (<a target="_blank" href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz">ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz</a>)<br>
+      Date modified: 11/28/16, 9:35:00 AM (the file)<br>
+    </p>
+    
+    <p class="faq-content">
+      Rat:<br>
+      FTP on RDG (<a target="_blank" href="ftp://ftp.rgd.mcw.edu/pub/ontology/annotated_rgd_objects_by_ontology/rattus_genes_go">ftp://ftp.rgd.mcw.edu/pub/ontology/annotated_rgd_objects_by_ontology/rattus_genes_go</a>) Last update: Mar 3, 2017
+    </p>
+    
+    <p class="faq-content">
+      Mouse:<br>
+      MGI result page -> All GO Annotations -> GO Graph: the table below the graph (http://www.informatics.jax.org/marker/gograph/[MGI ID])<br>
+      Last update: Nov 19 00:01 UTC 
+    </p>
+    
+    <p class="faq-content">
+      Zebrafish:<br>
+      ZFIN result page -> GENE ONTOLOGY -> "GO Terms (all ?)" (http://zfin.org/action/marker/marker-go-view/[ZFIN ID])<br>
+      Last update: Nov 18 21:56 UTC 
+    </p>
+    
+    <p class="faq-content">
+      Fly:<br>
+      Directly from the FlyBase result page(http://flybase.org/reports/[flybase id].html)<br>
+      Only "Terms Based on Experimental Evidence."<br>
+      Last update: Oct 26 20:01 UTC 
+    </p>
+    
+    <p class="faq-content">
+      Worm:<br>
+      WormBase REST API (<a target="_blank" href="http://www.wormbase.org/about/userguide/for_developers/API-REST/Go_term#0--10">http://www.wormbase.org/about/userguide/for_developers/API-REST/Go_term#0--10</a>)<br>
+      Last update: Nov 9 22:17 UTC
+    </p>
+    
+    <p class="faq-content">
+      Budding Yeast:<br>
+      Directly from the SGD result page (http://www.yeastgenome.org/locus/[SGD ID]/overview)<br>
+      Last update: Nov 18 22:11 UTC
+    </p>
+    
+    <p class="faq-content">
+      Fission Yeast:<br>
+      Directly from the PomBase result page (http://www.pombase.org/spombe/result/[pombase id])<br>
+      Last update: Nov 18 23:04 UTC 
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Organ/Tissue expression and phenotype data
+    </h3>
+    <p class="faq-content">
+      Human:<br>
+      GTEx (<a target="_blank" href="http://www.gtexportal.org/static/datasets/gtex_analysis_v6p/rna_seq_data/GTEx_Analysis_v6p_RNA-seq_RNA-SeQCv1.1.8_gene_median_rpkm.gct.gz">http://www.gtexportal.org/static/datasets/gtex_analysis_v6p/rna_seq_data/GTEx_Analysis_v6p_RNA-seq_RNA-SeQCv1.1.8_gene_median_rpkm.gct.gz</a>) V6
+    </p>
+    <p class="faq-content">
+      Ohters:<br>
+      IMPC (<a target="_blank" href="mousephenotype.org">https://www.mousephenotype.org</a>)
+    </p>
+    
+    <p class="faq-content">
+      Protein Atlas<br>
+      http://www.proteinatlas.org/[ensembl ID].xml<br>
+      Updated: Dec 14 17:18 UTC, 2016
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Rat
+    </h3>
+    <p class="faq-content">
+      Rat BodyMap: Yu, Y., Fuscoe, J.C., Zhao, C., Guo, C., Jia, M., Qing, T., Bannon, D.I., Lancashire, L., Bao, W., Du,
+      T., et al. (2014). A rat RNA-Seq transcriptomic BodyMap across 11 organs and 4 developmental stages. Nat. Commun. 5,
+      3230.
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Mouse
+    </h3>
+    <p class="faq-content">
+      MGI result page, "Mutations, Alleles, and Phenotypes" section, "Phenotype Overview”.<br>
+      Last update: Nov 8 22:17 UTC
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Zebrafish
+    </h3>
+    <p class="faq-content">
+      ZFIN downloadable data (<a target="_blank" href="http://zfin.org/downloads">http://zfin.org/downloads</a>), "Expression data for wildtype fish"<br>
+      Last update: 2016.11.07 (the file)
+    </p>
+    
+    <h3 class="faq-subtitle">
+      Fly
+    </h3>
+    <p class="faq-content">
+      FlyBase result page -> FlyAtlas Anatomy Microarray -> download data (TSV)<br><br>
+      Only when "Back-to-back Scales" or "Heatmap" is available.<br>
+      Last update: Nov 7 18:52 UTC <br>
+
+    <h3 class="faq-subtitle">
+      Protein Domain
+    </h3>
+    <p class="faq-content">
+      Directly from DIOPT Best score page<br>
+      Last update: Mar 6, 2017 
+    </p>
+
+    <h3 class="faq-subtitle">
+      PHAROS
+    </h3>
+    <p class="faq-content">
+      Pharos API (<a target="_blank" href="https://pharos.nih.gov/api">https://pharos.nih.gov/api</a>)
+    </p>
+  </div>
+
+  <div class="faq-section" id="faq8">
+    <h1 class="faq-title">
+      How is MARRVEL related to Undiagnosed Diseases Network (UDN)?
+    </h1>
+    <p class="faq-content">
+      The Undiagnosed Disease Network's Model Organism Screening Center, in collaboration with Dr. Zhandong Liu's and Dr. Norbert Perrimon's bioinformatics teams developed MARRVEL as a public tool to efficiently analyze potentially pathogenic variants in patients with rare or undiagnosed diseases.
+    </p>
+  </div>
+
+  <div class="faq-section" id="faq9">
+    <h1 class="faq-title">
+      How does the UDN use MARRVEL?
+    </h1>
+
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="http://www.omim.org/">Online Mendelian Inheritance in Man (OMIM)</a> 
+    </h3>
+    <p class="faq-content">
+      The three main pieces of information that we draw from OMIM are: gene function, associated phenotypes, and reported alleles. It is helpful to know if a gene is a part of a known Mendelian phenotype whose molecular basis is known (#entries). Genes without this knowledge are candidates for novel gene discovery and for genes that are this category if the patient's phenotype does not match the reported disease and phenotype as well as those of the patients in the literature, then this increases the opportunity to provide a phenotypic expansion.
+    </p>
+
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="http://exac.broadinstitute.org/">ExAC</a>
+    </h3>
+    <p class="faq-content">ExAC contains more than 60,000 exomes and is, other than gnomAD (<a target="_blank" href="http://gnomad.broadinstitute.org/">http://gnomad.broadinstitute.org/</a>), the largest public collection of exomes that have been selected against individuals with severe early-onset Mendelian phenotypes. For MARRVEL’s purposes, ExAC serves as the best control population minor allele frequency. We are interested in two sets of outputs from ExAC. The first output is the gene-centric overview of the expected versus observed number of missense and loss of function alleles. A metric called pLI (probability of Loss of function intolerance) ranges between 0 and 1 is likely related to how essential both copies of a gene are before reproductive age. A pLI score of 1 means that this gene is very intolerant of any loss of function variants and is under selective constraint. The second output is data from ExAC that pertains to the specific variant.
+    </p> 
+
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="http://gnomad.broadinstitute.org/">gnomAD</a>
+    </h3>
+    <p class="faq-content">gnomAd contains a total of 123,136 exome sequences and 15,496 whole-genome sequences from unrelated individuals sequenced as part of various disease-specific and population genetic studies. In MARRVEL we display the population frequencies that pertains to specific variant.</p>
+
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="https://www.ncbi.nlm.nih.gov/clinvar">ClinVar</a> 
+    </h3>
+    <p class="faq-content">
+      ClinVar is a public archive of reports of the relationships among human variations and phenotypes, with supporting evidence. Variants with interpretations reported by researchers and clinicians are valuable for analyzing how likely a variant is pathogenic.
+    </p>
+
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="http://geno2mp.gs.washington.edu/">Geno2MP</a> 
+    </h3>
+    <p class="faq-content">
+      Geno2MP is a collection of samples from the University of Washington Center for Mendelian Genetics. It contains about 5,000 exomes of affected individuals and unaffected relatives. This database links the phenotypic as well as mode of inheritance information to specific alleles. For phenotype, we focus on comparing the affected organ system of the patient to the affected individuals in Geno2MP. A match in allele, mode of inheritance, and phenotype provides an increased probability that the variant likely pathogenic. However, due to small sample size a negative association does not necessarily decrease a variant’s pathogenic priority.
+    </p>
+
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="http://dgv.tcag.ca/dgv/app/home">Database of Genomic Variants (DGV)</a>
+    </h3>
+    <p class="faq-content">
+      To our knowledge, DGV is the largest public-access collection of structural variants from more than 54,000 individuals. The database includes samples of reportedly healthy individuals, at the time of ascertainment, from up to 72 different studies. Possible limitations to this data include variation in source and method of the data acquired the lack of information regarding incomplete penetrance of pathogenic CNVs, and whether individuals will develop associated diseases subsequent to data collection.
+    </p>
+
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="https://decipher.sanger.ac.uk/">DECIPHER</a> 
+    </h3>
+    <p class="faq-content">
+      The data displayed on MARRVEL includes common variants from the control population. The data displayed includes structural variants that cover the genomic location of the input variant. DECIPHER also contains variant and phenotypic information for affected individuals.
+    </p>
+
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="http://www.flyrnai.org/diopt">DIOPT</a>
+    </h3>
+    <p class="faq-content">
+      DIOPT provided multiple protein sequence alignment of the best predicted orthologs in six model organisms against the protein sequence of the human gene of interest. The alignment will provide information on the conservation of specific amino acids as well as functional protein domains
+    </p>
+                                                                                                                                  
+    <h3 class="faq-subtitle">
+      <a target="_blank" href="http://www.yeastgenome.org/">SGD</a>,&nbsp;
+      <a target="_blank" href="http://pombase.org/">PomBase</a>,&nbsp;
+      <a target="_blank" href="http://wormbase.org/">WormBase</a>,&nbsp;
+      <a target="_blank" href="http://flybase.org/">FlyBase</a> ,&nbsp;
+      <a target="_blank" href="http://zfin.org/">ZFIN</a>,&nbsp;
+      <a target="_blank" href="http://www.informatics.jax.org/">MGI</a>,&nbsp;and&nbsp;
+      <a target="_blank" href="http://rgd.mcw.edu">RGD</a>
+    </h3>
+    <p class="faq-content">
+      We collected data from multiple model organism databases and provide a summary of the biological and genetic functions of the predicted orthologs derived by DIOPT.
+    </p>
+  </div>
+
+  <div class="faq-section" id="faq10">
+    <h1 class="faq-title">
+      How can MARRVEL outputs be used to analyze human variants?
+    </h1>
+    <p class="faq-content">
+      One of many ways that users can use the data provided by MARRVEL is by following the user-driven analysis as depicted in the Figure below.
+      <img src="../../../../assets/img/pipeline.jpg" style="max-width: 500px">
+    </p>
+  </div>
+
+  <div class="faq-section" id="faq11">
+    <h1 class="faq-title">
+      Where do I report an error or provide suggestions?
+    </h1>
+    <p class="faq-content">
+      You can report any errors and provide feedback by clicking on the ‘Feedback’ button which is displayed on the right side of our portal.
+    </p>
+  </div>
+</div>
+
+<app-scroll-top-button
+  [right]="sidenavOpened ? '262px' : '84px'"
+></app-scroll-top-button>

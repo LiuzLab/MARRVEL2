@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/pages/home/home.component';
 import { AboutComponent } from './components/pages/about/about.component';
+import { FaqComponent } from './components/pages/faq/faq.component';
 import { HumanResultComponent } from './components/pages/human-result/human-result.component';
 import { BatchComponent } from './components/pages/batch/batch.component';
 import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/multiple-genes.component';
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'human/batch/genes', component: MultipleGenesComponent },
 
   { path: 'about', component: AboutComponent },
+
+  { path: 'faq', component: FaqComponent },
 
   { path: 'plot', component: GtexBoxplotComponent },    // TO DO: remove this
 

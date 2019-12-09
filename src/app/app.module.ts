@@ -70,6 +70,7 @@ import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/
 import { ReverseAnnotationCandidatesComponent } from './components/reverse-annotation-candidates/reverse-annotation-candidates.component';
 import { PharosComponent } from './components/pages/human-result/pharos/pharos.component';
 import { PharosLigandTableComponent } from './components/pages/human-result/pharos/pharos-ligand-table/pharos-ligand-table.component';
+import { FaqComponent } from './components/pages/faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { PharosLigandTableComponent } from './components/pages/human-result/phar
     MultipleGenesComponent,
     ReverseAnnotationCandidatesComponent,
     PharosComponent,
-    PharosLigandTableComponent
+    PharosLigandTableComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
