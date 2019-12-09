@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
 
-import { Gene } from '../../../../interfaces/gene';
+import { HumanGene } from '../../../../interfaces/gene';
 import { Variant } from '../../../../interfaces/variant';
 
 @Component({
@@ -12,7 +12,7 @@ import { Variant } from '../../../../interfaces/variant';
   styleUrls: ['./decipher.component.scss']
 })
 export class DECIPHERComponent implements OnInit {
-  @Input() gene: Gene;
+  @Input() gene: HumanGene;
   @Input() variant: Variant;
 
   loading = false;
@@ -23,14 +23,15 @@ export class DECIPHERComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.variant && this.variant.chr) {
-      this.requestData();
-    }
+    this.requestData();
   }
 
   requestData() {
     this.loading = true;
-    this.api.getDECIPHERByVariant(this.variant)
+    const task = this.variant ?
+      this.api.getDECIPHERByVariant(this.variant) :
+      this.api.getDECIPHERByGenomLoc(this.gene.chr, this.gene.hg19Start, this.gene.hg19Stop);
+    task
       .pipe(take(1))
       .subscribe((res: DECIPHERData[]) => {
         for (let i = 0; i < res.length; ++i) {
@@ -43,7 +44,6 @@ export class DECIPHERComponent implements OnInit {
           res[i]['delObs'] = res[i].deletion ? (res[i].deletion.obs || 0) : 0;
           res[i]['dupObs'] = res[i].duplication ? (res[i].duplication.obs || 0) : 0;
         }
-        console.log(res);
         this.data = res;
         this.loading = false;
       });

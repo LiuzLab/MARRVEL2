@@ -32,7 +32,7 @@ export class DecipherDiseaseComponent {
   displayedColumns = [ 'variant', 'varType', 'pathogenicity', 'inheritance' ];
 
   showSnvs = true;
-  showCnvs = false;
+  showCnvs = true;
   hasSnvResult = false;
 
   categories = CATEGORIES;
@@ -42,9 +42,14 @@ export class DecipherDiseaseComponent {
 
   getData() {
     this.loading = true;
-    this.api.getDECIPHERDiseaseByVariant(this.variant)
+    console.log(this.gene);
+    const task = this.variant ?
+      this.api.getDECIPHERDiseaseByVariant(this.variant) :
+      this.api.getDECIPHERDiseaseByGenomLoc(this.gene.chr, this.gene.hg19Start, this.gene.hg19Stop);
+    task
       .pipe(take(1))
       .subscribe(res => {
+        console.log(res);
         this.setData(res);
         this.setTableTitle();
         this.loading = false;
@@ -57,14 +62,19 @@ export class DecipherDiseaseComponent {
 
   setTableTitle() {
     this.tableTitle = `Detailed Information of `;
-    if (this.showSnvs) {
-      this.tableTitle += `Single-Nucleotide Variant ${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`
-      if (this.showCnvs) this.tableTitle += ' and ';
-    }
-    if (this.showCnvs) {
-      this.tableTitle += `Copy-Number Variants Contain ${this.variant.chr}:${this.variant.pos}`;
+    if (this.variant) {
+      if (this.showSnvs) {
+        this.tableTitle += `Single-Nucleotide Variant ${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`
+        if (this.showCnvs) this.tableTitle += ' and ';
+      }
+      if (this.showCnvs) {
+        this.tableTitle += `Copy-Number Variants Contain ${this.variant.chr}:${this.variant.pos}`;
+      }
+    } else {
+      this.tableTitle += `variants on ${this.gene.symbol} (${this.gene.chr}:${this.gene.hg19Start}-${this.gene.hg19Stop})`;
     }
   }
+
   setData(data: DecipherDiseaseData[]) {
     data.map(D => {
       D['variant'] = `${D.hg19Chr}:${D.hg19Start}`;
