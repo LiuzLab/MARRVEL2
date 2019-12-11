@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 
 import { CAT_NUM_TO_CAT_NAME } from '../../human-result/geno2mp/categories';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-multiple-genes',
@@ -43,9 +44,12 @@ export class MultipleGenesComponent implements OnInit {
   wholeGenesHaveData = 0;
   wholeGenesPrepared = 0;
 
+  selectedInputType  = 'multigenes';
+
   constructor(
     private api: ApiService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) { }
 
   ngOnInit() { }
@@ -160,4 +164,15 @@ export class MultipleGenesComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
 
+  onInputTypeChange(e) {
+    if (this.selectedInputType === 'gene') {
+      this.router.navigate(['']);
+    } else if (this.selectedInputType === 'protein') {
+      this.router.navigate(['human', 'protein' ]);
+    } else if (this.selectedInputType === 'modelgene') {
+      this.router.navigate(['model', 'gene' ]);
+    } else if (this.selectedInputType === 'vcf') {
+      this.router.navigate(['human', 'batch', 'vcf' ]);
+    }
+  }
 }

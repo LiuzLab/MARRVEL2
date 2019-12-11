@@ -1,5 +1,17 @@
+<div class="row">
+  <div class="col-12 text-left">
+    <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="selectedInputType" (change)="onInputTypeChange($event)" name="inputType">
+      <mat-radio-button color="primary" value="gene" class="mr-2">Human gene</mat-radio-button>
+      <mat-radio-button color="primary" value="protein" class="mr-2">Human protein</mat-radio-button>
+      <mat-radio-button color="primary" value="modelgene" class="mr-2">Model organism gene</mat-radio-button>
+      <mat-radio-button color="primary" value="vcf" class="mr-2" selected>Upload VCF file</mat-radio-button>
+      <mat-radio-button color="primary" value="multigenes" class="mr-2">Multiple human genes</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
 <div class="d-flex flex-row">
-  <mat-form-field class="flex-grow-1" id="vcfField"
+  <mat-form-field class="flex-grow-1 mt-2" id="vcfField"
     appearance="outline"
     [formGroup]="fileFormGroup"
   >

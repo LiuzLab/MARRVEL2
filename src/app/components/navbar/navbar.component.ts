@@ -8,7 +8,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./navbar.component.scss'],
   animations: [
     trigger('toggle', [
-      state('true', style({ opacity: 1, height: '12em' })),
+      state('true', style({ opacity: 1, 'min-height': '12em' })),
       state('void', style({ opacity: 0, height: '0em' })),
       transition(':enter', animate('500ms ease-in-out')),
       transition(':leave', animate('500ms ease-in-out'))

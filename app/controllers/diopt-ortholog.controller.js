@@ -22,6 +22,8 @@ exports.findByEntrezId = (req, res) => {
         }
       ],
     })
+    .populate({ path: 'gene1', select: 'symbol -_id' })
+    .lean()
     .then((docs) => {
       return res.json(docs);
     }).catch((err) => {

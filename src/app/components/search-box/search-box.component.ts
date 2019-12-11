@@ -1,24 +1,28 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MatAutocomplete, MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
 
 import { ApiService } from '../../services/api.service';
+import { Animations } from 'src/app/animations';
+import { Gene, HumanGene } from 'src/app/interfaces/gene';
 
 @Component({
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',
-  styleUrls: ['./search-box.component.scss']
+  styleUrls: ['./search-box.component.scss'],
+  animations: [ Animations.toggleInOut ]
 })
 export class SearchBoxComponent implements OnInit {
   @Input() compact  = false;
 
   selectedInputType  = 'gene';
-  gene: object | null;
+  gene: HumanGene | null;
   geneKeyword = '';
   protein  = '';
   variant  = '';
   variantType: string | null = null;
+  modelGene: Gene | null;
 
   geneInputCtrl = new FormControl();
   variantInputCtrl = new FormControl('', [
@@ -49,20 +53,31 @@ export class SearchBoxComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private api: ApiService
   ) { }
 
   ngOnInit() {
+    this.route.url.subscribe(url => {
+      if (url.length > 1) {
+        if (url[0].path === 'human' && url[1].path === 'protein') {
+          this.selectedInputType = 'protein';
+          this.onInputTypeChange(null);
+        } else if (url[0].path === 'model' && url[1].path === 'gene') {
+          this.selectedInputType = 'modelgene';
+          this.onInputTypeChange(null);
+        }
+      }
+    });
   }
 
   onInputTypeChange(e) {
-    console.log(e);
     if (this.selectedInputType === 'vcf') {
       this.router.navigate(['human', 'batch', 'vcf' ]);
-    }
-    else if (this.selectedInputType === 'multigenes') {
+    } else if (this.selectedInputType === 'multigenes') {
       this.router.navigate(['human', 'batch', 'genes' ]);
     }
+
     this.gene = null;
     this.geneKeyword = '';
     this.protein = '';
@@ -73,15 +88,12 @@ export class SearchBoxComponent implements OnInit {
 
   onGeneInput(e) {
     this.geneKeyword = e.target.value;
-    console.log(this.geneKeyword);
     if (this.geneKeyword) {
       this.api.getGenesBySymbolPrefix(9606, this.geneKeyword)
         .subscribe((res) => {
           this.geneSuggestion = res;
-          console.log(this.geneSuggestion);
         });
-    }
-    else {
+    } else {
       this.geneSuggestion = [];
     }
   }
@@ -121,46 +133,54 @@ export class SearchBoxComponent implements OnInit {
     this.variant = e.target.value;
   }
 
+  onModelGeneSelected(e) {
+    this.modelGene = e;
+  }
+
   validateInput() {
     if (this.selectedInputType === 'gene') {
       if (this.gene != null) {
         return this.variantInputCtrl.valid;
-      }
-      else {
+      } else {
         return this.variantInputCtrl.valid && this.variant !== '';
       }
-    }
-    else if (this.selectedInputType === 'protein') {
+    } else if (this.selectedInputType === 'protein') {
       return this.protein.trim() !== '';
+    } else if (this.selectedInputType === 'modelgene') {
+      return this.modelGene && this.modelGene.entrezId != null;
     }
     return false;
   }
 
   search() {
-    let inputType  = 0;
-    if (this.protein !== '') inputType |= 1;
-    if (this.gene != null) inputType |= 2;
-    if (this.variant !== '') inputType |= 4;
+    if (this.selectedInputType === 'modelgene') {
+      this.router.navigate([ 'model', 'gene', this.modelGene.entrezId ]);
+    } else {
+      let inputType  = 0;
+      if (this.protein !== '') inputType |= 1;
+      if (this.gene != null) inputType |= 2;
+      if (this.variant !== '') inputType |= 4;
 
-    switch (inputType) {
-      case 1: {
-        this.router.navigate(['human', 'protein', this.protein ]);
+      switch (inputType) {
+        case 1: {
+          this.router.navigate(['human', 'protein', this.protein ]);
+          break;
+        }
+        case 2: {
+          this.router.navigate(['human', 'gene', this.gene.entrezId ]);
+          break;
+        }
+        case 4: {
+          this.router.navigate(['human', 'variant', this.variant ]);
+          break;
+        }
+        case 6: {
+          this.router.navigate(['human', 'gene', this.gene.entrezId, 'variant', this.variant]);
+          break;
+        }
+        default: {
         break;
-      }
-      case 2: {
-        this.router.navigate(['human', 'gene', this.gene['entrezId'] ]);
-        break;
-      }
-      case 4: {
-        this.router.navigate(['human', 'variant', this.variant ]);
-        break;
-      }
-      case 6: {
-        this.router.navigate(['human', 'gene', this.gene['entrezId'], 'variant', this.variant]);
-        break;
-      }
-      default: {
-       break;
+        }
       }
     }
   }

@@ -6,7 +6,17 @@
       <img src="../../../../assets/img/marrvel.svg" class="w-75">
     </div>
 
-    <div class="col-12 mt-5">
+    <div class="col-12 mt-5 text-left">
+      <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="selectedInputType" (change)="onInputTypeChange($event)" name="inputType">
+        <mat-radio-button color="primary" value="gene" class="mr-2">Human gene</mat-radio-button>
+        <mat-radio-button color="primary" value="protein" class="mr-2">Human protein</mat-radio-button>
+      <mat-radio-button color="primary" value="modelgene" class="mr-2">Model organism gene</mat-radio-button>
+        <mat-radio-button color="primary" value="vcf" class="mr-2">Upload VCF file</mat-radio-button>
+        <mat-radio-button color="primary" value="multigenes" class="mr-2" selected>Multiple human genes</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="col-12 mt-2">
       <app-multiple-gene-box
         (searchClick)="search($event)"
       ></app-multiple-gene-box>

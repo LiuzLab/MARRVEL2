@@ -1,28 +1,18 @@
 <div class="text-center" [ngClass]="{ 'compact': compact }">
   <div class="row mb-3" [ngClass]="{'pr-xs-15px': compact}">
-    <div [ngClass]="{
-      'col-12 col-md-2 mb-10px': !compact,
-      'col-12 text-left': compact
-    }">
-      <mat-form-field appearance="outline"
-        [ngClass]="{
-          'select-field-compact': compact,
-          'w-100': !compact
-        }"
-      >
-        <mat-label>Input Type</mat-label>
-        <select matNativeControl [(ngModel)]="selectedInputType" (change)="onInputTypeChange($event)" name="inputType">
-          <option value="gene">Human gene</option>
-          <option value="protein">Human protein</option>
-          <option value="vcf">Upload VCF file</option>
-          <option value="multigenes">Multiple human genes</option>
-        </select>
-      </mat-form-field>
+    <div class="col-12 text-left">
+      <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="selectedInputType" (change)="onInputTypeChange($event)" name="inputType">
+        <mat-radio-button color="primary" value="gene" class="mr-2">Human gene</mat-radio-button>
+        <mat-radio-button color="primary" value="protein" class="mr-2" >Human protein</mat-radio-button>
+        <mat-radio-button color="primary" value="modelgene" class="mr-2" *ngIf="!compact">Model organism gene</mat-radio-button>
+        <mat-radio-button color="primary" value="vcf" class="mr-2" *ngIf="!compact">Upload VCF file</mat-radio-button>
+        <mat-radio-button color="primary" value="multigenes" class="mr-2" *ngIf="!compact">Multiple human genes</mat-radio-button>
+      </mat-radio-group>
     </div>
 
-    <div [ngClass]="{
-      'col-12 col-md-10': !compact,
-      'col-12 col-lg-5 pr-0': compact
+    <div class="mt-2" [ngClass]="{
+      'col-12': !compact,
+      'col-10 col-lg-5 pr-0': compact
     }" *ngIf="selectedInputType == 'gene'">
       <mat-form-field appearance="outline" class="w-100" id="geneInputFormField">
         <mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
@@ -56,9 +46,10 @@
         </mat-option>
       </mat-autocomplete>
     </div>
-    <div [ngClass]="{
-      'col-12 col-md-10': !compact,
-      'col-10 col-lg-11 pr-0': compact
+
+    <div class="mt-2" [ngClass]="{
+      'col-12': !compact,
+      'col-10 col-lg-5 pr-0': compact
     }" *ngIf="selectedInputType == 'protein'">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Human Protein</mat-label>
@@ -66,9 +57,16 @@
       </mat-form-field>
     </div>
 
-    <div [ngClass]="{
+    <div class="mt-2" [ngClass]="{
       'col-12': !compact,
       'col-10 col-lg-5 pr-0': compact
+    }" *ngIf="selectedInputType === 'modelgene'">
+      <app-model-gene-search (geneSelected)="onModelGeneSelected($event)"></app-model-gene-search>
+    </div>
+
+    <div [ngClass]="{
+      'col-12': !compact,
+      'col-10 col-lg-5 mt-2 pr-0': compact
     }" *ngIf="selectedInputType == 'gene'">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Human Variant (hg19)</mat-label>
@@ -81,7 +79,6 @@
         </mat-error>
       </mat-form-field>
     </div>
-
 
     <div class="col-12 text-left search-box-example mb-5" *ngIf="!compact">
       <mat-hint *ngIf="selectedInputType === 'gene'">
@@ -104,7 +101,7 @@
     </div>
     <div [ngClass]="{
       'col-12 text-center': !compact,
-      'col-2 pr-0 text-left': compact
+      'col-2 pr-0 mt-2 text-left': compact
      }">
       <button mat-flat-button	color="primary"
         [ngClass]="{'button-compact': compact}"

@@ -11,15 +11,21 @@ import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/
 // TODO: Remove below
 import { GtexBoxplotComponent } from './components/pages/human-result/gtex-boxplot/gtex-boxplot.component';
 import { ReverseAnnotationCandidatesComponent } from './components/reverse-annotation-candidates/reverse-annotation-candidates.component';
+import { ModelGeneHumanOrthologsComponent } from './components/model-gene-human-orthologs/model-gene-human-orthologs.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
+
   { path: 'human/gene/:gene', component: HumanResultComponent },
   { path: 'human/variant/:variant', component: HumanResultComponent },
   { path: 'human/gene/:gene/variant/:variant', component: HumanResultComponent },
 
+  { path: 'human/protein', component: HomeComponent },
   { path: 'human/protein/:protein', component: ReverseAnnotationCandidatesComponent },
   { path: 'human/protein/:protein/gene/:gene/variant/:variant', component: HumanResultComponent },
+
+  { path: 'model/gene', component: HomeComponent },
+  { path: 'model/gene/:gene', component: ModelGeneHumanOrthologsComponent },
 
   { path: 'human/batch/vcf', component: BatchComponent },
   { path: 'human/batch/genes', component: MultipleGenesComponent },

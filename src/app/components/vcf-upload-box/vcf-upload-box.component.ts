@@ -3,6 +3,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { Animations } from 'src/app/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vcf-upload-box',
@@ -11,6 +12,8 @@ import { Animations } from 'src/app/animations';
   animations: [ Animations.fadeInOut ]
 })
 export class VcfUploadBoxComponent implements OnInit {
+  selectedInputType  = 'vcf';
+
   file: File | null = null;
   fileFormGroup: FormGroup;
   fileProgress = 0;
@@ -20,7 +23,8 @@ export class VcfUploadBoxComponent implements OnInit {
 
   constructor(
     fb: FormBuilder,
-    private api: ApiService
+    private api: ApiService,
+    private router: Router
   ) {
     this.fileFormGroup = fb.group({
       fileDisp: new FormControl('', (c: FormControl) => {
@@ -38,18 +42,15 @@ export class VcfUploadBoxComponent implements OnInit {
       this.file = null;
       this.fileFormGroup.controls['fileDisp'].setErrors({ valid: false });
       this.fileFormGroup.setValue({ fileDisp: null });
-    }
-    else if (file.size > 50000000) {
+    } else if (file.size > 50000000) {
       this.file = null;
       this.fileFormGroup.controls['fileDisp'].setErrors({ valid: false });
       this.fileFormGroup.setValue({ fileDisp: null });
-    }
-    else if (file.name.substr(file.name.length - 4) !== '.vcf') {
+    } else if (file.name.substr(file.name.length - 4) !== '.vcf') {
       this.file = null;
       this.fileFormGroup.controls['fileDisp'].setErrors({ valid: false });
       this.fileFormGroup.setValue({ fileDisp: null });
-    }
-    else {
+    } else {
       this.file = file;
       this.fileFormGroup.controls['fileDisp'].setErrors(null);
       this.fileFormGroup.setValue({ fileDisp: file.name });
@@ -86,8 +87,7 @@ export class VcfUploadBoxComponent implements OnInit {
       const lastNLIdx = result.lastIndexOf('\n');
       if (lastNLIdx === -1) {
         lastLine = lastLine + result;
-      }
-      else {
+      } else {
         const lines = result.split(/\r?\n/g);
         lines[0] = lastLine + lines[0];
         processLines(lines.slice(0, lines.length - 1));
@@ -101,12 +101,22 @@ export class VcfUploadBoxComponent implements OnInit {
         this.dataChange.emit(variants);
         this.fileProgress = 100;
         this.parsing = false;
-      }
-      else {
+      } else {
         readNextChunk();
       }
     }
     readNextChunk();
   }
 
+  onInputTypeChange(e) {
+    if (this.selectedInputType === 'gene') {
+      this.router.navigate(['']);
+    } else if (this.selectedInputType === 'protein') {
+      this.router.navigate(['human', 'protein' ]);
+    } else if (this.selectedInputType === 'modelgene') {
+      this.router.navigate(['model', 'gene' ]);
+    } else if (this.selectedInputType === 'multigenes') {
+      this.router.navigate(['human', 'batch', 'genes' ]);
+    }
+  }
 }

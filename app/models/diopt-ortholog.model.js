@@ -38,5 +38,11 @@ dioptOrthologSchema.virtual('gene2', {
   foreignField: 'entrezId',
   justOne: true
 });
+dioptOrthologSchema.virtual('gene1', {
+  ref: 'Genes',
+  localField: 'entrezId1',
+  foreignField: 'entrezId',
+  justOne: true
+});
 
 module.exports = mongoose.model('DIOPTOrtholog', dioptOrthologSchema);

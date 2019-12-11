@@ -1,0 +1,58 @@
+<app-navbar showSearch="true" showMenuButton="true"></app-navbar>
+
+<div class="container-fluid py-5 px-md-5">
+  <div class="row">
+    <div class="col-12 title">
+      <h1>Human Ortholog Candidates<span *ngIf="data && data.length">&nbsp;of {{ data[0].gene1.symbol }}</span></h1>
+      <h4 *ngIf="data && data.length" class="font-italic">
+        {{ taxonIdToName[data[0].taxonId1] }} - Homo sapiens
+      </h4>
+    </div>
+    <div class="col-12 subtitle">
+      <h4>{{ protein }}</h4>
+    </div>
+
+    <div class="col-12 text-center mt-3" *ngIf="loading">
+      loading...
+    </div>
+
+    <div class="col-12 mt-3" *ngIf="!loading && data">
+      <table class="mat-table w-100">
+        <thead>
+          <tr class="mat-header-row">
+            <th class="mat-header-cell">Human Ortholog Candidate(s)</th>
+            <th class="mat-header-cell number">
+              <span class="text-underline-dashed" matTooltip="DIOPT score indicates the number of individual ortholog prediction tools that report a given ortholog pair. The maximum score depends on the number of ortholog prediction tools that include that species in analysis.">
+                DIOPT Score
+              </span>
+            </th>
+            <th class="mat-header-cell">
+              <span class="text-underline-dashed" matTooltip="(Yes) means that this model organism gene has the highest DIOPT score for the given human gene">
+                Best score from Human gene to {{ taxonIdToCName[data[0].taxonId1] }}?
+              </span>
+            </th>
+            <th class="mat-header-cell">MARRVEL Link</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="data && data.length">
+          <tr *ngFor="let ortholog of data" class="mat-row">
+            <td class="mat-cell">
+              {{ ortholog.gene2.symbol }}
+              <a *ngIf="ortholog.gene2.hgncId" matTooltip="Show on HGNC"
+                [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + ortholog.gene2.hgncId">
+                <mat-icon class="icon-18px align-middle">open_in_new</mat-icon>
+              </a>
+            </td>
+            <td class="mat-cell number" [ngClass]="{ 'color-primary font-weight-bold': ortholog.bestScore }">{{ ortholog.score }}</td>
+            <td class="mat-cell" [ngClass]="{ 'color-primary font-weight-bold': ortholog.bestScoreRev }">{{ ortholog.bestScoreRev ? 'Yes' : 'No' }}</td>
+            <td class="mat-cell">
+              <a [attr.href]="'/human/gene/' + ortholog.gene2.entrezId"
+                mat-flat-button color="primary"
+              >MARRVEL it</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

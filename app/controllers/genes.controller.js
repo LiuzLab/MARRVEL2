@@ -24,7 +24,7 @@ exports.findByPrefix = (req, res) => {
 
   Genes.find({ taxonId: taxonId, symbol: new RegExp('^' + prefix, 'i') },
     { '_id': 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0 },
-    { limit: limit }
+    { limit: limit, sort: { symbol: 1 } }
   )
     .then((docs) => {
       if (!docs) {
