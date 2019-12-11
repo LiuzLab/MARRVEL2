@@ -31,9 +31,17 @@ exports.getByVariant = (variant) => {
               doc.scores[key].score = (doc.scores[key].score !== '.' ? parseFloat(doc.scores[key].score) : null);
             }
             if (doc.scores[key].prediction) {
-              if ((typeof doc.scores[key].prediction) === 'string') {
-                if (doc.scores[key].prediction.indexOf(';') !== -1) {
-                  doc.scores[key].prediction = splitAndGetFirstNoneNull(doc.scores[key].prediction);
+              var preds = doc.scores[key].prediction;
+              if ((typeof preds) === 'string') {
+                if (preds.indexOf(';') !== -1) {
+                  doc.scores[key].prediction = splitAndGetFirstNoneNull(preds);
+                }
+              } else if (preds.length) {
+                for (var i=0; i<preds.length; ++i) {
+                  if (preds[i] !== '.') {
+                    doc.scores[key].prediction = preds[i];
+                    break;
+                  }
                 }
               }
               doc.scores[key].prediction = (doc.scores[key].prediction !== '.' ? doc.scores[key].prediction : null);
