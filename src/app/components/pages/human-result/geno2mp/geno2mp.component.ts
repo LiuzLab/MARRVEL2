@@ -57,6 +57,7 @@ export class Geno2mpComponent implements OnInit {
       this.api.getGeno2MPByGeneEntrezId(this.gene.entrezId)
         .pipe(take(1))
         .subscribe((res: Geno2MPResult[]) => {
+          res = res || [];
           this.geneSummary = { 0: 0, 1: 0, 2: 0, 3: 0 };
           for (let i = 0; i < res.length; ++i) {
             const catNum = FUNCANNO_TO_CAT_NUM[res[i].funcAnno];
@@ -93,13 +94,17 @@ export class Geno2mpComponent implements OnInit {
   countPhenotypes(variants: Geno2MPResult[]) {
     this.affectedCount = 0;
     const phenotypes = {};
-    for (const variant of variants) {
-      for (const hpoProfile of variant.hpoProfiles) {
-        if (hpoProfile.affectedStatus === 'affected') {
-          ++this.affectedCount;
-          for (const hpoId of hpoProfile.broad.hpoIds) {
-            const catName = HPO_BROAD_TO_CAT[hpoId];
-            phenotypes[catName] = (phenotypes[catName] || 0) + 1;
+    if (variants && variants.length) {
+      for (const variant of variants) {
+        if (variant && variant.hpoProfiles) {
+          for (const hpoProfile of variant.hpoProfiles) {
+            if (hpoProfile.affectedStatus === 'affected') {
+              ++this.affectedCount;
+              for (const hpoId of hpoProfile.broad.hpoIds) {
+                const catName = HPO_BROAD_TO_CAT[hpoId];
+                phenotypes[catName] = (phenotypes[catName] || 0) + 1;
+              }
+            }
           }
         }
       }
