@@ -54,6 +54,29 @@
         </div>
 
         <div class="col-12 subtitle mt-3" *ngIf="gene" [@toggle]>
+          <a class="d-inline mr-3" target="_blank" [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId" *ngIf="gene.hgncId">
+            <button mat-flat-button color="primary">
+              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+              HGNC
+            </button>
+          </a>
+
+          <a class="d-inline mr-3" target="_blank" [attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId">
+            <button mat-flat-button color="primary">
+              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+              NCBI Gene
+            </button>
+          </a>
+
+          <a class="d-inline mr-3" target="_blank" [attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol">
+            <button mat-flat-button color="primary">
+              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+              MyGene2
+            </button>
+          </a>
+        </div>
+
+        <div class="col-12 subtitle mt-3" *ngIf="gene" [@toggle]>
           <h4>
             <span class="label">Name</span>
             {{ gene.name }}
