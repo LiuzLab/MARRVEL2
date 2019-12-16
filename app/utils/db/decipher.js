@@ -6,7 +6,12 @@ const Genes = require('../../models/genes.model');
 exports.getByGenomicLocation = (hg19Chr, hg19Start, hg19Stop) => {
   return new Promise((resolve, reject) => {
     decipher.find(
-      { hg19Chr: hg19Chr, hg19Start: { '$gte': hg19Start }, hg19Stop: { '$lte': hg19Stop } },
+      { hg19Chr: hg19Chr,
+        '$or': [
+          { hg19Start: { '$gte': hg19Start }, hg19Start: { '$lte': hg19Stop } },
+          { hg19Start: { '$lte': hg19Start }, hg19Stop: { '$gte': hg19Start } }
+        ]
+      },
       { patientId: 0, from: 0, '_id': 0 }
     )
       .lean()
