@@ -19,9 +19,24 @@
 </div>
 
 <div class="row" *ngIf="!loading && data && data.length">
-  <div class="col-12">
+  <div class="col-12 mt-3" *ngIf="!loading && data && delCount != null" [@toggle]>
+    <div class="d-table comment">
+      <div class="d-table-cell align-top comment-icon-wrapper">
+        <mat-icon matTooltip="MARRVEL's comment" matTooltipPosition="above">insert_comment</mat-icon>
+      </div>
+
+      <span class="d-table-cell pl-2" *ngIf="gene">
+        There are <strong>{{ delCount }} control</strong> individuals with <strong>deletion of copy number variants</strong>
+        that contain&nbsp;<strong><span *ngIf="gene">{{ gene.symbol }}</span><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span></strong>.
+        If many control individuals are missing one or more copies of <span *ngIf="gene">{{ gene.symbol }}</span><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span>,
+        then it is unlikely that deletion of <span *ngIf="gene">{{ gene.symbol }}</span><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span> will cause a disease.
+      </span>
+    </div>
+  </div>
+
+  <div class="mt-2 col-12">
     <app-basic-datatable
-      [title]="'Common Copy Number Variants of ' + (variant ? variant.chr + ':' + variant.pos : gene.symbol) + ' from DECIPER'"
+      [title]="'Common Copy Number Variants of ' + (!gene ? variant.chr + ':' + variant.pos : gene.symbol) + ' from DECIPER'"
       [data]="data"
       [displayedColumns]="['position', 'size', 'freq', 'delObs', 'dupObs', 'sampleSize', 'study']"
       [columnNames]="['Position', 'Size', 'Frequency', 'Deletion', 'Duplication', 'Sample Size', 'Study']"

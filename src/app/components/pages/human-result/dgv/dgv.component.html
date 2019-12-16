@@ -17,9 +17,24 @@
       </button>
     </a>
   </div>
+
+  <div class="col-12 mt-3" *ngIf="!loading && data && lossCount != null" [@toggle]>
+    <div class="d-table comment">
+      <div class="d-table-cell align-top comment-icon-wrapper">
+        <mat-icon matTooltip="MARRVEL's comment" matTooltipPosition="above">insert_comment</mat-icon>
+      </div>
+
+      <span class="d-table-cell pl-2">
+        There are <strong>{{ lossCount }} control</strong> individuals with <strong>loss of copy number variants</strong>
+        that contain&nbsp;<strong><span *ngIf="searchBy === 'gene'">{{ gene.symbol }}</span><span *ngIf="searchBy === 'variant'">Chr{{ variant.chr }}:{{ variant.pos }}</span></strong>.
+        If many control individuals are missing one or more copies of gene symbol,
+        then it is unlikely that loss of gene symbol will cause a disease.
+      </span>
+    </div>
+  </div>
 </div>
 
-<div class="row" *ngIf="!loading && data && data.length">
+<div class="row mt-2" *ngIf="!loading && data && data.length">
   <div class="col-12">
     <app-basic-datatable
       [title]="tableTitle"

@@ -5,19 +5,23 @@ import { ApiService } from '../../../../services/api.service';
 
 import { HumanGene } from '../../../../interfaces/gene';
 import { Variant } from '../../../../interfaces/variant';
+import { Animations } from 'src/app/animations';
 
 @Component({
   selector: 'app-dgv',
   templateUrl: './dgv.component.html',
-  styleUrls: ['./dgv.component.scss']
+  styleUrls: ['./dgv.component.scss'],
+  animations: [ Animations.toggleInOut ]
 })
 export class DgvComponent implements OnInit {
   @Input() variant: Variant;
   @Input() gene: HumanGene;
 
   searchBy = 'gene';
-  data: Geno2MPData[];
+  data: DGVData[];
   loading = false;
+
+  lossCount: number;
 
   tableTitle: string;
 
@@ -35,6 +39,7 @@ export class DgvComponent implements OnInit {
           .subscribe((res) => {
             this.tableTitle = `Copy Number Variation In Control Population of ${this.gene.symbol} from DGV`;
             this.data = this.processGeno2MPData(res);
+            this.lossCount = this.getLossCount(this.data);
             this.loading = false;
           });
       }
@@ -52,12 +57,24 @@ export class DgvComponent implements OnInit {
           .subscribe((res) => {
             this.tableTitle = `Copy Number Variation In Control Population of ${this.variant.chr}:${this.variant.pos} from DGV`;
             this.data = this.processGeno2MPData(res);
+            this.lossCount = this.getLossCount(this.data);
             this.loading = false;
           });
       }
     }
   }
 
+  getLossCount(data: DGVData[]) {
+    if (!data || !data.length) {
+      return null;
+    }
+
+    let count = 0;
+    for (const row of data) {
+      count += row.loss || 0;
+    }
+    return count;
+  }
 
   processGeno2MPData(data) {
     for (let i = 0; i < data.length; ++i) {
@@ -73,7 +90,7 @@ export class DgvComponent implements OnInit {
 
 }
 
-interface Geno2MPData {
+interface DGVData {
   hg19Chr: string;
   hg19Start: number;
   hg19Stop: number;
