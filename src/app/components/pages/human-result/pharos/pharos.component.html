@@ -26,9 +26,9 @@
             matTooltip="MARRVEL's comment" matTooltipPosition="above"
           >insert_comment</mat-icon>
           <span class="d-table-cell pl-2">
-            {{ getDevTrans(target.idgTDL, target.name) }}.
+            <strong>{{ getDevTrans(target.idgTDL, target.name) }}.</strong>
             There are {{ (target.drugs || []).length || 0 }} approved drugs and
-            {{ (target.ligands || []).length }} active ligands found for {{ target.name }}.
+            {{ (target.ligands || []).length }} active ligands found for this target.
           </span>
         </p>
 

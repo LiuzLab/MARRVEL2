@@ -14,7 +14,7 @@
   <h4 class="mt-5">Disease Databases</h4>
   <ul class="menu">
     <li
-      *ngIf="geneLoading || gene"
+      *ngIf="gene"
       matTooltip="OMIM"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
@@ -34,7 +34,7 @@
       <span class="rest">rediction Scroes</span>
     </li>
     <li
-      *ngIf="geneLoading || gene"
+      *ngIf="gene"
       matTooltip="ClinVar"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"
