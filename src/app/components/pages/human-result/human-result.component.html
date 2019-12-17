@@ -105,7 +105,7 @@
       <!-- OMIM ends -->
 
       <!-- dbNSFP starts -->
-      <div class="row section mt-5" id="DbNSFP" *ngIf="variant" [@toggle]>
+      <div class="row section mt-5" id="DbNSFP" *ngIf="!geneLoading && variant" [@toggle]>
         <div class="col-12">
           <h2 class="mb-1 text-uppercase">Disease Data</h2>
           <app-dbnsfp [variant]="variant"></app-dbnsfp>
@@ -161,7 +161,7 @@
         </div>
 
         <!-- gnomAD variant -->
-        <div class="col-12 mt-3" *ngIf="variant" [@toggle]>
+        <div class="col-12 mt-3" *ngIf="!geneLoading && variant" [@toggle]>
           <h4 class="mt-0 mb-3">
             Population Allele Frequencies of {{ variantString }} from gnomAD
           </h4>
@@ -177,16 +177,16 @@
       <!-- gnomAD ends -->
 
       <!-- DGV starts -->
-      <div class="row section mt-5" id="DGV" *ngIf="!geneLoading" [@toggle]>
+      <div class="row section mt-5" id="DGV" *ngIf="!geneLoading && gene" [@toggle]>
         <div class="col-12">
           <h2 class="mb-1 text-uppercase">Control Data</h2>
-          <app-dgv [variant]="variant" [gene]="gene"></app-dgv>
+          <app-dgv *ngIf="gene" [gene]="gene"></app-dgv>
         </div>
       </div>
       <!-- DGV ends -->
 
       <!-- DECIPHER Control starts -->
-      <div class="row section mt-5" id="DECIPHER-Control" *ngIf="!geneLoading && (variant || gene)" [@toggle]>
+      <div class="row section mt-5" id="DECIPHER-Control" *ngIf="!geneLoading && gene" [@toggle]>
         <div class="col-12">
           <h2 class="mb-1 text-uppercase">Control Data</h2>
           <app-decipher [variant]="variant" [gene]="gene"></app-decipher>

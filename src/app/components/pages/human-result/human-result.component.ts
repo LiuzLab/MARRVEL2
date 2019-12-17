@@ -23,14 +23,14 @@ export class HumanResultComponent implements OnInit {
   sidenavOpened = true;
 
   // Input
-  geneEntrezId: number | null;
-  variantInput: string | null;
-  proteinInput: string | null;
+  geneEntrezId: number | null = null;
+  variantInput: string | null = null;
+  proteinInput: string | null = null;
 
   // Processed input
   gene: HumanGene | null = null;
   variant: Variant | null = null;
-  variantString: string;
+  variantString: string | null = null;
 
   // Data from server
   geneCandidates: HumanGene[] | null = null;
@@ -39,7 +39,7 @@ export class HumanResultComponent implements OnInit {
   omimData = null;
 
   orthologsLoading = false;
-  orthologs: DIOPTOrtholog[] | null;
+  orthologs: DIOPTOrtholog[] | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,10 +50,12 @@ export class HumanResultComponent implements OnInit {
   ngOnInit() {
     this.geneLoading = true;
     this.route.params.subscribe((param) => {
+      this.initValues();
       this.geneEntrezId = param.gene ? +param.gene : null;
       this.variantInput = param.variant || null;
       this.proteinInput = param.protein || null;
 
+      // Get gene information from server
       if (this.geneEntrezId !== null) {
         this.api.getGeneByEntrezId(this.geneEntrezId)
           .pipe(take(1))
@@ -62,12 +64,12 @@ export class HumanResultComponent implements OnInit {
           });
       }
 
+      // Parse variant and get gene from variant if there was no user input
       if (this.variantInput !== null && this.variantInput !== '') {
         const parsed = this.variantService.parse(this.variantInput);
         if (!parsed.valid) {
           // TODO: error
         } else if (parsed.type === 'hgvs') {
-          // TODO: Request hgvs --> coordinate
           this.api.getGenomLocByHgvsVar(this.variantInput)
             .pipe(take(1))
             .subscribe(res => {
@@ -110,6 +112,26 @@ export class HumanResultComponent implements OnInit {
       }
     });
   }
+
+  initValues() {
+    this.geneLoading = true;
+    this.geneEntrezId = null;
+    this.variantInput = null;
+    this.proteinInput = null;
+
+    this.gene = null;
+    this.variant = null;
+    this.variantString = null;
+
+    this.geneCandidates = null;
+
+    this.omimLoading = true;
+    this.omimData = null;
+
+    this.orthologsLoading = false;
+    this.orthologs = null;
+  }
+
 
   onGeneSelectionChange(e: MatSelectChange) {
     this.onGeneLoad(e.value);

@@ -18,7 +18,7 @@
     </a>
   </div>
 
-  <div class="col-12 mt-3" *ngIf="!loading && data && lossCount != null" [@toggle]>
+  <div class="col-12 mt-3" *ngIf="!loading && data && lossCount != null && (searchBy === 'gene' && gene != null || searchBy === 'variant' && variant != null)" [@toggle]>
     <div class="d-table comment">
       <div class="d-table-cell align-top comment-icon-wrapper">
         <mat-icon matTooltip="MARRVEL's comment" matTooltipPosition="above">insert_comment</mat-icon>

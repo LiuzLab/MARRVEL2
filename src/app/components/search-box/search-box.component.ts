@@ -18,12 +18,12 @@ export class SearchBoxComponent implements OnInit {
   @Input() compact  = false;
 
   selectedInputType  = 'gene';
-  gene: HumanGene | null;
+  gene: HumanGene | null = null;
   geneKeyword = '';
   protein  = '';
   variant  = '';
   variantType: string | null = null;
-  modelGene: Gene | null;
+  modelGene: Gene | null = null;
 
   geneInputCtrl = new FormControl();
   variantInputCtrl = new FormControl('', [

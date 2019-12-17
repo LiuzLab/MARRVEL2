@@ -18,12 +18,12 @@ export class DgvComponent implements OnInit {
   @Input() gene: HumanGene;
 
   searchBy = 'gene';
-  data: DGVData[];
+  data: DGVData[] | null = null;
   loading = false;
 
-  lossCount: number;
+  lossCount: number | null = null;
 
-  tableTitle: string;
+  tableTitle = '';
 
   constructor(
     private api: ApiService
