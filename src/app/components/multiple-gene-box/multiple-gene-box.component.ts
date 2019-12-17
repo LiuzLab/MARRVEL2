@@ -4,6 +4,8 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 
 import { ApiService } from '../../services/api.service';
 
+import { MULTIGENE_EXAMPLE } from './multiple-genes-example';
+
 @Component({
   selector: 'app-multiple-gene-box',
   templateUrl: './multiple-gene-box.component.html',
@@ -69,6 +71,9 @@ export class MultipleGeneBoxComponent implements OnInit {
 
   search() {
     this.searchClick.emit(this.genes);
+  }
+  searchExample() {
+    this.searchClick.emit(MULTIGENE_EXAMPLE);
   }
 
 }

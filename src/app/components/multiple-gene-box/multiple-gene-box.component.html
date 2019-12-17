@@ -21,7 +21,10 @@
         [matChipInputFor]="geneChipList"
         matChipInputAddOnBlur
       >
-      <mat-hint align="start"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
+      <mat-hint align="start"><strong>
+        Example:
+        <a (click)="searchExample()">OXR1, IQSEC1, WDR27, ANKLE2, IRF2BPL</a>
+      </strong></mat-hint>
     </mat-form-field>
     
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">

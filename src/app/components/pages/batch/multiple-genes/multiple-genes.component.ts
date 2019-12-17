@@ -8,7 +8,6 @@ import 'rxjs/add/operator/first';
 import { Animations } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
 
-import { CAT_NUM_TO_CAT_NAME } from '../../human-result/geno2mp/categories';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 

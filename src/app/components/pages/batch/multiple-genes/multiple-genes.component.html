@@ -27,16 +27,6 @@
 <div class="container-fluid py-5 px-md-5" *ngIf="genes && genes.length > 0" [@toggle]>
   <div class="row">
     <div class="col-12">
-      <a class="e2e-trusted-url"
-        role="button"
-        [href]="tsvPageDownloadUrl"
-        mat-flat-button color="primary"
-        [disabled]="loading || !tsvPageDownloadUrl"
-      >
-        <mat-icon class="icon-18px mr-1 spin" *ngIf="loading || !tsvPageDownloadUrl">autorenew</mat-icon>
-        <mat-icon class="icon-18px mr-1" *ngIf="!loading && tsvPageDownloadUrl">save_alt</mat-icon>
-        Export this page (.tsv)
-      </a>
       <button class="ml-1"
         mat-flat-button color="primary"
         *ngIf="!tsvWholeDownloadUrl"
@@ -286,7 +276,7 @@
         <div class="table-row-loading-wrapper w-100" *ngFor="let gene of genes.slice(vFrom, vTo)">
           <div class="table-row-loading w-100">
             <div class="table-cell-loading">
-              {{ gene }}
+              {{ gene.symbol }}
             </div>
           </div>
         </div>
