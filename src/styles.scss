@@ -1,6 +1,8 @@
 @import './theme.scss';
 @include angular-material-theme($MARRVEL-theme);
 $primary-palette: map-get($MARRVEL-theme, primary);
+
+@import './spinner.scss';
 /* You can add global styles to this file, and also import other style files */
 
 /********************
