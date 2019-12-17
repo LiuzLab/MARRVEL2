@@ -27,8 +27,8 @@
       <span class="d-table-cell pl-2">
         There are <strong>{{ lossCount }} control</strong> individuals with <strong>loss of copy number variants</strong>
         that contain&nbsp;<strong><span *ngIf="searchBy === 'gene'">{{ gene.symbol }}</span><span *ngIf="searchBy === 'variant'">Chr{{ variant.chr }}:{{ variant.pos }}</span></strong>.
-        If many control individuals are missing one or more copies of gene symbol,
-        then it is unlikely that loss of gene symbol will cause a disease.
+        If many control individuals are missing one or more copies of <span *ngIf="searchBy === 'gene'">{{ gene.symbol }}</span><span *ngIf="searchBy === 'variant'">Chr{{ variant.chr }}:{{ variant.pos }}</span>,
+        then it is unlikely that loss of <span *ngIf="searchBy === 'gene'">{{ gene.symbol }}</span><span *ngIf="searchBy === 'variant'">Chr{{ variant.chr }}:{{ variant.pos }}</span> will cause a disease.
       </span>
     </div>
   </div>
