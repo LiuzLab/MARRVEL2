@@ -96,6 +96,16 @@
   <h4 class="mt-4">Model Organisms</h4>
   <ul class="menu">
     <li
+      matTooltip="Orthologs"
+      [matTooltipDisabled]="sidenavOpened"
+      matTooltipPosition="left"
+      (click)="scrollTo('orthologs')"
+    >
+      <span class="initial">P</span>
+      <span class="rest">redicted Orthologs</span>
+    </li>
+
+    <li
       matTooltip="Expression"
       [matTooltipDisabled]="sidenavOpened"
       matTooltipPosition="left"

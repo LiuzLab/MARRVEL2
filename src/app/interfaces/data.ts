@@ -1,3 +1,5 @@
+import { Gene } from './gene';
+
 export interface Geno2MPResult {
   hg19Chr: string;
   hg19Pos: number;
@@ -68,3 +70,15 @@ export interface PhenotypePopulated {
   };
 }
 
+export interface DIOPTOrtholog {
+  bestScore: boolean;
+  bestScoreRev: boolean;
+  confidence: 'high' | 'moderate' | 'low';
+  entrezId1: number;
+  entrezId2: number;
+  gene1: Gene;
+  gene2: Gene;
+  score: number;
+  taxonId1: number;
+  taxonId2: number;
+}

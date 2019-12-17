@@ -74,6 +74,7 @@ import { PharosLigandTableComponent } from './components/pages/human-result/phar
 import { FaqComponent } from './components/pages/faq/faq.component';
 import { ModelGeneSearchComponent } from './components/search-box/model-gene-search/model-gene-search.component';
 import { ModelGeneHumanOrthologsComponent } from './components/model-gene-human-orthologs/model-gene-human-orthologs.component';
+import { OrthologsComponent } from './components/pages/human-result/orthologs/orthologs.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { ModelGeneHumanOrthologsComponent } from './components/model-gene-human-
     PharosLigandTableComponent,
     FaqComponent,
     ModelGeneSearchComponent,
-    ModelGeneHumanOrthologsComponent
+    ModelGeneHumanOrthologsComponent,
+    OrthologsComponent
   ],
   imports: [
     BrowserModule,

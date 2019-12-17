@@ -10,6 +10,7 @@ import { Variant } from '../../../interfaces/variant';
 
 import { Animations } from 'src/app/animations';
 import { MatSelectChange } from '@angular/material';
+import { DIOPTOrtholog } from 'src/app/interfaces/data';
 
 @Component({
   selector: 'app-human-result',
@@ -38,7 +39,7 @@ export class HumanResultComponent implements OnInit {
   omimData = null;
 
   orthologsLoading = false;
-  orthologs: object[] | null;
+  orthologs: DIOPTOrtholog[] | null;
 
   constructor(
     private route: ActivatedRoute,

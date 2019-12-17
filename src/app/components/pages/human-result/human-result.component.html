@@ -194,6 +194,14 @@
       </div>
       <!-- DECIPHER Control ends -->
 
+      <!-- DIOPT Ortholog starts -->
+      <div class="row section" id="orthologs">
+        <div class="col-12 mt-5" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
+          <app-orthologs [gene]="gene" [data]="orthologs"></app-orthologs>
+        </div>
+      </div>
+      <!-- DIOPT Ortholog ends -->
+
       <div class="row section mt-5" id="expression" *ngIf="!geneLoading && gene" [@toggle]>
         <div class="col-12">
           <app-gtex-boxplot [gene]="gene"></app-gtex-boxplot>

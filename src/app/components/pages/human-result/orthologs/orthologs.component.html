@@ -1,0 +1,310 @@
+<div class="row">
+  <div class="col-12">
+    <h3 class="m-0 d-inline-block align-middle mr-3">
+      Predicted Orthologs from DIOPT&nbsp;<span class="badge badge-secondary" style="font-size: 0.4em; vertical-align: middle;">v7.1</span>
+    </h3>
+    <a class="d-inline-block align-middle"
+      *ngIf="gene && gene.entrezId"
+      [attr.href]="'http://www.gene2function.org/search/get_ortholog/9606/' + gene.entrezId + '/best_match'"
+      target="_blank"
+    >
+      <button mat-button color="primary">
+        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+        More on Gene2Function
+      </button>
+    </a>
+    <a class="d-inline-block align-middle"
+      *ngIf="gene && gene.hgncId"
+      [attr.href]="'https://monarchinitiative.org/gene/HGNC:' + gene.hgncId + '#compare'"
+      target="_blank"
+    >
+      <button mat-button color="primary">
+        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+        More on Monarch
+      </button>
+    </a>
+  </div>
+</div>
+
+<div class="mt-3" *ngIf="!data || !data.length">
+  <p>No predicted ortholog found {{ gene ? 'for ' + gene.symbol : '' }}</p>
+</div>
+
+<div class="row mt-3">
+  <div class="col-12">
+    <mat-slide-toggle
+      [checked]="showOnlyBest"
+      (change)="showOnlyBest = !showOnlyBest"
+      color="primary"
+    >
+      Show only best DIOPT<span class="badge badge-secondary" style="margin-left: 2px; font-size: 0.4em; vertical-align: middle;">v7.1</span> score gene
+    </mat-slide-toggle>
+  </div>
+</div>
+
+<table class="mt-3 w-100 mat-table" *ngIf="data && data.length">
+  <thead>
+    <tr class="mat-header-row">
+      <th class="mat-header-cell">Organism</th>
+      <th class="mat-header-cell">Ortholog gene symbol</th>
+      <th class="mat-header-cell number">DIOPT Score</th>
+      <th class="mat-header-cell max-70px pl-3">
+        <span class="text-underline-dashed" [matTooltip]="'(Yes) means that this model organism gene has the highest DIOPT score for the human gene' + gene.symbol">
+          Best Score from human to model organism?
+        </span>
+      </th>
+      <th class="mat-header-cell max-70px pl-3">
+        <span class="text-underline-dashed" [matTooltip]="'(Yes) means that the human gene ' + gene.symbol + ' has the highest DIOPT score for the given model organism gene'">
+          Best Score from model organism to human?
+        </span>
+      </th>
+      <th class="mat-header-cell">Confidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Mouse orthologs starts -->
+    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[10090]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
+      <td class="mat-cell">
+        <img [attr.src]="taxonIdToInfo[10090].icon" class="mr-1 org-icon align-middle">
+        Mouse
+      </td>
+      <td class="mat-cell">
+        {{ row.gene2.symbol }}
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.mgiId"
+          [attr.href]="'http://www.informatics.jax.org/marker/' + row.gene2.mgiId"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          MGI
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.mgiId"
+          [attr.href]="'http://www.mousephenotype.org/data/genes/' + row.gene2.mgiId"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          IMPC
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.entrezId2"
+          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          PubMed
+        </a>
+      </td>
+      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
+    </tr>
+    <!-- Mouse orthologs ends -->
+
+    <!-- Rat orthologs starts -->
+    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[10116]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
+      <td class="mat-cell">
+        <img [attr.src]="taxonIdToInfo[10116].icon" class="mr-1 org-icon align-middle">
+        Rat
+      </td>
+      <td class="mat-cell">
+        {{ row.gene2.symbol }}
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.rgdId"
+          [attr.href]="'http://rgd.mcw.edu/rgdweb/report/gene/main.html?id=' + row.gene2.rgdId"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          RGD
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.entrezId2"
+          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          PubMed
+        </a>
+      </td>
+      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
+    </tr>
+    <!-- Rat orthologs ends -->
+
+    <!-- Zebrafish orthologs starts -->
+    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[7955]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
+      <td class="mat-cell">
+        <img [attr.src]="taxonIdToInfo[7955].icon" class="mr-1 org-icon align-middle">
+        Zebrafish
+      </td>
+      <td class="mat-cell">
+        {{ row.gene2.symbol }}
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.zfinId"
+          [attr.href]="'http://zfin.org/action/marker/view/ZDB-GENE-041114-187' + row.gene2.zfinId"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          ZFIN
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.entrezId2"
+          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          PubMed
+        </a>
+      </td>
+      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
+    </tr>
+    <!-- Zebrafish orthologs ends -->
+
+    <!-- Fly orthologs starts -->
+    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[7227]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
+      <td class="mat-cell">
+        <img [attr.src]="taxonIdToInfo[7227].icon" class="mr-1 org-icon align-middle">
+        Fly
+      </td>
+      <td class="mat-cell">
+        {{ row.gene2.symbol }}
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.flyBaseId"
+          [attr.href]="'http://flybase.org/reports/FBgn0030555' + row.gene2.flyBaseId + '.html'"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          FlyBase
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.entrezId2"
+          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          PubMed
+        </a>
+      </td>
+      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
+    </tr>
+    <!-- Zebrafish orthologs ends -->
+
+    <!-- Worm orthologs starts -->
+    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[6239]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
+      <td class="mat-cell">
+        <img [attr.src]="taxonIdToInfo[6239].icon" class="mr-1 org-icon align-middle">
+        Worm
+      </td>
+      <td class="mat-cell">
+        {{ row.gene2.symbol }}
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.wormBaseId"
+          [attr.href]="'http://www.wormbase.org/species/c_elegans/gene/' + row.gene2.wormBaseId"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+         WormBase 
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.entrezId2"
+          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          PubMed
+        </a>
+      </td>
+      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
+    </tr>
+    <!-- Worm orthologs ends -->
+
+    <!-- Yeast orthologs starts -->
+    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[4932]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
+      <td class="mat-cell">
+        <img [attr.src]="taxonIdToInfo[4932].icon" class="mr-1 org-icon align-middle">
+        Budding Yeast
+      </td>
+      <td class="mat-cell">
+        {{ row.gene2.symbol }}
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.sgdId"
+          [attr.href]="'http://www.yeastgenome.org/locus/' + row.gene2.sgdId + '/overview'"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          SGD
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.entrezId2"
+          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          PubMed
+        </a>
+      </td>
+      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
+    </tr>
+    <!-- Yeast orthologs ends -->
+
+    <!-- FYeast orthologs starts -->
+    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[4896]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
+      <td class="mat-cell">
+        <img [attr.src]="taxonIdToInfo[4896].icon" class="mr-1 org-icon align-middle">
+        Fission Yeast
+      </td>
+      <td class="mat-cell">
+        {{ row.gene2.symbol }}
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.pomBaseId"
+          [attr.href]="'http://www.pombase.org/spombe/result/' + row.gene2.pomBaseId + '/overview'"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          SGD
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.entrezId2"
+          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          PubMed
+        </a>
+      </td>
+      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
+    </tr>
+    <!-- FYeast orthologs ends -->
+  </tbody>
+</table>
