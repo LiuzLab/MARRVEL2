@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { MatAutocomplete, MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocomplete, MatChipInputEvent, MatAutocompleteSelectedEvent, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 import { ApiService } from '../../services/api.service';
 import { Animations } from 'src/app/animations';
 import { Gene, HumanGene } from 'src/app/interfaces/gene';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search-box',
@@ -54,7 +55,9 @@ export class SearchBoxComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private api: ApiService
+    private api: ApiService,
+    public dialog: MatDialog,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -183,6 +186,28 @@ export class SearchBoxComponent implements OnInit {
         }
       }
     }
+  }
+
+  openYouTubeDialog() {
+    const dialogRef = this.dialog.open(YoutubeDialogComponent, {
+      width: '608px',
+      data: { url: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/e1Qy3HC3gLo') }
+    });
+  }
+
+}
+
+@Component({
+  selector: 'app-youtube-dialog',
+  templateUrl: 'youtube-dialog.html',
+})
+export class YoutubeDialogComponent {
+  constructor(
+    public dialogRef: MatDialogRef<YoutubeDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

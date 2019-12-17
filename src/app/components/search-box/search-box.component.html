@@ -104,12 +104,16 @@
       'col-2 pr-0 mt-2 text-left': compact
      }">
       <button mat-flat-button	color="primary"
-        [ngClass]="{'button-compact': compact}"
+        [ngClass]="{ 'button-compact': compact, 'button-big': !compact }"
         (click)="search()"
         [disabled]="!validateInput()"
       >
         <span *ngIf="!compact">Search</span>
         <mat-icon *ngIf="compact">search</mat-icon>
+      </button>
+
+      <button class="ml-3 button-big" mat-stroked-button color="default" *ngIf="!compact" (click)="openYouTubeDialog()">
+        Tutorial video
       </button>
     </div>
   </div>

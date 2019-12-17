@@ -26,7 +26,8 @@ import {
   MatSlideToggleModule,
   MatProgressBarModule,
   MatExpansionModule,
-  MatRadioModule
+  MatRadioModule,
+  MatDialogModule
 } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -75,6 +76,7 @@ import { FaqComponent } from './components/pages/faq/faq.component';
 import { ModelGeneSearchComponent } from './components/search-box/model-gene-search/model-gene-search.component';
 import { ModelGeneHumanOrthologsComponent } from './components/model-gene-human-orthologs/model-gene-human-orthologs.component';
 import { OrthologsComponent } from './components/pages/human-result/orthologs/orthologs.component';
+import { YoutubeDialogComponent } from './components/search-box/search-box.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +125,8 @@ import { OrthologsComponent } from './components/pages/human-result/orthologs/or
     FaqComponent,
     ModelGeneSearchComponent,
     ModelGeneHumanOrthologsComponent,
-    OrthologsComponent
+    OrthologsComponent,
+    YoutubeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -150,11 +153,15 @@ import { OrthologsComponent } from './components/pages/human-result/orthologs/or
     MatSlideToggleModule,
     MatProgressBarModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
     HighlightSearch
+  ],
+  entryComponents: [
+    YoutubeDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
