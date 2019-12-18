@@ -12,7 +12,10 @@
 </mat-form-field>
 
 <mat-form-field appearance="outline" class="w-100" id="geneInputFormField">
-  <mat-label matTooltip="If the search result is negative, please confirm that you are using the official gene symbol through respective model organism databases.">
+  <mat-label *ngIf="taxonId === '7227'">
+    Official Gene Symbol (Case sensitive)
+  </mat-label>
+  <mat-label *ngIf="taxonId !== '7227'">
     Official Gene Symbol
   </mat-label>
   <mat-chip-list #geneChipList aria-label="Model organism gene selected">
