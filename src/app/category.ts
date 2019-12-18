@@ -5,7 +5,7 @@ export const CATEGORIES = [
   { id: 4, name: 'Eye and Ear' },
   { id: 5, name: 'Integument' },
   { id: 6, name: 'Head and Neck' },
-  { id: 7, name: 'Limb/Appendix' },
+  { id: 7, name: 'Limb/Appendage' },
   { id: 8, name: 'Skeletal and Connective Tissue' },
   { id: 9, name: 'Blood and Immune' },
   { id: 10, name: 'Cardiovascular' },
@@ -25,7 +25,7 @@ export const CAT_TO_ICON = {
   'Eye and Ear': '004-ear',
   'Integument': '012-skin',
   'Head and Neck': '017-head',
-  'Limb/Appendix': '006-anatomy',
+  'Limb/Appendage': '006-anatomy',
   'Skeletal and Connective Tissue': '007-bone',
   'Blood and Immune': '009-blood',
   'Cardiovascular': '003-heart',
@@ -41,7 +41,7 @@ export const CAT_TO_ICON = {
 
 export const HPO_BROAD_TO_CAT = {
   'HP:0000924': 'Skeletal and Connective Tissue',
-  'HP:0040064': 'Limb/Appendix',
+  'HP:0040064': 'Limb/Appendage',
   'HP:0000707': 'Nervous System',
   'HP:0000152': 'Head and Neck',
   'HP:0001939': 'Metabolism/Homeostasis',
