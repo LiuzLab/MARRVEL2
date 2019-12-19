@@ -4,7 +4,7 @@ const config = require('../config');
 
 const gene = require('./gene');
 
-const transvarPath = path.join(config.root, '../env/bin/transvar');
+const transvarPath = config.transvar.path;
 
 const appendGene = (data) => {
   return new Promise((resolve, reject) => {
