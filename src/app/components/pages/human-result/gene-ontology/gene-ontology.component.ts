@@ -15,13 +15,13 @@ const TAXONID_TO_NAME = {
   4896: 'fission yeast',
 };
 const ORGNAME_TO_ICON = {
-  'mouse': '002-mouse',
-  'rat': '003-rat',
-  'zebrafish': '004-fish',
-  'fly': '005-fly',
-  'worm': '006-worm',
-  'yeast': '007-yeast',
-  'fission yeast': '008-fyeast',
+  'mouse': 'mouse',
+  'rat': 'rat',
+  'zebrafish': 'fish',
+  'fly': 'fly',
+  'worm': 'worm',
+  'yeast': 'yeast',
+  'fission yeast': 'yeast',
 };
 const EXP_EVICODES = {
   'IEP': true,

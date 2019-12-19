@@ -19,24 +19,24 @@ export const CATEGORIES = [
   { id: 18, name: 'Other' }
 ];
 export const CAT_TO_ICON = {
-  'Prenatal Development or Birth': '010-skull',
-  'Growth Abnormality': '011-height',
-  'Nervous System': '001-brain',
-  'Eye and Ear': '004-ear',
-  'Integument': '012-skin',
-  'Head and Neck': '017-head',
-  'Limb/Appendage': '006-anatomy',
-  'Skeletal and Connective Tissue': '007-bone',
-  'Blood and Immune': '009-blood',
-  'Cardiovascular': '003-heart',
-  'Musculature': '013-strong',
-  'Respiratory': '018-lungs',
-  'Digestive': '005-stomach',
-  'Genitourinary': '002-kidneys',
-  'Endocrine': '014-thyroid',
-  'Metabolism/Homeostasis': '015-flash',
-  'Neoplasm': '008-cell',
-  'Other': '016-more'
+  'Prenatal Development or Birth': 'prenatal',
+  'Growth Abnormality': 'growth',
+  'Nervous System': 'brain',
+  'Eye and Ear': 'eyeear',
+  'Integument': 'integument',
+  'Head and Neck': 'head',
+  'Limb/Appendage': 'limb',
+  'Skeletal and Connective Tissue': 'skeletal',
+  'Blood and Immune': 'blood',
+  'Cardiovascular': 'cardiovascular',
+  'Musculature': 'musculature',
+  'Respiratory': 'respiratory',
+  'Digestive': 'digestive',
+  'Genitourinary': 'genitourinary',
+  'Endocrine': 'endocrine',
+  'Metabolism/Homeostasis': 'metabolism',
+  'Neoplasm': 'neoplasm',
+  'Other': 'etc'
 };
 
 export const HPO_BROAD_TO_CAT = {

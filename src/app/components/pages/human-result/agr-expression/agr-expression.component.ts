@@ -25,37 +25,37 @@ export class AgrExpressionComponent implements OnInit {
   taxonIdToInfo = {
     7227: {
       name: 'Fly',
-      icon: '../../../../../assets/icons/005-fly.svg',
+      icon: '../../../../../assets/icons/fly.svg',
       maxScore: 16
     },
     6239: {
       name: 'Worm',
-      icon: '../../../../../assets/icons/006-worm.svg',
+      icon: '../../../../../assets/icons/worm.svg',
       maxScore: 16
     },
     7955: {
       name: 'Zebrafish',
-      icon: '../../../../../assets/icons/004-fish.svg',
+      icon: '../../../../../assets/icons/fish.svg',
       maxScore: 15
     },
     10090: {
       name: 'Mouse',
-      icon: '../../../../../assets/icons/002-mouse.svg',
+      icon: '../../../../../assets/icons/mouse.svg',
       maxScore: 16
     },
     10116: {
       name: 'Rat',
-      icon: '../../../../../assets/icons/003-rat.svg',
+      icon: '../../../../../assets/icons/rat.svg',
       maxScore: 14
     },
     4896: {
       name: 'Fission Yeast',
-      icon: '../../../../../assets/icons/008-fyeast.svg',
+      icon: '../../../../../assets/icons/yeast.svg',
       maxScore: 12
     },
     4932: {
       name: 'Budding Yeast',
-      icon: '../../../../../assets/icons/007-yeast.svg',
+      icon: '../../../../../assets/icons/yeast.svg',
       maxScore: 15
     }
   };
