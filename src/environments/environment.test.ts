@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiHost: 'http://54.148.148.128:3000'
+  apiHost: 'http://marrvel.org:8080'
 };
 
 /*
