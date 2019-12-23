@@ -91,9 +91,15 @@ export class DioptAlignmentComponent implements OnInit {
         htmlString += `<span class="ml-2 d-inline-block">[${ row.endIdx }]</span></div>`;
       }
       else {
-        htmlString += `<div class="mb-2">
-          <span class="mark d-inline-block">${ row.mark.substring(4) }</span>
-        </div>`;
+        if (row.mark.length && row.mark[0] === ' ') {
+          htmlString += `<div class="mb-2">
+            <span class="mark d-inline-block">${ row.mark.substring(4) }</span>
+          </div>`;
+        } else {
+          htmlString += `<div class="mb-2">
+            <span class="mark d-inline-block">${ row.mark }</span>
+          </div>`;
+        }
       }
     }
     return htmlString;
