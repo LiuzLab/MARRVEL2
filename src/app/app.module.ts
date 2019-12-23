@@ -27,7 +27,8 @@ import {
   MatProgressBarModule,
   MatExpansionModule,
   MatRadioModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -77,6 +78,7 @@ import { ModelGeneSearchComponent } from './components/search-box/model-gene-sea
 import { ModelGeneHumanOrthologsComponent } from './components/model-gene-human-orthologs/model-gene-human-orthologs.component';
 import { OrthologsComponent } from './components/pages/human-result/orthologs/orthologs.component';
 import { YoutubeDialogComponent } from './components/search-box/search-box.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -126,7 +128,8 @@ import { YoutubeDialogComponent } from './components/search-box/search-box.compo
     ModelGeneSearchComponent,
     ModelGeneHumanOrthologsComponent,
     OrthologsComponent,
-    YoutubeDialogComponent
+    YoutubeDialogComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
@@ -154,7 +157,8 @@ import { YoutubeDialogComponent } from './components/search-box/search-box.compo
     MatProgressBarModule,
     MatExpansionModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   exports: [
     MatButtonModule,

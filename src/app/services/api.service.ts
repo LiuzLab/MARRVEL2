@@ -15,6 +15,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getGenesBySymbolPrefix(taxonId: number, prefix: string): Observable<any> {
+    prefix = prefix.replace(/\s+/g, ' ');
     const url = `${environment.apiHost}/data/gene/taxonId/${taxonId}/prefix/${prefix}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {

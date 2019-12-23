@@ -17,8 +17,10 @@ export class MultipleGeneBoxComponent implements OnInit {
   geneKeyword = '';
   geneInputCtrl = new FormControl();
   geneSuggestion = [];
+  selectedEntrezIds = {};
   @ViewChild('geneInput') geneInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  showAutocomplete = false;
 
   @Output() searchClick: EventEmitter< any > = new EventEmitter();
 
@@ -30,11 +32,15 @@ export class MultipleGeneBoxComponent implements OnInit {
   }
 
   onGeneInput(e) {
+    this.showAutocomplete = true;
     this.geneKeyword = e.target.value;
     if (this.geneKeyword) {
       this.api.getGenesBySymbolPrefix(9606, this.geneKeyword)
         .subscribe((res) => {
-          this.geneSuggestion = res;
+          this.geneSuggestion = res.map(e => {
+            e.selected = (this.selectedEntrezIds[e.entrezId] == true);
+            return e;
+          });
         });
     }
     else {
@@ -42,12 +48,22 @@ export class MultipleGeneBoxComponent implements OnInit {
     }
   }
 
-  geneAutocompleteSelected(e: MatAutocompleteSelectedEvent) {
-    const idx = e.option.value;
-    this.genes.push(this.geneSuggestion[idx]);
-    this.geneKeyword = '';
-    this.geneInput.nativeElement.value = '';
-    this.geneInputCtrl.setValue(null);
+  closeAutocomplete() {
+    this.showAutocomplete = false;
+  }
+
+  toggleGene(aGene) {
+    if (aGene.selected) {
+      this.removeGene(aGene);
+    } else {
+      this.addGene(aGene);
+    }
+  }
+
+  addGene(aGene) {
+    this.selectedEntrezIds[aGene.entrezId] = true;
+    this.genes.push(aGene);
+    aGene.selected = true;
   }
 
   removeGene(targetGene) {
@@ -62,6 +78,13 @@ export class MultipleGeneBoxComponent implements OnInit {
 
     if (targetIdx >= 0) {
       this.genes.splice(targetIdx, 1);
+    }
+    targetGene.selected = false;
+    this.selectedEntrezIds[targetGene.entrezId] = false;
+    for (const gene of this.geneSuggestion) {
+      if (gene.entrezId === targetGene.entrezId) {
+        gene.selected = false;
+      }
     }
   }
 

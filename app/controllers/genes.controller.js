@@ -20,9 +20,9 @@ exports.findByGeneSymbol = (req, res) => {
 exports.findByPrefix = (req, res) => {
   const taxonId = parseInt(req.params.taxonId);
   const prefix = req.params.prefix;
-  const limit = req.params.limit || 10;
+  const limit = req.params.limit || 30;
 
-  const symbolRegex = new RegExp('^' + prefix, (taxonId === 7227 ? '' : 'i'));
+  const symbolRegex = new RegExp('^(' + prefix.trim().split(/[^a-zA-Z0-9]+/g).join('|') + ')', (taxonId === 7227 ? '' : 'i'));
   Genes.find({ taxonId: taxonId, symbol: symbolRegex },
     { '_id': 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0 },
     { limit: limit, sort: { symbol: 1 } }

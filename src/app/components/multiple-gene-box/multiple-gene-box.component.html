@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-12 mb-3">
+<div class="row" (clickOutside)="closeAutocomplete()">
+  <div class="col-12">
     <mat-form-field appearance="outline" class="w-100" id="geneInputFormField">
       <mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
       <mat-chip-list #geneChipList>
@@ -13,29 +13,43 @@
         </mat-chip>
       </mat-chip-list>
 
-      <input matInput
+      <input class="w-100" matInput
         #geneInput
         [formControl]="geneInputCtrl"
         (input)="onGeneInput($event)"
-        [matAutocomplete]="auto"
         [matChipInputFor]="geneChipList"
         matChipInputAddOnBlur
+        (focus)="showAutocomplete = true"
       >
       <mat-hint align="start"><strong>
         Example:
         <a (click)="searchExample()">OXR1, IQSEC1, WDR27, ANKLE2, IRF2BPL</a>
       </strong></mat-hint>
     </mat-form-field>
-    
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">
-      <mat-option *ngFor="let aGene of geneSuggestion; let idx = index" [attr.data-index]='idx' [value]="idx">
-        <span class="text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
-        <span class="ml-0">{{ aGene.symbol.substr(geneKeyword.length) }}</span>
-        <span class="float-right text-muted">{{ aGene.name }}</span>
-      </mat-option>
-    </mat-autocomplete>
   </div>
 
+  <div class="col-12">
+    <div class="autocomplete-wrapper" [ngClass]="{ 'd-none': !showAutocomplete }">
+      <div class="autocomplete">
+        <div class="autocomplete-option d-flex align-items-center" *ngFor="let aGene of geneSuggestion; let idx = index">
+          <mat-checkbox [checked]="aGene.selected" color="primary" (change)="toggleGene(aGene)"></mat-checkbox>
+
+          <div (click)="toggleGene(aGene)" class="flex-grow-1 d-flex justify-content-between align-items-center">
+            <span>
+              <span class="ml-2 text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
+              <span class="ml-0">{{ aGene.symbol.substr(geneKeyword.length) }}</span>
+            </span>
+            <span>
+              <span class="text-muted">{{ aGene.name }}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3">
   <div class="col-12 text-center">
     <button mat-flat-button	color="primary"
       (click)="search()"
