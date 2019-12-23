@@ -16,12 +16,14 @@ export class ModelGeneHumanOrthologsComponent implements OnInit {
   data;
 
   taxonIdToName = {
-    7227: 'Drosophila Melanogaster',
-    6239: 'Caenorhabditis Elegans',
-    7955: 'Danio Rerio',
-    9606: 'Homo Sapiens',
-    10090: 'Mus Musculus',
-    10116: 'Rattus Norvegicus'
+    7227: 'Drosophila melanogaster',
+    6239: 'Caenorhabditis elegans',
+    7955: 'Danio rerio',
+    9606: 'Homo sapiens',
+    10090: 'Mus musculus',
+    10116: 'Rattus norvegicus',
+    4932: 'Saccharomyces cerevisiae',
+    4896: 'Schizosaccharomyces pombe'
   };
   taxonIdToCName = {
     7227: 'Fly',
@@ -29,8 +31,19 @@ export class ModelGeneHumanOrthologsComponent implements OnInit {
     7955: 'Zebrafish',
     9606: 'Human',
     10090: 'Mouse',
-    10116: 'Rat'
+    10116: 'Rat',
+    4932: 'Yeast',
+    4896: 'Fission Yeast'
   };
+  taxonIdToMaxScore = {
+    7227: 16,
+    6239: 15,
+    7955: 15,
+    10090: 16,
+    10116: 14,
+    4932: 14,
+    4896: 11
+  }
 
   constructor(
     private route: ActivatedRoute,

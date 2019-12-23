@@ -40,7 +40,7 @@
                 <mat-icon class="icon-18px align-middle">open_in_new</mat-icon>
               </a>
             </td>
-            <td class="mat-cell number" [ngClass]="{ 'color-primary font-weight-bold': ortholog.bestScore }">{{ ortholog.score }}</td>
+            <td class="mat-cell number" [ngClass]="{ 'color-primary font-weight-bold': ortholog.bestScore }">{{ ortholog.score }}/{{ taxonIdToMaxScore[ortholog.taxonId1] }}</td>
             <td class="mat-cell" [ngClass]="{ 'color-primary font-weight-bold': ortholog.bestScoreRev }">{{ ortholog.bestScoreRev ? 'Yes' : 'No' }}</td>
             <td class="mat-cell">
               <a [attr.href]="'/human/gene/' + ortholog.gene2.entrezId"
