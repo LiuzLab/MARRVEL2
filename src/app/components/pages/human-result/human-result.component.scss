@@ -45,48 +45,76 @@ h2 {
   background-color: rgb(58, 58, 58);
   color: rgba(255,255,255,0.85);
 }
+.sidenav-container,
 .mat-sidenav-container {
   height: 100vh;
   background: none;
 }
 
 @media(min-width: 768px) {
-mat-sidenav-content.sidenav-closed {
-  margin-right: 250px !important;
-  -webkit-transition: margin 0.1s ease-in-out;
-  -moz-transition: margin 0.1s ease-in-out;
-  -o-transition: margin 0.1s ease-in-out;
-  transition: margin 0.1s ease-in-out;
-}
-mat-sidenav-content.sidenav-closed {
-  margin-right: 72px !important;
-  -webkit-transition: margin 0.1s ease-in-out;
-  -moz-transition: margin 0.1s ease-in-out;
-  -o-transition: margin 0.1s ease-in-out;
-  transition: margin 0.1s ease-in-out;
-}
+  .sidenav-content.sidenav-closed,
+  mat-sidenav-content.sidenav-closed {
+    margin-right: 250px !important;
+    -webkit-transition: margin 0.1s ease-in-out;
+    -moz-transition: margin 0.1s ease-in-out;
+    -o-transition: margin 0.1s ease-in-out;
+    transition: margin 0.1s ease-in-out;
+  }
+  .sidenav-content.sidenav-closed,
+  mat-sidenav-content.sidenav-closed {
+    margin-right: 72px !important;
+    -webkit-transition: margin 0.1s ease-in-out;
+    -moz-transition: margin 0.1s ease-in-out;
+    -o-transition: margin 0.1s ease-in-out;
+    transition: margin 0.1s ease-in-out;
+  }
 
-mat-sidenav.opened {
-  width: 250px;
-  -webkit-transition: width 0.1s ease-in-out;
-  -moz-transition: width 0.1s ease-in-out;
-  -o-transition: width 0.1s ease-in-out;
-  transition: width 0.1s ease-in-out;
-}
-mat-sidenav.closed {
-  width: 72px;
-  -webkit-transition: width 0.1s ease-in-out;
-  -moz-transition: width 0.1s ease-in-out;
-  -o-transition: width 0.1s ease-in-out;
-  transition: width 0.1s ease-in-out;
-}
+  .sidenav.opened,
+  mat-sidenav.opened {
+    width: 250px;
+    -webkit-transition: width 0.1s ease-in-out;
+    -moz-transition: width 0.1s ease-in-out;
+    -o-transition: width 0.1s ease-in-out;
+    transition: width 0.1s ease-in-out;
+  }
+  .sidenav.closed,
+  mat-sidenav.closed {
+    width: 72px;
+    -webkit-transition: width 0.1s ease-in-out;
+    -moz-transition: width 0.1s ease-in-out;
+    -o-transition: width 0.1s ease-in-out;
+    transition: width 0.1s ease-in-out;
+  }
 
-  mat-sidenav-content.sidenav-opened {
+  .sidenav-content.sidenav-opened,
+    mat-sidenav-content.sidenav-opened {
     margin-right: 250px !important;
   }
+  .sidenav-content.sidenav-closed,
   mat-sidenav-content.sidenav-closed {
     margin-right: 72px !important;
   }
+}
+.sidenav-content {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  overflow: hidden;
+}
+
+
+.sidenav {
+  z-index: 2;
+  display: block;
+  position: fixed;
+  right: 0;
+  top: 0;
+  outline: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+  height: 100vh;
 }
 
 #OMIM .skeleton {

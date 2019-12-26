@@ -30,7 +30,9 @@ export class SidenavComponent implements OnInit {
   }
 
   scrollTo(id: string) {
-    window.document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    this.change.emit({
+      scrollTo: id
+    });
   }
 
 }

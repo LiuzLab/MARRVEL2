@@ -2,18 +2,16 @@
   Loading ...
 </div>
 
-<mat-sidenav-container>
-  <mat-sidenav #sidenav class="sidenav" mode="side" position="end" opened disableClose
-    [ngClass]="{ 'opened': sidenavOpened, 'closed': !sidenavOpened }"
-  >
+<div class="sidenav-container">
+  <div class="sidenav" #sidenav [ngClass]="{ 'opened': sidenavOpened, 'closed': !sidenavOpened }">
     <app-sidenav
       [variant]="variantString"
       [gene]="gene"
       (change)="toggleSidenav($event)"
     ></app-sidenav>
-  </mat-sidenav>
+  </div>
 
-  <mat-sidenav-content id="human-result-container"
+  <div class="sidenav-content" id="human-result-container"
     [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
   >
     <div id="TOP"></div>
@@ -242,8 +240,8 @@
       <!-- Alignment ends -->
 
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</div>
 
 <app-scroll-top-button
   [right]="sidenavOpened ? '262px' : '84px'"

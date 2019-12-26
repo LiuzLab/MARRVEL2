@@ -176,6 +176,10 @@ export class HumanResultComponent implements OnInit {
   }
 
   toggleSidenav(e) {
-    this.sidenavOpened = e.sidenavOpened;
+    if ('sidenavOpened' in e) {
+      this.sidenavOpened = e.sidenavOpened;
+    } else {
+      window.document.getElementById(e.scrollTo).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }
