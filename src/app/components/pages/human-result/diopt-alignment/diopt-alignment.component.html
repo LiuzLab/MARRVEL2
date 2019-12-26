@@ -11,11 +11,12 @@
 
 <div class="row">
   <div class="col-12">
-    <h3 class="mt-0 mb-3 d-inline-block align-middle">
-      Multiple Protein Alignment for {{ gene? gene.symbol : '' }}&nbsp;
-      <span class="badge badge-secondary" style="font-size: 0.4em; vertical-align: middle;">DIOPT v7.1</span>
+    <h3 class="mt-0 d-inline-block align-middle">
+      Multiple Protein Alignment for {{ gene? gene.symbol : '' }}
+      <mat-icon class="ml-1" matTooltip="In general, the longest transcript is used to generate the multiple protein alignment. To examine a specific amino acid(s), enter the number of amino acid of interest below and select the organisms of interest. These amino acids will be highlighted in blue/green." style="vertical-align: middle; font-size: 18px; width: 18px; height: 18px; margin-bottom: 4px;">help</mat-icon>
+      <span class="ml-2 align-middle badge badge-secondary" style="font-size: 0.4em; vertical-align: middle;">DIOPT v7.1</span>
     </h3>
-    <a class="mb-3 d-inline-block ml-3 align-middle"
+    <a class="d-inline-block ml-3 align-middle"
       *ngIf="gene"
       [attr.href]="'http://www.flyrnai.org/tools/diopt/web/getAlignmentTarget/9606/' + gene.entrezId"
       target="_blank"
