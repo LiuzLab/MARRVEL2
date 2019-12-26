@@ -73,6 +73,23 @@ export class DbnsfpComponent implements OnInit {
       else if (res.scores.Polyphen2HVAR.prediction === 'D') {
         res.scores.Polyphen2HVAR.prediction = 'Probably Damaging';
       }
+
+      if (res.scores.MutationTaster && res.scores.MutationTaster.prediction) {
+        switch (res.scores.MutationTaster.prediction) {
+          case 'A':
+            res.scores.MutationTaster.prediction = 'Disease Causing Automatic';
+            break;
+          case 'D':
+            res.scores.MutationTaster.prediction = 'Disease Causing';
+            break;
+          case 'N':
+            res.scores.MutationTaster.prediction = 'Polymorphism';
+            break;
+          case 'P':
+            res.scores.MutationTaster.prediction = 'Polymorphism Automatic';
+            break;
+        }
+      }
     }
     return res;
   }

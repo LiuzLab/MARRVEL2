@@ -103,6 +103,31 @@
         <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
+              matTooltip="MutationTaster prediction. The score cutoff between Disease Causing and Polymorphism is 0.5 for MTnew and 0.31733 for the rankscore."
+            >
+              MutationTaster
+              <span class="ml-1 badge badge-secondary">v2</span>
+            </span>
+          </td>
+          <td class="mat-cell number">
+            <span class="text-underline-dashed" *ngIf="data.scores.MutationTaster && data.scores.MutationTaster.prediction"
+              matTooltip="Possible scores are: Disease Causing Automatic, Disease Causing, Polymorphism, and Polymorphism Automatic"
+            >
+              {{ data.scores.MutationTaster.prediction }}
+            </span>
+            <span class="text-muted" *ngIf="!data.scores.MutationTaster || !data.scores.MutationTaster.prediction">NA</span>
+          </td>
+          <td class="mat-cell">
+            <app-rankscore-visual
+              *ngIf="data.scores.MutationTaster && data.scores.MutationTaster.prediction"
+              [rankscore]="data.scores.MutationTaster.convertedRankscore"
+            ></app-rankscore-visual>
+          </td>
+        </tr>
+
+        <tr class="mat-row">
+          <td class="mat-cell">
+            <span class="text-underline-dashed"
               matTooltip="Uses conservation data and trained on mutations linked to Mendelian diseases."
             >
               M-CAP
