@@ -79,6 +79,7 @@ import { ModelGeneHumanOrthologsComponent } from './components/model-gene-human-
 import { OrthologsComponent } from './components/pages/human-result/orthologs/orthologs.component';
 import { YoutubeDialogComponent } from './components/search-box/search-box.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { ClinvarVariantsTableComponent } from './components/pages/human-result/clinvar/clinvar-variants-table/clinvar-variants-table.component';
 
 @NgModule({
   declarations: [
@@ -129,7 +130,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     ModelGeneHumanOrthologsComponent,
     OrthologsComponent,
     YoutubeDialogComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    ClinvarVariantsTableComponent
   ],
   imports: [
     BrowserModule,

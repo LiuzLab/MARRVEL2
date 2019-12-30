@@ -161,6 +161,16 @@ span.text-error {
   padding: 0.7em 0 0.7em 0 !important;
 }
 
+.mat-form-field.no-hint .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+.mat-form-field.no-hint .mat-form-field-underline {
+  bottom: 0em !important;
+}
+.mat-form-field.no-hint .mat-form-field-subscript-wrapper {
+  display: none !important;
+}
+
 /********************
  * Table
  */
@@ -206,9 +216,9 @@ span.text-error {
 }
 
 .mat-icon.icon-18px{
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 
 .no-overlay.mat-button:hover .mat-button-focus-overlay {

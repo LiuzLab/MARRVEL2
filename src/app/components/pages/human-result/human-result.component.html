@@ -125,7 +125,7 @@
       <div class="row section mt-5" id="ClinVar" *ngIf="!geneLoading && gene" [@toggle]>
         <div class="col-12">
           <h2 class="mb-1 text-uppercase">Disease Data</h2>
-          <app-clinvar [gene]="gene"></app-clinvar>
+          <app-clinvar [gene]="gene" [variant]="variant"></app-clinvar>
         </div>
       </div>
       <!-- ClinVar ends -->

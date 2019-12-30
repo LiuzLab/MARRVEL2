@@ -93,13 +93,18 @@
     <div class="mt-2"
       [@toggle]="alleleVisible"
     >
-      <app-basic-datatable
+      <!--app-basic-datatable
         [data]="data"
         [displayedColumns]="['title', 'location', 'condition', 'significanceText', 'reviewStatus']"
-        [columnNames]="['Variation', 'Location', 'Condition(s)', 'Clinical Significance', 'Reveiw Status']"
+        [columnNames]="['Variation', 'Location', 'Condition(s)', 'Clinical Significance', 'Review Status']"
         title="Reported Alleles From ClinVar"
         unit="Allele"
-      ></app-basic-datatable>
+      ></app-basic-datatable-->
+      <app-clinvar-variants-table
+        [gene]="gene"
+        [variant]="variant"
+        [data]="data"
+      ></app-clinvar-variants-table>
     </div>
   </div>
 </div>

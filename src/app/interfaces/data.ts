@@ -82,3 +82,16 @@ export interface DIOPTOrtholog {
   taxonId1: number;
   taxonId2: number;
 }
+
+export interface ClinVarVarinat {
+  uid: number;
+  title: string;
+  start?: number;
+  stop?: number;
+  significance?: {
+    reviewStatus?: string;
+    description?: string;
+    lastEvaluated?: string;
+  };
+  condition?: string;
+}

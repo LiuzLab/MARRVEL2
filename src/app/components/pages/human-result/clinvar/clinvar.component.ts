@@ -4,6 +4,7 @@ import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
+import { Variant } from '../../../../interfaces/variant';
 
 import { Animations } from '../../../../animations';
 
@@ -15,6 +16,7 @@ import { Animations } from '../../../../animations';
 })
 export class ClinvarComponent implements OnInit {
   @Input() gene: HumanGene;
+  @Input() variant: Variant;
 
   loading = false;
   data;
