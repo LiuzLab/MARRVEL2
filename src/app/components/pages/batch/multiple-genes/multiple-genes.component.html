@@ -65,7 +65,7 @@
   </div>
 
   <div class="overflow-x-scroll">
-    <table class="table border-top" [ngClass]="{ 'loading min-width-100perc': loading }">
+    <table class="table border-top min-width-100perc" [ngClass]="{ 'loading': loading }">
       <thead class="border-top">
         <tr>
           <th>&nbsp;</th>
@@ -300,7 +300,7 @@
                   <span class="label badge mr-1" [ngClass]="go.namespace" [matTooltip]="go.namespace">
                     {{ go.namespace === 'cellular_component' ? 'C' : (go.namespace === 'molecular_function' ? 'F' : 'P' ) }}
                   </span>
-                  <a [attr.href]="'http://amigo.geneontology.org/amigo/term/' + go.goId">{{ go.name }}</a>
+                  <a [attr.href]="'http://amigo.geneontology.org/amigo/term/' + go.goId" target="_blank">{{ go.name }}</a>
                 </li>
               </ul>
             </span>
