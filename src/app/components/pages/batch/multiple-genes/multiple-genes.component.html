@@ -61,234 +61,260 @@
         [pageIndex]="curPage"
         (page)="onPageChange($event)"
       ></mat-paginator>
-
-      <mat-table class="w-100" [dataSource]="dataSource">
-        <ng-container matColumnDef="symbol">
-          <mat-header-cell *matHeaderCellDef>Gene</mat-header-cell>
-          <mat-cell *matCellDef="let element" class="break-word">
-            <a [attr.href]="'/human/gene/' + element.entrezId" target="_blank">{{ element.symbol }}</a>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="omimPhenotypes">
-          <mat-header-cell *matHeaderCellDef class="number border-left">
-            <span class="text-underline-dashed" matTooltip="OMIM number of phenotypes">
-              # Phenotypes
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number border-left">
-            <span *ngIf="element.omim">
-              {{ element.omim.numPhenos || 0 }}
-            </span>
-            <span *ngIf="!element.omim" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="omimAllele">
-          <mat-header-cell *matHeaderCellDef class="number">
-            <span class="text-underline-dashed" matTooltip="OMIM number of alleric variants">
-              # Variants
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-              <span *ngIf="element.omim">
-                {{ element.omim.numVars || 0 }}
-              </span>
-              <span *ngIf="!element.omim" class="na">NA</span>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="clinvarP">
-          <mat-header-cell *matHeaderCellDef class="number border-left">
-            <span class="text-underline-dashed" matTooltip="ClinVar number of alleles reported as pathogenic">
-              # Pathogenic
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number border-left">
-            <span *ngIf="element.clinvar">
-              {{ element.clinvar.pathogenic || 0 }}
-            </span>
-            <span *ngIf="!element.clinvar" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="clinvarLP">
-          <mat-header-cell *matHeaderCellDef class="number">
-            <span class="text-underline-dashed" matTooltip="ClinVar number of alleles reported as likely pathogenic">
-              # Likely Pathogenic
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-            <span *ngIf="element.clinvar">
-              {{ element.clinvar.likelyPathogenic || 0 }}
-            </span>
-            <span *ngIf="!element.clinvar" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="clinvarLB">
-          <mat-header-cell *matHeaderCellDef class="number">
-            <span class="text-underline-dashed" matTooltip="ClinVar number of alleles reported as likely benign">
-              # Likely Benign
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-            <span *ngIf="element.clinvar">
-              {{ element.clinvar.likelyBenign || 0 }}
-            </span>
-            <span *ngIf="!element.clinvar" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="clinvarB">
-          <mat-header-cell *matHeaderCellDef class="number">
-            <span class="text-underline-dashed" matTooltip="ClinVar number of alleles reported as benign">
-              # Benign
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-            <span *ngIf="element.clinvar">
-              {{ element.clinvar.benign || 0 }}
-            </span>
-            <span *ngIf="!element.clinvar" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="g2mpHom">
-          <mat-header-cell *matHeaderCellDef class="number border-left">
-            <span class="text-underline-dashed" matTooltip="Homozygous count"># Hom</span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number border-left">
-            <span *ngIf="element.geno2mp">
-              {{ element.geno2mp.homCounts }}
-            </span>
-            <span *ngIf="!element.geno2mp" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="g2mpHet">
-          <mat-header-cell *matHeaderCellDef class="number">
-            <span class="text-underline-dashed" matTooltip="Homozygous count"># Het</span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-            <span *ngIf="element.geno2mp">
-              {{ element.geno2mp.hetCounts }}
-            </span>
-            <span *ngIf="!element.geno2mp" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="g2mpHpo">
-          <mat-header-cell *matHeaderCellDef class="number">
-            <span class="text-underline-dashed" matTooltip="Number of HPO profiles">
-              # HPO
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-            <span *ngIf="element.geno2mp">
-              {{ element.geno2mp.hpoCounts }}
-            </span>
-            <span *ngIf="!element.geno2mp" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="gnomadSynZ">
-          <mat-header-cell *matHeaderCellDef class="number border-left">
-            <span class="text-underline-dashed" matTooltip="Synonymouse Z">
-              Syn Z
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number border-left">
-            <span *ngIf="element.gnomad && element.gnomad.syn">
-              {{ element.gnomad.syn.z.toFixed(2) }}
-            </span>
-            <span *ngIf="!element.gnomad || !element.gnomad.syn" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="gnomadMisZ">
-          <mat-header-cell *matHeaderCellDef class="number">
-            <span class="text-underline-dashed" matTooltip="Missense Z">
-              Mis Z
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-            <span *ngIf="element.gnomad && element.gnomad.mis">
-              {{ element.gnomad.mis.z.toFixed(2) }}
-            </span>
-            <span *ngIf="!element.gnomad || !element.gnomad.mis" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="gnomadLofZ">
-          <mat-header-cell *matHeaderCellDef class="number">
-            <span class="text-underline-dashed" matTooltip="LoF pLI">
-              LoF pLI
-            </span>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-            <span *ngIf="element.gnomad && element.gnomad.lof">
-              {{ element.gnomad.lof.pLI.toFixed(2) }}
-            </span>
-            <span *ngIf="!element.gnomad || !element.gnomad.lof" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="dgvGain">
-          <mat-header-cell *matHeaderCellDef class="number border-left">
-            Total # Gain
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number border-left">
-            <span *ngIf="element.dgv">
-              {{ element.dgv.gains }}
-            </span>
-            <span *ngIf="!element.dgv" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="dgvLoss">
-          <mat-header-cell *matHeaderCellDef class="number">
-            Total # Loss
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element" class="number">
-            <span *ngIf="element.dgv">
-              {{ element.dgv.losses }}
-            </span>
-            <span *ngIf="!element.dgv" class="na">NA</span>
-          </mat-cell>
-        </ng-container>
-
-        <ng-container *matHeaderRowDef="displayedColumns">
-          <div class="mat-header-row header-group-row border-top">
-            <div class="mat-header-cell" role="columnheader"></div>
-            <div class="mat-header-cell header-group border-left text-center justify-content-center" role="columnheader" style="flex: 2">OMIM</div>
-            <div class="mat-header-cell header-group border-left text-center justify-content-center" role="columnheader" style="flex: 4">ClinVar</div>
-            <div class="mat-header-cell border-left text-center justify-content-center" role="columnheader" style="flex: 3">Geno2MP</div>
-            <div class="mat-header-cell border-left text-center justify-content-center" role="columnheader" style="flex: 3">gnomAD</div>
-            <div class="mat-header-cell header-group border-left text-center justify-content-center" role="columnheader" style="flex: 2">DGV</div>
-          </div>
-          <mat-header-row class="align-items-stretch"></mat-header-row>
-        </ng-container>
-        <mat-row *matRowDef="let row; columns: displayedColumns" class="align-items-stretch"></mat-row>
-      </mat-table>
-
-      <div *ngIf="loading">
-        <div class="table-row-loading-wrapper w-100" *ngFor="let gene of genes.slice(vFrom, vTo)">
-          <div class="table-row-loading w-100">
-            <div class="table-cell-loading">
-              {{ gene.symbol }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <mat-paginator
-        [length]="genes.length"
-        [pageSize]="gPerPage"
-        [pageSizeOptions]="[10, 30, 50]"
-        [pageIndex]="curPage"
-        (page)="onPageChange($event)"
-      ></mat-paginator>
     </div>
   </div>
+
+  <div class="overflow-x-scroll">
+    <table class="table border-top" [ngClass]="{ 'loading min-width-100perc': loading }">
+      <thead class="border-top">
+        <tr>
+          <th>&nbsp;</th>
+          <th colspan="3" class="border-left text-center pr-2">OMIM</th>
+          <th colspan="4" class="border-left text-center pr-2">ClinVar</th>
+          <th colspan="3" class="border-left text-center pr-2">Geno2MP</th>
+          <th colspan="6" class="border-left text-center pr-2">gnomAD</th>
+          <th colspan="2" class="border-left text-center pr-2">DGV</th>
+          <th class="border-left text-center pr-2">GTEx</th>
+          <th class="border-left">&nbsp;</th>
+        </tr>
+        <tr>
+          <th>Gene</th>
+          <th class="border-left">
+            <span>Gene MIM Number</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="OMIM number of phenotypes"># Pheno</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="OMIM number of alleric variants"># Var</span>
+          </th>
+          <th class="border-left number">
+            <span class="text-underline-dashed" matTooltip="ClinVar number of alleles reported as pathogenic">P</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="ClinVar number of alleles reported as likely pathogenic">LP</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="ClinVar number of alleles reported as likely benign">LB</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="ClinVar number of alleles reported as benign">B</span>
+          </th>
+          <th class="border-left number">
+            <span class="text-underline-dashed" matTooltip="Homozygous count">Hom</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="Homozygous count">Het</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="Number of HPO profiles">HPO</span>
+          </th>
+          <th class="border-left number">
+            <span class="text-underline-dashed" matTooltip="Synonymouse Z">Syn Z</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="Synonymouse o/e">Syn o/e</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="Missense Z">Mis Z</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="Missense o/e">Mis o/e</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="LoF pLI">LoF pLI</span>
+          </th>
+          <th class="number">
+            <span class="text-underline-dashed" matTooltip="LoF pLI">LoF o/e</span>
+          </th>
+          <th class="border-left number">Total Gain</th>
+          <th class="number">Total Loss</th>
+          <th class="border-left">&nbsp;</th>
+          <th class="border-left">GOs</th>
+        </tr>
+      </thead>
+      <tbody class="border-top">
+        <tr *ngFor="let gene of genesToDisplay; let idx = index">
+          <th scope="row" class="pr-2">
+            <a [attr.href]="'/human/gene/' + gene.entrezId" target="_blank">{{ gene.symbol }}</a>
+          </th>
+          <td class="border-left" [attr.colspan]="loading ? 20 : 1">
+            <span *ngIf="!loading && data">
+              <a *ngIf="data[idx].omim && data[idx].omim.mimNumber" [attr.href]="'https://omim.org/entry/' + data[idx].omim.mimNumber" target="_blank">
+                {{ data[idx].omim.mimNumber }}
+              </a>
+              <span *ngIf="!data[idx].omim || !data[idx].omim.mimNumber" class="na">NA</span>
+            </span>
+            &nbsp;
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].omim">
+                {{ data[idx].omim.numPhenos || 0 }}
+              </span>
+              <span *ngIf="!data[idx].omim" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].omim">
+                {{ data[idx].omim.numVars || 0 }}
+              </span>
+              <span *ngIf="!data[idx].omim" class="na">NA</span>
+            </span>
+          </td>
+          <td class="border-left number pl-2">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].clinvar">
+                {{ data[idx].clinvar.pathogenic || 0 }}
+              </span>
+              <span *ngIf="!data[idx].clinvar" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].clinvar">
+                {{ data[idx].clinvar.likelyPathogenic || 0 }}
+              </span>
+              <span *ngIf="!data[idx].clinvar" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].clinvar">
+                {{ data[idx].clinvar.likelyBenign || 0 }}
+              </span>
+              <span *ngIf="!data[idx].clinvar" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].clinvar">
+                {{ data[idx].clinvar.benign || 0 }}
+              </span>
+              <span *ngIf="!data[idx].clinvar" class="na">NA</span>
+            </span>
+          </td>
+          <td class="border-left number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].geno2mp">
+                {{ data[idx].geno2mp.homCounts }}
+              </span>
+              <span *ngIf="!data[idx].geno2mp" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].geno2mp">
+                {{ data[idx].geno2mp.hetCounts }}
+              </span>
+              <span *ngIf="!data[idx].geno2mp" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].geno2mp">
+                {{ data[idx].geno2mp.hpoCounts }}
+              </span>
+              <span *ngIf="!data[idx].geno2mp" class="na">NA</span>
+            </span>
+          </td>
+          <td class="border-left number pl-2">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].gnomad && data[idx].gnomad.syn">
+                {{ data[idx].gnomad.syn.z.toFixed(2) }}
+              </span>
+              <span *ngIf="!data[idx].gnomad || !data[idx].gnomad.syn" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number text-nowrap pl-2">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].gnomad && data[idx].gnomad.syn">
+                {{ data[idx].gnomad.syn.oe.toFixed(2) }}<br>
+                ({{ data[idx].gnomad.syn.oeLower.toFixed(2) }} - {{ data[idx].gnomad.syn.oeUpper.toFixed(2) }})
+              </span>
+              <span *ngIf="!data[idx].gnomad || !data[idx].gnomad.syn" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].gnomad && data[idx].gnomad.mis">
+                {{ data[idx].gnomad.mis.z.toFixed(2) }}
+              </span>
+              <span *ngIf="!data[idx].gnomad || !data[idx].gnomad.mis" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number text-nowrap pl-2">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].gnomad && data[idx].gnomad.mis">
+                {{ data[idx].gnomad.mis.oe.toFixed(2) }}<br>
+                ({{ data[idx].gnomad.mis.oeLower.toFixed(2) }} - {{ data[idx].gnomad.mis.oeUpper.toFixed(2) }})
+              </span>
+              <span *ngIf="!data[idx].gnomad || !data[idx].gnomad.mis" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].gnomad && data[idx].gnomad.lof">
+                {{ data[idx].gnomad.lof.pLI.toFixed(2) }}
+              </span>
+              <span *ngIf="!data[idx].gnomad || !data[idx].gnomad.lof" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number text-nowrap pl-2">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].gnomad && data[idx].gnomad.lof">
+                {{ data[idx].gnomad.lof.oe.toFixed(2) }}<br>
+                ({{ data[idx].gnomad.lof.oeLower.toFixed(2) }} - {{ data[idx].gnomad.mis.oeUpper.toFixed(2) }})
+              </span>
+              <span *ngIf="!data[idx].gnomad || !data[idx].gnomad.lof" class="na">NA</span>
+            </span>
+          </td>
+          <td class="border-left number pl-2">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].dgv">
+                {{ data[idx].dgv.gains }}
+              </span>
+              <span *ngIf="!data[idx].dgv" class="na">NA</span>
+            </span>
+          </td>
+          <td class="number pr-2">
+            <span *ngIf="!loading && data">
+              <span *ngIf="data[idx].dgv">
+                {{ data[idx].dgv.losses }}
+              </span>
+              <span *ngIf="!data[idx].dgv" class="na">NA</span>
+            </span>
+          </td>
+          <td class="border-left pr-2">
+            <span *ngIf="!loading && data">
+              <a [attr.href]="'https://gtexportal.org/home/gene/' + data[idx].symbol" target="_blank">
+                <mat-icon class="icon-18px">open_in_new</mat-icon> GTEx
+              </a>
+            </span>
+          </td>
+          <td class="border-left pr-2">
+            <span *ngIf="!loading && data">
+              <ul class="list-style-none my-1">
+                <li *ngFor="let go of data[idx].gos">
+                  <span class="label badge mr-1" [ngClass]="go.namespace" [matTooltip]="go.namespace">
+                    {{ go.namespace === 'cellular_component' ? 'C' : (go.namespace === 'molecular_function' ? 'F' : 'P' ) }}
+                  </span>
+                  <a [attr.href]="'http://amigo.geneontology.org/amigo/term/' + go.goId">{{ go.name }}</a>
+                </li>
+              </ul>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <mat-paginator
+    [length]="genes.length"
+    [pageSize]="gPerPage"
+    [pageSizeOptions]="[10, 30, 50]"
+    [pageIndex]="curPage"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
 </div>

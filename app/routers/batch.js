@@ -20,12 +20,14 @@ router.get('/batch/genes', (req, res) => {
         db.geno2mp.getCountsByEntrezId(entrezId),
         db.gnomAD.getByEntrezId(entrezId),
         db.dgv.getCountsByEntrezId(entrezId),
+        db.gos.getByEntrezId(entrezId)
       ]);
     }).map(docs => {
       return {
         entrezId: docs[0].entrezId,
         symbol: docs[0].symbol,
         omim: docs[1] ? {
+          mimNumber: docs[1].mimNumber || null,
           numPhenos: (docs[1].phenotypes || []).length,
           numVars: (docs[1].allelicVariants || []).length
         } : null,
@@ -33,6 +35,7 @@ router.get('/batch/genes', (req, res) => {
         geno2mp: docs[3],
         gnomad: docs[4],
         dgv: docs[5],
+        gos: docs[6],
       };
     }).then(doc => {
       res.json(doc);

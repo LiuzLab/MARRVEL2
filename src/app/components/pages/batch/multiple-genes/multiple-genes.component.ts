@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { take } from 'rxjs/operators';
 import 'rxjs/add/observable/forkJoin';
@@ -28,16 +28,7 @@ export class MultipleGenesComponent implements OnInit {
   gPerPage = 30;
   gFrom;
   gTo;
-  dataSource: MatTableDataSource< any > = new MatTableDataSource();
-  displayedColumns = [
-    'symbol',
-    'omimPhenotypes', 'omimAllele',
-    'clinvarP', 'clinvarLP', 'clinvarLB', 'clinvarB',
-    'g2mpHom', 'g2mpHet', 'g2mpHpo',
-    'gnomadSynZ', 'gnomadMisZ', 'gnomadLofZ',
-    'dgvGain', 'dgvLoss'
-  ];
-  tsvPageDownloadUrl = null;
+  genesToDisplay = [];
   tsvWholeDownloadUrl = null;
   wholeLoading = false;
   wholeGenesHaveData = 0;
@@ -51,7 +42,10 @@ export class MultipleGenesComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.gFrom = 0;
+    this.gTo = this.gPerPage;
+  }
 
   search(e) {
     this.hideUpBox = true;
@@ -60,17 +54,13 @@ export class MultipleGenesComponent implements OnInit {
   }
 
   fetchData(from, to) {
-    this.dataSource = new MatTableDataSource< any >();
+    this.genesToDisplay = this.genes.slice(from, to);
     this.loading = true;
-    this.tsvPageDownloadUrl = null;
-    this.api.getGeneBatchByArray(this.genes.slice(from, to))
+    this.api.getGeneBatchByArray(this.genesToDisplay)
       .pipe(take(1))
       .subscribe(res => {
-        console.log(res);
         this.data = res;
-        this.dataSource = new MatTableDataSource< any >(res);
         this.loading = false;
-        this.tsvPageDownloadUrl = this.createDownloadUrl('.tsv');
       }, err => {
         this.data = null;
         this.loading = false;
@@ -86,37 +76,38 @@ export class MultipleGenesComponent implements OnInit {
   }
 
   createDownloadUrl(fileType: string, whole?: boolean) {
-    if (!whole) {
-      return this.getBlobUrl(fileType, this.dataSource.data);
-    } else {
-      let dataToDownload: object[] = [];
+    let dataToDownload: object[] = [];
 
-      this.wholeLoading = true;
-      this.tsvWholeDownloadUrl = null;
+    this.wholeLoading = true;
+    this.tsvWholeDownloadUrl = null;
 
-      const nPage = this.genes.length / this.gPerPage;   // Total number of pages with current 'varaint per page' setting
-      const tasks: Observable< any >[] = [];
-      for (let page = 0; page < nPage; ++page) {
-        const gFrom = page * this.gPerPage;
-        const gTo = Math.min(gFrom + this.gPerPage, this.genes.length);
+    const nPage = this.genes.length / this.gPerPage;   // Total number of pages with current 'varaint per page' setting
+    const tasks: Observable< any >[] = [];
+    for (let page = 0; page < nPage; ++page) {
+      const gFrom = page * this.gPerPage;
+      const gTo = Math.min(gFrom + this.gPerPage, this.genes.length);
 
-        this.wholeGenesPrepared += gTo - gFrom;
+      this.wholeGenesPrepared += gTo - gFrom;
 
-        if (page === this.curPage && !this.loading) {    // not fetching data again for current page
-          dataToDownload = dataToDownload.concat(this.dataSource.data);
-          this.wholeGenesHaveData += gTo - gFrom;
-        } else {
-          tasks.push(
-            new Observable(observer => {
-              this.api.getBatchByArray(this.genes.slice(gFrom, gTo))
-                .subscribe(res => {
-                  this.wholeGenesHaveData += gTo - gFrom;
-                  observer.next(res);
-                });
-            }).first()
-          );
-        }
+      if (page === this.curPage && !this.loading) {    // not fetching data again for current page
+        dataToDownload = dataToDownload.concat(this.data);
+        this.wholeGenesHaveData += gTo - gFrom;
+      } else {
+        tasks.push(
+          new Observable(observer => {
+            this.api.getGeneBatchByArray(this.genes.slice(gFrom, gTo))
+              .subscribe(res => {
+                this.wholeGenesHaveData += gTo - gFrom;
+                observer.next(res);
+              });
+          }).first()
+        );
       }
+    }
+    if (tasks.length === 0) {
+      this.tsvWholeDownloadUrl = this.getBlobUrl(fileType, dataToDownload);
+      this.wholeLoading = false;
+    } else {
       Observable.forkJoin(...tasks).subscribe(results => {
         for (const res of results) {
           dataToDownload = dataToDownload.concat(res);
@@ -132,15 +123,18 @@ export class MultipleGenesComponent implements OnInit {
     let mediaType = '';
     switch (fileType) {
       case '.tsv':
-        dataString = 'symbol\tomim_phenotype\tomim_allele\t' +
+        dataString = 'symbol\tmim_number\tomim_phenotype\tomim_allele\t' +
           'clinvar_pathogenic\tclinvar_likely_pathogenic\t' +
           'clinvar_likely_benign\tclinvar_benign\t' +
           'geno2mp_hom\tgeno2mp_het\tgeno2mp_hpo\t' +
-          'gnomad_syn_z\tgnomad_mis_z\tgnomad_lof_z\t' +
-          'dgv_gain\tdgv_oss\n';
+          'gnomad_syn_zi\tgnomad_syn_oe\tgnomad_syn_oe_lowerbound\tgnomad_syn_oe_upperbound\t' +
+          'gnomad_mis_z\tgnomad_mis_oe\tgnomad_mis_oe_lowerbound\tgnomad_mis_oe_upperbound\t' +
+          'gnomad_lof_z\tgnomad_lof_oe\tgnomad_lof_oe_lowerbound\tgnomad_lof_oe_upperbound\t' +
+          'dgv_gain\tdgv_loss\tgoIds\n';
         for (const row of dataToDownload) {
           dataString = dataString +
             `${row.symbol}\t` +
+            `${row.omim ? row.omim.mimNumber : '' }\t` +
             `${row.omim ? (row.omim.numPhenos || 0) : ''}\t` +
             `${row.omim ? (row.omim.numVars || 0) : ''}\t` +
             `${row.clinvar ? (row.clinvar.pathogenic || 0) : ''}\t` +
@@ -151,10 +145,20 @@ export class MultipleGenesComponent implements OnInit {
             `${row.geno2mp ? (row.geno2mp.hetCounts || 0) : ''}\t` +
             `${row.geno2mp ? (row.geno2mp.hpoCounts || 0) : ''}\t` +
             `${row.gnomad && row.gnomad.syn ? row.gnomad.syn.z : ''}\t` +
+            `${row.gnomad && row.gnomad.syn ? row.gnomad.syn.oe : ''}\t` +
+            `${row.gnomad && row.gnomad.syn ? row.gnomad.syn.oeLower : ''}\t` +
+            `${row.gnomad && row.gnomad.syn ? row.gnomad.syn.oeUpper : ''}\t` +
             `${row.gnomad && row.gnomad.mis ? row.gnomad.mis.z : ''}\t` +
+            `${row.gnomad && row.gnomad.mis ? row.gnomad.mis.oe : ''}\t` +
+            `${row.gnomad && row.gnomad.mis ? row.gnomad.mis.oeLower : ''}\t` +
+            `${row.gnomad && row.gnomad.mis ? row.gnomad.mis.oeUpper : ''}\t` +
             `${row.gnomad && row.gnomad.lof ? row.gnomad.lof.pLI : ''}\t` +
+            `${row.gnomad && row.gnomad.lof ? row.gnomad.lof.oe : ''}\t` +
+            `${row.gnomad && row.gnomad.lof ? row.gnomad.lof.oeLower : ''}\t` +
+            `${row.gnomad && row.gnomad.lof ? row.gnomad.lof.oeUpper : ''}\t` +
             `${row.dgv ? (row.dgv.gains || 0) : ''}\t` +
-            `${row.dgv ? (row.dgv.losses || 0) : ''}\n`;
+            `${row.dgv ? (row.dgv.losses || 0) : ''}\t` +
+            `${row.gos ? row.gos.map(go => go.goId).join(',') : ''}\n`;
         }
         mediaType = 'text/tab-separated-values';
         break;

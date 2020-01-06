@@ -8,4 +8,5 @@ module.exports = {
   clinvar: require('./clinvar'),
   dbnsfp: require('./dbnsfp'),
   pharos: require('./pharos'),
+  gos: require('./gos')
 };

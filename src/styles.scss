@@ -3,15 +3,27 @@
 $primary-palette: map-get($MARRVEL-theme, primary);
 
 @import './spinner.scss';
+
+/********************
+ * bootstrap
+ */
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+@import "../node_modules/bootstrap/scss/bootstrap-grid";
+@import "../node_modules/bootstrap/scss/utilities";
+
+
 /* You can add global styles to this file, and also import other style files */
 
 /********************
  * Spacing
- * bootstrap
  * Section styling
  * Text styling
  * Form
  * Table
+ * Sizing
  * Misc.
  */
 
@@ -75,17 +87,6 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     }
   }
 }
-
-/********************
- * bootstrap
- */
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
-
-@import "../node_modules/bootstrap/scss/bootstrap-grid";
-@import "../node_modules/bootstrap/scss/utilities";
-
 
 /********************
  * Section styling
@@ -154,6 +155,10 @@ span.text-error {
   color: red !important;
 }
 
+.text-monospace {
+  font-family: monospace !important;
+}
+
 /********************
  * Form
  */
@@ -171,27 +176,6 @@ span.text-error {
   display: none !important;
 }
 
-/********************
- * Table
- */
-.mat-table {
-  background: #fbfbfb !important;
-}
-
-.mat-paginator {
-  background-color: #fbfbfb !important;
-}
-
-.mat-table .mat-row:hover {
-  filter: brightness(0.95) !important;
-}
-
-/********************
- * Misc.
- */
-.mat-drawer-container strong {
-  font-weight: 400;
-}
 .select-field-compact .mat-form-field-wrapper {
   padding-bottom: 0px !important;
   margin: 0 !important;
@@ -215,6 +199,43 @@ span.text-error {
   padding-bottom: 0.5em;
 }
 
+
+/********************
+ * Table
+ */
+.mat-table {
+  background: #fbfbfb !important;
+}
+
+.mat-paginator {
+  background-color: #fbfbfb !important;
+}
+
+.mat-table .mat-row:hover {
+  filter: brightness(0.95) !important;
+}
+
+/********************
+ * Sizing
+ */
+.min-h-70px {
+  min-height: 70px;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.min-width-100perc {
+  min-width: 100% !important;
+}
+
+/********************
+ * Misc.
+ */
+.mat-drawer-container strong {
+  font-weight: 400;
+}
 .mat-icon.icon-18px{
   font-size: 18px !important;
   width: 18px !important;
@@ -223,17 +244,6 @@ span.text-error {
 
 .no-overlay.mat-button:hover .mat-button-focus-overlay {
   opacity: 0 !important;
-}
-
-.min-h-70px {
-  min-height: 70px;
-}
-
-.scroll-x {
-  overflow-x: scroll;
-}
-.h-auto {
-  height: auto;
 }
 
 #vcfField .mat-form-field-infix {
@@ -268,10 +278,6 @@ span.text-error {
   padding-top: 30vh;
   background-color: rgba(255, 255, 255, 0.6);
   text-align: center;
-}
-
-.text-monospace {
-  font-family: monospace !important;
 }
 
 div.plot-tooltip {
@@ -492,8 +498,21 @@ div.plot-tooltip {
   color: #4cb7ac !important;
 }
 
-
 .button-big {
   padding: 0.5em 2em !important;
   font-size: 1em !important;
+}
+
+$overflowValues: auto, hidden, scroll;
+.scroll-x {
+  overflow-x: scroll;
+}
+@each $value in $overflowValues {
+  .overflow-x-#{$value} { overflow: $value !important; }
+  .overflow-y-#{$value} { overflow: $value !important; }
+}
+
+.list-style-none {
+  list-style-type: none;
+  padding-left: 0;
 }
