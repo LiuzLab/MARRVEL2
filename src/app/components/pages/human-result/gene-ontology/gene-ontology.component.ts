@@ -5,6 +5,7 @@ import { Animations } from '../../../../animations';
 
 import { HumanGene } from '../../../../interfaces/gene';
 import { AGR_SLIM_IDS, AGR_SLIM_ID_TO_NAME } from './agrSlim';
+import { EXP_EVICODES, EVICODE_TO_NAME } from './evidence-code';
 const TAXONID_TO_NAME = {
   10090: 'mouse',
   10116: 'rat',
@@ -22,14 +23,6 @@ const ORGNAME_TO_ICON = {
   'worm': 'worm',
   'yeast': 'yeast',
   'fission yeast': 'yeast',
-};
-const EXP_EVICODES = {
-  'IEP': true,
-  'IDA': true,
-  'IMP': true,
-  'IGI': true,
-  'IPI': true,
-  'IAGP': true
 };
 const NAMESPACE_TO_GOID = {
   'molecular_function': 'GO:0003674',
@@ -51,6 +44,7 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
   categoryGoIds = AGR_SLIM_IDS;
   orgNameToIcons = ORGNAME_TO_ICON;
   goIdToName = AGR_SLIM_ID_TO_NAME;
+  eviCodeToName = EVICODE_TO_NAME;
   visHeight = 200;
   visHeightOnlyBest = 200;
   hoverGoId = null;

@@ -130,7 +130,7 @@
       <ng-container matColumnDef="eviCode">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Evidence Code</th>
         <td mat-cell *matCellDef="let element" class="text-capitalize">
-          {{ element.eviCode }}
+          <span class="text-underline-dashed" [matTooltip]="eviCodeToName[element.eviCode]">{{ element.eviCode }}</span>
         </td>
       </ng-container>
 
