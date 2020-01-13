@@ -147,7 +147,7 @@
         {{ row.gene2.symbol }}
         <a class="ml-2 link-small align-middle" target="_blank"
           *ngIf="row.gene2.zfinId"
-          [attr.href]="'http://zfin.org/action/marker/view/ZDB-GENE-041114-187' + row.gene2.zfinId"
+          [attr.href]="'http://zfin.org/action/marker/view/' + row.gene2.zfinId"
         >
           <mat-icon class="align-middle">open_in_new</mat-icon>
           ZFIN
@@ -181,7 +181,7 @@
         {{ row.gene2.symbol }}
         <a class="ml-2 link-small align-middle" target="_blank"
           *ngIf="row.gene2.flyBaseId"
-          [attr.href]="'http://flybase.org/reports/FBgn0030555' + row.gene2.flyBaseId + '.html'"
+          [attr.href]="'http://flybase.org/reports/' + row.gene2.flyBaseId + '.html'"
         >
           <mat-icon class="align-middle">open_in_new</mat-icon>
           FlyBase
