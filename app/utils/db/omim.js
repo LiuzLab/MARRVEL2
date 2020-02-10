@@ -1,4 +1,4 @@
-const Promiae = require('bluebird');
+const Promise = require('bluebird');
 
 const utils = require('..');
 const ensembl = require('../ensembl');
@@ -150,7 +150,7 @@ const markAllele = (allele, variant) => {
         allele.isLocationMatched = (mapping.start <= variant.pos && variant.pos <= mapping.end);
         resolve(allele);
       }).catch((err) => {
-        console.error(err);
+        // console.error(err);
         resolve(allele);
       });
   });
@@ -163,7 +163,7 @@ const markAlleles = (alleles, variant) => {
     }).then((res) => {
       resolve(res);
     }).catch((err) => {
-      console.error(err);
+      // console.error(err);
       reject(err);
     });
   });
