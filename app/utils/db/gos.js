@@ -16,8 +16,8 @@ exports.getByEntrezId = (entrezId) => {
             const go = doc.gos[i];
             D[go.goId] = {
               goId: go.goId,
-              namespace: go.ontology.namespace,
-              name: go.ontology.name
+              namespace: go.ontology ? go.ontology.namespace : null,
+              name: go.ontology ? go.ontology.name: null
             };
           }
           resolve(Object.values(D));

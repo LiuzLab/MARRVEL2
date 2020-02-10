@@ -7,7 +7,7 @@ exports.getByEntrezId = (entrezId) => {
     Genes.findOne({ entrezId: entrezId }, { '_id': 0, clinVarIds: 0, gos: 0, geno2mpIds: 0, dgvIds: 0, phenotypes: 0 })
       .then(doc => {
         if (!doc) {
-          resolve(null);
+          resolve({});
         }
         else {
           doc = doc.toObject();
@@ -29,7 +29,7 @@ exports.getBySymbol = (taxonId, symbol) => {
     Genes.findOne({ taxonId: taxonId, symbol: symbol }, { '_id': 0, clinVarIds: 0, gos: 0, geno2mpIds: 0, dgvIds: 0, phenotypes: 0 })
       .then((doc) => {
         if (!doc) {
-          resolve(null);
+          resolve({});
         }
         else {
           doc = doc.toObject();

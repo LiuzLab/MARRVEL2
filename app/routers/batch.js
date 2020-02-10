@@ -11,6 +11,9 @@ const gene = require('../utils/gene');
 
 router.get('/batch/genes', (req, res) => {
   var entrezIds = req.query.entrezIds || [];
+  if ((typeof entrezIds) === 'string') {
+    entrezIds = [ parseInt(entrezIds) ];
+  }
   Promise.all(entrezIds)
     .map(entrezId => {
       return Promise.all([
@@ -24,8 +27,8 @@ router.get('/batch/genes', (req, res) => {
       ]);
     }).map(docs => {
       return {
-        entrezId: docs[0].entrezId,
-        symbol: docs[0].symbol,
+        entrezId: docs[0].entrezId || null,
+        symbol: docs[0].symbol || null,
         omim: docs[1] ? {
           mimNumber: docs[1].mimNumber || null,
           numPhenos: (docs[1].phenotypes || []).length,
@@ -73,7 +76,6 @@ router.get('/batch/variants', (req, res) => {
         return {};
       });
     }).then((result) => {
-      console.log(' > sent');
       res.json(result);
     }).catch((err) => {
       console.log(err);

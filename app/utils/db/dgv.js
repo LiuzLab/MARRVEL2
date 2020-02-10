@@ -49,9 +49,11 @@ exports.getCountsByEntrezId = (entrezId) => {
     getByEntrezId(entrezId)
       .then(docs => {
         const counts = { gains: 0, losses: 0 };
-        for (var i = 0; i< docs.length; ++i) {
-          counts.gains += docs[i].gain;
-          counts.losses += docs[i].loss;
+        if (docs && docs.length) {
+          for (var i = 0; i< docs.length; ++i) {
+            counts.gains += docs[i].gain;
+            counts.losses += docs[i].loss;
+          }
         }
         resolve(counts);
       }).catch(err => {
