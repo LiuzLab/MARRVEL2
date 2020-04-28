@@ -1,4 +1,4 @@
-const Promiae = require('bluebird');
+const Promise = require('bluebird');
 
 const utils = require('..');
 const ensembl = require('../ensembl');
