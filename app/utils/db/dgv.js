@@ -7,7 +7,7 @@ exports.getByVariant = (variant, projection, excludeGene) => {
   return new Promise((resolve, reject) => {
     if (variant === null) reject('Invalid variant');
 
-    projection = projection || {};
+    projection = projection || { frequency: 0, id: 0 };
     projection['_id'] = 0;
 
     var Q = Dgv.find(
@@ -16,7 +16,7 @@ exports.getByVariant = (variant, projection, excludeGene) => {
     );
     if (!excludeGene) Q.populate({ path: 'genes', select: 'entrezId symbol -_id' });
 
-    Q.then((docs) => {
+    Q.lean().then((docs) => {
       if (!docs) resolve([]);
       else resolve(docs);
     }).catch((err) => {
@@ -30,7 +30,7 @@ const getByEntrezId = (entrezId) => {
     Genes.findOne({ entrezId: parseInt(entrezId) }, { 'dgvIds': 1 })
       .populate({
         path: 'dgvIds',
-        select: '-_id',
+        select: '-frequency -_id',
         populate: {
           path: 'genes',
           select: 'entrezId symbol -_id'
