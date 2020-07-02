@@ -1,0 +1,30 @@
+type: object
+properties:
+  goId:
+    type: string
+  ontology:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Gene ontology ID
+      namespace:
+        type: string
+        description: Either `molecular_function`, `biological_process`, or `cellular_component`.
+      name:
+        type: string
+      agrSlimGoId:
+        type: string
+        required: false
+  eviCode:
+    type: string
+    description: Evidence code in abbreviation. The list of the evidence codes used is on http://geneontology.org/docs/guide-go-evidence-codes
+  references:
+    type: string[]
+    required: false
+  date:
+    type: string
+    required: false
+  assignedBy:
+    type: string
+    required: false

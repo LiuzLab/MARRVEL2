@@ -1,0 +1,56 @@
+type: object
+properties:
+  hg19Chr:
+    type: string
+    description: Chromosome (hg19)
+  hg19Start:
+    type: integer
+    description: Variant start position (hg19)
+  hg19Stop:
+    type: integer
+    description: Variant stop position (hg19)
+  type:
+    type: string
+  subType:
+    type: string
+  gain:
+    type: number
+  loss:
+    type: number
+  sampleSize:
+    type: number
+  reference:
+    type: string
+    required: false
+  genes:
+    required: false
+    type: array
+    items:
+      type: object
+      properties:
+          entrezId: number
+          symbol: string
+  accession:
+    type: string
+    required: false
+  mergedVariants:
+    type: string
+    required: false
+  method:
+    type: string
+    required: false
+  platform:
+    type: string
+    required: false
+  samples:
+    type: string
+    required: false
+  supportingVariants:
+    type: string
+    required: false
+  mergedOrSample:
+    type: string
+    required: false
+  cohortDescription:
+    type: string
+    required: false

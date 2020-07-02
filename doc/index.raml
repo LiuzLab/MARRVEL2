@@ -1,0 +1,850 @@
+#%RAML 1.0
+title: MARRVEL
+version: v2
+protocols: [ HTTP ]
+baseUri: http://beta.marrvel.org
+mediaType:  application/json
+types:
+  OmimPhenotype: !include types/omimPhenotype.raml
+  OmimVariant: !include types/omimVariant.raml
+  OmimResponse: !include types/omimResponse.raml
+  GnomADGeneResponse: !include types/gnomADGeneResponse.raml
+  Geno2mpResponse: !include types/geno2mpResponse.raml
+  ClinvarVariantResponse: !include types/clinvarVariantResponse.raml
+  DgvResponse: !include types/dgvResponse.raml
+  DecipherResponse: !include types/decipherResponse.raml
+  GO: !include types/go.raml
+  Phenotype: !include types/phenotype.raml
+  DioptOrtholog: !include types/dioptOrtholog.raml
+
+documentation:
+ - title: Home
+   content: |
+     Welcome to the _MARRVEL API_ Documentation. The _MARRVEL API_
+     allows you to retrieve the data MARRVEL serves such as OMIM, ExAC, and gnomAD
+     from your application without searching through the web interface.
+
+     Please also check [Python example](https://colab.research.google.com/drive/1Iierhoprr6JfUoX99FKu6xyb2Pr87aAf) if you want to see how to apply API in Python.
+
+/gene:
+  /entrezId/:entrezId:
+    type: collection
+    description: Get gene information with Entrez Gene ID
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: GeneResponse
+            example: !include examples/gene.json
+  /taxonId/:taxonId/symbol/:symbol:
+    type: collection
+    description: Get gene information with taxonomy ID and gene symbol
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: GeneResponse
+            example: !include examples/gene.json
+  /gene/chr/:hg19Chr/pos/:hg19Pos:
+    type: collection
+    description: Get human genes' information with genomic location
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: GeneResponse[]
+
+/omim:
+  /mimNumber/:mimNumber:
+    type: collection
+    description: Get OMIM text description of the gene, gene-phenotype relationships, and reported allelic variants by Mim Number.
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: OmimResponse
+
+            example: !include examples/omim.json
+  /gene/symbol/:geneSymbol:
+    type: collection
+    description: Get OMIM text description of the gene, gene-phenotype relationships, and reported allelic variants by gene symbol.
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: OmimResponse
+
+            example: !include examples/omim.json
+
+  /gene/symbol/:geneSymbol/variant/:variant:
+    type: collection
+    description: Get OMIM text description of the gene, gene-phenotype relationships, and reported allelic variants by gene symbol.
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              properties:
+                mimNumber:
+                  type: string
+                  description: OMIM identifier, mim number, of the gene
+
+                title:
+                  type: string
+                  description: Title and symbol, delimited with ""
+
+                description:
+                  type: string
+                  description: Text description of the gene
+                  required: false
+
+                phenotypes:
+                  required: false
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      mimNumber:
+                        type: integer
+                      phenotype: string
+                      phenotypeMimNumber:
+                        type: integer
+                        description: Mim number of the phenotype
+                      phenotypicSeriesNumber:
+                        type: string
+                        description: Comma delimited list of phenotypic series numbers
+                        required: false
+                      phenotypeMappingKey:
+                        type: integer
+                        required: false
+                      phenotypeInheritance: string
+                        required: false
+
+                allelicVariants:
+                  required: false
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      allelicVariant:
+                        type: object
+                        properties:
+                          mimNumber:
+                            type: integer
+                            description: Mim number of the variant
+                          name:
+                            type: string
+                          mutations:
+                            type: string
+                          text:
+                            type: string
+                            description: Text description of the variant
+                          isLocationMatched:
+                            type: boolean
+                            description: If the location is matched with the given variant, `true`, otherwise, `false`.
+                          dbSnps:
+                            type: string
+                            description: Comma delimited list of dbSNPs
+                            required: false
+                          gnomadSnps:
+                            type: string
+                            required: false
+                          clinvarAccessions:
+                            type: array
+                            items:
+                              type: string
+                            description: Array of ClinVar accessions
+                            required: false
+                          status:
+                            type: string
+                            description: The status of the variant. Either `live`, `moved`, or `removed`
+                            required: false
+
+            example: !include examples/omim.json
+
+/dbnsfp:
+  /variant/:variant:
+    type: collection
+    description: Get gnomAD variant information with variant
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              properties:
+                hg19Chr:
+                  type: string
+                  description: Chromosome
+                hg19Pos:
+                  type: integer
+                  description: Position
+                hg38Chr:
+                  required: false
+                  type: string
+                  description: Chromosome
+                hg38Pos:
+                  required: false
+                  type: integer
+                  description: Position
+                ref:
+                  type: string
+                  description: Reference allele
+                alt:
+                  type: string
+                  description: Alternate allele
+                aaRef:
+                  required: false
+                  type: string
+                aaAlt:
+                  required: false
+                  type: string
+                rsid:
+                  required: false
+                  type: string
+                symbol:
+                  required: false
+                  type: string
+                ensemblId:
+                  type: string
+                  required: false
+                  description: Ensembl ID delimited with ";"
+                transcriptEnsemblId:
+                  type: string
+                  required: false
+                  description: Transcript Ensembl ID delimited with ";"
+                proteinEnsemblId:
+                  type: string
+                  required: false
+                  description: Protein Ensembl ID delimited with ";"
+                scores:
+                  type: object
+                  properties:
+                    SIFT:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        convertedRankscore: number
+                        prediction: string
+                    Polyphen2HDIV:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                        prediction: string
+                    Polyphen2HVAR:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                        prediction: string
+                    LRT:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        convertedRankscore: number
+                        prediction: string
+                    MutationTaster:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        convertedRankscore: number
+                        prediction: string
+                    MutationAssessor:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                        prediction: string
+                    FATHMM:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        convertedRankscore: number
+                        prediction: string
+                    PROVEAN:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        convertedRankscore: number
+                        prediction: string
+                    MetaSVM:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                        prediction: string
+                    MCAP:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                        prediction: string
+                    REVEL:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                    MutPred:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                    CADD:
+                      required: false
+                      type: object
+                      properties:
+                        rawScore: number
+                        rankscore: number
+                        phred: number
+                    DANN:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                    fathmmMKLCoding:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                        prediction: string
+                    fathmmXFCoding:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                        prediction: string
+                    GM12878FitCons:
+                      required: false
+                      type: object
+                      properties:
+                        score: number
+                        rankscore: number
+                        cofidenceValue: number
+                    GERP++RS:
+                      required: false
+                      type: object
+                      properties:
+                          score: number
+                          rankscore: number
+                    phyloP100wayVertebrate:
+                      required: false
+                      type: object
+                      properties:
+                          score: number
+                          rankscore: number
+                    phyloP30wayMammalian:
+                      required: false
+                      type: object
+                      properties:
+                          score: number
+                          rankscore: number
+                    phyloP17wayPrimate:
+                      required: false
+                      type: object
+                      properties:
+                          score: number
+                          rankscore: number
+                    phastCons100wayVertebrate:
+                      required: false
+                      type: object
+                      properties:
+                          score: number
+                          rankscore: number
+                    phastCons30wayMammalian:
+                      required: false
+                      type: object
+                      properties:
+                          score: number
+                          rankscore: number
+                    phastCons17wayPrimate:
+                      required: false
+                      type: object
+                      properties:
+                          score: number
+                          rankscore: number
+
+              example: !include examples/dbnsfp.json
+
+/clinvar:
+  /gene/entrezId/:entrezId:
+    type: collection
+    description: Get ClinVar variants with gene Entrez ID
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: ClinvarVariantResponse[]
+              example: !include examples/clinvar.json
+
+  /gene/symbol/:geneSymbol:
+    type: collection
+    description: Get ClinVar variants with gene Entrez ID
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: ClinvarVariantResponse[]
+              example: !include examples/clinvar.json
+
+  /gene/variant/:variant:
+    type: collection
+    description: Get ClinVar variant information
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: ClinvarVariantResponse
+              example: !include examples/clinvar.json
+
+/geno2mp:
+  /variant/:variant:
+    type: collection
+    description: Get gnomAD variant information with variant
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Geno2mpResponse
+
+              example: !include examples/geno2mpVariant.json
+
+  /gene/entrezId/:entrezId:
+    type: collection
+    description: Get gnomAD variants information with Entrez gene ID
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Geno2mpResponse[]
+
+              example: !include examples/geno2mpGene.json
+/gnomad:
+  /variant/:variant:
+    type: collection
+    description: Get gnomAD variant information with variant
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              properties:
+                chr:
+                  type: string
+                  description: Chromosome
+                pos:
+                  type: integer
+                  description: Position
+                ref:
+                  type: string
+                  description: Reference allele
+                alt:
+                  type: string
+                  description: Alternate allele
+                exome:
+                  required: false
+                  type: object
+                  properties:
+                      alleleCount: integer
+                      alleleNum: integer
+                      homCount:
+                        type: integer
+                        description: Homozygous count
+                genome:
+                  required: false
+                  type: object
+                  properties:
+                      alleleCount: integer
+                      alleleNum: integer
+                      homCount:
+                        type: integer
+                        description: Homozygous count
+                transcripts:
+                  required: false
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      geneSymbol: string
+                      geneEnsemblId: string
+                      ensemblId: string
+
+              example: !include examples/gnomAD.json
+
+  /gene/entrezId/:entrezId:
+    type: collection
+    description: Get gnomAD gene information with Entrez gene ID
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: GnomADGeneResponse
+
+
+  /gene/symbol/:geneSymbol:
+    type: collection
+    description: Get gnomAD gene information by gene symbol
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: GnomADGeneResponse
+
+/dgv:
+  /variant/:variant:
+    type: collection
+    description: Get DGV information with variant
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: DgvResponse[]
+
+              example: !include examples/dgv.json
+
+  /gene/entrezId/:entrezId:
+    type: collection
+    description: Get DGV information with Entrez gene ID
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: DgvResponse[]
+
+              example: !include examples/dgv.json
+
+/decipher:
+  /variant/:variant:
+    type: collection
+    description: Get DECIPHER control data with variant
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: DecipherResponse[]
+              example: !include examples/decipher.json
+  /genomloc/:hg19Chr/:hg19Start/:hg19Stop:
+    type: collection
+    description: Get DECIPHER control data with genomic location (hg19)
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: DecipherResponse[]
+              example: !include examples/decipher.json
+
+/diopt:
+  /ortholog/gene/entrezId/:entrezId:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: DioptOrtholog[]
+              example: !include examples/diopt.json
+  /alignment/gene/entrezId/:entrezId:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: obeject
+              example: !include examples/dioptAlign.json
+
+/gtex:
+  /gene/entrezId/:entrezId:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              properties:
+                entrezId: integer
+                ensemblId: string
+                symbol: string
+                data:
+                  type: object
+                  properties:
+                    Adipose Tissue:
+                      type: object
+                      properties:
+                        Adipose - Subcutaneous:
+                          type: number[]
+                        Adipose - Visceral (Omentum):
+                          type: number[]
+                    Adrenal Gland:
+                      type: object
+                      properties:
+                        Adrenal Gland:
+                          type: number[]
+                    Blood Vessel:
+                      type: object
+                      properties:
+                        "Artery - Aorta":
+                          type: number[]
+                        "Artery - Coronary":
+                          type: number[]
+                        "Artery - Tibial":
+                          type: number[]
+                    Bladder:
+                      type: object
+                      properties:
+                        Bladder: number[]
+                    Brain:
+                      type: object
+                      properties:
+                        "Brain - Amygdala":
+                          type: number[]
+                        "Brain - Anterior cingulate cortex (BA24)":
+                          type: number[]
+                        "Brain - Caudate (basal ganglia)":
+                          type: number[]
+                        "Brain - Cerebellar Hemispher":
+                          type: number[]
+                        "Brain - Cerebellu":
+                          type: number[]
+                        "Brain - Cortex":
+                          type: number[]
+                        "Brain - Frontal Cortex (BA9)":
+                          type: number[]
+                        "Brain - Hippocampus":
+                          type: number[]
+                        "Brain - Hypothalamus":
+                          type: number[]
+                        "Brain - Nucleus accumbens (basal ganglia)":
+                          type: number[]
+                        "Brain - Putamen (basal ganglia)":
+                          type: number[]
+                        "Brain - Spinal cord (cervical c-1)":
+                          type: number[]
+                        "Brain - Substantia nigra":
+                          type: number[]
+                    Breast:
+                      type: object
+                      properties:
+                        "Breast - Mammary Tissue":
+                          type: number[]
+                    Blood:
+                      type: object
+                      properties:
+                        "Cells - EBV-transformed lymphocytes":
+                          type: number[]
+                        "Whole Blood":
+                          type: number[]
+                    Skin:
+                      type: object
+                      properties:
+                        "Cells - Transformed fibroblasts":
+                          type: number[]
+                        "Skin - Not Sun Exposed (Suprapubic)":
+                          type: number[]
+                        "Skin - Sun Exposed (Lower leg)":
+                          type: number[]
+                    Cervix Uteri:
+                      type: object
+                      properties:
+                        "Cervix - Ectocervix":
+                          type: number[]
+                        "Cervix - Endocervix":
+                          type: number[]
+                    Colon:
+                      type: object
+                      properties:
+                        "Colon - Sigmoid":
+                          type: number[]
+                        "Colon - Transverse":
+                          type: number[]
+                    Esophagus:
+                      type: object
+                      properties:
+                        "Esophagus - Gastroesophageal Junction":
+                          type: number[]
+                        "Esophagus - Mucosa":
+                          type: number[]
+                        "Esophagus - Muscularis":
+                          type: number[]
+                    Fallopian Tube:
+                      type: object
+                      properties:
+                        "Fallopian Tube":
+                          type: number[]
+                    Heart:
+                      type: object
+                      properties:
+                        "Heart - Atrial Appendag":
+                          type: number[]
+                        "Heart - Left Ventricle":
+                          type: number[]
+                    Kidney:
+                      type: object
+                      properties:
+                        "Kedney - Cortex":
+                          type: number[]
+                    Liver:
+                      type: object
+                      properties:
+                        "Liver":
+                          type: number[]
+                    Lung:
+                      type: object
+                      properties:
+                        "Lung":
+                          type: number[]
+                    Salivary Gland:
+                      type: object
+                      properties:
+                        "Minor Salivary Gland":
+                          type: number[]
+                    Muscle:
+                      type: object
+                      properties:
+                        "Muscle - Skeletal":
+                          type: number[]
+                    Nerve:
+                      type: object
+                      properties:
+                        "Nerve - Tibial":
+                          type: number[]
+                    Ovary:
+                      type: object
+                      properties:
+                        "Ovary":
+                          type: number[]
+                    Pancreas:
+                      type: object
+                      properties:
+                        "Pancreas":
+                          type: number[]
+                    Pituitary:
+                      type: object
+                      properties:
+                        "Pituitary":
+                          type: number[]
+                    Prostate:
+                      type: object
+                      properties:
+                        "Prostate":
+                          type: number[]
+                    Small Intestine:
+                      type: object
+                      properties:
+                        "Small Intestine - Terminal Ileum":
+                          type: number[]
+                    Spleen:
+                      type: object
+                      properties:
+                        "Spleen":
+                          type: number[]
+                    Stomach:
+                      type: object
+                      properties:
+                        "Stomach":
+                          type: number[]
+                    Testis:
+                      type: object
+                      properties:
+                        "Testis":
+                          type: number[]
+                    Thyroid:
+                      type: object
+                      properties:
+                        "Thyroid":
+                          type: number[]
+                    Uterus:
+                      type: object
+                      properties:
+                        "Uterus":
+                          type: number[]
+                    Vagina:
+                      type: object
+                      properties:
+                        "Vagina":
+                          type: number[]
+              example: !include examples/gtex.json
+
+/expression:
+  /orthologs/gene/entrezId/:entrezId:
+    type: collection
+    description: Get predicted ortholog genes' AGR expression data by Entrez gene ID
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+
+              example: !include examples/agr.json
+
+
+/pharos:
+  /targets/gene/entrezId/:entrezId:
+    type: collection
+    description: Get predicted ortholog genes' AGR expression data by Entrez gene ID
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+
+              example: !include examples/pharos.json
+
+/mutalyzer:
+  /hgvs/:variantHGVS:
+    type: collection
+    description: Get genomic location of the variant in HGVS format
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+
+              example: !include examples/mutalyzer.json
+
+/transvar:
+  /protein/:proteinVariant:
+    type: collection
+    description: Get genomic location of the variant and gene by of protein variant
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+
+              example: !include examples/transvar.json

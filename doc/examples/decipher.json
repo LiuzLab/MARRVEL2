@@ -1,0 +1,44 @@
+[
+   {
+      "hg19Chr":"6",
+      "hg19Start":60073,
+      "hg19Stop":76462,
+      "study":"42M calls",
+      "duplication":{
+         "std":0.174801475,
+         "obs":18,
+         "freq":0.45
+      },
+      "sampleSize":40,
+      "deletion":{
+         "std":1,
+         "obs":0,
+         "freq":0
+      },
+      "freq":0.45,
+      "std":0.174801475,
+      "obs":18,
+      "cnvType":1
+   },
+   {
+      "hg19Chr":"6",
+      "hg19Start":60073,
+      "hg19Stop":151563,
+      "study":"42M calls",
+      "duplication":{
+         "std":0.227866358,
+         "obs":13,
+         "freq":0.325
+      },
+      "sampleSize":40,
+      "deletion":{
+         "std":1,
+         "obs":0,
+         "freq":0
+      },
+      "freq":0.325,
+      "std":0.227866358,
+      "obs":13,
+      "cnvType":1
+   }
+]

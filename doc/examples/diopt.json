@@ -1,0 +1,76 @@
+[
+  {
+    "score": 1,
+    "bestScore": false,
+    "taxonId2": 10090,
+    "entrezId1": 26235,
+    "confidence": "low",
+    "entrezId2": 30840,
+    "taxonId1": 9606,
+    "bestScoreRev": false,
+    "gene1": {
+      "entrezId": 26235,
+      "symbol": "FBXL4"
+    },
+    "gene2": {
+      "entrezId": 30840,
+      "symbol": "Fbxl6",
+      "mgiId": "MGI:1354705",
+      "xref": {
+        "mgiId": "MGI:1354705",
+        "ensemblId": "ENSMUSG00000022559"
+      },
+      "gos": [
+        {
+          "date": "20180323",
+          "eviCode": "IBA",
+          "references": [
+            "MGI:MGI:6201960",
+            "PMID:21873635"
+          ],
+          "assignedBy": "GO_Central",
+          "goId": "GO:0019005",
+          "ontology": {
+            "namespace": "cellular_component",
+            "id": "GO:0019005",
+            "name": "SCF ubiquitin ligase complex"
+          }
+        },
+        {
+          "date": "20180323",
+          "eviCode": "IBA",
+          "references": [
+            "MGI:MGI:6201960",
+            "PMID:21873635"
+          ],
+          "assignedBy": "GO_Central",
+          "goId": "GO:0031146",
+          "ontology": {
+            "namespace": "biological_process",
+            "id": "GO:0031146",
+            "name": "SCF-dependent proteasomal ubiquitin-dependent protein catabolic process"
+          }
+        },
+        {
+          "date": "20180323",
+          "eviCode": "IBA",
+          "references": [
+            "MGI:MGI:6201960",
+            "PMID:21873635"
+          ],
+          "assignedBy": "GO_Central",
+          "goId": "GO:0061630",
+          "ontology": {
+            "namespace": "molecular_function",
+            "name": "ubiquitin protein ligase activity",
+            "agrSlimGoId": "GO:0016740",
+            "id": "GO:0061630"
+          }
+        }
+      ],
+      "phenotypes": {
+        "ontology": null
+      }
+    }
+  }
+]

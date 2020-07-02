@@ -1,0 +1,4898 @@
+[
+   {
+      "uid":608768,
+      "title":"GRCh37/hg19 6p25.3-q27(chr6:165632-170919470)x3",
+      "stop":170919470,
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2014-10-31T00:00:00.000Z"
+      },
+      "start":165632,
+      "condition":"not provided"
+   },
+   {
+      "uid":608767,
+      "title":"GRCh37/hg19 6p25.3-q27(chr6:108666-170980171)x3",
+      "stop":170980171,
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-01-05T00:00:00.000Z"
+      },
+      "start":108666,
+      "condition":"not provided"
+   },
+   {
+      "uid":608764,
+      "title":"GRCh37/hg19 6p25.3-q27(chr6:60107-171054786)x3",
+      "stop":171054786,
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2013-01-01T00:00:00.000Z"
+      },
+      "start":60107,
+      "condition":"not provided"
+   },
+   {
+      "uid":563209,
+      "title":"GRCh37/hg19 6q16.1(chr6:98870687-99356722)x1",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-11-10T00:00:00.000Z"
+      },
+      "start":98870687,
+      "stop":99356722
+   },
+   {
+      "uid":563204,
+      "condition":"not provided",
+      "start":95549951,
+      "title":"GRCh37/hg19 6q16.1-22.1(chr6:95549951-116684929)x1",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-25T00:00:00.000Z"
+      },
+      "stop":116684929
+   },
+   {
+      "uid":559353,
+      "title":"NM_012160.4(FBXL4):c.1103+30del",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Benign",
+         "lastEvaluated":"2016-03-08T00:00:00.000Z"
+      },
+      "start":99353272,
+      "stop":99353272
+   },
+   {
+      "uid":559352,
+      "title":"NM_012160.4(FBXL4):c.1103+30T&gt;C",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Benign",
+         "lastEvaluated":"2016-02-29T00:00:00.000Z"
+      },
+      "start":99353272,
+      "stop":99353272
+   },
+   {
+      "uid":545084,
+      "title":"NM_001278716.1(FBXL4):c.1607A&gt;C (p.Gln536Pro)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-07-27T00:00:00.000Z"
+      },
+      "start":99323386,
+      "stop":99323386
+   },
+   {
+      "uid":520628,
+      "title":"NM_012160.4(FBXL4):c.827delA (p.Asn276Ilefs)",
+      "condition":"Inborn genetic diseases",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2015-03-13T00:00:00.000Z"
+      },
+      "start":99365281,
+      "stop":99365281
+   },
+   {
+      "uid":516975,
+      "title":"NM_012160.4(FBXL4):c.-69A&gt;G",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely benign",
+         "lastEvaluated":"2017-09-28T00:00:00.000Z"
+      },
+      "start":99374933,
+      "stop":99374933
+   },
+   {
+      "uid":512559,
+      "title":"NM_012160.4(FBXL4):c.273T&gt;C (p.Phe91=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely benign",
+         "lastEvaluated":"2017-10-19T00:00:00.000Z"
+      },
+      "start":99374592,
+      "stop":99374592
+   },
+   {
+      "uid":444694,
+      "title":"NM_001278716.1(FBXL4):c.218A&gt;G (p.Tyr73Cys)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-02-28T00:00:00.000Z"
+      },
+      "start":99374647,
+      "stop":99374647
+   },
+   {
+      "uid":443497,
+      "title":"GRCh37/hg19 6p25.3-q27(chr6:156975-170919482)",
+      "stop":170919482,
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2015-07-14T00:00:00.000Z"
+      },
+      "start":156975,
+      "condition":"See cases"
+   },
+   {
+      "uid":443496,
+      "title":"GRCh37/hg19 6p25.3-q27(chr6:156975-170919482)x3",
+      "stop":170919482,
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2014-12-02T00:00:00.000Z"
+      },
+      "start":156975,
+      "condition":"See cases"
+   },
+   {
+      "uid":443296,
+      "condition":"See cases",
+      "start":94202605,
+      "title":"GRCh37/hg19 6q16.1-21(chr6:94202605-109878834)x1",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2014-06-16T00:00:00.000Z"
+      },
+      "stop":109878834
+   },
+   {
+      "uid":442063,
+      "condition":"See cases",
+      "start":97384446,
+      "title":"GRCh37/hg19 6q16.1-21(chr6:97384446-110247755)x1",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2016-02-01T00:00:00.000Z"
+      },
+      "stop":110247755
+   },
+   {
+      "uid":437828,
+      "title":"NM_001278716.1(FBXL4):c.*3_*5delTAAinsCAG",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322149,
+      "stop":99322151
+   },
+   {
+      "uid":437827,
+      "title":"NM_012160.4(FBXL4):c.*9A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322145,
+      "stop":99322145
+   },
+   {
+      "uid":437826,
+      "title":"NM_012160.4(FBXL4):c.*5A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Benign",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322149,
+      "stop":99322149
+   },
+   {
+      "uid":437825,
+      "title":"NM_012160.4(FBXL4):c.*18A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322136,
+      "stop":99322136
+   },
+   {
+      "uid":437824,
+      "title":"NM_012160.4(FBXL4):c.*11G&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322143,
+      "stop":99322143
+   },
+   {
+      "uid":437823,
+      "title":"NM_012160.4(FBXL4):c.*4A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322150,
+      "stop":99322150
+   },
+   {
+      "uid":437822,
+      "title":"NM_012160.4(FBXL4):c.1859C&gt;G (p.Thr620Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322161,
+      "stop":99322161
+   },
+   {
+      "uid":437821,
+      "title":"NM_012160.4(FBXL4):c.1836del (p.Val613Cysfs)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322184,
+      "stop":99322184
+   },
+   {
+      "uid":437820,
+      "title":"NM_012160.4(FBXL4):c.1826G&gt;A (p.Ser609Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322194,
+      "stop":99322194
+   },
+   {
+      "uid":437819,
+      "title":"NM_012160.4(FBXL4):c.1796A&gt;G (p.Asp599Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322224,
+      "stop":99322224
+   },
+   {
+      "uid":437818,
+      "title":"NM_012160.4(FBXL4):c.1788G&gt;A (p.Ser596=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322232,
+      "stop":99322232
+   },
+   {
+      "uid":437817,
+      "title":"NM_012160.4(FBXL4):c.1788G&gt;T (p.Ser596=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322232,
+      "stop":99322232
+   },
+   {
+      "uid":437816,
+      "title":"NM_012160.4(FBXL4):c.1787C&gt;T (p.Ser596Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322233,
+      "stop":99322233
+   },
+   {
+      "uid":437815,
+      "title":"NM_012160.4(FBXL4):c.1779C&gt;T (p.Ser593=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322241,
+      "stop":99322241
+   },
+   {
+      "uid":437814,
+      "title":"NM_012160.4(FBXL4):c.1778C&gt;G (p.Ser593Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322242,
+      "stop":99322242
+   },
+   {
+      "uid":437813,
+      "title":"NM_012160.4(FBXL4):c.1773T&gt;C (p.Asp591=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322247,
+      "stop":99322247
+   },
+   {
+      "uid":437812,
+      "title":"NM_012160.4(FBXL4):c.1772A&gt;C (p.Asp591Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, conflicting interpretations",
+         "description":"Conflicting interpretations of pathogenicity",
+         "lastEvaluated":"2017-11-16T00:00:00.000Z"
+      },
+      "start":99322248,
+      "stop":99322248
+   },
+   {
+      "uid":437811,
+      "title":"NM_012160.4(FBXL4):c.1764T&gt;G (p.Ser588=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322256,
+      "stop":99322256
+   },
+   {
+      "uid":437810,
+      "title":"NM_012160.4(FBXL4):c.1760T&gt;C (p.Leu587Pro)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322260,
+      "stop":99322260
+   },
+   {
+      "uid":437809,
+      "title":"NM_012160.4(FBXL4):c.1751G&gt;T (p.Cys584Phe)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322269,
+      "stop":99322269
+   },
+   {
+      "uid":437808,
+      "title":"NM_012160.4(FBXL4):c.1748C&gt;G (p.Ser583Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322272,
+      "stop":99322272
+   },
+   {
+      "uid":437807,
+      "title":"NM_012160.4(FBXL4):c.1745A&gt;G (p.Glu582Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322275,
+      "stop":99322275
+   },
+   {
+      "uid":437806,
+      "title":"NM_012160.4(FBXL4):c.1745A&gt;C (p.Glu582Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322275,
+      "stop":99322275
+   },
+   {
+      "uid":437805,
+      "title":"NM_012160.4(FBXL4):c.1739T&gt;C (p.Leu580Pro)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322281,
+      "stop":99322281
+   },
+   {
+      "uid":437804,
+      "title":"NM_012160.4(FBXL4):c.1739T&gt;G (p.Leu580Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322281,
+      "stop":99322281
+   },
+   {
+      "uid":437803,
+      "title":"NM_012160.4(FBXL4):c.1729T&gt;C (p.Leu577=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322291,
+      "stop":99322291
+   },
+   {
+      "uid":437802,
+      "title":"NM_012160.4(FBXL4):c.1723G&gt;T (p.Ala575Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322297,
+      "stop":99322297
+   },
+   {
+      "uid":437801,
+      "title":"NM_012160.4(FBXL4):c.1723G&gt;A (p.Ala575Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322297,
+      "stop":99322297
+   },
+   {
+      "uid":437800,
+      "title":"NM_012160.4(FBXL4):c.1722G&gt;A (p.Pro574=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322298,
+      "stop":99322298
+   },
+   {
+      "uid":437799,
+      "title":"NM_012160.4(FBXL4):c.1721C&gt;T (p.Pro574Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322299,
+      "stop":99322299
+   },
+   {
+      "uid":437798,
+      "title":"NM_012160.4(FBXL4):c.1721C&gt;A (p.Pro574Gln)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322299,
+      "stop":99322299
+   },
+   {
+      "uid":437797,
+      "title":"NM_012160.4(FBXL4):c.1713G&gt;A (p.Met571Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322307,
+      "stop":99322307
+   },
+   {
+      "uid":437796,
+      "title":"NM_012160.4(FBXL4):c.1703-9C&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322326,
+      "stop":99322326
+   },
+   {
+      "uid":437795,
+      "title":"NM_012160.4(FBXL4):c.1703-10C&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322327,
+      "stop":99322327
+   },
+   {
+      "uid":437794,
+      "title":"NM_012160.4(FBXL4):c.1703-14T&gt;C",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322331,
+      "stop":99322331
+   },
+   {
+      "uid":437793,
+      "title":"NM_012160.4(FBXL4):c.1702+18A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323273,
+      "stop":99323273
+   },
+   {
+      "uid":437792,
+      "title":"NM_012160.4(FBXL4):c.1702+11A&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323280,
+      "stop":99323280
+   },
+   {
+      "uid":437791,
+      "title":"NM_012160.4(FBXL4):c.1702+6G&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323285,
+      "stop":99323285
+   },
+   {
+      "uid":437790,
+      "title":"NM_012160.4(FBXL4):c.1700T&gt;C (p.Leu567Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323293,
+      "stop":99323293
+   },
+   {
+      "uid":437789,
+      "title":"NM_012160.4(FBXL4):c.1699T&gt;C (p.Leu567=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323294,
+      "stop":99323294
+   },
+   {
+      "uid":437788,
+      "title":"NM_012160.4(FBXL4):c.1689G&gt;A (p.Gln563=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323304,
+      "stop":99323304
+   },
+   {
+      "uid":437787,
+      "title":"NM_012160.4(FBXL4):c.1685A&gt;G (p.Gln562Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323308,
+      "stop":99323308
+   },
+   {
+      "uid":437786,
+      "title":"NM_012160.4(FBXL4):c.1681T&gt;A (p.Leu561Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323312,
+      "stop":99323312
+   },
+   {
+      "uid":437785,
+      "title":"NM_012160.4(FBXL4):c.1672T&gt;G (p.Cys558Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323321,
+      "stop":99323321
+   },
+   {
+      "uid":437784,
+      "title":"NM_012160.4(FBXL4):c.1670A&gt;G (p.Asn557Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323323,
+      "stop":99323323
+   },
+   {
+      "uid":437783,
+      "title":"NM_012160.4(FBXL4):c.1662G&gt;A (p.Leu554=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323331,
+      "stop":99323331
+   },
+   {
+      "uid":437782,
+      "title":"NM_012160.4(FBXL4):c.1656T&gt;C (p.Asp552=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323337,
+      "stop":99323337
+   },
+   {
+      "uid":437781,
+      "title":"NM_012160.4(FBXL4):c.1631G&gt;A (p.Arg544Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323362,
+      "stop":99323362
+   },
+   {
+      "uid":437780,
+      "title":"NM_012160.4(FBXL4):c.1628A&gt;C (p.Asn543Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323365,
+      "stop":99323365
+   },
+   {
+      "uid":437779,
+      "title":"NM_012160.4(FBXL4):c.1626T&gt;G (p.Ala542=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323367,
+      "stop":99323367
+   },
+   {
+      "uid":437778,
+      "title":"NM_012160.4(FBXL4):c.1617T&gt;G (p.Phe539Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323376,
+      "stop":99323376
+   },
+   {
+      "uid":437777,
+      "title":"NM_012160.4(FBXL4):c.1594C&gt;G (p.Leu532Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323399,
+      "stop":99323399
+   },
+   {
+      "uid":437776,
+      "title":"NM_012160.4(FBXL4):c.1592A&gt;G (p.Gln531Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323401,
+      "stop":99323401
+   },
+   {
+      "uid":437775,
+      "title":"NM_012160.4(FBXL4):c.1580G&gt;T (p.Arg527Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323413,
+      "stop":99323413
+   },
+   {
+      "uid":437774,
+      "title":"NM_012160.4(FBXL4):c.1569G&gt;C (p.Gly523=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323424,
+      "stop":99323424
+   },
+   {
+      "uid":437773,
+      "title":"NM_012160.4(FBXL4):c.1567G&gt;A (p.Gly523Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323426,
+      "stop":99323426
+   },
+   {
+      "uid":437772,
+      "title":"NM_012160.4(FBXL4):c.1566C&gt;T (p.Thr522=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323427,
+      "stop":99323427
+   },
+   {
+      "uid":437771,
+      "title":"NM_012160.4(FBXL4):c.1564A&gt;G (p.Thr522Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323429,
+      "stop":99323429
+   },
+   {
+      "uid":437770,
+      "title":"NM_012160.4(FBXL4):c.1553T&gt;G (p.Leu518Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323440,
+      "stop":99323440
+   },
+   {
+      "uid":437769,
+      "title":"NM_012160.4(FBXL4):c.1549A&gt;C (p.Thr517Pro)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323444,
+      "stop":99323444
+   },
+   {
+      "uid":437768,
+      "title":"NM_012160.4(FBXL4):c.1546C&gt;T (p.Pro516Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323447,
+      "stop":99323447
+   },
+   {
+      "uid":437767,
+      "title":"NM_012160.4(FBXL4):c.1533C&gt;A (p.Asp511Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323460,
+      "stop":99323460
+   },
+   {
+      "uid":437766,
+      "title":"NM_012160.4(FBXL4):c.1528C&gt;G (p.Leu510Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323465,
+      "stop":99323465
+   },
+   {
+      "uid":437765,
+      "title":"NM_012160.4(FBXL4):c.1526A&gt;C (p.Glu509Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323467,
+      "stop":99323467
+   },
+   {
+      "uid":437764,
+      "title":"NM_012160.4(FBXL4):c.1518A&gt;G (p.Leu506=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323475,
+      "stop":99323475
+   },
+   {
+      "uid":437763,
+      "title":"NM_012160.4(FBXL4):c.1508G&gt;T (p.Gly503Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323485,
+      "stop":99323485
+   },
+   {
+      "uid":437762,
+      "title":"NM_012160.4(FBXL4):c.1483A&gt;C (p.Asn495His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323510,
+      "stop":99323510
+   },
+   {
+      "uid":437761,
+      "title":"NM_012160.4(FBXL4):c.1468A&gt;G (p.Lys490Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323525,
+      "stop":99323525
+   },
+   {
+      "uid":437760,
+      "title":"NM_012160.4(FBXL4):c.1464A&gt;G (p.Arg488=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323529,
+      "stop":99323529
+   },
+   {
+      "uid":437759,
+      "title":"NM_012160.4(FBXL4):c.1449C&gt;G (p.Thr483=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323544,
+      "stop":99323544
+   },
+   {
+      "uid":437758,
+      "title":"NM_012160.4(FBXL4):c.1445G&gt;A (p.Arg482Gln)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323548,
+      "stop":99323548
+   },
+   {
+      "uid":437757,
+      "title":"NM_012160.4(FBXL4):c.1440A&gt;T (p.Lys480Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323553,
+      "stop":99323553
+   },
+   {
+      "uid":437756,
+      "title":"NM_012160.4(FBXL4):c.1428C&gt;A (p.Ala476=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323565,
+      "stop":99323565
+   },
+   {
+      "uid":437755,
+      "title":"NM_012160.4(FBXL4):c.1422A&gt;G (p.Ile474Met)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323571,
+      "stop":99323571
+   },
+   {
+      "uid":437754,
+      "title":"NM_012160.4(FBXL4):c.1400A&gt;G (p.Tyr467Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323593,
+      "stop":99323593
+   },
+   {
+      "uid":437753,
+      "title":"NM_012160.4(FBXL4):c.1399T&gt;A (p.Tyr467Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323594,
+      "stop":99323594
+   },
+   {
+      "uid":437752,
+      "title":"NM_012160.4(FBXL4):c.1396G&gt;C (p.Asp466His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323597,
+      "stop":99323597
+   },
+   {
+      "uid":437751,
+      "title":"NM_012160.4(FBXL4):c.1390A&gt;G (p.Ile464Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323603,
+      "stop":99323603
+   },
+   {
+      "uid":437750,
+      "title":"NM_012160.4(FBXL4):c.1390-17A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323620,
+      "stop":99323620
+   },
+   {
+      "uid":437749,
+      "title":"NM_012160.4(FBXL4):c.1389+18C&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328411,
+      "stop":99328411
+   },
+   {
+      "uid":437748,
+      "title":"NM_012160.4(FBXL4):c.1389+13G&gt;C",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328416,
+      "stop":99328416
+   },
+   {
+      "uid":437747,
+      "title":"NM_012160.4(FBXL4):c.1389+5G&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328424,
+      "stop":99328424
+   },
+   {
+      "uid":437746,
+      "title":"NM_012160.4(FBXL4):c.1389+4A&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328425,
+      "stop":99328425
+   },
+   {
+      "uid":437745,
+      "title":"NM_012160.4(FBXL4):c.1389G&gt;C (p.Met463Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328429,
+      "stop":99328429
+   },
+   {
+      "uid":437744,
+      "title":"NM_012160.4(FBXL4):c.1388T&gt;C (p.Met463Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328430,
+      "stop":99328430
+   },
+   {
+      "uid":437743,
+      "title":"NM_012160.4(FBXL4):c.1379G&gt;A (p.Ser460Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328439,
+      "stop":99328439
+   },
+   {
+      "uid":437742,
+      "title":"NM_012160.4(FBXL4):c.1370G&gt;A (p.Ser457Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328448,
+      "stop":99328448
+   },
+   {
+      "uid":437741,
+      "title":"NM_012160.4(FBXL4):c.1360C&gt;T (p.Gln454Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328458,
+      "stop":99328458
+   },
+   {
+      "uid":437740,
+      "title":"NM_012160.4(FBXL4):c.1356G&gt;A (p.Glu452=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328462,
+      "stop":99328462
+   },
+   {
+      "uid":437739,
+      "title":"NM_012160.4(FBXL4):c.1349G&gt;A (p.Cys450Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328469,
+      "stop":99328469
+   },
+   {
+      "uid":437738,
+      "title":"NM_012160.4(FBXL4):c.1344C&gt;T (p.Asn448=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328474,
+      "stop":99328474
+   },
+   {
+      "uid":437737,
+      "title":"NM_012160.4(FBXL4):c.1339T&gt;C (p.Leu447=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328479,
+      "stop":99328479
+   },
+   {
+      "uid":437736,
+      "title":"NM_012160.4(FBXL4):c.1336A&gt;G (p.Ile446Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328482,
+      "stop":99328482
+   },
+   {
+      "uid":437735,
+      "title":"NM_012160.4(FBXL4):c.1318-10C&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328510,
+      "stop":99328510
+   },
+   {
+      "uid":437734,
+      "title":"NM_012160.4(FBXL4):c.1318C&gt;G (p.Gln440Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328500,
+      "stop":99328500
+   },
+   {
+      "uid":437733,
+      "title":"NM_012160.4(FBXL4):c.1318-10C&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328510,
+      "stop":99328510
+   },
+   {
+      "uid":437732,
+      "title":"NM_012160.4(FBXL4):c.1318-15G&gt;C",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328515,
+      "stop":99328515
+   },
+   {
+      "uid":437731,
+      "title":"NM_012160.4(FBXL4):c.1318-16T&gt;C",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328516,
+      "stop":99328516
+   },
+   {
+      "uid":437730,
+      "title":"NM_012160.4(FBXL4):c.1317+19T&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347125,
+      "stop":99347125
+   },
+   {
+      "uid":437729,
+      "title":"NM_012160.4(FBXL4):c.1317+17A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347127,
+      "stop":99347127
+   },
+   {
+      "uid":437728,
+      "title":"NM_012160.4(FBXL4):c.1317+13C&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347131,
+      "stop":99347131
+   },
+   {
+      "uid":437727,
+      "title":"NM_012160.4(FBXL4):c.1311A&gt;G (p.Lys437=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347150,
+      "stop":99347150
+   },
+   {
+      "uid":437726,
+      "title":"NM_012160.4(FBXL4):c.1294G&gt;A (p.Val432Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347167,
+      "stop":99347167
+   },
+   {
+      "uid":437725,
+      "title":"NM_012160.4(FBXL4):c.1289G&gt;A (p.Arg430Gln)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347172,
+      "stop":99347172
+   },
+   {
+      "uid":437724,
+      "title":"NM_012160.4(FBXL4):c.1288C&gt;T (p.Arg430Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347173,
+      "stop":99347173
+   },
+   {
+      "uid":437723,
+      "title":"NM_012160.4(FBXL4):c.1285A&gt;G (p.Lys429Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347176,
+      "stop":99347176
+   },
+   {
+      "uid":437722,
+      "title":"NM_012160.4(FBXL4):c.1260C&gt;T (p.Asn420=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347201,
+      "stop":99347201
+   },
+   {
+      "uid":437721,
+      "title":"NM_012160.4(FBXL4):c.1254T&gt;A (p.Ala418=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347207,
+      "stop":99347207
+   },
+   {
+      "uid":437720,
+      "title":"NM_012160.4(FBXL4):c.1252G&gt;A (p.Ala418Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347209,
+      "stop":99347209
+   },
+   {
+      "uid":437719,
+      "title":"NM_012160.4(FBXL4):c.1251A&gt;G (p.Gln417=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, conflicting interpretations",
+         "description":"Conflicting interpretations of pathogenicity",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347210,
+      "stop":99347210
+   },
+   {
+      "uid":437718,
+      "title":"NM_012160.4(FBXL4):c.1247C&gt;T (p.Pro416Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347214,
+      "stop":99347214
+   },
+   {
+      "uid":437717,
+      "title":"NM_012160.4(FBXL4):c.1244C&gt;T (p.Pro415Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347217,
+      "stop":99347217
+   },
+   {
+      "uid":437716,
+      "title":"NM_012160.4(FBXL4):c.1226C&gt;A (p.Ser409Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347235,
+      "stop":99347235
+   },
+   {
+      "uid":437715,
+      "title":"NM_012160.4(FBXL4):c.1224C&gt;G (p.Leu408=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347237,
+      "stop":99347237
+   },
+   {
+      "uid":437714,
+      "title":"NM_012160.4(FBXL4):c.1214C&gt;A (p.Ala405Asp)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347247,
+      "stop":99347247
+   },
+   {
+      "uid":437713,
+      "title":"NM_012160.4(FBXL4):c.1213G&gt;A (p.Ala405Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347248,
+      "stop":99347248
+   },
+   {
+      "uid":437712,
+      "title":"NM_012160.4(FBXL4):c.1209A&gt;G (p.Leu403=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347252,
+      "stop":99347252
+   },
+   {
+      "uid":437711,
+      "title":"NM_012160.4(FBXL4):c.1195A&gt;T (p.Met399Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347266,
+      "stop":99347266
+   },
+   {
+      "uid":437710,
+      "title":"NM_012160.4(FBXL4):c.1194G&gt;A (p.Glu398=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347267,
+      "stop":99347267
+   },
+   {
+      "uid":437709,
+      "title":"NM_012160.4(FBXL4):c.1190C&gt;A (p.Ser397Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347271,
+      "stop":99347271
+   },
+   {
+      "uid":437708,
+      "title":"NM_012160.4(FBXL4):c.1172C&gt;G (p.Thr391Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347289,
+      "stop":99347289
+   },
+   {
+      "uid":437707,
+      "title":"NM_012160.4(FBXL4):c.1172C&gt;T (p.Thr391Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347289,
+      "stop":99347289
+   },
+   {
+      "uid":437706,
+      "title":"NM_012160.4(FBXL4):c.1166A&gt;G (p.Asn389Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347295,
+      "stop":99347295
+   },
+   {
+      "uid":437705,
+      "title":"NM_012160.4(FBXL4):c.1156C&gt;T (p.His386Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347305,
+      "stop":99347305
+   },
+   {
+      "uid":437704,
+      "title":"NM_012160.4(FBXL4):c.1153A&gt;G (p.Ser385Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347308,
+      "stop":99347308
+   },
+   {
+      "uid":437703,
+      "title":"NM_012160.4(FBXL4):c.1149T&gt;C (p.Ser383=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347312,
+      "stop":99347312
+   },
+   {
+      "uid":437702,
+      "title":"NM_012160.4(FBXL4):c.1139T&gt;C (p.Leu380Pro)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347322,
+      "stop":99347322
+   },
+   {
+      "uid":437701,
+      "title":"NM_012160.4(FBXL4):c.1136G&gt;A (p.Arg379His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347325,
+      "stop":99347325
+   },
+   {
+      "uid":437700,
+      "title":"NM_012160.4(FBXL4):c.1135C&gt;T (p.Arg379Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347326,
+      "stop":99347326
+   },
+   {
+      "uid":437699,
+      "title":"NM_012160.4(FBXL4):c.1126G&gt;A (p.Glu376Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347335,
+      "stop":99347335
+   },
+   {
+      "uid":437698,
+      "title":"NM_012160.4(FBXL4):c.1125C&gt;T (p.Ser375=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347336,
+      "stop":99347336
+   },
+   {
+      "uid":437697,
+      "title":"NM_012160.4(FBXL4):c.1115T&gt;C (p.Val372Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347346,
+      "stop":99347346
+   },
+   {
+      "uid":437696,
+      "title":"NM_012160.4(FBXL4):c.1113G&gt;C (p.Lys371Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347348,
+      "stop":99347348
+   },
+   {
+      "uid":437695,
+      "title":"NM_012160.4(FBXL4):c.1104-4G&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347361,
+      "stop":99347361
+   },
+   {
+      "uid":437694,
+      "title":"NM_012160.4(FBXL4):c.1104-4G&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347361,
+      "stop":99347361
+   },
+   {
+      "uid":437693,
+      "title":"NM_012160.4(FBXL4):c.1104-13G&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347370,
+      "stop":99347370
+   },
+   {
+      "uid":437692,
+      "title":"NM_012160.4(FBXL4):c.1104-19T&gt;C",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347376,
+      "stop":99347376
+   },
+   {
+      "uid":437691,
+      "title":"NM_012160.4(FBXL4):c.1103+13C&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353289,
+      "stop":99353289
+   },
+   {
+      "uid":437690,
+      "title":"NM_012160.4(FBXL4):c.1103+13C&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353289,
+      "stop":99353289
+   },
+   {
+      "uid":437689,
+      "title":"NM_012160.4(FBXL4):c.1103+12G&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353290,
+      "stop":99353290
+   },
+   {
+      "uid":437688,
+      "title":"NM_012160.4(FBXL4):c.1103+7A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353295,
+      "stop":99353295
+   },
+   {
+      "uid":437687,
+      "title":"NM_012160.4(FBXL4):c.1103G&gt;A (p.Arg368Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353302,
+      "stop":99353302
+   },
+   {
+      "uid":437686,
+      "title":"NM_012160.4(FBXL4):c.1087G&gt;T (p.Val363Phe)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353318,
+      "stop":99353318
+   },
+   {
+      "uid":437685,
+      "title":"NM_012160.4(FBXL4):c.1083C&gt;T (p.Ile361=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353322,
+      "stop":99353322
+   },
+   {
+      "uid":437684,
+      "title":"NM_012160.4(FBXL4):c.1073G&gt;A (p.Arg358Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353332,
+      "stop":99353332
+   },
+   {
+      "uid":437683,
+      "title":"NM_012160.4(FBXL4):c.1071T&gt;G (p.Asn357Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353334,
+      "stop":99353334
+   },
+   {
+      "uid":437682,
+      "title":"NM_012160.4(FBXL4):c.1070A&gt;G (p.Asn357Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353335,
+      "stop":99353335
+   },
+   {
+      "uid":437681,
+      "title":"NM_012160.4(FBXL4):c.1069A&gt;G (p.Asn357Asp)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353336,
+      "stop":99353336
+   },
+   {
+      "uid":437680,
+      "title":"NM_012160.4(FBXL4):c.1067G&gt;C (p.Gly356Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353338,
+      "stop":99353338
+   },
+   {
+      "uid":437679,
+      "title":"NM_012160.4(FBXL4):c.1056A&gt;G (p.Leu352=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353349,
+      "stop":99353349
+   },
+   {
+      "uid":437678,
+      "title":"NM_012160.4(FBXL4):c.1056A&gt;T (p.Leu352Phe)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353349,
+      "stop":99353349
+   },
+   {
+      "uid":437677,
+      "title":"NM_012160.4(FBXL4):c.1027C&gt;T (p.Arg343Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353378,
+      "stop":99353378
+   },
+   {
+      "uid":437676,
+      "title":"NM_012160.4(FBXL4):c.1020A&gt;G (p.Leu340=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353385,
+      "stop":99353385
+   },
+   {
+      "uid":437675,
+      "title":"NM_012160.4(FBXL4):c.1011G&gt;T (p.Leu337=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353394,
+      "stop":99353394
+   },
+   {
+      "uid":437674,
+      "title":"NM_012160.4(FBXL4):c.1009C&gt;T (p.Leu337=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353396,
+      "stop":99353396
+   },
+   {
+      "uid":437673,
+      "title":"NM_012160.4(FBXL4):c.991A&gt;G (p.Lys331Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353414,
+      "stop":99353414
+   },
+   {
+      "uid":437672,
+      "title":"NM_012160.4(FBXL4):c.989C&gt;G (p.Ala330Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353416,
+      "stop":99353416
+   },
+   {
+      "uid":437671,
+      "title":"NM_012160.4(FBXL4):c.989C&gt;T (p.Ala330Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353416,
+      "stop":99353416
+   },
+   {
+      "uid":437670,
+      "title":"NM_012160.4(FBXL4):c.988G&gt;A (p.Ala330Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353417,
+      "stop":99353417
+   },
+   {
+      "uid":437669,
+      "title":"NM_012160.4(FBXL4):c.982T&gt;C (p.Tyr328His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353423,
+      "stop":99353423
+   },
+   {
+      "uid":437668,
+      "title":"NM_012160.4(FBXL4):c.971A&gt;G (p.Asn324Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353434,
+      "stop":99353434
+   },
+   {
+      "uid":437667,
+      "title":"NM_012160.4(FBXL4):c.961A&gt;G (p.Ile321Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353444,
+      "stop":99353444
+   },
+   {
+      "uid":437666,
+      "title":"NM_012160.4(FBXL4):c.961A&gt;C (p.Ile321Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353444,
+      "stop":99353444
+   },
+   {
+      "uid":437665,
+      "title":"NM_012160.4(FBXL4):c.954G&gt;A (p.Leu318=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353451,
+      "stop":99353451
+   },
+   {
+      "uid":437664,
+      "title":"NM_012160.4(FBXL4):c.953T&gt;G (p.Leu318Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353452,
+      "stop":99353452
+   },
+   {
+      "uid":437663,
+      "title":"NM_012160.4(FBXL4):c.949C&gt;T (p.Pro317Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353456,
+      "stop":99353456
+   },
+   {
+      "uid":437662,
+      "title":"NM_012160.4(FBXL4):c.946G&gt;T (p.Asp316Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353459,
+      "stop":99353459
+   },
+   {
+      "uid":437661,
+      "title":"NM_012160.4(FBXL4):c.944G&gt;T (p.Cys315Phe)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353461,
+      "stop":99353461
+   },
+   {
+      "uid":437660,
+      "title":"NM_012160.4(FBXL4):c.937C&gt;T (p.His313Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353468,
+      "stop":99353468
+   },
+   {
+      "uid":437659,
+      "title":"NM_012160.4(FBXL4):c.936G&gt;A (p.Gln312=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353469,
+      "stop":99353469
+   },
+   {
+      "uid":437658,
+      "title":"NM_012160.4(FBXL4):c.933C&gt;G (p.Ser311Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353472,
+      "stop":99353472
+   },
+   {
+      "uid":437657,
+      "title":"NM_012160.4(FBXL4):c.923A&gt;G (p.Lys308Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353482,
+      "stop":99353482
+   },
+   {
+      "uid":437656,
+      "title":"NM_012160.4(FBXL4):c.919T&gt;C (p.Cys307Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353486,
+      "stop":99353486
+   },
+   {
+      "uid":437655,
+      "title":"NM_012160.4(FBXL4):c.913C&gt;G (p.Gln305Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353492,
+      "stop":99353492
+   },
+   {
+      "uid":437654,
+      "title":"NM_012160.4(FBXL4):c.906A&gt;G (p.Arg302=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353499,
+      "stop":99353499
+   },
+   {
+      "uid":437653,
+      "title":"NM_012160.4(FBXL4):c.904A&gt;G (p.Arg302Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353501,
+      "stop":99353501
+   },
+   {
+      "uid":437652,
+      "title":"NM_012160.4(FBXL4):c.903T&gt;A (p.Cys301Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353502,
+      "stop":99353502
+   },
+   {
+      "uid":437651,
+      "title":"NM_012160.4(FBXL4):c.901T&gt;C (p.Cys301Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353504,
+      "stop":99353504
+   },
+   {
+      "uid":437650,
+      "title":"NM_012160.4(FBXL4):c.893C&gt;T (p.Pro298Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353512,
+      "stop":99353512
+   },
+   {
+      "uid":437649,
+      "title":"NM_012160.4(FBXL4):c.891A&gt;G (p.Leu297=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353514,
+      "stop":99353514
+   },
+   {
+      "uid":437648,
+      "title":"NM_012160.4(FBXL4):c.879T&gt;C (p.Asn293=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353526,
+      "stop":99353526
+   },
+   {
+      "uid":437647,
+      "title":"NM_012160.4(FBXL4):c.874C&gt;G (p.Leu292Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353531,
+      "stop":99353531
+   },
+   {
+      "uid":437646,
+      "title":"NM_012160.4(FBXL4):c.872T&gt;C (p.Ile291Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353533,
+      "stop":99353533
+   },
+   {
+      "uid":437645,
+      "title":"NM_012160.4(FBXL4):c.871A&gt;G (p.Ile291Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353534,
+      "stop":99353534
+   },
+   {
+      "uid":437644,
+      "title":"NM_012160.4(FBXL4):c.859-1G&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353547,
+      "stop":99353547
+   },
+   {
+      "uid":437643,
+      "title":"NM_012160.4(FBXL4):c.859-6A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353552,
+      "stop":99353552
+   },
+   {
+      "uid":437642,
+      "title":"NM_012160.4(FBXL4):c.849A&gt;C (p.Leu283=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365259,
+      "stop":99365259
+   },
+   {
+      "uid":437641,
+      "title":"NM_012160.4(FBXL4):c.834G&gt;A (p.Gly278=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365274,
+      "stop":99365274
+   },
+   {
+      "uid":437640,
+      "title":"NM_012160.4(FBXL4):c.822G&gt;T (p.Gly274=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365286,
+      "stop":99365286
+   },
+   {
+      "uid":437639,
+      "title":"NM_012160.4(FBXL4):c.818A&gt;G (p.Glu273Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365290,
+      "stop":99365290
+   },
+   {
+      "uid":437638,
+      "title":"NM_012160.4(FBXL4):c.814G&gt;A (p.Gly272Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365294,
+      "stop":99365294
+   },
+   {
+      "uid":437637,
+      "title":"NM_012160.4(FBXL4):c.813C&gt;T (p.Leu271=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365295,
+      "stop":99365295
+   },
+   {
+      "uid":437636,
+      "title":"NM_012160.4(FBXL4):c.782G&gt;A (p.Ser261Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365326,
+      "stop":99365326
+   },
+   {
+      "uid":437635,
+      "title":"NM_012160.4(FBXL4):c.776T&gt;C (p.Met259Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365332,
+      "stop":99365332
+   },
+   {
+      "uid":437634,
+      "title":"NM_012160.4(FBXL4):c.773G&gt;T (p.Gly258Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365335,
+      "stop":99365335
+   },
+   {
+      "uid":437633,
+      "title":"NM_012160.4(FBXL4):c.766G&gt;A (p.Gly256Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365342,
+      "stop":99365342
+   },
+   {
+      "uid":437632,
+      "title":"NM_012160.4(FBXL4):c.755C&gt;T (p.Ala252Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365353,
+      "stop":99365353
+   },
+   {
+      "uid":437631,
+      "title":"NM_012160.4(FBXL4):c.752A&gt;G (p.Tyr251Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365356,
+      "stop":99365356
+   },
+   {
+      "uid":437630,
+      "title":"NM_012160.4(FBXL4):c.749C&gt;T (p.Ala250Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365359,
+      "stop":99365359
+   },
+   {
+      "uid":437629,
+      "title":"NM_012160.4(FBXL4):c.747T&gt;C (p.Asp249=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365361,
+      "stop":99365361
+   },
+   {
+      "uid":437628,
+      "title":"NM_012160.4(FBXL4):c.747T&gt;A (p.Asp249Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365361,
+      "stop":99365361
+   },
+   {
+      "uid":437627,
+      "title":"NM_012160.4(FBXL4):c.744T&gt;C (p.Asp248=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365364,
+      "stop":99365364
+   },
+   {
+      "uid":437626,
+      "title":"NM_012160.4(FBXL4):c.737T&gt;C (p.Ile246Thr)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365371,
+      "stop":99365371
+   },
+   {
+      "uid":437625,
+      "title":"NM_012160.4(FBXL4):c.736A&gt;G (p.Ile246Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365372,
+      "stop":99365372
+   },
+   {
+      "uid":437624,
+      "title":"NM_012160.4(FBXL4):c.735T&gt;C (p.Asp245=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365373,
+      "stop":99365373
+   },
+   {
+      "uid":437623,
+      "title":"NM_012160.4(FBXL4):c.731A&gt;G (p.Asn244Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365377,
+      "stop":99365377
+   },
+   {
+      "uid":437622,
+      "title":"NM_012160.4(FBXL4):c.730A&gt;G (p.Asn244Asp)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365378,
+      "stop":99365378
+   },
+   {
+      "uid":437621,
+      "title":"NM_012160.4(FBXL4):c.725A&gt;G (p.Asp242Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365383,
+      "stop":99365383
+   },
+   {
+      "uid":437620,
+      "title":"NM_012160.4(FBXL4):c.724G&gt;A (p.Asp242Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365384,
+      "stop":99365384
+   },
+   {
+      "uid":437619,
+      "title":"NM_012160.4(FBXL4):c.722T&gt;C (p.Ile241Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365386,
+      "stop":99365386
+   },
+   {
+      "uid":437618,
+      "title":"NM_012160.4(FBXL4):c.714T&gt;G (p.Thr238=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365394,
+      "stop":99365394
+   },
+   {
+      "uid":437617,
+      "title":"NM_012160.4(FBXL4):c.702T&gt;C (p.Leu234=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365406,
+      "stop":99365406
+   },
+   {
+      "uid":437616,
+      "title":"NM_012160.4(FBXL4):c.682G&gt;A (p.Val228Met)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365426,
+      "stop":99365426
+   },
+   {
+      "uid":437615,
+      "title":"NM_012160.4(FBXL4):c.676C&gt;T (p.His226Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365432,
+      "stop":99365432
+   },
+   {
+      "uid":437614,
+      "title":"NM_012160.4(FBXL4):c.673C&gt;T (p.Leu225=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365435,
+      "stop":99365435
+   },
+   {
+      "uid":437613,
+      "title":"NM_012160.4(FBXL4):c.672G&gt;A (p.Val224=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365436,
+      "stop":99365436
+   },
+   {
+      "uid":437612,
+      "title":"NM_012160.4(FBXL4):c.668T&gt;G (p.Val223Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365440,
+      "stop":99365440
+   },
+   {
+      "uid":437611,
+      "title":"NM_012160.4(FBXL4):c.666A&gt;C (p.Ala222=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365442,
+      "stop":99365442
+   },
+   {
+      "uid":437610,
+      "title":"NM_012160.4(FBXL4):c.645A&gt;G (p.Glu215=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365463,
+      "stop":99365463
+   },
+   {
+      "uid":437609,
+      "title":"NM_012160.4(FBXL4):c.645A&gt;C (p.Glu215Asp)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365463,
+      "stop":99365463
+   },
+   {
+      "uid":437608,
+      "title":"NM_012160.4(FBXL4):c.643G&gt;C (p.Glu215Gln)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365465,
+      "stop":99365465
+   },
+   {
+      "uid":437607,
+      "title":"NM_012160.4(FBXL4):c.637C&gt;T (p.Leu213Phe)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365471,
+      "stop":99365471
+   },
+   {
+      "uid":437606,
+      "title":"NM_012160.4(FBXL4):c.634T&gt;G (p.Ser212Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365474,
+      "stop":99365474
+   },
+   {
+      "uid":437605,
+      "title":"NM_012160.4(FBXL4):c.607A&gt;G (p.Asn203Asp)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365501,
+      "stop":99365501
+   },
+   {
+      "uid":437604,
+      "title":"NM_012160.4(FBXL4):c.601C&gt;T (p.Pro201Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365507,
+      "stop":99365507
+   },
+   {
+      "uid":437603,
+      "title":"NM_012160.4(FBXL4):c.590A&gt;C (p.Gln197Pro)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365518,
+      "stop":99365518
+   },
+   {
+      "uid":437602,
+      "title":"NM_012160.4(FBXL4):c.570G&gt;C (p.Gln190His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365538,
+      "stop":99365538
+   },
+   {
+      "uid":437601,
+      "title":"NM_012160.4(FBXL4):c.567C&gt;A (p.Arg189=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365541,
+      "stop":99365541
+   },
+   {
+      "uid":437600,
+      "title":"NM_012160.4(FBXL4):c.566G&gt;T (p.Arg189Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365542,
+      "stop":99365542
+   },
+   {
+      "uid":437599,
+      "title":"NM_012160.4(FBXL4):c.565C&gt;T (p.Arg189Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365543,
+      "stop":99365543
+   },
+   {
+      "uid":437598,
+      "title":"NM_012160.4(FBXL4):c.559C&gt;A (p.Gln187Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365549,
+      "stop":99365549
+   },
+   {
+      "uid":437597,
+      "title":"NM_012160.4(FBXL4):c.558C&gt;G (p.Ser186=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365550,
+      "stop":99365550
+   },
+   {
+      "uid":437596,
+      "title":"NM_012160.4(FBXL4):c.547G&gt;C (p.Val183Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365561,
+      "stop":99365561
+   },
+   {
+      "uid":437595,
+      "title":"NM_012160.4(FBXL4):c.542C&gt;T (p.Thr181Met)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365566,
+      "stop":99365566
+   },
+   {
+      "uid":437594,
+      "title":"NM_012160.4(FBXL4):c.541A&gt;G (p.Thr181Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365567,
+      "stop":99365567
+   },
+   {
+      "uid":437593,
+      "title":"NM_012160.4(FBXL4):c.540T&gt;G (p.Pro180=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365568,
+      "stop":99365568
+   },
+   {
+      "uid":437592,
+      "title":"NM_012160.4(FBXL4):c.532G&gt;A (p.Glu178Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365576,
+      "stop":99365576
+   },
+   {
+      "uid":437591,
+      "title":"NM_012160.4(FBXL4):c.529T&gt;A (p.Ser177Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365579,
+      "stop":99365579
+   },
+   {
+      "uid":437590,
+      "title":"NM_012160.4(FBXL4):c.527G&gt;C (p.Trp176Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365581,
+      "stop":99365581
+   },
+   {
+      "uid":437589,
+      "title":"NM_012160.4(FBXL4):c.526T&gt;C (p.Trp176Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365582,
+      "stop":99365582
+   },
+   {
+      "uid":437588,
+      "title":"NM_012160.4(FBXL4):c.513-13C&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365608,
+      "stop":99365608
+   },
+   {
+      "uid":437587,
+      "title":"NM_012160.4(FBXL4):c.513-13C&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365608,
+      "stop":99365608
+   },
+   {
+      "uid":437586,
+      "title":"NM_012160.4(FBXL4):c.513-16T&gt;C",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365611,
+      "stop":99365611
+   },
+   {
+      "uid":437585,
+      "title":"NM_012160.4(FBXL4):c.506A&gt;C (p.Glu169Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374359,
+      "stop":99374359
+   },
+   {
+      "uid":437584,
+      "title":"NM_012160.4(FBXL4):c.493A&gt;C (p.Asn165His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374372,
+      "stop":99374372
+   },
+   {
+      "uid":437583,
+      "title":"NM_012160.4(FBXL4):c.491C&gt;T (p.Pro164Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374374,
+      "stop":99374374
+   },
+   {
+      "uid":437582,
+      "title":"NM_012160.4(FBXL4):c.470G&gt;T (p.Cys157Phe)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374395,
+      "stop":99374395
+   },
+   {
+      "uid":437581,
+      "title":"NM_012160.4(FBXL4):c.454A&gt;G (p.Ile152Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374411,
+      "stop":99374411
+   },
+   {
+      "uid":437580,
+      "title":"NM_012160.4(FBXL4):c.443C&gt;T (p.Pro148Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374422,
+      "stop":99374422
+   },
+   {
+      "uid":437579,
+      "title":"NM_012160.4(FBXL4):c.442C&gt;T (p.Pro148Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374423,
+      "stop":99374423
+   },
+   {
+      "uid":437578,
+      "title":"NM_012160.4(FBXL4):c.440A&gt;G (p.His147Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374425,
+      "stop":99374425
+   },
+   {
+      "uid":437577,
+      "title":"NM_012160.4(FBXL4):c.434C&gt;G (p.Thr145Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374431,
+      "stop":99374431
+   },
+   {
+      "uid":437576,
+      "title":"NM_012160.4(FBXL4):c.418G&gt;A (p.Val140Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374447,
+      "stop":99374447
+   },
+   {
+      "uid":437575,
+      "title":"NM_012160.4(FBXL4):c.417_418insA (p.Val140Serfs)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374447,
+      "stop":99374448
+   },
+   {
+      "uid":437574,
+      "title":"NM_012160.4(FBXL4):c.416C&gt;G (p.Ala139Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374449,
+      "stop":99374449
+   },
+   {
+      "uid":437573,
+      "title":"NM_012160.4(FBXL4):c.415_416insTT (p.Ala139Valfs)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374449,
+      "stop":99374450
+   },
+   {
+      "uid":437572,
+      "title":"NM_012160.4(FBXL4):c.405G&gt;C (p.Val135=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374460,
+      "stop":99374460
+   },
+   {
+      "uid":437571,
+      "title":"NM_012160.4(FBXL4):c.402G&gt;T (p.Gln134His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374463,
+      "stop":99374463
+   },
+   {
+      "uid":437570,
+      "title":"NM_012160.4(FBXL4):c.399A&gt;G (p.Gln133=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374466,
+      "stop":99374466
+   },
+   {
+      "uid":437569,
+      "title":"NM_012160.4(FBXL4):c.396A&gt;G (p.Glu132=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374469,
+      "stop":99374469
+   },
+   {
+      "uid":437568,
+      "title":"NM_012160.4(FBXL4):c.394G&gt;A (p.Glu132Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374471,
+      "stop":99374471
+   },
+   {
+      "uid":437567,
+      "title":"NM_012160.4(FBXL4):c.381G&gt;A (p.Val127=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374484,
+      "stop":99374484
+   },
+   {
+      "uid":437566,
+      "title":"NM_012160.4(FBXL4):c.371A&gt;G (p.Gln124Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374494,
+      "stop":99374494
+   },
+   {
+      "uid":437565,
+      "title":"NM_012160.4(FBXL4):c.370C&gt;T (p.Gln124Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374495,
+      "stop":99374495
+   },
+   {
+      "uid":437564,
+      "title":"NM_012160.4(FBXL4):c.353C&gt;T (p.Pro118Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374512,
+      "stop":99374512
+   },
+   {
+      "uid":437563,
+      "title":"NM_012160.4(FBXL4):c.350C&gt;T (p.Thr117Met)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374515,
+      "stop":99374515
+   },
+   {
+      "uid":437562,
+      "title":"NM_012160.4(FBXL4):c.335T&gt;G (p.Leu112Trp)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374530,
+      "stop":99374530
+   },
+   {
+      "uid":437561,
+      "title":"NM_012160.4(FBXL4):c.332C&gt;T (p.Ser111Phe)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374533,
+      "stop":99374533
+   },
+   {
+      "uid":437560,
+      "title":"NM_012160.4(FBXL4):c.300T&gt;C (p.Tyr100=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374565,
+      "stop":99374565
+   },
+   {
+      "uid":437559,
+      "title":"NM_012160.4(FBXL4):c.293G&gt;A (p.Arg98Gln)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374572,
+      "stop":99374572
+   },
+   {
+      "uid":437558,
+      "title":"NM_012160.4(FBXL4):c.252A&gt;G (p.Val84=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374613,
+      "stop":99374613
+   },
+   {
+      "uid":437557,
+      "title":"NM_012160.4(FBXL4):c.249T&gt;G (p.Asn83Lys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374616,
+      "stop":99374616
+   },
+   {
+      "uid":437556,
+      "title":"NM_012160.4(FBXL4):c.249T&gt;C (p.Asn83=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374616,
+      "stop":99374616
+   },
+   {
+      "uid":437555,
+      "title":"NM_012160.4(FBXL4):c.230A&gt;G (p.Asn77Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374635,
+      "stop":99374635
+   },
+   {
+      "uid":437554,
+      "title":"NM_012160.4(FBXL4):c.221C&gt;G (p.Thr74Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374644,
+      "stop":99374644
+   },
+   {
+      "uid":437553,
+      "title":"NM_012160.4(FBXL4):c.219T&gt;C (p.Tyr73=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374646,
+      "stop":99374646
+   },
+   {
+      "uid":437552,
+      "title":"NM_012160.4(FBXL4):c.216C&gt;T (p.Ser72=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374649,
+      "stop":99374649
+   },
+   {
+      "uid":437551,
+      "title":"NM_012160.4(FBXL4):c.209G&gt;A (p.Ser70Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374656,
+      "stop":99374656
+   },
+   {
+      "uid":437550,
+      "title":"NM_012160.4(FBXL4):c.201T&gt;G (p.Ser67Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374664,
+      "stop":99374664
+   },
+   {
+      "uid":437549,
+      "title":"NM_012160.4(FBXL4):c.194A&gt;G (p.Tyr65Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374671,
+      "stop":99374671
+   },
+   {
+      "uid":437548,
+      "title":"NM_012160.4(FBXL4):c.176T&gt;G (p.Val59Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374689,
+      "stop":99374689
+   },
+   {
+      "uid":437547,
+      "title":"NM_012160.4(FBXL4):c.167A&gt;G (p.Lys56Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374698,
+      "stop":99374698
+   },
+   {
+      "uid":437546,
+      "title":"NM_012160.4(FBXL4):c.158A&gt;T (p.Gln53Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374707,
+      "stop":99374707
+   },
+   {
+      "uid":437545,
+      "title":"NM_012160.4(FBXL4):c.137C&gt;T (p.Pro46Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374728,
+      "stop":99374728
+   },
+   {
+      "uid":437544,
+      "title":"NM_012160.4(FBXL4):c.137C&gt;G (p.Pro46Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374728,
+      "stop":99374728
+   },
+   {
+      "uid":437543,
+      "title":"NM_012160.4(FBXL4):c.135C&gt;T (p.Ser45=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374730,
+      "stop":99374730
+   },
+   {
+      "uid":437542,
+      "title":"NM_012160.4(FBXL4):c.131C&gt;A (p.Thr44Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374734,
+      "stop":99374734
+   },
+   {
+      "uid":437541,
+      "title":"NM_012160.4(FBXL4):c.130A&gt;T (p.Thr44Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374735,
+      "stop":99374735
+   },
+   {
+      "uid":437540,
+      "title":"NM_012160.4(FBXL4):c.129G&gt;C (p.Gln43His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374736,
+      "stop":99374736
+   },
+   {
+      "uid":437539,
+      "title":"NM_012160.4(FBXL4):c.125G&gt;A (p.Ser42Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374740,
+      "stop":99374740
+   },
+   {
+      "uid":437538,
+      "title":"NM_012160.4(FBXL4):c.112A&gt;G (p.Ile38Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374753,
+      "stop":99374753
+   },
+   {
+      "uid":437537,
+      "title":"NM_012160.4(FBXL4):c.109G&gt;A (p.Ala37Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374756,
+      "stop":99374756
+   },
+   {
+      "uid":437536,
+      "title":"NM_012160.4(FBXL4):c.105T&gt;C (p.His35=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374760,
+      "stop":99374760
+   },
+   {
+      "uid":437535,
+      "title":"NM_012160.4(FBXL4):c.104A&gt;G (p.His35Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374761,
+      "stop":99374761
+   },
+   {
+      "uid":437534,
+      "title":"NM_012160.4(FBXL4):c.103C&gt;T (p.His35Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374762,
+      "stop":99374762
+   },
+   {
+      "uid":437533,
+      "title":"NM_012160.4(FBXL4):c.91A&gt;G (p.Met31Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374774,
+      "stop":99374774
+   },
+   {
+      "uid":437532,
+      "title":"NM_012160.4(FBXL4):c.87A&gt;G (p.Gly29=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374778,
+      "stop":99374778
+   },
+   {
+      "uid":437531,
+      "title":"NM_012160.4(FBXL4):c.79A&gt;G (p.Thr27Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374786,
+      "stop":99374786
+   },
+   {
+      "uid":437530,
+      "title":"NM_012160.4(FBXL4):c.78T&gt;C (p.Ala26=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374787,
+      "stop":99374787
+   },
+   {
+      "uid":437529,
+      "title":"NM_012160.4(FBXL4):c.70A&gt;G (p.Arg24Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374795,
+      "stop":99374795
+   },
+   {
+      "uid":437528,
+      "title":"NM_012160.4(FBXL4):c.65G&gt;A (p.Arg22Gln)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374800,
+      "stop":99374800
+   },
+   {
+      "uid":437527,
+      "title":"NM_012160.4(FBXL4):c.65G&gt;C (p.Arg22Pro)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374800,
+      "stop":99374800
+   },
+   {
+      "uid":437526,
+      "title":"NM_012160.4(FBXL4):c.62G&gt;A (p.Arg21His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374803,
+      "stop":99374803
+   },
+   {
+      "uid":437525,
+      "title":"NM_012160.4(FBXL4):c.61C&gt;T (p.Arg21Cys)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374804,
+      "stop":99374804
+   },
+   {
+      "uid":437524,
+      "title":"NM_012160.4(FBXL4):c.58C&gt;T (p.Arg20Trp)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374807,
+      "stop":99374807
+   },
+   {
+      "uid":437523,
+      "title":"NM_012160.4(FBXL4):c.49A&gt;G (p.Ile17Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374816,
+      "stop":99374816
+   },
+   {
+      "uid":437522,
+      "title":"NM_012160.4(FBXL4):c.49A&gt;T (p.Ile17Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374816,
+      "stop":99374816
+   },
+   {
+      "uid":437521,
+      "title":"NM_012160.4(FBXL4):c.48T&gt;C (p.Tyr16=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374817,
+      "stop":99374817
+   },
+   {
+      "uid":437520,
+      "title":"NM_012160.4(FBXL4):c.46T&gt;C (p.Tyr16His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374819,
+      "stop":99374819
+   },
+   {
+      "uid":437519,
+      "title":"NM_012160.4(FBXL4):c.45T&gt;C (p.Tyr15=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374820,
+      "stop":99374820
+   },
+   {
+      "uid":437518,
+      "title":"NM_012160.4(FBXL4):c.36C&gt;G (p.Thr12=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374829,
+      "stop":99374829
+   },
+   {
+      "uid":437517,
+      "title":"NM_012160.4(FBXL4):c.35C&gt;T (p.Thr12Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374830,
+      "stop":99374830
+   },
+   {
+      "uid":437516,
+      "title":"NM_012160.4(FBXL4):c.33G&gt;A (p.Leu11=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374832,
+      "stop":99374832
+   },
+   {
+      "uid":437515,
+      "title":"NM_012160.4(FBXL4):c.23T&gt;C (p.Leu8Ser)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374842,
+      "stop":99374842
+   },
+   {
+      "uid":437514,
+      "title":"NM_012160.4(FBXL4):c.20T&gt;C (p.Met7Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374845,
+      "stop":99374845
+   },
+   {
+      "uid":437513,
+      "title":"NM_012160.4(FBXL4):c.18C&gt;T (p.Pro6=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374847,
+      "stop":99374847
+   },
+   {
+      "uid":437512,
+      "title":"NM_012160.4(FBXL4):c.16_18del (p.Pro6del)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374847,
+      "stop":99374849
+   },
+   {
+      "uid":437511,
+      "title":"NM_012160.4(FBXL4):c.15T&gt;A (p.Phe5Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374850,
+      "stop":99374850
+   },
+   {
+      "uid":437510,
+      "title":"NM_012160.4(FBXL4):c.9G&gt;A (p.Pro3=)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374856,
+      "stop":99374856
+   },
+   {
+      "uid":437509,
+      "title":"NM_012160.4(FBXL4):c.8C&gt;T (p.Pro3Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374857,
+      "stop":99374857
+   },
+   {
+      "uid":437508,
+      "title":"NM_012160.4(FBXL4):c.6A&gt;G (p.Ser2=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374859,
+      "stop":99374859
+   },
+   {
+      "uid":437507,
+      "title":"NM_012160.4(FBXL4):c.3G&gt;A (p.Met1Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374862,
+      "stop":99374862
+   },
+   {
+      "uid":437506,
+      "title":"NM_012160.4(FBXL4):c.-16C&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374880,
+      "stop":99374880
+   },
+   {
+      "uid":437505,
+      "title":"NM_012160.4(FBXL4):c.1389+3_1389+6del",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328423,
+      "stop":99328426
+   },
+   {
+      "uid":437504,
+      "title":"NM_012160.4(FBXL4):c.-15A&gt;G",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374879,
+      "stop":99374879
+   },
+   {
+      "uid":437503,
+      "title":"NM_012160.4(FBXL4):c.1317G&gt;A (p.Glu439=)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347144,
+      "stop":99347144
+   },
+   {
+      "uid":437502,
+      "title":"NM_012160.4(FBXL4):c.858+1G&gt;T",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365249,
+      "stop":99365249
+   },
+   {
+      "uid":437501,
+      "title":"NM_012160.4(FBXL4):c.858+5G&gt;C",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365245,
+      "stop":99365245
+   },
+   {
+      "uid":437500,
+      "title":"NM_012160.4(FBXL4):c.513-1G&gt;A",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365596,
+      "stop":99365596
+   },
+   {
+      "uid":437499,
+      "title":"NM_012160.4(FBXL4):c.1648_1649del (p.Asp550Hisfs)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-12-03T00:00:00.000Z"
+      },
+      "start":99323344,
+      "stop":99323345
+   },
+   {
+      "uid":437498,
+      "title":"NM_012160.4(FBXL4):c.1067delG (p.Gly356Alafs)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic",
+         "lastEvaluated":"2018-05-21T00:00:00.000Z"
+      },
+      "start":99353338,
+      "stop":99353338
+   },
+   {
+      "uid":437496,
+      "title":"NM_012160.4(FBXL4):c.326del (p.Ser109Metfs)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374539,
+      "stop":99374539
+   },
+   {
+      "uid":437495,
+      "title":"NM_012160.4(FBXL4):c.273_277del (p.Phe91Leufs)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374588,
+      "stop":99374592
+   },
+   {
+      "uid":437494,
+      "title":"NM_012160.4(FBXL4):c.1687C&gt;T (p.Gln563Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323306,
+      "stop":99323306
+   },
+   {
+      "uid":437493,
+      "title":"NM_012160.4(FBXL4):c.1210C&gt;T (p.Gln404Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347251,
+      "stop":99347251
+   },
+   {
+      "uid":437492,
+      "title":"NM_012160.4(FBXL4):c.616C&gt;T (p.Arg206Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365492,
+      "stop":99365492
+   },
+   {
+      "uid":437491,
+      "title":"NM_012160.4(FBXL4):c.316C&gt;T (p.Gln106Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-11-16T00:00:00.000Z"
+      },
+      "start":99374549,
+      "stop":99374549
+   },
+   {
+      "uid":437490,
+      "title":"NM_012160.4(FBXL4):c.292C&gt;T (p.Arg98Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374573,
+      "stop":99374573
+   },
+   {
+      "uid":437489,
+      "title":"NM_012160.4(FBXL4):c.219T&gt;A (p.Tyr73Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374646,
+      "stop":99374646
+   },
+   {
+      "uid":437488,
+      "title":"NM_012160.4(FBXL4):c.106A&gt;T (p.Arg36Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374759,
+      "stop":99374759
+   },
+   {
+      "uid":437487,
+      "title":"NM_012160.4(FBXL4):c.1838T&gt;A (p.Val613Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322182,
+      "stop":99322182
+   },
+   {
+      "uid":437486,
+      "title":"NM_012160.4(FBXL4):c.1790A&gt;C (p.Gln597Pro)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, conflicting interpretations",
+         "description":"Conflicting interpretations of pathogenicity",
+         "lastEvaluated":"2018-05-23T00:00:00.000Z"
+      },
+      "start":99322230,
+      "stop":99322230
+   },
+   {
+      "uid":437485,
+      "title":"NM_012160.4(FBXL4):c.1772A&gt;G (p.Asp591Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322248,
+      "stop":99322248
+   },
+   {
+      "uid":437484,
+      "title":"NM_012160.4(FBXL4):c.1750T&gt;C (p.Cys584Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322270,
+      "stop":99322270
+   },
+   {
+      "uid":437483,
+      "title":"NM_012160.4(FBXL4):c.1698A&gt;G (p.Ile566Met)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323295,
+      "stop":99323295
+   },
+   {
+      "uid":437482,
+      "title":"NM_012160.4(FBXL4):c.1652T&gt;A (p.Ile551Asn)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323341,
+      "stop":99323341
+   },
+   {
+      "uid":437481,
+      "title":"NM_012160.4(FBXL4):c.1622C&gt;T (p.Thr541Ile)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323371,
+      "stop":99323371
+   },
+   {
+      "uid":437480,
+      "title":"NM_012160.4(FBXL4):c.1586C&gt;A (p.Ala529Glu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323407,
+      "stop":99323407
+   },
+   {
+      "uid":437479,
+      "title":"NM_012160.4(FBXL4):c.1540T&gt;G (p.Trp514Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-11-16T00:00:00.000Z"
+      },
+      "start":99323453,
+      "stop":99323453
+   },
+   {
+      "uid":437478,
+      "title":"NM_012160.4(FBXL4):c.1411G&gt;A (p.Ala471Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323582,
+      "stop":99323582
+   },
+   {
+      "uid":437477,
+      "title":"NM_012160.4(FBXL4):c.1361A&gt;C (p.Gln454Pro)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328457,
+      "stop":99328457
+   },
+   {
+      "uid":437476,
+      "title":"NM_012160.4(FBXL4):c.1304G&gt;T (p.Arg435Leu)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347157,
+      "stop":99347157
+   },
+   {
+      "uid":437475,
+      "title":"NM_012160.4(FBXL4):c.1232G&gt;A (p.Cys411Tyr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2018-10-31T00:00:00.000Z"
+      },
+      "start":99347229,
+      "stop":99347229
+   },
+   {
+      "uid":437474,
+      "title":"NM_012160.4(FBXL4):c.1229C&gt;T (p.Ser410Phe)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347232,
+      "stop":99347232
+   },
+   {
+      "uid":437473,
+      "title":"NM_012160.4(FBXL4):c.662A&gt;T (p.Asp221Val)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365446,
+      "stop":99365446
+   },
+   {
+      "uid":437472,
+      "title":"NM_012160.4(FBXL4):c.661G&gt;C (p.Asp221His)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365447,
+      "stop":99365447
+   },
+   {
+      "uid":437471,
+      "title":"NM_012160.4(FBXL4):c.614T&gt;C (p.Ile205Thr)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99365494,
+      "stop":99365494
+   },
+   {
+      "uid":437470,
+      "title":"NM_012160.4(FBXL4):c.445G&gt;A (p.Gly149Arg)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374420,
+      "stop":99374420
+   },
+   {
+      "uid":430470,
+      "title":"NM_012160.4(FBXL4):c.1304G&gt;A (p.Arg435Gln)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic/Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347157,
+      "stop":99347157
+   },
+   {
+      "uid":419943,
+      "title":"NM_012160.4(FBXL4):c.1703-16_1703-12dup",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely benign",
+         "lastEvaluated":"2017-03-28T00:00:00.000Z"
+      },
+      "start":99322329,
+      "stop":99322333
+   },
+   {
+      "uid":397014,
+      "title":"GRCh37/hg19 6q16.1(chr6:99331183-99393661)x1",
+      "condition":"See cases",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Uncertain significance",
+         "lastEvaluated":null
+      },
+      "start":99331183,
+      "stop":99393661
+   },
+   {
+      "uid":396191,
+      "condition":"See cases",
+      "start":85988428,
+      "title":"GRCh37/hg19 6q14.3-22.31(chr6:85988428-120548687)x1",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":null
+      },
+      "stop":120548687
+   },
+   {
+      "uid":396129,
+      "condition":"See cases",
+      "start":92576950,
+      "title":"GRCh37/hg19 6q15-16.3(chr6:92576950-104658245)x1",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":null
+      },
+      "stop":104658245
+   },
+   {
+      "uid":395806,
+      "condition":"See cases",
+      "start":99283597,
+      "title":"GRCh37/hg19 6q16.1-16.3(chr6:99283597-100910572)x1",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Uncertain significance",
+         "lastEvaluated":null
+      },
+      "stop":100910572
+   },
+   {
+      "uid":389412,
+      "title":"NM_012160.4(FBXL4):c.1353A&gt;G (p.Ser451=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, conflicting interpretations",
+         "description":"Conflicting interpretations of pathogenicity",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99328465,
+      "stop":99328465
+   },
+   {
+      "uid":389040,
+      "title":"NM_012160.4(FBXL4):c.351G&gt;A (p.Thr117=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, conflicting interpretations",
+         "description":"Conflicting interpretations of pathogenicity",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374514,
+      "stop":99374514
+   },
+   {
+      "uid":384777,
+      "title":"NM_012160.4(FBXL4):c.1317+14A&gt;G",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, conflicting interpretations",
+         "description":"Conflicting interpretations of pathogenicity",
+         "lastEvaluated":"2017-09-15T00:00:00.000Z"
+      },
+      "start":99347130,
+      "stop":99347130
+   },
+   {
+      "uid":382986,
+      "title":"NM_012160.4(FBXL4):c.429A&gt;G (p.Leu143=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Likely benign",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374436,
+      "stop":99374436
+   },
+   {
+      "uid":381422,
+      "title":"NM_012160.4(FBXL4):c.*3T&gt;C",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Benign",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99322151,
+      "stop":99322151
+   },
+   {
+      "uid":380510,
+      "title":"NM_012160.4(FBXL4):c.978A&gt;G (p.Gln326=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Benign",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353427,
+      "stop":99353427
+   },
+   {
+      "uid":380454,
+      "title":"NM_012160.4(FBXL4):c.468T&gt;C (p.Ala156=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Benign/Likely benign",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374397,
+      "stop":99374397
+   },
+   {
+      "uid":375387,
+      "title":"NM_012160.4(FBXL4):c.419T&gt;C (p.Val140Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374446,
+      "stop":99374446
+   },
+   {
+      "uid":373158,
+      "title":"NM_012160.4(FBXL4):c.1025C&gt;G (p.Ser342Cys)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99353380,
+      "stop":99353380
+   },
+   {
+      "uid":280414,
+      "title":"NM_012160.3(FBXL4):c.618_621dupACTG",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic",
+         "lastEvaluated":"2018-12-07T00:00:00.000Z"
+      },
+      "start":99365487,
+      "stop":99365490
+   },
+   {
+      "uid":265143,
+      "title":"NM_012160.4(FBXL4):c.1641_1642del (p.Cys547Terfs)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323351,
+      "stop":99323352
+   },
+   {
+      "uid":260209,
+      "title":"NM_012160.4(FBXL4):c.465C&gt;T (p.Leu155=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Benign",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374400,
+      "stop":99374400
+   },
+   {
+      "uid":260208,
+      "title":"NM_012160.4(FBXL4):c.1569G&gt;A (p.Gly523=)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Benign",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323424,
+      "stop":99323424
+   },
+   {
+      "uid":260207,
+      "title":"NM_012160.4(FBXL4):c.105T&gt;A (p.His35Gln)",
+      "condition":"not specified",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Benign",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99374760,
+      "stop":99374760
+   },
+   {
+      "uid":235778,
+      "title":"NM_012160.4(FBXL4):c.1546_1563del (p.Pro516_Ser521del)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323430,
+      "stop":99323447
+   },
+   {
+      "uid":235493,
+      "title":"NM_001278716.1(FBXL4):c.1440_1441insA (p.Leu481Thrfs)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2016-04-29T00:00:00.000Z"
+      },
+      "start":99323553,
+      "stop":99323553
+   },
+   {
+      "uid":224911,
+      "title":"NM_012160.4(FBXL4):c.1442T&gt;C (p.Leu481Pro)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323551,
+      "stop":99323551
+   },
+   {
+      "uid":209153,
+      "title":"NM_012160.4(FBXL4):c.64C&gt;T (p.Arg22Ter)",
+      "condition":"not provided",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-11-07T00:00:00.000Z"
+      },
+      "start":99374801,
+      "stop":99374801
+   },
+   {
+      "uid":154571,
+      "condition":"See cases",
+      "start":99218523,
+      "title":"GRCh38/hg38 6q16.1-16.2(chr6:98770647-99813111)x1",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Uncertain significance",
+         "lastEvaluated":"2010-10-19T00:00:00.000Z"
+      },
+      "stop":100260987
+   },
+   {
+      "uid":150937,
+      "condition":"See cases",
+      "start":75092523,
+      "title":"GRCh38/hg38 6q13-24.1(chr6:74382807-142040500)x3",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2011-07-05T00:00:00.000Z"
+      },
+      "stop":142361637
+   },
+   {
+      "uid":150641,
+      "condition":"See cases",
+      "start":97057870,
+      "title":"GRCh38/hg38 6q16.1-22.31(chr6:96609994-122161548)x1",
+      "significance":{
+         "reviewStatus":"no assertion criteria provided",
+         "description":"Pathogenic",
+         "lastEvaluated":"2011-08-02T00:00:00.000Z"
+      },
+      "stop":122482694
+   },
+   {
+      "uid":66094,
+      "title":"NM_012160.4(FBXL4):c.1694A&gt;G (p.Asp565Gly)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323299,
+      "stop":99323299
+   },
+   {
+      "uid":66093,
+      "title":"NM_012160.4(FBXL4):c.1444C&gt;T (p.Arg482Trp)",
+      "condition":"Mitochondrial encephalomyopathy",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic/Likely pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323549,
+      "stop":99323549
+   },
+   {
+      "uid":66092,
+      "title":"NM_012160.4(FBXL4):c.1703G&gt;C (p.Gly568Ala)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic/Likely pathogenic",
+         "lastEvaluated":"2017-11-16T00:00:00.000Z"
+      },
+      "start":99322317,
+      "stop":99322317
+   },
+   {
+      "uid":66091,
+      "title":"NM_012160.4(FBXL4):c.1303C&gt;T (p.Arg435Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, multiple submitters, no conflicts",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99347158,
+      "stop":99347158
+   },
+   {
+      "uid":66090,
+      "title":"NM_012160.4(FBXL4):c.1555C&gt;T (p.Gln519Ter)",
+      "condition":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2017-08-10T00:00:00.000Z"
+      },
+      "start":99323438,
+      "stop":99323438
+   },
+   {
+      "uid":58440,
+      "condition":"See cases",
+      "start":99116405,
+      "title":"GRCh38/hg38 6q16.1-16.3(chr6:98668529-101266950)x1",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2011-08-12T00:00:00.000Z"
+      },
+      "stop":101714826
+   },
+   {
+      "uid":58439,
+      "condition":"See cases",
+      "start":98301652,
+      "title":"GRCh38/hg38 6q16.1-16.3(chr6:97853776-102580597)x1",
+      "significance":{
+         "reviewStatus":"criteria provided, single submitter",
+         "description":"Pathogenic",
+         "lastEvaluated":"2011-08-12T00:00:00.000Z"
+      },
+      "stop":103028472
+   }
+]

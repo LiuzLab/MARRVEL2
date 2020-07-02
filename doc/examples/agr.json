@@ -1,0 +1,281 @@
+[
+  {
+    "score": 1,
+    "bestScore": false,
+    "taxonId2": 10090,
+    "entrezId1": 26235,
+    "confidence": "low",
+    "entrezId2": 30840,
+    "taxonId1": 9606,
+    "bestScoreRev": false,
+    "gene2": {
+      "entrezId": 30840,
+      "symbol": "Fbxl6",
+      "mgiId": "MGI:1354705",
+      "xref": {
+        "mgiId": "MGI:1354705",
+        "ensemblId": "ENSMUSG00000022559"
+      },
+      "agrExpressions": {
+        "entrezId": 30840,
+        "expressionSummary": {
+          "totalAnnotations": 0,
+          "groups": [
+            {
+              "terms": [
+                {
+                  "id": "UBERON:0001013",
+                  "numberOfAnnotations": 0,
+                  "name": "adipose tissue"
+                },
+                {
+                  "id": "UBERON:0000026",
+                  "numberOfAnnotations": 0,
+                  "name": "appendage"
+                },
+                {
+                  "id": "UBERON:0005726",
+                  "numberOfAnnotations": 0,
+                  "name": "chemosensory system"
+                },
+                {
+                  "id": "UBERON:0001009",
+                  "numberOfAnnotations": 0,
+                  "name": "circulatory system"
+                },
+                {
+                  "id": "UBERON:0001007",
+                  "numberOfAnnotations": 0,
+                  "name": "digestive system"
+                },
+                {
+                  "id": "UBERON:0000924",
+                  "numberOfAnnotations": 0,
+                  "name": "ectoderm"
+                },
+                {
+                  "id": "UBERON:0000949",
+                  "numberOfAnnotations": 0,
+                  "name": "endocrine system"
+                },
+                {
+                  "id": "UBERON:0000925",
+                  "numberOfAnnotations": 0,
+                  "name": "endoderm"
+                },
+                {
+                  "id": "UBERON:0016887",
+                  "numberOfAnnotations": 0,
+                  "name": "entire extraembryonic component"
+                },
+                {
+                  "id": "UBERON:0002330",
+                  "numberOfAnnotations": 0,
+                  "name": "exocrine system"
+                },
+                {
+                  "id": "UBERON:0002193",
+                  "numberOfAnnotations": 0,
+                  "name": "hemolymphoid system"
+                },
+                {
+                  "id": "UBERON:0002423",
+                  "numberOfAnnotations": 0,
+                  "name": "hepatobiliary system"
+                },
+                {
+                  "id": "UBERON:6005023",
+                  "numberOfAnnotations": 0,
+                  "name": "imaginal precursor"
+                },
+                {
+                  "id": "UBERON:0002416",
+                  "numberOfAnnotations": 0,
+                  "name": "integumental system"
+                },
+                {
+                  "id": "UBERON:0007037",
+                  "numberOfAnnotations": 0,
+                  "name": "mechanosensory system"
+                },
+                {
+                  "id": "UBERON:0003104",
+                  "numberOfAnnotations": 0,
+                  "name": "mesenchyme"
+                },
+                {
+                  "id": "UBERON:0000926",
+                  "numberOfAnnotations": 0,
+                  "name": "mesoderm"
+                },
+                {
+                  "id": "UBERON:0002204",
+                  "numberOfAnnotations": 0,
+                  "name": "musculoskeletal system"
+                },
+                {
+                  "id": "UBERON:0001016",
+                  "numberOfAnnotations": 0,
+                  "name": "nervous system"
+                },
+                {
+                  "id": "UBERON:0002539",
+                  "numberOfAnnotations": 0,
+                  "name": "pharyngeal arch"
+                },
+                {
+                  "id": "UBERON:0001008",
+                  "numberOfAnnotations": 0,
+                  "name": "renal system"
+                },
+                {
+                  "id": "UBERON:0000990",
+                  "numberOfAnnotations": 0,
+                  "name": "reproductive system"
+                },
+                {
+                  "id": "UBERON:0001004",
+                  "numberOfAnnotations": 0,
+                  "name": "respiratory system"
+                },
+                {
+                  "id": "UBERON:0001032",
+                  "numberOfAnnotations": 0,
+                  "name": "sensory system"
+                },
+                {
+                  "id": "UBERON:0002105",
+                  "numberOfAnnotations": 0,
+                  "name": "vestibulo-auditory system"
+                },
+                {
+                  "id": "UBERON:0002104",
+                  "numberOfAnnotations": 0,
+                  "name": "visual system"
+                },
+                {
+                  "id": "UBERON:AnatomyOtherLocation",
+                  "numberOfAnnotations": 0,
+                  "name": "other"
+                }
+              ],
+              "name": "Anatomy",
+              "totalAnnotations": 0
+            },
+            {
+              "terms": [
+                {
+                  "id": "GO:0030054",
+                  "numberOfAnnotations": 0,
+                  "name": "cell junction"
+                },
+                {
+                  "id": "GO:0042995",
+                  "numberOfAnnotations": 0,
+                  "name": "cell projection"
+                },
+                {
+                  "id": "GO:0005694",
+                  "numberOfAnnotations": 0,
+                  "name": "chromosome"
+                },
+                {
+                  "id": "GO:0031410",
+                  "numberOfAnnotations": 0,
+                  "name": "cytoplasmic vesicle"
+                },
+                {
+                  "id": "GO:0005856",
+                  "numberOfAnnotations": 0,
+                  "name": "cytoskeleton"
+                },
+                {
+                  "id": "GO:0005829",
+                  "numberOfAnnotations": 0,
+                  "name": "cytosol"
+                },
+                {
+                  "id": "GO:0005783",
+                  "numberOfAnnotations": 0,
+                  "name": "endoplasmic reticulum"
+                },
+                {
+                  "id": "GO:0005768",
+                  "numberOfAnnotations": 0,
+                  "name": "endosome"
+                },
+                {
+                  "id": "GO:0005576",
+                  "numberOfAnnotations": 0,
+                  "name": "extracellular region"
+                },
+                {
+                  "id": "GO:0005794",
+                  "numberOfAnnotations": 0,
+                  "name": "Golgi apparatus"
+                },
+                {
+                  "id": "GO:0005739",
+                  "numberOfAnnotations": 0,
+                  "name": "mitochondrion"
+                },
+                {
+                  "id": "GO:0005634",
+                  "numberOfAnnotations": 0,
+                  "name": "nucleus"
+                },
+                {
+                  "id": "GO:0005886",
+                  "numberOfAnnotations": 0,
+                  "name": "plasma membrane"
+                },
+                {
+                  "id": "GO:0032991",
+                  "numberOfAnnotations": 0,
+                  "name": "protein-containing complex"
+                },
+                {
+                  "id": "GO:0045202",
+                  "numberOfAnnotations": 0,
+                  "name": "synapse"
+                },
+                {
+                  "id": "GO:0005773",
+                  "numberOfAnnotations": 0,
+                  "name": "vacuole"
+                },
+                {
+                  "id": "GO:otherLocations",
+                  "numberOfAnnotations": 0,
+                  "name": "other locations"
+                }
+              ],
+              "name": "Cellular Component",
+              "totalAnnotations": 0
+            },
+            {
+              "terms": [
+                {
+                  "id": "UBERON:0000068",
+                  "numberOfAnnotations": 0,
+                  "name": "embryo stage"
+                },
+                {
+                  "id": "UBERON:PostEmbryonicPreAdult",
+                  "numberOfAnnotations": 0,
+                  "name": "post embryonic, pre-adult"
+                },
+                {
+                  "id": "UBERON:0000113",
+                  "numberOfAnnotations": 0,
+                  "name": "post-juvenile adult stage"
+                }
+              ],
+              "name": "Stage",
+              "totalAnnotations": 0
+            }
+          ]
+        }
+      }
+    }
+  },

@@ -1,0 +1,22 @@
+type: object
+properties:
+  mimNumber:
+    type: string
+    description: OMIM identifier, mim number, of the gene
+
+  title:
+    type: string
+    description: Title and symbol, delimited with ""
+
+  description:
+    type: string
+    description: Text description of the gene
+    required: false
+
+  phenotypes:
+    required: false
+    type: OmimPhenotype[]
+
+  allelicVariants:
+    required: false
+    type: OmimVariant[]

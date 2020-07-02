@@ -1,0 +1,37 @@
+[  
+   {  
+      "geneSymbol":"duo-3",
+      "geneId":"WBGene00001112",
+      "entrezId":172925,
+      "dioptScore":1,
+      "bestScore":true,
+      "goTerms":[  
+         {  
+            "goId":"GO:0016579",
+            "goTerm":"NOTprotein deubiquitination",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0036459",
+            "goTerm":"thiol-dependent ubiquitinyl hydrolase activity",
+            "goType":0
+         }
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"Y71A12B.12",
+      "geneId":"WBGene00013509",
+      "entrezId":173263,
+      "dioptScore":1,
+      "bestScore":true,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+
+      ]
+   }
+]

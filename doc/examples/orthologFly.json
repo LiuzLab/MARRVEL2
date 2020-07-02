@@ -1,0 +1,28 @@
+[  
+   {  
+      "geneSymbol":"Fbxl4",
+      "geneId":"FBgn0030555",
+      "entrezId":32378,
+      "dioptScore":10,
+      "bestScore":true,
+      "goTerms":[  
+         {  
+            "goId":"GO:0016059",
+            "goTerm":"deactivation of rhodopsin mediated signaling",
+            "goType":1
+         }
+      ],
+      "expression":[  
+         {  
+            "tissueId":"AT_001",
+            "flybaseId":"FBgn0030555",
+            "expLevel":335.3,
+            "heatmapClass":3,
+            "affy2ProbSetPrefix":"162",
+            "description":"Head",
+            "type":"AT",
+            "organTissueId":1
+         }
+      ]
+   }
+]

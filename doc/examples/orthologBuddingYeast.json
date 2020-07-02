@@ -1,0 +1,225 @@
+[  
+   {  
+      "geneSymbol":"GRR1",
+      "geneId":"S000003850",
+      "entrezId":853552,
+      "dioptScore":2,
+      "bestScore":true,
+      "goTerms":[  
+         {  
+            "goId":"GO:0000142",
+            "goTerm":"cellular bud neck contractile ring",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0000209",
+            "goTerm":"protein polyubiquitination",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0000751",
+            "goTerm":"mitotic cell cycle arrest in response to pheromone",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0004842",
+            "goTerm":"ubiquitin-protein transferase activity",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0005634",
+            "goTerm":"nucleus",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0005737",
+            "goTerm":"cytoplasm",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0006974",
+            "goTerm":"cellular response to DNA damage stimulus",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0016567",
+            "goTerm":"protein ubiquitination",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0019005",
+            "goTerm":"SCF ubiquitin ligase complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0030674",
+            "goTerm":"protein binding, bridging",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0031146",
+            "goTerm":"SCF-dependent proteasomal ubiquitin-dependent protein catabolic process",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0071406",
+            "goTerm":"cellular response to methylmercury",
+            "goType":1
+         }
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"UBP8",
+      "geneId":"S000004836",
+      "entrezId":855263,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0000124",
+            "goTerm":"SAGA complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0004843",
+            "goTerm":"NOTthiol-dependent ubiquitin-specific protease activity",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0008380",
+            "goTerm":"RNA splicing",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0016578",
+            "goTerm":"histone deubiquitination",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0032947",
+            "goTerm":"protein complex scaffold",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0034729",
+            "goTerm":"histone H3-K79 methylation",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0046695",
+            "goTerm":"SLIK (SAGA-like) complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0051568",
+            "goTerm":"histone H3-K4 methylation",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0071819",
+            "goTerm":"DUBm complex",
+            "goType":2
+         }
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"RAD7",
+      "geneId":"S000003813",
+      "entrezId":853512,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0000113",
+            "goTerm":"nucleotide-excision repair factor 4 complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0000715",
+            "goTerm":"nucleotide-excision repair, DNA damage recognition",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0003684",
+            "goTerm":"damaged DNA binding",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0004842",
+            "goTerm":"ubiquitin-protein transferase activity",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0008094",
+            "goTerm":"DNA-dependent ATPase activity",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0031463",
+            "goTerm":"Cul3-RING ubiquitin ligase complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0034613",
+            "goTerm":"cellular protein localization",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0042787",
+            "goTerm":"protein ubiquitination involved in ubiquitin-dependent protein catabolic process",
+            "goType":1
+         }
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"AMN1",
+      "geneId":"S000000362",
+      "entrezId":852455,
+      "dioptScore":1,
+      "bestScore":true,
+      "goTerms":[  
+         {  
+            "goId":"GO:0001100",
+            "goTerm":"negative regulation of exit from mitosis",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0005515",
+            "goTerm":"protein binding",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0005634",
+            "goTerm":"nucleus",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0005737",
+            "goTerm":"cytoplasm",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0005933",
+            "goTerm":"cellular bud",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0007093",
+            "goTerm":"mitotic cell cycle checkpoint",
+            "goType":1
+         }
+      ],
+      "expression":[  
+
+      ]
+   }
+]

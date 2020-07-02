@@ -1,0 +1,59 @@
+type: object
+properties:
+  hg19Chr:
+    type: string
+    description: Chromosome (hg19)
+  hg19Pos:
+    type: integer
+    description: Position (hg19)
+  ref:
+    type: string
+    description: Reference allele
+  alt:
+    type: string
+    description: Alternate allele
+  homCount:
+    type: number
+  hetCount: number
+  funcAnno: string
+  hpoCount:
+    type: number
+    description: Number of HPO profiles
+  hpoProfiles:
+    type: array
+    items:
+      type: object
+      properties:
+        narrow:
+          type: object
+          properties:
+            hpoIds: string[]
+            hpoTerm: string
+        medium:
+          type: object
+          properties:
+            hpoIds: string[]
+            hpoTerm: string
+        broad:
+          type: object
+          properties:
+            hpoIds: string[]
+            hpoTerm: string
+        affectedStatus: string
+  hgvsProteinChange:
+    type: string
+    required: false
+  genes:
+    type: array
+    required: false
+    items:
+      type: object
+      properties:
+        entrezId: number
+        symbol: string
+  hgvsCdnaChange:
+    type: string
+    required: false
+  rsId:
+    type: string
+    required: false

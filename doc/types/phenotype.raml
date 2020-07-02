@@ -1,0 +1,20 @@
+type: object
+properties:
+  id:
+    type: string
+  ontology:
+    type: object
+    properties:
+      id: string
+      name: string
+      categories:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: MARRVEL assigned category ID
+            name:
+              type: string
+              description: MARRVEL assigned category name

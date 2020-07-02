@@ -1,0 +1,204 @@
+[
+   {
+      "alt":"C",
+      "hg19Chr":"6",
+      "hg19Pos":99365567,
+      "ref":"T",
+      "hpoProfiles":[
+         {
+            "narrow":{
+               "hpoIds":[
+
+               ],
+               "hpoTerm":"  "
+            },
+            "medium":{
+               "hpoIds":[
+                  "HP:0000365"
+               ],
+               "hpoTerm":"Hearing impairment  "
+            },
+            "broad":{
+               "hpoIds":[
+                  "HP:0000598"
+               ],
+               "hpoTerm":"Abnormality of the ear  "
+            },
+            "affectedStatus":"affected",
+            "T2C":1
+         },
+         {
+            "narrow":{
+               "hpoIds":[
+
+               ],
+               "hpoTerm":"  "
+            },
+            "medium":{
+               "hpoIds":[
+                  "HP:0000708"
+               ],
+               "hpoTerm":"Behavioral abnormality  "
+            },
+            "broad":{
+               "hpoIds":[
+                  "HP:0000707"
+               ],
+               "hpoTerm":"Abnormality of the nervous system  "
+            },
+            "affectedStatus":"affected",
+            "T2C":1
+         },
+         {
+            "narrow":{
+               "hpoIds":[
+                  "HP:0200134"
+               ],
+               "hpoTerm":"Epileptic encephalopathy  "
+            },
+            "medium":{
+               "hpoIds":[
+                  "HP:0012638"
+               ],
+               "hpoTerm":"Abnormality of nervous system physiology  "
+            },
+            "broad":{
+               "hpoIds":[
+                  "HP:0000707"
+               ],
+               "hpoTerm":"Abnormality of the nervous system  "
+            },
+            "affectedStatus":"affected",
+            "T2C":1
+         },
+         {
+            "narrow":{
+               "hpoIds":[
+                  "HP:0001249"
+               ],
+               "hpoTerm":"Intellectual disability  "
+            },
+            "medium":{
+               "hpoIds":[
+                  "HP:0012759",
+                  "HP:0000504"
+               ],
+               "hpoTerm":"Neurodevelopmental abnormality Abnormality of vision "
+            },
+            "broad":{
+               "hpoIds":[
+                  "HP:0000707",
+                  "HP:0000478"
+               ],
+               "hpoTerm":"Abnormality of the nervous system Abnormality of the eye "
+            },
+            "affectedStatus":"affected",
+            "T2C":1
+         },
+         {
+            "narrow":{
+               "hpoIds":[
+
+               ],
+               "hpoTerm":"  "
+            },
+            "medium":{
+               "hpoIds":[
+                  "HP:0000708"
+               ],
+               "hpoTerm":"Behavioral abnormality  "
+            },
+            "broad":{
+               "hpoIds":[
+                  "HP:0000707"
+               ],
+               "hpoTerm":"Abnormality of the nervous system  "
+            },
+            "affectedStatus":"relative",
+            "T2C":2
+         },
+         {
+            "narrow":{
+               "hpoIds":[
+                  "HP:0200134"
+               ],
+               "hpoTerm":"Epileptic encephalopathy  "
+            },
+            "medium":{
+               "hpoIds":[
+                  "HP:0012638"
+               ],
+               "hpoTerm":"Abnormality of nervous system physiology  "
+            },
+            "broad":{
+               "hpoIds":[
+                  "HP:0000707"
+               ],
+               "hpoTerm":"Abnormality of the nervous system  "
+            },
+            "affectedStatus":"relative",
+            "T2C":1
+         },
+         {
+            "narrow":{
+               "hpoIds":[
+                  "HP:0001249"
+               ],
+               "hpoTerm":"Intellectual disability  "
+            },
+            "medium":{
+               "hpoIds":[
+                  "HP:0012759",
+                  "HP:0000504"
+               ],
+               "hpoTerm":"Neurodevelopmental abnormality Abnormality of vision "
+            },
+            "broad":{
+               "hpoIds":[
+                  "HP:0000707",
+                  "HP:0000478"
+               ],
+               "hpoTerm":"Abnormality of the nervous system Abnormality of the eye "
+            },
+            "affectedStatus":"relative",
+            "T2C":1
+         },
+         {
+            "narrow":{
+               "hpoIds":[
+                  "HP:0000776"
+               ],
+               "hpoTerm":"Congenital diaphragmatic hernia  "
+            },
+            "medium":{
+               "hpoIds":[
+                  "HP:0000775"
+               ],
+               "hpoTerm":"Abnormality of the diaphragm  "
+            },
+            "broad":{
+               "hpoIds":[
+                  "HP:0001438"
+               ],
+               "hpoTerm":"Abnormality of the abdomen  "
+            },
+            "affectedStatus":"relative",
+            "T2C":2
+         }
+      ],
+      "hpoCount":8,
+      "hgvsProteinChange":"p.(T181A)",
+      "hetCount":10,
+      "funcAnno":"missense",
+      "genes":[
+         {
+            "entrezId":26235,
+            "symbol":"FBXL4"
+         }
+      ],
+      "homCount":0,
+      "hgvsCdnaChange":"c.541A>G",
+      "rsId":"rs150748757",
+      "href":"VariantGenoPhenoQueryServlet?chr=6&pos=99365567&genotype=T%2FC&rsid=150748757&cadd=11.0&gerp=4.62&polyphen=0.014&esp=5.38E-4&exac=2.61E-4&genome1k=4.58E-4&variantType=snp"
+   }
+]

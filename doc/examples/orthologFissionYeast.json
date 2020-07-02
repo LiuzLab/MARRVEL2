@@ -1,0 +1,166 @@
+[  
+   {  
+      "geneSymbol":"cdc2",
+      "geneId":"SPBC11B10.09",
+      "entrezId":2539869,
+      "dioptScore":6,
+      "bestScore":true,
+      "goTerms":[  ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"pef1",
+      "geneId":"SPCC16C4.11",
+      "entrezId":2539366,
+      "dioptScore":3,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0000083",
+            "goTerm":"regulation of transcription involved in G1/S transition of mitotic cell cycle",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0005634",
+            "goTerm":"nucleus",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0005829",
+            "goTerm":"cytosol",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0007089",
+            "goTerm":"traversing start control point of mitotic cell cycle",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0007165",
+            "goTerm":"signal transduction",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0042764",
+            "goTerm":"ascospore-type prospore",
+            "goType":2
+         }
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"lsk1",
+      "geneId":"SPAC2F3.15",
+      "entrezId":2541672,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0000790",
+            "goTerm":"nuclear chromatin",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0005634",
+            "goTerm":"nucleus",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0005730",
+            "goTerm":"nucleolus",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0019908",
+            "goTerm":"nuclear cyclin-dependent protein kinase holoenzyme complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0036278",
+            "goTerm":"positive regulation of transcription from RNA polymerase II promoter in response to nitrogen starvation",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0070692",
+            "goTerm":"CTDK-1 complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0071619",
+            "goTerm":"phosphorylation of RNA polymerase II C-terminal domain serine 2 residues",
+            "goType":0
+         },
+         {  
+            "goId":"GO:1904788",
+            "goTerm":"positive regulation of induction of conjugation with cellular fusion by regulation of transcription from RNA polymerase II promo",
+            "goType":0
+         },
+         {  
+            "goId":"GO:1904789",
+            "goTerm":"regulation of mitotic actomyosin contractile ring maintenance",
+            "goType":2
+         }
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"srb10",
+      "geneId":"SPAC23H4.17c",
+      "entrezId":2541900,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0006357",
+            "goTerm":"regulation of transcription from RNA polymerase II promoter",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0010971",
+            "goTerm":"positive regulation of G2/M transition of mitotic cell cycle",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0016592",
+            "goTerm":"mediator complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0070816",
+            "goTerm":"phosphorylation of RNA polymerase II C-terminal domain",
+            "goType":1
+         },
+         {  
+            "goId":"GO:1900387",
+            "goTerm":"negative regulation of cell-cell adhesion by negative regulation of transcription from RNA polymerase II promoter",
+            "goType":1
+         }
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"ppk23",
+      "geneId":"SPBC18H10.15",
+      "entrezId":2540799,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0005634",
+            "goTerm":"nucleus",
+            "goType":2
+         }
+      ],
+      "expression":[  
+
+      ]
+   }
+]
