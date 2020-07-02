@@ -1,0 +1,37 @@
+{
+   "chr":"6",
+   "pos":"99365567",
+   "ref":"T",
+   "alt":"C",
+   "gene":{
+      "alias":[
+         "FBL4",
+         "FBL5",
+         "MTDPS13"
+      ],
+      "pharosTargetIds":[
+         1520
+      ],
+      "chr":"6",
+      "type":"protein-coding",
+      "name":"F-box and leucine rich repeat protein 4",
+      "lastModified":"20191012",
+      "status":"O",
+      "hg19Start":99316420,
+      "description":"F-box and leucine rich repeat protein 4",
+      "taxonId":9606,
+      "entrezId":26235,
+      "location":"6q16.1-q16.2",
+      "hg19Stop":99395849,
+      "xref":{
+         "omimId":605654,
+         "hgncId":13601,
+         "ensemblId":"ENSG00000112234"
+      },
+      "symbol":"FBXL4",
+      "hgncId":13601,
+      "grch38Start":98868535,
+      "grch39Stop":98948006,
+      "entrezSummary":"This gene encodes a member of the F-box protein family, which are characterized by an approximately 40 amino acid motif, the F-box. F-box proteins constitute one subunit of modular E3 ubiquitin ligase complexes, called SCF complexes, which function in phosphorylation-dependent ubiquitination. The F-box domain mediates protein-protein interactions and binds directly to S-phase kinase-associated protein 1. In addition to an F-box domain, the encoded protein contains at least 9 tandem leucine-rich repeats. The ubiquitin ligase complex containing the encoded protein may function in cell-cycle control by regulating levels of lysine-specific demethylase 4A. Alternative splicing results in multiple transcript variants. [provided by RefSeq, Jul 2013]"
+   }
+}

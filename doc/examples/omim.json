@@ -1,0 +1,85 @@
+{ 
+   "phenotypes":[ 
+      { 
+         "mimNumber":605654,
+         "phenotype":"Mitochondrial DNA depletion syndrome 13 (encephalomyopathic type)",
+         "phenotypeMimNumber":615471,
+         "phenotypicSeriesNumber":"PS603041",
+         "phenotypeMappingKey":3,
+         "phenotypeInheritance":"Autosomal recessive"
+      }
+   ],
+   "allelicVariants":[ 
+      { 
+         "number":1,
+         "mimNumber":605654,
+         "status":"live",
+         "name":"MITOCHONDRIAL DNA DEPLETION SYNDROME 13 (ENCEPHALOMYOPATHIC TYPE)",
+         "mutations":"FBXL4, GLN519TER",
+         "text":"In 5 affected members of a highly consanguineous Arabian family with fatal mitochondrial DNA depletion syndrome-13 (MTDPS13; {615471}), {1:Bonnen et al. (2013)} identified a homozygous c.1555C-T transition in the FBXL4 gene, resulting in a gln519-to-ter (Q519X) substitution in the C-terminal LRR domain. The mutation was found by whole-exome sequencing of the proband and showed complete segregation with the disorder in the family. The variant was not present in the NHLBI Exome Sequencing Project or 1000 Genomes Project databases, or in 408 ethnically matched control chromosomes.",
+         "dbSnps":"rs398123059",
+         "clinvarAccessions":[ 
+            "RCV000056327"
+         ]
+      },
+      { 
+         "number":2,
+         "mimNumber":605654,
+         "status":"live",
+         "name":"MITOCHONDRIAL DNA DEPLETION SYNDROME 13 (ENCEPHALOMYOPATHIC TYPE)",
+         "mutations":"FBXL4, ARG435TER",
+         "text":"In a child, born of consanguineous Arabian parents, with fatal MTDPS13 ({615471}), {1:Bonnen et al. (2013)} identified a homozygous c.1303C-T transition in the FBXL4 gene, resulting in an arg435-to-ter (R435X) substitution. The mutation was found by whole-exome sequencing and segregated with the disorder in the family. The variant was not present in the 1000 Genomes Project database or in 408 ethnically matched controls; it was found in 1 of 13,005 chromosomes in the NHLBI Exome Sequencing Project.",
+         "dbSnps":"rs201889294",
+         "clinvarAccessions":[ 
+            "RCV000056328",
+            "RCV000622490",
+            "RCV000604628"
+         ],
+         "gnomadSnps":"rs201889294"
+      },
+      { 
+         "number":3,
+         "mimNumber":605654,
+         "status":"live",
+         "name":"MITOCHONDRIAL DNA DEPLETION SYNDROME 13 (ENCEPHALOMYOPATHIC TYPE)",
+         "mutations":"FBXL4, GLY568ALA",
+         "text":"In a 4-year-old boy, born of consanguineous Saudi Arabian parents, with MTDPS13 ({615471}), {3:Gai et al. (2013)} identified a homozygous c.1703G-C transversion in the FBXL4 gene, resulting in a gly568-to-ala (G568A) substitution at a highly conserved residue in the LRR domain. The mutation was found by homozygosity mapping followed by whole-exome sequencing. The mutation was not present in 242 Saudi exomes, in 4,500 in-house European control chromosomes, or in the Exome Variant Server database.",
+         "dbSnps":"rs398123060",
+         "clinvarAccessions":[ 
+            "RCV000056329"
+         ]
+      },
+      { 
+         "number":4,
+         "mimNumber":605654,
+         "status":"live",
+         "name":"MITOCHONDRIAL DNA DEPLETION SYNDROME 13 (ENCEPHALOMYOPATHIC TYPE)",
+         "mutations":"FBXL4, ARG482TRP",
+         "text":"In 3 sibs, born of consanguineous Saudi Arabian parents, with MTDPS13 ({615471}), {3:Gai et al. (2013)} identified a homozygous c.1444C-T transition in the FBXL4 gene, resulting in an arg482-to-trp (R481W) substitution at a highly conserved residue in the LRR domain. The mutation was found by homozygosity mapping followed by whole-exome sequencing. It was not present in 242 Saudi exomes, in 4,500 in-house European control chromosomes, or in the Exome Variant Server database.",
+         "dbSnps":"rs398123061",
+         "clinvarAccessions":[ 
+            "RCV000056330",
+            "RCV000224233",
+            "RCV000162170"
+         ],
+         "gnomadSnps":"rs398123061"
+      },
+      { 
+         "number":5,
+         "mimNumber":605654,
+         "status":"live",
+         "name":"MITOCHONDRIAL DNA DEPLETION SYNDROME 13 (ENCEPHALOMYOPATHIC TYPE)",
+         "mutations":"FBXL4, ASP565GLY",
+         "text":"In an Albanian male infant with MTDPS13 ({615471}), {3:Gai et al. (2013)} identified a homozygous c.1694A-G transition in the FBXL4 gene, resulting in an asp565-to-gly (D565G) substitution at a highly conserved residue in the LRR domain. The mutation was found by whole-exome sequencing and was not present in 4,500 in-house European control chromosomes or in the Exome Variant Server database.",
+         "dbSnps":"rs398123062",
+         "clinvarAccessions":[ 
+            "RCV000056331"
+         ]
+      }
+   ],
+   "mimNumber":605654,
+   "status":"live",
+   "title":"F-BOX AND LEUCINE-RICH REPEAT PROTEIN 4; FBXL4",
+   "description":"The F box, named after cyclin F (CCNF; <a href=\"http://omim.org/entry/600227\">600227</a>), in which it was originally observed, is an approximately 40-amino acid motif that binds SKP1 (<a href=\"http://omim.org/entry/601434\">601434</a>). F-box proteins, such as FBXL4, are components of modular E3 ubiquitin protein ligases called SCFs (SKP1, cullin (see <a href=\"http://omim.org/entry/603134\">603134</a>), F-box proteins), which function in phosphorylation-dependent ubiquitination.",
+   "lastUpdate":"2020-02-06T07:53:08.510Z"
+}

@@ -1,0 +1,58 @@
+type: object
+properties:
+  taxonId:
+    type: integer
+  entrezId:
+    type: integer
+  symbol:
+    type: string
+  location:
+    type: string
+    required: false
+  xref:
+    type: object
+    required: false
+  name:
+    type: string
+    required: false
+  type:
+    type: string
+    required: false
+  entrezSummary:
+    type: string
+    required: false
+  chr:
+    type: string
+    description: Chromosome
+    required: false
+  hg19Start:
+    type: integer
+    description: Variant start position (hg19) if it is human gene
+    required: false
+  hg19Stop:
+    type: integer
+    description: Variant stop position (hg19) if it is human gene
+    required: false
+  grch38Start:
+    type: integer
+    description: Variant start position (hg19) if it is human gene
+    required: false
+  grch38Stop:
+    type: integer
+    description: Variant stop position (hg19) if it is human gene
+    required: false
+  description:
+    type: string
+    required: false
+  gos:
+    type: GO[]
+    required: false
+  phenotypes:
+    type: Phenotype[]
+    required: false
+  lastModified:
+    type: string
+    required: false
+  status:
+    type: string
+    required: false

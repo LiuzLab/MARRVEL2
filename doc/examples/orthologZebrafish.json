@@ -1,0 +1,127 @@
+[  
+   {  
+      "geneSymbol":"fbxl4",
+      "geneId":"ZDB-GENE-041114-187",
+      "entrezId":492349,
+      "dioptScore":9,
+      "bestScore":true,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+         {  
+            "tissueId":"ZFA:0001094",
+            "zfinId":"ZDB-GENE-041114-187",
+            "description":"whole organism"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"kdm2aa",
+      "geneId":"ZDB-GENE-061215-144",
+      "entrezId":571851,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"kdm2ab",
+      "geneId":"ZDB-GENE-101007-5",
+      "entrezId":799441,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"fbxl17",
+      "geneId":"ZDB-GENE-111013-3",
+      "entrezId":795023,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"fbxl15",
+      "geneId":"ZDB-GENE-040426-2440",
+      "entrezId":405878,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0009953",
+            "goTerm":"dorsal/ventral pattern formation",
+            "goType":1
+         }
+      ],
+      "expression":[  
+         {  
+            "tissueId":"ZFA:0001094",
+            "zfinId":"ZDB-GENE-040426-2440",
+            "description":"whole organism"
+         },
+         {  
+            "tissueId":"ZFA:0001114",
+            "zfinId":"ZDB-GENE-040426-2440",
+            "description":"head"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"zgc:158376",
+      "geneId":"ZDB-GENE-070720-8",
+      "entrezId":100101643,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"fbxl6",
+      "geneId":"ZDB-GENE-060810-162",
+      "entrezId":323163,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+         {  
+            "tissueId":"ZFA:0001094",
+            "zfinId":"ZDB-GENE-060810-162",
+            "description":"whole organism"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"si:dkey-192l18.9",
+      "geneId":"ZDB-GENE-120709-25",
+      "entrezId":100005961,
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+
+      ]
+   }
+]

@@ -1,0 +1,36 @@
+{  
+   "ensemblId":"ENSG00000112234",
+   "symbol":"FBXL4",
+   "thead":[  
+      "Constraint from ExAC",
+      "Expected no. variants",
+      "Observed no. variants",
+      "ConstraintMetric"
+   ],
+   "tbody":[  
+      [  
+         "Synonymous",
+         "71.0",
+         "77",
+         "z=-0.44"
+      ],
+      [  
+         "Missense",
+         "177.4",
+         "204",
+         "z=-0.98"
+      ],
+      [  
+         "LoF",
+         "19.2",
+         "7",
+         "pLI=0.01"
+      ],
+      [  
+         "CNV",
+         "5.3",
+         "2",
+         "z=0.59"
+      ]
+   ]
+}

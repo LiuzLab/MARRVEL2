@@ -1,0 +1,23 @@
+type: array
+items:
+  type: object
+  properties:
+    uid: number
+    title: string
+    start:
+      type: number
+      description: Variant start position
+    stop:
+      type: number
+      description: Variant stop position
+    significance:
+      type: object
+      properties:
+        description: string
+        reviewStatus:
+          type: string
+          required: false
+        lastEvaluated:
+          type: string
+          required: false
+    condition: string

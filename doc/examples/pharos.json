@@ -1,0 +1,231 @@
+[
+  {
+    "id": 1125,
+    "deprecated": false,
+    "description": "Acts as a tumor suppressor in many tumor types; induces growth arrest or apoptosis depending on the physiological circumstances and cell type. Involved in cell cycle regulation as a trans-activator that acts to negatively regulate cell division by controlling a set of genes required for this process. One of the activated genes is an inhibitor of cyclin-dependent kinases. Apoptosis induction seems to be mediated either by stimulation of BAX and FAS antigen expression, or by repression of Bcl-2 expression. In cooperation with mitochondrial PPIF is involved in activating oxidative stress-induced necrosis; the function is largely independent of transcription. Induces the transcription of long intergenic non-coding RNA p21 (lincRNA-p21) and lincRNA-Mkln1. LincRNA-p21 participates in TP53-dependent transcriptional repression leading to apoptosis and seem to have to effect on cell-cycle regulation. Implicated in Notch signaling cross-over. Prevents CDK7 kinase activity when associated to CAK complex in response to DNA damage, thus stopping cell cycle progression. Isoform 2 enhances the transactivation activity of isoform 1 from some but not all TP53-inducible promoters. Isoform 4 suppresses transactivation activity and impairs growth suppression mediated by isoform 1. Isoform 7 inhibits isoform 1-mediated apoptosis. Regulates the circadian clock by repressing CLOCK-ARNTL/BMAL1-mediated transcriptional activation of PER2 (PubMed:24051492).",
+    "gene": "TP53",
+    "name": "Cellular tumor antigen p53",
+    "accession": "P04637",
+    "idgFamily": "Transcription Factor",
+    "idgTDL": "Tchem",
+    "drugs": [],
+    "ligands": [
+      {
+        "id": 8596,
+        "version": 1,
+        "created": 1554862655000,
+        "modified": 1554862656000,
+        "deprecated": false,
+        "name": "CHEMBL2059300",
+        "description": null,
+        "self": "https://pharos.nih.gov/idg/api/v1/ligands(8596)?view=full",
+        "kind": "ix.idg.models.Ligand",
+        "namespace": null,
+        "synonyms": [
+          {
+            "id": 413575,
+            "href": "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL2059300",
+            "term": "CHEMBL2059300",
+            "label": "CHEMBL Synonym"
+          },
+          {
+            "id": 413580,
+            "href": "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL2059300",
+            "term": "2-((3R,5R,6S)-1-((S)-1-(tert-Butoxy)-1-oxo-butan-2-yl)-5-(3-chlorophenyl)-6-(4-chlorophenyl)-3-methyl-2-oxopiperidin-3-yl)acetic Acid",
+            "label": "CHEMBL Synonym"
+          }
+        ],
+        "properties": [
+          {
+            "id": 1,
+            "href": "https://druggablegenome.net",
+            "term": "TCRDv5.4.0",
+            "label": "Data Source"
+          },
+          {
+            "id": 2380,
+            "href": "https://www.ebi.ac.uk/chembl",
+            "term": "CHEMBL",
+            "label": "Data Source"
+          },
+          {
+            "id": 2403,
+            "href": null,
+            "term": "ChEMBL",
+            "label": "Ligand Activity Source"
+          },
+          {
+            "id": 413576,
+            "href": null,
+            "term": "SF4XW7N1H",
+            "label": "LyChI_L1"
+          },
+          {
+            "id": 413577,
+            "href": null,
+            "term": "HZ4GY1F585",
+            "label": "LyChI_L2"
+          },
+          {
+            "id": 413578,
+            "href": null,
+            "term": "H59DPRMP8J9",
+            "label": "LyChI_L3"
+          },
+          {
+            "id": 413579,
+            "href": null,
+            "term": "H59YXMBV1Q3K",
+            "label": "LyChI_L4"
+          },
+          {
+            "id": 413581,
+            "href": "https://www.ebi.ac.uk/chembl",
+            "term": "CHEMBL",
+            "label": "Ligand Source"
+          },
+          {
+            "id": 413582,
+            "text": "CC[C@H](N1[C@@H]([C@H](C[C@](C)(CC(=O)O)C1=O)c2cccc(Cl)c2)c3ccc(Cl)cc3)C(=O)OC(C)(C)C",
+            "label": "CHEMBL Canonical SMILES"
+          },
+          {
+            "id": 413586,
+            "intval": 22524527,
+            "label": "PubMed ID"
+          },
+          {
+            "id": 3190860,
+            "intval": 22524527,
+            "label": "PubMed ID"
+          }
+        ],
+        "links": [
+          {
+            "id": 964845,
+            "kind": "ix.core.models.Structure",
+            "href": "https://pharos.nih.gov/idg/api/v1/structures(967932df-8c7d-40d3-8747-2a2df9222b6c)",
+            "refid": "967932df-8c7d-40d3-8747-2a2df9222b6c",
+            "created": 1554862655000,
+            "namespace": null,
+            "version": 1,
+            "deprecated": false,
+            "properties": [],
+            "modified": 1554862655000
+          },
+          {
+            "id": 964846,
+            "kind": "ix.idg.models.Target",
+            "href": "https://pharos.nih.gov/idg/api/v1/targets(1125)",
+            "refid": "1125",
+            "created": 1554862656000,
+            "namespace": null,
+            "version": 1,
+            "deprecated": false,
+            "properties": [
+              {
+                "id": 293,
+                "href": null,
+                "term": "Transcription Factor",
+                "label": "IDG Target Family"
+              },
+              {
+                "id": 2347,
+                "href": null,
+                "term": "Tchem",
+                "label": "IDG Development Level"
+              },
+              {
+                "id": 2403,
+                "href": null,
+                "term": "ChEMBL",
+                "label": "Ligand Activity Source"
+              },
+              {
+                "id": 2405,
+                "href": null,
+                "term": "IC50",
+                "label": "Ligand Activity"
+              },
+              {
+                "id": 413583,
+                "unit": null,
+                "numval": 6,
+                "label": "IC50"
+              },
+              {
+                "id": 413584,
+                "href": "http://www.genenames.org/cgi-bin/gene_symbol_report?match=TP53",
+                "term": "TP53",
+                "label": "IDG Target"
+              }
+            ],
+            "modified": 1554862656000
+          },
+          {
+            "id": 6810230,
+            "kind": "ix.idg.models.Target",
+            "href": "https://pharos.nih.gov/idg/api/v1/targets(7699)",
+            "refid": "7699",
+            "created": 1554910877000,
+            "namespace": null,
+            "version": 1,
+            "deprecated": false,
+            "properties": [
+              {
+                "id": 2347,
+                "href": null,
+                "term": "Tchem",
+                "label": "IDG Development Level"
+              },
+              {
+                "id": 2403,
+                "href": null,
+                "term": "ChEMBL",
+                "label": "Ligand Activity Source"
+              },
+              {
+                "id": 4588,
+                "href": null,
+                "term": "Enzyme",
+                "label": "IDG Target Family"
+              },
+              {
+                "id": 19918,
+                "href": null,
+                "term": "Kd",
+                "label": "Ligand Activity"
+              },
+              {
+                "id": 3180745,
+                "href": "http://www.genenames.org/cgi-bin/gene_symbol_report?match=MDM2",
+                "term": "MDM2",
+                "label": "IDG Target"
+              },
+              {
+                "id": 3190859,
+                "unit": null,
+                "numval": 9,
+                "label": "Kd"
+              }
+            ],
+            "modified": 1554910877000
+          }
+        ],
+        "publications": [],
+        "structureRefId": "967932df-8c7d-40d3-8747-2a2df9222b6c",
+        "targetProperties": [
+          {
+            "id": 413583,
+            "unit": null,
+            "numval": 6,
+            "label": "IC50"
+          }
+        ],
+        "idgTargetFamily": "Transcription Factor",
+        "idgDevLevel": "Tchem",
+        "idgTarget": "TP53",
+        "targetCount": 2
+      }
+  }
+]

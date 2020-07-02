@@ -1,0 +1,25 @@
+type: object
+properties:
+  uid:
+    type: number
+  title:
+    type: string
+  start:
+    type: number
+    description: Variant start position
+  stop:
+    type: number
+    description: Variant stop position
+  significance:
+    type: object
+    properties:
+      description:
+        type: string
+      reviewStatus:
+        type: string
+        required: false
+      lastEvaluated:
+        type: string
+        required: false
+  condition:
+    type: string

@@ -1,0 +1,413 @@
+[  
+   {  
+      "geneSymbol":"Fbxl4",
+      "geneId":"2140367",
+      "entrezId":"269514",
+      "dioptScore":11,
+      "bestScore":true,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+
+      ]
+   },
+   {  
+      "geneSymbol":"Fbxl17",
+      "geneId":"1354704",
+      "entrezId":"50758",
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+         {  
+            "tissueId":"EMAPA:16469",
+            "mgiId":1354704,
+            "expType":1,
+            "description":"nervous system"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"Kdm2a",
+      "geneId":"1354736",
+      "entrezId":"225876",
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0000790",
+            "goTerm":"nuclear chromatin",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0001701",
+            "goTerm":"in utero embryonic development",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0001843",
+            "goTerm":"neural tube closure",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0001947",
+            "goTerm":"heart looping",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0010628",
+            "goTerm":"positive regulation of gene expression",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0010629",
+            "goTerm":"negative regulation of gene expression",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0030182",
+            "goTerm":"neuron differentiation",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0033184",
+            "goTerm":"positive regulation of histone ubiquitination",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0035264",
+            "goTerm":"multicellular organism growth",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0043066",
+            "goTerm":"negative regulation of apoptotic process",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0045322",
+            "goTerm":"unmethylated CpG binding",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0060563",
+            "goTerm":"neuroepithelial cell differentiation",
+            "goType":1
+         }
+      ],
+      "expression":[  
+         {  
+            "tissueId":"EMAPA:16405",
+            "mgiId":1354736,
+            "expType":1,
+            "description":"limbs"
+         },
+         {  
+            "tissueId":"EMAPA:16469",
+            "mgiId":1354736,
+            "expType":1,
+            "description":"nervous system"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"Fbxl19",
+      "geneId":"3039600",
+      "entrezId":"233902",
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0005515",
+            "goTerm":"protein binding",
+            "goType":0
+         }
+      ],
+      "expression":[  
+         {  
+            "tissueId":"EMAPA:17366",
+            "mgiId":3039600,
+            "expType":1,
+            "description":"urinary system"
+         },
+         {  
+            "tissueId":"EMAPA:17381",
+            "mgiId":3039600,
+            "expType":1,
+            "description":"reproductive system"
+         },
+         {  
+            "tissueId":"EMAPA:35961",
+            "mgiId":3039600,
+            "expType":2,
+            "description":"embryo mesenchyme"
+         },
+         {  
+            "tissueId":"EMAPA:36473",
+            "mgiId":3039600,
+            "expType":1,
+            "description":"early conceptus"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"Kdm2b",
+      "geneId":"1354737",
+      "entrezId":"30841",
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0000122",
+            "goTerm":"negative regulation of transcription from RNA polymerase II promoter",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0000979",
+            "goTerm":"RNA polymerase II core promoter sequence-specific DNA binding",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0005515",
+            "goTerm":"protein binding",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0007283",
+            "goTerm":"spermatogenesis",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0021555",
+            "goTerm":"midbrain-hindbrain boundary morphogenesis",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0021592",
+            "goTerm":"fourth ventricle development",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0021670",
+            "goTerm":"lateral ventricle development",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0021678",
+            "goTerm":"third ventricle development",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0021993",
+            "goTerm":"initiation of neural tube closure",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0030307",
+            "goTerm":"positive regulation of cell growth",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0030900",
+            "goTerm":"forebrain development",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0030901",
+            "goTerm":"midbrain development",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0030902",
+            "goTerm":"hindbrain development",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0043524",
+            "goTerm":"negative regulation of neuron apoptotic process",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0048596",
+            "goTerm":"embryonic camera-type eye morphogenesis",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0070544",
+            "goTerm":"histone H3-K36 demethylation",
+            "goType":1
+         },
+         {  
+            "goId":"GO:1902459",
+            "goTerm":"positive regulation of stem cell population maintenance",
+            "goType":1
+         },
+         {  
+            "goId":"GO:2000178",
+            "goTerm":"negative regulation of neural precursor cell proliferation",
+            "goType":1
+         }
+      ],
+      "expression":[  
+         {  
+            "tissueId":"EMAPA:17366",
+            "mgiId":1354737,
+            "expType":1,
+            "description":"urinary system"
+         },
+         {  
+            "tissueId":"EMAPA:17381",
+            "mgiId":1354737,
+            "expType":1,
+            "description":"reproductive system"
+         },
+         {  
+            "tissueId":"EMAPA:35961",
+            "mgiId":1354737,
+            "expType":2,
+            "description":"embryo mesenchyme"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"Lrrc29",
+      "geneId":"2443262",
+      "entrezId":"234684",
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+         {  
+            "tissueId":"EMAPA:16469",
+            "mgiId":2443262,
+            "expType":1,
+            "description":"nervous system"
+         },
+         {  
+            "tissueId":"EMAPA:16727",
+            "mgiId":2443262,
+            "expType":2,
+            "description":"respiratory system"
+         },
+         {  
+            "tissueId":"EMAPA:16840",
+            "mgiId":2443262,
+            "expType":2,
+            "description":"liver and biliary system"
+         },
+         {  
+            "tissueId":"EMAPA:17366",
+            "mgiId":2443262,
+            "expType":1,
+            "description":"urinary system"
+         },
+         {  
+            "tissueId":"EMAPA:17381",
+            "mgiId":2443262,
+            "expType":1,
+            "description":"reproductive system"
+         },
+         {  
+            "tissueId":"EMAPA:18765",
+            "mgiId":2443262,
+            "expType":1,
+            "description":"hemolymphoid system"
+         },
+         {  
+            "tissueId":"EMAPA:35306",
+            "mgiId":2443262,
+            "expType":1,
+            "description":"endocrine system"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"Fbxl21",
+      "geneId":"2442921",
+      "entrezId":"213311",
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+         {  
+            "goId":"GO:0005515",
+            "goTerm":"protein binding",
+            "goType":0
+         },
+         {  
+            "goId":"GO:0005634",
+            "goTerm":"nucleus",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0005829",
+            "goTerm":"cytosol",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0016567",
+            "goTerm":"protein ubiquitination",
+            "goType":1
+         },
+         {  
+            "goId":"GO:0019005",
+            "goTerm":"SCF ubiquitin ligase complex",
+            "goType":2
+         },
+         {  
+            "goId":"GO:0043153",
+            "goTerm":"entrainment of circadian clock by photoperiod",
+            "goType":1
+         }
+      ],
+      "expression":[  
+         {  
+            "tissueId":"EMAPA:16246",
+            "mgiId":2442921,
+            "expType":1,
+            "description":"alimentary system"
+         },
+         {  
+            "tissueId":"EMAPA:16469",
+            "mgiId":2442921,
+            "expType":1,
+            "description":"nervous system"
+         },
+         {  
+            "tissueId":"EMAPA:17366",
+            "mgiId":2442921,
+            "expType":1,
+            "description":"urinary system"
+         },
+         {  
+            "tissueId":"EMAPA:17381",
+            "mgiId":2442921,
+            "expType":1,
+            "description":"reproductive system"
+         },
+         {  
+            "tissueId":"EMAPA:35306",
+            "mgiId":2442921,
+            "expType":1,
+            "description":"endocrine system"
+         }
+      ]
+   },
+   {  
+      "geneSymbol":"Fbxl6",
+      "geneId":"1354705",
+      "entrezId":"30840",
+      "dioptScore":1,
+      "bestScore":false,
+      "goTerms":[  
+
+      ],
+      "expression":[  
+
+      ]
+   }
+]

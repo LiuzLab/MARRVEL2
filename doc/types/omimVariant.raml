@@ -1,0 +1,32 @@
+type: object
+properties:
+  allelicVariant:
+    type: object
+    properties:
+      mimNumber:
+        type: integer
+        description: Mim number of the variant
+      name:
+        type: string
+      mutations:
+        type: string
+      text:
+        type: string
+        description: Text description of the variant
+      dbSnps:
+        type: string
+        description: Comma delimited list of dbSNPs
+        required: false
+      gnomadSnps:
+        type: string
+        required: false
+      clinvarAccessions:
+        type: array
+        items:
+          type: string
+        description: Array of ClinVar accessions
+        required: false
+      status:
+        type: string
+        description: The status of the variant. Either `live`, `moved`, or `removed`
+        required: false

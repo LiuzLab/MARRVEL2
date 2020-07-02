@@ -1,0 +1,30 @@
+{
+   "transcripts":[
+      {
+         "geneSymbol":"FBXL4",
+         "geneEnsemblId":"ENSG00000112234",
+         "ensemblId":"ENST00000369244"
+      },
+      {
+         "geneSymbol":"FBXL4",
+         "geneEnsemblId":"ENSG00000112234",
+         "ensemblId":"ENST00000229971"
+      }
+   ],
+   "chr":"6",
+   "pos":99365567,
+   "ref":"T",
+   "alt":"C",
+   "exome":{
+      "alleleCount":68,
+      "alleleNum":244286,
+      "homCount":0
+   },
+   "genome":{
+      "alleleCount":5,
+      "alleleNum":31392,
+      "homCount":0
+   },
+   "lastUpdate":"2020-01-31T21:05:32.062Z",
+   "__v":0
+}

@@ -1,0 +1,30 @@
+type: object
+properties:
+  taxonId2:
+    type: number
+    description: The taxonomy ID of the ortholog gene
+  entrezId2:
+    type: number
+    description: The Entrez gene ID of the ortholog gene
+  gene2:
+    type: object
+    properties:
+      entrezId: integer
+      symbol: string
+      xref: object
+      gos:
+        description: Experiment based GO terms
+        type: GO[]
+        required: false
+      phenotypes:
+        type: Phenotype[]
+        required: false
+  score:
+    type: integer
+    description: DIOPT score that indicates the number of individual ortholog prediction tools that report a given ortholog pair.
+  bestScore:
+    type: boolean
+    description: if the gene scored the best among other ortholog genes then `true`, otherwise, `false`.
+  bestScoreRev:
+    type: boolean
+    description: If the given gene is the best scored ortholog gene of the gene then `true`, otherwise, `false`.
