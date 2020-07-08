@@ -74,7 +74,9 @@ export class DioptAlignmentComponent implements OnInit {
   getHtml() {
     let htmlString = '';
     for (const row of this.data) {
-      if (!row.display) continue;
+      if (!row.display) {
+        continue;
+      }
 
       if (row.species !== 'mark') {
         htmlString += '<div>';
@@ -83,14 +85,12 @@ export class DioptAlignmentComponent implements OnInit {
           if (this.speciesToHighlight[row.species] &&
             this.highlightFrom <= row.realIdx[idx] && row.realIdx[idx] <= this.highlightTo) {
             htmlString += `<span class="d-inline-block text-highlight ${row.style[idx]}">${row.proteins[idx]}</span>`;
-          }
-          else {
+          } else {
             htmlString += `<span class="d-inline-block ${row.style[idx]}">${row.proteins[idx]}</span>`;
           }
         }
         htmlString += `<span class="ml-2 d-inline-block">[${ row.endIdx }]</span></div>`;
-      }
-      else {
+      } else {
         if (row.mark.length && row.mark[0] === ' ') {
           htmlString += `<div class="mb-2">
             <span class="mark d-inline-block">${ row.mark.substring(4) }</span>
@@ -105,7 +105,18 @@ export class DioptAlignmentComponent implements OnInit {
     return htmlString;
   }
 
-  highlightDomain(e) {
+  highlightDomain(e, species?: string) {
+    if (species) {
+      const toHighlight = {
+        hs: false, mm: false, rn: false, dr: false,
+        dm: false, ce: false, sc: false, sp: false,
+      };
+      const sTags = species.split(';');
+      for (const tag of sTags) {
+        toHighlight[tag] = true;
+      }
+      this.speciesToHighlight = toHighlight;
+    }
     this.setHighlightFrom(e.from);
     this.setHighlightTo(e.to);
   }

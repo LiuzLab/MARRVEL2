@@ -4,7 +4,7 @@
       *ngIf="!loading"
       [gene]="gene"
       [data]="domainData"
-      (highlight)="highlightDomain($event); scrollToAlignment()"
+      (highlight)="highlightDomain($event, 'hs'); scrollToAlignment()"
     ></app-protein-domain>
   </div>
 </div>
