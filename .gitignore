@@ -62,3 +62,5 @@ src/assets
 npm-debug.log
 testem.log
 /typings
+/key
+*.pem

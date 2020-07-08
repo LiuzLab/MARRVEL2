@@ -6,6 +6,10 @@ const bodyParser = require('body-parser');
 const glob = require('glob');
 const mongoose = require('mongoose');
 
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+
 const config = require('./config');
 
 // Middleware: Bodyparser
@@ -33,6 +37,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(config.root, '../dist/MARRVEL/index.html'));
 });
 
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer({key: fs.readFileSync('key/key.pem', 'utf8'), cert: fs.readFileSync('key/cert.pem', 'utf8')}, app);
 // Mongoose
 mongoose.connect(config.mongo.url + '?authSource=admin', {
   dbName: config.mongo.database,
@@ -45,9 +51,10 @@ mongoose.connect(config.mongo.url + '?authSource=admin', {
     console.log('Connected to Mongo DB');
     const db = mongoose.connection;
 
-    app.listen(config.port, () => {
+    httpServer.listen(config.port, () => {
       console.log('Listening ' + config.port);
     });
+    httpsServer.listen(443);
   }).catch((err) => {
     console.log('Error connecting Mongo DB');
     console.error(err);
