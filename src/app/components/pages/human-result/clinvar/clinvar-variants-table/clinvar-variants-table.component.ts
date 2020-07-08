@@ -40,8 +40,8 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
     this.dataSource.sort = this.sort;
     this.dataSource.sortData = (data, sort: MatSort) => {
       return data.sort((a, b) => {
-        const aMatching = a.start <= this.variant.pos && this.variant.pos <= a.stop;
-        const bMatching = b.start <= this.variant.pos && this.variant.pos <= b.stop;
+        const aMatching = this.variant && a.start <= this.variant.pos && this.variant.pos <= a.stop;
+        const bMatching = this.variant && b.start <= this.variant.pos && this.variant.pos <= b.stop;
         if (this.variant && this.showMatchingVarsFirst && aMatching !== bMatching) {
           return aMatching ? -1 : 1;
         }
@@ -65,7 +65,6 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
   }
 
   onSearchChange(e) {
-    console.log(e.target.value);
     this.dataSource.filter = e.target.value;
   }
 }
