@@ -80,21 +80,9 @@ exports.findByGenomicLocation = (req, res) => {
   if (!chr || !pos) {
     return res.status(404).send([]);
   }
-  Genes.find(
-    { chr: chr, hg19Start: { $lte: pos }, hg19Stop: { $gte: pos } },
-    { '_id': 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0 }
-  ).lean(true)
+  geneUtil.getByGenomicLocation(chr, pos)
     .then((docs) => {
-      if (!docs) return res.json([]);
-      else {
-        for (var i=0; i<docs.length; ++i) {
-          if (docs[i].alias && (typeof docs[i].alias === 'string')) docs[i].alias = [ docs[i].alias ];
-          if (docs[i].xref && docs[i].xref.omimId && docs[i].xref.omimId.length) {
-            docs[i].xref.omimId = docs[i].xref.omimId[0];
-          }
-        }
-        return res.json(docs);
-      }
+      return res.json(docs);
     }).catch((err) => {
       console.log(err);
       return res.status(500).send({

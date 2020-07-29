@@ -8,23 +8,19 @@ exports.getByVariant = (variant) => {
     if (!variant) reject('Invalid variant');
 
     var startPos = parseInt(variant.pos)
-    var stopPos = startPos + variant.ref.length - 1;
     ClinVar.find(
-      { chr: variant.chr, start: startPos, stop: stopPos },
+      { chr: variant.chr, start: startPos },
       { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, '_id': 0 }
     )
       .then((docs) => {
-        var res = null;
-        if (docs && docs.length) {
-          res = docs[0];
-          for (var i=0; i<docs.length; ++i) {
-            if (docs[i].ref && dosc[i].ref === variant.ref && docs[i].alt && docs[i].alt === variant.alt) {
-              res = docs[i];
-              break;
-            }
-          }
+        const counts = { 'pathogenic': 0, 'likely pathogenic': 0, 'likely benign': 0, 'benign': 0 };
+        for (var i = 0; i < docs.length; ++i) {
+          if (docs[i].ref && docs[i].ref.length && docs[i].ref != variant.ref) continue;
+          if (docs[i].alt && docs[i].alt.length && docs[i].alt != variant.alt) continue;
+          resolve(docs[i]);
+          break;
         }
-        resolve(res);
+        resolve({ significance: {} });
       }).catch((err) => {
         reject(err);
       });

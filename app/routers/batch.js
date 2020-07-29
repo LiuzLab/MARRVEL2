@@ -34,7 +34,7 @@ router.get('/batch/genes', (req, res) => {
           numPhenos: (docs[1].phenotypes || []).length,
           numVars: (docs[1].allelicVariants || []).length
         } : null,
-        clinvar: docs[2],
+        clinvar: docs[2] || {},
         geno2mp: docs[3],
         gnomad: docs[4],
         dgv: docs[5],
@@ -52,6 +52,9 @@ router.get('/batch/genes', (req, res) => {
 
 router.get('/batch/variants', (req, res) => {
   var variants = req.query.variants || [];
+  if (typeof(variants) !== 'object') {
+    variants = [ variants];
+  }
   Promise.all(variants)
     .map((variantStr) => {
       const variant = utils.variant.validateAndParseVariant(variantStr);

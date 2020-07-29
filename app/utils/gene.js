@@ -46,3 +46,29 @@ exports.getBySymbol = (taxonId, symbol) => {
   });
 };
 
+exports.getByGenomicLocation = (chr, pos) => {
+  return new Promise((resolve, reject) => {
+    Genes.find(
+      { chr: chr, hg19Start: { $lte: pos }, hg19Stop: { $gte: pos } },
+      { '_id': 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0 }
+    )
+      .lean()
+      .then((docs) => {
+        if (!docs) {
+          resolve([]);
+        } else {
+          for (var i=0; i<docs.length; ++i) {
+            if (docs[i].alias && (typeof docs[i].alias === 'string')) {
+              docs[i].alias = [ docs[i].alias ];
+            }
+            if (docs[i].xref && docs[i].xref.omimId && docs[i].xref.omimId.length) {
+              docs[i].xref.omimId = docs[i].xref.omimId[0];
+            }
+          }
+          resolve(docs);
+        }
+      }).catch((err) => {
+        reject(err);
+      });
+  });
+};
