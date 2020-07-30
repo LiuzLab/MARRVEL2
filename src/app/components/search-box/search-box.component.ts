@@ -91,10 +91,13 @@ export class SearchBoxComponent implements OnInit {
 
   onGeneInput(e) {
     this.geneKeyword = e.target.value;
-    if (this.geneKeyword) {
-      this.api.getGenesBySymbolPrefix(9606, this.geneKeyword)
+    const keyword = e.target.value;
+    if (keyword) {
+      this.api.getGenesBySymbolPrefix(9606, keyword)
         .subscribe((res) => {
-          this.geneSuggestion = res;
+          if (keyword === this.geneKeyword) {
+            this.geneSuggestion = res;
+          }
         });
     } else {
       this.geneSuggestion = [];
