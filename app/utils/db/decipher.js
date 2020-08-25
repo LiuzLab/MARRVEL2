@@ -8,7 +8,7 @@ exports.getByGenomicLocation = (hg19Chr, hg19Start, hg19Stop) => {
     decipher.find(
       { hg19Chr: hg19Chr,
         '$or': [
-          { hg19Start: { '$gte': hg19Start }, hg19Start: { '$lte': hg19Stop } },
+          { hg19Start: { '$gte': hg19Start, '$lte': hg19Stop } },
           { hg19Start: { '$lte': hg19Start }, hg19Stop: { '$gte': hg19Start } }
         ]
       },

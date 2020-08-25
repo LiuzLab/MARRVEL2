@@ -2,17 +2,18 @@ const Promise = require('bluebird');
 
 const decipher = require('../../models/decipher-disease.model');
 
-exports.getByGenomicLocation = (hg19Chr, hg19Start, hg19Stop) => {
+exports.getByGenomicLocation = (hg19Chr, st, ed) => {
   return new Promise((resolve, reject) => {
     decipher.find(
       { hg19Chr: hg19Chr,
         '$or': [
-          { hg19Start: { '$gte': hg19Start }, hg19Start: { '$lte': hg19Stop } },
-          { hg19Start: { '$lte': hg19Start }, hg19Stop: { '$gte': hg19Start } }
+          { hg19Start: { '$gte': st, '$lte': ed } },
+          { hg19Start: { '$lte': st }, hg19Stop: { '$gte': st } }
         ]
       },
       { patientId: 0, from: 0, '_id': 0 }
     )
+      .populate({ path: 'phenotypes.ontology', select: '-_id' })
       .lean()
       .then(docs => {
         if (!docs) resolve(null);
