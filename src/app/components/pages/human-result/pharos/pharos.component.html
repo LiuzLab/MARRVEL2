@@ -3,7 +3,7 @@
     <h3 class="d-inline-block align-middle">Approved Drugs and Active Ligands from PHAROS</h3>
     <a class="d-inline-block ml-3 align-middle" target="_blank"
       *ngIf="gene"
-      [attr.href]="'https://pharos.nih.gov/search?q=%22' + gene.symbol + '%22'" target="_blank"
+      [attr.href]="'https://pharos.nih.gov/targets?q=' + gene.symbol" target="_blank"
     >
       <button mat-button color="primary">
         <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>

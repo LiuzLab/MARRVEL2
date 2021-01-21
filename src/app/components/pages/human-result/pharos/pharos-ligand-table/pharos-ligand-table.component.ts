@@ -34,4 +34,8 @@ export class PharosLigandTableComponent implements OnInit, OnChanges, AfterViewI
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+  encodeForUrl(str: string) {
+    return encodeURIComponent(str);
+  }
 }
