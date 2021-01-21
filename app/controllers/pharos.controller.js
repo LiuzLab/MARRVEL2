@@ -1,15 +1,22 @@
 const db = require('../utils/db');
 
+const Genes = require('../models/genes.model');
+const pharos = require('../utils/pharos');
+
 exports.getTargetsByEntrezId = (req, res) => {
   const entrezId = req.params.entrezId || '';
 
-  db.pharos.getDrugsLigandsByEntrezId(entrezId)
-    .then(doc => {
-      res.json(doc);
-    }).catch(err => {
-      console.error(err);
-      res.status(500).send({
-        message: 'Server error occured'
-      });
+  Genes.findOne({ entrezId: parseInt(entrezId) }, { 'pharosTargetIds': 1 })
+    .populate({ path: 'pharosTargets', select: 'accession -_id' })
+    .lean()
+    .then((doc) => {
+      return doc.pharosTargets || [];
+    }).map((target) => {
+      return pharos.queryTargetByAccession(target.accession);
+    }).then((docs) => {
+      res.send(docs);
+    }).catch((err) => {
+      console.log(err);
+      res.status(500).send({});
     });
 };
