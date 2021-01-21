@@ -7,6 +7,35 @@ const synNameToFieldName = {
   LyCHI: 'lychiId'
 };
 
+const parseLigands = (e, targetSymbol) => {
+  D = {
+    id: e.ligid,
+    name: e.name,
+    synonyms: [],
+    targetProperties: (e.activities || [])
+      .filter((act) => act.target.sym === targetSymbol)
+      .map((act) => {
+        return {
+          label: act.type,
+          numval: act.value,
+          unit: act.moa
+        };
+      }),
+    smiles: e.smiles
+  };
+  for (const syn of e.synonyms) {
+    if (syn.name in synNameToFieldName) {
+      D[synNameToFieldName[syn.name]] = syn.value;
+    }
+    D.synonyms.push({
+      label: syn.name,
+      term: syn.value
+    });
+  }
+  D.name = D.chemblId || D.name;
+  return D;
+};
+
 exports.queryTargetByAccession = (accession) => {
   return new Promise((resolve, reject) => {
     axios({
@@ -71,38 +100,12 @@ fragment ligandCardFields on Ligand {
         idgTDL: target.tdl,
         idgFamily: target.fam,
         description: target.description,
-        drugs: (target.drugs || []).map((e) => e),
-        ligands: (target.ligands || []).map((e) => {
-          D = {
-            id: e.ligid,
-            name: e.name,
-            synonyms: [],
-            targetProperties: (e.activities || [])
-              .filter((act) => act.target.sym === target.sym)
-              .map((act) => {
-                return {
-                  label: act.type,
-                  numval: act.value,
-                  unit: act.moa
-                };
-              }),
-            smiles: e.smiles
-          };
-          for (const syn of e.synonyms) {
-            if (syn.name in synNameToFieldName) {
-              D[synNameToFieldName[syn.name]] = syn.value;
-            }
-            D.synonyms.push({
-              label: syn.name,
-              term: syn.value
-            });
-          }
-          D.name = D.chemblId || D.name;
-          return D;
-        })
+        drugs: (target.drugs || []).map((e) => parseLigands(e, target.symbol)),
+        ligands: (target.ligands || []).map((e) => parseLigands(e, target.symbol))
       })
     }).catch((err) => {
       reject(err);
     });
   });
 };
+
