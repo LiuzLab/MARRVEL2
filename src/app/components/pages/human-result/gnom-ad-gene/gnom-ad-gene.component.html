@@ -9,14 +9,14 @@
       {{ gene.symbol }} is {{ data.lof.oe.toFixed(2) }}. 
     </span>
 
-    <span *ngIf="(data.lof.oeUpper - data.lof.oeLower) > 0.35">
+    <span *ngIf="data.lof.oeUpper >= 0.35">
       <br>
       Since the upper bound of the confidence interval of LoF o/e score is above 0.35,
       {{ gene.symbol }} is tolerant of LoF alleles.
       The loss of one copy of {{ gene.symbol }} is <strong>likely not lethal</strong> in humans.
     </span>
 
-    <span *ngIf="(data.lof.oeUpper - data.lof.oeLower) <= 0.35">
+    <span *ngIf="data.lof.oeUpper < 0.35">
       <br>
       Since the upper bound of the confidence interval of LoF o/e score is equal to or below 0.35,
       {{ gene.symbol }} is intolerant of LoF alleles.
