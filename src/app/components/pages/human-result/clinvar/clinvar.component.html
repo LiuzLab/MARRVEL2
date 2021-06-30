@@ -35,7 +35,7 @@
 <div class="row summary mt-3"  *ngIf="significance && sigFourTotal > 0" [@toggle]>
   <div class="col-12">
     <div class="w-100 bar-chart">
-      <div class="bar bg-blue"
+      <div class="bar bg-orange"
         *ngIf="significance['pathogenic']"
         [attr.style]="getWidthPercStyle(significance['pathogenic'], sigFourTotal)"
         [matTooltip]="'Pathoogenic: ' + significance['pathogenic'] + ' alleles'"
@@ -45,7 +45,7 @@
           <span class="bar-value">{{ significance['pathogenic'] }}</span>
         </div>
       </div>
-      <div class="bar bg-blue-light"
+      <div class="bar bg-orange-light"
         *ngIf="significance['likely pathogenic']"
         [attr.style]="getWidthPercStyle(significance['likely pathogenic'], sigFourTotal)"
         [matTooltip]="'Likely Pathoogenic: ' + significance['likely pathogenic'] + ' alleles'"
@@ -55,7 +55,7 @@
           <span class="bar-value">{{ significance['likely pathogenic'] }}</span>
         </div>
       </div>
-      <div class="bar bg-orange-light"
+      <div class="bar bg-blue-light"
         *ngIf="significance['likely benign']"
         [attr.style]="getWidthPercStyle(significance['likely benign'], sigFourTotal)"
         [matTooltip]="'Likely Benign: ' + significance['likely benign'] + ' alleles'"
@@ -65,7 +65,7 @@
           <span class="bar-value">{{ significance['likely benign']  }}</span>
         </div>
       </div>
-      <div class="bar bg-orange"
+      <div class="bar bg-blue"
         *ngIf="significance['benign']"
         [attr.style]="getWidthPercStyle(significance['benign'], sigFourTotal)"
         [matTooltip]="'Benign: ' + significance['benign'] + ' alleles'"
