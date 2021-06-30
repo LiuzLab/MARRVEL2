@@ -220,11 +220,11 @@
         </div>
       </div>
 
-      <!--div class="row section mt-5" id="phenotypes" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
+      <div class="row section mt-5" id="phenotypes" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
         <div class="col-12">
           <app-phenotypes [gene]="gene" [orthologs]="orthologs"></app-phenotypes>
         </div>
-      </div-->
+      </div>
 
       <div class="row section mt-5" id="gene-ontology" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
         <div class="col-12">
