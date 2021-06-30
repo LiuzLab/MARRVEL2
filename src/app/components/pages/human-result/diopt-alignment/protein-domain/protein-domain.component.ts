@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, ViewChil
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 
-import { HumanGene } from './../../../../../interfaces/gene';
 
 @Component({
   selector: 'app-protein-domain',
@@ -10,7 +9,6 @@ import { HumanGene } from './../../../../../interfaces/gene';
   styleUrls: ['./protein-domain.component.scss']
 })
 export class ProteinDomainComponent implements OnInit, AfterViewInit {
-  @Input() gene: HumanGene;
   @Input() data: DomainData[];
 
   @Output() highlight: EventEmitter< any > = new EventEmitter();

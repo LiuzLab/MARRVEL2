@@ -17,6 +17,7 @@ export class DioptAlignmentComponent implements OnInit {
   data = null;
   domainData = null;
   loading = true;
+  versionName = '7.0';
 
   species = null;
   speciesTagToName = {
@@ -48,6 +49,7 @@ export class DioptAlignmentComponent implements OnInit {
       this.api.getAlignmentByEntrezId(this.gene.entrezId)
         .pipe(take(1))
         .subscribe(res => {
+          this.versionName = res.dioptVersion || this.versionName;
           if (res && res.data && res.data.length) {
             const speciesObj = {};
             for (const row of res.data) {
