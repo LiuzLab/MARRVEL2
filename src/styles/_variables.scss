@@ -1,0 +1,10 @@
+@import './palette';
+
+$primary: map-get($MARRVEL-brand, 500);
+$primary-50: map-get($MARRVEL-brand, 50);
+$primary-700: map-get($MARRVEL-brand, 700);
+$primary-900: map-get($MARRVEL-brand, 900);
+$primary-2: map-get($MARRVEL-honeydew, 500);
+$accent: map-get($MARRVEL-cadmium-orange, 500);
+$accent-2: map-get($MARRVEL-gold-crayola, 500);
+$warn: map-get($MARRVEL-paradise-pink, 500);

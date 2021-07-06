@@ -1,6 +1,5 @@
 @import './theme.scss';
-@include angular-material-theme($MARRVEL-theme);
-$primary-palette: map-get($MARRVEL-theme, primary);
+@import './styles/variables';
 
 @import './spinner.scss';
 
@@ -41,24 +40,24 @@ h1, h2, h3, h4, h5 {
   margin: 0;
 }
 a, .link-primary {
-  color: mat-color($primary-palette, 900);
+  color: $primary-900;
   text-decoration: none;
   cursor: pointer;
 }
 a:hover, a:active, .link-primary:hover, .link-primary:active {
-  color: mat-color($primary-palette, 900);
+  color: $primary-900;
   text-decoration: underline;
   cursor: pointer;
 }
 .color-primary {
-  color: mat-color($primary-palette);
+  color: $primary;
 }
 
 .bg-light-gray {
   background-color: #f8f8f8;
 }
 .bg-light-brand {
-  background-color: mat-color($primary-palette, 50);
+  background-color: $primary-50;
 }
 .bg-dark-gray {
   background-color: #222;
@@ -153,10 +152,10 @@ span.mat-slide-toggle-content {
 }
 
 span.text-warning {
-  color: #E5893E !important;
+  color: $accent !important;
 }
 span.text-error {
-  color: red !important;
+  color: $warn !important;
 }
 
 .text-monospace {
@@ -258,7 +257,7 @@ span.text-error {
 
 .badge-primary {
   color: #fff;
-  background-color: #66c6be;
+  background-color: $primary-700;
 }
 .badge-secondary {
   color: #fff;
@@ -420,11 +419,11 @@ div.plot-tooltip {
 }
 .go-cat-cell.bg-blue,
 .agr-cat-cell.bg-blue {
-  background-color: #66c6be;
+  background-color: $primary-700;
 }
 .go-cat-cell.bg-blue:hover,
 .agr-cat-cell.bg-blue:hover {
-  background-color: #66c6be;
+  background-color: $primary-700;
   filter: brightness(1.05) !important;
   transition: linear;
 }
@@ -482,7 +481,7 @@ div.plot-tooltip {
 
 .text-bold-blue {
   font-weight: 500;
-  color: #66c6be;
+  color: $primary-700;
 }
 
 .go-row:hover .go-cat-cell,
@@ -500,11 +499,11 @@ div.plot-tooltip {
 }
 
 .color-primary {
-  color:#66c6be
+  color:$primary-700
 }
 
 #human-result-container .mat-button.mat-primary {
-  color: #4cb7ac !important;
+  color: $primary-900 !important;
 }
 
 .button-big {

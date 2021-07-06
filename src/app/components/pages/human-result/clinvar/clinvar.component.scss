@@ -1,3 +1,5 @@
+@import '~src/styles/variables';
+
 .summary .label {
   font-size: 0.85em;
 }
@@ -59,19 +61,19 @@
 }
 
 .bg-blue {
-  background-color: #66c6be;
+  background-color: $primary-700;
 }
 
 .bg-blue-light {
-  background-color: #cce5d4;
+  background-color: $primary-2;
 }
 
 .bg-orange-light {
-  background-color: #e3c47c;
+  background-color: $accent-2;
 }
 
 .bg-orange {
-  background-color: #e5893e;
+  background-color: $accent;
 }
 .bg-gray {
   background-color: #eee;
