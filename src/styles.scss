@@ -140,6 +140,9 @@ $sides: (top, bottom, left, right); // Leave this variable alone
 .text-highlight {
   background-color: rgba(105, 200, 190, 0.6) !important;
 }
+.text-highlight-accent {
+  background-color: rgba(229, 137, 62, 0.6) !important;
+}
 
 .text-underline-dashed {
   text-decoration: underline dashed #888;

@@ -86,7 +86,7 @@ export class DioptAlignmentComponent implements OnInit {
         for (let idx = 0; idx < row.proteins.length; ++idx) {
           if (this.speciesToHighlight[row.species] &&
             this.highlightFrom <= row.realIdx[idx] && row.realIdx[idx] <= this.highlightTo) {
-            htmlString += `<span class="d-inline-block text-highlight ${row.style[idx]}">${row.proteins[idx]}</span>`;
+            htmlString += `<span class="d-inline-block text-highlight-accent ${row.style[idx]}">${row.proteins[idx]}</span>`;
           } else {
             htmlString += `<span class="d-inline-block ${row.style[idx]}">${row.proteins[idx]}</span>`;
           }
