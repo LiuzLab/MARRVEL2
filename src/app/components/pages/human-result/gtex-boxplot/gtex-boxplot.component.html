@@ -12,7 +12,9 @@
 
 <div id="gtex-legend" class="row">
   <div class="col-12 mb-3">
-    <h5>Organs (Click to toggle)</h5>
+    <h5 class="d-inline-block align-middle">Organs (Click to toggle)</h5>
+    <a class="d-inline-block ml-2 legend-control align-middle" matRipple (click)="toggleAll('hide')">Hide all</a>
+    <a class="d-inline-block ml-2 legend-control align-middle" matRipple (click)="toggleAll('show')">Show all</a>
   </div>
   <div class="col-sm-4 col-md-3 col-lg-2"
     *ngFor="let organ of organs; let idx = index"

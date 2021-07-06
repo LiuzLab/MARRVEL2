@@ -28,7 +28,8 @@ import {
   MatExpansionModule,
   MatRadioModule,
   MatDialogModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatRippleModule
 } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -160,7 +161,8 @@ import { ClinvarVariantsTableComponent } from './components/pages/human-result/c
     MatExpansionModule,
     MatRadioModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRippleModule
   ],
   exports: [
     MatButtonModule,

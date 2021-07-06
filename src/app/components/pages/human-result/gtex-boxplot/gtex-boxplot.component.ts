@@ -55,6 +55,16 @@ export class GtexBoxplotComponent implements OnInit {
     this.organVisibility[organIdx] = !this.organVisibility[organIdx];
   }
 
+  toggleAll(action: 'show' | 'hide') {
+    const targetVis = action === 'show' ? true : false;
+    for (let i = 0; i < this.organs.length; ++i) {
+      if (this.organVisibility[i] !== targetVis) {
+        this.boxplot.toggleGroup(this.organs[i]);
+        this.organVisibility[i] = targetVis;
+      }
+    }
+  }
+
   parseData(data) {
     const formatted = [];
 
