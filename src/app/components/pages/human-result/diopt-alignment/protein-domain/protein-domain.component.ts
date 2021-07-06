@@ -22,12 +22,32 @@ export class ProteinDomainComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.data);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.initTableAcc();
   }
   ngAfterViewInit() {
+    this.initTableAcc();
+  }
+
+  initTableAcc() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sortData = (data: DomainData[], sort: MatSort) => {
+      return data.sort((a: DomainData, b: DomainData) => {
+        const dirMul = sort.direction === 'asc' ?  1 : -1;
+        switch (sort.active) {
+          case 'domainStart':
+            const aStart = isNaN(+a.domainStart) ? +a.domainStart.substr(1) : +a.domainStart;
+            const bStart = isNaN(+b.domainStart) ? +b.domainStart.substr(1) : +b.domainStart;
+            return (aStart < bStart ? -1 : 1) * dirMul;
+          case 'domainStop':
+            const aStop = isNaN(+a.domainStop) ? +a.domainStop.substr(1) : +a.domainStop;
+            const bStop = isNaN(+b.domainStop) ? +b.domainStop.substr(1) : +b.domainStop;
+            return (aStop < bStop ? -1 : 1) * dirMul;
+          default:
+            return (a[sort.active] < b[sort.active] ? -1 : 1) * dirMul;
+        }
+      });
+    };
   }
 
   onDomainClick(from, to) {
@@ -41,8 +61,8 @@ export class ProteinDomainComponent implements OnInit, AfterViewInit {
 interface DomainData {
   index: string;
   domainName: string;
-  domainStart: number;
-  domainStop: number;
+  domainStart: string;
+  domainStop: string;
   domainDescription?: string;
   proteinId?: string;
   externalId?: string;
