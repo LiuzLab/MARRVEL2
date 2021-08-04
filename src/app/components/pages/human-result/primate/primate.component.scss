@@ -1,0 +1,13 @@
+.mat-row {
+  height: 48px;
+  .mat-header-cell, .mat-cell {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+    padding-left: 24px;
+    padding-right: 24px;
+    &.number {
+      text-align: right;
+    }
+  }
+}

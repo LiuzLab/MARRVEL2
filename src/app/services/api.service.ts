@@ -291,4 +291,15 @@ export class ApiService {
       });
     });
   }
+
+  getPrimateByVariant(variant: Variant) {
+    const url = `${environment.apiHost}/data/primate/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
 }
