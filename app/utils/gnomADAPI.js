@@ -3,37 +3,35 @@ const rp = require('request-promise');
 
 const queryByVariant = (variant) => {
   return rp({
-    uri: 'http://gnomad-api.broadinstitute.org',
-    qs: { query: '{\n' +
-        '  variant(variantId: "' + variant + '", dataset: gnomad_r2_1) {\n' +
-        '    alt\n' +
-        '    chrom\n' +
-        '    pos\n' +
-        '    ref\n' +
-        '    variantId\n' +
-        '    ... on GnomadVariantDetails {\n' +
-        '      exome {\n' +
-        '        ac\n' +
-        '        ac_hemi\n' +
-        '        ac_hom\n' +
-        '        an\n' +
-        '      }\n' +
-        '      genome {\n' +
-        '        ac\n' +
-        '        ac_hemi\n' +
-        '        ac_hom\n' +
-        '        an\n' +
-        '      }\n' +
-        '      rsid\n' +
-        '      colocatedVariants\n' +
-        '      sortedTranscriptConsequences {\n' +
-        '        gene_id\n' +
-        '        gene_symbol\n' +
-        '        transcript_id\n' +
-        '      }\n' +
-        '    }\n' +
-        '  }\n' +
-        '}' },
+    method: 'POST',
+    uri: 'https://gnomad.broadinstitute.org/api/',
+    body: { query: '{\n' +
+      '  variant(variantId: "' + variant + '", dataset: gnomad_r2_1) {\n' +
+      '    chrom\n' +
+      '    pos\n' +
+      '    ref\n' +
+      '    alt\n' +
+      '    exome {\n' +
+      '      ac\n' +
+      '    an\n' +
+      '    ac_hemi\n' +
+      '    ac_hom\n' +
+      '    }\n' +
+      '    genome {\n' +
+      '      ac\n' +
+      '      an\n' +
+      '      ac_hemi\n' +
+      '      ac_hom\n' +
+      '    }\n' +
+      '    rsids\n' +
+      '    transcript_consequences {\n' +
+      '      gene_id\n' +
+      '      gene_symbol\n' +
+      '      transcript_id\n' +
+      '    }\n' +
+      '  }\n' +
+      '}\n'
+    },
     json: true
   }).then((res) => {
     if (res.data == null || res.data.variant == null) {
@@ -57,7 +55,7 @@ const queryByVariant = (variant) => {
           alleleNum: res.data.variant.genome.an,
           homCount: res.data.variant.genome.ac_hom
         },
-        transcripts: res.data.variant.sortedTranscriptConsequences
+        transcripts: res.data.variant.transcript_consequences
           .map((item) => {
             return {
               geneSymbol: item['gene_symbol'],
