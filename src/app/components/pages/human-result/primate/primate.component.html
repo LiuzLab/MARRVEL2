@@ -19,6 +19,15 @@
 
 <table class="mt-3 mat-table w-100 mb-3" *ngIf="!loading && data">
   <tbody>
+    <tr class="mat-row" *ngIf="data.filter">
+      <td class="mat-header-cell">
+        Filter
+      </td>
+      <td class="mat-cell number">
+        <span [ngClass]="{ 'text-highlight': data.filter === 'PASS', 'text-highlight-accent': data.filter !== 'PASS' }">{{ data.filter }}</span>
+      </td>
+    </tr>
+
     <tr class="mat-row">
       <td class="mat-header-cell">
         Allele count in genotypes
