@@ -33,6 +33,7 @@
     "express": "^4.16.4",
     "glob": "^7.1.3",
     "hammerjs": "^2.0.8",
+    "molstar": "^2.2.1",
     "moment": "^2.24.0",
     "mongoose": "^5.4.17",
     "morgan": "^1.9.1",
