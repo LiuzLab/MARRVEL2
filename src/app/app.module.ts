@@ -81,6 +81,8 @@ import { OrthologsComponent } from './components/pages/human-result/orthologs/or
 import { YoutubeDialogComponent } from './components/search-box/search-box.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { ClinvarVariantsTableComponent } from './components/pages/human-result/clinvar/clinvar-variants-table/clinvar-variants-table.component';
+import { ProteinViewerComponent} from './components/protein-viewer/protein-viewer.component';
+import { HumanProteinStructureComponent } from './components/pages/human-result/human-protein-structure/human-protein-structure.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +134,9 @@ import { ClinvarVariantsTableComponent } from './components/pages/human-result/c
     OrthologsComponent,
     YoutubeDialogComponent,
     ClickOutsideDirective,
-    ClinvarVariantsTableComponent
+    ClinvarVariantsTableComponent,
+    ProteinViewerComponent,
+    HumanProteinStructureComponent
   ],
   imports: [
     BrowserModule,
