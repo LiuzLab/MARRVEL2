@@ -249,6 +249,36 @@
       </div>
       <!-- Alignment ends -->
 
+      <!-- Protein structure starts -->
+      <div class="row section mt-5" id="protein-structure" [@toggle]>
+        <div class="col-12">
+          <h3 class="mt-0 d-inline-block align-middle mr-3">
+            Protein structure prediction from AlphaFold
+          </h3>
+          <a class="d-inline-block align-middle"
+            *ngIf="gene && gene.uniprotKBId && gene.uniprotKBId.length"
+            [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
+            target="_blank"
+          >
+            <button mat-button color="primary">
+              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+              More on AlphaFold Protein Structure Database
+            </button>
+          </a>
+        </div>
+
+        <div class="col-12 mt-3">
+          <app-human-protein-structure
+            *ngIf="!geneLoading && gene && gene.uniprotKBId && gene.uniprotKBId.length"
+            [uniprotId]="gene.uniprotKBId"></app-human-protein-structure>
+
+          <p *ngIf="!geneLoading && (!gene || !gene.uniprotKBId || !gene.uniprotKBId.length)">
+            No protein structure available
+          </p>
+        </div>
+
+      </div>
+      <!-- Protein structure ends -->
     </div>
   </div>
 </div>

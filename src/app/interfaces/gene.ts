@@ -48,4 +48,5 @@ export interface HumanGene extends Gene {
     eviCode?: string;
     references?: string[];
   }];
+  uniprotKBId?: string;
 }

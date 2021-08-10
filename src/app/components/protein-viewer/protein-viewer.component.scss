@@ -1,2 +1,27 @@
 // protein-viewer.component
 @import '~molstar/build/viewer/molstar.css';
+
+.msp-plugin {
+  background: transparent !important;
+  .msp-layout-region {
+    &.msp-layout-right {
+      width: 0px !important;
+      background: transparent !important;
+    }
+    &.msp-layout-main {
+      border-left: 1px solid #cec9ba;
+      border-right: 1px solid #cec9ba;
+      border-bottom: 1px solid #cec9ba;
+    }
+    &.msp-layout-top {
+      border: 1px solid #cec9ba;
+    }
+  }
+  .msp-viewport {
+    background: transparent !important;
+  }
+  .msp-layout-region.msp-layout-right,
+  .msp-layout-standard {
+    border: 0px !important;
+  }
+}

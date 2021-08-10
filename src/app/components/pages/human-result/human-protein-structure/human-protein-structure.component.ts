@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-human-protein-structure',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./human-protein-structure.component.scss']
 })
 export class HumanProteinStructureComponent implements OnInit {
+  @Input() uniprotId: string;
 
   constructor() { }
 
