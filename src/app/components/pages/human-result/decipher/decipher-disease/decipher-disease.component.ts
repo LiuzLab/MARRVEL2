@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { take } from 'rxjs/operators';
 
@@ -17,11 +17,9 @@ import { Animations } from 'src/app/animations';
   styleUrls: ['./decipher-disease.component.scss'],
   animations: [ Animations.toggleInOut ]
 })
-export class DecipherDiseaseComponent {
+export class DecipherDiseaseComponent implements OnInit{
   @Input() gene: HumanGene;
   @Input() variant: Variant;
-
-  concent = false;
 
   loading = false;
   data = null;
@@ -40,6 +38,10 @@ export class DecipherDiseaseComponent {
 
   constructor(private api: ApiService) { }
 
+  ngOnInit() {
+    this.getData();
+  }
+
   getData() {
     this.loading = true;
     console.log(this.gene);
@@ -49,7 +51,6 @@ export class DecipherDiseaseComponent {
     task
       .pipe(take(1))
       .subscribe(res => {
-        console.log(res);
         this.setData(res);
         this.setTableTitle();
         this.loading = false;
@@ -65,7 +66,9 @@ export class DecipherDiseaseComponent {
     if (this.variant) {
       if (this.showSnvs) {
         this.tableTitle += `Single-Nucleotide Variant ${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`
-        if (this.showCnvs) this.tableTitle += ' and ';
+        if (this.showCnvs) {
+          this.tableTitle += ' and ';
+        }
       }
       if (this.showCnvs) {
         this.tableTitle += `Copy-Number Variants Contain ${this.variant.chr}:${this.variant.pos}`;
@@ -78,8 +81,12 @@ export class DecipherDiseaseComponent {
   setData(data: DecipherDiseaseData[]) {
     data.map(D => {
       D['variant'] = `${D.hg19Chr}:${D.hg19Start}`;
-      if (D.hg19Start !== D.hg19Stop) D['variant'] += `-${D.hg19Stop}`;
-      if (D.ref && D.alt) D['variant'] += ` ${D.ref}>${D.alt}`;
+      if (D.hg19Start !== D.hg19Stop) {
+        D['variant'] += `-${D.hg19Stop}`;
+      }
+      if (D.ref && D.alt) {
+        D['variant'] += ` ${D.ref}>${D.alt}`;
+      }
       D['varType'] = D.cnvType === 1 ? 'CNV' : 'SNV';
       this.hasSnvResult = D.cnvType !== 1 ? true : this.hasSnvResult;
     });
