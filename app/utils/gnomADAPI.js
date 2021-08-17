@@ -13,17 +13,18 @@ const queryByVariant = (variant) => {
       '    alt\n' +
       '    exome {\n' +
       '      ac\n' +
-      '    an\n' +
-      '    ac_hemi\n' +
-      '    ac_hom\n' +
+      '      an\n' +
+      '      ac_hemi\n' +
+      '      ac_hom\n' +
+      '      filters\n' +
       '    }\n' +
       '    genome {\n' +
       '      ac\n' +
       '      an\n' +
       '      ac_hemi\n' +
       '      ac_hom\n' +
+      '      filters\n' +
       '    }\n' +
-      '    rsids\n' +
       '    transcript_consequences {\n' +
       '      gene_id\n' +
       '      gene_symbol\n' +
@@ -61,7 +62,6 @@ const queryByVariant = (variant) => {
               geneSymbol: item['gene_symbol'],
               geneEnsemblId: item['gene_id'],
               ensemblId: item['transcript_id'],
-              proteinId: item['protein_id']
             };
           }),
         lastUpdate: new Date()
