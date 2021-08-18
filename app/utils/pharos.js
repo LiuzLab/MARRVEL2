@@ -8,19 +8,16 @@ const synNameToFieldName = {
 };
 
 const parseLigands = (e, targetSymbol) => {
+  act = e.activities && e.activities.length ? e.activities[e.activities.length - 1] : {};
   D = {
     id: e.ligid,
     name: e.name,
     synonyms: [],
-    targetProperties: (e.activities || [])
-      .filter((act) => act.target.sym === targetSymbol)
-      .map((act) => {
-        return {
-          label: act.type,
-          numval: act.value,
-          unit: act.moa
-        };
-      }),
+    targetProperties: (e.activities && e.activities.length) ? {
+      label: act.type,
+      numval: act.value,
+      unit: act.moa
+    } : {},
     smiles: e.smiles
   };
   for (const syn of e.synonyms) {
@@ -44,25 +41,32 @@ exports.queryTargetByAccession = (accession) => {
       data: {
         operationName: 'fetchTargetDetails',
         variables: { term: accession },
-        query: `query fetchTargetDetails($term: String, $drugstop: Int, $drugsskip: Int, $ligandstop: Int, $ligandsskip: Int) {
-  targets: target(q: {sym: $term, uniprot: $term, stringid: $term}) {
+        query: `query fetchTargetDetails($term: String) {
+  targets: target(q: {uniprot: $term}) {
     ...targetsDetailsFields
-    tdl
-    sym
-    fam
-    name
-    description
   }
 }
 
 fragment targetsDetailsFields on Target {
-  drugs: ligands(top: $drugstop, skip: $drugsskip, isdrug: true) {
+  ...targetsListFields
+  drugs: ligands(isdrug: true) {
     ...ligandCardFields
   }
-  ligands(top: $ligandstop, skip: $ligandsskip, isdrug: false) {
+  ligands(isdrug: false) {
     ...ligandCardFields
   }
 }
+
+fragment targetsListFields on Target {
+  _tcrdid: tcrdid
+  name
+  gene: sym
+  accession: uniprot
+  idgFamily: fam
+  idgTDL: tdl
+  description
+}
+
 
 fragment ligandCardFields on Ligand {
   ligid
@@ -73,14 +77,10 @@ fragment ligandCardFields on Ligand {
     name
     value
   }
-  activityCount: actcnt
   activities(all: false) {
     type
     moa
     value
-    target {
-      sym
-    }
   }
 }`
       },
@@ -97,8 +97,8 @@ fragment ligandCardFields on Ligand {
         id: accession,
         accession: accession,
         name: target.name,
-        idgTDL: target.tdl,
-        idgFamily: target.fam,
+        idgTDL: target.idgTDL,
+        idgFamily: target.idgFamily,
         description: target.description,
         drugs: (target.drugs || []).map((e) => parseLigands(e, target.symbol)),
         ligands: (target.ligands || []).map((e) => parseLigands(e, target.symbol))
