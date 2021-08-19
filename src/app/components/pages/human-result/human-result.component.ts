@@ -9,7 +9,7 @@ import { HumanGene } from '../../../interfaces/gene';
 import { Variant } from '../../../interfaces/variant';
 
 import { Animations } from 'src/app/animations';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
 
 @Component({

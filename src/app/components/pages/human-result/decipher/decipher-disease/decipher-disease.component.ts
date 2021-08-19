@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
@@ -44,7 +44,6 @@ export class DecipherDiseaseComponent implements OnInit{
 
   getData() {
     this.loading = true;
-    console.log(this.gene);
     const task = this.variant ?
       this.api.getDECIPHERDiseaseByVariant(this.variant) :
       this.api.getDECIPHERDiseaseByGenomLoc(this.gene.chr, this.gene.hg19Start, this.gene.hg19Stop);

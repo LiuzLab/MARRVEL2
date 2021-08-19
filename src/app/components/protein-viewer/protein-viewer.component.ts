@@ -10,7 +10,7 @@ import * as molstar from 'molstar/build/viewer/molstar';
 export class ProteinViewerComponent implements OnInit, AfterViewInit {
   @Input() uniprotId: string;
   viewer;
-  @ViewChild('molstarViewer') molstarViewer: ElementRef;
+  @ViewChild('molstarViewer', { static: true }) molstarViewer: ElementRef;
 
   constructor(private renderer: Renderer2) { }
 

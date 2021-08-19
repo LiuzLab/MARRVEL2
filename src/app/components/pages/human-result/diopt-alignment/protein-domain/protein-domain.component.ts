@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 
@@ -15,7 +17,7 @@ export class ProteinDomainComponent implements OnInit, AfterViewInit {
 
   dataSource: MatTableDataSource< DomainData > = new MatTableDataSource();
   displayedColumns = [ 'domainName', 'domainStart', 'domainStop', 'domainDescription', 'proteinId' ];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor() { }

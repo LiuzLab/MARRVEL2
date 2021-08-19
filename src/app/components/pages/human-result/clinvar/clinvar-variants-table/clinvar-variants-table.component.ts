@@ -22,8 +22,8 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
   displayedColumns: string[] = [ 'title', 'location', 'condition', 'significance', 'reviewStatus' ];
   dataSource: MatTableDataSource< ClinVarVarinat > = new MatTableDataSource();
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor() { }
 

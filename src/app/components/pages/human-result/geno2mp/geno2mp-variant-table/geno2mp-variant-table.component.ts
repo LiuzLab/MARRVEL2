@@ -1,5 +1,8 @@
 import { Component, Input, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
-import { MatSort, MatTableDataSource, MatPaginator, MatSlideToggleChange } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { Animations } from '../../../../../animations';
 

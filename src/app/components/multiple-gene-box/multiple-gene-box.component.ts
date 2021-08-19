@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { ApiService } from '../../services/api.service';
 
@@ -18,7 +18,7 @@ export class MultipleGeneBoxComponent implements OnInit {
   geneInputCtrl = new FormControl();
   geneSuggestion = [];
   selectedEntrezIds = {};
-  @ViewChild('geneInput') geneInput: ElementRef<HTMLInputElement>;
+  @ViewChild('geneInput', { static: true }) geneInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   showAutocomplete = false;
 

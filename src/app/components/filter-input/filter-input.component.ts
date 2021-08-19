@@ -10,7 +10,7 @@ export class FilterInputComponent implements OnInit {
   @Input() value: string;
   isFocused = false;
   @Output() keyup: EventEmitter<any> = new EventEmitter();
-  @ViewChild('inputBox') inputBox: ElementRef;
+  @ViewChild('inputBox', { static: true }) inputBox: ElementRef;
 
   constructor() { }
 
