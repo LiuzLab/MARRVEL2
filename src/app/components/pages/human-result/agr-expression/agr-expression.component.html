@@ -56,8 +56,8 @@
             <div class="agr-org-icon-wrapper">
               <img [attr.src]="taxonIdToInfo[taxonId].icon" [matTooltip]="taxonIdToInfo[taxonId].name">
             </div>
-            <div class="agr-gene-symbol-cell">
-              <a [attr.href]="row.url" target="_blank">{{ row.symbol }}</a>
+            <div class="agr-gene-symbol-cell overflow-hidden">
+              <a [attr.href]="row.url" target="_blank" class="text-nowrap">{{ row.symbol }}</a>
             </div>
         <div class="agr-diopt-score-cell text-right">{{ row.score }}/{{ taxonIdToInfo[row.taxonId].maxScore }}</div>
         <div class="agr-best-cell text-center">

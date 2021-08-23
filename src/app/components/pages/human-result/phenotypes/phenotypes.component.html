@@ -45,8 +45,8 @@
           Human
         </span>
       </div>
-      <div class="org-gene-wrapper">
-        <span>
+      <div class="org-gene-wrapper overflow-hidden">
+        <span class="text-nowrap">
           {{ gene.symbol }}
         </span>
       </div>
@@ -87,8 +87,8 @@
           </span>
         </div>
         <div class="org-gene-wrapper">
-          <span>
-            <a href="http://www.informatics.jax.org/marker/{{ aGenePheno.gene.mgiId }}" target="_blank">
+          <span class="overflow-hidden">
+            <a href="http://www.informatics.jax.org/marker/{{ aGenePheno.gene.mgiId }}" target="_blank" class="text-nowrap">
               {{ aGenePheno.gene.symbol }}
             </a>
           </span>
@@ -138,8 +138,8 @@
           </span>
         </div>
         <div class="org-gene-wrapper">
-          <span>
-            <a href="https://rgd.mcw.edu/rgdweb/report/gene/main.html?id={{ aGenePheno.gene.rgdId }}" target="_blank">
+          <span class="overflow-hidden">
+            <a href="https://rgd.mcw.edu/rgdweb/report/gene/main.html?id={{ aGenePheno.gene.rgdId }}" target="_blank" class="text-nowrap">
               {{ aGenePheno.gene.symbol }}
             </a>
           </span>
@@ -189,8 +189,8 @@
           </span>
         </div>
         <div class="org-gene-wrapper">
-          <span>
-            <a href="https://flybase.org/reports/{{ aGenePheno.gene.flyBaseId }}" target="_blank">
+          <span class="overflow-hidden">
+            <a href="https://flybase.org/reports/{{ aGenePheno.gene.flyBaseId }}" target="_blank" class="text-nowrap">
               {{ aGenePheno.gene.symbol }}
             </a>
           </span>
@@ -239,8 +239,8 @@
           </span>
         </div>
         <div class="org-gene-wrapper">
-          <span *ngIf="aGenePheno.gene">
-            <a href="https://www.wormbase.org/species/c_elegans/gene/{{ aGenePheno.gene.wormBaseId }}" target="_blank">
+          <span *ngIf="aGenePheno.gene" class="overflow-hidden">
+            <a href="https://www.wormbase.org/species/c_elegans/gene/{{ aGenePheno.gene.wormBaseId }}" target="_blank" class="text-nowrap">
               {{ aGenePheno.gene.symbol }}
             </a>
           </span>

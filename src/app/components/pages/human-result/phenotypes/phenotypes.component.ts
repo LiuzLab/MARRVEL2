@@ -105,6 +105,22 @@ export class PhenotypesComponent implements OnInit {
       if (this.phenotypes['worm']) {
         this.phenotypes['worm'].sort((a, b) => a.score < b.score ? 1 : a.score > b.score ? -1 : 0);
       }
+
+      const orgNames = Object.keys(this.phenotypes);
+      for (const orgName of orgNames) {
+        if (this.phenotypes[orgName].length) {
+          this.phenotypes[orgName].sort((a, b) => {
+            if (a.score === b.score) {
+              if (a.bestScore === b.bestScore) {
+                return a.symbol < b.symbol ? -1 : 1;
+              }
+              return a.bestScore ? -1 : 1;
+            } else {
+              return a.score > b.score ? -1 : 1;
+            }
+          });
+        }
+      }
     }
   }
 

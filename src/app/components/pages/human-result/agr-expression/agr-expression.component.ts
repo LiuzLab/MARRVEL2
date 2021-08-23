@@ -100,6 +100,22 @@ export class AgrExpressionComponent implements OnInit {
       res[row.taxonId2] = res[row.taxonId2] || [];
       res[row.taxonId2].push(D);
     }
+
+    for (const taxonId of this.taxonIds) {
+      if (!res[taxonId] || !res[taxonId].length) {
+        continue;
+      }
+      res[taxonId].sort((a, b) => {
+        if (a.score === b.score) {
+          if (b.bestScore === b.bestScore) {
+            return a.symbol < b.symbol ? -1 : 1;
+          }
+          return a.bestScore ? -1 : 1;
+        } else {
+          return a.score > b.score ? -1 : 1;
+        }
+      });
+    }
     return res;
   }
 

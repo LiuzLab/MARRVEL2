@@ -113,6 +113,21 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
           gos: D
         });
       }
+      const orgNames = Object.keys(this.gos);
+      for (const orgName of orgNames) {
+        if (this.gos[orgName].length) {
+          this.gos[orgName].sort((a, b) => {
+            if (a.score === b.score) {
+              if (a.bestScore === b.bestScore) {
+                return a.gene.symbol < b.gene.symbol ? -1 : 1;
+              }
+              return a.bestScore ? -1 : 1;
+            } else {
+              return a.score > b.score ? -1 : 1;
+            }
+          });
+        }
+      }
     }
   }
 

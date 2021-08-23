@@ -73,8 +73,8 @@
           <div class="go-org-icon-wrapper" [matTooltip]="orgName" >
             <img src="../../../../../assets/icons/{{ orgNameToIcons[orgName] }}.svg">
           </div>
-          <div class="go-gene-symbol-cell">
-            <a href="{{ getUrl(ortholog.gene) }}">{{ ortholog.gene.symbol }}</a>
+          <div class="go-gene-symbol-cell overflow-hidden">
+            <a href="{{ getUrl(ortholog.gene) }}" class="text-nowrap">{{ ortholog.gene.symbol }}</a>
           </div>
 
           <div class="go-cat-cell-wrapper"
