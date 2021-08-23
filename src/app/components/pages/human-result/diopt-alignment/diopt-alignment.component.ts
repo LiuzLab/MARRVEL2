@@ -82,7 +82,8 @@ export class DioptAlignmentComponent implements OnInit {
 
       if (row.species !== 'mark') {
         htmlString += '<div>';
-        htmlString += `<div class="species-tag d-inline-block align-middle"><span>${ row.species }${ row.sIdx }</span></div>`;
+        htmlString += '<div class="species-tag d-inline-block align-middle">' +
+          `<span>${ row.species }${ row.sIdx != null ? row.sIdx : '' }</span></div>`;
         for (let idx = 0; idx < row.proteins.length; ++idx) {
           if (this.speciesToHighlight[row.species] &&
             this.highlightFrom <= row.realIdx[idx] && row.realIdx[idx] <= this.highlightTo) {
