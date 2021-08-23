@@ -15,7 +15,7 @@
       Show only best DIOPT<span class="badge badge-secondary" style="margin-left: 2px; font-size: 0.4em; vertical-align: middle;">v7.1</span> score gene
     </mat-slide-toggle>
   </div>
-  <div id="phenotypes-vis" class="mb-3 mr-3"
+  <div id="phenotypes-vis" class="overflow-x-auto overflow-y-hidden"
     [ngStyle]="{ 'height': (showOnlyBest ? bestHeight : height) + 'px' }"
     (mouseleave)="mouseoverCat = null"
   >

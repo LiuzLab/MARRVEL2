@@ -61,7 +61,7 @@ export class PhenotypesComponent implements OnInit {
     }
 
     if (this.orthologs && this.orthologs.length) {
-      this.height = this.bestHeight = 60;
+      this.height = this.bestHeight = 70;
       for (const ortholog of this.orthologs) {
         let relExists = false;
         const orgName = TAXONID_TO_NAME[ortholog['taxonId2']];

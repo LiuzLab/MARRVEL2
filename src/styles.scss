@@ -515,8 +515,8 @@ $overflowValues: auto, hidden, scroll;
   overflow-x: scroll;
 }
 @each $value in $overflowValues {
-  .overflow-x-#{$value} { overflow: $value !important; }
-  .overflow-y-#{$value} { overflow: $value !important; }
+  .overflow-x-#{$value} { overflow-x: $value !important; }
+  .overflow-y-#{$value} { overflow-y: $value !important; }
 }
 
 .list-style-none {
