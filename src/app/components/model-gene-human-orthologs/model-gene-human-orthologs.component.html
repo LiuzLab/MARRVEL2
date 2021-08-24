@@ -13,7 +13,12 @@
       loading...
     </div>
 
-    <div class="col-12 mt-3" *ngIf="!loading && data">
+    <div class="col-12 mt-3" *ngIf="!loading && (!data || !data.length)">
+      <p>No ortholog candidates found</p>
+      <a mat-flat-button color="primary" routerLink="..">Back</a>
+    </div>
+
+    <div class="col-12 mt-3" *ngIf="!loading && data && data.length">
       <table class="mat-table w-100">
         <thead>
           <tr class="mat-header-row">
