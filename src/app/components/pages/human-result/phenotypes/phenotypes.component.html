@@ -28,7 +28,7 @@
       <div class="org-header-cell-wrapper"
         *ngFor="let cat of categories"
       >
-        <img src="../../../../../assets/icons/{{ catNameToIcon[cat.name] }}.svg"
+        <img src="/assets/icons/{{ catNameToIcon[cat.name] }}.svg"
           [ngClass]="{ 'accent': mouseoverCat === cat.name }"
           [matTooltip]="cat.name"
           (mouseenter)="selectCategory(null, null, cat.name, true)"
@@ -38,7 +38,7 @@
 
     <div class="org-row">
       <div class="org-icon-wrapper">
-        <img src="../../../../../assets/icons/001-user.svg">
+        <img src="/assets/icons/001-user.svg">
       </div>
       <div class="org-name-wrapper">
         <span>
@@ -46,9 +46,9 @@
         </span>
       </div>
       <div class="org-gene-wrapper overflow-hidden">
-        <span class="text-nowrap">
+        <a [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId" target="_blank" class="text-nowrap">
           {{ gene.symbol }}
-        </span>
+        </a>
       </div>
       <div class="org-diopt-score-wrapper"></div>
       <div class="org-best-wrapper"></div>
@@ -79,7 +79,7 @@
         [@toggle]="!showOnlyBest || aGenePheno.bestScore"
       >
         <div class="org-icon-wrapper">
-          <img src="../../../../../assets/icons/mouse.svg">
+          <img src="/assets/icons/mouse.svg">
         </div>
         <div class="org-name-wrapper">
           <span>
@@ -130,7 +130,7 @@
         [@toggle]="!showOnlyBest || aGenePheno.bestScore"
       >
         <div class="org-icon-wrapper">
-          <img src="../../../../../assets/icons/rat.svg">
+          <img src="/assets/icons/rat.svg">
         </div>
         <div class="org-name-wrapper">
           <span>
@@ -181,7 +181,7 @@
         [@toggle]="!showOnlyBest || aGenePheno.bestScore"
       >
         <div class="org-icon-wrapper">
-          <img src="../../../../../assets/icons/fly.svg">
+          <img src="/assets/icons/fly.svg">
         </div>
         <div class="org-name-wrapper">
           <span>
@@ -231,7 +231,7 @@
         [@toggle]="!showOnlyBest || aGenePheno.bestScore"
       >
         <div class="org-icon-wrapper">
-          <img src="../../../../../assets/icons/worm.svg">
+          <img src="/assets/icons/worm.svg">
         </div>
         <div class="org-name-wrapper">
           <span>

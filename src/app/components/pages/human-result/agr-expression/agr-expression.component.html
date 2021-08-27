@@ -40,12 +40,28 @@
         <div class="agr-diopt-score-wrapper">DIOPT Score</div>
         <div class="agr-best-wrapper">Best Score</div>
         <div class="agr-group" *ngFor="let group of expressionTerms">
-          <div class="agr-name-cell"
-            *ngFor="let term of group"
-          >
+          <div class="agr-name-cell" *ngFor="let term of group">
             <div class="label" [ngClass]="{ 'color-primary': term === hoverTerm || term === selected, 'font-weight-bold': term === selected }">
               {{ term }}
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="agr-row" style="width: 1170px;">
+        <div class="agr-org-icon-wrapper">
+          <img src="/assets/icons/human.svg" matTooltip="Human">
+        </div>
+        <div class="agr-gene-symbol-cell overflow-hidden">
+          <a [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId" target="_blank" class="text-nowrap">
+            {{ gene.symbol }}
+          </a>
+        </div>
+        <div class="agr-diopt-score-cell text-right"></div>
+        <div class="agr-best-cell text-center"></div>
+        <div class="agr-group" *ngFor="let group of expressionTerms" (mouseleave)="mouseChange(null)">
+          <div class="agr-cat-cell-wrapper" *ngFor="let term of group" (mouseenter)="mouseChange(term)">
+            <div class="agr-cat-cell bg-gray"></div>
           </div>
         </div>
       </div>
@@ -59,18 +75,19 @@
             <div class="agr-gene-symbol-cell overflow-hidden">
               <a [attr.href]="row.url" target="_blank" class="text-nowrap">{{ row.symbol }}</a>
             </div>
-        <div class="agr-diopt-score-cell text-right">{{ row.score }}/{{ taxonIdToInfo[row.taxonId].maxScore }}</div>
-        <div class="agr-best-cell text-center">
-          <span [ngClass]="{ 'text-bold-blue': row.bestScore }">
-            {{ row.bestScore ? 'Y' : 'N' }}
-          </span>
-        </div>
-            <div class="agr-group" *ngFor="let group of expressionTerms"
-              (mouseleave)="mouseChange(null)"
-            >
-              <div class="agr-cat-cell-wrapper" *ngFor="let term of group"
-                (mouseenter)="mouseChange(term)"
-              >
+
+            <div class="agr-diopt-score-cell text-right">
+              {{ row.score }}/{{ taxonIdToInfo[row.taxonId].maxScore }}
+            </div>
+
+            <div class="agr-best-cell text-center">
+              <span [ngClass]="{ 'text-bold-blue': row.bestScore }">
+                {{ row.bestScore ? 'Y' : 'N' }}
+              </span>
+            </div>
+
+            <div class="agr-group" *ngFor="let group of expressionTerms" (mouseleave)="mouseChange(null)">
+              <div class="agr-cat-cell-wrapper" *ngFor="let term of group" (mouseenter)="mouseChange(term)">
                 <div class="agr-cat-cell bg-blue"
                   *ngIf="row.expression[term]"
                   [ngClass]="{ 'col-highlight': term === hoverTerm }"

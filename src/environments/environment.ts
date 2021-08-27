@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiHost: 'http://api.marrvel.org'
+  apiHost: 'http://localhost:8080'
 };
 
 /*
