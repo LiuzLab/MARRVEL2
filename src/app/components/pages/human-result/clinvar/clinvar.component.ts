@@ -18,6 +18,8 @@ export class ClinvarComponent implements OnInit {
   @Input() gene: HumanGene;
   @Input() variant: Variant;
 
+  urlSearchTerm: string;
+
   loading = false;
   data;
   significance;
@@ -31,6 +33,14 @@ export class ClinvarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.gene) {
+      if (this.gene.hgncId) {
+        this.urlSearchTerm = this.gene.hgncId + '%5BHGNC+identifier+for+human+gene%5D';
+      } else {
+        this.urlSearchTerm = this.gene.symbol + '%5Bgene%5D';
+      }
+    }
+
     this.loading = true;
     this.api.getClinVarByEntrezId(this.gene.entrezId)
       .pipe(take(1))
