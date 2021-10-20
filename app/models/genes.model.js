@@ -59,6 +59,11 @@ geneSchema.virtual('phenotypes.ontology', {
   foreignField: 'id',
   justOne: true
 });
+geneSchema.virtual('impcPhenotypes', {
+  ref: 'IMPCPhenotypes',
+  localField: 'entrezId',
+  foreignField: 'markerEntrezId'
+});
 geneSchema.virtual('clinVar', {
   ref: 'ClinVar',
   localField: 'clinVarIds',
