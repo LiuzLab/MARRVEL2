@@ -1,6 +1,7 @@
 const DIOPTOrtholog = require('../models/diopt-ortholog.model');
 const Genes = require('../models/genes.model');
 const POTerms = require('../models/phenotype-ontology-terms.model');
+const IMPCPhenotype = require('../models/impc-phenotypes.model');
 
 const utils = require('../utils');
 
@@ -15,6 +16,14 @@ exports.findByEntrezId = (req, res) => {
         {
           path: 'phenotypes.ontology',
           select: 'name categories -_id'
+        },
+        {
+          path: 'impcPhenotypes',
+          select: 'poId markerEntrezId markerMgiId poName alleleSymbol lifeStage sex pValue zygosity -_id',
+          populate: {
+            path: 'phenotype',
+            select: 'name categories -_id'
+          }
         },
         {
           path: 'gos.ontology',

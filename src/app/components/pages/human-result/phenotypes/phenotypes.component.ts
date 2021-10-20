@@ -66,10 +66,12 @@ export class PhenotypesComponent implements OnInit {
         let relExists = false;
         const orgName = TAXONID_TO_NAME[ortholog['taxonId2']];
         if (orgName) {
+          ortholog.gene2 = ortholog.gene2 || {};
+
           this.height += 26;
           this.bestHeight += (ortholog.bestScore ? 26 : 0);
           const aGenePheno = {};
-          if (ortholog.gene2 && ortholog.gene2.phenotypes && ortholog.gene2.phenotypes.length) {
+          if (ortholog.gene2.phenotypes && ortholog.gene2.phenotypes.length) {
             for (const phenotype of ortholog.gene2.phenotypes) {
               if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
                 for (const cat of phenotype.ontology.categories) {
@@ -86,6 +88,27 @@ export class PhenotypesComponent implements OnInit {
               }
             }
           }
+          const impcPheno = {};
+          const impcPhenoIds = {};
+          if (ortholog.gene2.impcPhenotypes && ortholog.gene2.impcPhenotypes.length) {
+            this.height += 26;
+            this.bestHeight += (ortholog.bestScore ? 26 : 0);
+            for (const pheno of ortholog.gene2.impcPhenotypes) {
+              if (pheno.phenotype && pheno.phenotype.categories && pheno.phenotype.categories.length) {
+                for (const cat of pheno.phenotype.categories) {
+                  if (!(pheno.phenotype.id in impcPhenoIds)) {
+                    impcPhenoIds[pheno.phenotype.id] = true;
+                    const catName = cat.name;
+                    impcPheno[catName] = impcPheno[catName] || [];
+                    impcPheno[catName].push({
+                      id: pheno.phenotype.id,
+                      name: pheno.phenotype.name
+                    });
+                  }
+                }
+              }
+            }
+          }
 
           if (!(orgName in this.phenotypes)) {
             this.phenotypes[orgName] = [];
@@ -93,6 +116,7 @@ export class PhenotypesComponent implements OnInit {
           this.phenotypes[orgName].push({
             gene: ortholog.gene2,
             phenotypes: relExists ? aGenePheno : null,
+            impcPhenotypes: ortholog.gene2.impcPhenotypes && ortholog.gene2.impcPhenotypes.length ? impcPheno : null,
             score: ortholog.score,
             bestScore: ortholog.bestScore
           });
@@ -124,20 +148,21 @@ export class PhenotypesComponent implements OnInit {
     }
   }
 
-  selectCategory(org: string, idx: number, category: string, hover?: boolean) {
+  selectCategory(org: string, idx: number, category: string, hover?: boolean, impc?: boolean) {
     if (!hover) {
-      if (this.selected && this.selected.org === org && this.selected.idx === idx && this.selected.category === category) {
+      impc = impc || false;
+      if (this.selected && this.selected.org === org && this.selected.idx === idx &&
+        this.selected.category === category && this.selected === impc) {
         this.selected = null;
-      }
-      else {
+      } else {
         this.selected = {
           org: org,
           idx: idx,
-          category: category
+          category: category,
+          impc: impc
         };
       }
-    }
-    else {
+    } else {
       this.mouseoverCat = category;
     }
   }
