@@ -26,9 +26,6 @@ export class PhenotypesComponent implements OnInit {
   selected = null;
   mouseoverCat = null;
 
-  height = 60;
-  bestHeight = 60;
-
   categories = CATEGORIES;
   catNameToIcon = CAT_TO_ICON;
 
@@ -61,15 +58,11 @@ export class PhenotypesComponent implements OnInit {
     }
 
     if (this.orthologs && this.orthologs.length) {
-      this.height = this.bestHeight = 70;
       for (const ortholog of this.orthologs) {
         let relExists = false;
         const orgName = TAXONID_TO_NAME[ortholog['taxonId2']];
         if (orgName) {
           ortholog.gene2 = ortholog.gene2 || {};
-
-          this.height += 26;
-          this.bestHeight += (ortholog.bestScore ? 26 : 0);
           const aGenePheno = {};
           if (ortholog.gene2.phenotypes && ortholog.gene2.phenotypes.length) {
             for (const phenotype of ortholog.gene2.phenotypes) {
@@ -91,8 +84,6 @@ export class PhenotypesComponent implements OnInit {
           const impcPheno = {};
           const impcPhenoIds = {};
           if (ortholog.gene2.impcPhenotypes && ortholog.gene2.impcPhenotypes.length) {
-            this.height += 26;
-            this.bestHeight += (ortholog.bestScore ? 26 : 0);
             for (const pheno of ortholog.gene2.impcPhenotypes) {
               if (pheno.phenotype && pheno.phenotype.categories && pheno.phenotype.categories.length) {
                 for (const cat of pheno.phenotype.categories) {

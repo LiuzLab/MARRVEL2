@@ -85,6 +85,7 @@
           <span class="overflow-hidden">
             <a href="http://www.informatics.jax.org/marker/{{ aGenePheno.gene.mgiId }}" target="_blank" class="text-nowrap">
               {{ aGenePheno.gene.symbol }}
+              <span class="badge badge-secondary">MGI</span>
             </a>
           </span>
         </div>
@@ -103,7 +104,7 @@
             *ngIf="aGenePheno.phenotypes && aGenePheno.phenotypes[cat.name] && aGenePheno.phenotypes[cat.name].length"
             [matTooltip]="aGenePheno.phenotypes[cat.name].length + ' phenotypes'"
             (click)="selectCategory('mouse', idx, cat.name)"
-            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'selected': selected && selected.org === 'mouse' && selected.idx === idx && selected.category === cat.name }"
+            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'selected': selected && selected.org === 'mouse' && selected.idx === idx && selected.category === cat.name && !selected.impc }"
             (mouseenter)="selectCategory('mouse', null, cat.name, true)"
           ></div>
           <div class="org-cat-cell-wrapper"
@@ -114,13 +115,14 @@
         </div>
       </div>
       <!-- IMPC phenotype row -->
-      <div class="org-row" *ngIf="aGenePheno.impcPhenotypes && (!showOnlyBest || aGenePheno.bestScore)"
-        [@toggle]="aGenePheno.impcPhenotypes && (!showOnlyBest || aGenePheno.bestScore)">
+      <div class="org-row" *ngIf="!showOnlyBest || aGenePheno.bestScore"
+        [@toggle]="!showOnlyBest || aGenePheno.bestScore">
         <div class="org-icon-wrapper"></div>
         <div class="org-name-wrapper"></div>
         <div class="org-gene-wrapper" style="width: 160px">
             <a href="https://www.mousephenotype.org/data/genes/{{ aGenePheno.gene.mgiId }}" target="_blank" class="text-nowrap">
-              {{ aGenePheno.gene.symbol }} (IMPC)
+              {{ aGenePheno.gene.symbol }}
+              <span class="badge badge-secondary">IMPC</span>
             </a>
         </div>
         <div *ngFor="let cat of categories">
@@ -128,7 +130,7 @@
             *ngIf="aGenePheno.impcPhenotypes && aGenePheno.impcPhenotypes[cat.name] && aGenePheno.impcPhenotypes[cat.name].length"
             [matTooltip]="aGenePheno.impcPhenotypes[cat.name].length + ' phenotypes'"
             (click)="selectCategory('mouse', idx, cat.name, false, true)"
-            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'selected': selected && selected.org === 'mouse' && selected.idx === idx && selected.category === cat.name }"
+            [ngClass]="{ 'mouseover': cat.name === mouseoverCat, 'selected': selected && selected.org === 'mouse' && selected.idx === idx && selected.category === cat.name && selected.impc }"
             (mouseenter)="selectCategory('mouse', null, cat.name, true)"
           ></div>
           <div class="org-cat-cell-wrapper"
