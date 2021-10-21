@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HumanGene } from 'src/app/interfaces/gene';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
 
+const TAXONIDS = [ 10090, 10116, 7955, 7227, 6239, 4896, 4932, 8364 ];
+
 @Component({
   selector: 'app-orthologs',
   templateUrl: './orthologs.component.html',
@@ -12,7 +14,7 @@ export class OrthologsComponent implements OnInit {
   @Input() gene: HumanGene;
   @Input() data: DIOPTOrtholog[];
   showOnlyBest = true;
-  taxonIdToOrthologs = { 10090: [], 10116: [], 7955: [], 7227: [], 6239: [], 4896: [], 4932: [] };
+  taxonIdToOrthologs = { 10090: [], 10116: [], 7955: [], 7227: [], 6239: [], 4896: [], 4932: [], 8364: [] };
   taxonIdToInfo = {
     7227: {
       name: 'Fly',
@@ -48,6 +50,11 @@ export class OrthologsComponent implements OnInit {
       name: 'Budding Yeast',
       icon: '/assets/icons/yeast.svg',
       maxScore: 15
+    },
+    8364: {
+      name: 'Tropical clawed frog',
+      icon: '/assets/icons/frog.svg',
+      maxScore: 13
     }
   };
 
@@ -58,7 +65,7 @@ export class OrthologsComponent implements OnInit {
       for (const row of this.data) {
         this.taxonIdToOrthologs[row.taxonId2].push(row);
       }
-      for (const taxonId of [ 10090, 10116, 7955, 7227, 6239, 4896, 4932 ]) {
+      for (const taxonId of TAXONIDS) {
         this.taxonIdToOrthologs[taxonId] = this.taxonIdToOrthologs[taxonId].sort((e1: DIOPTOrtholog, e2: DIOPTOrtholog) => {
           const norm1 = [ -e1.score, e1.bestScore, e1.bestScoreRev, e1.gene2.symbol ];
           const norm2 = [ -e2.score, e2.bestScore, e2.bestScoreRev, e2.gene2.symbol ];
