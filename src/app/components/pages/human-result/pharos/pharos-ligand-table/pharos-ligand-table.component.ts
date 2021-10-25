@@ -23,7 +23,12 @@ export class PharosLigandTableComponent implements OnInit, OnChanges, AfterViewI
   constructor() { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.ligands);
+    this.dataSource = new MatTableDataSource(this.ligands.map((ligand) => {
+      if (!ligand.targetProperties.length) {
+        ligand.targetProperties = ligand.targetProperties != null ? [ ligand.targetProperties ] : [];
+      }
+      return ligand;
+    }));
     this.dataSource.paginator = this.paginator;
   }
 
