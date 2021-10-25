@@ -59,7 +59,7 @@ export class AgrExpressionComponent implements OnInit {
       maxScore: 15
     }
   };
-  taxonIds = [ 10090, 10116, 7955, 7227, 6239, 4932, 4896 ];
+  taxonIds = [ 10116, 7955, 7227, 6239, 4932, 4896 ];
 
   constructor(
     private api: ApiService
@@ -71,7 +71,7 @@ export class AgrExpressionComponent implements OnInit {
       .subscribe(res => {
         this.loading = false;
         this.data = this.parseData(res);
-      }, err => {
+      }, (err) => {
         this.loading = false;
         this.data = null;
       });
@@ -103,18 +103,19 @@ export class AgrExpressionComponent implements OnInit {
 
     for (const taxonId of this.taxonIds) {
       if (!res[taxonId] || !res[taxonId].length) {
-        continue;
-      }
-      res[taxonId].sort((a, b) => {
-        if (a.score === b.score) {
-          if (b.bestScore === b.bestScore) {
-            return a.symbol < b.symbol ? -1 : 1;
+        res[taxonId] = [];
+      } else {
+        res[taxonId].sort((a, b) => {
+          if (a.score === b.score) {
+            if (b.bestScore === b.bestScore) {
+              return a.symbol < b.symbol ? -1 : 1;
+            }
+            return a.bestScore ? -1 : 1;
+          } else {
+            return a.score > b.score ? -1 : 1;
           }
-          return a.bestScore ? -1 : 1;
-        } else {
-          return a.score > b.score ? -1 : 1;
-        }
-      });
+        });
+      }
     }
     return res;
   }
