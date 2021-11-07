@@ -16,6 +16,8 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+@import "./styles/ribbon";
+
 /********************
  * Spacing
  * Section styling
@@ -337,164 +339,9 @@ div.plot-tooltip {
 .mark-asterisk {
   color: red;
 }
-
-.go-header-row,
-.agr-header-row {
-  padding-top: 133px;
-  margin-bottom: 4px;
-  font-size: 13px;
-}
-.go-org-icon-wrapper,
-.agr-org-icon-wrapper,
-.go-gene-symbol-cell,
-.agr-gene-symbol-cell,
-.go-diopt-score-wrapper,
-.agr-diopt-score-wrapper,
-.go-best-wrapper,
-.agr-best-wrapper,
-.go-row div,
-.agr-row div,
-.go-name-cell,
-.agr-name-cell,
-.go-cat-cell,
-.agr-cat-cell,
-.agr-group {
-  display: inline-block;
-  vertical-align: middle;
-}
-.go-gene-symbol-cell,
-.agr-gene-symbol-cell {
-  vertical-align: top;
-  padding-top: 3px;
-  padding-left: 0.5em;
-  width: 70px;
-  font-size: 12px;
-  height: 20px;
-}
-
-.go-name-cell,
-.agr-name-cell,
-.go-cat-cell,
-.agr-cat-cell {
-  width: 18px;
-  height: 18px;
-  margin: 1px;
-}
-.go-name-cell,
-.agr-name-cell {
-  padding-top: 4px;
-  padding-left: 2px;
-
-  white-space: nowrap;
-}
-.go-name-cell .label,
-.agr-name-cell .label {
-  text-transform: capitalize;
-
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-.go-name-cell.other,
-.go-cat-cell-wrapper.other,
-.agr-group:not(:last-child) {
-  margin-right: 11px;
-}
-
-.go-row, .go-header-row {
-  width: 1345px;
-}
-.go-row,
-.agr-row {
-  vertical-align: middle;
-}
-.go-row, .go-row .go-cat-cell-wrapper,
-.agr-row, .agr-row .agr-cat-cell-wrapper {
-  height: 20px;
-}
-.go-cat-cell,
-.agr-cat-cell {
-  border-radius: 2px;
-  background-color: #f3f3f3;
-}
-.go-cat-cell.bg-blue,
-.agr-cat-cell.bg-blue {
-  background-color: $primary-700;
-}
-.go-cat-cell.bg-blue:hover,
-.agr-cat-cell.bg-blue:hover {
-  background-color: $primary-700;
-  filter: brightness(1.05) !important;
-  transition: linear;
-}
-.go-cat-cell.bg-blue:hover {
-  cursor: pointer;
-}
-.go-cat-cell.bg-blue.selected {
-  transform: translate(-1px, -1px);
-  box-shadow: 1px 1px 3px #afafaf;
-  filter: brightness(1.05);
-  transition: linear;
-}
-.go-cat-cell.bg-gray,
-.agr-cat-cell.bg-gray {
-  background-color: #aaa;
-}
-.agr-row:hover .agr-gene-symbol-cell,
-.agr-row:hover .agr-diopt-score-cell,
-.agr-row:hover .agr-best-cell {
-  font-weight: 500;
-}
-
-.go-org-icon-wrapper,
-.agr-org-icon-wrapper {
-  width: 20px;
-  height: 20px;
-  padding: 1px;
-}
-.go-org-icon-wrapper img,
-.agr-org-icon-wrapper img {
-  width: 18px;
-  height: 18px;
-  opacity: 0.35;
-}
-.agr-header-row .agr-diopt-score-wrapper,
-.agr-row .agr-diopt-score-cell {
-  font-size: 12px;
-  line-height: 1;
-  text-align: right;
-}
-.agr-diopt-score-wrapper,
-.agr-diopt-score-cell {
-  width: 50px;
-}
-.agr-header-row .agr-best-wrapper,
-.agr-row .agr-best-cell {
-  font-size: 12px;
-  line-height: 1;
-  padding-left: 0.5em;
-}
-.agr-best-wrapper,
-.agr-best-cell {
-  width: 40px;
-}
-
 .text-bold-blue {
   font-weight: 500;
   color: $primary-700;
-}
-
-.go-row:hover .go-cat-cell,
-.agr-row:hover .agr-cat-cell,
-.go-cat-cell.col-highlight,
-.agr-cat-cell.col-highlight,
-.go-cat-cell.bg-gray.col-highlight,
-.agr-cat-cell.bg-gray.col-highlight {
-  filter: brightness(0.95);
-}
-
-.go-reference:not(:last-child)::after,
-.agr-reference:not(:last-child)::after {
-  content: ", "
 }
 
 .color-primary {

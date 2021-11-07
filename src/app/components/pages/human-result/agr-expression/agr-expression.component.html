@@ -1,5 +1,5 @@
 <div class="w-100">
-  <h3 class="mb-3 d-inline-block align-middle">
+  <h3 class="m-0 d-inline-block align-middle">
     Expression of
     DIOPT Ortholog Genes of {{ gene ? gene.symbol : '' }}
     from AGR
@@ -25,22 +25,22 @@
   </mat-slide-toggle>
 </div>
 
-<div class="w-100 d-flex" *ngIf="data">
+<div class="ribbon-shrink ribbon-container agr" *ngIf="data">
   <!-- MO icons, gene symbol, DIOPT score, best score column container -->
   <div style="width: 180px">
-    <div class="agr-header-row" style="width: 180px; padding-top: 155px;">
-      <div class="agr-org-icon-wrapper"></div>
-      <div class="agr-gene-symbol-cell">Gene</div>
-      <div class="agr-diopt-score-wrapper">DIOPT Score</div>
-      <div class="agr-best-wrapper">Best Score</div>
+    <div class="ribbon-header-row" style="height: 177px; display: flex; align-items: flex-end">
+      <div class="ribbon-cell ribbon-org-icon-cell"></div>
+      <div class="ribbon-cell ribbon-gene-symbol-cell">Gene</div>
+      <div class="ribbon-cell ribbon-diopt-score-cell">DIOPT Score</div>
+      <div class="ribbon-cell ribbon-diopt-best-cell text-left pl-2">Best Score</div>
     </div>
 
     <!-- Human search term row -->
-    <div class="agr-row" style="width: 180px">
-      <div class="agr-org-icon-wrapper">
+    <div class="ribbon-header-row mt-1" style="width: 180px">
+      <div class="ribbon-cell ribbon-org-icon-cell">
         <img src="/assets/icons/human.svg" matTooltip="Human">
       </div>
-      <div class="agr-gene-symbol-cell overflow-hidden">
+      <div class="ribbon-cell ribbon-gene-symbol-cell">
         <a [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId" target="_blank" class="text-nowrap">
           {{ gene.symbol }}
         </a>
@@ -48,21 +48,19 @@
     </div>
 
     <!-- MO rows -->
-    <div *ngFor="let taxonId of taxonIds">
-      <div *ngFor="let row of data[taxonId]">
-        <div class="agr-row" style="width: 180px;" *ngIf="!showOnlyBest || row.bestScore" [@toggle]>
-          <div class="agr-org-icon-wrapper">
+    <div *ngFor="let taxonId of taxonIds" class="">
+      <div *ngFor="let row of data[taxonId]" class="">
+        <div class="ribbon-header-row" style="width: 180px;" *ngIf="!showOnlyBest || row.bestScore" [@toggle]>
+          <div class="ribbon-cell ribbon-org-icon-cell">
             <img [attr.src]="taxonIdToInfo[taxonId].icon" [matTooltip]="taxonIdToInfo[taxonId].name">
           </div>
-          <div class="agr-gene-symbol-cell overflow-hidden">
+          <div class="ribbon-cell ribbon-gene-symbol-cell overflow-hidden">
             <a [attr.href]="row.url" target="_blank" class="text-nowrap">{{ row.symbol }}</a>
           </div>
-
-          <div class="agr-diopt-score-cell text-right">
+          <div class="ribbon-cell ribbon-diopt-score-cell text-right">
             {{ row.score }}/{{ taxonIdToInfo[row.taxonId].maxScore }}
           </div>
-
-          <div class="agr-best-cell text-center">
+          <div class="ribbon-cell ribbon-diopt-best-cell text-center">
             <span [ngClass]="{ 'text-bold-blue': row.bestScore }">
               {{ row.bestScore ? 'Y' : 'N' }}
             </span>
@@ -73,31 +71,32 @@
   </div>
 
   <!-- Expression term columns container -->
-  <div class="flex-grow-1 scroll-x" style="padding-bottom: 8px;">
+  <div class="ribbon-scrollable-column-container">
     <!-- Exp term header -->
-    <div class="agr-header-row" style="width: 1080px; padding-top: 155px;">
-      <div class="agr-group" *ngFor="let group of expressionTerms">
-        <div class="agr-name-cell" *ngFor="let term of group">
-          <div class="label" [ngClass]="{ 'color-primary': term === hoverTerm || term === selected, 'font-weight-bold': term === selected }">
+    <div class="ribbon-header-row" style="width: 1080px; margin-left: 2px;">
+      <div class="ribbon-col-group" *ngFor="let group of expressionTerms">
+        <div class="ribbon-cell ribbon-header-name-cell" *ngFor="let term of group">
+          <span class="label" [ngClass]="{ 'color-primary': term === hoverTerm || term === selected, 'font-weight-bold': term === selected }">
             {{ term }}
-          </div>
+          </span>
         </div>
       </div>
     </div>
 
     <!-- Exp term body -->
-    <div class="agr-row" style="width: 1080px"></div>
+    <div class="ribbon-row mt-1" style="width: 1080px"><!-- human search term row --></div>
+
     <div *ngFor="let taxonId of taxonIds">
       <div *ngFor="let row of data[taxonId]">
-        <div class="agr-row" style="width: 1080px" *ngIf="!showOnlyBest || row.bestScore" [@toggle]>
-          <div class="agr-group" *ngFor="let group of expressionTerms" (mouseleave)="mouseChange(null)">
-            <div class="agr-cat-cell-wrapper" *ngFor="let term of group" (mouseenter)="mouseChange(term)">
-              <div class="agr-cat-cell bg-blue"
+        <div class="ribbon-row" style="width: 1080px" *ngIf="!showOnlyBest || row.bestScore" [@toggle]>
+          <div class="ribbon-col-group" *ngFor="let group of expressionTerms" (mouseleave)="mouseChange(null)">
+            <div class="ribbon-cell-wrapper" *ngFor="let term of group" (mouseenter)="mouseChange(term)">
+              <div class="ribbon-cell bg-blue"
                 *ngIf="row.expression[term]"
                 [ngClass]="{ 'col-highlight': term === hoverTerm }"
                 [matTooltip]="row.symbol + '-' + term + ': ' + row.expression[term]"
               ></div>
-              <div class="agr-cat-cell"
+              <div class="ribbon-cell"
                 *ngIf="!row.expression[term]"
                 [ngClass]="{ 'col-highlight': term === hoverTerm }"
               ></div>

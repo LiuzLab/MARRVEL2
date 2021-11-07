@@ -236,7 +236,8 @@
 
       <div class="row section mt-5" id="gene-ontology" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
         <div class="col-12">
-          <app-gene-ontology [gene]="gene" [orthologs]="orthologs"></app-gene-ontology>
+          <h3 class="m-0">Gene Ontology</h3>
+          <app-gene-ontology [gene]="gene" [orthologs]="orthologs" *ngIf="gene"></app-gene-ontology>
         </div>
       </div>
 

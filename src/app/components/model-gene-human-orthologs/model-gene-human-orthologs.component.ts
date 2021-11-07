@@ -23,7 +23,8 @@ export class ModelGeneHumanOrthologsComponent implements OnInit {
     10090: 'Mus musculus',
     10116: 'Rattus norvegicus',
     4932: 'Saccharomyces cerevisiae',
-    4896: 'Schizosaccharomyces pombe'
+    4896: 'Schizosaccharomyces pombe',
+    8364: 'Xenopus tropicalis'
   };
   taxonIdToCName = {
     7227: 'Fly',
@@ -33,7 +34,8 @@ export class ModelGeneHumanOrthologsComponent implements OnInit {
     10090: 'Mouse',
     10116: 'Rat',
     4932: 'Yeast',
-    4896: 'Fission Yeast'
+    4896: 'Fission Yeast',
+    8364: 'Western Clawed Frog'
   };
   taxonIdToMaxScore = {
     7227: 16,
@@ -42,8 +44,9 @@ export class ModelGeneHumanOrthologsComponent implements OnInit {
     10090: 16,
     10116: 14,
     4932: 14,
-    4896: 11
-  }
+    4896: 11,
+    8364: 13
+  };
 
   constructor(
     private route: ActivatedRoute,

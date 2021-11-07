@@ -8,6 +8,7 @@
     <mat-option value="6239">Worm (<span class="font-italic">Caenorhabditis elegans</span>)</mat-option>
     <mat-option value="4932">Yeast (<span class="font-italic">Saccharomyces cerevisiae</span>)</mat-option>
     <mat-option value="4896">Fission Yeast (<span class="font-italic">Schizosaccharomyces pombe</span>)</mat-option>
+    <mat-option value="8364">Western Clawed Frog (<span class="font-italic">Xenopus tropicalis</span>)</mat-option>
   </mat-select>
 </mat-form-field>
 
@@ -66,6 +67,9 @@
     </mat-hint>
     <mat-hint *ngIf="taxonId === '4896'">
       Example: <a href="/model/gene/2539869">cdc2</a>
+    </mat-hint>
+    <mat-hint *ngIf="taxonId === '8364'">
+      Example: <a href="/model/gene/100037842">notch1</a>
     </mat-hint>
   </div>
 </div>

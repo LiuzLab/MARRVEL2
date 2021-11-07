@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 
 import { AGR_EXP_TERMS } from './agr-expression-terms';
 import { Animations } from 'src/app/animations';
+import { TAXONID_TO_INFO } from 'src/app/data/diopt';
 
 @Component({
   selector: 'app-agr-expression',
@@ -22,43 +23,7 @@ export class AgrExpressionComponent implements OnInit {
 
   expressionTerms = AGR_EXP_TERMS;
   hoverTerm: string | null = null;
-  taxonIdToInfo = {
-    7227: {
-      name: 'Fly',
-      icon: '/assets/icons/fly.svg',
-      maxScore: 16
-    },
-    6239: {
-      name: 'Worm',
-      icon: '/assets/icons/worm.svg',
-      maxScore: 16
-    },
-    7955: {
-      name: 'Zebrafish',
-      icon: '/assets/icons/fish.svg',
-      maxScore: 15
-    },
-    10090: {
-      name: 'Mouse',
-      icon: '/assets/icons/mouse.svg',
-      maxScore: 16
-    },
-    10116: {
-      name: 'Rat',
-      icon: '/assets/icons/rat.svg',
-      maxScore: 14
-    },
-    4896: {
-      name: 'Fission Yeast',
-      icon: '/assets/icons/yeast.svg',
-      maxScore: 12
-    },
-    4932: {
-      name: 'Budding Yeast',
-      icon: '/assets/icons/yeast.svg',
-      maxScore: 15
-    }
-  };
+  taxonIdToInfo = TAXONID_TO_INFO;
   taxonIds = [ 10116, 7955, 7227, 6239, 4932, 4896 ];
 
   constructor(
