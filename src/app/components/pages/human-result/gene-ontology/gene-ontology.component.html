@@ -82,7 +82,7 @@
             *ngFor="let goId of categoryGoIds"
             [ngClass]="{ 'other': goIdToName[goId]['other'] }"
             (mouseenter)="mouseChange(true, goId)">
-            <div class="ribbon-cell bg-blue"
+            <div class="ribbon-cell bg-blue clickable"
               *ngIf="ortholog['gos'][goId] && ortholog['gos'][goId].length"
               [ngClass]="{ 'col-highlight': goId === hoverGoId, 'selected': selected && selected.orgName === orgName && selected.goId === goId && selected.idx === idx }"
               [matTooltip]="orgName + '-' + ortholog['gene']['symbol'] + '-' + goIdToName[goId]['name'] + ': ' + ortholog['gos'][goId].length + ' associations'"

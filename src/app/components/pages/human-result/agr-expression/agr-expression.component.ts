@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators';
 
 import { AGR_EXP_TERMS } from './agr-expression-terms';
 import { Animations } from 'src/app/animations';
-import { TAXONID_TO_INFO } from 'src/app/data/diopt';
+import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
 
 @Component({
   selector: 'app-agr-expression',

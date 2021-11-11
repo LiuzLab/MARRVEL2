@@ -10,6 +10,21 @@
     height: fit-content;
     padding-bottom: 8px;
   }
+  .ribbon-cell.selected {
+    transform: translate(-1px, -1px);
+    box-shadow: 1px 1px 3px #afafaf;
+    filter: brightness(1.05);
+    transition: linear;
+  }
+  .ribbon-cell.bg-blue:hover {
+    background-color: #66c6be;
+    filter: brightness(1.05) !important;
+    transition: linear;
+  }
+  .ribbon-row:hover .ribbon-cell-wrapper,
+  .ribbon-cell-wrapper.mouseover {
+    filter: brightness(0.95);
+  }
 }
 
 .ribbon {
@@ -39,6 +54,8 @@
         img {
           width: 24px;
           height: 24px;
+          margin: 1px;
+          filter: grayscale(1) brightness(1);
         }
       }
       &.ribbon-gene-symbol-cell {
@@ -127,17 +144,21 @@
       display: inline-block !important;
     }
   }
-  .ribbon-header-row {
+  .ribbon-header-row,
+  .ribbon-row {
     display: flex;
+
+    .ribbon-cell.clickable:hover {
+      cursor: pointer;
+    }
+  }
+  .ribbon-header-row {
     align-items: center;
     .ribbon-cell {
       font-size: 12px;
       line-height: 1;
       display: flex;
       align-items: center;
-      &.clickable:hover {
-        cursor: pointer;
-      }
       &.ribbon-org-icon-cell {
         padding: 1px;
         img {
