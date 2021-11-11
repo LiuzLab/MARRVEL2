@@ -195,6 +195,40 @@
     </tr>
     <!-- Zebrafish orthologs ends -->
 
+    <!-- Frog orthologs starts -->
+    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[8364]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
+      <td class="mat-cell">
+        <img [attr.src]="taxonIdToInfo[8364].icon" class="mr-1 org-icon align-middle">
+        Frog
+      </td>
+      <td class="mat-cell">
+        {{ row.gene2.symbol }}
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.gene2.xenbaseId"
+          [attr.href]="'http://www.xenbase.org/gene/showgene.do?method=display&geneId=' + row.gene2.pomBaseId"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          Xenbase
+        </a>
+        <a class="ml-2 link-small align-middle" target="_blank"
+          *ngIf="row.entrezId2"
+          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
+        >
+          <mat-icon class="align-middle">open_in_new</mat-icon>
+          PubMed
+        </a>
+      </td>
+      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell pl-3">
+        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
+      </td>
+      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
+    </tr>
+    <!-- Frog orthologs ends -->
+
     <!-- Fly orthologs starts -->
     <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[7227]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
       <td class="mat-cell">
@@ -310,7 +344,7 @@
           [attr.href]="'http://www.pombase.org/spombe/result/' + row.gene2.pomBaseId + '/overview'"
         >
           <mat-icon class="align-middle">open_in_new</mat-icon>
-          SGD
+          PomBase
         </a>
         <a class="ml-2 link-small align-middle" target="_blank"
           *ngIf="row.entrezId2"
@@ -330,39 +364,5 @@
       <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
     </tr>
     <!-- FYeast orthologs ends -->
-
-    <!-- Frog orthologs starts -->
-    <tr class="mat-row" *ngFor="let row of taxonIdToOrthologs[8364]" [ngClass]="{ 'd-none': showOnlyBest && !row.bestScore }">
-      <td class="mat-cell">
-        <img [attr.src]="taxonIdToInfo[8364].icon" class="mr-1 org-icon align-middle">
-        Tropical Clawed Frog
-      </td>
-      <td class="mat-cell">
-        {{ row.gene2.symbol }}
-        <a class="ml-2 link-small align-middle" target="_blank"
-          *ngIf="row.gene2.xenbaseId"
-          [attr.href]="'http://www.xenbase.org/gene/showgene.do?method=display&geneId=' + row.gene2.pomBaseId"
-        >
-          <mat-icon class="align-middle">open_in_new</mat-icon>
-          SGD
-        </a>
-        <a class="ml-2 link-small align-middle" target="_blank"
-          *ngIf="row.entrezId2"
-          [attr.href]="'https://www.ncbi.nlm.nih.gov/pubmed?LinkName=gene_pubmed&from_uid=' + row.entrezId2"
-        >
-          <mat-icon class="align-middle">open_in_new</mat-icon>
-          PubMed
-        </a>
-      </td>
-      <td class="mat-cell number">{{ row.score }}/{{ taxonIdToInfo[row.taxonId2].maxScore }}</td>
-      <td class="mat-cell pl-3">
-        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScore }">{{ row.bestScore ? 'Yes' : 'No' }}</span>
-      </td>
-      <td class="mat-cell pl-3">
-        <span [ngClass]="{ 'color-primary font-weight-bold': row.bestScoreRev }">{{ row.bestScoreRev ? 'Yes' : 'No' }}</span>
-      </td>
-      <td class="mat-cell text-capitalize">{{ row.confidence }}</td>
-    </tr>
-    <!-- Frog orthologs ends -->
   </tbody>
 </table>
