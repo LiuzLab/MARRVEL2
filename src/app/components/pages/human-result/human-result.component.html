@@ -61,7 +61,7 @@
             </a>
           </div>
           <div *ngIf="!variant && gene && gene.hg19Start && gene.hg19Stop" class="d-inline-block">
-            <a class="d-inline mr-3" target="_blank" [attr.href]="'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr6%3A' + gene.hg19Start + '-' + gene.hg19Stop">
+            <a class="d-inline mr-3" target="_blank" [attr.href]="'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + gene.chr + '%3A' + gene.hg19Start + '-' + gene.hg19Stop">
               <button mat-flat-button color="primary" class="mb-1">
                 <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
                 UCSC Genome Browser
