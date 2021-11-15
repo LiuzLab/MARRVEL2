@@ -24,7 +24,7 @@ export class AgrExpressionComponent implements OnInit {
   expressionTerms = AGR_EXP_TERMS;
   hoverTerm: string | null = null;
   taxonIdToInfo = TAXONID_TO_INFO;
-  taxonIds = [ 10116, 7955, 7227, 6239, 4932, 4896 ];
+  taxonIds = [ 10090, 10116, 7955, 7227, 6239, 4932, 4896 ];
 
   constructor(
     private api: ApiService

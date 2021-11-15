@@ -32,7 +32,7 @@ export class PhenotypesComponent implements OnInit {
   ngOnInit() {
     if (this.gene) {
       this.phenotypes[9606] = this.phenotypes[9606] || [{ gene: this.gene, bestScore: true, phenotypes: null }];
-      if (this.gene.phenotypes && this.gene.phenotypes.length) {
+      if (this.gene.phenotypes && this.gene.phenotypes.length && this.gene.phenotypes[0].id) {
         this.phenotypes[9606][0].phenotypes = {};
         for (const phenotype of this.gene.phenotypes) {
           if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
