@@ -3,10 +3,10 @@
     <h3 class="d-inline-block align-middle">DECIPHER (Control)</h3>
     <a class="d-inline-block ml-3 align-middle"
       *ngIf="gene || variant"
-      [attr.href]="variant?
-      'https://decipher.sanger.ac.uk/search?q=' + variant.chr + ':' + variant.pos + '-' + variant.pos + '#consented-patients/results'
+      [attr.href]="gene?
+      'https://www.deciphergenomics.org/gene/' + gene.symbol
       :
-      'https://decipher.sanger.ac.uk/search?q=' + gene.symbol + '#consented-patients/results'
+      'https://www.deciphergenomics.org/search?q=grch37%3A' + variant.chr + '%3A' + variant.pos + '-' + variant.pos
       "
       target="_blank"
     >

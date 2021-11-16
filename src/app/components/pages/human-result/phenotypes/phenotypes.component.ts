@@ -110,7 +110,6 @@ export class PhenotypesComponent implements OnInit {
       }
     }
 
-    console.log(this.phenotypes);
     for (const taxonId of this.taxonIds) {
       if (!(taxonId in this.phenotypes)) {
         continue;
