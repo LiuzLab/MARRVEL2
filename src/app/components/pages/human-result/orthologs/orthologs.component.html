@@ -341,7 +341,7 @@
         {{ row.gene2.symbol }}
         <a class="ml-2 link-small align-middle" target="_blank"
           *ngIf="row.gene2.pomBaseId"
-          [attr.href]="'http://www.pombase.org/spombe/result/' + row.gene2.pomBaseId + '/overview'"
+          [attr.href]="'http://www.pombase.org/spombe/result/' + row.gene2.pomBaseId"
         >
           <mat-icon class="align-middle">open_in_new</mat-icon>
           PomBase
