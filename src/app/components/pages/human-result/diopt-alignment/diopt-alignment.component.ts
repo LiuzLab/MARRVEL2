@@ -24,18 +24,19 @@ export class DioptAlignmentComponent implements OnInit {
     hs: 'Homo Sapiens (Human)',
     mm: 'Mus musculus (Mouse)',
     rn: 'Rattus norvegicus (Rat)',
+    xt: 'Xenopus tropicalis (Frog)',
     dr: 'Danio rerio (Zebrafish)',
     dm: 'Drosophila melanogaster (Fly)',
     ce: 'Caenorhabditis Elegans (Worm)',
     sc: 'Saccharomyces cerevisiae (Yeast)',
-    sp: 'Schizosaccharomyces pombe (Fission yeast)'
+    sp: 'Schizosaccharomyces pombe (Fission yeast)',
   };
 
   highlightFrom = null;
   highlightTo = null;
   speciesToHighlight = {
-    hs: true, mm: true, rn: true, dr: true,
-    dm: true, ce: true, sc: true, sp: true,
+    hs: true, mm: false, rn: false, xt: false,
+    dr: false, dm: false, ce: false, sc: false, sp: false,
   };
 
   constructor(
@@ -111,7 +112,7 @@ export class DioptAlignmentComponent implements OnInit {
   highlightDomain(e, species?: string) {
     if (species) {
       const toHighlight = {
-        hs: false, mm: false, rn: false, dr: false,
+        hs: false, mm: false, rn: false, dr: false, xt: false,
         dm: false, ce: false, sc: false, sp: false,
       };
       const sTags = species.split(';');
