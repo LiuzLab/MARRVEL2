@@ -205,7 +205,7 @@
         {{ row.gene2.symbol }}
         <a class="ml-2 link-small align-middle" target="_blank"
           *ngIf="row.gene2.xenbaseId"
-          [attr.href]="'http://www.xenbase.org/gene/showgene.do?method=display&geneId=' + row.gene2.pomBaseId"
+          [attr.href]="'http://www.xenbase.org/gene/showgene.do?method=display&geneId=' + row.gene2.xenbaseId"
         >
           <mat-icon class="align-middle">open_in_new</mat-icon>
           Xenbase
