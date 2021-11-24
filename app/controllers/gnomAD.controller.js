@@ -53,15 +53,9 @@ exports.findByGeneSymbol = (req, res) => {
 
 exports.findByGeneEntrezId = (req, res) => {
   const entrezId = req.params.entrezId;
-
   db.gnomAD.getByEntrezId(entrezId)
     .then((doc) => {
-      if (!doc) {
-        return res.json({});
-      }
-      else {
-        return res.json(doc);
-      }
+      return res.json(doc);
     }).catch((err) => {
       console.log(err);
       return res.status(500).send({

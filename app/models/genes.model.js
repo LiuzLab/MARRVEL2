@@ -80,5 +80,11 @@ geneSchema.virtual('pharosTargets', {
   localField: 'pharosTargetIds',
   foreignField: 'id'
 });
+geneSchema.virtual('gnomadGene', {
+  ref: 'GnomADGene',
+  localField: 'entrezId',
+  foreignField: 'entrezId',
+  justOne: true
+});
 
 module.exports = mongoose.model('Genes', geneSchema);
