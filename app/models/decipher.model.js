@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
 const decipherSchema = mongoose.Schema({
   hg19Chr: {
@@ -29,6 +30,6 @@ const decipherSchema = mongoose.Schema({
   obs: Number,
   cnvType: Number,
   study: String
-}, { collection: 'DECIPHER' });
-module.exports = mongoose.model('DECIPHER', decipherSchema);
+}, { collection: config.decipher.control.name });
+module.exports = mongoose.model(config.decipher.control.name, decipherSchema);
 

@@ -26,11 +26,7 @@ exports.findByVariant = (req, res) => {
     return res.status(404).send({ message: 'Invalid variant' });
   }
 
-  if (config.env === 'production' && config.host !== req.hostname) {
-    return res.sendStatus(403);
-  }
-
-  db.decipherDisease.getByVariant(variant)
+  db.decipherDisease.getByVariant(variant, { patientId: 0 })
     .then((docs) => {
       res.json(docs);
     }).catch((err) => {

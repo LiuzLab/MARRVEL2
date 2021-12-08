@@ -12,6 +12,15 @@ const config = {
     }
   },
 
+  test: {
+    env: env,
+    root: rootPath,
+    port: process.env.PORT || 8080,
+    transvar: {
+      path: '../env/bin/transvar'
+    }
+  },
+
   production: {
     env: env,
     root: rootPath,
@@ -30,6 +39,17 @@ config[env].mongo.url = 'mongodb://' + config[env].mongo.username + ':' + config
                           + '/' + config[env].mongo.database;
 
 config[env].omim = require(path.join(rootPath, 'config/omim', env + '.json'));
+
+config[env].decipher = {
+  control: {
+    version: process.env.DECIPHER_CONTROL_VERSION,
+    name: 'DECIPHERControl' + (process.env.DECIPHER_CONTROL_VERSION ? '.' + process.env.DECIPHER_CONTROL_VERSION : '')
+  },
+  disease: {
+    version: process.env.DECIPHER_DISEASE_VERSION,
+    name: 'DECIPHERDisease' + (process.env.DECIPHER_DISEASE_VERSION ? '.' + process.env.DECIPHER_DISEASE_VERSION : '')
+  }
+};
 
 module.exports = config[env];
 

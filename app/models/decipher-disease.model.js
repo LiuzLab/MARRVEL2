@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
 const decipherDiseaseSchema = mongoose.Schema({
   patientId : String,
@@ -30,7 +31,7 @@ const decipherDiseaseSchema = mongoose.Schema({
       required: true
     }
   }]
-}, { collection: 'DECIPHERDisease' });
+}, { collection: config.decipher.disease.name });
 
 decipherDiseaseSchema.virtual('phenotypes.ontology', {
   ref: 'POTerms',
@@ -39,5 +40,5 @@ decipherDiseaseSchema.virtual('phenotypes.ontology', {
   justOne: true
 });
 
-module.exports = mongoose.model('DECIPHERDisease', decipherDiseaseSchema);
+module.exports = mongoose.model(config.decipher.disease.name, decipherDiseaseSchema);
 

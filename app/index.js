@@ -42,6 +42,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(config.root, '../dist/MARRVEL/index.html'));
 });
 
+console.log(`Running @ ${ config.env }`);
+console.log(`DECIPHER control data using collection ${ config.decipher.control.name }`);
+console.log(`DECIPEHR disease data using collection ${ config.decipher.disease.name }`);
+
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer({key: fs.readFileSync('key/key.pem', 'utf8'), cert: fs.readFileSync('key/cert.pem', 'utf8')}, app);
 // Mongoose
