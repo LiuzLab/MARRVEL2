@@ -3,16 +3,19 @@ const path = require('path');
 const config = require('../config');
 
 const gene = require('./gene');
+const Genes = require('../models/genes.model');
+const ensembl = require('./ensembl');
 
 const transvarPath = config.transvar.path;
 
 const appendGene = (data) => {
   return new Promise((resolve, reject) => {
-    gene.getBySymbol(9606, data.gene)
-      .then(geneDoc => {
+    Genes.findOne({ taxonId: 9606, symbol: data.gene }, { _id: 0, entrezId: 1, symbol: 1 })
+      .then((geneDoc) => {
         data.gene = geneDoc;
         resolve(data);
-      }).catch(err => {
+      }).catch((err) => {
+        console.log(err);
         data.gene = null;
         resolve(data);
       });
@@ -22,7 +25,6 @@ const appendGene = (data) => {
 const executeTransvar = (option) => {
   return new Promise((resolve, reject) => {
     const { spawn } = require('child_process');
-    console.log(transvarPath, option);
     const proc = spawn(transvarPath, option);
 
     var stdout = '';
@@ -45,6 +47,53 @@ const executeTransvar = (option) => {
   });
 };
 
+const parseTransvarResultCoordinate = (coord) => {
+  return new Promise((resolve, reject) => {
+    const M = coord.match(/(chr(\d+|X|Y):g.(\d+)(A|C|G|T)>(A|C|G|T)|\.)\/[^\/]+\/(p\.([A-Za-z]+)(\d+)([A-Za-z]+)|\.)/);
+    if (M == null) {
+      reject('Invalid format');
+    } else {
+      resolve({
+        gdna: {
+          annot: M[1] === '.' ? null : M[1],
+          chr: M[2] || null,
+          pos: M[3] === undefined ? null : +M[3],
+          ref: M[4] || null,
+          alt: M[5] || null
+        },
+        protein: {
+          annot: M[6] === '.' ? null : M[6],
+          ref: M[7],
+          pos: M[8] === undefined ? null : +M[8],
+          alt: M[9]
+        }
+      });
+    }
+  });
+};
+
+const parseTransvarResult = (res) => {
+  return new Promise((resolve, reject) => {
+    const parsed = {
+      code: res.code,
+      errors: null,
+      output: []
+    };
+    if (res.stderr && res.stderr.length > 0) {
+      parsed.errors = [];
+      for (var i = 0; i < res.stderr.length; ++i) {
+        parsed.errors.push(res.stderr[i].toString().replace(/\[[^\[]+\]/, '').replace(/_/g, ' '));
+      }
+    }
+
+    const lines = res.stdout.split(/\r?\n/);
+    if (lines.length > 1) {
+      parsed.output = lines.slice(1).filter((line) => (line || '').trim().length);
+    }
+    resolve(parsed);
+  });
+};
+
 const putCandidate = (candidates, gene, transcript, coord, varType) => {
   if (coord.indexOf('>') === -1) return;
   const M = transcript.match(/((?:ENST(?:\d)+|NM_(?:\d)+(?:\.\d+)?))\s*(?:\([^\)]+\))?/);
@@ -64,71 +113,30 @@ exports.proteinToGenomicLocations = (protein) => {
   return new Promise((resolve, reject) => {
     executeTransvar(['panno', '-i', protein, '--ensembl', '--refseq']).bind({})
       .then((res) => {
-        this.code = res.code;
-        this.errors = null;
-        if (res.stderr && res.stderr.length > 0) {
-          this.errors = [];
-          for (var i=0; i<res.stderr.length; ++i) {
-            this.errors.push(res.stderr[i].toString().replace(/\[[^\[]+\]/, '').replace(/_/g, ' '));
+        return parseTransvarResult(res);
+      }).then((res) => {
+        const candidates = {};
+        for (const L of res.output) {
+          const col = L.split('\t');
+          const geneSymbol = (col[2] || '.').trim();
+          let coord = (col[4] || '').split('/')[0];
+          coord = coord === '.' ? null : coord;
+          if (coord && geneSymbol !== '.') {
+            // Put TransVar's choice
+            putCandidate(candidates, geneSymbol, col[1].trim(), coord, 'snv');
+          } else if (this.errors == null && col[6]) {
+            this.errors = [ col[6].trim().replace(/_/g, ' ') ];
           }
         }
-
-        var L = res.stdout.split(/\r?\n/)
-        if (L.length <= 1) {
-          return [];
-        }
-        else {
-          var candidates = {};
-          for (var i=1; i<L.length; ++i) {
-            var line = L[i].split('\t');
-            if (line.length < 3) continue;
-
-            var gene = line[2].trim();
-            var coord = line[4].split('/')[0];
-            var info = line[6].split(';');
-            var transcript = line[1].trim();
-            if (gene !== '.') {
-              // Put TransVar's choice
-              putCandidate(candidates, gene, transcript, coord, 'snv');
-
-              // Put other candidates TransVar did not choose
-              for (var j=0; j<info.length; ++j) {
-                var S = info[j].split('=');
-                if (S.length < 2) {
-                  continue;
-                }
-
-                if (S[0] === 'candidate_snv_variants') {
-                  var snvs = S[1].split(',');
-                  for (var k=0; k<snvs.length; ++k) {
-                    putCandidate(candidates, gene, transcript, snvs[k], 'snv');
-                  }
-                }
-
-                /*
-                if (S[0] === 'candidate_mnv_variants') {
-                  var mnvs = S[1].split(',');
-                  for (var k=0; k<mnvs.length; ++k) {
-                    putCandidate(candidates, gene, transcript, mnvs[k], 'mnv');
-                  }
-                }
-                */
-              }
-            } else if (this.errors == null) {
-              this.errors = [ line[6].trim().replace(/_/g, ' ') ];
-            }
-          }
-
-          return Object.keys(candidates).map((key) => {
-            candidates[key].transcript = candidates[key].transcripts.filter((v, i, a) => a.indexOf(v) === i);
-            return candidates[key];
-          });
-        }
+        return Object.keys(candidates).map((key) => {
+          candidates[key].transcript = candidates[key].transcripts.filter((v, i, a) => a.indexOf(v) === i);
+          return candidates[key];
+        });
       }).filter((candidate) => {    // Remove this filter if also want to serve mnvs
         return candidate.type === 'snv';
       }).map(candidate => {
         return appendGene(candidate);
-      }).filter((candidate) => {    // Remove this filter if also want to serve mnvs
+      }).filter((candidate) => {
         return candidate.gene !== null;
       }).then((candidates) => {
         resolve({
@@ -142,3 +150,69 @@ exports.proteinToGenomicLocations = (protein) => {
       });
   });
 }
+
+exports.forwardAnnotationWithGdna = (identifier) => {
+  return new Promise((resolve, reject) => {
+    executeTransvar(['ganno', '-i', identifier, '--ensembl', '--refseq'])
+      .bind({})
+      .then((res) => {
+        return parseTransvarResult(res);
+      }).then((res) => {
+        return res.output;
+      }).map((line) => {
+        // Get protein annotation & transcript IDs
+        const col = line.split('\t');
+        return parseTransvarResultCoordinate(col[4].trim())
+          .then((coord) => {
+            return {
+              transcriptId: (col[1] || '').trim().split(' ')[0],
+              coord: coord.protein,
+            };
+          });
+      }).map((candidate) => {
+        // Mark Ensembl canonical
+        return ensembl.queryLookupByEnsemblId(candidate.transcriptId)
+          .then((res) => {
+            return ((res || {}).is_canonical) ? true : false;
+          }).then((isCanonical) => {
+            candidate.isCanonical = isCanonical;
+            return candidate;
+          }).catch((err) => {
+            return candidate;
+          });
+      }).then((candidates) => {
+        let canonical = undefined;
+        const countAnnot = {};
+        for (const cand of candidates) {
+          if (cand.isCanonical) {
+            canonical = { coord: cand.coord };
+          }
+
+          if (cand.transcriptId.slice(0, 4) === 'ENST') {
+            countAnnot[cand.coord.annot] = 0;   // Prep to count the annotation from Ensembl result
+          }
+        }
+        // If no canonical transcript exists, get the annotation most agreed on by RefSeq result
+        let mostAgreed = undefined;
+        if (!canonical) {
+          let maxAgrees = -1;
+          for (const cand of candidates) {
+            if (cand.transcriptId.slice(0, 4) !== 'ENST' && cand.coord.annot in countAnnot) {
+              countAnnot[cand.coord.annot] += 1;
+              if (maxAgrees < countAnnot[cand.coord.annot]) {
+                mostAgreed = { coord: cand.coord };
+              }
+            }
+          }
+        }
+
+        resolve({
+          canonical: canonical,
+          mostAgreed: mostAgreed,
+          candidates: candidates
+        });
+      }).catch((err) => {
+        reject(err);
+      });
+  });
+};
