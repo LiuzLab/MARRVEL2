@@ -86,5 +86,11 @@ geneSchema.virtual('gnomadGene', {
   foreignField: 'entrezId',
   justOne: true
 });
+geneSchema.virtual('pdbeSummary', {
+  ref: 'PdbeSummaries',
+  localField: 'uniprotKBId',
+  foreignField: 'uniprotKBId',
+  justOne: true
+});
 
 module.exports = mongoose.model('Genes', geneSchema);
