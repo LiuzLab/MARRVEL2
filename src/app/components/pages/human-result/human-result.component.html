@@ -259,14 +259,25 @@
       <!-- Alignment ends -->
 
       <!-- Protein structure starts -->
-      <div class="row section mt-5" id="protein-structure" [@toggle]>
+      <div class="row section mt-5" id="protein-structure">
         <div class="col-12">
-          <h3 class="mt-0 d-inline-block align-middle mr-3">
-            Protein structure prediction from AlphaFold
+          <h3 class="mt-0 d-block">
+            Human Protein Structure
+          </h3>
+        </div>
+
+        <div class="col-12 mt-3">
+          <app-pdbe [entrezId]="gene.entrezId" *ngIf="gene"></app-pdbe>
+        </div>
+
+        <!-- Alphafold starts -->
+        <div class="col-12" *ngIf="gene">
+          <h4 class="mt-0 mb-3 d-inline-block">
+            Protein Structure Prediction from AlphaFold for {{ gene.symbol }}
             <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle;">
               Beta
             </span>
-          </h3>
+          </h4>
           <a class="d-inline-block align-middle"
             *ngIf="gene && gene.uniprotKBId && gene.uniprotKBId.length"
             [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
@@ -288,6 +299,7 @@
             No protein structure available
           </p>
         </div>
+        <!-- Alphafold ends -->
 
       </div>
       <!-- Protein structure ends -->

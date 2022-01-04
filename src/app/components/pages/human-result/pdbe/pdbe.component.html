@@ -1,0 +1,17 @@
+<p class="mt-0 mb-3 d-table" *ngIf="!loading && data && data.uniprotKBId">
+  <mat-icon class="d-table-cell align-top"
+    matTooltip="MARRVEL's comment" matTooltipPosition="above"
+  >insert_comment</mat-icon>
+
+  <span class="d-table-cell pl-2">
+    <span *ngIf="data.pdbs != undefined">
+      There {{ data.pdbs > 1 ? 'are' : 'is' }} <strong>{{ data.pdbs }} PDB structure{{ data.pdbs > 1 ? 's' : '' }}</strong> reported on
+      <a [attr.href]="'https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/' + data.uniprotKBId" target="_blank">
+        PDBe-KB
+      </a>
+    </span>
+    <span *ngIf="!data.pdbs">
+      There is <strong>no PDB structure</strong> reported on PDBe-KB.
+    </span>
+  </span>
+</p>

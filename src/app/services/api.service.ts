@@ -291,4 +291,15 @@ export class ApiService {
       });
     });
   }
+
+  getPdbeSummaryByEntrezId(entrezId: number | string): Observable< any > {
+    const url = `${environment.apiHost}/data/gene/entrezId/${entrezId}/pdbe/structure`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
 }

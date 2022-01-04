@@ -81,6 +81,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { ClinvarVariantsTableComponent } from './components/pages/human-result/clinvar/clinvar-variants-table/clinvar-variants-table.component';
 import { ProteinViewerComponent} from './components/protein-viewer/protein-viewer.component';
 import { HumanProteinStructureComponent } from './components/pages/human-result/human-protein-structure/human-protein-structure.component';
+import { PdbeComponent } from './components/pages/human-result/pdbe/pdbe.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +135,8 @@ import { HumanProteinStructureComponent } from './components/pages/human-result/
     ClickOutsideDirective,
     ClinvarVariantsTableComponent,
     ProteinViewerComponent,
-    HumanProteinStructureComponent
+    HumanProteinStructureComponent,
+    PdbeComponent
   ],
   imports: [
     BrowserModule,
