@@ -244,14 +244,6 @@
         </div>
       </div>
 
-      <!-- Pharos starts -->
-      <div class="row section mt-5" id="pharos" *ngIf="!geneLoading && gene" [@toggle]>
-        <div class="col-12">
-          <app-pharos [gene]="gene"></app-pharos>
-        </div>
-      </div>
-      <!-- Pharos Control ends -->
-
 
       <!-- Alignment starts -->
       <div class="row section mt-5" id="alignment"  *ngIf="!geneLoading && gene" [@toggle]>
@@ -306,6 +298,15 @@
 
       </div>
       <!-- Protein structure ends -->
+
+      <!-- Pharos starts -->
+      <div class="row section mt-5" id="pharos" *ngIf="!geneLoading && gene" [@toggle]>
+        <div class="col-12">
+          <app-pharos [gene]="gene"></app-pharos>
+        </div>
+      </div>
+      <!-- Pharos Control ends -->
+
     </div>
   </div>
 </div>
