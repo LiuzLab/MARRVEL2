@@ -1,5 +1,6 @@
 const Promise = require('bluebird');
 const rp = require('request-promise');
+const got = Promise.promisify(require('got'));
 
 const queryHumanVariationById = (vid) => {
   return new Promise((resolve, reject) => {
@@ -44,3 +45,20 @@ exports.getGenomicLocationByVariationId = (vid, strand) => {
     }
   });
 }
+
+exports.queryLookupByEnsemblId = (ensemblId) => {
+  return new Promise((resolve, reject) => {
+    if (!ensemblId || ensemblId.slice(0, 2) != 'EN') {
+      reject('Invalid Ensembl ID');
+    } else {
+      const url = 'https://grch37.rest.ensembl.org/lookup/id/' + ensemblId;
+      got.get(url, { headers: { 'content-type': 'application/json' } })
+        .json()
+        .then((res) => {
+          resolve(res);
+        }).catch((err) => {
+          reject(err);
+        });
+    }
+  });
+};

@@ -39,7 +39,6 @@
             </h4>
           </div>
         </div>
-
         <div class="col-12 mt-3" *ngIf="geneCandidates && geneCandidates.length">
           <mat-form-field style="margin-bottom: -1.25em">
             <mat-label>Genes contain Chr{{ variant.chr }}:{{ variant.pos }}</mat-label>
@@ -94,14 +93,18 @@
 
         <div class="col-12 subtitle mt-2" *ngIf="gene" [@toggle]>
           <h4>
-            <span class="label">Name</span>
+            <span class="label">Gene Name</span>
             {{ gene.name }}
           </h4>
           <h4 *ngIf="gene['alias']" [@toggle]>
-            <span class="label">Aliases</span>
+            <span class="label">Gene Aliases</span>
             {{ gene.alias.join(', ') }}
           </h4>
         </div>
+        <div class="col-12" *ngIf="variant">
+          <app-forward-annotation [variant]="variant"></app-forward-annotation>
+        </div>
+
 
         <div class="col-12 mt-3" *ngIf="gene && gene.entrezSummary" [@toggle]>
           <h4 class="m-0 title">Entrez Summary of {{ gene.symbol }}</h4>

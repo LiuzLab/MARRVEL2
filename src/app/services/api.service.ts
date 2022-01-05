@@ -302,4 +302,15 @@ export class ApiService {
       });
     });
   }
+
+  getForwardAnnotByVariant(variant: Variant): Observable< any > {
+    const url = `${environment.apiHost}/data/transvar/forward/gdna/chr${variant.chr}:g.${variant.pos}${variant.ref}%3E${variant.alt}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
 }
