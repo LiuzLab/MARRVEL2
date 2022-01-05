@@ -33,6 +33,7 @@ const executeTransvar = (option) => {
       stdout += data.toString();
     });
 
+    // Err on subprocess (transvar)
     proc.stderr.on('data', (err) => {
       stderr.push(err);
     });
@@ -43,6 +44,11 @@ const executeTransvar = (option) => {
         stdout: stdout,
         stderr: stderr
       });
+    });
+
+    // Error on spawning
+    proc.on('error', (err) => {
+      reject(err);
     });
   });
 };
