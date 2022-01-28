@@ -77,7 +77,7 @@ exports.getByVariant = (variant, projection, build) => {
             return doc;
           }
         }).then((doc) => {
-          if ('__v' in doc) {
+          if (doc && '__v' in doc) {
             delete doc['__v'];
           }
           resolve(doc);
