@@ -77,10 +77,11 @@ exports.findByEntrezId = (req, res) => {
 exports.findByGenomicLocation = (req, res) => {
   const chr = req.params.chr;
   const pos = parseInt(req.params.pos);
+  const build = req.query.build;
   if (!chr || !pos) {
     return res.status(404).send([]);
   }
-  geneUtil.getByGenomicLocation(chr, pos)
+  geneUtil.getByGenomicLocation(chr, pos, build)
     .then((docs) => {
       return res.json(docs);
     }).catch((err) => {
