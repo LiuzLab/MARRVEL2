@@ -10,14 +10,15 @@ const splitAndGetFirstNoneNull = (S) => {
   return '.';
 };
 
-exports.getByVariant = (variant) => {
+exports.getByVariant = (variant, build) => {
   return new Promise((resolve, reject) => {
     if (variant === null) reject('Invalid variant');
 
-    dbNSFP.findOne(
-      { hg19Chr: variant.chr, hg19Pos: parseInt(variant.pos), ref: variant.ref, alt: variant.alt },
-      { '_id': 0 }
-    )
+    const query = build === 'hg38' ?
+      { hg38Chr: variant.chr, hg38Pos: variant.pos, ref: variant.ref, alt: variant.alt } :
+      { hg19Chr: variant.chr, hg19Pos: parseInt(variant.pos), ref: variant.ref, alt: variant.alt };
+    dbNSFP.findOne(query, { '_id': 0 })
+      .lean()
       .then((doc) => {
         if (!doc) resolve(null);
         else {

@@ -81,10 +81,19 @@ const queryByGene = (gene) => {
           lastUpdate: new Date()
         };
       }).then((doc) => {
-        GnomADGene.replaceOne({ entrezId: doc.entrezId }, doc, { upsert: true })
-          .catch((err) => {
-            console.error(err);
-          });
+        GnomADGene.updateOne({ entrezId: doc.entrezId },
+          { '$set': {
+            ensemblId: doc.ensemblId,
+            symbol: doc.symbol,
+            mis: doc.mis,
+            syn: doc.syn,
+            lof: doc.lof,
+            flags: doc.flags,
+            lastUpdate: doc.lastUpdate
+          } }, { upsert: true })
+        .catch((err) => {
+          console.error(err);
+        });
         resolve(doc);
       }).catch((err) => {
         reject(err);
@@ -158,7 +167,11 @@ const queryByVariant = (variant) => {
     }
   }).then((doc) => {
     if (doc) {
-      GnomAD.replaceOne({ chr: doc.chr, pos: doc.pos, ref: doc.ref, alt: doc.alt }, doc, { upsert: true })
+      GnomAD.updateOne({ chr: doc.chr, pos: doc.pos, ref: doc.ref, alt: doc.alt }, { $set: {
+        exome: doc.exome,
+        genome: doc.genome,
+        transcripts: doc.transcripts
+      } }, { upsert: true })
         .catch((err) => {
           console.error(err);
         });
