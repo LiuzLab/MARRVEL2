@@ -115,9 +115,10 @@ const putCandidate = (candidates, gene, transcript, coord, varType) => {
   candidates[coord].transcripts.push(M[1]);
 }
 
-exports.proteinToGenomicLocations = (protein) => {
+exports.proteinToGenomicLocations = (protein, build) => {
   return new Promise((resolve, reject) => {
-    executeTransvar(['panno', '--refversion', 'hg19', '-i', protein, '--ensembl', '--refseq']).bind({})
+    build = build === 'hg38' ? build : 'hg19';
+    executeTransvar(['panno', '--refversion', build, '-i', protein, '--ensembl', '--refseq']).bind({})
       .then((res) => {
         return parseTransvarResult(res);
       }).then((res) => {
@@ -157,9 +158,10 @@ exports.proteinToGenomicLocations = (protein) => {
   });
 }
 
-exports.forwardAnnotationWithGdna = (identifier) => {
+exports.forwardAnnotationWithGdna = (identifier, build) => {
   return new Promise((resolve, reject) => {
-    executeTransvar(['ganno', '--refversion', 'hg19', '-i', identifier, '--ensembl', '--refseq'])
+    build = build === 'hg38' ? build : 'hg19';
+    executeTransvar(['ganno', '--refversion', build, '-i', identifier, '--ensembl', '--refseq'])
       .bind({})
       .then((res) => {
         return parseTransvarResult(res);

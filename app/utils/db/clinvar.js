@@ -21,11 +21,9 @@ exports.getByVariant = (variant, build) => {
         query.chr = variant.chr;
         query.start = query.stop = pos;
       }
-      console.log(query);
       ClinVar.find(query, { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, '_id': 0 })
         .lean()
         .then((docs) => {
-          console.log(docs);
           for (const doc of docs) {
             const thisVar = build === 'hg38' ?
               { chr: doc.grch38Chr, pos: doc.grch38Start, ref: doc.grch38Ref, alt: doc.grch38Alt } :
