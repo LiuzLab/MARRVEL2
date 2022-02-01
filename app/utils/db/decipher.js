@@ -24,14 +24,14 @@ exports.getByGenomicLocation = (hg19Chr, hg19Start, hg19Stop) => {
   });
 };
 
-exports.getByVariant = (variant) => {
+exports.getByVariant = (variant, build) => {
   return new Promise((resolve, reject) => {
     if (variant === null) reject('Invalid variant');
 
-    decipher.find(
-      { hg19Chr: variant.chr, hg19Start: { $lte: parseInt(variant.pos) }, hg19Stop: { $gte: parseInt(variant.pos) } },
-      { patientId: 0, from: 0, '_id': 0 }
-    )
+    const query = build === 'hg38' ?
+      { hg38Chr: variant.chr, hg38Start: { $lte: parseInt(variant.pos) }, hg38Stop: { $gte: parseInt(variant.pos) } } :
+      { hg19Chr: variant.chr, hg19Start: { $lte: parseInt(variant.pos) }, hg19Stop: { $gte: parseInt(variant.pos) } };
+    decipher.find(query, { patientId: 0, from: 0, '_id': 0 })
       .lean()
       .then((docs) => {
         if (!docs) resolve(null);

@@ -21,10 +21,11 @@ exports.findByGenomicLocation = (req, res) => {
 
 exports.findByVariant = (req, res) => {
   const variant = utils.variant.validateAndParseVariant(req.params.variant);
+  const build = req.query.build;
   if (variant === null) {
     return res.status(404).send({ message: 'Invalid variant' });
   }
-  db.decipher.getByVariant(variant)
+  db.decipher.getByVariant(variant, build)
     .then((docs) => {
       res.json(docs);
     }).catch((err) => {
