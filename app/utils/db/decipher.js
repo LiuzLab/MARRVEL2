@@ -29,8 +29,8 @@ exports.getByVariant = (variant, build) => {
     if (variant === null) reject('Invalid variant');
 
     const query = build === 'hg38' ?
-      { hg38Chr: variant.chr, hg38Start: { $lte: parseInt(variant.pos) }, hg38Stop: { $gte: parseInt(variant.pos) } } :
-      { hg19Chr: variant.chr, hg19Start: { $lte: parseInt(variant.pos) }, hg19Stop: { $gte: parseInt(variant.pos) } };
+      { hg38Chr: variant.chr, hg38Start: { $lte: variant.pos }, hg38Stop: { $gte: variant.pos } } :
+      { hg19Chr: variant.chr, hg19Start: { $lte: variant.pos }, hg19Stop: { $gte: variant.pos } };
     decipher.find(query, { patientId: 0, from: 0, '_id': 0 })
       .lean()
       .then((docs) => {
