@@ -2,9 +2,9 @@ const Promise = require('bluebird');
 
 const validateAndParseVariant = (varInput) => {
   const reExps = [
-    /(?:chr|Chr)?([0-9]?[0-9XY])\s*:\s*([0-9]*)\s*([ACGT]*)\s*>\s*([ACGT]*)/,
-    /([0-9]?[0-9XY])\s*-\s*([0-9]*)\s*-\s*([ACGT]*)\s*-\s*([ACGT]*)/,
-    /.+_0*(\d+)\.\d+:.\.(\d+)([ACGT]*)>([ACGT]*)/
+    /(?:chr|Chr)?([0-9]?[0-9XY])\s*:\s*([0-9]*)\s*([ACGTU]*)\s*>\s*([ACGTU]*)/,
+    /([0-9]?[0-9XY])\s*-\s*([0-9]*)\s*-\s*([ACGTU]*)\s*-\s*([ACGTU]*)/,
+    /.+_0*(\d+)\.\d+:.\.(\d+)([ACGTU]*)>([ACGTU]*)/
   ];
   for (let i=0; i<reExps.length; ++i) {
     const reExp = reExps[i];
@@ -16,7 +16,7 @@ const validateAndParseVariant = (varInput) => {
       else if (res[1] === '24') res[1] = 'Y';
       return  {
         chr: res[1],
-        pos: res[2],
+        pos: parseInt(res[2]),
         ref: res[3],
         alt: res[4]
       };
@@ -25,3 +25,16 @@ const validateAndParseVariant = (varInput) => {
   return null;
 }
 exports.validateAndParseVariant = validateAndParseVariant;
+
+const comp = {
+  A: 'T',
+  T: 'A',
+  C: 'G',
+  G: 'C'
+};
+exports.comp = comp;
+
+exports.matchVariant = (v1, v2) => {
+  return v1.chr === v2.chr && v1.pos === v2.pos &&
+    (v1.ref === v2.ref && v1.alt === v2.alt || comp[v1.ref] === v2.ref && comp[v1.alt] === v2.alt);
+}

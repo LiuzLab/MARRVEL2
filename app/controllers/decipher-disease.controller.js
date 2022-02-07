@@ -5,6 +5,9 @@ const utils = require('../utils');
 const db = require('../utils/db');
 
 exports.findByGenomicLocation = (req, res) => {
+  const match = (req.headers.referer || '').match(/^(?:https?:\/\/)?(?:www\.)?marrvel.org.*/i);
+  if (config.env === 'production' && !match) return res.status(403).end();
+
   if (!req.params.hg19Chr || req.params.hg19Start == null || req.params.hg19Stop == null) {
     return res.status(404).send({ message: 'Invalid location' });
   }
@@ -21,6 +24,9 @@ exports.findByGenomicLocation = (req, res) => {
 };
 
 exports.findByVariant = (req, res) => {
+  const match = (req.headers.referer || '').match(/^(?:https?:\/\/)?(?:www\.)?marrvel.org.*/i);
+  if (config.env === 'production' && !match) return res.status(403).end();
+
   const variant = utils.variant.validateAndParseVariant(req.params.variant);
   if (variant === null) {
     return res.status(404).send({ message: 'Invalid variant' });

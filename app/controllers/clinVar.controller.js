@@ -35,9 +35,10 @@ exports.findByGeneEntrezId = (req, res) => {
 
 exports.findByVariant = (req, res) => {
   const variant = utils.variant.validateAndParseVariant(req.params.variant);
+  const build = req.query.build;
   if (!variant) return res.sendStatus(404);
 
-  db.clinvar.getByVariant(variant)
+  db.clinvar.getByVariant(variant, build)
     .then((doc) => {
       res.json(doc);
     }).catch((err) => {

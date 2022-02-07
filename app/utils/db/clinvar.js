@@ -3,27 +3,45 @@ const Promise = require('bluebird');
 const ClinVar = require('../../models/clinVar.model');
 const Genes = require('../../models/genes.model');
 
-exports.getByVariant = (variant) => {
-  return new Promise((resolve, reject) => {
-    if (!variant) reject('Invalid variant');
+const matchVariant = require('../variant').matchVariant;
 
-    var startPos = parseInt(variant.pos)
-    ClinVar.find(
-      { chr: variant.chr, start: startPos },
-      { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, '_id': 0 }
-    )
-      .then((docs) => {
-        const counts = { 'pathogenic': 0, 'likely pathogenic': 0, 'likely benign': 0, 'benign': 0 };
-        for (var i = 0; i < docs.length; ++i) {
-          if (docs[i].ref && docs[i].ref.length && docs[i].ref != variant.ref) continue;
-          if (docs[i].alt && docs[i].alt.length && docs[i].alt != variant.alt) continue;
-          resolve(docs[i]);
-          break;
-        }
-        resolve({ significance: {} });
-      }).catch((err) => {
-        reject(err);
-      });
+exports.getByVariant = (variant, build) => {
+  return new Promise((resolve, reject) => {
+    build = build || 'hg19';
+
+    if (!variant) {
+      reject('Invalid variant');
+    } else {
+      const pos = parseInt(variant.pos)
+      const query = {};
+      if (build === 'hg38') {
+        query.grch38Chr = variant.chr;
+        query.grch38Start = query.grch38Stop = pos;
+      } else {
+        query.chr = variant.chr;
+        query.start = query.stop = pos;
+      }
+      ClinVar.find(query, { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, '_id': 0 })
+        .lean()
+        .then((docs) => {
+          for (const doc of docs) {
+            const thisVar = build === 'hg38' ?
+              { chr: doc.grch38Chr, pos: doc.grch38Start, ref: doc.grch38Ref, alt: doc.grch38Alt } :
+              { chr: doc.chr, pos: doc.start, ref: doc.ref, alt: doc.alt };
+            if (doc.ref && doc.ref.length) {
+              if (!matchVariant(variant, thisVar)) continue;
+            } else {
+              const match = doc.title.match(/:c.\d+([ACGT]+)>([ACGT]+)/);
+              if (match && !matchVariant(variant, { chr: variant.chr, pos: variant.pos, ref: match[1], alt: match[2] })) continue;
+            }
+            resolve(doc);
+            break;
+          }
+          resolve({ significance: {} });
+        }).catch((err) => {
+          reject(err);
+        });
+    }
   });
 };
 

@@ -17,11 +17,12 @@ const replace = (doc) => {
 
 exports.findByVariant = (req, res) => {
   const variant = utils.variant.validateAndParseVariant(req.params.variant);
+  const build = req.query.build;
   if (variant === null) {
     return res.status(404).send({ message: 'Invalid variant' });
   }
 
-  db.gnomAD.getByVariant(variant)
+  db.gnomAD.getByVariant(variant, null, build)
     .then((doc) => {
       return res.json(doc);
     }).catch((err) => {

@@ -57,14 +57,18 @@ exports.getByGeneSymbol = (symbol) => {
   });
 };
 
-exports.getByVariant = (variant, projection) => {
+exports.getByVariant = (variant, projection, build) => {
   return new Promise((resolve, reject) => {
     if (variant === null) resolve(null);
     else {
       projection = projection || {};
       projection['_id'] = 0;
 
-      GnomAD.findOne({ chr: variant.chr, pos: parseInt(variant.pos), ref: variant.ref, alt: variant.alt }, projection)
+      const query = build === 'hg38' ?
+        { hg38Chr: variant.chr, hg38Pos: variant.pos, ref: variant.ref, alt: variant.alt } :
+        { chr: variant.chr, pos: variant.pos, ref: variant.ref, alt: variant.alt };
+
+      GnomAD.findOne(query, projection)
         .lean()
         .then((doc) => {
           if (!doc || !doc.lastUpdate || utils.isOlderThan(doc.lastUpdate, 14)) {
@@ -73,7 +77,7 @@ exports.getByVariant = (variant, projection) => {
             return doc;
           }
         }).then((doc) => {
-          if ('__v' in doc) {
+          if (doc && '__v' in doc) {
             delete doc['__v'];
           }
           resolve(doc);
@@ -82,16 +86,6 @@ exports.getByVariant = (variant, projection) => {
           resolve(null);
         });
     }
-  });
-};
-
-const replace = (doc) => {
-  return GnomAD.replaceOne(
-    { chr: doc.chr, pos: doc.pos, ref: doc.ref, alt: doc.alt },
-    doc,
-    { upsert: true }
-  ).catch((err) => {
-    console.error(err);
   });
 };
 
