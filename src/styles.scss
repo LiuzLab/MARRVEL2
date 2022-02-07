@@ -237,6 +237,15 @@ span.text-error {
 /********************
  * Misc.
  */
+.na {
+  &:empty {
+    color: $light-gray;
+    &::before {
+      content: 'N/A';
+    }
+  }
+}
+
 .mat-drawer-container strong {
   font-weight: 400;
 }

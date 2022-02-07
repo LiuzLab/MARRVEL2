@@ -166,30 +166,38 @@
         <div class="col-12">
           <h2 class="mb-1 text-uppercase">Control Data</h2>
 
-          <h3 class="mb-0 d-inline-block align-middle">gnomAD</h3>
-          <a class="mb-0 d-inline-block ml-3 align-middle"
+          <h3 class="mb-0">gnomAD</h3>
+        </div>
+
+        <!-- gnomAD variant -->
+        <div class="col-12 mt-3" *ngIf="!geneLoading && variant" [@toggle]>
+          <h4 class="mt-0 mb-3 d-inline-block align-middle">
+            Population Allele Frequencies of {{ variantString }} from gnomAD
+          </h4>
+          <a class="mb-3 d-inline-block ml-3 align-middle"
             *ngIf="gene && gene.xref && gene.xref.ensemblId"
-            href="https://gnomad.broadinstitute.org/gene/{{ gene.xref.ensemblId }}"
-            target="_blank"
-          >
+            href="https://gnomad.broadinstitute.org/variant/{{ variant.chr }}-{{ variant.pos }}-{{ variant.ref }}-{{ variant.alt }}"
+            target="_blank">
             <button mat-button color="primary">
               <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
               More on gnomAD
             </button>
           </a>
-        </div>
-
-        <!-- gnomAD variant -->
-        <div class="col-12 mt-3" *ngIf="!geneLoading && variant" [@toggle]>
-          <h4 class="mt-0 mb-3">
-            Population Allele Frequencies of {{ variantString }} from gnomAD
-          </h4>
           <app-gnom-ad [variant]="variant"></app-gnom-ad>
         </div>
 
         <!-- gnomAD gene -->
         <div class="col-12 mt-3" *ngIf="!geneLoading && gene" [@toggle]>
-          <h4 class="mt-0 mb-3">Control Population Summary of {{ gene.symbol }} from gnomAD</h4>
+          <h4 class="mt-0 mb-3 d-inline-block align-middle">Control Population Summary of {{ gene.symbol }} from gnomAD</h4>
+          <a class="mb-3 d-inline-block ml-3 align-middle"
+            *ngIf="gene && gene.xref && gene.xref.ensemblId"
+            href="https://gnomad.broadinstitute.org/gene/{{ gene.xref.ensemblId }}"
+            target="_blank">
+            <button mat-button color="primary">
+              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+              More on gnomAD
+            </button>
+          </a>
           <app-gnom-ad-gene [gene]="gene"></app-gnom-ad-gene>
         </div>
       </div>

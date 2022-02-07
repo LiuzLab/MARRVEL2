@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../environments/environment';
 import { Variant } from '../interfaces/variant';
+import { GnomADVariantData } from '../interfaces/data';
 
 @Injectable({
   providedIn: 'root'
@@ -107,7 +108,22 @@ export class ApiService {
   getGnomADVaraint(variant: Variant): Observable<any> {
     const url = `${environment.apiHost}/data/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
     return new Observable(observer => {
-      this.http.get(url).subscribe((res) => {
+      this.http.get(url).subscribe((res: GnomADVariantData) => {
+        res.exome = res.exome || {};
+        res.genome = res.genome || {};
+        res.exome.alleleFreq = res.exome.alleleNum ? res.exome.alleleCount / res.exome.alleleNum : undefined;
+        res.genome.alleleFreq = res.genome.alleleNum ? res.genome.alleleCount / res.genome.alleleNum : undefined;
+        if (res.exome.alleleNum || res.genome.alleleNum) {
+          res.total = {
+            alleleNum: (res.exome.alleleNum || 0) + (res.genome.alleleNum || 0),
+            alleleCount: (res.exome.alleleCount || 0) + (res.genome.alleleCount || 0),
+            homCount: (res.exome.homCount || 0) + (res.genome.homCount || 0),
+            alleleFreq: ((res.exome.alleleCount || 0) + (res.genome.alleleCount || 0)) /
+              ((res.exome.alleleCount || 0) + (res.genome.alleleCount || 0))
+          };
+        } else {
+          res.total = {};
+        }
         observer.next(res);
       }, (err) => {
         observer.error(err);

@@ -95,3 +95,35 @@ export interface ClinVarVarinat {
   };
   condition?: string;
 }
+
+
+export interface GnomADVariantData {
+  chr: string;
+  pos: number;
+  ref: string;
+  alt: string;
+  exome?: {
+    alleleCount?: number;
+    alleleNum?: number;
+    homCount?: number;
+    alleleFreq?: number;
+  };
+  genome?: {
+    alleleCount?: number;
+    alleleNum?: number;
+    homCount?: number;
+    alleleFreq?: number;
+  };
+  total?: {
+    alleleCount?: number;
+    alleleNum?: number;
+    homCount?: number;
+    alleleFreq?: number;
+  };
+  transcripts?: [{
+    geneSymbol: string;
+    geneEnsemblId: string;
+    ensemblId: string;
+    proteinId?: string;
+  }];
+}

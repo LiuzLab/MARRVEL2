@@ -29,56 +29,32 @@
       <td class="mat-header-cell">
         Allele Count
       </td>
-      <td class="mat-cell number">
-        {{ data.exome.alleleCount + data.genome.alleleCount }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.exome.alleleCount }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.genome.alleleCount }}
-      </td>
+      <td class="mat-cell number na">{{ data.total.alleleCount }}</td>
+      <td class="mat-cell number na">{{ data.exome.alleleCount }}</td>
+      <td class="mat-cell number na">{{ data.genome.alleleCount }}</td>
     </tr>
 
     <tr class="mat-row">
       <td class="mat-header-cell">
         Allele Number
       </td>
-      <td class="mat-cell number">
-        {{ data.exome.alleleNum + data.genome.alleleNum }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.exome.alleleNum }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.genome.alleleNum }}
-      </td>
+      <td class="mat-cell number na">{{ data.total.alleleNum }}</td>
+      <td class="mat-cell number na">{{ data.exome.alleleNum }}</td>
+      <td class="mat-cell number na">{{ data.genome.alleleNum }}</td>
     </tr>
 
     <tr class="mat-row">
       <td class="mat-header-cell">Homozygous Count</td>
-      <td class="mat-cell number">
-        {{ data.exome.homCount + data.genome.homCount }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.exome.homCount }}
-      </td>
-      <td class="mat-cell number">
-        {{ data.genome.homCount }}
-      </td>
+      <td class="mat-cell number na">{{ data.total.homCount }}</td>
+      <td class="mat-cell number na">{{ data.exome.homCount }}</td>
+      <td class="mat-cell number na">{{ data.genome.homCount }}</td>
     </tr>
 
     <tr class="mat-row">
       <td class="mat-header-cell">Allele Frequency</td>
-      <td class="mat-cell number">
-        {{ ((data.exome.alleleCount + data.genome.alleleCount) / (data.exome.alleleNum + data.genome.alleleNum)).toFixed(6) }}
-      </td>
-      <td class="mat-cell number">
-        {{ (data.exome.alleleCount / data.exome.alleleNum).toFixed(6) }}
-      </td>
-      <td class="mat-cell number">
-        {{ (data.genome.alleleCount / data.genome.alleleNum).toFixed(6) }}
-      </td>
+      <td class="mat-cell number na">{{ data.total.alleleFreq ? data.total.alleleFreq.toFixed(6) : '' }}</td>
+      <td class="mat-cell number na">{{ data.exome.alleleFreq ? data.exome.alleleFreq.toFixed(6) : '' }}</td>
+      <td class="mat-cell number na">{{ data.genome.alleleFreq ? data.genome.alleleFreq.toFixed(6) : '' }}</td>
     </tr>
   </tbody>
 </table>

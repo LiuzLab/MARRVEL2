@@ -3,6 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
 import { Variant } from '../../../../interfaces/variant';
+import { GnomADVariantData } from 'src/app/interfaces/data';
 
 @Component({
   selector: 'app-gnom-ad',
@@ -15,9 +16,7 @@ export class GnomADComponent implements OnInit {
   loading = false;
   data: GnomADVariantData;
 
-  constructor(
-    private api: ApiService
-  ) { }
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
     if (this.variant) {
@@ -25,38 +24,16 @@ export class GnomADComponent implements OnInit {
       this.api.getGnomADVaraint(this.variant)
         .pipe(take(1))
         .subscribe((res) => {
-          if (res) {
-            res.exome = res.exome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
-            res.genome = res.genome || { alleleCount: 0, alleleNum: 0, homCount: 0 };
-          }
-
           this.data = res;
           this.loading = false;
         });
     }
   }
 
-}
-
-interface GnomADVariantData {
-  chr: string;
-  pos: number;
-  ref: string;
-  alt: string;
-  exome: {
-    alleleCount?: number;
-    alleleNum?: number;
-    homCount?: number;
-  };
-  genome: {
-    alleleCount?: number;
-    alleleNum?: number;
-    homCount?: number;
-  };
-  transcripts?: [{
-    geneSymbol: string;
-    geneEnsemblId: string;
-    ensemblId: string;
-    proteinId?: string;
-  }];
+  retUnlNull(mightNum: number | null | undefined, retValIfNull: any): number | string {
+    if (mightNum != null && !isNaN(mightNum)) {
+      return mightNum;
+    }
+    return retValIfNull;
+  }
 }
