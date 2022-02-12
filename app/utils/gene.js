@@ -72,3 +72,35 @@ exports.getByGenomicLocation = (chr, pos, build) => {
       });
   });
 };
+
+exports.queryGenes = (query) => {
+  return new Promise((resolve, reject) => {
+    const queries = [];
+    const projection = { '_id': 0, clinVarIds: 0, gos: 0, geno2mpIds: 0, dgvIds: 0, phenotypes: 0, pharosTargetIds: 0, id: 0 };
+    if (query.ensemblId) {
+      queries.push(Genes.findOne({ 'xref.ensemblId': query.ensemblId }, projection).lean());
+    }
+    if (query.symbol) {
+      queries.push(Genes.findOne({ symbol: query.symbol }, projection).lean());
+      queries.push(Genes.find({ alias: query.symbol }, projection).lean());
+    }
+
+    Promise.all(queries)
+      .then((results) => {
+        let cnt = 0;
+        for (const res of results) {
+          cnt += 1
+          if (res) {
+            if (res.length != null) {
+              res[0].otherCandidates = res.slice(1);
+              resolve(res[0]);
+            } else {
+              resolve(res);
+            }
+            break;
+          }
+        }
+        resolve(null);
+      });
+  });
+};

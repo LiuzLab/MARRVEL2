@@ -10,6 +10,7 @@ router.get('/gene/taxonId/:taxonId/symbol/:symbol', genesController.findByGeneSy
 router.get('/gene/taxonId/:taxonId/symbol/prefix/:prefix', genesController.findByPrefix);
 
 router.get('/gene/chr/:chr/pos/:pos', genesController.findByGenomicLocation);
+router.get('/gene/search', genesController.query);
 
 router.get('/gene/entrezId/:entrezId/pdbe/structure', pdbeController.getByEntrezId);
 
