@@ -19,9 +19,15 @@ exports.hg38ToHg19 = (req, res) => {
       } else {
         return liftover(chr, pos, 'Human', 'hg38', 'Human', 'hg19')
           .then((result) => {
-            LiftoverModel38.create({ hg38Chr: result.inputChr, hg38Pos: result.inputPos, hg19Chr: result.chr, hg19Pos: result.pos })
-              .catch((err) => { console.log(err); });
-            return { hg19Chr: result.chr, hg19Pos: result.pos };
+            if (isNaN(result.pos)) {
+              LiftoverModel38.create({ hg38Chr: result.inputChr, hg38Pos: result.inputPos })
+                .catch((err) => { console.log(err); });
+              return {}
+            } else {
+              LiftoverModel38.create({ hg38Chr: result.inputChr, hg38Pos: result.inputPos, hg19Chr: result.chr, hg19Pos: result.pos })
+                .catch((err) => { console.log(err); });
+              return { hg19Chr: result.chr, hg19Pos: result.pos };
+            }
           });
       }
     }).then((result) => {
@@ -47,9 +53,15 @@ exports.hg19ToHg38 = (req, res) => {
       } else {
         return liftover(chr, pos, 'Human', 'hg19', 'Human', 'hg38')
           .then((result) => {
-            LiftoverModel19.create({ hg19Chr: result.inputChr, hg19Pos: result.inputPos, hg38Chr: result.chr, hg38Pos: result.pos })
-              .catch((err) => { console.log(err); });
-            return { hg38Chr: result.chr, hg38Pos: result.pos };
+            if (isNaN(result.pos)) {
+              LiftoverModel19.create({ hg19Chr: result.inputChr, hg19Pos: result.inputPos })
+                .catch((err) => { console.log(err); });
+              return { hg38Chr: result.chr, hg38Pos: result.pos };
+            } else {
+              LiftoverModel19.create({ hg19Chr: result.inputChr, hg19Pos: result.inputPos, hg38Chr: result.chr, hg38Pos: result.pos })
+                .catch((err) => { console.log(err); });
+              return { hg38Chr: result.chr, hg38Pos: result.pos };
+            }
           });
       }
     }).then((result) => {
