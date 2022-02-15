@@ -9,6 +9,17 @@ const config = {
     port: process.env.PORT || 8080,
     transvar: {
       path: '../env/bin/transvar'
+    },
+    decipher: {
+      control: {
+        version: process.env.DECIPHER_CONTROL_VERSION,
+        name: 'DECIPHERControl' + (process.env.DECIPHER_CONTROL_VERSION ? '.' + process.env.DECIPHER_CONTROL_VERSION : '')
+      },
+      disease: {
+        allowedReferer: process.env.RESTRICT_DECIPHER_DISEASE ? new RegExp('^(?:https?:\/\/)?(?:www\.)?marrvel.org.*', 'i') : new RegExp('.*'),
+        version: process.env.DECIPHER_DISEASE_VERSION,
+        name: 'DECIPHERDisease' + (process.env.DECIPHER_DISEASE_VERSION ? '.' + process.env.DECIPHER_DISEASE_VERSION : '')
+      }
     }
   },
 
@@ -18,6 +29,17 @@ const config = {
     port: process.env.PORT || 8080,
     transvar: {
       path: '../env/bin/transvar'
+    },
+    decipher: {
+      control: {
+        version: process.env.DECIPHER_CONTROL_VERSION,
+        name: 'DECIPHERControl' + (process.env.DECIPHER_CONTROL_VERSION ? '.' + process.env.DECIPHER_CONTROL_VERSION : '')
+      },
+      disease: {
+        allowedReferer: process.env.RESTRICT_DECIPHER_DISEASE ? new RegExp('^(?:https?:\/\/)?(?:www\.)?marrvel.org.*', 'i') : new RegExp('.*'),
+        version: process.env.DECIPHER_DISEASE_VERSION,
+        name: 'DECIPHERDisease' + (process.env.DECIPHER_DISEASE_VERSION ? '.' + process.env.DECIPHER_DISEASE_VERSION : '')
+      }
     }
   },
 
@@ -28,6 +50,17 @@ const config = {
     host: 'marrvel.org',
     transvar: {
       path: 'transvar'
+    },
+    decipher: {
+      control: {
+        version: process.env.DECIPHER_CONTROL_VERSION,
+        name: 'DECIPHERControl' + (process.env.DECIPHER_CONTROL_VERSION ? '.' + process.env.DECIPHER_CONTROL_VERSION : '')
+      },
+      disease: {
+        allowedReferer: process.env.RESTRICT_DECIPHER_DISEASE ? new RegExp('^(?:https?:\/\/)?(?:www\.)?marrvel.org.*', 'i') : new RegExp('.*'),
+        version: process.env.DECIPHER_DISEASE_VERSION,
+        name: 'DECIPHERDisease' + (process.env.DECIPHER_DISEASE_VERSION ? '.' + process.env.DECIPHER_DISEASE_VERSION : '')
+      }
     }
   }
 };
@@ -38,17 +71,6 @@ config[env].mongo.url = 'mongodb://' + config[env].mongo.username + ':' + config
                           + '/' + config[env].mongo.database;
 
 config[env].omim = require(path.join(rootPath, 'config/omim', env + '.json'));
-
-config[env].decipher = {
-  control: {
-    version: process.env.DECIPHER_CONTROL_VERSION,
-    name: 'DECIPHERControl' + (process.env.DECIPHER_CONTROL_VERSION ? '.' + process.env.DECIPHER_CONTROL_VERSION : '')
-  },
-  disease: {
-    version: process.env.DECIPHER_DISEASE_VERSION,
-    name: 'DECIPHERDisease' + (process.env.DECIPHER_DISEASE_VERSION ? '.' + process.env.DECIPHER_DISEASE_VERSION : '')
-  }
-};
 
 config[env].liftover = {
   hg38Version: process.env.LIFTOVER_HG38_VERSION || 'hg38_201312',

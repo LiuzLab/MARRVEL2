@@ -45,6 +45,7 @@ app.get('*', (req, res) => {
 console.log(`Running @ ${ config.env }`);
 console.log(`DECIPHER control data using collection ${ config.decipher.control.name }`);
 console.log(`DECIPEHR disease data using collection ${ config.decipher.disease.name }`);
+console.log(`DECIPHER disease access is restricted to ${ config.decipher.disease.allowedReferer }`);
 
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer({key: fs.readFileSync('key/key.pem', 'utf8'), cert: fs.readFileSync('key/cert.pem', 'utf8')}, app);
