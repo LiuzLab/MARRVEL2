@@ -3,7 +3,7 @@ const got = Promise.promisify(require('got'));
 
 const validateAndParseVariant = (varInput) => {
   const reExps = [
-    /(?:chr|Chr)?([0-9]?[0-9XY])\s*:\s*([0-9]*)\s*([ACGTU]*)\s*>\s*([ACGTU]*)/,
+    /(?:chr|Chr)?([0-9]?[0-9XY])\s*:(?:g\.)?\s*([0-9]*)\s*([ACGTU]*)\s*>\s*([ACGTU]*)/,
     /([0-9]?[0-9XY])\s*-\s*([0-9]*)\s*-\s*([ACGTU]*)\s*-\s*([ACGTU]*)/,
     /.+_0*(\d+)\.\d+:.\.(\d+)([ACGTU]*)>([ACGTU]*)/
   ];
