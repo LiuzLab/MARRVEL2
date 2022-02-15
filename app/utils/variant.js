@@ -1,4 +1,5 @@
 const Promise = require('bluebird');
+const got = Promise.promisify(require('got'));
 
 const validateAndParseVariant = (varInput) => {
   const reExps = [
@@ -37,4 +38,41 @@ exports.comp = comp;
 exports.matchVariant = (v1, v2) => {
   return v1.chr === v2.chr && v1.pos === v2.pos &&
     (v1.ref === v2.ref && v1.alt === v2.alt || comp[v1.ref] === v2.ref && comp[v1.alt] === v2.alt);
-}
+};
+
+exports.liftover = (chr, pos, fromOrg, fromDb, toOrg, toDb, minMatch, isMultiRegionAllowed, minQuery, minChain, minBlocks, isThickFudgeSet) => {
+  return new Promise((resolve, reject) => {
+    got.get('https://genome.ucsc.edu/cgi-bin/hgLiftOver').then((res) => {
+      const M = res.body.match(new RegExp(`\<input type=(?:(?:['"]hidden['"])|(?:hidden)) name=(?:(?:['"]hgsid['"])|(?:hgsid)) value=['"]([^'"]+)[^>]`, 'mi'));
+      const payload = {
+        hgsid: M[1],
+        hglft_fromOrg: fromOrg,
+        hglft_fromDb: fromDb,
+        hglft_toOrg: toOrg,
+        hglft_toDb: toDb,
+        hglft_minMatch: minMatch || '0.95',
+        'boolshad.hglft_multiple': isMultiRegionAllowed || '0',
+        hglft_minSizeQ: minQuery || '0',
+        hglft_minChainT: minChain || '0',
+        hglft_minBlocks: minBlocks || '1',
+        'boolshad.hglft_fudgeThick': isThickFudgeSet || '0',
+        hglft_userData: 'chr' + chr + '\t' + pos + '\t' + pos
+      };
+      return got.post('https://genome.ucsc.edu/cgi-bin/hgLiftOver', { form: payload }).text();
+    }).then((res) => {
+      const M = res.match(new RegExp(`(..\/trash[^\ \>]+.bed)`, 'mi'));
+      return M ? got.get('https://genome.ucsc.edu/cgi-bin/' + M[1]).text() : '';
+    }).then((res) => {
+      const lifted = (res.split('\n')[0] || '').split('\t');
+      resolve({
+        inputChr: chr,
+        inputPos: pos,
+        chr: lifted[0].replace('chr', ''),
+        pos: parseInt(lifted[1])
+      });
+    }).catch((err) => {
+      reject(err);
+    });
+  });
+};
+

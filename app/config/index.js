@@ -29,7 +29,6 @@ const config = {
     transvar: {
       path: 'transvar'
     }
-
   }
 };
 
@@ -49,6 +48,11 @@ config[env].decipher = {
     version: process.env.DECIPHER_DISEASE_VERSION,
     name: 'DECIPHERDisease' + (process.env.DECIPHER_DISEASE_VERSION ? '.' + process.env.DECIPHER_DISEASE_VERSION : '')
   }
+};
+
+config[env].liftover = {
+  hg38Version: process.env.LIFTOVER_HG38_VERSION || 'hg38_201312',
+  hg19Version: process.env.LIFTOVER_HG19_VERSION || 'hg19_200902',
 };
 
 module.exports = config[env];
