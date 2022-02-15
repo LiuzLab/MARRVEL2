@@ -21,7 +21,7 @@ exports.getByVariant = (variant, build) => {
         query.chr = variant.chr;
         query.start = query.stop = pos;
       }
-      ClinVar.find(query, { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, '_id': 0 })
+      ClinVar.find(query, { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, interpretation: 1, '_id': 0 })
         .lean()
         .then((docs) => {
           for (const doc of docs) {
