@@ -92,5 +92,15 @@ geneSchema.virtual('pdbeSummary', {
   foreignField: 'uniprotKBId',
   justOne: true
 });
+geneSchema.virtual('smartDomains', {
+  ref: 'SMARTDomains',
+  localField: 'entrezId',
+  foreignField: 'entrezId'
+});
+geneSchema.virtual('dioptDomains', {
+  ref: 'DIOPTDomains',
+  localField: 'entrezId',
+  foreignField: 'entrezId'
+});
 
 module.exports = mongoose.model('Genes', geneSchema);
