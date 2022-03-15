@@ -10,6 +10,7 @@ import 'rxjs/add/operator/first';
 import { Animations } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
 import { DbNSFPData } from 'src/app/interfaces/data';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-batch',
@@ -110,10 +111,7 @@ export class BatchComponent implements OnInit {
   createDownloadUrl(fileType: string, whole?: boolean) {
     if (!whole) {
       return this.getBlobUrl(fileType, this.dataSource.data);
-    }
-    else {
-      let dataToDownload: VariantResult[] = [];
-
+    } else {
       this.wholeLoading = true;
       this.tsvWholeDownloadUrl = null;
 
@@ -126,10 +124,9 @@ export class BatchComponent implements OnInit {
         this.wholeVarsPrepared += vTo - vFrom;
 
         if (page === this.curPage && !this.loading) {    // not fetching data again for current page
-          dataToDownload = dataToDownload.concat(this.dataSource.data);
+          tasks.push(of(this.dataSource.data));
           this.wholeVarsHaveData += vTo - vFrom;
-        }
-        else {
+        } else {
           tasks.push(
             new Observable(observer => {
               this.api.getBatchByArray(this.variants.slice(vFrom, vTo))
@@ -142,10 +139,7 @@ export class BatchComponent implements OnInit {
         }
       }
       Observable.forkJoin(...tasks).subscribe(results => {
-        for (const res of results) {
-          dataToDownload = dataToDownload.concat(res);
-        }
-        this.tsvWholeDownloadUrl = this.getBlobUrl(fileType, dataToDownload);
+        this.tsvWholeDownloadUrl = this.getBlobUrl(fileType, results.flat());
         this.wholeLoading = false;
       });
     }
@@ -245,3 +239,4 @@ interface VariantResult {
   };
   dbnsfp?: DbNSFPData;
 }
+
