@@ -1,91 +1,109 @@
-<h3>Primate</h3>
+<h3>
+  Primate Sequencing Project
+  (<a href="https://www.hgsc.bcm.edu/" target="_blank">
+    <mat-icon class="align-middle" style="width: 20px; height: 20px; font-size: 20px; margin-bottom: 2px">open_in_new</mat-icon>
+    HGSC
+  </a> Cohort)
+</h3>
 
-<!--p class="mt-0 mb-3 d-table" *ngIf="!loading && data">
-  <mat-icon class="d-table-cell align-top"
-    matTooltip="MARRVEL's comment" matTooltipPosition="above"
-  >insert_comment</mat-icon>
+<mat-form-field style="margin-bottom: -1.25em" *ngIf="variant && gene" class="mt-3">
+  <mat-label>Search by</mat-label>
+  <mat-select [(value)]="searchBy">
+    <mat-option value="gene" *ngIf="gene">
+      {{ gene.symbol }}
+    </mat-option>
+    <mat-option value="variant">
+      {{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-  <span class="d-table-cell pl-2">
-    <span *ngIf="data && data.exome && data.genome">
-      Chr{{ data.chr }}:{{ data.pos }} {{ data.ref }}>{{ data.alt }} is found
-      <strong appUnit [count]="data.exome.alleleCount + data.genome.alleleCount" unit="time"></strong>
-      in the control population (may contain adult-onset diseases).
-      There are
-      <strong appUnit [count]="data.exome.homCount + data.genome.homCount" unit="individual"></strong>
-      who are <strong>homozygous</strong> for this variant.
+<div class="w-100" *ngIf="searchBy === 'variant'" [@toggle]>
+  <p class="mt-3 mb-3 d-table" *ngIf="!loading && data">
+    <mat-icon class="d-table-cell align-top"
+      matTooltip="MARRVEL's comment" matTooltipPosition="above"
+    >insert_comment</mat-icon>
+
+    <span class="d-table-cell pl-2">
+      <span *ngIf="variant && data && data.alleleNum">
+        Allele frequency of the Rhesus macaque variant that corresponds to
+        human Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }} is
+        <strong>{{ data.alleleFreq.toFixed(6) }} (1/{{ data.alleleNum }})</strong> in HGSC cohort.
+      </span>
     </span>
-  </span>
-</p-->
+  </p>
 
-<table class="mt-3 mat-table w-100 mb-3" *ngIf="!loading && data">
-  <tbody>
-    <tr class="mat-row" *ngIf="data.filter">
-      <td class="mat-header-cell">
-        Filter
-      </td>
-      <td class="mat-cell number">
-        <span [ngClass]="{ 'text-highlight': data.filter === 'PASS', 'text-highlight-accent': data.filter !== 'PASS' }">{{ data.filter }}</span>
-      </td>
-    </tr>
+  <table class="mt-3 mat-table w-100 mb-3" *ngIf="!loading">
+    <thead>
+      <tr class="mat-header-row">
+        <th class="mat-header-cell">&nbsp;</th>
+        <th class="mat-header-cell text-right">Allele Count</th>
+        <th class="mat-header-cell text-right">Total Alleles</th>
+        <th class="mat-header-cell text-right">Allele Frequency</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="mat-row">
+        <td class="mat-header-cell">
+          HGSC Cohort
+        </td>
+        <ng-container *ngIf="data">
+          <td class="mat-cell number">
+            {{ data.alleleCount }}
+          </td>
+          <td class="mat-cell number">
+            {{ data.alleleNum }}
+          </td>
+          <td class="mat-cell number">
+            {{ data.alleleFreq.toFixed(6) }}
+          </td>
+        </ng-container>
+        <ng-container *ngIf="!data">
+          <td class="mat-cell number na">
+            N/A
+          </td>
+          <td class="mat-cell number na">
+            N/A
+          </td>
+          <td class="mat-cell number na">
+            N/A
+          </td>
+          <td class="mat-cell number na">
+            N/A
+          </td>
+          <td class="mat-cell number na">
+            N/A
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-    <tr class="mat-row">
-      <td class="mat-header-cell">
-        Allele count in genotypes
-      </td>
-      <td class="mat-cell number">
-        {{ data.alleleCount }}
-      </td>
-    </tr>
+<div class="w-100" *ngIf="gene && searchBy === 'gene'" [@toggle]>
+  <p class="mt-3 mb-0 d-table" *ngIf="!geneLoading">
+    <mat-icon class="d-table-cell align-top"
+      matTooltip="MARRVEL's comment" matTooltipPosition="above"
+    >insert_comment</mat-icon>
 
-    <tr class="mat-row">
-      <td class="mat-header-cell">
-        Total number of alleles
-      </td>
-      <td class="mat-cell number">
-        {{ data.alleleNum }}
-      </td>
-    </tr>
+    <span class="d-table-cell pl-2">
+      <span>
+        There are <strong>{{ dataByGene.length }} alleles</strong> reported in HGSC cohort associated with <strong>{{ gene.symbol }}</strong>.
+      </span>
+    </span>
+  </p>
 
-    <tr class="mat-row">
-      <td class="mat-header-cell">
-        Allele Frequency
-      </td>
-      <td class="mat-cell number">
-        {{ data.alleleFreq }}
-      </td>
-    </tr>
-
-    <tr class="mat-row">
-      <td class="mat-header-cell">
-        Allele Balance for heterozygous calls
-      </td>
-      <td class="mat-cell number">
-        {{ data.abHet }}
-      </td>
-    </tr>
-
-    <tr class="mat-row">
-      <td class="mat-header-cell">
-        Allele Balance for homozygous calls
-      </td>
-      <td class="mat-cell number">
-        {{ data.abHom }}
-      </td>
-    </tr>
-
-    <tr class="mat-row" *ngIf="data.baseQRankSum">
-      <td class="mat-header-cell">
-        Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities
-      </td>
-      <td class="mat-cell number">
-        {{ data.baseQRankSum }}
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="row mb-3" *ngIf="!loading && !data">
-  <div class="col-12">
-    <p class="m-0">No data found</p>
-  </div>
+  <app-basic-datatable
+    [data]="dataByGene"
+    unit="Alleles"
+    [displayedColumns]="[ 'variant', 'alleleCount', 'alleleNum', 'alleleFreq', 'dataSource' ]"
+    [columnNames]="[ 'Corresponding Variant', 'Allele Count', 'Total Alleles', 'Allele Frequency', 'Data Source' ]"
+    [types]="[ null, 'int', 'int', 'float', null ]"
+    sortActive="alleleFreq"
+    sortDirection="desc"
+    [url]="[true, false, false, false]"
+    [urlPrefixes]="[ '/human/variant/', '', '', '' ]"
+    [loading]="geneLoading"
+    *ngIf="!geneLoading"
+  ></app-basic-datatable>
 </div>

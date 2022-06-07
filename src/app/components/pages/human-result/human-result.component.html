@@ -234,7 +234,7 @@
 
       <div class="row section mt-5" id="primate" [@toggle]>
         <div class="col-12">
-          <app-primate [variant]="variant"></app-primate>
+          <app-primate [variant]="variant" [gene]="gene" *ngIf="!geneLoading"></app-primate>
         </div>
       </div>
 

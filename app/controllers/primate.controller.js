@@ -1,4 +1,5 @@
 const Primate = require('../models/primate.model');
+const Genes = require('../models/genes.model');
 const utils = require('../utils');
 
 exports.findByVariant = (req, res) => {
@@ -27,6 +28,28 @@ exports.findByVariant = (req, res) => {
         mleAC: doc.MLEAC,
         mleAF: doc.MLEAF
       });
+    }).catch((err) => {
+      console.log(err);
+      return res.status(500).send({
+        message: 'Server error occured'
+      });
+    });
+};
+
+exports.findByEntrezId = (req, res) => {
+  const entrezId = parseInt(req.params.entrezId || '');
+
+  if (isNaN(entrezId)) {
+    return res.status(404).send({ message: 'Invalid variant' });
+  }
+
+  Genes.findOne({ entrezId: entrezId }, { hg19Chr: 1, hg19Start: 1, hg19Stop: 1 })
+    .lean()
+    .then((gene) => {
+      if (!gene || !gene.hg19Start) return [];
+      return Primate.find({ chr: gene.hg19Chr, pos: { $gte: gene.hg19Start, $lte: gene.hg19Stop } }, { _id: 0 });
+    }).then((docs) => {
+      return res.json(docs);
     }).catch((err) => {
       console.log(err);
       return res.status(500).send({
