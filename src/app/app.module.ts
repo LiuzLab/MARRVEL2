@@ -83,6 +83,7 @@ import { ProteinViewerComponent} from './components/protein-viewer/protein-viewe
 import { HumanProteinStructureComponent } from './components/pages/human-result/human-protein-structure/human-protein-structure.component';
 import { PdbeComponent } from './components/pages/human-result/pdbe/pdbe.component';
 import { ForwardAnnotationComponent } from './components/pages/human-result/forward-annotation/forward-annotation.component';
+import { PrimateComponent } from './components/pages/human-result/primate/primate.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +139,8 @@ import { ForwardAnnotationComponent } from './components/pages/human-result/forw
     ProteinViewerComponent,
     HumanProteinStructureComponent,
     PdbeComponent,
-    ForwardAnnotationComponent
+    ForwardAnnotationComponent,
+    PrimateComponent
   ],
   imports: [
     BrowserModule,

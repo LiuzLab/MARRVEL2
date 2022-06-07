@@ -96,7 +96,6 @@ export interface ClinVarVarinat {
   condition?: string;
 }
 
-
 export interface GnomADVariantData {
   chr: string;
   pos: number;
@@ -127,3 +126,21 @@ export interface GnomADVariantData {
     proteinId?: string;
   }];
 }
+export interface PrimateData {
+  chr: string;
+  pos: number;
+  ref: string;
+  alt: string;
+  alleleCount?: number;
+  alleleNum?: number;
+  alleleFreq?: number;
+  abHet?: number;
+  abHom?: number;
+  filter?: string;
+  baseQRankSum?: number;
+  excessHet?: number;
+  phredP?: number;
+  mleAC?: number;
+  mleAF?: number;
+}
+

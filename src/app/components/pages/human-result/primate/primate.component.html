@@ -1,0 +1,109 @@
+<h3>
+  Primate Sequencing Project
+  (<a href="https://www.hgsc.bcm.edu/" target="_blank">
+    <mat-icon class="align-middle" style="width: 20px; height: 20px; font-size: 20px; margin-bottom: 2px">open_in_new</mat-icon>
+    HGSC
+  </a> Cohort)
+</h3>
+
+<mat-form-field style="margin-bottom: -1.25em" *ngIf="variant && gene" class="mt-3">
+  <mat-label>Search by</mat-label>
+  <mat-select [(value)]="searchBy">
+    <mat-option value="gene" *ngIf="gene">
+      {{ gene.symbol }}
+    </mat-option>
+    <mat-option value="variant">
+      {{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="w-100" *ngIf="searchBy === 'variant'" [@toggle]>
+  <p class="mt-3 mb-3 d-table" *ngIf="!loading && data">
+    <mat-icon class="d-table-cell align-top"
+      matTooltip="MARRVEL's comment" matTooltipPosition="above"
+    >insert_comment</mat-icon>
+
+    <span class="d-table-cell pl-2">
+      <span *ngIf="variant && data && data.alleleNum">
+        Allele frequency of the Rhesus macaque variant that corresponds to
+        human Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }} is
+        <strong>{{ data.alleleFreq.toFixed(6) }} (1/{{ data.alleleNum }})</strong> in HGSC cohort.
+      </span>
+    </span>
+  </p>
+
+  <table class="mt-3 mat-table w-100 mb-3" *ngIf="!loading">
+    <thead>
+      <tr class="mat-header-row">
+        <th class="mat-header-cell">&nbsp;</th>
+        <th class="mat-header-cell text-right">Allele Count</th>
+        <th class="mat-header-cell text-right">Total Alleles</th>
+        <th class="mat-header-cell text-right">Allele Frequency</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="mat-row">
+        <td class="mat-header-cell">
+          HGSC Cohort
+        </td>
+        <ng-container *ngIf="data">
+          <td class="mat-cell number">
+            {{ data.alleleCount }}
+          </td>
+          <td class="mat-cell number">
+            {{ data.alleleNum }}
+          </td>
+          <td class="mat-cell number">
+            {{ data.alleleFreq.toFixed(6) }}
+          </td>
+        </ng-container>
+        <ng-container *ngIf="!data">
+          <td class="mat-cell number na">
+            N/A
+          </td>
+          <td class="mat-cell number na">
+            N/A
+          </td>
+          <td class="mat-cell number na">
+            N/A
+          </td>
+          <td class="mat-cell number na">
+            N/A
+          </td>
+          <td class="mat-cell number na">
+            N/A
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="w-100" *ngIf="gene && searchBy === 'gene'" [@toggle]>
+  <p class="mt-3 mb-0 d-table" *ngIf="!geneLoading">
+    <mat-icon class="d-table-cell align-top"
+      matTooltip="MARRVEL's comment" matTooltipPosition="above"
+    >insert_comment</mat-icon>
+
+    <span class="d-table-cell pl-2">
+      <span>
+        There are <strong>{{ dataByGene.length }} alleles</strong> reported in HGSC cohort associated with <strong>{{ gene.symbol }}</strong>.
+      </span>
+    </span>
+  </p>
+
+  <app-basic-datatable
+    [data]="dataByGene"
+    unit="Alleles"
+    [displayedColumns]="[ 'variant', 'alleleCount', 'alleleNum', 'alleleFreq', 'dataSource' ]"
+    [columnNames]="[ 'Corresponding Variant', 'Allele Count', 'Total Alleles', 'Allele Frequency', 'Data Source' ]"
+    [types]="[ null, 'int', 'int', 'float', null ]"
+    sortActive="alleleFreq"
+    sortDirection="desc"
+    [url]="[true, false, false, false]"
+    [urlPrefixes]="[ '/human/variant/', '', '', '' ]"
+    [loading]="geneLoading"
+    *ngIf="!geneLoading"
+  ></app-basic-datatable>
+</div>

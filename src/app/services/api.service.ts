@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../environments/environment';
 import { Variant } from '../interfaces/variant';
+import { HumanGene } from '../interfaces/gene';
 import { GnomADVariantData } from '../interfaces/data';
 
 @Injectable({
@@ -321,6 +322,28 @@ export class ApiService {
 
   getForwardAnnotByVariant(variant: Variant): Observable< any > {
     const url = `${environment.apiHost}/data/transvar/forward/gdna/chr${variant.chr}:g.${variant.pos}${variant.ref}%3E${variant.alt}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
+
+  getPrimateByVariant(variant: Variant): Observable< any > {
+    const url = `${environment.apiHost}/data/primate/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    return new Observable(observer => {
+      this.http.get(url).subscribe((res) => {
+        observer.next(res);
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+  }
+
+  getPrimateByGene(gene: HumanGene): Observable< any > {
+    const url = `${environment.apiHost}/data/primate/gene/entrezId/${gene.entrezId}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res) => {
         observer.next(res);
