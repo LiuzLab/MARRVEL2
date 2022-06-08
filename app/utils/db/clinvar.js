@@ -31,8 +31,8 @@ exports.getByVariant = (variant, build) => {
             if (doc.ref && doc.ref.length) {
               if (!matchVariant(variant, thisVar)) continue;
             } else {
-              const match = doc.title.match(/:c.\d+([ACGT]+)>([ACGT]+)/);
-              if (match && !matchVariant(variant, { chr: variant.chr, pos: variant.pos, ref: match[1], alt: match[2] })) continue;
+              const match = doc.title.match(/:c.[^ACGTU]+([ACGTU]+)>([ACGTU]+)/);
+              if (!match || !matchVariant(variant, { chr: variant.chr, pos: variant.pos, ref: match[1], alt: match[2] })) continue;
             }
             resolve(doc);
             break;
