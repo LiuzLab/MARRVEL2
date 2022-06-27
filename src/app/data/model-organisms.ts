@@ -14,7 +14,8 @@ export const TAXONID_TO_INFO = {
   7955: {
     name: 'Zebrafish',
     icon: '/assets/icons/fish.svg',
-    maxScore: 15
+    maxScore: 15,
+    phenoName: 'Zebrafish Phenotypes'
   },
   10090: {
     name: 'Mouse',

@@ -25,7 +25,7 @@ export class PhenotypesComponent implements OnInit {
   catNameToIcon = CAT_TO_ICON;
 
   taxonIdToInfo = TAXONID_TO_INFO;
-  taxonIds = [ 9606, 10090, 10116, 7227, 6239 ];
+  taxonIds = [ 9606, 10090, 10116, 7955, 7227, 6239 ];
 
   constructor() { }
 
@@ -166,6 +166,18 @@ export class PhenotypesComponent implements OnInit {
       case 7227:
         return isGene ? `https://flybase.org/reports/${term.flyBaseId}` :
           `http://flybase.org/cgi-bin/cvreport.pl?id=${term}`;
+      case 7955:
+        if (isGene) {
+          return `http://zfin.org/${term.zfinId}#phenotype`;
+        } else {
+          if (term.slice(0, 2) === 'GO') {
+            return `https://www.ebi.ac.uk/QuickGO/GTerm?id=${term}`;
+          } else if (term.slice(0, 3) === 'ZFA') {
+            return `http://zfin.org/action/ontology/term-detail/${term}`;
+          } else {
+            return '';
+          }
+        }
     }
   }
 }

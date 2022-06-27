@@ -219,6 +219,10 @@ span.text-error {
   filter: brightness(0.95) !important;
 }
 
+.mat-header-cell.number .mat-sort-header-container {
+  justify-content: end !important;
+  padding-right: 24px;
+}
 /********************
  * Sizing
  */
