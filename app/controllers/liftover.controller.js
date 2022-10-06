@@ -49,7 +49,7 @@ exports.hg19ToHg38 = (req, res) => {
     .lean()
     .then((doc) => {
       if (doc) {
-        return { hg19Chr: doc.hg19Chr, hg38Pos: doc.hg38Pos };
+        return { hg38Chr: doc.hg38Chr, hg38Pos: doc.hg38Pos };
       } else {
         return liftover(chr, pos, 'Human', 'hg19', 'Human', 'hg38')
           .then((result) => {
