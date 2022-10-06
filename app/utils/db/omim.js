@@ -16,14 +16,17 @@ const getByMimNumberAndUpdate = (mimNumber) => {
       .lean()
       .then((doc) => {
         if (!doc || !doc.lastUpdate || utils.isOlderThan(doc.lastUpdate, 14)) {
-          return utils.omimAPI.queryByMimNumber(mimNumber);
+          return utils.omimAPI.queryByMimNumber(mimNumber).then((apiRes) => {
+            replaceDoc(doc);
+            return apiRes;
+          }).catch((err) => {
+            return doc ? doc : reject(err);
+          });
         }
         else {
           return doc;
         }
       }).then((doc) => {
-        replaceDoc(doc);
-
         if (doc.allelicVariants && doc.allelicVariants.length) {
           for (var i=0; i<doc.allelicVariants.length; ++i) {
             if (doc.allelicVariants[i].mutations) {
