@@ -48,7 +48,11 @@ console.log(`DECIPEHR disease data using collection ${ config.decipher.disease.n
 console.log(`DECIPHER disease access is restricted to ${ config.decipher.disease.allowedReferer }`);
 
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer({key: fs.readFileSync('key/key.pem', 'utf8'), cert: fs.readFileSync('key/cert.pem', 'utf8')}, app);
+const httpsServer = https.createServer({
+  key: fs.readFileSync(path.join(config.root, '../key/privkey.pem'), 'utf8'),
+  cert: fs.readFileSync(path.join(config.root, '../key/cert.pem'), 'utf8'),
+  ca: fs.readFileSync(path.join(config.root, '../key/chain.pem'), 'utf8')
+}, app);
 // Mongoose
 mongoose.connect(config.mongo.url + '?authSource=admin', {
   dbName: config.mongo.database,
