@@ -11,6 +11,7 @@ exports.findByVariant = (req, res) => {
   Primate.findOne({ chr: variant.chr, pos: variant.pos, ref: variant.ref, alt: variant.alt }, { _id: 0 })
     .lean()
     .then((doc) => {
+      if (!doc) return res.json(null);
       return res.json({
         chr: doc.chr,
         pos: doc.pos,
