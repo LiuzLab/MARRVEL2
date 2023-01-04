@@ -84,6 +84,7 @@ import { HumanProteinStructureComponent } from './components/pages/human-result/
 import { PdbeComponent } from './components/pages/human-result/pdbe/pdbe.component';
 import { ForwardAnnotationComponent } from './components/pages/human-result/forward-annotation/forward-annotation.component';
 import { PrimateComponent } from './components/pages/human-result/primate/primate.component';
+import { SmartProteinDomainComponent } from './components/pages/human-result/smart-protein-domain/smart-protein-domain.component';
 
 @NgModule({
   declarations: [
@@ -140,7 +141,8 @@ import { PrimateComponent } from './components/pages/human-result/primate/primat
     HumanProteinStructureComponent,
     PdbeComponent,
     ForwardAnnotationComponent,
-    PrimateComponent
+    PrimateComponent,
+    SmartProteinDomainComponent
   ],
   imports: [
     BrowserModule,

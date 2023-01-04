@@ -1,4 +1,5 @@
 import { Gene } from './gene';
+import { PDShape } from '../d3/interfaces/protein-domain-plot';
 
 export interface Geno2MPResult {
   hg19Chr: string;
@@ -142,5 +143,21 @@ export interface PrimateData {
   phredP?: number;
   mleAC?: number;
   mleAF?: number;
+}
+
+export interface ProteinDomain {
+  type: string;
+  name: string;
+  start: number;
+  end?: number;
+  shape?: PDShape;
+  phase?: number;
+}
+export interface SmartDomain extends ProteinDomain {
+  entrezId: number;
+  idx: number;
+  type: 'SMART' | 'INTRINSIC' | 'INTRON';
+  eValue: number;
+  seq?: string;
 }
 

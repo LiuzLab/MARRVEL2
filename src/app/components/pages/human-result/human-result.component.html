@@ -258,68 +258,76 @@
         </div>
       </div>
 
-      <!-- Alignment starts -->
-      <div class="row section mt-5" id="alignment"  *ngIf="!geneLoading && gene" [@toggle]>
-        <div class="col-12">
-          <app-diopt-alignment [gene]="gene"></app-diopt-alignment>
+      <div *ngIf="!geneLoading && gene" [@toggle]>
+        <div class="row section mt-5" id="alignment">
+          <!-- SMART Domain starts -->
+          <div class="col-12">
+            <app-smart-protein-domain [gene]="gene"></app-smart-protein-domain>
+          </div>
+          <!-- SMART Domain ends -->
+
+          <!-- Alignment starts -->
+          <div class="col-12 mt-5">
+            <app-diopt-alignment [gene]="gene"></app-diopt-alignment>
+          </div>
         </div>
+        <!-- Alignment ends -->
+
+        <!-- Protein structure starts -->
+        <div class="row section mt-5" id="protein-structure">
+          <div class="col-12">
+            <h3 class="mt-0 d-block">
+              Human Protein Structure
+            </h3>
+          </div>
+
+          <div class="col-12 mt-3">
+            <app-pdbe [entrezId]="gene.entrezId"></app-pdbe>
+          </div>
+
+          <!-- Alphafold starts -->
+          <div class="col-12">
+            <h4 class="mt-0 mb-3 d-inline-block">
+              Protein Structure Prediction from AlphaFold for {{ gene.symbol }}
+              <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle;">
+                Beta
+              </span>
+            </h4>
+            <a class="d-inline-block align-middle"
+              *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
+              [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
+              target="_blank"
+            >
+              <button mat-button color="primary">
+                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                More on AlphaFold Protein Structure Database
+              </button>
+            </a>
+          </div>
+
+          <div class="col-12 mt-3">
+            <app-human-protein-structure
+              *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
+              [uniprotId]="gene.uniprotKBId"></app-human-protein-structure>
+
+            <p *ngIf="!gene.uniprotKBId || !gene.uniprotKBId.length">
+              No protein structure available
+            </p>
+          </div>
+          <!-- Alphafold ends -->
+
+        </div>
+        <!-- Protein structure ends -->
+
+        <!-- Pharos starts -->
+        <div class="row section mt-5" id="pharos">
+          <div class="col-12">
+            <app-pharos [gene]="gene"></app-pharos>
+          </div>
+        </div>
+        <!-- Pharos Control ends -->
+
       </div>
-      <!-- Alignment ends -->
-
-      <!-- Protein structure starts -->
-      <div class="row section mt-5" id="protein-structure">
-        <div class="col-12">
-          <h3 class="mt-0 d-block">
-            Human Protein Structure
-          </h3>
-        </div>
-
-        <div class="col-12 mt-3">
-          <app-pdbe [entrezId]="gene.entrezId" *ngIf="gene"></app-pdbe>
-        </div>
-
-        <!-- Alphafold starts -->
-        <div class="col-12" *ngIf="gene">
-          <h4 class="mt-0 mb-3 d-inline-block">
-            Protein Structure Prediction from AlphaFold for {{ gene.symbol }}
-            <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle;">
-              Beta
-            </span>
-          </h4>
-          <a class="d-inline-block align-middle"
-            *ngIf="gene && gene.uniprotKBId && gene.uniprotKBId.length"
-            [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
-            target="_blank"
-          >
-            <button mat-button color="primary">
-              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-              More on AlphaFold Protein Structure Database
-            </button>
-          </a>
-        </div>
-
-        <div class="col-12 mt-3">
-          <app-human-protein-structure
-            *ngIf="!geneLoading && gene && gene.uniprotKBId && gene.uniprotKBId.length"
-            [uniprotId]="gene.uniprotKBId"></app-human-protein-structure>
-
-          <p *ngIf="!geneLoading && (!gene || !gene.uniprotKBId || !gene.uniprotKBId.length)">
-            No protein structure available
-          </p>
-        </div>
-        <!-- Alphafold ends -->
-
-      </div>
-      <!-- Protein structure ends -->
-
-      <!-- Pharos starts -->
-      <div class="row section mt-5" id="pharos" *ngIf="!geneLoading && gene" [@toggle]>
-        <div class="col-12">
-          <app-pharos [gene]="gene"></app-pharos>
-        </div>
-      </div>
-      <!-- Pharos Control ends -->
-
     </div>
   </div>
 </div>

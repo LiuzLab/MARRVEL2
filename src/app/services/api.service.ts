@@ -352,4 +352,17 @@ export class ApiService {
       });
     });
   }
+
+  getSmartDomain(gene: HumanGene): Observable< any > {
+    return new Observable(observer => {
+      this.http.get(`${environment.apiHost}/data//gene/entrezId/${gene.entrezId}/protein/domain/smart`).subscribe({
+        next: (res) => {
+          observer.next(res);
+        },
+        error: (err) => {
+          observer.error(err);
+        }
+      });
+    });
+  }
 }
