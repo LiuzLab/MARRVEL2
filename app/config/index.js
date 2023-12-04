@@ -77,5 +77,7 @@ config[env].liftover = {
   hg19Version: process.env.LIFTOVER_HG19_VERSION || 'hg19_200902',
 };
 
+config[env].https = require(path.join(rootPath, 'config/https', env + '.json'));
+
 module.exports = config[env];
 

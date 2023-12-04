@@ -49,9 +49,9 @@ console.log(`DECIPHER disease access is restricted to ${ config.decipher.disease
 
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer({
-  key: fs.readFileSync(path.join(config.root, '../key/privkey.pem'), 'utf8'),
-  cert: fs.readFileSync(path.join(config.root, '../key/cert.pem'), 'utf8'),
-  ca: fs.readFileSync(path.join(config.root, '../key/chain.pem'), 'utf8')
+  key: fs.readFileSync(config.https.key, 'utf8'),
+  cert: fs.readFileSync(config.https.cert, 'utf8'),
+  ca: fs.readFileSync(config.https.ca, 'utf8')
 }, app);
 // Mongoose
 mongoose.connect(config.mongo.url + '?authSource=admin', {
