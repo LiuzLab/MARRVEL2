@@ -6,6 +6,7 @@ const genesController = require('../controllers/genes.controller');
 const pdbeController = require('../controllers/pdbe.controller');
 
 router.get('/gene/entrezId/:entrezId', genesController.findByEntrezId);
+router.get('/gene/ensemblId/:ensemblId', genesController.findByEnsemblId);
 router.get('/gene/taxonId/:taxonId/symbol/:symbol', genesController.findByGeneSymbol);
 router.get('/gene/taxonId/:taxonId/symbol/prefix/:prefix', genesController.findByPrefix);
 
