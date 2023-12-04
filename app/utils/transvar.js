@@ -55,7 +55,7 @@ const executeTransvar = (option) => {
 
 const parseTransvarResultCoordinate = (coord) => {
   return new Promise((resolve, reject) => {
-    const M = coord.match(/(chr(\d+|X|Y):g.(\d+)(A|C|G|T)>(A|C|G|T)|\.)\/[^\/]+\/(p\.([A-Za-z]+)(\d+)([A-Za-z]+)|\.)/);
+    const M = coord.match(/(chr(\d+|X|Y):g.(\d+)((?:A|C|G|T|U)+)?>?((?:(?:[a-z]+)?(?:A|C|G|T|U)+))|\.)\/((?:c\.(\d+(?:[-+_]\d+)?)((?:A|C|G|T|U)+)?)>?((?:[a-z]+)?(?:A|C|G|T|U)+)|\.)\/(p\.([A-Za-z]+)(\d+)([A-Za-z]+|\*)|\.)/);
     if (M == null) {
       reject('Invalid format');
     } else {
@@ -67,11 +67,18 @@ const parseTransvarResultCoordinate = (coord) => {
           ref: M[4] || null,
           alt: M[5] || null
         },
-        protein: {
+        cdna: {
           annot: M[6] === '.' ? null : M[6],
-          ref: M[7],
-          pos: M[8] === undefined ? null : +M[8],
-          alt: M[9]
+          chr: M[2] || null,
+          pos: M[7] === undefined ? null : +M[7],
+          ref: M[8] || null,
+          alt: M[9] || null
+        },
+        protein: {
+          annot: M[10] === '.' ? null : M[10],
+          ref: M[11],
+          pos: M[12] === undefined ? null : +M[12],
+          alt: M[13]
         }
       });
     }
@@ -175,9 +182,14 @@ exports.forwardAnnotationWithGdna = (identifier, build) => {
             return {
               transcriptId: (col[1] || '').trim().split(' ')[0],
               coord: coord.protein,
+              cdnaCoord: coord.cdna
             };
+          }).catch((err) => {
+            return null;
           });
-      }).map((candidate) => {
+      })
+      .map((candidate) => {
+        if (!candidate) return {};
         // Mark Ensembl canonical
         return ensembl.queryLookupByEnsemblId(candidate.transcriptId)
           .then((res) => {
@@ -188,12 +200,15 @@ exports.forwardAnnotationWithGdna = (identifier, build) => {
           }).catch((err) => {
             return candidate;
           });
-      }).then((candidates) => {
+      })
+      .filter((candidate) => candidate.coord)
+      .then((candidates) => {
         let canonical = undefined;
         const countAnnot = {};
         for (const cand of candidates) {
+          if (!cand.transcriptId) continue;
           if (cand.isCanonical) {
-            canonical = { coord: cand.coord };
+            canonical = cand;
           }
 
           if (cand.transcriptId.slice(0, 4) === 'ENST') {
@@ -205,10 +220,11 @@ exports.forwardAnnotationWithGdna = (identifier, build) => {
         if (!canonical) {
           let maxAgrees = -1;
           for (const cand of candidates) {
+            if (!cand.transcriptId) continue;
             if (cand.transcriptId.slice(0, 4) !== 'ENST' && cand.coord.annot in countAnnot) {
               countAnnot[cand.coord.annot] += 1;
               if (maxAgrees < countAnnot[cand.coord.annot]) {
-                mostAgreed = { coord: cand.coord };
+                mostAgreed = cand;
               }
             }
           }
