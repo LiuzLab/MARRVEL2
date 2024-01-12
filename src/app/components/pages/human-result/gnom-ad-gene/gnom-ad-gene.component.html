@@ -1,4 +1,4 @@
-<p class="mt-0 mb-3 d-table" *ngIf="!loading && data && data.lof">
+<p class="mt-0 mb-3 d-table" *ngIf="!loading && data && data.lof && data.lof.obs">
   <mat-icon class="d-table-cell align-top"
     matTooltip="MARRVEL's comment" matTooltipPosition="above"
   >insert_comment</mat-icon>
@@ -6,7 +6,7 @@
   <span class="d-table-cell pl-2">
     <span>
       The LoF o/e (loss-of-function observed/expected) score for
-      {{ gene.symbol }} is {{ data.lof.oe.toFixed(2) }}. 
+      {{ gene.symbol }} is {{ toFixed(data.lof.oe, 2) }}.
     </span>
 
     <span *ngIf="data.lof.oeUpper >= 0.35">
@@ -24,11 +24,11 @@
   </span>
 </p>
 
-<p *ngIf="!loading && (!data || !data.lof)">No matches found</p>
+<p class="mt-0" *ngIf="!loading && (!data || !data.lof || !data.lof.obs)">No matches found</p>
 
 <table
   class="mat-table w-100"
-  *ngIf="data && data.lof"
+  *ngIf="data && data.lof && data.lof.obs"
 >
   <thead>
     <tr class="mat-header-row">
@@ -41,14 +41,14 @@
   <tbody>
     <tr class="mat-row">
       <td class="mat-cell">Synonymous</td>
-      <td class="mat-cell number">{{ data.syn.exp.toFixed(1) }}</td>
+      <td class="mat-cell number">{{ toFixed(data.syn.exp, 1) }}</td>
       <td class="mat-cell number">{{ data.syn.obs }}</td>
-      <td class="mat-cell">Z={{ data.syn.z.toFixed(2) }}</td>
+      <td class="mat-cell">Z={{ toFixed(data.syn.z, 2) }}</td>
       <td class="mat-cell">
         <span class="text-underline-dashed" matTooltip="o/e (with 90% CI) = o/e = observed / expected. If the upper bound of the Loss-of-function o/e CI < 0.35, then there is a high likelihood of intolerance of loss-of-function/haploinsufficiency">
           o/e
-        </span>={{ data.syn.oe.toFixed(2) }}<br>
-        ({{ data.syn.oeLower.toFixed(2) }} - {{ data.syn.oeUpper.toFixed(2) }})
+        </span>={{ toFixed(data.syn.oe, 2) }}<br>
+        ({{ toFixed(data.syn.oeLower, 2) }} - {{ toFixed(data.syn.oeUpper, 2) }})
       </td>
       <td class="mat-cell">
         <app-gnom-ad-gene-visual
@@ -60,14 +60,14 @@
     </tr>
     <tr class="mat-row">
       <td class="mat-cell">Missense</td>
-      <td class="mat-cell number">{{ data.mis.exp.toFixed(1) }}</td>
+      <td class="mat-cell number">{{ toFixed(data.mis.exp, 1) }}</td>
       <td class="mat-cell number">{{ data.mis.obs }}</td>
-      <td class="mat-cell">Z={{ data.mis.z.toFixed(2) }}</td>
+      <td class="mat-cell">Z={{ toFixed(data.mis.z, 2) }}</td>
       <td class="mat-cell">
         <span class="text-underline-dashed" matTooltip="o/e (with 90% CI) = o/e = observed / expected. If the upper bound of the Loss-of-function o/e CI < 0.35, then there is a high likelihood of intolerance of loss-of-function/haploinsufficiency">
           o/e
-        </span>={{ data.mis.oe.toFixed(2) }}<br>
-        ({{ data.mis.oeLower.toFixed(2) }} - {{ data.mis.oeUpper.toFixed(2) }})
+        </span>={{ toFixed(data.mis.oe, 2) }}<br>
+        ({{ toFixed(data.mis.oeLower, 2) }} - {{ toFixed(data.mis.oeUpper, 2) }})
       </td>
       <td class="mat-cell">
         <app-gnom-ad-gene-visual
@@ -79,17 +79,17 @@
     </tr>
     <tr class="mat-row">
       <td class="mat-cell">LoF</td>
-      <td class="mat-cell number">{{ data.lof.exp.toFixed(1) }}</td>
+      <td class="mat-cell number">{{ toFixed(data.lof.exp, 1) }}</td>
       <td class="mat-cell number">{{ data.lof.obs }}</td>
       <td class="mat-cell">
         <span class="text-underline-dashed" matTooltip="pLI = this metric estimates the probability that a gene falls into the class of">
           pLI
-        </span>={{ data.lof.pLI.toFixed(2) }}</td>
+        </span>={{ toFixed(data.lof.pLI, 2) }}</td>
       <td class="mat-cell">
         <span class="text-underline-dashed" matTooltip="o/e (with 90% CI) = o/e = observed / expected. If the upper bound of the Loss-of-function o/e CI < 0.35, then there is a high likelihood of intolerance of loss-of-function/haploinsufficiency">
           o/e
-        </span>={{ data.lof.oe.toFixed(2) }}<br>
-        ({{ data.lof.oeLower.toFixed(2) }} - {{ data.lof.oeUpper.toFixed(2) }})
+        </span>={{ toFixed(data.lof.oe, 2) }}<br>
+        ({{ toFixed(data.lof.oeLower, 2) }} - {{ toFixed(data.lof.oeUpper, 2) }})
       </td>
       <td class="mat-cell">
         <app-gnom-ad-gene-visual

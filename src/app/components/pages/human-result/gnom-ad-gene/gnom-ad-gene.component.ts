@@ -29,6 +29,9 @@ export class GnomADGeneComponent implements OnInit {
     }
   }
 
+  toFixed(S: number | null, digit: number): string {
+    return S && S.toFixed ? S.toFixed(digit) : 'N/A';
+  }
 }
 
 interface GnomADGeneSummary {
