@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiHost: 'http://marrvel.org'
+  apiHost: 'https://marrvel.org'
 };
