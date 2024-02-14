@@ -7,17 +7,18 @@ const mutalyzer = require('../utils/mutalyzer');
 router.get('/mutalyzer/hgvs/:variant', (req, res) => {
   const variant = req.params.variant || '';
   mutalyzer.getGenomLocByHgvsVar(variant)
-    .then(result => {
+    .then((result) => {
       this.variant = result;
-      return mutalyzer.getGeneByTranscript(variant.substr(0, variant.indexOf(':')));
-    }).then(result => {
+      return mutalyzer.getGeneByRefSeqId(variant.substr(0, variant.indexOf(':')));
+    }).then((result) => {
       if (result) {
         this.variant.gene = result;
+        this.variant.chr = this.variant.chr || result.hg19Chr;
       }
-      res.send(this.variant);
+      return res.json(this.variant);
     }).catch(err => {
       console.log(err);
-      res.status(500).send({
+      return res.status(500).send({
         message: 'Server error occured'
       });
     });
