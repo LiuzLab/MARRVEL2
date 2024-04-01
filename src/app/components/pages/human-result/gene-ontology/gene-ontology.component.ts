@@ -8,6 +8,8 @@ import { Animations } from '../../../../animations';
 import { HumanGene } from '../../../../interfaces/gene';
 import { AGR_SLIM_IDS, AGR_SLIM_ID_TO_NAME } from './agrSlim';
 import { EXP_EVICODES, EVICODE_TO_NAME } from './evidence-code';
+import { TAXONID_TO_INFO } from '../../../../data/model-organisms';
+
 const TAXONID_TO_NAME = {
   10090: 'mouse',
   10116: 'rat',
@@ -16,15 +18,6 @@ const TAXONID_TO_NAME = {
   6239: 'worm',
   4932: 'yeast',
   4896: 'fission yeast',
-};
-const ORGNAME_TO_ICON = {
-  'mouse': 'mouse',
-  'rat': 'rat',
-  'zebrafish': 'fish',
-  'fly': 'fly',
-  'worm': 'worm',
-  'yeast': 'yeast',
-  'fission yeast': 'yeast',
 };
 const NAMESPACE_TO_GOID = {
   'molecular_function': 'GO:0003674',
@@ -44,7 +37,7 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 
   gos = null;
   categoryGoIds = AGR_SLIM_IDS;
-  orgNameToIcons = ORGNAME_TO_ICON;
+  orgNameToIcons: { [key: string]: string };
   goIdToName = AGR_SLIM_ID_TO_NAME;
   eviCodeToName = EVICODE_TO_NAME;
   visHeight = 200;
@@ -60,7 +53,12 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor() {
+    this.orgNameToIcons = { human: TAXONID_TO_INFO[9606].icon };
+    for (const tid in TAXONID_TO_NAME) {
+      this.orgNameToIcons[TAXONID_TO_NAME[tid]] = TAXONID_TO_INFO[tid].icon;
+    }
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

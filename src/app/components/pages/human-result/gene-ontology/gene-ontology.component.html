@@ -19,7 +19,7 @@
     <!-- Human search term -->
     <div class="ribbon-header-row mt-3" *ngIf="gos['human']" style="width: 1255px;">
       <div class="ribbon-cell ribbon-org-icon-cell" matTooltip="Human">
-        <img src="../../../../../assets/icons/human.svg">
+        <img [attr.src]="orgNameToIcons['human']">
       </div>
       <div class="ribbon-cell ribbon-gene-symbol-cell">
         <a href="https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:{{ gene.hgncId }}" target="_blank">
@@ -33,7 +33,7 @@
       <div *ngFor="let ortholog of gos[orgName]; index as idx">
         <div class="ribbon-header-row" *ngIf="!showOnlyBest || ortholog.bestScore" style="width: 1255px;">
           <div class="ribbon-cell ribbon-org-icon-cell" [matTooltip]="orgName" >
-            <img src="../../../../../assets/icons/{{ orgNameToIcons[orgName] }}.svg">
+            <img [attr.src]="orgNameToIcons[orgName]">
           </div>
           <div class="ribbon-cell ribbon-gene-symbol-cell overflow-hidden">
             <a href="{{ getUrl(ortholog.gene) }}" target="_blank" class="text-nowrap">

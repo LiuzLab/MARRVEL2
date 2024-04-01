@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HumanGene } from 'src/app/interfaces/gene';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
 
+import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
+
 const TAXONIDS = [ 10090, 10116, 7955, 7227, 6239, 4896, 4932, 8364 ];
 
 @Component({
@@ -15,48 +17,7 @@ export class OrthologsComponent implements OnInit {
   @Input() data: DIOPTOrtholog[];
   showOnlyBest = true;
   taxonIdToOrthologs = { 10090: [], 10116: [], 7955: [], 7227: [], 6239: [], 4896: [], 4932: [], 8364: [] };
-  taxonIdToInfo = {
-    7227: {
-      name: 'Fly',
-      icon: '/assets/icons/fly.svg',
-      maxScore: 16
-    },
-    6239: {
-      name: 'Worm',
-      icon: '/assets/icons/worm.svg',
-      maxScore: 16
-    },
-    7955: {
-      name: 'Zebrafish',
-      icon: '/assets/icons/fish.svg',
-      maxScore: 15
-    },
-    10090: {
-      name: 'Mouse',
-      icon: '/assets/icons/mouse.svg',
-      maxScore: 16
-    },
-    10116: {
-      name: 'Rat',
-      icon: '/assets/icons/rat.svg',
-      maxScore: 14
-    },
-    4896: {
-      name: 'Fission Yeast',
-      icon: '/assets/icons/fyeast.svg',
-      maxScore: 12
-    },
-    4932: {
-      name: 'Budding Yeast',
-      icon: '/assets/icons/yeast.svg',
-      maxScore: 15
-    },
-    8364: {
-      name: 'Tropical clawed frog',
-      icon: '/assets/icons/frog.svg',
-      maxScore: 13
-    }
-  };
+  taxonIdToInfo = TAXONID_TO_INFO;
 
   constructor() { }
 

@@ -38,7 +38,7 @@
     <!-- Human search term row -->
     <div class="ribbon-header-row mt-1" style="width: 180px">
       <div class="ribbon-cell ribbon-org-icon-cell">
-        <img src="/assets/icons/human.svg" matTooltip="Human">
+        <img [attr.src]="taxonIdToInfo[9606].icon" matTooltip="Human">
       </div>
       <div class="ribbon-cell ribbon-gene-symbol-cell">
         <a [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId" target="_blank" class="text-nowrap">
