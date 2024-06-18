@@ -64,12 +64,21 @@
       <app-model-gene-search (geneSelected)="onModelGeneSelected($event)"></app-model-gene-search>
     </div>
 
-    <div [ngClass]="{
-      'col-12': !compact,
-      'col-10 col-lg-5 mt-2 pr-0': compact
-    }" *ngIf="selectedInputType == 'gene'">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Human Variant (hg19)</mat-label>
+    <div class="d-flex"
+        [ngClass]="{
+          'col-12': !compact,
+          'col-10 col-lg-5 mt-2 pr-0': compact
+        }"
+        *ngIf="selectedInputType == 'gene'">
+      <mat-form-field appearance="outline" class="mr-2">
+        <mat-label>Genome Build</mat-label>
+        <mat-select matNativeControl required [(ngModel)]="genomeBuild">
+          <mat-option value="hg19">hg19</mat-option>
+          <mat-option value="hg38">hg38</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="flex-grow-1">
+        <mat-label>Human Variant</mat-label>
         <input matInput
           [formControl]="variantInputCtrl"
           (input)="onVariantInput($event)"

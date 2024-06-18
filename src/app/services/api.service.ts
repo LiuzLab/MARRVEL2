@@ -109,7 +109,8 @@ export class ApiService {
   getGnomADVaraint(variant: Variant): Observable<any> {
     const url = `${environment.apiHost}/data/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
     return new Observable(observer => {
-      this.http.get(url).subscribe((res: GnomADVariantData) => {
+      this.http.get(url).subscribe((res: any) => {
+        res = res || {};
         res.exome = res.exome || {};
         res.genome = res.genome || {};
         res.exome.alleleFreq = res.exome.alleleNum ? res.exome.alleleCount / res.exome.alleleNum : undefined;
@@ -322,11 +323,15 @@ export class ApiService {
 
   getForwardAnnotByVariant(variant: Variant): Observable< any > {
     const url = `${environment.apiHost}/data/transvar/forward/gdna/chr${variant.chr}:g.${variant.pos}${variant.ref}%3E${variant.alt}`;
-    return new Observable(observer => {
-      this.http.get(url).subscribe((res) => {
-        observer.next(res);
-      }, (err) => {
-        observer.error(err);
+    return new Observable((observer) => {
+      this.http.get(url).subscribe({
+        next: (res) => {
+          observer.next(res);
+        },
+        error: (err) => {
+          console.log(err);
+          observer.error(err);
+        }
       });
     });
   }

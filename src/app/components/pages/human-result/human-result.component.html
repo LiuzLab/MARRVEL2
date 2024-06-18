@@ -28,6 +28,13 @@
             <h1 *ngIf="variant">{{ variantString }}</h1>
             <h1 *ngIf="variantInput && variantInput.indexOf(':c.') != -1">&nbsp;({{ variantInput }})</h1>
           </div>
+          <div class="subtitle" *ngIf="hg38Variant">
+            <h4>
+              <span class="label">hg38</span>
+              Chr{{ hg38Variant.chr }}:{{ hg38Variant.pos }}
+              {{ hg38Variant.ref }}&gt;{{ hg38Variant.alt }}
+            </h4>
+          </div>
 
           <div class="title" *ngIf="proteinInput">
             <h1 class="d-block">{{ proteinInput }}</h1>

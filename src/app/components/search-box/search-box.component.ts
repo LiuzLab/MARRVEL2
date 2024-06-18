@@ -24,7 +24,7 @@ export class SearchBoxComponent implements OnInit {
   geneKeyword = '';
   protein  = '';
   variant  = '';
-  variantType: string | null = null;
+  genomeBuild = 'hg19';
   modelGene: Gene | null = null;
 
   geneInputCtrl = new FormControl();
@@ -88,7 +88,6 @@ export class SearchBoxComponent implements OnInit {
     this.protein = '';
     this.variant = '';
     this.variantInputCtrl.setValue('');
-    this.variantType = null;
   }
 
   onGeneInput(e) {
@@ -179,7 +178,11 @@ export class SearchBoxComponent implements OnInit {
           break;
         }
         case 4: {
-          this.router.navigate(['human', 'variant', this.variant ]);
+          if (this.genomeBuild === 'hg38') {
+            this.router.navigate(['human', 'variant', 'hg38', this.variant ]);
+          } else {
+            this.router.navigate(['human', 'variant', this.variant ]);
+          }
           break;
         }
         case 6: {

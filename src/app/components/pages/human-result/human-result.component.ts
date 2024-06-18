@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../services/api.service';
@@ -26,10 +27,12 @@ export class HumanResultComponent implements OnInit {
   geneEntrezId: number | null = null;
   variantInput: string | null = null;
   proteinInput: string | null = null;
+  genomeBuild = 'hg19';
 
   // Processed input
   gene: HumanGene | null = null;
   variant: Variant | null = null;
+  hg38Variant: Variant | null = null;
   variantString: string | null = null;
 
   // Data from server
@@ -54,6 +57,9 @@ export class HumanResultComponent implements OnInit {
       this.geneEntrezId = param.gene ? +param.gene : null;
       this.variantInput = param.variant || null;
       this.proteinInput = param.protein || null;
+      if (this.route.snapshot.routeConfig?.path === 'human/variant/hg38/:variant') {
+        this.genomeBuild = 'hg38';
+      }
 
       // Get gene information from server
       if (this.geneEntrezId !== null) {
@@ -66,32 +72,32 @@ export class HumanResultComponent implements OnInit {
 
       // Parse variant and get gene from variant if there was no user input
       if (this.variantInput !== null && this.variantInput !== '') {
-        const parsed = this.variantService.parse(this.variantInput);
-        if (!parsed.valid) {
-          // TODO: error
-        } else if (parsed.type === 'hgvs') {
-          this.api.getGenomLocByHgvsVar(this.variantInput)
-            .pipe(take(1))
-            .subscribe(res => {
-              this.geneEntrezId = res.gene.entrezId;
-              this.variant = {
-                chr: res.chr,
-                pos: res.pos,
-                ref: res.ref,
-                alt: res.alt
-              };
-              this.variantString = `Chr${res.chr}:${res.pos} ${res.ref}>${res.alt}`;
-              this.gene = res.gene;
-              this.onGeneLoad(res.gene);
-            }, err => {
-              console.log(err);
-              // TODO: error
-            });
-        } else if (parsed.type === 'coord') {
-          this.variant = parsed.variant;
-          this.variantString = `Chr${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`;
+        this.parseVariant().toPromise()
+          .then((variant: Variant) => {
+            if (this.genomeBuild === 'hg19') {
+              return variant;
+            } else {
+              this.hg38Variant = variant;
+              return this.variantService.liftoverHg38ToHg19(variant)
+                .pipe(take(1))
+                .toPromise()
+                .then((liftover) => {
+                  if (liftover.success) {
+                    return liftover.data;
+                  }
+                  throw Error(liftover.error?.message);
+                }).catch((err) => { throw err });
+            }
+          }).then((hg19Variant: Variant) => {
+            this.variant = hg19Variant;
+            this.variantString = `Chr${ hg19Variant.chr}:` +
+              `${ hg19Variant.pos } ` +
+              `${ hg19Variant.ref }>${ hg19Variant.alt }`;
+            if (this.gene) {
+              this.geneLoading = false;
+              return;
 
-          if (!this.geneEntrezId && !this.gene) {
+            }
             this.geneCandidates = null;
             this.api.getGeneByGenomicLocation(this.variant)
               .pipe(take(1))
@@ -105,10 +111,13 @@ export class HumanResultComponent implements OnInit {
                   this.gene = null;
                 }
               });
-          }
-        } else {
-          // TODO: error
-        }
+            return;
+          }).catch((err) => {
+            // TODO: error
+            console.log(err);
+            this.geneLoading = false;
+            this.gene = null;
+          });
       }
     });
   }
@@ -132,6 +141,51 @@ export class HumanResultComponent implements OnInit {
     this.orthologs = null;
   }
 
+  parseVariant(): Observable< any > {
+    return new Observable((obs) => {
+      const parsed = this.variantService.parse(this.variantInput);
+      if (!parsed.valid) {
+        obs.error({
+          message: `Invalid variant ${ this.variantInput }`
+        });
+        obs.complete();
+        return;
+      }
+      switch (parsed.type) {
+        case 'hgvs':
+          this.genomeBuild = 'hg19'
+          this.api.getGenomLocByHgvsVar(this.variantInput)
+            .pipe(take(1))
+            .subscribe((res) => {
+              if (res.gene) {
+                this.geneEntrezId = res.gene.entrezId;
+                this.onGeneLoad(res.gene);
+              }
+              obs.next({
+                chr: res.chr,
+                pos: res.pos,
+                ref: res.ref,
+                alt: res.alt,
+              });
+              obs.complete();
+            }, (err) => {
+              obs.error(err);
+              obs.complete();
+            });
+          break;
+        case 'coord':
+          obs.next(parsed.variant);
+          obs.complete();
+          break;
+        default:
+          obs.error({
+            message: `Invalid variant ${ this.variantInput }`
+          });
+          obs.complete();
+          break;
+      }
+    });
+  }
 
   onGeneSelectionChange(e: MatSelectChange) {
     this.onGeneLoad(e.value);

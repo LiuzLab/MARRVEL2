@@ -18,7 +18,9 @@ const routes: Routes = [
 
   { path: 'human/gene/:gene', component: HumanResultComponent },
   { path: 'human/variant/:variant', component: HumanResultComponent },
+  { path: 'human/variant/hg38/:variant', component: HumanResultComponent },
   { path: 'human/gene/:gene/variant/:variant', component: HumanResultComponent },
+  { path: 'human/gene/:gene/variant/hg38/:variant', component: HumanResultComponent },
 
   { path: 'human/protein', component: HomeComponent },
   { path: 'human/protein/:protein', component: ReverseAnnotationCandidatesComponent },
