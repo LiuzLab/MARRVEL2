@@ -1,139 +1,103 @@
 const Promise = require('bluebird');
+const fs = require('fs');
+const path = require('path');
 const got = Promise.promisify(require('got'));
+
+const config = require('../config');
 
 const GnomAD = require('../models/gnomAD.model');
 const GnomADGene = require('../models/gnomADGene.model');
 
-const queryByGene = (gene) => {
+const variantQuery = fs.readFileSync(path.join(config.root,
+  'utils/gnomad-variant-query.txt')).toString();
+const geneQuery = fs.readFileSync(path.join(config.root,
+  'utils/gnomad-gene-query.txt')).toString();
+
+const queryByGene = (gene, referenceGenome) => {
+  referenceGenome = referenceGenome || 'GRCh37';
   return new Promise((resolve, reject) => {
     if (!gene.entrezId || !gene.symbol && (!gene.xref || !gene.xref.ensemblId)) {
-      resolve(null);
+      return resolve(null);
+    }
+    const filter = { referenceGenome };
+    if (gene.xref?.ensemblId?.length) {
+      filter.geneId = gene.xref.ensemblId;
     } else {
-      const geneFilter = gene.xref && gene.xref.ensemblId ?
-        `gene_id: "${ gene.xref.ensemblId }"` :
-        `gene_symbol: "${ gene.symbol }"`;
-      got.post('https://gnomad.broadinstitute.org/api/', { json:
-        { query: 'query Gene {\n' +
-            `  gene(${ geneFilter }, reference_genome: GRCh37) {\n` +
-            '    gene_id\n' +
-            '    symbol\n' +
-            '    flags\n' +
-            '    gnomad_constraint {\n' +
-            '      exp_lof\n' +
-            '      exp_mis\n' +
-            '      exp_syn\n' +
-            '      obs_lof\n' +
-            '      obs_mis\n' +
-            '      obs_syn\n' +
-            '      oe_lof\n' +
-            '      oe_lof_lower\n' +
-            '      oe_lof_upper\n' +
-            '      oe_mis\n' +
-            '      oe_mis_lower\n' +
-            '      oe_mis_upper\n' +
-            '      oe_syn\n' +
-            '      oe_syn_lower\n' +
-            '      oe_syn_upper\n' +
-            '      lof_z\n' +
-            '      mis_z\n' +
-            '      syn_z\n' +
-            '      pLI\n' +
-            '      flags\n' +
-            '    }\n' +
-            '  }\n' +
-            '}\n'
-        }
-      }).json().then((doc) => {
-        doc = doc || {};
-        doc.data = doc.data || {};
-        doc.data.gene = doc.data.gene || {};
-        doc.data.gene.gnomad_constraint = doc.data.gene.gnomad_constraint || {};
-        return {
-          entrezId: gene.entrezId,
-          ensemblId: doc.data.gene.gene_id,
-          symbol: doc.data.gene.symbol,
-          mis: {
-            obs: doc.data.gene.gnomad_constraint.obs_mis,
-            z: doc.data.gene.gnomad_constraint.mis_z,
-            exp: doc.data.gene.gnomad_constraint.exp_mis,
-            oe: doc.data.gene.gnomad_constraint.oe_mis,
-            oeLower: doc.data.gene.gnomad_constraint.oe_mis_lower,
-            oeUpper: doc.data.gene.gnomad_constraint.oe_mis_upper,
-          },
-          syn: {
-            obs: doc.data.gene.gnomad_constraint.obs_syn,
-            z: doc.data.gene.gnomad_constraint.syn_z,
-            exp: doc.data.gene.gnomad_constraint.exp_syn,
-            oe: doc.data.gene.gnomad_constraint.oe_syn,
-            oeLower: doc.data.gene.gnomad_constraint.oe_syn_lower,
-            oeUpper: doc.data.gene.gnomad_constraint.oe_syn_upper,
-          },
-          lof: {
-            obs: doc.data.gene.gnomad_constraint.obs_lof,
-            z: doc.data.gene.gnomad_constraint.lof_z,
-            exp: doc.data.gene.gnomad_constraint.exp_lof,
-            oe: doc.data.gene.gnomad_constraint.oe_lof,
-            oeLower: doc.data.gene.gnomad_constraint.oe_lof_lower,
-            oeUpper: doc.data.gene.gnomad_constraint.oe_lof_upper,
-            pLI: doc.data.gene.gnomad_constraint.pLI,
-          },
-          flags: doc.data.gene.flags,
-          lastUpdate: new Date()
-        };
-      }).then((doc) => {
-        GnomADGene.updateOne({ entrezId: doc.entrezId },
-          { '$set': {
-            ensemblId: doc.ensemblId,
-            symbol: doc.symbol,
-            mis: doc.mis,
-            syn: doc.syn,
-            lof: doc.lof,
-            flags: doc.flags,
-            lastUpdate: doc.lastUpdate
-          } }, { upsert: true })
+      filter.geneSymbol = gene.symbol;
+    }
+    got.post('https://gnomad.broadinstitute.org/api/', { json: {
+      operationName: 'Gene',
+      query,
+      variables: filter
+    } }).then((res) => {
+      let data;
+      try {
+        data = JSON.parse(res?.body || '').data.gene;
+      } catch (err) {
+        console.log('Error parsing gnomAD result');
+        console.log(filter);
+        console.log(err);
+        data = {};
+      }
+      data.gnomad_constraint = data.gnomad_constraint || {};
+      return {
+        entrezId: gene.entrezId,
+        ensemblId: data.gene_id,
+        symbol: data.symbol,
+        mis: {
+          obs: data.gnomad_constraint.obs_mis,
+          z: data.gnomad_constraint.mis_z,
+          exp: data.gnomad_constraint.exp_mis,
+          oe: data.gnomad_constraint.oe_mis,
+          oeLower: data.gnomad_constraint.oe_mis_lower,
+          oeUpper: data.gnomad_constraint.oe_mis_upper,
+        },
+        syn: {
+          obs: data.gnomad_constraint.obs_syn,
+          z: data.gnomad_constraint.syn_z,
+          exp: data.gnomad_constraint.exp_syn,
+          oe: data.gnomad_constraint.oe_syn,
+          oeLower: data.gnomad_constraint.oe_syn_lower,
+          oeUpper: data.gnomad_constraint.oe_syn_upper,
+        },
+        lof: {
+          obs: data.gnomad_constraint.obs_lof,
+          z: data.gnomad_constraint.lof_z,
+          exp: data.gnomad_constraint.exp_lof,
+          oe: data.gnomad_constraint.oe_lof,
+          oeLower: data.gnomad_constraint.oe_lof_lower,
+          oeUpper: data.gnomad_constraint.oe_lof_upper,
+          pLI: data.gnomad_constraint.pLI,
+        },
+        flags: data.flags,
+        lastUpdate: new Date()
+      };
+    }).then((doc) => {
+      GnomADGene.updateOne({ entrezId: doc.entrezId },
+        { '$set': doc }, { upsert: true })
         .catch((err) => {
           console.error(err);
         });
-        resolve(doc);
-      }).catch((err) => {
-        reject(err);
-      });
-    }
+      return resolve(doc);
+    }).catch((err) => {
+      return reject(err);
+    });
   });
 };
 exports.queryByGene = queryByGene;
 
-const queryByVariant = (variant) => {
-  return got.post('https://gnomad.broadinstitute.org/api/',
-    { json: { query: '{\n' +
-      '  variant(variantId: "' + variant + '", dataset: gnomad_r2_1) {\n' +
-      '    chrom\n' +
-      '    pos\n' +
-      '    ref\n' +
-      '    alt\n' +
-      '    exome {\n' +
-      '      ac\n' +
-      '      an\n' +
-      '      ac_hemi\n' +
-      '      ac_hom\n' +
-      '      filters\n' +
-      '    }\n' +
-      '    genome {\n' +
-      '      ac\n' +
-      '      an\n' +
-      '      ac_hemi\n' +
-      '      ac_hom\n' +
-      '      filters\n' +
-      '    }\n' +
-      '    transcript_consequences {\n' +
-      '      gene_id\n' +
-      '      gene_symbol\n' +
-      '      transcript_id\n' +
-      '    }\n' +
-      '  }\n' +
-      '}\n'
-    } }
-  ).json().then((res) => {
+const queryByVariant = (variantId, referenceGenome, datasetId) => {
+  referenceGenome = referenceGenome || 'GRCh37';
+  datasetId = datasetId || 'gnomad_r2_1';
+  return got.post('https://gnomad.broadinstitute.org/api/', { json: {
+    operationName: 'GnomadVariant',
+    query: variantQuery,
+    variables: {
+      variantId,
+      referenceGenome,
+      datasetId
+    }
+  } }).json().then((res) => {
     if (res.data == null || res.data.variant == null) {
       return null;
     } else {
@@ -154,14 +118,14 @@ const queryByVariant = (variant) => {
           alleleNum: res.data.variant.genome.an,
           homCount: res.data.variant.genome.ac_hom
         },
-        transcripts: res.data.variant.transcript_consequences
-          .map((item) => {
-            return {
-              geneSymbol: item['gene_symbol'],
-              geneEnsemblId: item['gene_id'],
-              ensemblId: item['transcript_id'],
-            };
-          }),
+        transcripts: res.data.variant.transcript_consequences.map((item) => ({
+          geneSymbol: item['gene_symbol'],
+          geneEnsemblId: item['gene_id'],
+          ensemblId: item['transcript_id'],
+          isCanonical: item['is_canonical'],
+          isManeSelect: item['is_mane_select'],
+          lof: item['lof'],
+        })),
         lastUpdate: new Date()
       };
     }

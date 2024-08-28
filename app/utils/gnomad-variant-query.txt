@@ -1,0 +1,32 @@
+query GnomadVariant($variantId: String!, $datasetId: DatasetId!) {
+  variant(variantId: $variantId, dataset: $datasetId) {
+    variant_id
+    reference_genome
+    chrom
+    pos
+    ref
+    alt
+    exome {
+      ac
+      an
+      ac_hemi
+      ac_hom
+      filters
+    }
+    genome {
+      ac
+      an
+      ac_hemi
+      ac_hom
+      filters
+    }
+    transcript_consequences {
+      gene_id
+      gene_symbol
+      is_canonical
+      is_mane_select
+      lof
+      transcript_id
+    }
+  }
+}

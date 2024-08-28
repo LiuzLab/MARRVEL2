@@ -15,6 +15,8 @@ export class GnomADComponent implements OnInit {
 
   loading = false;
   data: GnomADVariantData;
+  alleleCount?: number;
+  homCount?: number;
 
   constructor(private api: ApiService) { }
 
@@ -25,6 +27,10 @@ export class GnomADComponent implements OnInit {
         .pipe(take(1))
         .subscribe((res) => {
           this.data = res;
+          this.alleleCount = (this.data.exome?.alleleCount || 0) +
+            (this.data.genome?.alleleCount || 0);
+          this.homCount = (this.data.exome?.homCount || 0) +
+            (this.data.genome?.homCount || 0);
           this.loading = false;
         });
     }

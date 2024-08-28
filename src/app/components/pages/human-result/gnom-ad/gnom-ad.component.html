@@ -6,10 +6,10 @@
   <span class="d-table-cell pl-2">
     <span *ngIf="data && data.exome && data.genome">
       Chr{{ data.chr }}:{{ data.pos }} {{ data.ref }}>{{ data.alt }} is found
-      <strong appUnit [count]="data.exome.alleleCount + data.genome.alleleCount" unit="time"></strong>
+      <strong appUnit [count]="alleleCount" unit="time"></strong>
       in the control population (may contain adult-onset diseases).
       There are
-      <strong appUnit [count]="data.exome.homCount + data.genome.homCount" unit="individual"></strong>
+      <strong appUnit [count]="homCount" unit="individual"></strong>
       who are <strong>homozygous</strong> for this variant.
     </span>
   </span>
