@@ -186,7 +186,11 @@ export class SearchBoxComponent implements OnInit {
           break;
         }
         case 6: {
-          this.router.navigate(['human', 'gene', this.gene.entrezId, 'variant', this.variant]);
+          if (this.genomeBuild === 'hg38') {
+            this.router.navigate(['human', 'gene', this.gene.entrezId, 'variant', 'hg38', this.variant]);
+          } else {
+            this.router.navigate(['human', 'gene', this.gene.entrezId, 'variant', this.variant]);
+          }
           break;
         }
         default: {
