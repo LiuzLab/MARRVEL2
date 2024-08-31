@@ -57,8 +57,13 @@ export class HumanResultComponent implements OnInit {
       this.geneEntrezId = param.gene ? +param.gene : null;
       this.variantInput = param.variant || null;
       this.proteinInput = param.protein || null;
-      if (this.route.snapshot.routeConfig?.path === 'human/variant/hg38/:variant') {
-        this.genomeBuild = 'hg38';
+      switch (this.route.snapshot.routeConfig?.path) {
+        case 'human/variant/hg38/:variant':
+          case 'human/gene/:gene/variant/hg38/:variant':
+          this.genomeBuild = 'hg38';
+          break;
+        default:
+          this.genomeBuild = 'hg19';
       }
 
       // Get gene information from server
