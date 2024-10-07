@@ -13,8 +13,11 @@ router.get('/ensembl/isCanonical/:identifiers', async (req, res) => {
   let gotResult = false;
   results = [];
   for (const id of ids) {
-    const trptId = id.split(':')[0];
+    let trptId = id.split(':')[0];
     if (trptId.slice(0, 3) !== 'ENS') continue;
+    if (trptId.indexOf('.') !== -1) {
+      trptId = trptId.split('.')[0];
+    }
 
     let resp = {};
     try {
