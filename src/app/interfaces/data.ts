@@ -58,6 +58,90 @@ export interface DbNSFPData {
     phyloP30wayMammalian?: MethodScore;
   };
 }
+const BPT_SCORES = {
+  weight: {
+    'B': 0,
+    'P': 1,
+    'D': 2,
+  },
+  value: {
+    0: 'Benign',
+    1: 'Possibly Damaging',
+    2: 'Probably Damaging',
+  }
+};
+const HMLN_SCORE = {
+  weight: {
+    'N': 0,
+    'L': 1,
+    'M': 2,
+    'H': 3,
+  },
+  value: {
+    0: 'Neutral (Non-Functional)',
+    1: 'Low (Non-Functional)',
+    2: 'Medium (Functional)',
+    3: 'High (Functional)',
+  }
+};
+const TD_SCORE = {
+  weight: {
+    'T': 0,
+    'D': 1,
+  },
+  value: {
+    0: 'Tolerated',
+    1: 'Damaging',
+  }
+};
+const BAP_SCORE = {
+  weight: {
+    'B': 0,
+    'A': 1,
+    'P': 2,
+  },
+  value: {
+    0: 'Benign',
+    1: 'Ambiguous',
+    2: 'Likely Pathogenic',
+  }
+};
+export const DBNSFP_METHOD_TO_INFO = {
+  Polyphen2HDIV: BPT_SCORES,
+  Polyphen2HVAR: BPT_SCORES,
+  SIFT: BPT_SCORES,
+  FATHMM: TD_SCORE,
+  MCAP: TD_SCORE,
+  MutationTaster: {
+    weight: {
+      'A': 3,
+      'D': 2,
+      'N': 1,
+      'P': 0,
+    },
+    value: {
+      3: 'Disease Causing Automatic',
+      2: 'Disease Causing',
+      1: 'Polymorphism',
+      0: 'Polymorphism Automatic',
+    }
+  },
+  MutationAssessor: HMLN_SCORE,
+  AlphaMissense: BAP_SCORE,
+  LRT: {
+    weight: {
+      'U': 0,
+      'N': 1,
+      'D': 2,
+    },
+    value: {
+      0: 'Unknown',
+      1: 'Neutral',
+      2: 'Deleterious',
+    }
+  }
+};
+
 
 export interface PhenotypePopulated {
   id: string;

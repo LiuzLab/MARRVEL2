@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { Variant } from './../../../../interfaces/variant';
 import { ApiService } from '../../../../services/api.service';
-import { DbNSFPData } from 'src/app/interfaces/data';
+import { DbNSFPData, DBNSFP_METHOD_TO_INFO as METHOD_TO_INFO } from 'src/app/interfaces/data';
 import { Animations } from 'src/app/animations';
 
 @Component({
@@ -40,58 +40,45 @@ export class DbnsfpComponent implements OnInit {
           }
           this.rankAverage = toolCounts > 0 ? this.rankAverage / toolCounts : null;
         }
-        this.data = this.changePredictionLabel(res);
+        this.data = res;
+        console.log(this.data.scores);
         this.loading = false;
       });
   }
 
-  changePredictionLabel(res) {
-    if (res && res.scores) {
-      if (res.scores.MCAP.prediction === 'T') {
-        res.scores.MCAP.prediction = 'Tolerated';
-      }
-      else if (res.scores.MCAP.prediction === 'D') {
-        res.scores.MCAP.prediction = 'Damaging';
-      }
 
-      if (res.scores.Polyphen2HDIV.prediction === 'B') {
-        res.scores.Polyphen2HDIV.prediction = 'Benign';
-      }
-      else if (res.scores.Polyphen2HDIV.prediction === 'P') {
-        res.scores.Polyphen2HDIV.prediction = 'Possibly Damaging';
-      }
-      else if (res.scores.Polyphen2HDIV.prediction === 'D') {
-        res.scores.Polyphen2HDIV.prediction = 'Probably Damaging';
-      }
-
-      if (res.scores.Polyphen2HVAR.prediction === 'B') {
-        res.scores.Polyphen2HVAR.prediction = 'Benign';
-      }
-      else if (res.scores.Polyphen2HVAR.prediction === 'P') {
-        res.scores.Polyphen2HVAR.prediction = 'Possibly Damaging';
-      }
-      else if (res.scores.Polyphen2HVAR.prediction === 'D') {
-        res.scores.Polyphen2HVAR.prediction = 'Probably Damaging';
-      }
-
-      if (res.scores.MutationTaster && res.scores.MutationTaster.prediction) {
-        switch (res.scores.MutationTaster.prediction) {
-          case 'A':
-            res.scores.MutationTaster.prediction = 'Disease Causing Automatic';
-            break;
-          case 'D':
-            res.scores.MutationTaster.prediction = 'Disease Causing';
-            break;
-          case 'N':
-            res.scores.MutationTaster.prediction = 'Polymorphism';
-            break;
-          case 'P':
-            res.scores.MutationTaster.prediction = 'Polymorphism Automatic';
-            break;
-        }
-      }
+  max(numArr: (number | null)[]): number | string {
+    const filtered = numArr.filter((e) => e !== null);
+    if (filtered.length) {
+      return Math.max(...filtered);
     }
-    return res;
+    return '';
   }
 
+  maxStr(strArr: (string | null)[], method: string): string {
+    const weight = METHOD_TO_INFO[method]?.weight;
+    console.log(method, weight);
+    if (!weight) {
+      return '';
+    }
+    return METHOD_TO_INFO[method]?.value[
+      Math.max(
+        ...(strArr.filter((e) => e !== null)
+          .map((e) => weight[e]))
+      )
+    ] || '';
+  }
+
+  getPredLabel(str: string, method: string): string {
+    const weight = METHOD_TO_INFO[method]?.weight;
+    const values = METHOD_TO_INFO[method]?.value;
+    return values[weight[str]] || '';
+  }
+
+  toFixed(num: number | null, digit: number): string {
+    if (num.toFixed) {
+      return num.toFixed(digit);
+    }
+    return '';
+  }
 }
