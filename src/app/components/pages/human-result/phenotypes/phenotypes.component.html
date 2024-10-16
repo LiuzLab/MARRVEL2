@@ -29,7 +29,7 @@
       <div *ngFor="let aGenePheno of phenotypes[taxonId]; index as idx">
         <div class="ribbon-header-row" *ngIf="!showOnlyBest || aGenePheno.bestScore" [@toggle]="!showOnlyBest || aGenePheno.bestScore">
           <div class="ribbon-cell ribbon-org-icon-cell">
-            <img [attr.src]="taxonIdToInfo[taxonId].icon">
+            <img class="w-100" class="w-100" [attr.src]="taxonIdToInfo[taxonId].icon">
           </div>
           <div class="ribbon-cell ribbon-org-name-cell">
             {{ taxonIdToInfo[taxonId].name }}
@@ -71,7 +71,7 @@
   <div class="ribbon-scrollable-column-container">
     <div class="ribbon-header-row">
       <div class="ribbon-cell ribbon-header-img-cell" *ngFor="let cat of categories">
-        <img src="/assets/icons/{{ catNameToIcon[cat.name] }}.svg"
+        <img class="w-100" src="/assets/icons/{{ catNameToIcon[cat.name] }}.svg"
           [ngClass]="{ 'accent': mouseoverCat === cat.name }"
           [matTooltip]="cat.name"
           (mouseenter)="selectCategory(null, null, cat.name, true)">

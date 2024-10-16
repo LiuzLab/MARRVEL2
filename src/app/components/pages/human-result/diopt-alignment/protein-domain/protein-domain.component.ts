@@ -24,7 +24,6 @@ export class ProteinDomainComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.data);
-    this.initTableAcc();
   }
   ngAfterViewInit() {
     this.initTableAcc();

@@ -41,7 +41,6 @@ export class DbnsfpComponent implements OnInit {
           this.rankAverage = toolCounts > 0 ? this.rankAverage / toolCounts : null;
         }
         this.data = res;
-        console.log(this.data.scores);
         this.loading = false;
       });
   }
@@ -57,7 +56,6 @@ export class DbnsfpComponent implements OnInit {
 
   maxStr(strArr: (string | null)[], method: string): string {
     const weight = METHOD_TO_INFO[method]?.weight;
-    console.log(method, weight);
     if (!weight) {
       return '';
     }

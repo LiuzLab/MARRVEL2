@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -19,7 +19,7 @@ import { DIOPTOrtholog } from 'src/app/interfaces/data';
   styleUrls: ['./human-result.component.scss'],
   animations: [ Animations.fadeInOut, Animations.toggleInOut ]
 })
-export class HumanResultComponent implements OnInit {
+export class HumanResultComponent implements OnInit, AfterViewInit {
   geneLoading = true;
   sidenavOpened = true;
 
@@ -125,6 +125,13 @@ export class HumanResultComponent implements OnInit {
           });
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    document.body.style.overflow = 'hidden';
+    if (window.innerWidth <= 768) {   // md
+      this.toggleSidenav({ sidenavOpened: false });
+    }
   }
 
   initValues() {

@@ -1,19 +1,21 @@
-.actions {
-  position: fixed;
-  top: 0px;
-  height: 64px;
-  width: 100%;
-  padding: 0px 16px;
-  background-color: rgb(49, 49, 49);
-}
-.actions button {
-  color: rgba(255, 255, 255, 0.3);
-  margin-top: 12px;
-}
+.human-result-sidenav {
+  .actions {
+    width: 100%;
+    flex: 0 0 64px;
+    padding: 0px 16px;
+    background-color: rgb(49, 49, 49);
+    button {
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 12px;
+    }
+  }
 
-.content {
-  padding: 1em 24px 0px 24px;
-  margin-top: 64px;
+  .content {
+    padding: 1em 0 0 0;
+    &.opened {
+      padding: 1em 32px 0 32px;
+    }
+  }
 }
 
 h4 {
@@ -39,7 +41,7 @@ ul, ul.menu {
 }
 .menu li {
   padding: 0.8em 32px;
-  margin: 0 -24px;
+  margin: 0 -32px;
   min-height: 3em;
   cursor: pointer;
 }
@@ -55,8 +57,7 @@ ul, ul.menu {
   height: 2.7em;
   text-align: center;
   line-height: 1;
-  margin-left: -10px;
-  margin-bottom: 0.3em;
+  margin: 0 auto 0.3em auto;
   font-weight: 600;
 }
 .closed .menu li:hover {

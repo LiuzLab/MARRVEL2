@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -6,33 +6,28 @@ import { DOCUMENT } from '@angular/common';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnChanges {
   @Input() gene: object | null;
   @Input() variant: string | null;
   @Output() change: EventEmitter<any> = new EventEmitter();
-  @Input() startOpened = false;
 
-  sidenavOpened = true;
+  @Input() sidenavOpened = true;
 
   constructor() { }
 
-  ngOnInit() {
-    this.change.emit({
-      sidenavOpened: this.sidenavOpened
-    });
+  ngOnChanges(): void {
   }
 
-  toggleSidenav() {
+  toggleSidenav(): void {
     this.sidenavOpened = !this.sidenavOpened;
     this.change.emit({
       sidenavOpened: this.sidenavOpened
     });
   }
 
-  scrollTo(id: string) {
+  scrollTo(id: string): void {
     this.change.emit({
       scrollTo: id
     });
   }
-
 }

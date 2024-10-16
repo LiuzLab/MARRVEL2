@@ -2,340 +2,340 @@
   Loading ...
 </div>
 
-<div class="sidenav-container">
-  <div class="sidenav" #sidenav [ngClass]="{ 'opened': sidenavOpened, 'closed': !sidenavOpened }">
+<div class="d-flex" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh">
+  <div class="sidenav-content flex-grow-1 flex-column d-flex"
+    [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }">
+    <div>
+      <app-navbar showSearch="true" showMenuButton="true"></app-navbar>
+    </div>
+    <div class="flex-grow-1" style="overflow-x: hidden; overflow-y: auto;">
+      <div id="TOP"></div>
+      <div *ngIf="gene !== null || variant" class="container-fluid py-5 px-md-5">
+        <!-- Gene, Input information starts -->
+        <div class="row">
+          <div class="col-12">
+            <div class="title" *ngIf="!proteinInput">
+              <h1 *ngIf="geneEntrezId && gene">{{ gene.symbol }}</h1>
+              <h1 *ngIf="geneEntrezId && variant">&nbsp;/&nbsp;</h1>
+              <h1 *ngIf="variant">{{ variantString }}</h1>
+              <h1 *ngIf="variantInput && variantInput.indexOf(':c.') != -1">&nbsp;({{ variantInput }})</h1>
+            </div>
+            <div class="subtitle" *ngIf="hg38Variant">
+              <h4>
+                <span class="label">hg38</span>
+                Chr{{ hg38Variant.chr }}:{{ hg38Variant.pos }}
+                {{ hg38Variant.ref }}&gt;{{ hg38Variant.alt }}
+              </h4>
+            </div>
+
+            <div class="title" *ngIf="proteinInput">
+              <h1 class="d-block">{{ proteinInput }}</h1>
+              <h4 class="d-inline-block" style="font-weight: 300; font-size: 0.95em;" *ngIf="gene" [@fadeInOut]>
+                <span class="label">Gene</span>{{ gene.symbol }}
+              </h4>
+              <h4 class="d-inline-block ml-3" style="font-weight: 300; font-size: 0.95em;" *ngIf="variant" [@fadeInOut]>
+                <span class="label">Variant</span>{{ variantString }}
+              </h4>
+            </div>
+          </div>
+          <div class="col-12 mt-3" *ngIf="geneCandidates && geneCandidates.length">
+            <mat-form-field style="margin-bottom: -1.25em">
+              <mat-label>Genes contain Chr{{ variant.chr }}:{{ variant.pos }}</mat-label>
+              <mat-select [value]="gene" (selectionChange)="onGeneSelectionChange($event)">
+                <mat-option *ngFor="let aGene of geneCandidates" [value]="aGene">
+                  {{ aGene.symbol }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 subtitle mt-3" [@toggle]>
+            <div *ngIf="variant" class="d-inline-block">
+              <a class="d-inline mr-3" target="_blank" [attr.href]="'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + variant.chr + ':' + variant.pos">
+                <button mat-flat-button color="primary" class="mb-1">
+                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                  UCSC Genome Browser
+                </button>
+              </a>
+            </div>
+            <div *ngIf="!variant && gene && gene.hg19Start && gene.hg19Stop" class="d-inline-block">
+              <a class="d-inline mr-3" target="_blank" [attr.href]="'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + gene.chr + '%3A' + gene.hg19Start + '-' + gene.hg19Stop">
+                <button mat-flat-button color="primary" class="mb-1">
+                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                  UCSC Genome Browser
+                </button>
+              </a>
+            </div>
+            <div *ngIf="gene" class="d-inline-block">
+              <a class="d-inline mr-3" target="_blank" [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId" *ngIf="gene.hgncId">
+                <button mat-flat-button color="primary" class="mb-1">
+                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                  HGNC
+                </button>
+              </a>
+
+              <a class="d-inline mr-3" target="_blank" [attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId">
+                <button mat-flat-button color="primary" class="mb-1">
+                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                  NCBI Gene
+                </button>
+              </a>
+
+              <a class="d-inline mr-3" target="_blank" [attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol">
+                <button mat-flat-button color="primary" class="mb-1">
+                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                  MyGene2
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-12 subtitle mt-2" *ngIf="gene" [@toggle]>
+            <h4>
+              <span class="label">Gene Name</span>
+              {{ gene.name }}
+            </h4>
+            <h4 *ngIf="gene['alias']" [@toggle]>
+              <span class="label">Gene Aliases</span>
+              {{ gene.alias.join(', ') }}
+            </h4>
+          </div>
+          <div class="col-12" *ngIf="variant">
+            <app-forward-annotation [variant]="variant"></app-forward-annotation>
+          </div>
+
+
+          <div class="col-12 mt-3" *ngIf="gene && gene.entrezSummary" [@toggle]>
+            <h4 class="m-0 title">Entrez Summary of {{ gene.symbol }}</h4>
+            <p class="mt-3 mb-0">{{ gene.entrezSummary }} </p>
+          </div>
+
+        </div>
+        <!-- Gene, Input information ends -->
+
+        <!-- OMIM starts -->
+        <div class="row section mt-5" id="OMIM" *ngIf="geneLoading || gene" [@toggle]>
+          <div class="col-12" [ngClass]="{ 'skeleton': omimLoading }">
+            <h2 class="mb-1 text-uppercase">Disease Data</h2>
+            <app-omim *ngIf="gene" [gene]="gene" [loading]="omimLoading" [data]="omimData"></app-omim>
+          </div>
+        </div>
+        <!-- OMIM ends -->
+
+        <!-- dbNSFP starts -->
+        <div class="row section mt-5" id="DbNSFP" *ngIf="!geneLoading && variant" [@toggle]>
+          <div class="col-12">
+            <h2 class="mb-1 text-uppercase">Disease Data</h2>
+            <app-dbnsfp [variant]="variant"></app-dbnsfp>
+          </div>
+        </div>
+        <!-- dbNSFP ends -->
+
+        <!-- ClinVar starts -->
+        <div class="row section mt-5" id="ClinVar" *ngIf="!geneLoading && gene" [@toggle]>
+          <div class="col-12">
+            <h2 class="mb-1 text-uppercase">Disease Data</h2>
+            <app-clinvar [gene]="gene" [variant]="variant"></app-clinvar>
+          </div>
+        </div>
+        <!-- ClinVar ends -->
+
+        <!-- Geno2MP starts -->
+        <div class="row section mt-5" id="Geno2MP" *ngIf="!geneLoading" [@toggle]>
+          <div class="col-12">
+            <h2 class="mb-1 text-uppercase">Disease Data</h2>
+            <app-geno2mp [gene]="gene" [variant]="variant"></app-geno2mp>
+          </div>
+        </div>
+        <!-- Geno2MP ends -->
+
+        <!-- DECIPHER starts -->
+        <div class="row section mt-5" id="DECIPHER" *ngIf="!geneLoading" [@toggle]>
+          <div class="col-12">
+            <h2 class="mb-1 text-uppercase">Disease Data</h2>
+            <app-decipher-disease [gene]="gene" [variant]="variant"></app-decipher-disease>
+          </div>
+        </div>
+        <!-- DECIPHER ends -->
+
+        <mat-divider class="mt-5"></mat-divider>
+
+        <!-- gnomAD starts -->
+        <div class="row section mt-5" id="GnomAD">
+          <div class="col-12">
+            <h2 class="mb-1 text-uppercase">Control Data</h2>
+
+            <h3 class="mb-0">gnomAD</h3>
+          </div>
+
+          <!-- gnomAD variant -->
+          <div class="col-12 mt-3" *ngIf="!geneLoading && variant" [@toggle]>
+            <h4 class="mt-0 mb-3 d-inline-block align-middle">
+              Population Allele Frequencies of {{ variantString }} from gnomAD
+            </h4>
+            <a class="mb-3 d-inline-block ml-3 align-middle"
+              *ngIf="gene && gene.xref && gene.xref.ensemblId"
+              href="https://gnomad.broadinstitute.org/variant/{{ variant.chr }}-{{ variant.pos }}-{{ variant.ref }}-{{ variant.alt }}?dataset=gnomad_r2_1"
+              target="_blank">
+              <button mat-button color="primary">
+                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                More on gnomAD
+              </button>
+            </a>
+            <app-gnom-ad [variant]="variant"></app-gnom-ad>
+          </div>
+
+          <!-- gnomAD gene -->
+          <div class="col-12 mt-3" *ngIf="!geneLoading && gene" [@toggle]>
+            <h4 class="mt-0 mb-3 d-inline-block align-middle">Control Population Summary of {{ gene.symbol }} from gnomAD</h4>
+            <a class="mb-3 d-inline-block ml-3 align-middle"
+              *ngIf="gene && gene.xref && gene.xref.ensemblId"
+              href="https://gnomad.broadinstitute.org/gene/{{ gene.xref.ensemblId }}?dataset=gnomad_r2_1"
+              target="_blank">
+              <button mat-button color="primary">
+                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                More on gnomAD
+              </button>
+            </a>
+            <app-gnom-ad-gene [gene]="gene"></app-gnom-ad-gene>
+          </div>
+        </div>
+        <!-- gnomAD ends -->
+
+        <!-- DGV starts -->
+        <div class="row section mt-5" id="DGV" *ngIf="!geneLoading && gene" [@toggle]>
+          <div class="col-12">
+            <h2 class="mb-1 text-uppercase">Control Data</h2>
+            <app-dgv *ngIf="gene" [gene]="gene"></app-dgv>
+          </div>
+        </div>
+        <!-- DGV ends -->
+
+        <!-- DECIPHER Control starts -->
+        <div class="row section mt-5" id="DECIPHER-Control" *ngIf="!geneLoading && gene" [@toggle]>
+          <div class="col-12">
+            <h2 class="mb-1 text-uppercase">Control Data</h2>
+            <app-decipher [variant]="variant" [gene]="gene"></app-decipher>
+          </div>
+        </div>
+        <!-- DECIPHER Control ends -->
+
+        <!-- DIOPT Ortholog starts -->
+        <div class="row section" id="orthologs">
+          <div class="col-12 mt-5" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
+            <app-orthologs [gene]="gene" [data]="orthologs"></app-orthologs>
+          </div>
+        </div>
+        <!-- DIOPT Ortholog ends -->
+
+        <div class="row section mt-5" id="expression" *ngIf="!geneLoading && gene" [@toggle]>
+          <div class="col-12">
+            <app-gtex-boxplot [gene]="gene"></app-gtex-boxplot>
+          </div>
+
+          <div class="col-12 mt-5">
+            <app-agr-expression [gene]="gene"></app-agr-expression>
+          </div>
+        </div>
+
+        <div class="row section mt-5" id="phenotypes" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
+          <div class="col-12">
+            <app-phenotypes [gene]="gene" [orthologs]="orthologs"></app-phenotypes>
+          </div>
+        </div>
+
+        <div class="row section mt-5" id="gene-ontology" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
+          <div class="col-12">
+            <h3 class="m-0">Gene Ontology</h3>
+            <app-gene-ontology [gene]="gene" [orthologs]="orthologs" *ngIf="gene"></app-gene-ontology>
+          </div>
+        </div>
+
+        <div class="row section mt-5" id="primate" [@toggle]>
+          <div class="col-12">
+            <app-primate [variant]="variant" [gene]="gene" *ngIf="!geneLoading"></app-primate>
+          </div>
+        </div>
+
+        <div *ngIf="!geneLoading && gene" [@toggle]>
+          <div class="row section mt-5" id="alignment">
+            <!-- SMART Domain starts -->
+            <div class="col-12">
+              <app-smart-protein-domain [gene]="gene"></app-smart-protein-domain>
+            </div>
+            <!-- SMART Domain ends -->
+
+            <!-- Alignment starts -->
+            <div class="col-12 mt-5">
+              <app-diopt-alignment [gene]="gene"></app-diopt-alignment>
+            </div>
+          </div>
+          <!-- Alignment ends -->
+
+          <!-- Protein structure starts -->
+          <div class="row section mt-5" id="protein-structure">
+            <div class="col-12">
+              <h3 class="mt-0 d-block">
+                Human Protein Structure
+              </h3>
+            </div>
+
+            <div class="col-12 mt-3">
+              <app-pdbe [entrezId]="gene.entrezId"></app-pdbe>
+            </div>
+
+            <!-- Alphafold starts -->
+            <div class="col-12">
+              <h4 class="mt-0 mb-3 d-inline-block">
+                Protein Structure Prediction from AlphaFold for {{ gene.symbol }}
+                <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle;">
+                  Beta
+                </span>
+              </h4>
+              <a class="d-inline-block align-middle"
+                *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
+                [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
+                target="_blank"
+              >
+                <button mat-button color="primary">
+                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                  More on AlphaFold Protein Structure Database
+                </button>
+              </a>
+            </div>
+
+            <div class="col-12 mt-3">
+              <app-human-protein-structure
+                *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
+                [uniprotId]="gene.uniprotKBId"></app-human-protein-structure>
+
+              <p *ngIf="!gene.uniprotKBId || !gene.uniprotKBId.length">
+                No protein structure available
+              </p>
+            </div>
+            <!-- Alphafold ends -->
+          </div>
+          <!-- Protein structure ends -->
+
+          <!-- Pharos starts -->
+          <div class="row section mt-5" id="pharos">
+            <div class="col-12">
+              <app-pharos [gene]="gene"></app-pharos>
+            </div>
+          </div>
+          <!-- pharos control ends -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sidenav-container"
+    [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }">
     <app-sidenav
       [variant]="variantString"
       [gene]="gene"
+      [sidenavOpened]="sidenavOpened"
       (change)="toggleSidenav($event)"
     ></app-sidenav>
-  </div>
-
-  <div class="sidenav-content" id="human-result-container"
-    [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
-  >
-    <div id="TOP"></div>
-    <app-navbar showSearch="true" showMenuButton="true"></app-navbar>
-
-    <div *ngIf="gene !== null || variant" class="container-fluid py-5 px-md-5">
-
-      <!-- Gene, Input information starts -->
-      <div class="row">
-        <div class="col-12">
-          <div class="title" *ngIf="!proteinInput">
-            <h1 *ngIf="geneEntrezId && gene">{{ gene.symbol }}</h1>
-            <h1 *ngIf="geneEntrezId && variant">&nbsp;/&nbsp;</h1>
-            <h1 *ngIf="variant">{{ variantString }}</h1>
-            <h1 *ngIf="variantInput && variantInput.indexOf(':c.') != -1">&nbsp;({{ variantInput }})</h1>
-          </div>
-          <div class="subtitle" *ngIf="hg38Variant">
-            <h4>
-              <span class="label">hg38</span>
-              Chr{{ hg38Variant.chr }}:{{ hg38Variant.pos }}
-              {{ hg38Variant.ref }}&gt;{{ hg38Variant.alt }}
-            </h4>
-          </div>
-
-          <div class="title" *ngIf="proteinInput">
-            <h1 class="d-block">{{ proteinInput }}</h1>
-            <h4 class="d-inline-block" style="font-weight: 300; font-size: 0.95em;" *ngIf="gene" [@fadeInOut]>
-              <span class="label">Gene</span>{{ gene.symbol }}
-            </h4>
-            <h4 class="d-inline-block ml-3" style="font-weight: 300; font-size: 0.95em;" *ngIf="variant" [@fadeInOut]>
-              <span class="label">Variant</span>{{ variantString }}
-            </h4>
-          </div>
-        </div>
-        <div class="col-12 mt-3" *ngIf="geneCandidates && geneCandidates.length">
-          <mat-form-field style="margin-bottom: -1.25em">
-            <mat-label>Genes contain Chr{{ variant.chr }}:{{ variant.pos }}</mat-label>
-            <mat-select [value]="gene" (selectionChange)="onGeneSelectionChange($event)">
-              <mat-option *ngFor="let aGene of geneCandidates" [value]="aGene">
-                {{ aGene.symbol }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div class="col-12 subtitle mt-3" [@toggle]>
-          <div *ngIf="variant" class="d-inline-block">
-            <a class="d-inline mr-3" target="_blank" [attr.href]="'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + variant.chr + ':' + variant.pos">
-              <button mat-flat-button color="primary" class="mb-1">
-                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                UCSC Genome Browser
-              </button>
-            </a>
-          </div>
-          <div *ngIf="!variant && gene && gene.hg19Start && gene.hg19Stop" class="d-inline-block">
-            <a class="d-inline mr-3" target="_blank" [attr.href]="'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + gene.chr + '%3A' + gene.hg19Start + '-' + gene.hg19Stop">
-              <button mat-flat-button color="primary" class="mb-1">
-                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                UCSC Genome Browser
-              </button>
-            </a>
-          </div>
-          <div *ngIf="gene" class="d-inline-block">
-            <a class="d-inline mr-3" target="_blank" [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId" *ngIf="gene.hgncId">
-              <button mat-flat-button color="primary" class="mb-1">
-                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                HGNC
-              </button>
-            </a>
-
-            <a class="d-inline mr-3" target="_blank" [attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId">
-              <button mat-flat-button color="primary" class="mb-1">
-                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                NCBI Gene
-              </button>
-            </a>
-
-            <a class="d-inline mr-3" target="_blank" [attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol">
-              <button mat-flat-button color="primary" class="mb-1">
-                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                MyGene2
-              </button>
-            </a>
-          </div>
-        </div>
-
-        <div class="col-12 subtitle mt-2" *ngIf="gene" [@toggle]>
-          <h4>
-            <span class="label">Gene Name</span>
-            {{ gene.name }}
-          </h4>
-          <h4 *ngIf="gene['alias']" [@toggle]>
-            <span class="label">Gene Aliases</span>
-            {{ gene.alias.join(', ') }}
-          </h4>
-        </div>
-        <div class="col-12" *ngIf="variant">
-          <app-forward-annotation [variant]="variant"></app-forward-annotation>
-        </div>
-
-
-        <div class="col-12 mt-3" *ngIf="gene && gene.entrezSummary" [@toggle]>
-          <h4 class="m-0 title">Entrez Summary of {{ gene.symbol }}</h4>
-          <p class="mt-3 mb-0">{{ gene.entrezSummary }} </p>
-        </div>
-
-      </div>
-      <!-- Gene, Input information ends -->
-
-      <!-- OMIM starts -->
-      <div class="row section mt-5" id="OMIM" *ngIf="geneLoading || gene" [@toggle]>
-        <div class="col-12" [ngClass]="{ 'skeleton': omimLoading }">
-          <h2 class="mb-1 text-uppercase">Disease Data</h2>
-          <app-omim *ngIf="gene" [gene]="gene" [loading]="omimLoading" [data]="omimData"></app-omim>
-        </div>
-      </div>
-      <!-- OMIM ends -->
-
-      <!-- dbNSFP starts -->
-      <div class="row section mt-5" id="DbNSFP" *ngIf="!geneLoading && variant" [@toggle]>
-        <div class="col-12">
-          <h2 class="mb-1 text-uppercase">Disease Data</h2>
-          <app-dbnsfp [variant]="variant"></app-dbnsfp>
-        </div>
-      </div>
-      <!-- dbNSFP ends -->
-
-      <!-- ClinVar starts -->
-      <div class="row section mt-5" id="ClinVar" *ngIf="!geneLoading && gene" [@toggle]>
-        <div class="col-12">
-          <h2 class="mb-1 text-uppercase">Disease Data</h2>
-          <app-clinvar [gene]="gene" [variant]="variant"></app-clinvar>
-        </div>
-      </div>
-      <!-- ClinVar ends -->
-
-      <!-- Geno2MP starts -->
-      <div class="row section mt-5" id="Geno2MP" *ngIf="!geneLoading" [@toggle]>
-        <div class="col-12">
-          <h2 class="mb-1 text-uppercase">Disease Data</h2>
-          <app-geno2mp [gene]="gene" [variant]="variant"></app-geno2mp>
-        </div>
-      </div>
-      <!-- Geno2MP ends -->
-
-      <!-- DECIPHER starts -->
-      <div class="row section mt-5" id="DECIPHER" *ngIf="!geneLoading" [@toggle]>
-        <div class="col-12">
-          <h2 class="mb-1 text-uppercase">Disease Data</h2>
-          <app-decipher-disease [gene]="gene" [variant]="variant"></app-decipher-disease>
-        </div>
-      </div>
-      <!-- DECIPHER ends -->
-
-      <mat-divider class="mt-5"></mat-divider>
-
-      <!-- gnomAD starts -->
-      <div class="row section mt-5" id="GnomAD">
-        <div class="col-12">
-          <h2 class="mb-1 text-uppercase">Control Data</h2>
-
-          <h3 class="mb-0">gnomAD</h3>
-        </div>
-
-        <!-- gnomAD variant -->
-        <div class="col-12 mt-3" *ngIf="!geneLoading && variant" [@toggle]>
-          <h4 class="mt-0 mb-3 d-inline-block align-middle">
-            Population Allele Frequencies of {{ variantString }} from gnomAD
-          </h4>
-          <a class="mb-3 d-inline-block ml-3 align-middle"
-            *ngIf="gene && gene.xref && gene.xref.ensemblId"
-            href="https://gnomad.broadinstitute.org/variant/{{ variant.chr }}-{{ variant.pos }}-{{ variant.ref }}-{{ variant.alt }}?dataset=gnomad_r2_1"
-            target="_blank">
-            <button mat-button color="primary">
-              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-              More on gnomAD
-            </button>
-          </a>
-          <app-gnom-ad [variant]="variant"></app-gnom-ad>
-        </div>
-
-        <!-- gnomAD gene -->
-        <div class="col-12 mt-3" *ngIf="!geneLoading && gene" [@toggle]>
-          <h4 class="mt-0 mb-3 d-inline-block align-middle">Control Population Summary of {{ gene.symbol }} from gnomAD</h4>
-          <a class="mb-3 d-inline-block ml-3 align-middle"
-            *ngIf="gene && gene.xref && gene.xref.ensemblId"
-            href="https://gnomad.broadinstitute.org/gene/{{ gene.xref.ensemblId }}?dataset=gnomad_r2_1"
-            target="_blank">
-            <button mat-button color="primary">
-              <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-              More on gnomAD
-            </button>
-          </a>
-          <app-gnom-ad-gene [gene]="gene"></app-gnom-ad-gene>
-        </div>
-      </div>
-      <!-- gnomAD ends -->
-
-      <!-- DGV starts -->
-      <div class="row section mt-5" id="DGV" *ngIf="!geneLoading && gene" [@toggle]>
-        <div class="col-12">
-          <h2 class="mb-1 text-uppercase">Control Data</h2>
-          <app-dgv *ngIf="gene" [gene]="gene"></app-dgv>
-        </div>
-      </div>
-      <!-- DGV ends -->
-
-      <!-- DECIPHER Control starts -->
-      <div class="row section mt-5" id="DECIPHER-Control" *ngIf="!geneLoading && gene" [@toggle]>
-        <div class="col-12">
-          <h2 class="mb-1 text-uppercase">Control Data</h2>
-          <app-decipher [variant]="variant" [gene]="gene"></app-decipher>
-        </div>
-      </div>
-      <!-- DECIPHER Control ends -->
-
-      <!-- DIOPT Ortholog starts -->
-      <div class="row section" id="orthologs">
-        <div class="col-12 mt-5" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
-          <app-orthologs [gene]="gene" [data]="orthologs"></app-orthologs>
-        </div>
-      </div>
-      <!-- DIOPT Ortholog ends -->
-
-      <div class="row section mt-5" id="expression" *ngIf="!geneLoading && gene" [@toggle]>
-        <div class="col-12">
-          <app-gtex-boxplot [gene]="gene"></app-gtex-boxplot>
-        </div>
-
-        <div class="col-12 mt-5">
-          <app-agr-expression [gene]="gene"></app-agr-expression>
-        </div>
-      </div>
-
-      <div class="row section mt-5" id="phenotypes" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
-        <div class="col-12">
-          <app-phenotypes [gene]="gene" [orthologs]="orthologs"></app-phenotypes>
-        </div>
-      </div>
-
-      <div class="row section mt-5" id="gene-ontology" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
-        <div class="col-12">
-          <h3 class="m-0">Gene Ontology</h3>
-          <app-gene-ontology [gene]="gene" [orthologs]="orthologs" *ngIf="gene"></app-gene-ontology>
-        </div>
-      </div>
-
-      <div class="row section mt-5" id="primate" [@toggle]>
-        <div class="col-12">
-          <app-primate [variant]="variant" [gene]="gene" *ngIf="!geneLoading"></app-primate>
-        </div>
-      </div>
-
-      <div *ngIf="!geneLoading && gene" [@toggle]>
-        <div class="row section mt-5" id="alignment">
-          <!-- SMART Domain starts -->
-          <div class="col-12">
-            <app-smart-protein-domain [gene]="gene"></app-smart-protein-domain>
-          </div>
-          <!-- SMART Domain ends -->
-
-          <!-- Alignment starts -->
-          <div class="col-12 mt-5">
-            <app-diopt-alignment [gene]="gene"></app-diopt-alignment>
-          </div>
-        </div>
-        <!-- Alignment ends -->
-
-        <!-- Protein structure starts -->
-        <div class="row section mt-5" id="protein-structure">
-          <div class="col-12">
-            <h3 class="mt-0 d-block">
-              Human Protein Structure
-            </h3>
-          </div>
-
-          <div class="col-12 mt-3">
-            <app-pdbe [entrezId]="gene.entrezId"></app-pdbe>
-          </div>
-
-          <!-- Alphafold starts -->
-          <div class="col-12">
-            <h4 class="mt-0 mb-3 d-inline-block">
-              Protein Structure Prediction from AlphaFold for {{ gene.symbol }}
-              <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle;">
-                Beta
-              </span>
-            </h4>
-            <a class="d-inline-block align-middle"
-              *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
-              [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
-              target="_blank"
-            >
-              <button mat-button color="primary">
-                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                More on AlphaFold Protein Structure Database
-              </button>
-            </a>
-          </div>
-
-          <div class="col-12 mt-3">
-            <app-human-protein-structure
-              *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
-              [uniprotId]="gene.uniprotKBId"></app-human-protein-structure>
-
-            <p *ngIf="!gene.uniprotKBId || !gene.uniprotKBId.length">
-              No protein structure available
-            </p>
-          </div>
-          <!-- Alphafold ends -->
-
-        </div>
-        <!-- Protein structure ends -->
-
-        <!-- Pharos starts -->
-        <div class="row section mt-5" id="pharos">
-          <div class="col-12">
-            <app-pharos [gene]="gene"></app-pharos>
-          </div>
-        </div>
-        <!-- Pharos Control ends -->
-
-      </div>
-    </div>
   </div>
 </div>
 

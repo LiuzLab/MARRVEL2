@@ -5,10 +5,14 @@
       <span class="badge badge-secondary" style="font-size: 0.4em; vertical-align: middle;">DIOPT v{{ versionName }}</span>
     </h3>
     <app-protein-domain
-      *ngIf="!loading"
+      *ngIf="!loading && domainData"
       [data]="domainData"
       (highlight)="highlightDomain($event, 'hs'); scrollToAlignment()"
     ></app-protein-domain>
+
+    <div class="mt-3" *ngIf="!Loading && (!domainData || !domainData.length)">
+      <p>No matches found</p>
+    </div>
   </div>
 </div>
 
