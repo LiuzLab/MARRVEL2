@@ -22,6 +22,7 @@ import { DIOPTOrtholog } from 'src/app/interfaces/data';
 export class HumanResultComponent implements OnInit, AfterViewInit {
   geneLoading = true;
   sidenavOpened = true;
+  smallScreen = false;
 
   // Input
   geneEntrezId: number | null = null;
@@ -130,7 +131,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     document.body.style.overflow = 'hidden';
     if (window.innerWidth <= 768) {   // md
-      this.toggleSidenav({ sidenavOpened: false });
+      this.smallScreen = true;
     }
   }
 

@@ -87,6 +87,24 @@
                   MyGene2
                 </button>
               </a>
+
+              <a class="d-inline mr-3" target="_blank"
+                *ngIf="gene.xref?.ensemblId?.length"
+                [attr.href]="'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=' + gene.xref.ensemblId">
+                <button mat-flat-button color="primary" class="mb-1">
+                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                  Ensembl
+                </button>
+              </a>
+
+              <a class="d-inline mr-3" target="_blank"
+                *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
+                [attr.href]="'https://www.uniprot.org/uniprotkb/' + gene.uniprotKBId">
+                <button mat-flat-button color="primary" class="mb-1">
+                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                  Uniprot
+                </button>
+              </a>
             </div>
           </div>
 
@@ -266,14 +284,14 @@
             <!-- SMART Domain ends -->
 
             <!-- Alignment starts -->
-            <div class="col-12 mt-5">
+            <div class="col-12 mt-5" *ngIf="!smallScreen">
               <app-diopt-alignment [gene]="gene"></app-diopt-alignment>
             </div>
           </div>
           <!-- Alignment ends -->
 
           <!-- Protein structure starts -->
-          <div class="row section mt-5" id="protein-structure">
+          <div class="row section mt-5" id="protein-structure" *ngIf="!smallScreen">
             <div class="col-12">
               <h3 class="mt-0 d-block">
                 Human Protein Structure
@@ -329,7 +347,8 @@
     </div>
   </div>
   <div class="sidenav-container"
-    [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }">
+    [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
+    *ngIf="!smallScreen">
     <app-sidenav
       [variant]="variantString"
       [gene]="gene"

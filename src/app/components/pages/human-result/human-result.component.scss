@@ -47,7 +47,7 @@ h2 {
 
 @include media-breakpoint-down(sm) {
   .sidenav, .mat-sidenav {
-    display: none !important;
+    width: 0px !important;
   }
 }
 
