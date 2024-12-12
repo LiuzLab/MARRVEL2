@@ -8,6 +8,8 @@ router.get('/omim/mimNumber/:mimNumber', omimController.findByMimNumber);
 router.get('/omim/gene/symbol/:symbol', omimController.findByGeneSymbol);
 router.get('/omim/gene/symbol/:symbol/variant/:variant', omimController.findByPair);
 
+router.get('/omim/title/:title', omimController.findByTitle);
+
 // Remove below
 router.get('/omim/symbol/:symbol', omimController.findByGeneSymbol);
 router.get('/omim/gene/:symbol/variant/:variant', omimController.findByPair);
