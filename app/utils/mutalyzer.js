@@ -56,23 +56,13 @@ const getGeneByRefSeqId = (sid) => {
 };
 exports.getGeneByRefSeqId = getGeneByRefSeqId;
 
-exports.getGenomLocByHgvsVar = async (variant) => {
+exports.getGenomLocByHgvsVar = async (variant, build) => {
   return new Promise((resolve, reject) => {
-    const M = variant.match(/([^:]+):([^\.]+)\.([\d]+)([ACGTU]+)>([ACGTU]+)/);
-    if (!M) {
-      return reject(new Error('Invalid variant'));
-    }
-    const ref = M[1];
-    const coordSys = M[2];
-    const pos = M[3];
-    const varRef = M[4];
-    const varAlt = M[5];
+    build = build === 'hg38' ? 'GRCH38' : 'GRCH37';
     // Get gene information from the reference sequence
     rp({
       method: 'GET',
-      uri: `https://mutalyzer.nl/api/position_convert/?reference_id=${ref}` +
-        `&from_coordinate_system=${coordSys}&` +
-        `position=${pos}&to_coordinate_system=g`,
+      uri: `https://mutalyzer.nl/api/normalize/${encodeURIComponent(variant)}`,
       headers: {
         'content-type': 'application/json'
       }
@@ -83,18 +73,19 @@ exports.getGenomLocByHgvsVar = async (variant) => {
       } catch (err) {
         return reject(err);
       }
-      if (!resp.converted_model || !resp.converted_model.variants ||
-        !resp.converted_model.variants.length) {
+      if (!resp.chromosomal_descriptions || !resp.chromosomal_descriptions.length) {
         return reject(new Error('no mutalyzer result'));
       }
-      for (const pos of resp.converted_model.variants) {
-        if (pos.location) {
-          return resolve({
-              chr: gene.hg19Chr,
-              pos: pos.location.position,
-              ref: varRef,
-              alt: varAlt
-          });
+      for (const desc of resp.chromosomal_descriptions) {
+        if (desc.assembly === build && desc.g && desc.g.length) {
+          const M = desc.g.match(/[^:]+:g.([^ACGTU]+)([ACGTU]*)>([ACGTU]*)/);
+          if (M) {
+            return resolve({
+              pos: parseInt(M[1]),
+              ref: M[2],
+              alt: M[3]
+            });
+          }
         }
       }
       return reject(new Error('no mutalyzer result'));
