@@ -11,7 +11,7 @@
     <td mat-cell *matCellDef="let element" class="p-0">
       <img
         *ngIf="element.smiles"
-        [attr.src]="'https://tripod.nih.gov/servlet/renderServletv13?standardize=true&size=96&structure=' + encodeForUrl(element.smiles)"
+        [attr.src]="'https://pharos-api.ncats.io/render?standardize=true&size=96&structure=' + encodeForUrl(element.smiles)"
         style="width: 96px"
       >
     </td>
