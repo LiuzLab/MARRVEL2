@@ -1,3 +1,5 @@
+export const TAXONIDS = [ 10090, 10116, 7955, 7227, 6239, 4896, 4932, 8364 ];
+
 export const TAXONID_TO_INFO = {
   7227: {
     name: 'Fly',

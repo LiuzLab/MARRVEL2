@@ -85,6 +85,7 @@ import { PdbeComponent } from './components/pages/human-result/pdbe/pdbe.compone
 import { ForwardAnnotationComponent } from './components/pages/human-result/forward-annotation/forward-annotation.component';
 import { PrimateComponent } from './components/pages/human-result/primate/primate.component';
 import { SmartProteinDomainComponent } from './components/pages/human-result/smart-protein-domain/smart-protein-domain.component';
+import { ModelmatcherComponent } from './components/pages/human-result/modelmatcher/modelmatcher.component';
 
 @NgModule({
   declarations: [
@@ -142,7 +143,8 @@ import { SmartProteinDomainComponent } from './components/pages/human-result/sma
     PdbeComponent,
     ForwardAnnotationComponent,
     PrimateComponent,
-    SmartProteinDomainComponent
+    SmartProteinDomainComponent,
+    ModelmatcherComponent
   ],
   imports: [
     BrowserModule,

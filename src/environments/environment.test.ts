@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiHost: 'http://marrvel.org:8080'
+  apiHost: 'http://marrvel.org:8080',
+  mmApiHost: 'https://www.modelmatcher.net:8443',
 };
 
 /*

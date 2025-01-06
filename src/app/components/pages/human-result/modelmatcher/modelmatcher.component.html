@@ -1,0 +1,75 @@
+<h3 class="mb-0 d-inline-block align-middle">ModelMatcher</h3>
+<a class="mb-0 d-inline-block ml-3 align-middle"
+  [attr.href]="'https://www.modelmatcher.net:8443/search?symbol=' + gene.symbol + '&taxonId=9606&orthologTaxonId=&iSearch=true'"
+  target="_blank"
+>
+  <button mat-button color="primary">
+    <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+    More on ModelMatcher
+  </button>
+</a>
+
+  <p class="mt-3 mb-0 d-table" *ngIf="!loading && data && data.length" [@toggle]>
+    <mat-icon class="d-table-cell align-top"
+      matTooltip="MARRVEL's comment" matTooltipPosition="above"
+    >insert_comment</mat-icon>
+    <span class="d-table-cell pl-2">
+      There {{ data.length > 1 ? 'are' : 'is' }}
+      <strong appUnit [count]="data.length"
+        unit="scientist match" plural="scientist matches"></strong>
+      with experience in
+      <strong>{{ gene.symbol }}</strong>
+    </span>
+  </p>
+
+<div class="mt-3 w-100">
+  <mat-progress-bar mode="indeterminate" class="w-100"
+    *ngIf="loading && data"></mat-progress-bar>
+
+  <p class="text-muted my-0" *ngIf="!loading && (!data || data.length === 0)">
+    No scientists are currently registered for the gene {{ gene.symbol }}
+  </p>
+
+  <ng-container *ngIf="!loading && data && data.length">
+    <table class="mat-table w-100">
+      <thead>
+        <tr class="mat-header-row">
+          <th class="mat-header-cell" style="width: 0"></th>
+          <th class="mat-header-cell">Gene</th>
+          <th class="mat-header-cell" style="width: 0">
+            <span class="text-underline-dashed"
+              matTooltip="Tier indicates the degree of involvement of a researcher with a gene.">
+              Tier
+            </span>
+          </th>
+          <th class="mat-header-cell">PI</th>
+          <th class="mat-header-cell">Network</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="mat-row" *ngFor="let row of data">
+          <td class="mat-cell pr-2" [matTooltip]="taxonIdToInfo[row.modelOrganism.id].name">
+            <img class="model-icon" [attr.src]="taxonIdToInfo[row.modelOrganism.id].icon">
+          </td>
+          <td class="mat-cell">{{ row.matchingGeneSymbol }}</td>
+          <td class="mat-cell pr-3" [ngClass]="{ 'color-primary font-weight-bold': row.tier === 'Primary' }">
+            {{ row.tier }}
+          </td>
+          <td class="mat-cell">
+            <span *ngIf="row.network === 'ModelMatcher'"
+              [ngClass]="{ 'color-primary font-weight-bold': row.pi === 'Y' }">
+              {{ row.pi }}
+            </span>
+          </td>
+          <td class="mat-cell">
+            <a class="color-primary align-middle font-weight-bold"
+              [attr.href]="row.profileLink" target="_blank">
+              <mat-icon class="icon-18px align-middle mr-1">open_in_new</mat-icon>
+              {{ row.network }}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>

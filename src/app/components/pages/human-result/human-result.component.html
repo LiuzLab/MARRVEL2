@@ -342,6 +342,15 @@
             </div>
           </div>
           <!-- pharos control ends -->
+
+          <!-- Collaboration starts -->
+          <div class="row section mt-5" id="modelmatcher">
+            <div class="col-12">
+              <app-modelmatcher [gene]="gene"
+                *ngIf="!geneLoading"></app-modelmatcher>
+            </div>
+          </div>
+          <!-- Collaboration ends -->
         </div>
       </div>
     </div>

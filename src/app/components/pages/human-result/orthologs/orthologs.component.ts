@@ -3,9 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HumanGene } from 'src/app/interfaces/gene';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
 
-import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
-
-const TAXONIDS = [ 10090, 10116, 7955, 7227, 6239, 4896, 4932, 8364 ];
+import { TAXONIDS, TAXONID_TO_INFO } from 'src/app/data/model-organisms';
 
 @Component({
   selector: 'app-orthologs',

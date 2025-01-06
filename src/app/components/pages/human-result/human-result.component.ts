@@ -246,7 +246,10 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
     if ('sidenavOpened' in e) {
       this.sidenavOpened = e.sidenavOpened;
     } else {
-      window.document.getElementById(e.scrollTo).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const target = window.document.getElementById(e.scrollTo);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   }
 }

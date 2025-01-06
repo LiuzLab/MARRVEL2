@@ -237,11 +237,28 @@ export interface ProteinDomain {
   shape?: PDShape;
   phase?: number;
 }
+
 export interface SmartDomain extends ProteinDomain {
   entrezId: number;
   idx: number;
   type: 'SMART' | 'INTRINSIC' | 'INTRON';
   eValue: number;
   seq?: string;
+}
+
+export interface ModelMatcherData {
+  modelOrganism: {
+    id: number;
+    scientificName: string;
+    commonName: string;
+  };
+  tier: string;
+  network: string;
+  profileLink: string;
+  matchingGeneName: string;
+  matchingGeneId: number;
+  matchingGeneSymbol: string;
+  matchingGeneAliases: string;
+  pi: string | null;
 }
 
