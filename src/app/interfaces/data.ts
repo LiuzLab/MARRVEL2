@@ -260,5 +260,7 @@ export interface ModelMatcherData {
   matchingGeneSymbol: string;
   matchingGeneAliases: string;
   pi: string | null;
+  lastName?: string;
+  organization?: string;
 }
 

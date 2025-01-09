@@ -39,28 +39,32 @@
     <table class="mat-table w-100">
       <thead>
         <tr class="mat-header-row">
-          <th class="mat-header-cell" style="width: 0"></th>
+          <th class="mat-header-cell w-min"></th>
           <th class="mat-header-cell">Gene</th>
-          <th class="mat-header-cell" style="width: 0">
+          <th class="mat-header-cell">Last Name</th>
+          <th class="mat-header-cell mm-cell-institution">Institution</th>
+          <th class="mat-header-cell w-min">
             <span class="text-underline-dashed"
               matTooltip="Tier indicates the degree of involvement of a researcher with a gene.">
               Tier
             </span>
           </th>
-          <th class="mat-header-cell">PI</th>
+          <th class="mat-header-cell" style="min-width: 24px">PI</th>
           <th class="mat-header-cell">Network</th>
         </tr>
       </thead>
       <tbody>
         <tr class="mat-row" *ngFor="let row of data">
-          <td class="mat-cell pr-2" [matTooltip]="taxonIdToInfo[row.modelOrganism.id].name">
-            <img class="model-icon" [attr.src]="taxonIdToInfo[row.modelOrganism.id].icon">
+          <td class="mat-cell pr-1" [matTooltip]="taxonIdToInfo[row.modelOrganism.id].name">
+            <img class="model-icon mr-2" [attr.src]="taxonIdToInfo[row.modelOrganism.id].icon">
           </td>
           <td class="mat-cell">{{ row.matchingGeneSymbol }}</td>
+          <td class="mat-cell mm-cell-name">{{ row.lastName || '' }}</td>
+          <td class="mat-cell mm-cell-institution text-truncate fill-empty pr-2">{{ row.organization }}</td>
           <td class="mat-cell pr-3" [ngClass]="{ 'color-primary font-weight-bold': row.tier === 'Primary' }">
             {{ row.tier }}
           </td>
-          <td class="mat-cell">
+          <td class="mat-cell fill-empty">
             <span *ngIf="row.network === 'ModelMatcher'"
               [ngClass]="{ 'color-primary font-weight-bold': row.pi === 'Y' }">
               {{ row.pi }}

@@ -31,7 +31,12 @@ export class ModelmatcherComponent implements OnChanges {
     this.mmSvc.getScientistsByGeneSymbol(geneSymbol)
       .toPromise()
       .then((res: ModelMatcherData[]) => {
-        this.data = (res || []);
+        this.data = (res || []).map((e) => {
+          if (e.lastName === 'Anonymous Scientist') {
+            e.lastName = null;
+          }
+          return e;
+        });
         this.loading = false;
       }).catch((err: unknown) => {
         this.data = null;

@@ -3,3 +3,32 @@
   height: 18px;
   vertical-align: middle;
 }
+
+
+tr.mat-row {
+  background-color: #fbfbfb !important;
+}
+
+.w-min {
+  width: 0;
+}
+.mm-cell-name {
+  &:empty {
+    color: #ccc;
+    &::before {
+      content: 'Anonymous';
+    }
+  }
+}
+.mm-cell-institution {
+  max-width: calc((100vw - 250px) * 0.2);
+  overflow-x: hidden;
+}
+.fill-empty {
+  &:empty {
+    color: #ccc;
+    &::before {
+      content: '—';
+    }
+  }
+}
