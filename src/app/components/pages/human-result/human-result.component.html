@@ -316,8 +316,8 @@
               <app-ppi
                 [gene]="gene"
                 [data]="ppiData"
-                *ngIf="!ppiLoading"></app-ppi>
-              <p *ngIf="!ppiLoading && !ppiData">
+                *ngIf="!ppiLoading && ppiData && ppiData.length"></app-ppi>
+              <p *ngIf="!ppiLoading && (!ppiData || !ppiData.length)">
                 No protein interaction data available
               </p>
             </div>
