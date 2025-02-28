@@ -173,6 +173,9 @@ const markAlleles = (alleles, variant) => {
 };
 
 const replaceDoc = (doc) => {
+  if (!(doc?.mimNumber)) {
+    return;
+  }
   return OMIM.replaceOne(
     { mimNumber: doc.mimNumber },
     doc,
