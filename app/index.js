@@ -10,7 +10,6 @@ const mongoose = require('mongoose');
 
 const fs = require('fs');
 const http = require('http');
-const https = require('https');
 
 const config = require('./config');
 
@@ -48,11 +47,6 @@ console.log(`DECIPEHR disease data using collection ${ config.decipher.disease.n
 console.log(`DECIPHER disease access is restricted to ${ config.decipher.disease.allowedReferer }`);
 
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer({
-  key: fs.readFileSync(config.https.key, 'utf8'),
-  cert: fs.readFileSync(config.https.cert, 'utf8'),
-  ca: fs.readFileSync(config.https.ca, 'utf8')
-}, app);
 // Mongoose
 mongoose.connect(config.mongo.url + '?authSource=admin', {
   dbName: config.mongo.database,
@@ -68,7 +62,6 @@ mongoose.connect(config.mongo.url + '?authSource=admin', {
     httpServer.listen(config.port, () => {
       console.log('Listening ' + config.port);
     });
-    httpsServer.listen(443);
   }).catch((err) => {
     console.log('Error connecting Mongo DB');
     console.error(err);
