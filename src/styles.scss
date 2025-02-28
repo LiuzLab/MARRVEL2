@@ -374,6 +374,10 @@ div.plot-tooltip {
   padding: 0.5em 2em !important;
   font-size: 1em !important;
 }
+.mat-flat-button.compact {
+  line-height: 28px;
+  padding: 0 8px;
+}
 
 $overflowValues: auto, hidden, scroll;
 .scroll-x {
