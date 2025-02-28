@@ -3,6 +3,7 @@ import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/c
 
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { take } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Variant } from '../interfaces/variant';
@@ -369,5 +370,22 @@ export class ApiService {
         }
       });
     });
+  }
+
+  getPPI(gene: HumanGene): Observable< any > {
+    return new Observable(observer => {
+      this.http.get(`${environment.apiHost}/data/ppi/entrezId/${gene.entrezId}`)
+        .pipe(take(1))
+        .subscribe({
+          next: (res) => {
+            observer.next(res);
+            observer.complete();
+          },
+          error: (err) => {
+            observer.error(err);
+            observer.complete();
+          }
+        });
+      });
   }
 }

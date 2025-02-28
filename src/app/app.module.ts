@@ -30,6 +30,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -86,6 +88,7 @@ import { ForwardAnnotationComponent } from './components/pages/human-result/forw
 import { PrimateComponent } from './components/pages/human-result/primate/primate.component';
 import { SmartProteinDomainComponent } from './components/pages/human-result/smart-protein-domain/smart-protein-domain.component';
 import { ModelmatcherComponent } from './components/pages/human-result/modelmatcher/modelmatcher.component';
+import { PpiComponent } from './components/pages/human-result/ppi/ppi.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +147,8 @@ import { ModelmatcherComponent } from './components/pages/human-result/modelmatc
     ForwardAnnotationComponent,
     PrimateComponent,
     SmartProteinDomainComponent,
-    ModelmatcherComponent
+    ModelmatcherComponent,
+    PpiComponent
   ],
   imports: [
     BrowserModule,
@@ -174,7 +178,9 @@ import { ModelmatcherComponent } from './components/pages/human-result/modelmatc
     MatRadioModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSliderModule,
+    MatMenuModule
   ],
   exports: [
     MatButtonModule,

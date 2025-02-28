@@ -45,6 +45,9 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   orthologsLoading = false;
   orthologs: DIOPTOrtholog[] | null = null;
 
+  ppiLoading = true;
+  ppiData;
+
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
@@ -210,6 +213,23 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
 
     this.getOMIM();
     this.getOrthologs();
+
+    this.getPPI();
+  }
+
+  getPPI() {
+    this.ppiLoading = true;
+    this.api.getPPI(this.gene).subscribe({
+      next: (res) => {
+        this.ppiData = res;
+        this.ppiLoading = false;
+      },
+      error: (err) => {
+        console.log(err);
+        this.ppiData = null;
+        this.ppiLoading = false;
+      }
+    });
   }
 
   getOMIM() {

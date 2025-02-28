@@ -12,6 +12,7 @@ export class SidenavComponent implements OnChanges {
   @Output() change: EventEmitter<any> = new EventEmitter();
 
   @Input() sidenavOpened = true;
+  @Input() smallScreen = false;
 
   constructor() { }
 

@@ -290,6 +290,23 @@
           </div>
           <!-- Alignment ends -->
 
+          <!-- PPI starts -->
+          <div class="row section mt-5" id="ppi">
+            <div class="col-12">
+              <h3 class="m-0">Protein Interactions</h3>
+              <mat-progress-bar mode="indeterminate" class="w-100"
+                *ngIf="ppiLoading"></mat-progress-bar>
+              <app-ppi
+                [gene]="gene"
+                [data]="ppiData"
+                *ngIf="!ppiLoading"></app-ppi>
+              <p *ngIf="!ppiLoading && !ppiData">
+                No protein interaction data available
+              </p>
+            </div>
+          </div>
+          <!-- PPI ends -->
+
           <!-- Protein structure starts -->
           <div class="row section mt-5" id="protein-structure" *ngIf="!smallScreen">
             <div class="col-12">
@@ -363,6 +380,7 @@
       [gene]="gene"
       [sidenavOpened]="sidenavOpened"
       (change)="toggleSidenav($event)"
+      [smallScreen]="smallScreen"
     ></app-sidenav>
   </div>
 </div>

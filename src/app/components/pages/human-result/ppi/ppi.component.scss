@@ -1,0 +1,219 @@
+.graph-control {
+  line-height: 1.5;
+  vertical-align: middle;
+  min-height: 40px;
+}
+
+.layout-control {
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+@media(max-width: 374px) {
+  .graph-control {
+    display: none;
+  }
+}
+
+.graph-popup-container {
+  position: absolute;
+  max-height: 576px;
+  left: 0px;
+  z-index: 9996;
+}
+
+.graph-popup {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 4px;
+  margin: 12px 0px 12px 12px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.graph-popup table {
+  color: initial;
+}
+.graph-control {
+  width: 300px;
+}
+.detail-container {
+  width: auto;
+}
+.detail-container.closed,
+.detail-container.closed > div {
+  overflow: hidden !important;
+}
+.graph-popup .box-default {
+  color: initial;
+}
+
+.legend-container {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgba(255, 255, 255, 0.87);
+  height: 600px;
+  position: absolute;
+  right: 0px;
+  z-index: 9997;
+}
+
+.legend-detail-control {
+  background-color: rgba(255,255,255,0.05);
+}
+.legend-detail-control:hover {
+  background-color: rgba(255,255,255,0.07);
+  cursor: pointer;
+}
+.legend-detail-control > .icon-wrapper {
+  transform: rotateY(0deg);
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.legend-container.opened .legend-detail-control > .icon-wrapper {
+  transform: rotateY(180deg);
+}
+.transform-8 {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.rotateX-0 {
+  transform: rotateY(180deg);
+}
+.rotateX-180 {
+  transform: rotateY(180deg);
+}
+.legend-detail-body {
+  height: 600px;
+  padding: 1rem;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.mat-button-toggle {
+  font-weight: 300;
+  white-space: nowrap;
+  position: relative;
+  color: rgba(0,0,0,.87);
+  background: #fff;
+}
+.mat-button-toggle-checked {
+  background-color: #e0e0e0;
+  color: rgba(0, 0, 0, 0.54);
+}
+.mat-button-toggle-group {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 2px;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+}
+.mat-button-toggle-button {
+  border: 0;
+  background: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+}
+.mat-button-toggle .mat-button-toggle-label-content {
+  line-height: 48px;
+  padding: 0 12px;
+}
+
+.mat-button-toggle-label-content {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: inline-block;
+  line-height: 36px;
+  padding: 0 16px;
+  position: relative;
+}
+
+.mat-button-toggle-group {
+  border-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.mat-button-toggle-group {
+  border: 1px solid rgba(0,0,0,.12);
+    border-top-color: rgba(0, 0, 0, 0.12);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgba(0, 0, 0, 0.12);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgba(0, 0, 0, 0.12);
+    border-left-style: solid;
+    border-left-width: 1px;
+}
+.mat-button-toggle {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.mat-button-toggle-button {
+  background: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+}
+.graph-control.float-right {
+  position: relative;
+  top: -0.0825rem;
+}
+.graph-control.float-right > button,
+.graph-control.float-right > div {
+  vertical-align: middle;
+}
+.box-header > h3,
+.box-header > .graph-control {
+  vertical-align: middle;
+}
+
+.legend-detail-body .legend-graphic-item {
+  position: relative;
+  width: 50px;
+}
+.legend-item:not(:first-child) {
+  margin-top: 1rem;
+}
+.legend-detail-body .legend-graphic-item.legend-graphic-node {
+  top: 0.5rem;
+  height: 30px;
+}
+.legend-detail-body .legend-graphic-item.legend-graphic-line {
+  top: -2px;
+  height: 5px;
+  background-color: #4bb3ad;
+  vertical-align: middle;
+}
+.legend-detail-body .node-text {
+  font-weight: 400;
+  fill: #fff;
+  text-anchor: middle;
+  stroke: #3a4047;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+.fill-primary {
+  fill: #4bb3ad !important;
+}

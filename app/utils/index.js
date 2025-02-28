@@ -1,6 +1,7 @@
 exports.variant = require('./variant');
 exports.gnomADAPI = require('./gnomADAPI');
 exports.omimAPI = require('./omimAPI');
+exports.ppi = require('./ppi');
 
 var moment = require('moment');
 
