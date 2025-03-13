@@ -50,6 +50,8 @@ export interface DbNSFPData {
   scores: {
     CADD?: MethodScore;
     REVEL?: MethodScore;
+    AlphaMissense?: MethodScore;
+    PrimateAI?: MethodScore;
     MCAP?: MethodScore;
     Polyphen2HDIV?: MethodScore;
     Polyphen2HVAR?: MethodScore;
@@ -138,6 +140,16 @@ export const DBNSFP_METHOD_TO_INFO = {
       0: 'Unknown',
       1: 'Neutral',
       2: 'Deleterious',
+    }
+  },
+  PrimateAI: {
+    weight: {
+      'T': 0,
+      'D': 1,
+    },
+    value: {
+      0: 'Tolerated',
+      1: 'Damaging',
     }
   }
 };

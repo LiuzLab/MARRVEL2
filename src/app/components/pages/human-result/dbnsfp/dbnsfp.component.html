@@ -77,18 +77,17 @@
         <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
-              matTooltip="Ensemble method of 13 tools."
-            >
+              matTooltip="Ensemble method of 13 tools.">
               REVEL
+              <span class="ml-1 badge badge-secondary">
+                May 3, 2021
+              </span>
             </span>
           </td>
           <td class="mat-cell number">
-            <span class="text-underline-dashed" *ngIf="data.scores.REVEL && data.scores.REVEL.scores"
+            <span class="text-underline-dashed na" *ngIf="data.scores.REVEL && data.scores.REVEL.scores"
               matTooltip="Range = 0 (least damaging) to 1 (most damaging)"
-            >
-              {{ max(data.scores.REVEL.scores) }}
-            </span>
-            <span class="text-muted" *ngIf="!data.scores.REVEL || !data.scores.REVEL.scores">NA</span>
+            >{{ max(data.scores.REVEL.scores) }}</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
@@ -101,22 +100,58 @@
         <tr class="mat-row">
           <td class="mat-cell">
             <span class="text-underline-dashed"
-              matTooltip="MutationTaster prediction. The score cutoff between Disease Causing and Polymorphism is 0.5 for MTnew and 0.31733 for the rankscore."
-            >
-              MutationTaster
-              <span class="ml-1 badge badge-secondary">v2</span>
+              matTooltip="unsupervised model incorporating structural context of an AlphaFold-derived system predicts the pathogenicity of human missense variants.">
+              AlphaMissense
             </span>
           </td>
           <td class="mat-cell number">
+            <span class="text-underline-dashed number na"
+              *ngIf="data.scores.AlphaMissense && data.scores.AlphaMissense.predictions"
+              matTooltip="Range: 0 to 1. The larger the score, the more likely the variant is pathogenic.">{{ maxStr(data.scores.AlphaMissense.predictions, 'AlphaMissense') }}</span>
+          </td>
+          <td class="mat-cell">
+            <app-rankscore-visual
+              *ngIf="data.scores.AlphaMissense && data.scores.AlphaMissense.predictions"
+              [rankscore]="data.scores.AlphaMissense.rankscore"
+            ></app-rankscore-visual>
+          </td>
+        </tr>
+
+        <tr class="mat-row">
+          <td class="mat-cell">
             <span class="text-underline-dashed"
+              matTooltip="Pathogenicity prediction for missense variants based on common variants of non-human primate species using a deep neural network."
+            >PrimateAI</span>
+          </td>
+          <td class="mat-cell number">
+            <span class="text-underline-dashed"
+              *ngIf="data.scores.PrimateAI && data.scores.PrimateAI.prediction"
+              matTooltip="Possible scores are: Tolerated or Damaging">
+              {{ getPredLabel(data.scores.PrimateAI.prediction, 'PrimateAI') }}
+            </span>
+            <span class="text-muted" *ngIf="!data.scores.PrimateAI || !data.scores.PrimateAI.prediction">NA</span>
+          </td>
+          <td class="mat-cell">
+            <app-rankscore-visual
+              *ngIf="data.scores.PrimateAI && data.scores.PrimateAI.prediction"
+              [rankscore]="data.scores.PrimateAI.rankscore"
+            ></app-rankscore-visual>
+          </td>
+        </tr>
+
+        <tr class="mat-row">
+          <td class="mat-cell">
+            <span class="text-underline-dashed"
+              matTooltip="MutationTaster prediction. The score cutoff between Disease Causing and Polymorphism is 0.5 for MTnew and 0.31733 for the rankscore."
+            >
+              MutationTaster
+              <span class="ml-1 badge badge-secondary">2021</span>
+            </span>
+          </td>
+          <td class="mat-cell number">
+            <span class="text-underline-dashed na"
               *ngIf="data.scores.MutationTaster && data.scores.MutationTaster.predictions"
-              matTooltip="Possible scores are: Disease Causing Automatic, Disease Causing, Polymorphism, and Polymorphism Automatic">
-              {{ maxStr(data.scores.MutationTaster.predictions, 'MutationTaster') }}
-            </span>
-            <span class="text-muted"
-              *ngIf="!data.scores.MutationTaster || !data.scores.MutationTaster.predictions">
-              NA
-            </span>
+              matTooltip="Possible scores are: Disease Causing Automatic, Disease Causing, Polymorphism, and Polymorphism Automatic">{{ maxStr(data.scores.MutationTaster.predictions, 'MutationTaster') }}</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
@@ -135,12 +170,9 @@
               <span class="ml-1 badge badge-secondary">v1.3</span>
             </span>
           </td>
-          <td class="mat-cell number">
+          <td class="mat-cell number na">
             <span class="text-underline-dashed" *ngIf="data.scores.MCAP && data.scores.MCAP.prediction"
-              matTooltip="Possible scores are: Tolerated or Damaging">
-              {{ getPredLabel(data.scores.MCAP.prediction, 'MCAP') }}
-            </span>
-            <span class="text-muted" *ngIf="!data.scores.MCAP || !data.scores.MCAP.prediction">NA</span>
+              matTooltip="Possible scores are: Tolerated or Damaging">{{ getPredLabel(data.scores.MCAP.prediction, 'MCAP') }}</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
@@ -160,12 +192,9 @@
             </span>
           </td>
           <td class="mat-cell number">
-            <span class="text-underline-dashed"
+            <span class="text-underline-dashed na"
               *ngIf="data.scores.Polyphen2HDIV && data.scores.Polyphen2HDIV.predictions"
-              matTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging">
-              {{ maxStr(data.scores.Polyphen2HDIV.predictions, 'Polyphen2HDIV') }}
-            </span>
-            <span class="text-muted" *ngIf="!data.scores.Polyphen2HDIV || !data.scores.Polyphen2HDIV.predictions">NA</span>
+              matTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging">{{ maxStr(data.scores.Polyphen2HDIV.predictions, 'Polyphen2HDIV') }}</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
@@ -185,40 +214,15 @@
             </span>
           </td>
           <td class="mat-cell number">
-            <span class="text-underline-dashed number"
+            <span class="text-underline-dashed number na"
               *ngIf="data.scores.Polyphen2HVAR && data.scores.Polyphen2HVAR.predictions"
-              matTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging">
-              {{ maxStr(data.scores.Polyphen2HVAR.predictions, 'Polyphen2HVAR') }}
-            </span>
+              matTooltip="Possible scores are: Benign, Possibly Damaging, and Probably Damaging">{{ maxStr(data.scores.Polyphen2HVAR.predictions, 'Polyphen2HVAR') }}</span>
             <span class="text-muted" *ngIf="!data.scores.Polyphen2HVAR || !data.scores.Polyphen2HVAR.predictions">NA</span>
           </td>
           <td class="mat-cell">
             <app-rankscore-visual
               *ngIf="data.scores.Polyphen2HVAR && data.scores.Polyphen2HVAR.predictions"
               [rankscore]="data.scores.Polyphen2HVAR.rankscore"
-            ></app-rankscore-visual>
-          </td>
-        </tr>
-
-        <tr class="mat-row">
-          <td class="mat-cell">
-            <span class="text-underline-dashed"
-              matTooltip="unsupervised model incorporating structural context of an AlphaFold-derived system predicts the pathogenicity of human missense variants.">
-              AlphaMissense
-            </span>
-          </td>
-          <td class="mat-cell number">
-            <span class="text-underline-dashed number"
-              *ngIf="data.scores.AlphaMissense && data.scores.AlphaMissense.predictions"
-              matTooltip="Range: 0 to 1. The larger the score, the more likely the variant is pathogenic.">
-              {{ maxStr(data.scores.AlphaMissense.predictions, 'AlphaMissense') }}
-            </span>
-            <span class="text-muted" *ngIf="!data.scores.AlphaMissense || !data.scores.AlphaMissense.predictions">NA</span>
-          </td>
-          <td class="mat-cell">
-            <app-rankscore-visual
-              *ngIf="data.scores.AlphaMissense && data.scores.AlphaMissense.predictions"
-              [rankscore]="data.scores.AlphaMissense.rankscore"
             ></app-rankscore-visual>
           </td>
         </tr>
