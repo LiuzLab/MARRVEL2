@@ -1,110 +1,105 @@
-<div class="row">
-  <div class="col-12">
-    <h3 class="mb-0 d-inline-block align-middle">ClinVar</h3>
-    <a class="mb-0 d-inline-block ml-3 align-middle"
-      *ngIf="urlSearchTerm"
-      [attr.href]="'https://www.ncbi.nlm.nih.gov/clinvar/?term=' + urlSearchTerm"
-      target="_blank"
-    >
-      <button mat-button color="primary">
-        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-        More on ClinVar
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<ng-container *ngIf="!loading">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="mb-0 d-inline-block align-middle">ClinVar</h3>
+      <a class="mb-0 d-inline-block ml-3 align-middle"
+        *ngIf="urlSearchTerm"
+        [attr.href]="'https://www.ncbi.nlm.nih.gov/clinvar/?term=' + urlSearchTerm"
+        target="_blank"
+      >
+        <button mat-button color="primary">
+          <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+          More on ClinVar
+        </button>
+      </a>
+
+      <p class="mt-3 mb-0 d-table" *ngIf="data" [@toggle]>
+        <mat-icon class="d-table-cell align-top"
+          matTooltip="MARRVEL's comment" matTooltipPosition="above"
+        >insert_comment</mat-icon>
+        <span class="d-table-cell pl-2">
+          <span *ngIf="data && data.length > 0">
+            {{ gene.symbol }} has
+            <span appUnit [count]="data.length" unit="reported variant"></span>.
+          </span>
+          <span *ngIf="significance">
+            <strong appUnit [count]="significance['pathogenic']" unit="allele"></strong>
+            {{ significance['pathogenic'] > 1 ? 'are' : 'is' }}  reported as <strong>pathogenic</strong>, and
+            <strong appUnit [count]="significance['likely pathogenic']" unit="allele"></strong>
+            {{ significance['likely pathogenic'] > 1 ? 'are' : 'is' }} reported as <strong>likely pathogenic</strong>.
+          </span>
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="row summary mt-3"  *ngIf="significance && sigFourTotal > 0" [@toggle]>
+    <div class="col-12">
+      <div class="w-100 bar-chart">
+        <div class="bar bg-orange"
+          *ngIf="significance['pathogenic']"
+          [attr.style]="getWidthPercStyle(significance['pathogenic'], sigFourTotal)"
+          [matTooltip]="'Pathoogenic: ' + significance['pathogenic'] + ' alleles'"
+        >
+          <div class="bar-label-wrapper">
+            <span class="bar-label">Pathogenic</span>
+            <span class="bar-value">{{ significance['pathogenic'] }}</span>
+          </div>
+        </div>
+        <div class="bar bg-orange-light"
+          *ngIf="significance['likely pathogenic']"
+          [attr.style]="getWidthPercStyle(significance['likely pathogenic'], sigFourTotal)"
+          [matTooltip]="'Likely Pathoogenic: ' + significance['likely pathogenic'] + ' alleles'"
+        >
+          <div class="bar-label-wrapper">
+            <span class="bar-label">Likely Pathogenic</span>
+            <span class="bar-value">{{ significance['likely pathogenic'] }}</span>
+          </div>
+        </div>
+        <div class="bar bg-blue-light"
+          *ngIf="significance['likely benign']"
+          [attr.style]="getWidthPercStyle(significance['likely benign'], sigFourTotal)"
+          [matTooltip]="'Likely Benign: ' + significance['likely benign'] + ' alleles'"
+        >
+          <div class="bar-label-wrapper">
+            <span class="bar-label">Likely Benign</span>
+            <span class="bar-value">{{ significance['likely benign']  }}</span>
+          </div>
+        </div>
+        <div class="bar bg-blue"
+          *ngIf="significance['benign']"
+          [attr.style]="getWidthPercStyle(significance['benign'], sigFourTotal)"
+          [matTooltip]="'Benign: ' + significance['benign'] + ' alleles'"
+        >
+          <div class="bar-label-wrapper">
+            <span class="bar-label">Benign</span>
+            <span class="bar-value">{{ significance['benign'] }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3" *ngIf="data && data.length > 0" [@toggle]>
+    <div class="col-12">
+      <button mat-button class="px-0 no-overlay"
+        color="primary" disableRipple="true"
+        (click)="alleleVisible = !alleleVisible"
+      >
+        {{ alleleVisible ? 'Hide alleles' : 'Show alleles' }}
+        <mat-icon *ngIf="!alleleVisible">expand_more</mat-icon>
+        <mat-icon *ngIf="alleleVisible">expand_less</mat-icon>
       </button>
-    </a>
 
-    <p class="mt-3 mb-0 d-table" *ngIf="data" [@toggle]>
-      <mat-icon class="d-table-cell align-top"
-        matTooltip="MARRVEL's comment" matTooltipPosition="above"
-      >insert_comment</mat-icon>
-      <span class="d-table-cell pl-2">
-        <span *ngIf="data && data.length > 0">
-          {{ gene.symbol }} has
-          <span appUnit [count]="data.length" unit="reported variant"></span>.
-        </span>
-        <span *ngIf="significance">
-          <strong appUnit [count]="significance['pathogenic']" unit="allele"></strong>
-          {{ significance['pathogenic'] > 1 ? 'are' : 'is' }}  reported as <strong>pathogenic</strong>, and
-          <strong appUnit [count]="significance['likely pathogenic']" unit="allele"></strong>
-          {{ significance['likely pathogenic'] > 1 ? 'are' : 'is' }} reported as <strong>likely pathogenic</strong>.
-        </span>
-      </span>
-    </p>
-  </div>
-</div>
-
-<div class="row summary mt-3"  *ngIf="significance && sigFourTotal > 0" [@toggle]>
-  <div class="col-12">
-    <div class="w-100 bar-chart">
-      <div class="bar bg-orange"
-        *ngIf="significance['pathogenic']"
-        [attr.style]="getWidthPercStyle(significance['pathogenic'], sigFourTotal)"
-        [matTooltip]="'Pathoogenic: ' + significance['pathogenic'] + ' alleles'"
-      >
-        <div class="bar-label-wrapper">
-          <span class="bar-label">Pathogenic</span>
-          <span class="bar-value">{{ significance['pathogenic'] }}</span>
-        </div>
-      </div>
-      <div class="bar bg-orange-light"
-        *ngIf="significance['likely pathogenic']"
-        [attr.style]="getWidthPercStyle(significance['likely pathogenic'], sigFourTotal)"
-        [matTooltip]="'Likely Pathoogenic: ' + significance['likely pathogenic'] + ' alleles'"
-      >
-        <div class="bar-label-wrapper">
-          <span class="bar-label">Likely Pathogenic</span>
-          <span class="bar-value">{{ significance['likely pathogenic'] }}</span>
-        </div>
-      </div>
-      <div class="bar bg-blue-light"
-        *ngIf="significance['likely benign']"
-        [attr.style]="getWidthPercStyle(significance['likely benign'], sigFourTotal)"
-        [matTooltip]="'Likely Benign: ' + significance['likely benign'] + ' alleles'"
-      >
-        <div class="bar-label-wrapper">
-          <span class="bar-label">Likely Benign</span>
-          <span class="bar-value">{{ significance['likely benign']  }}</span>
-        </div>
-      </div>
-      <div class="bar bg-blue"
-        *ngIf="significance['benign']"
-        [attr.style]="getWidthPercStyle(significance['benign'], sigFourTotal)"
-        [matTooltip]="'Benign: ' + significance['benign'] + ' alleles'"
-      >
-        <div class="bar-label-wrapper">
-          <span class="bar-label">Benign</span>
-          <span class="bar-value">{{ significance['benign'] }}</span>
-        </div>
+      <div class="mt-2"
+        [@toggle]="alleleVisible">
+        <app-clinvar-variants-table
+          [gene]="gene"
+          [variant]="variant"
+          [data]="data"
+        ></app-clinvar-variants-table>
       </div>
     </div>
   </div>
-</div>
-
-<div class="row mt-3" *ngIf="data && data.length > 0" [@toggle]>
-  <div class="col-12">
-    <button mat-button class="px-0 no-overlay"
-      color="primary" disableRipple="true"
-      (click)="alleleVisible = !alleleVisible"
-    >
-      {{ alleleVisible ? 'Hide alleles' : 'Show alleles' }}
-      <mat-icon *ngIf="!alleleVisible">expand_more</mat-icon>
-      <mat-icon *ngIf="alleleVisible">expand_less</mat-icon>
-    </button>
-
-    <div class="mt-2"
-      [@toggle]="alleleVisible"
-    >
-      <!--app-basic-datatable
-        [data]="data"
-        [displayedColumns]="['title', 'location', 'condition', 'significanceText', 'reviewStatus']"
-        [columnNames]="['Variation', 'Location', 'Condition(s)', 'Clinical Significance', 'Review Status']"
-        title="Reported Alleles From ClinVar"
-        unit="Allele"
-      ></app-basic-datatable-->
-      <app-clinvar-variants-table
-        [gene]="gene"
-        [variant]="variant"
-        [data]="data"
-      ></app-clinvar-variants-table>
-    </div>
-  </div>
-</div>
+</ng-container>

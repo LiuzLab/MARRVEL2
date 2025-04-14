@@ -42,8 +42,18 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
       return data.sort((a, b) => {
         const aMatching = this.variant && a.start <= this.variant.pos && this.variant.pos <= a.stop;
         const bMatching = this.variant && b.start <= this.variant.pos && this.variant.pos <= b.stop;
-        if (this.variant && this.showMatchingVarsFirst && aMatching !== bMatching) {
-          return aMatching ? -1 : 1;
+        if (this.variant) {
+          // Exact match
+          if (a.start === a.stop && a.start === this.variant.pos) {
+            return -1;
+          }
+          if (b.start === b.stop && b.start === this.variant.pos) {
+            return 1;
+          }
+          // Includes the location
+          if (this.showMatchingVarsFirst && aMatching !== bMatching) {
+            return aMatching ? -1 : 1;
+          }
         }
         const dirMul = sort.direction === 'asc' ? 1 : -1;
         switch (sort.active) {
