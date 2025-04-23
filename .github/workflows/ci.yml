@@ -1,0 +1,98 @@
+name: Build and Deploy
+on:
+  push:
+    branches: [master]
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Build docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/ai-marrvel-frontend ./aiMarrvelFrontend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/ai-marrvel-backend ./aiMarrvelBackend
+
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Publish image to docker hub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/ai-marrvel-frontend:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/ai-marrvel-backend:latest
+
+  deploy-production-server:
+    needs: build
+    runs-on: [self-hosted, production]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Copy configuration files from S3
+        run: |
+          aws s3 cp s3://${{ secrets.CONF_BUCKET_NAME }} /tmp/aim_config/ --recursive
+
+      - name: Get .env file from S3
+        run: |
+          aws s3 cp s3://${{ secrets.CONF_BUCKET_NAME }}/.env/Production/.env /tmp/.env
+
+      - name: Pull image from docker hub & run
+        run: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/ai-marrvel-frontend
+          docker-compose run --rm frontend
+          docker pull ${{ secrets.DOCKER_USERNAME }}/ai-marrvel-backend
+          docker-compose down
+          docker-compose up -d backend
+
+  deploy-analysis-server:
+    runs-on: [self-hosted, analysis]
+    strategy:
+      matrix:
+        runner: [1, 2]
+    defaults:
+      run:
+        working-directory: ./aiMarrvelBackend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Copy configuration files from S3
+        run: |
+          aws s3 cp s3://${{ secrets.CONF_BUCKET_NAME }}/config/ ./config/ --recursive
+
+      - name: Get .env file from S3
+        run: |
+          aws s3 cp s3://${{ secrets.CONF_BUCKET_NAME }}/.env/${{ runner.name }}/.env ./.env
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
