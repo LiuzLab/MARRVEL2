@@ -1,13 +1,12 @@
 FROM node:20
 ARG ANGULAR_ENV=production
 
-RUN mkdir -p /app/aiMarrvelFrontend
-WORKDIR /app/aiMarrvelFrontend
+RUN mkdir -p /marrvel
+WORKDIR /marrvel
 
 # Install dependencies
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
-
 
 # Copy the rest of the application
 COPY . .
