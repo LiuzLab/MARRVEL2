@@ -17,7 +17,7 @@ const getByMimNumberAndUpdate = (mimNumber) => {
       .then((doc) => {
         if (!doc || !doc.lastUpdate || utils.isOlderThan(doc.lastUpdate, 14)) {
           return utils.omimAPI.queryByMimNumber(mimNumber).then((apiRes) => {
-            replaceDoc(doc);
+            replaceDoc(apiRes);
             return apiRes;
           }).catch((err) => {
             return doc ? doc : reject(err);
