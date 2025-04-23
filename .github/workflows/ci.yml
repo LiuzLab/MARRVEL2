@@ -1,0 +1,62 @@
+name: Build and Deploy
+on:
+  push:
+    branches: [master, ci]
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build:
+    if: github.repository == 'liuzLab/marrvel2'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Build docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/marrvel-client ./client
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/marrvel-server ./server
+
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Publish image to docker hub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/marrvel-client:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/marrvel-server:latest
+
+  deploy-production-server:
+    needs: build
+    runs-on: [self-hosted, production]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Get configuration files from S3
+        run: |
+          aws s3 sync s3://${{ secrets.CONF_BUCKET_NAME }} /tmp/config
+
+      - name: Get TransVar reference and annotation files from S3
+        run: |
+          aws s3 sync s3://${{ secrets.TRANSVAR_REF_BUCKET_NAME }} /tmp/transvar.download
+
+      - name: Pull image from docker hub & run
+        run: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/marrvel-client
+          docker compose run --rm client
+          docker pull ${{ secrets.DOCKER_USERNAME }}/marrvel-server
+          docker compose down
+          docker compose up -d server

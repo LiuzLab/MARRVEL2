@@ -1,0 +1,14 @@
+# dependencies
+/node_modules
+
+# TransVar
+env
+transvar/
+_transvar/
+
+# Credentials
+/config/*/
+/config/*/
+
+# Misc.
+.env

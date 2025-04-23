@@ -1,0 +1,18 @@
+services:
+  client:
+    image: zhandongliulab/marrvel-client
+    volumes:
+      - /tmp/dist:/output
+    command: sh -c "cp -r dist/* /output/"
+
+  server:
+    image: zhandongliulab/marrvel-server
+    working_dir: /MARRVEL/server
+    volumes:
+      - /tmp/.env:/MARRVEL/server/.env
+      - /tmp/dist:/MARRVEL/dist
+      - /tmp/config:/tmp/config
+      - /tmp/transvar.download:/root/.transvar.download
+    ports:
+      - "8080:8080"
+    command: sh -c "cp -r /tmp/config/* /MARRVEL/server/config/ && npm start"

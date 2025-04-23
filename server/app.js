@@ -32,7 +32,7 @@ routes.forEach((router) => {
   app.use('/data', require(router));
 });
 
-app.use(express.static('dist/MARRVEL'));
+app.use(express.static('../dist/MARRVEL'));
 
 app.get('/doc', (req, res) => {
   res.sendFile(path.join(config.root, '../dist/doc/index.html'));

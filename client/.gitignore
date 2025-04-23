@@ -1,0 +1,16 @@
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# dependencies
+/node_modules
+
+# Credentials
+src/config/*
+
+.angulardoc.json

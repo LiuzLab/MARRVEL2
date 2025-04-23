@@ -1,24 +1,18 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
 # compiled output
-/dist
-/tmp
-/out-tsc
-
-# dependencies
-/node_modules
+**/dist
+**/tmp
+server/out-tsc
 
 # IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-*.orig
+**/.idea
+**/.project
+**/.classpath
+**/.c9/
+**/*.launch
+**/.settings/
+**/*.sublime-workspace
+**/*.orig
 .vscode
-.angulardoc.json
 
 # IDE - VSCode
 .vscode/*
@@ -27,31 +21,14 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# e2e
-/e2e/*.js
-/e2e/*.map
-
 # System Files
-.DS_Store
-Thumbs.db
 **/.DS_Store
-
-# TransVar
-env
-transvar/
-_transvar/
-
-# Credentials
-/app/config/*/
-/app/config/*/
-src/config/*
+**/Thumbs.db
 
 # Logs and backups
-backup/
-logs/
-*.log
-
-# Static files
+**/backup/
+**/logs/
+**/*.log
 
 # misc
 /.sass-cache
@@ -62,4 +39,4 @@ npm-debug.log
 testem.log
 /typings
 /key
-*.pem
+**/*.pem
