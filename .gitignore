@@ -54,6 +54,7 @@ logs/
 # Static files
 
 # misc
+.env
 /.sass-cache
 /connect.lock
 /coverage
