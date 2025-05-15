@@ -1,0 +1,55 @@
+<app-navbar showSearch="true" showMenuButton="true"></app-navbar>
+
+<div class="container-fluid py-5 px-md-5">
+  <div class="row">
+    <div class="col-12 title">
+      <h1>Search Results: Candidate Genes Matching "{{keyword}}"</h1>
+    </div>
+
+    <div class="col-12 text-center mt-3" *ngIf="loading">
+      loading...
+    </div>
+
+    <div class="col-12 mt-3" *ngIf="!loading && genes?.length">
+      <table class="m-table mat-table w-100">
+        <thead>
+          <tr class="mat-header-row">
+            <th class="mat-header-cell">Symbol</th>
+            <th class="mat-header-cell">Alias</th>
+            <th class="mat-header-cell">Coordinate</th>
+            <th class="mat-header-cell">Type</th>
+            <th class="mat-header-cell"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let gene of genes" class="mat-row">
+            <td class="mat-cell" [innerHtml]="getSymbol(gene)"></td>
+            <td class="mat-cell" [innerHtml]="getAlias(gene)"></td>
+            <td class="mat-cell">Chr{{ gene.chr }}:{{ gene.hg19Start }}-{{ gene.hg19Stop }}</td>
+            <td class="mat-cell text-capitalize">{{ gene.type }}</td>
+            <td class="mat-cell">
+              <a [attr.href]="'/human/gene/' + gene.entrezId + urlPostfix"
+                mat-flat-button color="primary"
+              >MARRVEL it</a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="!loading && error">
+          <tr class="mat-row">
+            <td colspan="5" class="mat-cell">
+              <span class="">Sorry, something went wrong on our end. Please try again in a moment.</span>
+            </td>
+          </tr>
+        </tfoot>
+
+        <tfoot *ngIf="!loading && (!genes || !genes.length)">
+          <tr class="mat-row">
+            <td colspan="5" class="mat-cell">
+              <span class="">Could not find any gene candidates for {{ keyword }}</span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

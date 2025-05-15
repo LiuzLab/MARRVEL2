@@ -89,6 +89,7 @@ import { PrimateComponent } from './components/pages/human-result/primate/primat
 import { SmartProteinDomainComponent } from './components/pages/human-result/smart-protein-domain/smart-protein-domain.component';
 import { ModelmatcherComponent } from './components/pages/human-result/modelmatcher/modelmatcher.component';
 import { PpiComponent } from './components/pages/human-result/ppi/ppi.component';
+import { HumanSearchComponent } from './components/pages/human-search/human-search.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { PpiComponent } from './components/pages/human-result/ppi/ppi.component'
     PrimateComponent,
     SmartProteinDomainComponent,
     ModelmatcherComponent,
-    PpiComponent
+    PpiComponent,
+    HumanSearchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,18 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 import { ApiService } from '../../services/api.service';
+import { GeneService } from '../../services/gene.service';
+import { SearchService } from '../../services/search.service';
+
 import { Animations } from 'src/app/animations';
+
 import { Gene, HumanGene } from 'src/app/interfaces/gene';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search-box',
@@ -24,7 +28,7 @@ export class SearchBoxComponent implements OnInit {
   geneKeyword = '';
   protein  = '';
   variant  = '';
-  genomeBuild = 'hg19';
+  genomeBuild: 'hg19' | 'hg38' = 'hg19';
   modelGene: Gene | null = null;
 
   geneInputCtrl = new FormControl();
@@ -58,6 +62,8 @@ export class SearchBoxComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
+    private geneSvc: GeneService,
+    private searchSvc: SearchService,
     public dialog: MatDialog,
     private sanitizer: DomSanitizer
   ) { }
@@ -90,9 +96,12 @@ export class SearchBoxComponent implements OnInit {
     this.variantInputCtrl.setValue('');
   }
 
-  onGeneInput(e) {
-    this.geneKeyword = e.target.value;
-    const keyword = e.target.value;
+  onGeneInput(e: KeyboardEvent, value: string): void {
+    if (this.geneKeyword === value) {
+      return;
+    }
+    this.geneKeyword = value;
+    const keyword = value;
     if (keyword) {
       this.api.getGenesBySymbolPrefix(9606, keyword)
         .subscribe((res) => {
@@ -102,6 +111,24 @@ export class SearchBoxComponent implements OnInit {
         });
     } else {
       this.geneSuggestion = [];
+    }
+  }
+
+  onEnterKey(value?: string): void {
+    if (this.gene) {
+      // Gene is selected from autocomplete
+      this.getResult();
+      return;
+    }
+
+    const keyword = value ? value.trim() : this.geneInputCtrl.value?.trim();
+    if (keyword?.length) {
+      // some characters in gene input box => search
+      this.search(keyword);
+    } else {
+      // no gene keyword (triggered by variant box) => redirect to result page
+      this.variantInputCtrl.markAsTouched();
+      this.getResult();
     }
   }
 
@@ -121,20 +148,12 @@ export class SearchBoxComponent implements OnInit {
       if (value) {
         this.gene = this.geneSuggestion[value];
       }
-
-      if (input) {
-        input.value = '';
-      }
-      this.geneKeyword = '';
-      this.geneInputCtrl.setValue(null);
-      this.geneSuggestion = [];
     }
   }
   removeGene(gene) {
     this.gene = null;
     this.geneKeyword = '';
   }
-
 
   onVariantInput(e) {
     this.variant = e.target.value;
@@ -159,45 +178,24 @@ export class SearchBoxComponent implements OnInit {
     return false;
   }
 
-  search() {
+  getResult(): void {
+    if (this.variantInputCtrl.invalid) {
+      return;
+    }
+
     if (this.selectedInputType === 'modelgene') {
       this.router.navigate([ 'model', 'gene', this.modelGene.entrezId ]);
     } else {
-      let inputType  = 0;
-      if (this.protein !== '') inputType |= 1;
-      if (this.gene != null) inputType |= 2;
-      if (this.variant !== '') inputType |= 4;
-
-      switch (inputType) {
-        case 1: {
-          this.router.navigate(['human', 'protein', this.protein ]);
-          break;
-        }
-        case 2: {
-          this.router.navigate(['human', 'gene', this.gene.entrezId ]);
-          break;
-        }
-        case 4: {
-          if (this.genomeBuild === 'hg38') {
-            this.router.navigate(['human', 'variant', 'hg38', this.variant ]);
-          } else {
-            this.router.navigate(['human', 'variant', this.variant ]);
-          }
-          break;
-        }
-        case 6: {
-          if (this.genomeBuild === 'hg38') {
-            this.router.navigate(['human', 'gene', this.gene.entrezId, 'variant', 'hg38', this.variant]);
-          } else {
-            this.router.navigate(['human', 'gene', this.gene.entrezId, 'variant', this.variant]);
-          }
-          break;
-        }
-        default: {
-        break;
-        }
-      }
+      this.searchSvc.redirect(this.selectedInputType as 'gene' | 'protein',
+        this.gene, this.variant, this.genomeBuild);
     }
+  }
+
+  search(keyword?: string): void {
+    this.router.navigate(['search', 'human'], { queryParams: {
+      keyword: keyword || this.geneInputCtrl.value || '',
+      variant: this.variant || ''
+    } });
   }
 
   openYouTubeDialog() {
