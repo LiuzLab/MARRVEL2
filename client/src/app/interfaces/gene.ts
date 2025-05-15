@@ -8,6 +8,7 @@ export interface Gene {
   name?: string;
   status?: string;
   alias?: string[];
+  prevSymbols?: string[];
   locusType?: string;
   chr?: string;
   location?: string;

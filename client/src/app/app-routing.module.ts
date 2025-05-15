@@ -7,9 +7,7 @@ import { FaqComponent } from './components/pages/faq/faq.component';
 import { HumanResultComponent } from './components/pages/human-result/human-result.component';
 import { BatchComponent } from './components/pages/batch/batch.component';
 import { MultipleGenesComponent } from './components/pages/batch/multiple-genes/multiple-genes.component';
-
-// TODO: Remove below
-import { GtexBoxplotComponent } from './components/pages/human-result/gtex-boxplot/gtex-boxplot.component';
+import { HumanSearchComponent } from './components/pages/human-search/human-search.component';
 import { ReverseAnnotationCandidatesComponent } from './components/reverse-annotation-candidates/reverse-annotation-candidates.component';
 import { ModelGeneHumanOrthologsComponent } from './components/model-gene-human-orthologs/model-gene-human-orthologs.component';
 
@@ -21,6 +19,8 @@ const routes: Routes = [
   { path: 'human/variant/hg38/:variant', component: HumanResultComponent },
   { path: 'human/gene/:gene/variant/:variant', component: HumanResultComponent },
   { path: 'human/gene/:gene/variant/hg38/:variant', component: HumanResultComponent },
+
+  { path: 'search/human', component: HumanSearchComponent },
 
   { path: 'human/protein', component: HomeComponent },
   { path: 'human/protein/:protein', component: ReverseAnnotationCandidatesComponent },
@@ -35,8 +35,6 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
 
   { path: 'faq', component: FaqComponent },
-
-  { path: 'plot', component: GtexBoxplotComponent },    // TO DO: remove this
 
 ];
 
