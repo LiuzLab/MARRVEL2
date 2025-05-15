@@ -6,6 +6,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 import { ApiService } from '../../services/api.service';
+import { GeneService } from '../../services/gene.service';
 import { Animations } from 'src/app/animations';
 import { Gene, HumanGene } from 'src/app/interfaces/gene';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -58,6 +59,7 @@ export class SearchBoxComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
+    private geneSvc: GeneService,
     public dialog: MatDialog,
     private sanitizer: DomSanitizer
   ) { }
@@ -90,9 +92,12 @@ export class SearchBoxComponent implements OnInit {
     this.variantInputCtrl.setValue('');
   }
 
-  onGeneInput(e) {
-    this.geneKeyword = e.target.value;
-    const keyword = e.target.value;
+  onGeneInput(e: KeyboardEvent, value: string): void {
+    if (this.geneKeyword === value) {
+      return;
+    }
+    this.geneKeyword = value;
+    const keyword = value;
     if (keyword) {
       this.api.getGenesBySymbolPrefix(9606, keyword)
         .subscribe((res) => {
@@ -102,6 +107,40 @@ export class SearchBoxComponent implements OnInit {
         });
     } else {
       this.geneSuggestion = [];
+    }
+  }
+
+  onEnterKey(value?: string): void {
+    if (this.gene) {
+      // Gene is selected from autocomplete
+      this.search();
+      return;
+    }
+
+    const keyword = value ? value.trim() : this.geneInputCtrl.value?.trim();
+    if (keyword?.length) {
+      // gene search keyword
+      this.geneSvc.searchBySymbol(keyword, 9606).subscribe({
+        next: (genes: HumanGene[]) => {
+          if (genes[0]?.symbol.toLowerCase() === keyword.toLowerCase()) {
+            // treat it as the exact match
+            this.gene = genes[0];
+            this.geneInputCtrl.setValue(null);
+            this.geneInput.nativeElement.value = '';
+            this.search();
+          } else {
+            console.log(genes);
+            console.log(' > Show list');
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    } else {
+      // no gene keyword (triggered by variant box)
+      this.variantInputCtrl.markAsTouched();
+      this.search();
     }
   }
 
@@ -121,20 +160,12 @@ export class SearchBoxComponent implements OnInit {
       if (value) {
         this.gene = this.geneSuggestion[value];
       }
-
-      if (input) {
-        input.value = '';
-      }
-      this.geneKeyword = '';
-      this.geneInputCtrl.setValue(null);
-      this.geneSuggestion = [];
     }
   }
   removeGene(gene) {
     this.gene = null;
     this.geneKeyword = '';
   }
-
 
   onVariantInput(e) {
     this.variant = e.target.value;
@@ -160,6 +191,10 @@ export class SearchBoxComponent implements OnInit {
   }
 
   search() {
+    if (this.variantInputCtrl.invalid) {
+      return;
+    }
+
     if (this.selectedInputType === 'modelgene') {
       this.router.navigate([ 'model', 'gene', this.modelGene.entrezId ]);
     } else {
