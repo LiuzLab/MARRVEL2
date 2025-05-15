@@ -61,15 +61,27 @@ exports.getByGeneSymbol = (symbol) => {
 };
 
 const getByGeneEntrezId = (entrezId) => {
-  return new Promise((resolve, reject) => {
-    Genes.findOne({ entrezId: parseInt(entrezId) }, { 'clinVarIds': 1 })
-      .populate({ path: 'clinVar', select: { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, '_id': 0 } })
-      .then((doc) => {
-        if (!doc || !doc.clinVar) resolve([]);
-        else resolve(doc.clinVar);
-      }).catch((err) => {
-        reject(err);
-      });
+  return new Promise(async (resolve, reject) => {
+    try {
+      const gene = await Genes.findOne({ entrezId: parseInt(entrezId) },
+        'chr hg19Start hg19Stop').lean();
+      const docs = await ClinVar.find({
+        chr: gene.chr,
+        '$or': [
+          // gene.hg19Start <= start <= gene.hg19Stop
+          { start: { $gte: gene.hg19Start, $lte: gene.hg19Stop } },
+          // start <= gene.hg19Start <= stop
+          {
+            start: { $lte: gene.hg19Start },
+            stop: { $gte: gene.hg19Start },
+          }
+        ]
+      }).lean();
+      resolve(docs);
+    } catch (err) {
+      console.log(err);
+      return reject(err);
+    }
   });
 };
 exports.getByGeneEntrezId = getByGeneEntrezId;
