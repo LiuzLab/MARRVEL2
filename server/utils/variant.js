@@ -76,3 +76,16 @@ exports.liftover = (chr, pos, fromOrg, fromDb, toOrg, toDb, minMatch, isMultiReg
   });
 };
 
+exports.getChromStr = (chrom) => {
+  chrom = chrom.replace('chr', '').replace('Chr', '');
+  switch (chrom) {
+    case '23':
+      return 'X';
+    case '24':
+      return 'Y';
+    case 'MT':
+      return 'M';
+    default:
+      return chrom;
+  }
+}
