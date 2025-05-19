@@ -125,8 +125,6 @@ exports.findByGenomicLocation = (req, res) => {
 };
 
 exports.query = (req, res) => {
-  const ensemblId = req.query.ensemblId;
-  const symbol = req.query.symbol;
   geneUtil.queryGenes(req.query)
     .then((doc) => {
       return res.json(doc);

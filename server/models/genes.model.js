@@ -19,7 +19,13 @@ const geneSchema = mongoose.Schema({
   locusType: String,
   status: String,
   clinVarIds: Array,
-  xref: Object,
+  xref: {
+    ensemblId: String,
+    omimId: String,
+    mgiId: String,
+    hgncId: String,
+    pomBaseId: String
+  },
   gos: [{
     goId: {
       type: String,

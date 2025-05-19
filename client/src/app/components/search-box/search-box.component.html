@@ -29,15 +29,15 @@
         <input matInput
           #geneInput
           [formControl]="geneInputCtrl"
-          (input)="onGeneInput($event)"
+          (keyup)="onGeneInput($event, geneInput.value)"
+          (keyup.enter)="onEnterKey(geneInput.value)"
           [matAutocomplete]="auto"
           [matChipInputFor]="geneChipList"
           matChipInputAddOnBlur
-          (matChipInputTokenEnd)="addGene($event)"
-        >
+          (matChipInputTokenEnd)="addGene($event)">
         <mat-hint align="start" *ngIf="!compact"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
       </mat-form-field>
-      
+
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">
         <mat-option *ngFor="let aGene of geneSuggestion; let idx = index" [attr.data-index]='idx' [value]="idx">
           <span class="text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
@@ -82,6 +82,7 @@
         <input matInput
           [formControl]="variantInputCtrl"
           (input)="onVariantInput($event)"
+          (keyup.enter)="onEnterKey()"
         >
         <mat-error *ngIf="!variantInputCtrl.valid">
           Please check your variant format.
@@ -114,7 +115,7 @@
      }">
       <button mat-flat-button	color="primary"
         [ngClass]="{ 'button-compact': compact, 'button-big': !compact }"
-        (click)="search()"
+        (click)="getResult()"
         [disabled]="!validateInput()"
       >
         <span *ngIf="!compact">Search</span>

@@ -96,32 +96,59 @@ exports.getByGenomicLocation = (chr, pos, build) => {
 
 exports.queryGenes = (query) => {
   return new Promise((resolve, reject) => {
+    // common filter (taxon ID if given)
+    const filter = {};
+    if (query.taxonId) {
+      filter.taxonId = parseInt(query.taxonId);
+    }
+    // common projection
+    const projection = { '_id': 0, clinVarIds: 0, gos: 0, geno2mpIds: 0, dgvIds: 0, phenotypes: 0, pharosTargetIds: 0, expressionSummary: 0, id: 0 };
+
     const queries = [];
-    const projection = { '_id': 0, clinVarIds: 0, gos: 0, geno2mpIds: 0, dgvIds: 0, phenotypes: 0, pharosTargetIds: 0, id: 0 };
+    let partialQuery;
+    // the first result matches the search term better than the later ones.
     if (query.ensemblId) {
-      queries.push(Genes.findOne({ 'xref.ensemblId': query.ensemblId }, projection).lean());
+      queries.push(Genes.find({
+        ...filter,
+        'xref.ensemblId': query.ensemblId.trim()
+      }, projection).lean());
     }
     if (query.symbol) {
-      queries.push(Genes.findOne({ symbol: query.symbol }, projection).lean());
-      queries.push(Genes.find({ alias: query.symbol }, projection).lean());
+      // symbol first
+      queries.push(Genes.find({
+        ...filter,
+        symbol: new RegExp(`^${query.symbol}$`, 'i')
+      }, projection).sort({ symbol: 1 }).lean());
+      // previous symbol next
+      queries.push(Genes.find({
+        prevSymbols: new RegExp(`^${query.symbol}$`, 'i')
+      }, projection, { limit : 30 }).sort({ symbol: 1 }).lean());
+      // alias next
+      queries.push(Genes.find({
+        ...filter,
+        alias: new RegExp(`^${query.symbol}$`, 'i')
+      }, projection, { limit : 30 }).sort({ symbol: 1 }).lean());
+      // partial query
+      queries.push(Genes.find({
+        ...filter,
+        symbol: new RegExp(`${query.symbol}`, 'i')
+      }, projection, { limit : 30 }).sort({ symbol: 1 }).lean());
     }
 
     Promise.all(queries)
       .then((results) => {
-        let cnt = 0;
-        for (const res of results) {
-          cnt += 1
-          if (res) {
-            if (res.length != null) {
-              res[0].otherCandidates = res.slice(1);
-              resolve(res[0]);
-            } else {
-              resolve(res);
+        resolve(results
+          .filter((e) => e?.length)
+          .flat()
+          .filter((val, idx, arr) => arr.findIndex((e) => e.entrezId === val.entrezId) === idx)
+          .map((e) => {
+            if (typeof(e.alias) === 'string') {
+              e.alias = [e.alias];
             }
-            break;
-          }
-        }
-        resolve(null);
+            return e;
+          }));
+      }).catch((err) => {
+        return reject(err);
       });
   });
 };
