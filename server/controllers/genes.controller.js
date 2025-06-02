@@ -61,9 +61,6 @@ exports.findByEntrezId = (req, res) => {
         doc = doc.toObject();
 
         if (doc.alias && (typeof doc.alias === 'string')) doc.alias = [ doc.alias ];
-        if (doc.xref && doc.xref.omimId && doc.xref.omimId.length) {
-          doc.xref.omimId = doc.xref.omimId[0];
-        }
         res.json(doc);
       }
     }).catch((err) => {
