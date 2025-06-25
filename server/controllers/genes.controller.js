@@ -105,12 +105,28 @@ exports.findByEnsemblId = (req, res) => {
 
 exports.findByGenomicLocation = (req, res) => {
   const chr = req.params.chr;
-  const pos = parseInt(req.params.pos);
-  const build = req.query.build;
-  if (!chr || !pos) {
+  const posStr = req.params.pos;
+  let posStart, posStop;
+  if (!posStr || !posStr.length) {
     return res.status(404).send([]);
+  } else if(posStr.indexOf('-') === -1) {
+    // single position
+    const pos = parseInt(req.params.pos);
+    if (isNaN(pos)) {
+      return res.status(404).send([]);
+    }
+    posStart = posStop = pos;
+  } else {
+    // range
+    posSptd = posStr.split('-').map((e) => parseInt(e));
+    if (posSptd.length !== 2 || isNaN(posSptd[0]) || isNaN(posSptd[1])) {
+      return res.status(404).send([]);
+    }
+    posStart = posSptd[0];
+    posStop = posSptd[1];
   }
-  geneUtil.getByGenomicLocation(chr, pos, build)
+  const build = req.query.build || 'hg19';
+  geneUtil.getByGenomicLocation(chr, posStart, posStop, build)
     .then((docs) => {
       return res.json(docs);
     }).catch((err) => {
