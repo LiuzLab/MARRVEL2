@@ -103,4 +103,40 @@ export class VariantService {
         });
     });
   }
+
+  liftoverHg19ToHg38(variant: Variant): Observable<any> {
+    const url = `${ environment.apiHost }/data/liftover/` +
+      `hg19/chr/${ variant.chr }` +
+      `/pos/${ variant.pos }/hg38`;
+    return new Observable((obs) => {
+      this.http.get(url)
+        .pipe(take(1))
+        .subscribe({
+          next: (res: { hg38Chr?: string, hg38Pos?: number }) => {
+            if (res.hg38Chr) {
+              obs.next({
+                success: true,
+                data: {
+                  chr: res.hg38Chr,
+                  pos: res.hg38Pos,
+                  ref: variant.ref,
+                  alt: variant.alt,
+                  build: 'hg38'
+                }
+              });
+            } else {
+              obs.next({
+                success: false,
+                error: {
+                  message: 'Unmapped'
+                }
+              });
+            }
+          },
+          error: (err) => {
+            obs.error(err);
+          }
+        });
+    });
+  }
 }

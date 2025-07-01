@@ -84,7 +84,15 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
         this.parseVariant().toPromise()
           .then((variant: Variant) => {
             if (this.genomeBuild === 'hg19') {
-              return variant;
+              return this.variantService.liftoverHg19ToHg38(variant)
+                .pipe(take(1))
+                .toPromise()
+                .then((liftover) => {
+                  if (liftover.success) {
+                    this.hg38Variant = liftover.data;
+                  }
+                  return variant;
+                }).catch((err) => { throw err; });
             } else {
               this.hg38Variant = variant;
               return this.variantService.liftoverHg38ToHg19(variant)
