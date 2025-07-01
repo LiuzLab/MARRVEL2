@@ -1,10 +1,10 @@
-const Promise = require('bluebird')
+const Promise = require('bluebird');
 const PPI = require('../models/ppi.model');
 
 exports.getGroupedPpi = (entrezId, populateSource) => {
   return new Promise((resolve, reject) => {
     let aggPipe = [
-      { '$match': { 'source.entrezId': entrezId } },
+      { $match: { 'source.entrezId': entrezId } },
       { $unwind: '$interactor' },
       { $group: {
         _id: '$interactor.entrezId',

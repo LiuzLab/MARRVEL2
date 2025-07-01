@@ -5,15 +5,17 @@ const Genes = require('../../models/genes.model');
 
 exports.getByVariant = (variant, projection, excludeGene) => {
   return new Promise((resolve, reject) => {
-    if (variant === null) reject('Invalid variant');
-
+    if (variant === null) {
+      return reject(new Error('Invalid variant'));
+    }
     projection = projection || { frequency: 0, id: 0 };
     projection['_id'] = 0;
 
-    var Q = Dgv.find(
-      { hg19Chr: variant.chr, hg19Start: { $lte: parseInt(variant.pos) }, hg19Stop: { $gte: parseInt(variant.pos) } },
-      projection
-    );
+    const Q = Dgv.find({
+      hg19Chr: variant.chr,
+      hg19Start: { $lte: parseInt(variant.pos) },
+      hg19Stop: { $gte: parseInt(variant.pos) }
+    });
     if (!excludeGene) Q.populate({ path: 'genes', select: 'entrezId symbol -_id' });
 
     Q.lean().then((docs) => {
@@ -27,7 +29,7 @@ exports.getByVariant = (variant, projection, excludeGene) => {
 
 const getByEntrezId = (entrezId) => {
   return new Promise((resolve, reject) => {
-    Genes.findOne({ entrezId: parseInt(entrezId) }, { 'dgvIds': 1 })
+    Genes.findOne({ entrezId: parseInt(entrezId) }, { dgvIds: 1 })
       .populate({
         path: 'dgvIds',
         select: '-frequency -_id',
@@ -50,7 +52,7 @@ exports.getCountsByEntrezId = (entrezId) => {
       .then(docs => {
         const counts = { gains: 0, losses: 0 };
         if (docs && docs.length) {
-          for (var i = 0; i< docs.length; ++i) {
+          for (let i = 0; i < docs.length; ++i) {
             counts.gains += docs[i].gain;
             counts.losses += docs[i].loss;
           }

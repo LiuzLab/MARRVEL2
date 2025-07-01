@@ -1,4 +1,3 @@
-const dgv = require('../models/dgv.model');
 const Genes = require('../models/genes.model');
 
 const utils = require('../utils');
@@ -23,7 +22,7 @@ exports.findByVariant = (req, res) => {
 
 exports.findByGeneEntrezId = (req, res) => {
   const entrezId = req.params.entrezId;
-  Genes.findOne({ taxonId : 9606, entrezId: parseInt(entrezId) }, { 'dgvIds': 1 })
+  Genes.findOne({ taxonId: 9606, entrezId: parseInt(entrezId) }, { dgvIds: 1 })
     .populate({
       path: 'dgvIds',
       select: '-_id',
@@ -35,8 +34,7 @@ exports.findByGeneEntrezId = (req, res) => {
     .then((doc) => {
       if (!doc) {
         return res.send({});
-      }
-      else {
+      } else {
         res.send(doc.dgvIds);
       }
     }).catch((err) => {

@@ -7,7 +7,7 @@
     "start": "./node_modules/@angular/cli/bin/ng serve",
     "build": "./node_modules/@angular/cli/bin/ng build --configuration=$ANGULAR_ENV",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "./node_modules/tslint/bin/tslint -p tsconfig.json 'src/**/*.ts'",
     "e2e": "ng e2e",
     "analyse": "webpack-bundle-analyzer dist/MARRVEL/stats.json"
   },

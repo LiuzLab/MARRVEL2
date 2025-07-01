@@ -1,4 +1,4 @@
-const GOs = require('../models/go.model');
+const GO = require('../models/go.model'); // eslint-disable-line no-unused-vars
 const Genes = require('../models/genes.model');
 const geneUtil = require('../utils/gene');
 
@@ -22,16 +22,15 @@ exports.findByPrefix = (req, res) => {
   const prefix = req.params.prefix;
   const limit = req.params.limit || 30;
 
-  const symbolRegex = new RegExp('^(' + prefix.trim().split(/[^a-zA-Z0-9]+/g).join('|') + ')', (taxonId === 7227 ? '' : 'i'));
-  Genes.find({ taxonId: taxonId, symbol: symbolRegex },
-    { '_id': 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0 },
-    { limit: limit, sort: { symbol: 1 } }
+  const symbolRegex = new RegExp(`^(${prefix.trim().split(/[^a-zA-Z0-9]+/g).join('|')})`, (taxonId === 7227 ? '' : 'i'));
+  Genes.find({ taxonId, symbol: symbolRegex },
+    { _id: 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0 },
+    { limit, sort: { symbol: 1 } }
   )
     .then((docs) => {
       if (!docs) {
         return res.status(404).send([]);
-      }
-      else {
+      } else {
         res.json(docs);
       }
     }).catch((err) => {
@@ -45,22 +44,21 @@ exports.findByPrefix = (req, res) => {
 exports.findByEntrezId = (req, res) => {
   const entrezId = parseInt(req.params.entrezId);
 
-  Genes.findOne({ entrezId: entrezId }, { '_id': 0, clinVarIds: 0, dgvIds: 0, decipherIds: 0, geno2mpIds: 0 })
+  Genes.findOne({ entrezId }, { _id: 0, clinVarIds: 0, dgvIds: 0, decipherIds: 0, geno2mpIds: 0 })
     .populate({ path: 'phenotypes.ontology', select: 'id name categories -_id' })
     .populate(
-        {
-          path: 'gos.ontology',
-          select: 'name namespace agrSlimGoId -_id'
-        }
+      {
+        path: 'gos.ontology',
+        select: 'name namespace agrSlimGoId -_id'
+      }
     )
     .then((doc) => {
       if (!doc) {
         return res.status(404).send({});
-      }
-      else {
+      } else {
         doc = doc.toObject();
 
-        if (doc.alias && (typeof doc.alias === 'string')) doc.alias = [ doc.alias ];
+        if (doc.alias && (typeof doc.alias === 'string')) doc.alias = [doc.alias];
         res.json(doc);
       }
     }).catch((err) => {
@@ -74,22 +72,21 @@ exports.findByEntrezId = (req, res) => {
 exports.findByEnsemblId = (req, res) => {
   const ensemblId = req.params.ensemblId;
 
-  Genes.findOne({ 'xref.ensemblId': ensemblId }, { '_id': 0, clinVarIds: 0, dgvIds: 0, decipherIds: 0, geno2mpIds: 0 })
+  Genes.findOne({ 'xref.ensemblId': ensemblId }, { _id: 0, clinVarIds: 0, dgvIds: 0, decipherIds: 0, geno2mpIds: 0 })
     .populate({ path: 'phenotypes.ontology', select: 'id name categories -_id' })
     .populate(
-        {
-          path: 'gos.ontology',
-          select: 'name namespace agrSlimGoId -_id'
-        }
+      {
+        path: 'gos.ontology',
+        select: 'name namespace agrSlimGoId -_id'
+      }
     )
     .then((doc) => {
       if (!doc) {
         return res.status(404).send({});
-      }
-      else {
+      } else {
         doc = doc.toObject();
 
-        if (doc.alias && (typeof doc.alias === 'string')) doc.alias = [ doc.alias ];
+        if (doc.alias && (typeof doc.alias === 'string')) doc.alias = [doc.alias];
         if (doc.xref && doc.xref.omimId && doc.xref.omimId.length) {
           doc.xref.omimId = doc.xref.omimId[0];
         }
@@ -109,7 +106,7 @@ exports.findByGenomicLocation = (req, res) => {
   let posStart, posStop;
   if (!posStr || !posStr.length) {
     return res.status(404).send([]);
-  } else if(posStr.indexOf('-') === -1) {
+  } else if (posStr.indexOf('-') === -1) {
     // single position
     const pos = parseInt(req.params.pos);
     if (isNaN(pos)) {
@@ -118,7 +115,7 @@ exports.findByGenomicLocation = (req, res) => {
     posStart = posStop = pos;
   } else {
     // range
-    posSptd = posStr.split('-').map((e) => parseInt(e));
+    const posSptd = posStr.split('-').map((e) => parseInt(e));
     if (posSptd.length !== 2 || isNaN(posSptd[0]) || isNaN(posSptd[1])) {
       return res.status(404).send([]);
     }

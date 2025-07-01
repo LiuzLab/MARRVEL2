@@ -11,13 +11,12 @@ exports.findByVariant = (req, res) => {
 
   exac.findOne(
     { chr: variant.chr, pos: parseInt(variant.pos), ref: variant.ref, alt: variant.alt },
-    { '_id': 0 }
+    { _id: 0 }
   )
     .then((doc) => {
       if (!doc) {
         return res.send(null);
-      }
-      else {
+      } else {
         res.send(doc.toObject());
       }
     }).catch((err) => {

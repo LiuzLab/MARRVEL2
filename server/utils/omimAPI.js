@@ -6,10 +6,10 @@ exports.queryByMimNumber = (mimNumber) => {
     rp({
       uri: 'https://api.omim.org/api/entry',
       qs: {
-        mimNumber: mimNumber,
-      format: 'json',
-      include: 'geneMap,text,allelicVariantList',
-      apiKey: apiKey
+        mimNumber,
+        format: 'json',
+        include: 'geneMap,text,allelicVariantList',
+        apiKey
       },
       headers: { 'User-Agent': 'Request-Promise' },
       json: true
@@ -17,8 +17,7 @@ exports.queryByMimNumber = (mimNumber) => {
       .then((res) => {
         if (!res.omim.entryList || !res.omim.entryList.length || !res.omim.entryList[0].entry) {
           return null;
-        }
-        else {
+        } else {
           return res.omim.entryList[0].entry;
         }
       }).then((data) => {
@@ -34,12 +33,13 @@ exports.queryByMimNumber = (mimNumber) => {
         }
         if (data.textSectionList) {
           D.description = data.textSectionList[0].textSection.textSectionContent;
-          D.description = D.description.replace(/\{([0-9]*)\}/g, (match, pattern, offset, str) => {
-            return '<a href="http://omim.org/entry/' + pattern + '">' + pattern + '</a>';
+          D.description = D.description.replace(/\{([0-9]*)\}/g, (match, pattern) => {
+            return `<a href="http://omim.org/entry/${pattern}">${pattern}</a>`;
           });
-          D.description = D.description.replace(/\{([0-9]*):([^}]*)\}/g, (match, pattern1, pattern2, offset, str) => {
-            return pattern2
-          });
+          D.description = D.description
+            .replace(/\{([0-9]*):([^}]*)\}/g, (match, pattern1, pattern2) => {
+              return pattern2;
+            });
         }
         if (data.allelicVariantList) {
           D.allelicVariants = data.allelicVariantList.map(e => {

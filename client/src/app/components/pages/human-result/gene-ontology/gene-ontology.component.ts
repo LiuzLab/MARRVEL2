@@ -19,6 +19,7 @@ const TAXONID_TO_NAME = {
   4932: 'yeast',
   4896: 'fission yeast',
 };
+const TAXONIDS = Object.keys(TAXONID_TO_NAME).map(tid => parseInt(tid, 10));
 const NAMESPACE_TO_GOID = {
   'molecular_function': 'GO:0003674',
   'biological_process': 'GO:0008150',
@@ -55,7 +56,7 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 
   constructor() {
     this.orgNameToIcons = { human: TAXONID_TO_INFO[9606].icon };
-    for (const tid in TAXONID_TO_NAME) {
+    for (const tid of TAXONIDS) {
       this.orgNameToIcons[TAXONID_TO_NAME[tid]] = TAXONID_TO_INFO[tid].icon;
     }
   }
@@ -85,11 +86,11 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
       this.visHeightOnlyBest = 200;
       this.gos = this.gos || {};
       for (const ortholog of this.orthologs) {
-        if (!(ortholog.taxonId2 in TAXONID_TO_NAME)) continue;
+        if (!(ortholog.taxonId2 in TAXONID_TO_NAME)) { continue; }
         const orgName = TAXONID_TO_NAME[ortholog.taxonId2];
         this.gos[orgName] = this.gos[orgName] || [];
 
-        if (!ortholog.gene2 || !ortholog.gene2.gos || !ortholog.gene2.gos.length) continue;
+        if (!ortholog.gene2 || !ortholog.gene2.gos || !ortholog.gene2.gos.length) { continue; }
         this.visHeight += 20;
         this.visHeightOnlyBest += ortholog.bestScore ? 20 : 0;
         const D = {};
@@ -152,8 +153,7 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
   mouseChange(enter: boolean, goId: string) {
     if (enter) {
       this.hoverGoId = goId;
-    }
-    else {
+    } else {
       this.hoverGoId = null;
     }
   }

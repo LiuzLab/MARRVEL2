@@ -22,10 +22,14 @@ exports.hg38ToHg19 = (req, res) => {
             if (isNaN(result.pos)) {
               LiftoverModel38.create({ hg38Chr: result.inputChr, hg38Pos: result.inputPos })
                 .catch((err) => { console.log(err); });
-              return {}
+              return {};
             } else {
-              LiftoverModel38.create({ hg38Chr: result.inputChr, hg38Pos: result.inputPos, hg19Chr: result.chr, hg19Pos: result.pos })
-                .catch((err) => { console.log(err); });
+              LiftoverModel38.create({
+                hg38Chr: result.inputChr,
+                hg38Pos: result.inputPos,
+                hg19Chr: result.chr,
+                hg19Pos: result.pos
+              }).catch((err) => { console.log(err); });
               return { hg19Chr: result.chr, hg19Pos: result.pos };
             }
           });
@@ -33,6 +37,7 @@ exports.hg38ToHg19 = (req, res) => {
     }).then((result) => {
       return res.json(result);
     }).catch((err) => {
+      console.error('Error during liftover from hg38 to hg19:', err);
       return res.status(500).end();
     });
 };
@@ -58,8 +63,12 @@ exports.hg19ToHg38 = (req, res) => {
                 .catch((err) => { console.log(err); });
               return { hg38Chr: result.chr, hg38Pos: result.pos };
             } else {
-              LiftoverModel19.create({ hg19Chr: result.inputChr, hg19Pos: result.inputPos, hg38Chr: result.chr, hg38Pos: result.pos })
-                .catch((err) => { console.log(err); });
+              LiftoverModel19.create({
+                hg19Chr: result.inputChr,
+                hg19Pos: result.inputPos,
+                hg38Chr: result.chr,
+                hg38Pos: result.pos
+              }).catch((err) => { console.log(err); });
               return { hg38Chr: result.chr, hg38Pos: result.pos };
             }
           });
@@ -67,6 +76,7 @@ exports.hg19ToHg38 = (req, res) => {
     }).then((result) => {
       return res.json(result);
     }).catch((err) => {
+      console.error('Error during liftover from hg19 to hg38:', err);
       return res.status(500).end();
     });
 };

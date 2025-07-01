@@ -55,7 +55,7 @@ export class PrimateComponent implements OnInit {
               alleleNum: e.alleleNum,
               alleleFreq: e.alleleFreq,
               dataSource: 'HGSC'
-            }
+            };
           });
           this.geneLoading = false;
         }, (err) => {

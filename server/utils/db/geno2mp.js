@@ -5,12 +5,13 @@ const Genes = require('../../models/genes.model');
 
 exports.getByVariant = (variant, projection, excludeGene) => {
   return new Promise((resolve, reject) => {
-    if (variant === null) reject('Invalid variant');
-
+    if (variant === null) {
+      return reject(new Error('Invalid variant'));
+    }
     projection = projection || {};
     projection['_id'] = 0;
 
-    var Q = Geno2mp.findOne(
+    const Q = Geno2mp.findOne(
       { hg19Chr: variant.chr, hg19Pos: parseInt(variant.pos), ref: variant.ref, alt: variant.alt },
       projection
     );
@@ -27,7 +28,7 @@ exports.getByVariant = (variant, projection, excludeGene) => {
 
 const getByEntrezId = (entrezId) => {
   return new Promise((resolve, reject) => {
-    Genes.findOne({ entrezId: entrezId }, { geno2mpIds: 1, '_id': 0 })
+    Genes.findOne({ entrezId }, { geno2mpIds: 1, _id: 0 })
       .populate({ path: 'geno2mpIds', select: '-_id -genes' })
       .lean()
       .then((doc) => {
@@ -45,7 +46,7 @@ exports.getCountsByEntrezId = (entrezId) => {
       .then(docs => {
         docs = docs || [];
         const counts = { homCounts: 0, hetCounts: 0, hpoCounts: 0 };
-        for (var i = 0; i < docs.length; ++i) {
+        for (let i = 0; i < docs.length; ++i) {
           counts.homCounts += docs[i].homCount;
           counts.hetCounts += docs[i].hetCount;
           counts.hpoCounts += docs[i].hpoCount;

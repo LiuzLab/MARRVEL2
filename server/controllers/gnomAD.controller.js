@@ -1,10 +1,9 @@
 const GnomAD = require('../models/gnomAD.model');
-const GnomADGene = require('../models/gnomADGene.model');
-const Genes = require('../models/genes.model');
 
 const utils = require('../utils');
 const db = require('../utils/db');
 
+// eslint-disable-next-line no-unused-vars
 const replace = (doc) => {
   return GnomAD.replaceOne(
     { chr: doc.chr, pos: doc.pos, ref: doc.ref, alt: doc.alt },
@@ -40,8 +39,7 @@ exports.findByGeneSymbol = (req, res) => {
     .then(doc => {
       if (!doc) {
         return res.json({});
-      }
-      else {
+      } else {
         return res.json(doc);
       }
     }).catch((err) => {

@@ -8,7 +8,12 @@ exports.findByVariant = (req, res) => {
     return res.status(404).send({ message: 'Invalid variant' });
   }
 
-  Primate.findOne({ chr: variant.chr, pos: variant.pos, ref: variant.ref, alt: variant.alt }, { _id: 0 })
+  Primate.findOne({
+    chr: variant.chr,
+    pos: variant.pos,
+    ref: variant.ref,
+    alt: variant.alt
+  }, { _id: 0 })
     .lean()
     .then((doc) => {
       if (!doc) return res.json(null);
@@ -44,11 +49,14 @@ exports.findByEntrezId = (req, res) => {
     return res.status(404).send({ message: 'Invalid variant' });
   }
 
-  Genes.findOne({ entrezId: entrezId }, { hg19Chr: 1, hg19Start: 1, hg19Stop: 1 })
+  Genes.findOne({ entrezId }, { hg19Chr: 1, hg19Start: 1, hg19Stop: 1 })
     .lean()
     .then((gene) => {
       if (!gene || !gene.hg19Start) return [];
-      return Primate.find({ chr: gene.hg19Chr, pos: { $gte: gene.hg19Start, $lte: gene.hg19Stop } }, { _id: 0 });
+      return Primate.find({
+        chr: gene.hg19Chr,
+        pos: { $gte: gene.hg19Start, $lte: gene.hg19Stop }
+      }, { _id: 0 });
     }).then((docs) => {
       return res.json(docs.map((e) => ({
         chr: e.chr,

@@ -15,6 +15,21 @@ import { Animations } from 'src/app/animations';
 import { Gene, HumanGene } from 'src/app/interfaces/gene';
 
 @Component({
+  selector: 'app-youtube-dialog',
+  templateUrl: 'youtube-dialog.html',
+})
+export class YoutubeDialogComponent {
+  constructor(
+    public dialogRef: MatDialogRef<YoutubeDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss'],
@@ -203,21 +218,6 @@ export class SearchBoxComponent implements OnInit {
       width: '608px',
       data: { url: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/e1Qy3HC3gLo') }
     });
-  }
-
-}
-
-@Component({
-  selector: 'app-youtube-dialog',
-  templateUrl: 'youtube-dialog.html',
-})
-export class YoutubeDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<YoutubeDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
 }

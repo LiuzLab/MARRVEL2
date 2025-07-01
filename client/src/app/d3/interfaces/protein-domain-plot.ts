@@ -1,4 +1,4 @@
-import { Margin } from "./margin";
+import { Margin } from './margin';
 
 export interface PDShape {
   shape: string;

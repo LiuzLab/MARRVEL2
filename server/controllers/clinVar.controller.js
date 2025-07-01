@@ -1,6 +1,3 @@
-const ClinVar = require('../models/clinVar.model');
-const Genes = require('../models/genes.model');
-
 const utils = require('../utils');
 const db = require('../utils/db');
 

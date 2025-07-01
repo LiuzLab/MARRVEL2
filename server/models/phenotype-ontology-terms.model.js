@@ -1,7 +1,8 @@
+/* eslint camelcase: 0 */
 const mongoose = require('mongoose');
 
 const potermsSchema = mongoose.Schema({
-  id : {
+  id: {
     type: String,
     required: true
   },
@@ -9,7 +10,7 @@ const potermsSchema = mongoose.Schema({
   def: String,
   namespace: String,
   taxonId: Number,
-  'is_a': [{
+  is_a: [{
     type: String
   }],
   categories: [{

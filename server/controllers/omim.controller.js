@@ -1,5 +1,3 @@
-const Promise = require('bluebird');
-
 const Genes = require('../models/genes.model');
 const OMIMEntry = require('../models/omim-entry.model');
 
@@ -62,8 +60,9 @@ exports.findByTitle = async (req, res) => {
   let docs = [];
   try {
     docs = await OMIMEntry.find({ $text: { $search: title } }, { score: { $meta: 'textScore' } })
-      .sort({ score: { $meta: "textScore" } });
+      .sort({ score: { $meta: 'textScore' } });
   } catch (err) {
+    console.error('Error while querying OMIM by title', err);
     return res.status(500).send({
       message: 'Server error occured'
     });
@@ -74,13 +73,13 @@ exports.findByTitle = async (req, res) => {
     doc.alternativeTitles = doc.alternativeTitles.map((title) => {
       title = title.trim();
       if (title[0] === '\'' && title[title.length - 1] === '\'') {
-        return title.slice(1, title.length - 1)
+        return title.slice(1, title.length - 1);
       }
       return title;
     });
 
     let genes = [];
-    let geneIds = [];
+    const geneIds = [];
     if (doc.phenotypeMapList) {
       for (const pheno of doc.phenotypeMapList) {
         if (pheno.phenotypeMap && pheno.phenotypeMap.geneIDs) {

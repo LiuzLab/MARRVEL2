@@ -9,10 +9,10 @@ const getByMimNumberAndUpdate = (mimNumber) => {
   return new Promise((resolve, reject) => {
     mimNumber = parseInt(mimNumber);
     if (isNaN(mimNumber)) {
-      reject('Invalid mimNumber');
+      reject(new Error('Invalid mimNumber'));
     }
 
-    OMIM.findOne({ mimNumber: mimNumber }, { '_id': 0 })
+    OMIM.findOne({ mimNumber }, { _id: 0 })
       .lean()
       .then((doc) => {
         if (!doc || !doc.lastUpdate || utils.isOlderThan(doc.lastUpdate, 14)) {
@@ -22,13 +22,12 @@ const getByMimNumberAndUpdate = (mimNumber) => {
           }).catch((err) => {
             return doc ? doc : reject(err);
           });
-        }
-        else {
+        } else {
           return doc;
         }
       }).then((doc) => {
         if (doc.allelicVariants && doc.allelicVariants.length) {
-          for (var i=0; i<doc.allelicVariants.length; ++i) {
+          for (let i = 0; i < doc.allelicVariants.length; ++i) {
             if (doc.allelicVariants[i].mutations) {
               doc.allelicVariants[i].mutations = doc.allelicVariants[i].mutations
                 .replace(/\(\{[^})]+\}\)/g, '')
@@ -51,12 +50,11 @@ exports.getByMimNumberAndUpdate = getByMimNumberAndUpdate;
 
 const getMimNumberByEntrezId = (entrezId) => {
   return new Promise((resolve, reject) => {
-    Genes.findOne({ entrezId: entrezId }, { 'xref.omimId': 1, '_id': 0 })
+    Genes.findOne({ entrezId }, { 'xref.omimId': 1, _id: 0 })
       .then(doc => {
         if (doc && doc.xref && doc.xref.omimId) {
           resolve(doc.xref.omimId);
-        }
-        else {
+        } else {
           resolve(null);
         }
       }).catch(err => {
@@ -77,23 +75,19 @@ exports.getByEntrezId = (entrezId) => {
         }
       }).then(doc => {
         return resolve(doc);
-      }).catch(err => {
-        console.log(err);
-        return res.status(500).send({
-          message: 'Server error occured'
-        });
+      }).catch((err) => {
+        reject(err);
       });
   });
 };
 
 const getByGeneSymbol = (symbol) => {
   return new Promise((resolve, reject) => {
-    Genes.findOne({ taxonId: 9606, symbol: new RegExp('^' + symbol + '$', 'i') }, { '_id': 0, 'clinVarIds': 0, 'gos': 0 })
+    Genes.findOne({ taxonId: 9606, symbol: new RegExp(`^${symbol}$`, 'i') }, { _id: 0, clinVarIds: 0, gos: 0 })
       .then(doc => {
         if (doc && doc.xref && doc.xref.omimId) {
           return doc.xref.omimId;
-        }
-        else {
+        } else {
           return null;
         }
       }).then(mimNumber => {
@@ -116,14 +110,16 @@ exports.getByPair = (symbol, variant) => {
     getByGeneSymbol(symbol)
       .then((doc) => {
         this.doc = doc;
-        return markAlleles((doc.allelicVariants || []), variant);
-      }).then((alleles) => {
-        this.doc.allelicVariants = alleles;
+        return markAlleles((doc.allelicVariants || []), variant)
+          .then((alleles) => {
+            this.doc.allelicVariants = alleles;
+          }).catch((err) => {
+            console.error('Error while marking OMIM Allele', err);
+            this.doc.allelicVariants = [];
+          });
+      }).then(() => {
         resolve(this.doc);
       }).catch((err) => {
-        this.doc.allelicVariants = [];
-        resolve(this.doc);
-      }).catch(err => {
         reject(err);
       });
   });
@@ -143,17 +139,19 @@ const filterAlleles = (alleles, variant) => {
         console.error(err);
         reject(err);
       });
-    });
+  });
 };
+exports.filterAlleles = filterAlleles;
 
 const markAllele = (allele, variant) => {
+  // eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     ensembl.getGenomicLocationByVariationId(allele.dbSnps)
       .then((mapping) => {
         allele.isLocationMatched = (mapping.start <= variant.pos && variant.pos <= mapping.end);
         resolve(allele);
       }).catch((err) => {
-        // console.error(err);
+        console.error(err);
         resolve(allele);
       });
   });

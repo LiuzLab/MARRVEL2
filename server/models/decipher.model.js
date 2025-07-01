@@ -20,7 +20,7 @@ const decipherSchema = mongoose.Schema({
     freq: Number
   },
   sampleSize: Number,
-    delection: {
+  delection: {
     std: Number,
     obs: Number,
     freq: Number

@@ -95,7 +95,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
                     return liftover.data;
                   }
                   throw Error(liftover.error?.message);
-                }).catch((err) => { throw err });
+                }).catch((err) => { throw err; });
             }
           }).then((hg19Variant: Variant) => {
             this.variant = hg19Variant;
@@ -114,8 +114,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
                 this.geneCandidates = res;
                 if (res && res.length) {
                   this.onGeneLoad(res[0]);
-                }
-                else {
+                } else {
                   this.geneLoading = false;
                   this.gene = null;
                 }
@@ -169,7 +168,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
       }
       switch (parsed.type) {
         case 'hgvs':
-          this.genomeBuild = 'hg19'
+          this.genomeBuild = 'hg19';
           this.api.getGenomLocByHgvsVar(this.variantInput)
             .pipe(take(1))
             .subscribe((res) => {

@@ -1,5 +1,3 @@
-const decipher = require('../models/decipher.model');
-
 const utils = require('../utils');
 const db = require('../utils/db');
 
@@ -8,7 +6,8 @@ exports.findByGenomicLocation = (req, res) => {
     return res.status(404).send({ message: 'Invalid location' });
   }
 
-  db.decipher.getByGenomicLocation(req.params.hg19Chr, parseInt(req.params.hg19Start), parseInt(req.params.hg19Stop))
+  db.decipher.getByGenomicLocation(req.params.hg19Chr,
+    parseInt(req.params.hg19Start), parseInt(req.params.hg19Stop))
     .then((docs) => {
       res.json(docs);
     }).catch((err) => {

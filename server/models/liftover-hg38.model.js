@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('../config');
 
-const colName = 'Liftover.' + config.liftover.hg38Version + '-' + config.liftover.hg19Version;
+const colName = `Liftover.${config.liftover.hg38Version}-${config.liftover.hg19Version}`;
 
 const liftoverSchema = mongoose.Schema({
   hg38Chr: {

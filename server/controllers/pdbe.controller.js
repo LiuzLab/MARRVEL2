@@ -11,7 +11,7 @@ const update = (doc) => {
       { uniprotKBId: doc.uniprotKBId },
       { ...doc, lastUpdate: new Date() },
       { upsert: true }
-    ).then((res) => {
+    ).then(() => {
       resolve(doc);
     }).catch((err) => {
       reject(err);
@@ -19,19 +19,20 @@ const update = (doc) => {
   });
 };
 
-exports.getByEntrezId = (req, res, next) => {
+exports.getByEntrezId = (req, res) => {
   const entrezId = parseInt(req.params.entrezId);
   if (isNaN(entrezId)) {
     return res.status(404).send({ message: 'Invalid Entrez Gene ID' });
   }
   // Query gene by Entrez ID and pull cached PDBe summary if available
-  Genes.findOne({ entrezId: entrezId }, '-_id uniprotKBId')
+  Genes.findOne({ entrezId }, '-_id uniprotKBId')
     .populate('pdbeSummary', '-_id')
     .lean()
     .then((doc) => {
       if (!doc.uniprotKBId) {
         return {};
-      } else if (!doc.pdbeSummary || !doc.pdbeSummary.lastUpdate || utils.isOlderThan(doc.pdbeSummary.lastUpdate, 13)) {
+      } else if (!doc.pdbeSummary || !doc.pdbeSummary.lastUpdate ||
+        utils.isOlderThan(doc.pdbeSummary.lastUpdate, 13)) {
         // No cached PDBe data or it needs refresh
         return pdbe.queryByUniportKBId(doc.uniprotKBId).then((qRes) => {
           // Try updating the cache

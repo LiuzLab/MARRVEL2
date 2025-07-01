@@ -1,17 +1,14 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
 
 const ensembl = require('../utils/ensembl');
-
-const Genes = require('../models/genes.model');
 
 router.get('/ensembl/isCanonical/:identifiers', async (req, res) => {
   const ids = (req.params.identifiers || '').split(',');
   const justOne = req.query.justOne === 'true';
 
   let gotResult = false;
-  results = [];
+  const results = [];
   for (const id of ids) {
     let trptId = id.split(':')[0];
     if (trptId.slice(0, 3) !== 'ENS') continue;
@@ -40,7 +37,7 @@ router.get('/ensembl/isCanonical/:identifiers', async (req, res) => {
           console.log(err);
         }
         if (gene && gene.symbol) {
-          notation = gene.symbol + ':' + id.split(':')[1];
+          notation = `${gene.symbol}:${id.split(':')[1]}`;
         }
       }
       if (justOne) {

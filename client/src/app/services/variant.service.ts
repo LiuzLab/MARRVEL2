@@ -43,7 +43,7 @@ export class VariantService {
         type: 'coord',
         variant: {
           chr: coordMatch[2],
-          pos: parseInt(coordMatch[3]),
+          pos: parseInt(coordMatch[3], 10),
           ref: coordMatch[4],
           alt: coordMatch[5]
         }
@@ -55,7 +55,7 @@ export class VariantService {
         type: 'coord',
         variant: {
           chr: coordGnomADMatch[1],
-          pos: parseInt(coordGnomADMatch[2]),
+          pos: parseInt(coordGnomADMatch[2], 10),
           ref: coordGnomADMatch[3],
           alt: coordGnomADMatch[4]
         }

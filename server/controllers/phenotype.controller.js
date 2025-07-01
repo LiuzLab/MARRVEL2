@@ -1,17 +1,14 @@
 const DIOPTOrtholog = require('../models/diopt-ortholog.model');
 const Genes = require('../models/genes.model');
-const POTerms = require('../models/phenotype-ontology-terms.model');
-const IMPCPhenotype = require('../models/impc-phenotypes.model');
 
-const utils = require('../utils');
-exports.getOrthologsByEntrezId = (req, res, next) => {
+exports.getOrthologsByEntrezId = (req, res) => {
   const entrezId = parseInt(req.params.entrezId);
 
-  Genes.findOne({ entrezId: entrezId }, { phenotypes: 1, _id: 0 })
+  Genes.findOne({ entrezId }, { phenotypes: 1, _id: 0 })
     .populate({ path: 'phenotypes.ontology', select: 'name categories -_id' })
     .lean()
     .then((geneDoc) => {
-      DIOPTOrtholog.find({ entrezId1: entrezId }, { '_id': 0 })
+      DIOPTOrtholog.find({ entrezId1: entrezId }, { _id: 0 })
         .populate({
           path: 'gene2',
           select: '-_id -location -lastModified -type -name -status -chr -alias -description -taxonId -clinVarIds -dgvIds -geno2mpIds -hg19Stop -hg19Start -gos',

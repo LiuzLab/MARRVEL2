@@ -183,8 +183,7 @@ export class BatchComponent implements OnInit {
               `${row.dbnsfp.scores.phyloP100wayVertebrate ? row.dbnsfp.scores.phyloP100wayVertebrate.score : ''}\t` +
               `${row.dbnsfp.scores.phyloP30wayMammalian ? row.dbnsfp.scores.phyloP30wayMammalian.score : ''}`
             ;
-          }
-          else {
+          } else {
             dataString = dataString + '\t\t\t\t\t\t\t';
           }
           dataString = dataString + '\n';
