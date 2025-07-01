@@ -74,22 +74,27 @@ exports.getBySymbol = (taxonId, symbol) => {
 
 exports.getByGenomicLocation = (chr, posStart, posStop, build) => {
   return new Promise((resolve, reject) => {
-    let query = build === 'hg38' ?
-      { chr, $or: [
-        { grch38Start: { $gte: posStart, $lte: posStop } },
-        { grch38Stop: { $gte: posStart, $lte: posStop } },
-        { grch38Start: { $lte: posStart }, grch38Stop: { $gte: posStop } },
-      ] } :
-      { chr, $or: [
-        { hg19Start: { $gte: posStart, $lte: posStop } },
-        { hg19Stop: { $gte: posStart, $lte: posStop } },
-        { hg19Start: { $lte: posStart }, hg19Stop: { $gte: posStop } },
-      ] };
+    // Extract field names based on build
+    const startField = build === 'hg38' ? 'grch38Start' : 'hg19Start';
+    const stopField = build === 'hg38' ? 'grch38Stop' : 'hg19Stop';
+    let query;
     if (posStart === posStop) {
       // single position
-      query = build === 'hg38' ?
-        { chr, grch38Start: { $lte: posStart }, grch38Stop: { $gte: posStart } } :
-        { chr, hg19Start: { $lte: posStart }, hg19Stop: { $gte: posStart } };
+      query = {
+        chr,
+        [startField]: { $lte: posStart },
+        [stopField]: { $gte: posStart }
+      };
+    } else {
+      // range query
+      query = {
+        chr,
+        $or: [
+          { [startField]: { $gte: posStart, $lte: posStop } },
+          { [stopField]: { $gte: posStart, $lte: posStop } },
+          { [startField]: { $lte: posStart }, [stopField]: { $gte: posStop } },
+        ]
+      };
     }
     Genes.find(query, { _id: 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0, geno2mpIds: 0,
       phenotypes: 0, expressionSummary: 0, pharosLigandsIds: 0, pharosTargetIds: 0 })
