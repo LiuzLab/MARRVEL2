@@ -74,7 +74,7 @@ exports.getBySymbol = (taxonId, symbol) => {
 
 exports.getByGenomicLocation = (chr, posStart, posStop, build) => {
   return new Promise((resolve, reject) => {
-    const query = build === 'hg38' ?
+    let query = build === 'hg38' ?
       { chr, $or: [
         { grch38Start: { $gte: posStart, $lte: posStop } },
         { grch38Stop: { $gte: posStart, $lte: posStop } },
@@ -83,6 +83,12 @@ exports.getByGenomicLocation = (chr, posStart, posStop, build) => {
         { hg19Start: { $gte: posStart, $lte: posStop } },
         { hg19Stop: { $gte: posStart, $lte: posStop } },
       ] };
+    if (posStart === posStop) {
+      // single position
+      query = build === 'hg38' ?
+        { chr, grch38Start: { $lte: posStart }, grch38Stop: { $gte: posStart } } :
+        { chr, hg19Start: { $lte: posStart }, hg19Stop: { $gte: posStart } };
+    }
     Genes.find(query, { _id: 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0, geno2mpIds: 0,
       phenotypes: 0, expressionSummary: 0, pharosLigandsIds: 0, pharosTargetIds: 0 })
       .lean()
