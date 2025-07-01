@@ -78,10 +78,12 @@ exports.getByGenomicLocation = (chr, posStart, posStop, build) => {
       { chr, $or: [
         { grch38Start: { $gte: posStart, $lte: posStop } },
         { grch38Stop: { $gte: posStart, $lte: posStop } },
+        { grch38Start: { $lte: posStart }, grch38Stop: { $gte: posStop } },
       ] } :
       { chr, $or: [
         { hg19Start: { $gte: posStart, $lte: posStop } },
         { hg19Stop: { $gte: posStart, $lte: posStop } },
+        { hg19Start: { $lte: posStart }, hg19Stop: { $gte: posStop } },
       ] };
     if (posStart === posStop) {
       // single position
