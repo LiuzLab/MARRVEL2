@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 import { Variant } from '../interfaces/variant';
+import { LiftoverResponse } from '../interfaces/liftover';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +69,7 @@ export class VariantService {
     };
   }
 
-  liftoverHg38ToHg19(variant: Variant): Observable<any> {
+  liftoverHg38ToHg19(variant: Variant): Observable<LiftoverResponse> {
     const url = `${ environment.apiHost }/data/liftover/` +
       `hg38/chr/${ variant.chr }` +
       `/pos/${ variant.pos }/hg19`;
@@ -85,7 +86,7 @@ export class VariantService {
                   pos: res.hg19Pos,
                   ref: variant.ref,
                   alt: variant.alt,
-                  build: 'hg38'
+                  build: 'hg19'
                 }
               });
             } else {
@@ -104,7 +105,7 @@ export class VariantService {
     });
   }
 
-  liftoverHg19ToHg38(variant: Variant): Observable<any> {
+  liftoverHg19ToHg38(variant: Variant): Observable<LiftoverResponse> {
     const url = `${ environment.apiHost }/data/liftover/` +
       `hg19/chr/${ variant.chr }` +
       `/pos/${ variant.pos }/hg38`;
@@ -132,6 +133,7 @@ export class VariantService {
                 }
               });
             }
+            obs.complete();
           },
           error: (err) => {
             obs.error(err);
