@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 import { Variant } from '../interfaces/variant';
+import { LiftoverResponse } from '../interfaces/liftover';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +69,7 @@ export class VariantService {
     };
   }
 
-  liftoverHg38ToHg19(variant: Variant): Observable<any> {
+  liftoverHg38ToHg19(variant: Variant): Observable<LiftoverResponse> {
     const url = `${ environment.apiHost }/data/liftover/` +
       `hg38/chr/${ variant.chr }` +
       `/pos/${ variant.pos }/hg19`;
@@ -85,6 +86,42 @@ export class VariantService {
                   pos: res.hg19Pos,
                   ref: variant.ref,
                   alt: variant.alt,
+                  build: 'hg19'
+                }
+              });
+            } else {
+              obs.next({
+                success: false,
+                error: {
+                  message: 'Unmapped'
+                }
+              });
+            }
+          },
+          error: (err) => {
+            obs.error(err);
+          }
+        });
+    });
+  }
+
+  liftoverHg19ToHg38(variant: Variant): Observable<LiftoverResponse> {
+    const url = `${ environment.apiHost }/data/liftover/` +
+      `hg19/chr/${ variant.chr }` +
+      `/pos/${ variant.pos }/hg38`;
+    return new Observable((obs) => {
+      this.http.get(url)
+        .pipe(take(1))
+        .subscribe({
+          next: (res: { hg38Chr?: string, hg38Pos?: number }) => {
+            if (res.hg38Chr) {
+              obs.next({
+                success: true,
+                data: {
+                  chr: res.hg38Chr,
+                  pos: res.hg38Pos,
+                  ref: variant.ref,
+                  alt: variant.alt,
                   build: 'hg38'
                 }
               });
@@ -96,6 +133,7 @@ export class VariantService {
                 }
               });
             }
+            obs.complete();
           },
           error: (err) => {
             obs.error(err);

@@ -43,7 +43,7 @@ export class SearchBoxComponent implements OnInit {
   geneKeyword = '';
   protein  = '';
   variant  = '';
-  genomeBuild: 'hg19' | 'hg38' = 'hg19';
+  genomeBuild: 'hg19' | 'hg38' = 'hg38';
   modelGene: Gene | null = null;
 
   geneInputCtrl = new FormControl();
