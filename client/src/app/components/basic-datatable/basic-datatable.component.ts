@@ -51,7 +51,7 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
       const filters = JSON.parse(filter);
       let isMatched = true;
       for (const fColName in filters) {
-        if (!(fColName in filters) || filters[fColName] === '') continue;
+        if (!(fColName in filters) || filters[fColName] === '') { continue; }
 
         const value = ('' + data[fColName] || '').toLowerCase();
         const filterValue = (filters[fColName] || '').toLowerCase();

@@ -1,5 +1,3 @@
-const Promise = require('bluebird');
-
 const Gtex = require('../models/gtex.model');
 
 const utils = require('../utils');
@@ -12,7 +10,7 @@ exports.findByEntrezId = (req, res) => {
     });
   }
 
-  Gtex.findOne({ entrezId: entrezId }, { '_id': 0 })
+  Gtex.findOne({ entrezId }, { _id: 0 })
     .lean()
     .then(doc => {
       res.json(doc);
@@ -36,13 +34,14 @@ const getQuartiles = (doc) => {
         const sorted = doc.data[organ][tissue].sort((a, b) => +a < +b ? -1 : 1);
         const q2 = utils.getMedianFromSortedArr(sorted, 0, sorted.length - 1);
         const q1 = utils.getMedianFromSortedArr(sorted, 0, Math.floor(sorted.length / 2) - 1);
-        const q3 = utils.getMedianFromSortedArr(sorted, Math.ceil(sorted.length / 2), sorted.length - 1);
+        const q3 = utils.getMedianFromSortedArr(sorted, Math.ceil(sorted.length / 2),
+          sorted.length - 1);
         data[data.length - 1].tissues.push({
           name: tissue,
           min: +sorted[0],
-          q1: q1,
-          q2: q2,
-          q3: q3,
+          q1,
+          q2,
+          q3,
           max: +sorted[sorted.length - 1]
         });
       }
@@ -59,7 +58,7 @@ exports.getQuartilesByEntrezId = (req, res) => {
     });
   }
 
-  Gtex.findOne({ entrezId: entrezId }, { '_id': 0 })
+  Gtex.findOne({ entrezId }, { _id: 0 })
     .lean()
     .then((doc) => {
       res.json(getQuartiles(doc));

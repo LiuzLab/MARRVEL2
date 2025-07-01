@@ -9,6 +9,22 @@ import { TAXONIDS, TAXONID_TO_INFO } from '../data/model-organisms';
 
 import { HumanGene } from '../interfaces/gene';
 
+const COMPARE = (a: any, b: any,
+  aSmall: number, bSmall: number, abTie: number | null, superiorValue?: any) => {
+  if (a === b) {
+    return abTie;
+  }
+  if (superiorValue != null) {
+    if (a === superiorValue) {
+      return -1;
+    }
+    if (b === superiorValue) {
+      return 1;
+    }
+  }
+  return a < b ? aSmall : bSmall;
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +40,7 @@ export class ModelmatcherService {
 
   getScientistsByGeneSymbol(geneSymbol: string): Observable< unknown > {
     return new Observable((obs) => {
-      this.http.get(`${environment.mmApiHost}/SearchScientistByGene` + 
+      this.http.get(`${environment.mmApiHost}/SearchScientistByGene` +
         `?symbol=${geneSymbol}&taxonId=9606&iSearch=true`)
         .pipe(take(1))
         .subscribe({
@@ -69,20 +85,4 @@ export class ModelmatcherService {
         });
     });
   }
-}
-
-const COMPARE = (a: any, b: any,
-  aSmall: number, bSmall: number, abTie: number | null, superiorValue?: any) => {
-  if (a === b) {
-    return abTie;
-  }
-  if (superiorValue != null) {
-    if (a === superiorValue) {
-      return -1;
-    }
-    if (b === superiorValue) {
-      return 1;
-    }
-  }
-  return a < b ? aSmall : bSmall;
 }

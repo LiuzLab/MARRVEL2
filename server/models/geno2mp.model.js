@@ -19,7 +19,7 @@ const geno2mpSchema = mongoose.Schema({
   },
   homCount: Number,
   hetCount: Number,
-  hpoCount : Number,
+  hpoCount: Number,
   funcAnno: String,
   hpoProfiles: [{
     narrow: {
@@ -30,17 +30,17 @@ const geno2mpSchema = mongoose.Schema({
       hpoId: String,
       hpoTerm: String,
     },
-    broad : {
-      hpoId : String,
-      hpoTerm : String,
+    broad: {
+      hpoId: String,
+      hpoTerm: String,
     },
-    affectedStatus : String
+    affectedStatus: String
   }],
   genes: [{
     type: mongoose.ObjectId,
     ref: 'Genes'
   }],
-  hgvsCdnaChange : String
+  hgvsCdnaChange: String
 }, { collection: 'Geno2MP' });
 
 module.exports = mongoose.model('Geno2MP', geno2mpSchema);

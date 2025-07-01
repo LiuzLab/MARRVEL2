@@ -1,11 +1,10 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
 
 const Genes = require('../models/genes.model');
 const utils = require('../utils');
 
-router.get('/ppi/entrezId/:entrezId', async (req, res, next) => {
+router.get('/ppi/entrezId/:entrezId', async (req, res) => {
   const geneId = req.params.entrezId || '';
   let gene;
   try {
@@ -21,7 +20,7 @@ router.get('/ppi/entrezId/:entrezId', async (req, res, next) => {
   utils.ppi.getGroupedPpi(gene.entrezId)
     .map((ppi) => {
       ppi.source.symbol = gene.symbol;
-      return Promise.all([ ppi, utils.ppi.getGroupedPpi(ppi.interactor.entrezId, true) ]);
+      return Promise.all([ppi, utils.ppi.getGroupedPpi(ppi.interactor.entrezId, true)]);
     }).map((data) => {
       return {
         source: data[0].source,

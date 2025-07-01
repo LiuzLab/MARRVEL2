@@ -50,7 +50,7 @@ export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
       const filters = JSON.parse(filter);
       let isMatched = true;
       for (const fColName in filters) {
-        if (!(fColName in filters) || filters[fColName] === '') continue;
+        if (!(fColName in filters) || filters[fColName] === '') { continue; }
 
         const value = ('' + data[fColName] || '').toLowerCase();
         const filterValue = (filters[fColName] || '').toLowerCase();
@@ -102,7 +102,7 @@ export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
   countPhenotypes() {
     const phenotypes = {};
     for (const hpoProfile of this.data) {
-      if (this.showOnlyAffected && hpoProfile.affectedStatus !== 'affected') continue;
+      if (this.showOnlyAffected && hpoProfile.affectedStatus !== 'affected') { continue; }
 
       for (const hpoId of hpoProfile.broad.hpoIds) {
         const catName = HPO_BROAD_TO_CAT[hpoId];

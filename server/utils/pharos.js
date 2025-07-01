@@ -7,9 +7,9 @@ const synNameToFieldName = {
   LyCHI: 'lychiId'
 };
 
-const parseLigands = (e, targetSymbol) => {
-  act = e.activities && e.activities.length ? e.activities[e.activities.length - 1] : {};
-  D = {
+const parseLigands = (e) => {
+  const act = e.activities && e.activities.length ? e.activities[e.activities.length - 1] : {};
+  const D = {
     id: e.ligid,
     name: e.name,
     synonyms: [],
@@ -85,7 +85,7 @@ fragment ligandCardFields on Ligand {
 }`
       },
       headers: {
-        'Accept': 'application/json, text/plain, */*',
+        Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
       responseType: 'json'
@@ -95,14 +95,14 @@ fragment ligandCardFields on Ligand {
     }).then((target) => {
       resolve({
         id: accession,
-        accession: accession,
+        accession,
         name: target.name,
         idgTDL: target.idgTDL,
         idgFamily: target.idgFamily,
         description: target.description,
         drugs: (target.drugs || []).map((e) => parseLigands(e, target.symbol)),
         ligands: (target.ligands || []).map((e) => parseLigands(e, target.symbol))
-      })
+      });
     }).catch((err) => {
       reject(err);
     });

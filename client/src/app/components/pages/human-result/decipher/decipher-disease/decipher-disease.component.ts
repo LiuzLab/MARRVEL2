@@ -17,7 +17,7 @@ import { Animations } from 'src/app/animations';
   styleUrls: ['./decipher-disease.component.scss'],
   animations: [ Animations.toggleInOut ]
 })
-export class DecipherDiseaseComponent implements OnInit{
+export class DecipherDiseaseComponent implements OnInit {
   @Input() gene: HumanGene;
   @Input() variant: Variant;
 
@@ -64,7 +64,7 @@ export class DecipherDiseaseComponent implements OnInit{
     this.tableTitle = `Detailed Information of `;
     if (this.variant) {
       if (this.showSnvs) {
-        this.tableTitle += `Single-Nucleotide Variant ${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`
+        this.tableTitle += `Single-Nucleotide Variant ${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`;
         if (this.showCnvs) {
           this.tableTitle += ' and ';
         }

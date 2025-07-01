@@ -15,11 +15,9 @@ export class UnitDirective implements OnChanges {
     this.count = this.count || 0;
     if (!this.unit || this.unit === '') {
       this.el.nativeElement.innerHTML = '' + this.count;
-    }
-    else if (this.count >= 2) {
+    } else if (this.count >= 2) {
       this.el.nativeElement.innerHTML = `${this.count} ${this.plural}`;
-    }
-    else {
+    } else {
       this.el.nativeElement.innerHTML = `${this.count} ${this.unit}`;
     }
   }

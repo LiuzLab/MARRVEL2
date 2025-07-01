@@ -10,8 +10,7 @@ const GnomADGene = require('../models/gnomADGene.model');
 
 const variantQuery = fs.readFileSync(path.join(config.root,
   'utils/gnomad-variant-query.txt')).toString();
-const geneQuery = fs.readFileSync(path.join(config.root,
-  'utils/gnomad-gene-query.txt')).toString();
+const geneQuery = fs.readFileSync(path.join(config.root, 'utils/gnomad-gene-query.txt')).toString();
 
 const queryByGene = (gene, referenceGenome) => {
   referenceGenome = referenceGenome || 'GRCh37';
@@ -27,7 +26,7 @@ const queryByGene = (gene, referenceGenome) => {
     }
     got.post('https://gnomad.broadinstitute.org/api/', { json: {
       operationName: 'Gene',
-      query,
+      geneQuery,
       variables: filter
     } }).then((res) => {
       let data;
@@ -39,6 +38,7 @@ const queryByGene = (gene, referenceGenome) => {
         console.log(err);
         data = {};
       }
+      // eslint-disable-next-line camelcase
       data.gnomad_constraint = data.gnomad_constraint || {};
       return {
         entrezId: gene.entrezId,
@@ -74,7 +74,7 @@ const queryByGene = (gene, referenceGenome) => {
       };
     }).then((doc) => {
       GnomADGene.updateOne({ entrezId: doc.entrezId },
-        { '$set': doc }, { upsert: true })
+        { $set: doc }, { upsert: true })
         .catch((err) => {
           console.error(err);
         });

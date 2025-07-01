@@ -16,5 +16,5 @@ const gnomADGeneSchema = mongoose.Schema({
     type: Number,
     select: false
   }
-}, {collection: 'GnomADGene' });
+}, { collection: 'GnomADGene' });
 module.exports = mongoose.model('GnomADGene', gnomADGeneSchema);

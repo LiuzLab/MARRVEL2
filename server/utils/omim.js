@@ -16,17 +16,18 @@ exports.filterAlleles = (alleles, variant) => {
         console.error(err);
         reject(err);
       });
-    });
+  });
 };
 
 const markAllele = (allele, variant) => {
+  // eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     ensembl.getGenomicLocationByVariationId(allele.dbSnps)
       .then((mapping) => {
         allele.isLocationMatched = (mapping.start <= variant.pos && variant.pos <= mapping.end);
         resolve(allele);
       }).catch((err) => {
-      console.error(err);
+        console.error(err);
         resolve(allele);
       });
   });
@@ -59,5 +60,5 @@ exports.filterAlleles = (alleles, variant) => {
         console.error(err);
         reject(err);
       });
-    });
+  });
 };

@@ -45,7 +45,7 @@ export class AgrExpressionComponent implements OnInit {
   parseData(data: AgrExpData[]) {
     const res = {};
     for (const row of data) {
-      if (!row.gene2) continue;
+      if (!row.gene2) { continue; }
       const D = {
         symbol: row.gene2.symbol,
         xref: row.gene2.xref,
@@ -86,13 +86,13 @@ export class AgrExpressionComponent implements OnInit {
   }
 
   getUrl(gene) {
-    if ('mgiId' in gene) return `http://www.informatics.jax.org/marker/${gene['mgiId']}`;
-    if ('rgdId' in gene) return `http://rgd.mcw.edu/rgdweb/report/gene/main.html?id=${gene['rgdId']}`;
-    if ('zfinId' in gene) return `http://zfin.org/action/marker/view/${gene['zfinId']}`;
-    if ('sgdId' in gene) return `http://www.yeastgenome.org/locus/${gene['sgdId']}`;
-    if ('pomBaseId' in gene) return `https://www.pombase.org/gene/${gene['pomBaseId']}`;
-    if ('flyBaseId' in gene) return `http://flybase.org/reports/${gene['flyBaseId']}.html`;
-    if ('wormBaseId' in gene) return `http://www.wormbase.org/species/c_elegans/gene/${gene['wormBaseId']}`;
+    if ('mgiId' in gene) { return `http://www.informatics.jax.org/marker/${gene['mgiId']}`; }
+    if ('rgdId' in gene) { return `http://rgd.mcw.edu/rgdweb/report/gene/main.html?id=${gene['rgdId']}`; }
+    if ('zfinId' in gene) { return `http://zfin.org/action/marker/view/${gene['zfinId']}`; }
+    if ('sgdId' in gene) { return `http://www.yeastgenome.org/locus/${gene['sgdId']}`; }
+    if ('pomBaseId' in gene) { return `https://www.pombase.org/gene/${gene['pomBaseId']}`; }
+    if ('flyBaseId' in gene) { return `http://flybase.org/reports/${gene['flyBaseId']}.html`; }
+    if ('wormBaseId' in gene) { return `http://www.wormbase.org/species/c_elegans/gene/${gene['wormBaseId']}`; }
     return '';
   }
 

@@ -5,7 +5,7 @@ const got = Promise.promisify(require('got'));
 
 const queryByUniportKBId = (uid) => {
   return new Promise((resolve, reject) => {
-    got.get('https://www.ebi.ac.uk/pdbe/graph-api/uniprot/summary_stats/' + uid)
+    got.get(`https://www.ebi.ac.uk/pdbe/graph-api/uniprot/summary_stats/${uid}`)
       .json()
       .then((doc) => {
         if (uid in doc) {

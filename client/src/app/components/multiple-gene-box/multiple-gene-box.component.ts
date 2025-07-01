@@ -37,13 +37,12 @@ export class MultipleGeneBoxComponent implements OnInit {
     if (this.geneKeyword) {
       this.api.getGenesBySymbolPrefix(9606, this.geneKeyword)
         .subscribe((res) => {
-          this.geneSuggestion = res.map(e => {
-            e.selected = (this.selectedEntrezIds[e.entrezId] == true);
-            return e;
+          this.geneSuggestion = res.map(gene => {
+            gene.selected = (this.selectedEntrezIds[gene.entrezId] === true);
+            return gene;
           });
         });
-    }
-    else {
+    } else {
       this.geneSuggestion = [];
     }
   }

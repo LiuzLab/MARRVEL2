@@ -146,7 +146,9 @@ export class GroupedBoxplot {
     // Calculate yMin and yMax among visible groups
     this.yMin = 1000000000, this.yMax = -1000000000;
     for (const G of this.groupedData) {
-      if (G.name in this.groupHidden && this.groupHidden[G.name]) continue;
+      if (G.name in this.groupHidden && this.groupHidden[G.name]) {
+        continue;
+      }
 
       for (const box of G.boxes) {
         for (const yVal of box.y) {
@@ -165,7 +167,7 @@ export class GroupedBoxplot {
       .attr('transform', `translate(${this.options.margin.l - 2},0)`)
       .attr('class', 'yaxis')
       .call(d3.axisLeft(yScale).ticks(null, 's'))
-      .call(g => g.select('.domain').remove());
+      .call(gr => gr.select('.domain').remove());
     this.svg.append('g').call(yAxis);
     this.yScale = yScale;
   }
@@ -192,7 +194,9 @@ export class GroupedBoxplot {
     const plotAreaWidth = this.width - this.options.margin.l - this.options.margin.r;
     let lastRangeEnds = this.options.margin.l;
     for (const G of this.groupedData) {
-      if (G.name in this.groupHidden && this.groupHidden[G.name]) continue;
+      if (G.name in this.groupHidden && this.groupHidden[G.name]) {
+        continue;
+      }
 
       const W = plotAreaWidth * G.boxes.length / this.totalBoxesVisible;
       G.widthRange = [ lastRangeEnds, lastRangeEnds + W ];
@@ -299,7 +303,7 @@ export class GroupedBoxplot {
 
     const xAxisFontSize = 10;
     const xAxisLabelLimit = Math.ceil((this.options.margin.b - 12) * 2 / xAxisFontSize * 1.25);
-    const xAxis = g => g
+    const xAxis = gr => gr
       .attr('transform', `translate(0,${this.height - this.options.margin.b})`)
       .call(d3.axisBottom(x).ticks(group.boxes.map(b => b.x)).tickSizeOuter(0));
     svg.append('g').attr('class', 'xaxis').call(xAxis)

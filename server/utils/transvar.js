@@ -1,14 +1,13 @@
 const Promise = require('bluebird');
-const path = require('path');
 const config = require('../config');
 
-const gene = require('./gene');
 const Genes = require('../models/genes.model');
 const ensembl = require('./ensembl');
 
 const transvarPath = config.transvar.path;
 
 const appendGene = (data) => {
+  // eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     Genes.findOne({ taxonId: 9606, symbol: data.gene }, { _id: 0, entrezId: 1, symbol: 1 })
       .then((geneDoc) => {
@@ -20,15 +19,15 @@ const appendGene = (data) => {
         resolve(data);
       });
   });
-}
+};
 
 const executeTransvar = (option) => {
   return new Promise((resolve, reject) => {
     const { spawn } = require('child_process');
     const proc = spawn(transvarPath, option);
 
-    var stdout = '';
-    var stderr = [];
+    let stdout = '';
+    const stderr = [];
     proc.stdout.on('data', (data) => {
       stdout += data.toString();
     });
@@ -40,9 +39,9 @@ const executeTransvar = (option) => {
 
     proc.on('close', (code) => {
       resolve({
-        code: code,
-        stdout: stdout,
-        stderr: stderr
+        code,
+        stdout,
+        stderr
       });
     });
 
@@ -57,7 +56,7 @@ const parseTransvarResultCoordinate = (coord) => {
   return new Promise((resolve, reject) => {
     const M = coord.match(/(chr(\d+|X|Y):g.(\d+)((?:A|C|G|T|U)+)?>?((?:(?:[a-z]+)?(?:A|C|G|T|U)+))|\.)\/((?:c\.(\d+(?:[-+_]\d+)?)((?:A|C|G|T|U)+)?)>?((?:[a-z]+)?(?:A|C|G|T|U)+)|\.)\/(p\.([A-Za-z]+)(\d+)([A-Za-z]+|\*)|\.)/);
     if (M == null) {
-      reject('Invalid format');
+      reject(new Error('Invalid format'));
     } else {
       resolve({
         gdna: {
@@ -86,6 +85,7 @@ const parseTransvarResultCoordinate = (coord) => {
 };
 
 const parseTransvarResult = (res) => {
+  // eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     const parsed = {
       code: res.code,
@@ -94,7 +94,8 @@ const parseTransvarResult = (res) => {
     };
     if (res.stderr && res.stderr.length > 0) {
       parsed.errors = [];
-      for (var i = 0; i < res.stderr.length; ++i) {
+      for (let i = 0; i < res.stderr.length; ++i) {
+        // eslint-disable-next-line no-useless-escape
         parsed.errors.push(res.stderr[i].toString().replace(/\[[^\[]+\]/, '').replace(/_/g, ' '));
       }
     }
@@ -109,18 +110,19 @@ const parseTransvarResult = (res) => {
 
 const putCandidate = (candidates, gene, transcript, coord, varType) => {
   if (coord.indexOf('>') === -1) return;
+  // eslint-disable-next-line no-useless-escape
   const M = transcript.match(/((?:ENST(?:\d)+|NM_(?:\d)+(?:\.\d+)?))\s*(?:\([^\)]+\))?/);
   if (!M) return;
   if (!(coord in candidates)) {
     candidates[coord] = {
-      gene: gene,
-      coord: coord,
+      gene,
+      coord,
       type: varType,
       transcripts: []
     };
   }
   candidates[coord].transcripts.push(M[1]);
-}
+};
 
 exports.proteinToGenomicLocations = (protein, build) => {
   return new Promise((resolve, reject) => {
@@ -133,17 +135,18 @@ exports.proteinToGenomicLocations = (protein, build) => {
         for (const L of res.output) {
           const col = L.split('\t');
           const geneSymbol = (col[2] || '.').trim();
-          let coord = (col[4] || '').split('/')[0];
+          let [coord] = (col[4] || '').split('/');
           coord = coord === '.' ? null : coord;
           if (coord && geneSymbol !== '.') {
             // Put TransVar's choice
             putCandidate(candidates, geneSymbol, col[1].trim(), coord, 'snv');
           } else if (this.errors == null && col[6]) {
-            this.errors = [ col[6].trim().replace(/_/g, ' ') ];
+            this.errors = [col[6].trim().replace(/_/g, ' ')];
           }
         }
         return Object.keys(candidates).map((key) => {
-          candidates[key].transcript = candidates[key].transcripts.filter((v, i, a) => a.indexOf(v) === i);
+          candidates[key].transcript = candidates[key].transcripts
+            .filter((v, i, a) => a.indexOf(v) === i);
           return candidates[key];
         });
       }).filter((candidate) => {    // Remove this filter if also want to serve mnvs
@@ -156,14 +159,14 @@ exports.proteinToGenomicLocations = (protein, build) => {
         resolve({
           code: this.code,
           errors: this.errors,
-          candidates: candidates
+          candidates
         });
       }).catch((err) => {
         console.log(err);
         reject(err);
       });
   });
-}
+};
 
 exports.forwardAnnotationWithGdna = (identifier, build) => {
   return new Promise((resolve, reject) => {
@@ -185,6 +188,7 @@ exports.forwardAnnotationWithGdna = (identifier, build) => {
               cdnaCoord: coord.cdna
             };
           }).catch((err) => {
+            console.error(err);
             return null;
           });
       })
@@ -193,11 +197,12 @@ exports.forwardAnnotationWithGdna = (identifier, build) => {
         // Mark Ensembl canonical
         return ensembl.queryLookupByEnsemblId(candidate.transcriptId)
           .then((res) => {
-            return ((res || {}).is_canonical) ? true : false;
+            return (res || {}).is_canonical === true;
           }).then((isCanonical) => {
             candidate.isCanonical = isCanonical;
             return candidate;
           }).catch((err) => {
+            console.error(err);
             return candidate;
           });
       })
@@ -225,15 +230,16 @@ exports.forwardAnnotationWithGdna = (identifier, build) => {
               countAnnot[cand.coord.annot] += 1;
               if (maxAgrees < countAnnot[cand.coord.annot]) {
                 mostAgreed = cand;
+                maxAgrees = countAnnot[cand.coord.annot];
               }
             }
           }
         }
 
         resolve({
-          canonical: canonical,
-          mostAgreed: mostAgreed,
-          candidates: candidates
+          canonical,
+          mostAgreed,
+          candidates
         });
       }).catch((err) => {
         reject(err);

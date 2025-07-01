@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 const mongoose = require('mongoose');
 
 const gosSchema = mongoose.Schema({
@@ -7,13 +8,12 @@ const gosSchema = mongoose.Schema({
   },
   name: String,
   synonyms: Array,
-  'is_a': [{
+  is_a: [{
     type: String,
   }],
   namespace: String,
   def: String,
   agrSlimGoId: String,
-  name: String
 }, { collection: 'GOs', toJSON: { virtuals: true } });
 
 module.exports = mongoose.model('GOs', gosSchema);

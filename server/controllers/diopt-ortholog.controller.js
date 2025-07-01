@@ -1,14 +1,12 @@
 const DIOPTOrtholog = require('../models/diopt-ortholog.model');
-const Genes = require('../models/genes.model');
-const POTerms = require('../models/phenotype-ontology-terms.model');
-const IMPCPhenotype = require('../models/impc-phenotypes.model');
-
-const utils = require('../utils');
+const Genes = require('../models/genes.model'); // eslint-disable-line no-unused-vars
+const POTerms = require('../models/phenotype-ontology-terms.model'); // eslint-disable-line no-unused-vars
+const IMPCPhenotype = require('../models/impc-phenotypes.model'); // eslint-disable-line no-unused-vars
 
 exports.findByEntrezId = (req, res) => {
   const entrezId = parseInt(req.params.entrezId);
 
-  DIOPTOrtholog.find({ 'entrezId1': entrezId }, { '_id': 0 })
+  DIOPTOrtholog.find({ entrezId1: entrezId }, { _id: 0 })
     .populate({
       path: 'gene2',
       select: '-_id -location -lastModified -type -name -status -chr -alias -description -taxonId -clinVarIds -dgvIds -geno2mpIds -hg19Stop -hg19Start',

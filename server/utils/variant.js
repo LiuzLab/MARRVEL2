@@ -1,3 +1,4 @@
+/* eslint camelcase:0 */
 const Promise = require('bluebird');
 const got = Promise.promisify(require('got'));
 
@@ -7,7 +8,7 @@ const validateAndParseVariant = (varInput) => {
     /([0-9]?[0-9XY])\s*-\s*([0-9]*)\s*-\s*([ACGTU]*)\s*-\s*([ACGTU]*)/,
     /.+_0*(\d+)\.\d+:.\.(\d+)([ACGTU]*)>([ACGTU]*)/
   ];
-  for (let i=0; i<reExps.length; ++i) {
+  for (let i = 0; i < reExps.length; ++i) {
     const reExp = reExps[i];
     const res = varInput.match(reExp);
     if (res) {
@@ -24,7 +25,7 @@ const validateAndParseVariant = (varInput) => {
     }
   }
   return null;
-}
+};
 exports.validateAndParseVariant = validateAndParseVariant;
 
 const comp = {
@@ -40,9 +41,11 @@ exports.matchVariant = (v1, v2) => {
     (v1.ref === v2.ref && v1.alt === v2.alt || comp[v1.ref] === v2.ref && comp[v1.alt] === v2.alt);
 };
 
-exports.liftover = (chr, pos, fromOrg, fromDb, toOrg, toDb, minMatch, isMultiRegionAllowed, minQuery, minChain, minBlocks, isThickFudgeSet) => {
+exports.liftover = (chr, pos, fromOrg, fromDb, toOrg, toDb,
+  minMatch, isMultiRegionAllowed, minQuery, minChain, minBlocks, isThickFudgeSet) => {
   return new Promise((resolve, reject) => {
     got.get('https://genome.ucsc.edu/cgi-bin/hgLiftOver').then((res) => {
+      // eslint-disable-next-line no-useless-escape
       const M = res.body.match(new RegExp(`\<input type=(?:(?:['"]hidden['"])|(?:hidden)) name=(?:(?:['"]hgsid['"])|(?:hgsid)) value=['"]([^'"]+)[^>]`, 'mi'));
       const payload = {
         hgsid: M[1],
@@ -56,12 +59,13 @@ exports.liftover = (chr, pos, fromOrg, fromDb, toOrg, toDb, minMatch, isMultiReg
         hglft_minChainT: minChain || '0',
         hglft_minBlocks: minBlocks || '1',
         'boolshad.hglft_fudgeThick': isThickFudgeSet || '0',
-        hglft_userData: 'chr' + chr + '\t' + pos + '\t' + pos
+        hglft_userData: `chr${chr}\t${pos}\t${pos}`
       };
       return got.post('https://genome.ucsc.edu/cgi-bin/hgLiftOver', { form: payload }).text();
     }).then((res) => {
+      // eslint-disable-next-line no-useless-escape
       const M = res.match(new RegExp(`(..\/trash[^\ \>]+.bed)`, 'mi'));
-      return M ? got.get('https://genome.ucsc.edu/cgi-bin/' + M[1]).text() : '';
+      return M ? got.get(`https://genome.ucsc.edu/cgi-bin/${M[1]}`).text() : '';
     }).then((res) => {
       const lifted = (res.split('\n')[0] || '').split('\t');
       resolve({
@@ -88,4 +92,4 @@ exports.getChromStr = (chrom) => {
     default:
       return chrom;
   }
-}
+};

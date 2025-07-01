@@ -136,7 +136,7 @@ export class ProteinDomainPlot {
       .attr('transform', `translate(${this.options.margin.l},${this.options.height - this.options.margin.b})`)
       .attr('class', 'axis')
       .call(d3.axisBottom(this.scale).ticks(Math.ceil((this.scale.domain()[1] - this.scale.domain()[0]) / 100) + 1))
-      .call((g) => g.select('.domain').remove());
+      .call((gr) => gr.select('.domain').remove());
     wrapper.append('g').call(axis);
     // Draw middle horizontal line
     wrapper.append('g')

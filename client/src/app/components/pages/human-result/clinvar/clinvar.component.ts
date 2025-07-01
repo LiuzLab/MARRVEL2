@@ -48,8 +48,8 @@ export class ClinvarComponent implements OnInit {
         this.significance = { 'pathogenic': 0, 'likely pathogenic': 0, 'likely benign': 0, 'benign': 0 };
         for (const item of res) {
           item.location = '';
-          if (item.chr) item.location = `Chr${item.chr}:`;
-          if (item.start) item.location = item.location + `${item.start}`;
+          if (item.chr) { item.location = `Chr${item.chr}:`; }
+          if (item.start) { item.location = item.location + `${item.start}`; }
           if (item.stop && item.start !== item.stop) {
             item.location = item.location + `-${item.stop}`;
           }

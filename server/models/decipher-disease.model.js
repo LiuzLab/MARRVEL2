@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const config = require('../config');
 
 const decipherDiseaseSchema = mongoose.Schema({
-  patientId : String,
+  patientId: String,
   hg19Chr: {
     type: String,
     required: true

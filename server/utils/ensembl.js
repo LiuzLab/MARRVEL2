@@ -5,7 +5,7 @@ const got = Promise.promisify(require('got'));
 const queryHumanVariationById = (vid) => {
   return new Promise((resolve, reject) => {
     rp({
-      uri: 'http://grch37.rest.ensembl.org/variation/human/' + vid,
+      uri: `http://grch37.rest.ensembl.org/variation/human/${vid}`,
       qs: {
         'content-type': 'application/json'
       },
@@ -28,9 +28,9 @@ exports.getGenomicLocationByVariationId = (vid, strand) => {
       queryHumanVariationById(vid).then((res) => {
         if (!('mappings' in res)) resolve({});
         else {
-          var mapping = res['mappings'];
-          var found = false;
-          for (var i=0; i<mapping.length; ++i) {
+          const mapping = res['mappings'];
+          let found = false;
+          for (let i = 0; i < mapping.length; ++i) {
             if (mapping[i].strand === strand) {
               found = true;
               resolve(mapping[i]);
@@ -44,14 +44,14 @@ exports.getGenomicLocationByVariationId = (vid, strand) => {
       });
     }
   });
-}
+};
 
 exports.queryLookupByEnsemblId = (ensemblId) => {
   return new Promise((resolve, reject) => {
     if (!ensemblId || ensemblId.slice(0, 2) != 'EN') {
-      reject('Invalid Ensembl ID');
+      reject(new Error('Invalid Ensembl ID'));
     } else {
-      const url = 'https://grch37.rest.ensembl.org/lookup/id/' + ensemblId;
+      const url = `https://grch37.rest.ensembl.org/lookup/id/${ensemblId}`;
       got.get(url, { headers: { 'content-type': 'application/json' } })
         .json()
         .then((res) => {

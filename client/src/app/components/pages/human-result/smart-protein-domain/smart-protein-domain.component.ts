@@ -54,7 +54,7 @@ export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
 
   initTable(data?: SmartDomain[]): void {
     if (data) {
-      this.dataSource = new MatTableDataSource(this.data!);
+      this.dataSource = new MatTableDataSource(this.data);
     }
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

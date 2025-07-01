@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
 
 const Promise = require('bluebird');
@@ -10,9 +9,9 @@ const db = require('../utils/db');
 const gene = require('../utils/gene');
 
 router.get('/batch/genes', (req, res) => {
-  var entrezIds = req.query.entrezIds || [];
+  let entrezIds = req.query.entrezIds || [];
   if ((typeof entrezIds) === 'string') {
-    entrezIds = [ parseInt(entrezIds) ];
+    entrezIds = [parseInt(entrezIds)];
   }
   Promise.all(entrezIds)
     .map(entrezId => {
@@ -51,9 +50,9 @@ router.get('/batch/genes', (req, res) => {
 });
 
 router.get('/batch/variants', (req, res) => {
-  var variants = req.query.variants || [];
+  let variants = req.query.variants || [];
   if (typeof(variants) !== 'object') {
-    variants = [ variants];
+    variants = [variants];
   }
   Promise.all(variants)
     .map((variantStr) => {
@@ -61,8 +60,9 @@ router.get('/batch/variants', (req, res) => {
       return Promise.all([
         variantStr,
         db.gnomAD.getByVariant(variant),
-        db.geno2mp.getByVariant(variant, { hpoCount: 1, homCount: 1, funcAnno: 1, hetCount: 1 }, excludeGene=true),
-        db.dgv.getByVariant(variant, { frequency: 1, sampleSize: 1, gain: 1, loss: 1 }, excludeGene=true),
+        db.geno2mp.getByVariant(variant,
+          { hpoCount: 1, homCount: 1, funcAnno: 1, hetCount: 1 }, true),
+        db.dgv.getByVariant(variant, { frequency: 1, sampleSize: 1, gain: 1, loss: 1 }, true),
         db.clinvar.getByVariant(variant),
         db.dbnsfp.getByVariant(variant),
       ]).then((arr) => {
@@ -87,4 +87,3 @@ router.get('/batch/variants', (req, res) => {
 });
 
 module.exports = router;
-

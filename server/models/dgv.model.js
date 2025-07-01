@@ -13,24 +13,24 @@ const dgvSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  subType : String,
-  accession : String,
-  type : String,
-  reference : String,
-  method : String,
-  platform : String,
-  mergedVariants : String,
-  supportingVariants : String,
-  mergedOrSample : String,
-  frequency : Number,
-  sampleSize : Number,
+  subType: String,
+  accession: String,
+  type: String,
+  reference: String,
+  method: String,
+  platform: String,
+  mergedVariants: String,
+  supportingVariants: String,
+  mergedOrSample: String,
+  frequency: Number,
+  sampleSize: Number,
   gain: Number,
-  loss : Number,
-  cohortDescription : String,
-  samples : [{
+  loss: Number,
+  cohortDescription: String,
+  samples: [{
     type: String
   }],
-  "genes" : [{
+  genes: [{
     type: mongoose.ObjectId,
     ref: 'Genes'
   }]

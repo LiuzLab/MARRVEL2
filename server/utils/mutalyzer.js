@@ -3,13 +3,11 @@ const rp = require('request-promise');
 
 const gene = require('./gene');
 
-var validateAndParseVariantInput;
-
 const getGeneByRefSeqId = (sid) => {
   return new Promise((resolve, reject) => {
     rp({
       method: 'GET',
-      uri: 'https://mutalyzer.nl/api/reference_model/?reference_id=' + encodeURIComponent(sid),
+      uri: `https://mutalyzer.nl/api/reference_model/?reference_id=${encodeURIComponent(sid)}`,
       headers: {
         'content-type': 'application/json'
       }
@@ -95,17 +93,17 @@ exports.getGenomLocByHgvsVar = async (variant, build) => {
   });
 };
 
-validateAndParseVariantInput = (varInput) => {
+const validateAndParseVariantInput = (varInput) => {
   const reExps = [
     /(?:chr|Chr)?([0-9]?[0-9XY])\s*:\s*([0-9]*)\s*([ACGT]*)\s*>\s*([ACGT]*)/,
     /([0-9]?[0-9XY])\s*-\s*([0-9]*)\s*-\s*([ACGT]*)\s*-\s*([ACGT]*)/,
     /.+_0*(\d+)\.\d+:.\.(\d+)([ACGT]*)>([ACGT]*)/
   ];
-  for (var i=0; i<reExps.length; ++i) {
-    var reExp = reExps[i];
-    var res = varInput.match(reExp);
+  for (let i = 0; i < reExps.length; ++i) {
+    const reExp = reExps[i];
+    const res = varInput.match(reExp);
     if (res) {
-      var chr = parseInt(res[1]);
+      const chr = parseInt(res[1]);
       if (chr < 1 || chr > 24) return null;
       if (res[1] === '23') res[1] = 'X';
       else if (res[1] === '24') res[1] = 'Y';
@@ -119,3 +117,4 @@ validateAndParseVariantInput = (varInput) => {
   }
   return null;
 };
+exports.validateAndParseVariantInput = validateAndParseVariantInput;

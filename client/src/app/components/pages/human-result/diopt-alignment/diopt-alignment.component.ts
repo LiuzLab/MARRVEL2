@@ -126,11 +126,11 @@ export class DioptAlignmentComponent implements OnInit {
   }
 
   setHighlightFrom(from) {
-    from = parseInt(from);
+    from = parseInt(from, 10);
     this.highlightFrom = from >= 0 ? from : null;
   }
   setHighlightTo(to) {
-    to = parseInt(to);
+    to = parseInt(to, 10);
     this.highlightTo = to >= 0 ? to : null;
   }
   scrollToAlignment() {

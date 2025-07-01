@@ -24,17 +24,21 @@ export class SearchService {
     const VARIANT = 1;
     let inputTypeCode = 0;
     if (gene) {
+      // tslint:disable-next-line:no-bitwise
       inputTypeCode |= GENE;
     }
     if (variant?.length) {
+      // tslint:disable-next-line:no-bitwise
       inputTypeCode |= VARIANT;
     }
 
     const route = ['human'];
+    // tslint:disable-next-line:no-bitwise
     if (inputTypeCode & GENE) {
       route.push('gene');
       route.push(gene.entrezId.toString());
     }
+    // tslint:disable-next-line:no-bitwise
     if (inputTypeCode & VARIANT) {
       switch (genomeBuild) {
         case 'hg19':

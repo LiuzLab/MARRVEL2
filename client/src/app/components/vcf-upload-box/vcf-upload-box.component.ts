@@ -83,7 +83,7 @@ export class VcfUploadBoxComponent implements OnInit {
       }
     };
     fr.onload = (e) => {
-      let result: string = (e.target as FileReader).result as string;
+      const result: string = (e.target as FileReader).result as string;
       const lastNLIdx = result.lastIndexOf('\n');
       if (lastNLIdx === -1) {
         lastLine = lastLine + result;
@@ -104,7 +104,7 @@ export class VcfUploadBoxComponent implements OnInit {
       } else {
         readNextChunk();
       }
-    }
+    };
     readNextChunk();
   }
 

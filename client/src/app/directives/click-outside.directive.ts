@@ -1,8 +1,10 @@
 import { Directive, Output, EventEmitter, ElementRef, HostListener } from '@angular/core';
 
+/* tslint:disable:directive-selector */
 @Directive({
   selector: '[clickOutside]'
 })
+/* tslint:enable:directive-selector */
 export class ClickOutsideDirective {
 
   constructor(private _elementRef: ElementRef) { }

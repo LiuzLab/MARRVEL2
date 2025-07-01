@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const impcPhenotypesSchema = mongoose.Schema({
-  poId : {
+  poId: {
     type: String,
     required: true
   },
