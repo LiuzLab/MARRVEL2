@@ -89,11 +89,8 @@ exports.getByGenomicLocation = (chr, posStart, posStop, build) => {
       // range query
       query = {
         chr,
-        $or: [
-          { [startField]: { $gte: posStart, $lte: posStop } },
-          { [stopField]: { $gte: posStart, $lte: posStop } },
-          { [startField]: { $lte: posStart }, [stopField]: { $gte: posStop } },
-        ]
+        [startField]: { $lte: posStop },
+        [stopField]: { $gte: posStart }
       };
     }
     Genes.find(query, { _id: 0, clinVarIds: 0, gos: 0, dgvIds: 0, decipherIds: 0, geno2mpIds: 0,
