@@ -198,11 +198,17 @@ export class SearchBoxComponent implements OnInit {
       return;
     }
 
-    if (this.selectedInputType === 'modelgene') {
-      this.router.navigate([ 'model', 'gene', this.modelGene.entrezId ]);
-    } else {
-      this.searchSvc.redirect(this.selectedInputType as 'gene' | 'protein',
-        this.gene, this.variant, this.genomeBuild);
+    switch (this.selectedInputType) {
+      case 'modelgene':
+        this.router.navigate([ 'model', 'gene', this.modelGene.entrezId ]);
+        break;
+      case 'protein':
+        this.searchSvc.redirect('protein', null, this.protein);
+        break;
+      default:
+        this.searchSvc.redirect(this.selectedInputType as 'gene' | 'protein',
+          this.gene, this.variant, this.genomeBuild);
+        break;
     }
   }
 
