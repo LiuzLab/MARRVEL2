@@ -90,6 +90,7 @@ import { SmartProteinDomainComponent } from './components/pages/human-result/sma
 import { ModelmatcherComponent } from './components/pages/human-result/modelmatcher/modelmatcher.component';
 import { PpiComponent } from './components/pages/human-result/ppi/ppi.component';
 import { HumanSearchComponent } from './components/pages/human-search/human-search.component';
+import { PpiVisualComponent } from './components/pages/human-result/ppi/ppi-visual/ppi-visual.component';
 
 @NgModule({
   declarations: [
@@ -150,7 +151,8 @@ import { HumanSearchComponent } from './components/pages/human-search/human-sear
     SmartProteinDomainComponent,
     ModelmatcherComponent,
     PpiComponent,
-    HumanSearchComponent
+    HumanSearchComponent,
+    PpiVisualComponent
   ],
   imports: [
     BrowserModule,

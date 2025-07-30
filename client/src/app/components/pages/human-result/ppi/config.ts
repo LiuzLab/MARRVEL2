@@ -17,4 +17,3 @@ export const EDGE_CONFIG = {
   'line-color': '#4bb3ad',
   'width': '4px'
 };
-

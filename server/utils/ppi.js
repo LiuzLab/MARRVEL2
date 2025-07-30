@@ -57,3 +57,5 @@ exports.getGroupedPpi = (entrezId, populateSource) => {
     });
   });
 };
+
+exports.string = require('./db/string');

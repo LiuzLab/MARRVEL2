@@ -2,6 +2,8 @@ const Promise = require('bluebird');
 const rp = require('request-promise');
 const got = Promise.promisify(require('got'));
 
+const EnsemblGene = require('../models/ensembl-gene.model');
+
 const queryHumanVariationById = (vid) => {
   return new Promise((resolve, reject) => {
     rp({
@@ -61,4 +63,13 @@ exports.queryLookupByEnsemblId = (ensemblId) => {
         });
     }
   });
+};
+
+exports.getEnsemblGeneByEntrezId = async (entrezId) => {
+  entrezId = parseInt(entrezId);
+  if (isNaN(entrezId)) {
+    return [];
+  }
+  const genes = await EnsemblGene.find({ entrezId });
+  return genes;
 };

@@ -5,6 +5,20 @@ const router = express.Router();
 const Genes = require('../models/genes.model');
 const utils = require('../utils');
 
+router.get('/ppi/string/entrezId/:entrezId', async (req, res) => {
+  const entrezId = parseInt(req.params.entrezId);
+  if (isNaN(entrezId)) {
+    return res.status(400).json('Invalid Entrez ID');
+  }
+  try {
+    const ppi = await utils.ppi.string.getByEntrezId(entrezId)
+    return res.json(ppi);
+  } catch (err) {
+    console.log('Error getting STRING PPI', err);
+    return res.status(500);
+  }
+});
+
 router.get('/ppi/entrezId/:entrezId', async (req, res, next) => {
   const geneId = req.params.entrezId || '';
   let gene;

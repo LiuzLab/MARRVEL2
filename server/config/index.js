@@ -77,6 +77,9 @@ config[env].liftover = {
   hg19Version: process.env.LIFTOVER_HG19_VERSION || 'hg19_200902',
 };
 
+config[env].string = process.env.STRING_VERSION || '12.0';
+config[env].ensemblGene = process.env.ENSEMBL_GENE_VERSION || 'GRCh38.p14';
+
 config[env].https = require(path.join(rootPath, 'config/https', env + '.json'));
 
 module.exports = config[env];

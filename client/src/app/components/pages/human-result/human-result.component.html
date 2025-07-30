@@ -317,13 +317,7 @@
               </h3>
               <mat-progress-bar mode="indeterminate" class="w-100"
                 *ngIf="ppiLoading"></mat-progress-bar>
-              <app-ppi
-                [gene]="gene"
-                [data]="ppiData"
-                *ngIf="!ppiLoading && ppiData && ppiData.length"></app-ppi>
-              <p *ngIf="!ppiLoading && (!ppiData || !ppiData.length)">
-                No protein interaction data available
-              </p>
+              <app-ppi [gene]="gene" *ngIf="gene"></app-ppi>
             </div>
           </div>
           <!-- PPI ends -->
