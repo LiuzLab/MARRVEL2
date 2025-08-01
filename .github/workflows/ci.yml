@@ -18,6 +18,10 @@ jobs:
         with:
           submodules: true
 
+      - name: Write env file for docker compose
+        run: |
+          echo "LOCAL_BASE=${{ secrets.LOCAL_BASE }}" >> .env
+
       - name: Build docker image
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/marrvel-client ./client
@@ -47,11 +51,15 @@ jobs:
 
       - name: Get configuration files from S3
         run: |
-          aws s3 sync s3://${{ secrets.CONF_BUCKET_NAME }} /tmp/config
+          aws s3 sync s3://${{ secrets.CONF_BUCKET_NAME }} ${{ secrets.LOCAL_BASE }}/config
 
       - name: Get TransVar reference and annotation files from S3
         run: |
-          aws s3 sync s3://${{ secrets.TRANSVAR_REF_BUCKET_NAME }} /tmp/transvar.download
+          aws s3 sync s3://${{ secrets.TRANSVAR_REF_BUCKET_NAME }} ${{ secrets.LOCAL_BASE }}/transvar.download
+      
+      - name: Write env file for docker compose
+        run: |
+          echo "LOCAL_BASE=${{ secrets.LOCAL_BASE }}" >> .env
 
       - name: Pull image from docker hub & run
         run: |
