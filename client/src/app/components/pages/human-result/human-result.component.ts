@@ -92,7 +92,11 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
                     this.hg38Variant = liftover.data;
                   }
                   return variant;
-                }).catch((err) => { throw err; });
+                }).catch((err) => {
+                  this.hg38Variant = null;
+                  console.log(err);
+                  return variant;
+                });
             } else {
               this.hg38Variant = variant;
               return this.variantService.liftoverHg38ToHg19(variant)
@@ -103,9 +107,14 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
                     return liftover.data;
                   }
                   throw Error(liftover.error?.message);
-                }).catch((err) => { throw err; });
+                });
             }
           }).then((hg19Variant: Variant) => {
+            if (!hg19Variant) {
+              this.variant = null;
+              this.variantString = null;
+              return;
+            }
             this.variant = hg19Variant;
             this.variantString = `Chr${ hg19Variant.chr}:` +
               `${ hg19Variant.pos } ` +
