@@ -20,7 +20,12 @@ const getByEntrezId = (entrezId) => {
             .then((queryRes) => {
               resolve(queryRes);
             }).catch((err) => {
-              console.error('Error while querying gnomAD by gene', err);
+              if (err?.name === 'HTTPError') {
+                // just print the status code
+                console.error(`Error while querying gnomAD by gene: HTTPError ${err.response?.statusCode}`);
+              } else {
+                console.error('Error while querying gnomAD by gene', err);
+              }
               resolve(doc.gnomadGene || {});
             });
         } else {

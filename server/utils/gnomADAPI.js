@@ -26,7 +26,7 @@ const queryByGene = (gene, referenceGenome) => {
     }
     got.post('https://gnomad.broadinstitute.org/api/', { json: {
       operationName: 'Gene',
-      geneQuery,
+      query: geneQuery,
       variables: filter
     } }).then((res) => {
       let data;
