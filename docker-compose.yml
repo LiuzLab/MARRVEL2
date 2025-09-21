@@ -13,6 +13,7 @@ services:
       - "${LOCAL_BASE}/dist:/MARRVEL/dist"
       - "${LOCAL_BASE}/config:/tmp/config"
       - "${LOCAL_BASE}/transvar.download:/root/.transvar.download"
+      - "${LOCAL_LIFTOVER}:/liftover"
     ports:
       - "8080:8080"
     command: sh -c "cp -r /tmp/config/* /MARRVEL/server/config/ && npm start"

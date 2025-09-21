@@ -31,6 +31,14 @@ routes.forEach((router) => {
   app.use('/data', require(router));
 });
 
+
+// Check liftOver Configuration
+if (!config.liftoverCmdTool || !config.liftoverCmdTool.path ||
+  !(config.liftoverCmdTool.Human?.hg19?.Human?.hg38) ||
+  !(config.liftoverCmdTool.Human?.hg38?.Human?.hg19)) {
+  throw new Error('Error: liftOver command line tool is not configured properly.');
+}
+
 app.use(express.static('../dist/MARRVEL'));
 
 app.get('/doc', (req, res) => {

@@ -1,4 +1,4 @@
-const liftover = require('../utils/variant').liftover;
+const liftover = require('../utils/liftover').liftover;
 
 const LiftoverModel38 = require('../models/liftover-hg38.model');
 const LiftoverModel19 = require('../models/liftover-hg19.model');

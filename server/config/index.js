@@ -77,6 +77,21 @@ config[env].liftover = {
   hg38Version: process.env.LIFTOVER_HG38_VERSION || 'hg38_201312',
   hg19Version: process.env.LIFTOVER_HG19_VERSION || 'hg19_200902',
 };
+config[env].liftoverCmdTool = {
+  path: process.env.LIFTOVER_CMD_TOOL_PATH || 'liftOver',
+  Human: {
+    hg19: {
+      Human: {
+        hg38: process.env.LIFTOVER_HG19_TO_HG38_CHAIN_PATH
+      }
+    },
+    hg38: {
+      Human: {
+        hg19: process.env.LIFTOVER_HG38_TO_HG19_CHAIN_PATH
+      }
+    }
+  }
+};
 
 config[env].https = require(path.join(rootPath, 'config/https', `${env}.json`));
 

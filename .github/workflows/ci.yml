@@ -60,6 +60,7 @@ jobs:
       - name: Write env file for docker compose
         run: |
           echo "LOCAL_BASE=${{ secrets.LOCAL_BASE }}" >> .env
+          echo "LOCAL_LIFTOVER=${{ secrets.LOCAL_LIFTOVER }}" >> .env
 
       - name: Pull image from docker hub & run
         run: |
