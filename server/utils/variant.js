@@ -1,5 +1,3 @@
-const Promise = require('bluebird');
-
 const validateAndParseVariant = (varInput) => {
   const reExps = [
     /(?:chr|Chr)?([0-9]?[0-9XY])\s*:(?:g\.)?\s*([0-9]*)\s*([ACGTU]*)\s*>\s*([ACGTU]*)/,
