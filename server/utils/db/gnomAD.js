@@ -41,16 +41,16 @@ exports.getByEntrezId = getByEntrezId;
 
 exports.getByGeneSymbol = (symbol) => {
   return new Promise((resolve, reject) => {
-    Genes.findOne({ taxonId: 9606, symbol: new RegExp(`^${symbol}$`, 'i') }, { _id: 1 })
+    Genes.findOne({ taxonId: 9606, symbol: new RegExp(`^${symbol}$`, 'i') }, { entrezId: 1 })
       .then((doc) => {
-        return (doc || { _id: null })['_id'];
-      }).then((geneId) => {
-        if (!geneId) {
+        return (doc || { entrezId: null }).entrezId;
+      }).then((entrezId) => {
+        if (!entrezId) {
           return resolve(null);
         }
-        GnomADGene.findOne({ geneId }, { _id: 0, geneId: 0 })
+        return GnomADGene.findOne({ entrezId }, { _id: 0 })
           .then((queryRes) => {
-            resolve(queryRes);
+            return queryRes;
           }).catch((err) => {
             console.error('Error while querying gnomAD by gene symbol', err);
             reject(err);
