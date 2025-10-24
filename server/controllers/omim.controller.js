@@ -1,5 +1,6 @@
 const Genes = require('../models/genes.model');
 const OMIMEntry = require('../models/omim-entry.model');
+const OMIMPhenotype = require('../models/omim-phenotype.model');
 
 const utils = require('../utils');
 const db = require('../utils/db');
@@ -115,3 +116,39 @@ exports.findByTitle = async (req, res) => {
   return res.json(result);
 };
 
+exports.findPhenotypesByTitle = async (req, res) => {
+  const title = req.params.title || '';
+  try {
+    const results = await OMIMPhenotype.find(
+      { $text: { $search: title } },
+      {
+        _id: 0,
+        mimNumber: 1,
+        phenotype: 1,
+        geneMimNumber: 1,
+        phenotypeInheritance: 1,
+        phenotypeMappingKey: 1,
+        entrezId: 1,
+        score: { $meta: 'textScore' }
+      })
+      .sort({ score: { $meta: 'textScore' } })
+      .limit(30)
+      .populate('gene', 'entrezId symbol');
+    return res.json(results.map(doc => ({
+      mimNumber: doc.mimNumber,
+      phenotype: doc.phenotype,
+      phenotypeInheritance: doc.phenotypeInheritance,
+      phenotypeMappingKey: doc.phenotypeMappingKey,
+      gene: doc.gene ? {
+        entrezId: doc.gene.entrezId,
+        symbol: doc.gene.symbol,
+        mimNumber: doc.geneMimNumber
+      } : null,
+    })));
+  } catch (err) {
+    console.error('Error while querying OMIM phenotypes by title', err);
+    return res.status(500).send({
+      message: 'Server error occurred'
+    });
+  }
+};
