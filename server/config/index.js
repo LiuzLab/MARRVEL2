@@ -58,7 +58,7 @@ const config = {
         name: `DECIPHERControl${process.env.DECIPHER_CONTROL_VERSION ? `.${process.env.DECIPHER_CONTROL_VERSION}` : ''}`
       },
       disease: {
-        allowedReferer: process.env.RESTRICT_DECIPHER_DISEASE ? new RegExp('^(?:https?:\/\/)?(?:www\.)?marrvel.org.*', 'i') : new RegExp('.*'),
+        allowedReferer: new RegExp('^(?:https?:\/\/)?(?:www\.)?marrvel.org.*', 'i'),
         version: process.env.DECIPHER_DISEASE_VERSION,
         name: `DECIPHERDisease${process.env.DECIPHER_DISEASE_VERSION ? `.${process.env.DECIPHER_DISEASE_VERSION}` : ''}`
       }
