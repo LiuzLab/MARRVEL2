@@ -50,11 +50,30 @@ exports.getByVariant = (variant, build) => {
 
 exports.getByGeneSymbol = (symbol) => {
   return new Promise((resolve, reject) => {
-    Genes.findOne({ taxonId: 9606, symbol: new RegExp(`^${symbol}$`, 'i') }, { clinVarIds: 1 })
-      .populate({ path: 'clinVar', select: { uid: 1, title: 1, condition: 1, significance: 1, start: 1, stop: 1, _id: 0 } })
-      .then((doc) => {
-        if (!doc || !doc.clinVar) resolve([]);
-        else resolve(doc.clinVar);
+    Genes.findOne({ taxonId: 9606, symbol: new RegExp(`^${symbol}$`, 'i') }, { chr: 1, hg19Start: 1, hg19Stop: 1 }).lean()
+      .then((gene) => {
+        if (!gene || isNaN(parseInt(gene.hg19Start)) || isNaN(parseInt(gene.hg19Stop))) {
+          return resolve([]);
+        }
+        // get overlapping clinvar variants
+        return ClinVar.find({
+          chr: gene.chr,
+          $or: [
+            // gene.hg19Start <= start <= gene.hg19Stop
+            { start: { $gte: gene.hg19Start, $lte: gene.hg19Stop } },
+            // start <= gene.hg19Start <= stop
+            {
+              start: { $lte: gene.hg19Start },
+              stop: { $gte: gene.hg19Start },
+            }
+          ]
+        }).lean();
+      }).then((docs) => {
+        if (!docs) {
+          resolve([]);
+        } else {
+          resolve(docs);
+        }
       }).catch((err) => {
         reject(err);
       });
