@@ -5,19 +5,29 @@ const path = require('path');
 
 // Import resolvers
 const clinvarResolvers = require('./resolvers/clinvar.resolvers');
+const geneResolvers = require('./resolvers/gene.resolvers');
 
 // Read schema files
 const clinvarTypeDefs = readFileSync(path.join(__dirname, 'schemas/clinvar.schema.graphql'), 'utf8');
+const geneTypeDefs = readFileSync(path.join(__dirname, 'schemas/gene.schema.graphql'), 'utf8');
 
 // Combine all schemas
 const typeDefs = `
   ${clinvarTypeDefs}
+  ${geneTypeDefs}
 
   type Query {
     clinvarByGeneSymbol(symbol: String!): [Clinvar!]!
     clinvarByGeneEntrezId(entrezId: Int!): [Clinvar!]!
     clinvarByVariant(variant: String!, build: String = "hg19"): Clinvar
     clinvarCountsByEntrezId(entrezId: Int!): ClinvarCounts!
+    
+    geneBySymbol(symbol: String!, taxonId: Int!): Gene
+    geneByEntrezId(entrezId: Int!): Gene
+    geneByHgncId(hgncId: Int!): Gene
+    geneByEnsemblId(ensemblId: String!): Gene
+    genesByPrefix(prefix: String!, taxonId: Int!, limit: Int = 30): [Gene!]!
+    genesByGenomicLocation(chr: String!, posStart: Int!, posStop: Int!, build: String = "hg19"): [Gene!]!
   }
 `;
 
@@ -30,6 +40,13 @@ const rootValue = {
   clinvarByGeneEntrezId: clinvarResolvers.findByGeneEntrezId,
   clinvarByVariant: clinvarResolvers.findByVariant,
   clinvarCountsByEntrezId: clinvarResolvers.getCountsByEntrezId,
+
+  geneBySymbol: geneResolvers.findByGeneSymbol,
+  geneByEntrezId: geneResolvers.findByEntrezId,
+  geneByHgncId: geneResolvers.findByHgncId,
+  geneByEnsemblId: geneResolvers.findByEnsemblId,
+  genesByPrefix: geneResolvers.findByPrefix,
+  genesByGenomicLocation: geneResolvers.findByGenomicLocation,
 };
 
 // Create and export the GraphQL handler

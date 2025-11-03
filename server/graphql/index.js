@@ -10,6 +10,8 @@
  *
  * Available queries:
  * - Clinvar: findByGeneSymbol, findByGeneEntrezId, findByVariant, getCountsByEntrezId
+ * - Gene: findByGeneSymbol, findByEntrezId, findByHgncId, findByEnsemblId,
+ *         findByPrefix, findByGenomicLocation
  */
 
 module.exports = {

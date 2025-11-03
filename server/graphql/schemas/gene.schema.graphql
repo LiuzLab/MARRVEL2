@@ -1,0 +1,31 @@
+"""
+Cross-reference information for a gene
+"""
+type GeneXref {
+  ensemblId: String
+  omimId: String
+  mgiId: String
+  hgncId: String
+  pomBaseId: String
+}
+
+"""
+A gene entry
+"""
+type Gene {
+  taxonId: Int!
+  entrezId: Int!
+  symbol: String!
+  hgncId: Int
+  alias: [String]
+  name: String
+  locusType: String
+  status: String
+  xref: GeneXref
+  chr: String
+  hg19Start: Int
+  hg19Stop: Int
+  hg38Start: Int
+  hg38Stop: Int
+  uniprotKBId: String
+}
