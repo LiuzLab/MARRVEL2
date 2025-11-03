@@ -954,3 +954,187 @@ query($ensemblId1: String!, $ensemblId2: String!) {
   "ensemblId2": "ENSP00000000412"
 }
 ```
+
+### DbNSFP
+- `hg19Chr`: String! - Chromosome (hg19)
+- `hg19Pos`: Int! - Position (hg19)
+- `ref`: String! - Reference allele
+- `alt`: String! - Alternative allele
+- `scores`: DbNSFPScores! - All prediction scores
+- `hg18Chr`: String - Chromosome (hg18)
+- `hg18Pos`: Int - Position (hg18)
+- `hg38Chr`: String - Chromosome (hg38)
+- `hg38Pos`: Int - Position (hg38)
+- `aaPos`: Int - Amino acid position
+- `aaRef`: String - Reference amino acid
+- `aaAlt`: String - Alternative amino acid
+- `rsid`: String - dbSNP ID
+- `ensemblId`: String - Ensembl gene ID
+- `transcriptEnsemblId`: String - Ensembl transcript ID
+- `proteinEnsemblId`: String - Ensembl protein ID
+- `symbol`: String - Gene symbol
+
+### DbNSFPScores
+- `SIFT`: PredictionScore - SIFT predictions
+- `SIFT4G`: PredictionScore - SIFT4G predictions
+- `Polyphen2HDIV`: PredictionScore - PolyPhen-2 HumDiv predictions
+- `Polyphen2HVAR`: PredictionScore - PolyPhen-2 HumVar predictions
+- `MutationTaster`: PredictionScore - MutationTaster predictions
+- `MutationAssessor`: PredictionScore - MutationAssessor predictions
+- `CADD`: CADDScore - CADD scores
+- `REVEL`: REVELScore - REVEL scores
+- `AlphaMissense`: PredictionScore - AlphaMissense predictions
+- `PrimateAI`: SinglePredictionScore - PrimateAI predictions
+- `MCAP`: SinglePredictionScore - M-CAP predictions
+- `GERPppRS`: ConservationScore - GERP++ RS conservation scores
+- `phyloP100way_vertebrate`: ConservationScore - phyloP 100-way vertebrate conservation
+- `phyloP470way_mammalian`: ConservationScore - phyloP 470-way mammalian conservation
+
+### PredictionScore
+- `scores`: [Float] - Prediction scores (multiple transcripts)
+- `predictions`: [String] - Prediction categories (multiple transcripts)
+- `rankscore`: Float - Rank score
+
+### SinglePredictionScore
+- `score`: Float - Single prediction score
+- `prediction`: String - Single prediction category
+- `rankscore`: Float - Rank score
+
+### CADDScore
+- `rawScore`: Float - CADD raw score
+- `phred`: Float - CADD Phred score
+- `rankscore`: Float - CADD rank score
+
+### REVELScore
+- `scores`: [Float] - REVEL scores (multiple transcripts)
+- `rankscore`: Float - REVEL rank score
+
+### ConservationScore
+- `score`: Float - Conservation score
+- `rankscore`: Float - Conservation rank score
+
+## dbNSFP Queries
+
+### Find Variant Annotations by Variant
+
+Find dbNSFP annotations for a specific variant by chromosome, position, reference, and alternative alleles.
+
+**Query:**
+```graphql
+query($chr: String!, $pos: Int!, $ref: String!, $alt: String!, $build: String) {
+  dbnsfpByVariant(chr: $chr, pos: $pos, ref: $ref, alt: $alt, build: $build) {
+    hg19Chr
+    hg19Pos
+    hg38Chr
+    hg38Pos
+    ref
+    alt
+    symbol
+    rsid
+    scores {
+      SIFT {
+        scores
+        predictions
+        rankscore
+      }
+      CADD {
+        rawScore
+        phred
+        rankscore
+      }
+      REVEL {
+        scores
+        rankscore
+      }
+      AlphaMissense {
+        scores
+        predictions
+        rankscore
+      }
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "chr": "17",
+  "pos": 43094454,
+  "ref": "A",
+  "alt": "T",
+  "build": "hg19"
+}
+```
+
+### Find Variants by Position
+
+Find all dbNSFP variants at a specific genomic position.
+
+**Query:**
+```graphql
+query($chr: String!, $pos: Int!, $build: String, $limit: Int, $start: Int) {
+  dbnsfpByPosition(chr: $chr, pos: $pos, build: $build, limit: $limit, start: $start) {
+    ref
+    alt
+    symbol
+    scores {
+      CADD {
+        phred
+      }
+      REVEL {
+        rankscore
+      }
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "chr": "17",
+  "pos": 43094454,
+  "build": "hg19",
+  "limit": 50,
+  "start": 0
+}
+```
+
+### Find Variants by Gene Symbol
+
+Find dbNSFP annotations for all variants in a specific gene.
+
+**Query:**
+```graphql
+query($symbol: String!, $limit: Int, $start: Int) {
+  dbnsfpByGeneSymbol(symbol: $symbol, limit: $limit, start: $start) {
+    hg19Chr
+    hg19Pos
+    ref
+    alt
+    rsid
+    scores {
+      SIFT {
+        rankscore
+      }
+      Polyphen2HDIV {
+        rankscore
+      }
+      CADD {
+        phred
+      }
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "symbol": "TP53",
+  "limit": 100,
+  "start": 0
+}
+```
+

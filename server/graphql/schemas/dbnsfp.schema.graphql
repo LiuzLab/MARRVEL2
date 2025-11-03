@@ -1,0 +1,85 @@
+"""
+A variant annotation score from a prediction tool
+"""
+type PredictionScore {
+  scores: [Float]
+  predictions: [String]
+  rankscore: Float
+}
+
+"""
+A single prediction score (for tools that don't have multiple transcripts)
+"""
+type SinglePredictionScore {
+  score: Float
+  prediction: String
+  rankscore: Float
+}
+
+"""
+CADD scores (different structure)
+"""
+type CADDScore {
+  rawScore: Float
+  phred: Float
+  rankscore: Float
+}
+
+"""
+REVEL scores (scores only, no predictions)
+"""
+type REVELScore {
+  scores: [Float]
+  rankscore: Float
+}
+
+"""
+Conservation scores (score only)
+"""
+type ConservationScore {
+  score: Float
+  rankscore: Float
+}
+
+"""
+All prediction scores for a variant
+"""
+type DbNSFPScores {
+  SIFT: PredictionScore
+  SIFT4G: PredictionScore
+  Polyphen2HDIV: PredictionScore
+  Polyphen2HVAR: PredictionScore
+  MutationTaster: PredictionScore
+  MutationAssessor: PredictionScore
+  CADD: CADDScore
+  REVEL: REVELScore
+  AlphaMissense: PredictionScore
+  PrimateAI: SinglePredictionScore
+  MCAP: SinglePredictionScore
+  GERPppRS: ConservationScore
+  phyloP100way_vertebrate: ConservationScore
+  phyloP470way_mammalian: ConservationScore
+}
+
+"""
+A dbNSFP variant annotation entry
+"""
+type DbNSFP {
+  hg38Chr: String!
+  hg38Pos: Int!
+  ref: String!
+  alt: String!
+  hg19Chr: String
+  hg19Pos: Int
+  hg18Chr: String
+  hg18Pos: Int
+  aaPos: Int
+  aaRef: String
+  aaAlt: String
+  rsid: String
+  ensemblId: String
+  transcriptEnsemblId: String
+  proteinEnsemblId: String
+  symbol: String
+  scores: DbNSFPScores!
+}
