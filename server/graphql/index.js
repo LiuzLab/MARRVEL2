@@ -2,7 +2,7 @@
  * GraphQL API module for MARRVEL
  *
  * This module provides GraphQL API endpoints for various data sources
- * including Clinvar, genes, DIOPT, and other genomic databases.
+ * including Clinvar, genes, DIOPT, phenotype ontology, and other genomic databases.
  *
  * Usage:
  * - Access GraphQL playground at /graphql (in development)
@@ -14,6 +14,8 @@
  *         findByPrefix, findByGenomicLocation
  * - Diopt: findAlignmentsByEntrezId, findDomainsByEntrezId, findOrthologsByEntrezId,
  *          findOrthologsByTaxonIds
+ * - PhenotypeOntology: findByPoId, findByName, findByTaxonId, findByNamespace,
+ *                      findByCategory
  */
 
 module.exports = {

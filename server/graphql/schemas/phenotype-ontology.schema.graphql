@@ -1,0 +1,20 @@
+"""
+A category within a phenotype ontology
+"""
+type PhenotypeOntologyCategory {
+  id: Int
+  name: String
+}
+
+"""
+A phenotype ontology term
+"""
+type PhenotypeOntology {
+  id: String!
+  name: String
+  def: String
+  namespace: String
+  taxonId: Int
+  is_a: [String]
+  categories: [PhenotypeOntologyCategory]
+}

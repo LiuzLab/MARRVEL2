@@ -2,7 +2,7 @@
 
 ## Overview
 
-This GraphQL API provides access to genomic data from various databases including Clinvar, genes, and other genomic resources.
+This GraphQL API provides access to genomic data from various databases including Clinvar, genes, DIOPT, phenotype ontology, and other genomic resources.
 
 ## Endpoint
 
@@ -379,6 +379,162 @@ query GetDioptOrthologsByTaxonId($taxonId1: Int!, $taxonId2: Int!, $limit: Int) 
 }
 ```
 
+### PhenotypeOntology Queries
+
+#### 1. Get phenotype ontology term by PO ID
+
+```graphql
+query GetPhenotypeOntologyByPoId($poId: String!) {
+  phenotypeOntologyByPoId(poId: $poId) {
+    id
+    name
+    def
+    namespace
+    taxonId
+    is_a
+    categories {
+      id
+      name
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "poId": "PO:0000001"
+}
+```
+
+#### 2. Search phenotype ontology terms by name
+
+```graphql
+query GetPhenotypeOntologyByName($name: String!, $limit: Int, $start: Int) {
+  phenotypeOntologyByName(name: $name, limit: $limit, start: $start) {
+    id
+    name
+    def
+    namespace
+    categories {
+      id
+      name
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "name": "leaf",
+  "limit": 10,
+  "start": 0
+}
+```
+
+#### 3. Get phenotype ontology terms by taxon ID
+
+```graphql
+query GetPhenotypeOntologyByTaxonId($taxonId: Int!, $limit: Int, $start: Int) {
+  phenotypeOntologyByTaxonId(taxonId: $taxonId, limit: $limit, start: $start) {
+    id
+    name
+    namespace
+    categories {
+      id
+      name
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "taxonId": 3702,
+  "limit": 20,
+  "start": 0
+}
+```
+
+#### 4. Get phenotype ontology terms by namespace
+
+```graphql
+query GetPhenotypeOntologyByNamespace($namespace: String!, $limit: Int, $start: Int) {
+  phenotypeOntologyByNamespace(namespace: $namespace, limit: $limit, start: $start) {
+    id
+    name
+    def
+    taxonId
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "namespace": "plant_anatomy",
+  "limit": 30,
+  "start": 0
+}
+```
+
+#### 5. Get phenotype ontology terms by category
+
+```graphql
+query GetPhenotypeOntologyByCategory($categoryId: Int!, $limit: Int, $start: Int) {
+  phenotypeOntologyByCategory(categoryId: $categoryId, limit: $limit, start: $start) {
+    id
+    name
+    def
+    categories {
+      id
+      name
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "categoryId": 1,
+  "limit": 25,
+  "start": 0
+}
+```
+
+### Pagination Example
+
+For queries that support pagination, you can use the `start` and `limit` parameters to retrieve data in chunks:
+
+```graphql
+# Get first 20 results
+query GetFirstPage {
+  phenotypeOntologyByName(name: "leaf", limit: 20, start: 0) {
+    id
+    name
+  }
+}
+
+# Get next 20 results (page 2)
+query GetSecondPage {
+  phenotypeOntologyByName(name: "leaf", limit: 20, start: 20) {
+    id
+    name
+  }
+}
+
+# Get third page
+query GetThirdPage {
+  phenotypeOntologyByName(name: "leaf", limit: 20, start: 40) {
+    id
+    name
+  }
+}
+```
+
 ## Example Usage with curl
 
 ```bash
@@ -436,6 +592,15 @@ You can copy and paste this into the GraphiQL interface:
     confidence
     gene2 {
       symbol
+      name
+    }
+  }
+  
+  phenotypeOntologyByName(name: "leaf", limit: 5) {
+    id
+    name
+    namespace
+    categories {
       name
     }
   }
@@ -531,3 +696,16 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `confidence`: String! - Confidence level (High/Moderate/Low)
 - `gene1`: Gene - Source gene information
 - `gene2`: Gene - Target gene information
+
+### PhenotypeOntology
+- `id`: String! - Phenotype ontology ID (PO ID)
+- `name`: String - Term name
+- `def`: String - Term definition
+- `namespace`: String - Ontology namespace
+- `taxonId`: Int - Organism taxonomy ID
+- `is_a`: [String] - Parent term IDs
+- `categories`: [PhenotypeOntologyCategory] - Associated categories
+
+### PhenotypeOntologyCategory
+- `id`: Int - Category identifier
+- `name`: String - Category name

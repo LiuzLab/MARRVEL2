@@ -47,7 +47,7 @@ const findAlignmentsByEntrezId = async ({ entrezId }) => {
  */
 const findDomainsByEntrezId = async ({ entrezId }) => {
   try {
-    const gene = await Genes.findOne({ entrezId }, '-_id entrezId')
+    const gene = await Genes.findOne({ entrezId }, '-_id -clinVarIds -dgvIds -geno2mpIds')
       .populate('dioptDomains', '-_id')
       .lean();
 
@@ -73,27 +73,27 @@ const findOrthologsByEntrezId = async ({ entrezId }) => {
     const docs = await DIOPTOrtholog.find({ entrezId1: entrezId }, { _id: 0 })
       .populate({
         path: 'gene2',
-        select: '-_id -location -lastModified -type -name -status -chr -alias -description -taxonId -clinVarIds -dgvIds -geno2mpIds -hg19Stop -hg19Start',
+        select: '-_id -clinVarIds -dgvIds -geno2mpIds',
         populate: [
           {
             path: 'phenotypes.ontology',
-            select: 'name categories -_id'
+            select: '-_id'
           },
           {
             path: 'impcPhenotypes',
-            select: 'poId markerEntrezId markerMgiId poName alleleSymbol lifeStage sex pValue zygosity -_id',
+            select: '-_id',
             populate: {
               path: 'phenotype',
-              select: 'name categories -_id'
+              select: '-_id'
             }
           },
           {
             path: 'gos.ontology',
-            select: 'name namespace agrSlimGoId -_id'
+            select: '-_id'
           }
         ],
       })
-      .populate({ path: 'gene1', select: 'symbol -_id' })
+      .populate({ path: 'gene1', select: '-_id -clinVarIds -dgvIds -geno2mpIds' })
       .lean();
 
     // Filter out entries where gene2 is null
