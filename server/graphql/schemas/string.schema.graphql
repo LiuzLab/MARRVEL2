@@ -1,0 +1,10 @@
+"""
+String DB interaction between two genes (experimental, database, and two combined)
+"""
+type StringInteraction {
+  ensemblId1: String
+  ensemblId2: String
+  experiments: Int
+  database: Int
+  combExpDb: Int
+}

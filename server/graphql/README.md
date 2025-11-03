@@ -894,3 +894,63 @@ query($entrezId: Int!) {
   "entrezId": 7157
 }
 ```
+
+### StringInteraction
+- `ensemblId1`: String! - First protein Ensembl ID (not gene ID)
+- `ensemblId2`: String! - Second protein Ensembl ID (not gene ID)
+- `experiments`: Int! - Experimental evidence score
+- `database`: Int! - Database evidence score
+- `combExpDb`: Int! - Combined experimental and database score
+
+## String Queries
+
+### Find Interactions by Ensembl Protein ID
+
+Find STRING protein-protein interactions for a protein by its Ensembl protein ID.
+
+**Query:**
+```graphql
+query($ensemblId: String!, $limit: Int, $start: Int) {
+  stringInteractionsByEnsemblId(ensemblId: $ensemblId, limit: $limit, start: $start) {
+    ensemblId1
+    ensemblId2
+    experiments
+    database
+    combExpDb
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "ensemblId": "ENSP00000000233",
+  "limit": 100,
+  "start": 0
+}
+```
+
+### Find Interaction Between Two Proteins
+
+Find the specific STRING interaction between two proteins using their Ensembl protein IDs. This query searches bidirectionally.
+
+**Query:**
+```graphql
+query($ensemblId1: String!, $ensemblId2: String!) {
+  stringInteractionBetweenProteins(ensemblId1: $ensemblId1, ensemblId2: $ensemblId2) {
+    ensemblId1
+    ensemblId2
+    experiments
+    database
+    combExpDb
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "ensemblId1": "ENSP00000000233",
+  "ensemblId2": "ENSP00000000412"
+}
+```

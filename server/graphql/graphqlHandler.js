@@ -9,6 +9,7 @@ const geneResolvers = require('./resolvers/gene.resolvers');
 const dioptResolvers = require('./resolvers/diopt.resolvers');
 const phenotypeOntologyResolvers = require('./resolvers/phenotype-ontology.resolvers');
 const pharosResolvers = require('./resolvers/pharos.resolver');
+const stringResolvers = require('./resolvers/string.resolvers');
 
 // Read schema files
 const clinvarTypeDefs = readFileSync(path.join(__dirname, 'schemas/clinvar.schema.graphql'), 'utf8');
@@ -16,6 +17,7 @@ const geneTypeDefs = readFileSync(path.join(__dirname, 'schemas/gene.schema.grap
 const dioptTypeDefs = readFileSync(path.join(__dirname, 'schemas/diopt.schema.graphql'), 'utf8');
 const phenotypeOntologyTypeDefs = readFileSync(path.join(__dirname, 'schemas/phenotype-ontology.schema.graphql'), 'utf8');
 const pharosTypeDefs = readFileSync(path.join(__dirname, 'schemas/pharos.schema.graphql'), 'utf8');
+const stringTypeDefs = readFileSync(path.join(__dirname, 'schemas/string.schema.graphql'), 'utf8');
 
 // Combine all schemas
 const typeDefs = `
@@ -24,6 +26,7 @@ const typeDefs = `
   ${dioptTypeDefs}
   ${phenotypeOntologyTypeDefs}
   ${pharosTypeDefs}
+  ${stringTypeDefs}
 
   type Query {
     clinvarByGeneSymbol(symbol: String!): [Clinvar!]!
@@ -52,6 +55,9 @@ const typeDefs = `
     pharosTargetById(id: Int!): PharosTarget
     pharosTargetsByIds(ids: [Int!]!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
     pharosTargetsByGeneEntrezId(entrezId: Int!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
+    
+    stringInteractionsByEnsemblId(ensemblId: String!, limit: Int = 100, start: Int = 0): [StringInteraction!]!
+    stringInteractionBetweenProteins(ensemblId1: String!, ensemblId2: String!): StringInteraction
   }
 `;
 
@@ -76,17 +82,20 @@ const rootValue = {
   dioptDomainsByEntrezId: dioptResolvers.findDomainsByEntrezId,
   dioptOrthologsByEntrezId: dioptResolvers.findOrthologsByEntrezId,
   dioptOrthologsByTaxonId: dioptResolvers.findOrthologsByTaxonIds,
-  
+
   phenotypeOntologyByPoId: phenotypeOntologyResolvers.findByPoId,
   phenotypeOntologyByName: phenotypeOntologyResolvers.findByName,
   phenotypeOntologyByTaxonId: phenotypeOntologyResolvers.findByTaxonId,
   phenotypeOntologyByNamespace: phenotypeOntologyResolvers.findByNamespace,
   phenotypeOntologyByCategory: phenotypeOntologyResolvers.findByCategory,
-  
+
   pharosTargetById: pharosResolvers.pharosTargetById,
   pharosTargetsByIds: pharosResolvers.pharosTargetsByIds,
   pharosTargetsByGeneEntrezId: pharosResolvers.pharosTargetsByGeneEntrezId,
-  
+
+  stringInteractionsByEnsemblProteinId: stringResolvers.stringInteractionsByEnsemblProteinId,
+  stringInteractionBetweenProteins: stringResolvers.stringInteractionBetweenProteins,
+
   // Type resolvers
   PharosTarget: pharosResolvers.PharosTarget,
 };
