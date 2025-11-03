@@ -81,7 +81,6 @@ const rootValue = {
   dioptAlignmentByEntrezId: dioptResolvers.findAlignmentsByEntrezId,
   dioptDomainsByEntrezId: dioptResolvers.findDomainsByEntrezId,
   dioptOrthologsByEntrezId: dioptResolvers.findOrthologsByEntrezId,
-  dioptOrthologsByTaxonId: dioptResolvers.findOrthologsByTaxonIds,
 
   phenotypeOntologyByPoId: phenotypeOntologyResolvers.findByPoId,
   phenotypeOntologyByName: phenotypeOntologyResolvers.findByName,
