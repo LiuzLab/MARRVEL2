@@ -8,12 +8,14 @@ const clinvarResolvers = require('./resolvers/clinvar.resolvers');
 const geneResolvers = require('./resolvers/gene.resolvers');
 const dioptResolvers = require('./resolvers/diopt.resolvers');
 const phenotypeOntologyResolvers = require('./resolvers/phenotype-ontology.resolvers');
+const pharosResolvers = require('./resolvers/pharos.resolver');
 
 // Read schema files
 const clinvarTypeDefs = readFileSync(path.join(__dirname, 'schemas/clinvar.schema.graphql'), 'utf8');
 const geneTypeDefs = readFileSync(path.join(__dirname, 'schemas/gene.schema.graphql'), 'utf8');
 const dioptTypeDefs = readFileSync(path.join(__dirname, 'schemas/diopt.schema.graphql'), 'utf8');
 const phenotypeOntologyTypeDefs = readFileSync(path.join(__dirname, 'schemas/phenotype-ontology.schema.graphql'), 'utf8');
+const pharosTypeDefs = readFileSync(path.join(__dirname, 'schemas/pharos.schema.graphql'), 'utf8');
 
 // Combine all schemas
 const typeDefs = `
@@ -21,6 +23,7 @@ const typeDefs = `
   ${geneTypeDefs}
   ${dioptTypeDefs}
   ${phenotypeOntologyTypeDefs}
+  ${pharosTypeDefs}
 
   type Query {
     clinvarByGeneSymbol(symbol: String!): [Clinvar!]!
@@ -45,6 +48,10 @@ const typeDefs = `
     phenotypeOntologyByTaxonId(taxonId: Int!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
     phenotypeOntologyByNamespace(namespace: String!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
     phenotypeOntologyByCategory(categoryId: Int!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
+    
+    pharosTargetById(id: Int!): PharosTarget
+    pharosTargetsByIds(ids: [Int!]!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
+    pharosTargetsByGeneEntrezId(entrezId: Int!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
   }
 `;
 
@@ -75,6 +82,13 @@ const rootValue = {
   phenotypeOntologyByTaxonId: phenotypeOntologyResolvers.findByTaxonId,
   phenotypeOntologyByNamespace: phenotypeOntologyResolvers.findByNamespace,
   phenotypeOntologyByCategory: phenotypeOntologyResolvers.findByCategory,
+  
+  pharosTargetById: pharosResolvers.pharosTargetById,
+  pharosTargetsByIds: pharosResolvers.pharosTargetsByIds,
+  pharosTargetsByGeneEntrezId: pharosResolvers.pharosTargetsByGeneEntrezId,
+  
+  // Type resolvers
+  PharosTarget: pharosResolvers.PharosTarget,
 };
 
 // Create and export the GraphQL handler

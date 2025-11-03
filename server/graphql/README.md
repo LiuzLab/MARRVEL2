@@ -709,3 +709,188 @@ All GraphQL queries return structured error messages in case of failures. Common
 ### PhenotypeOntologyCategory
 - `id`: Int - Category identifier
 - `name`: String - Category name
+
+### PharosTarget
+- `id`: Int! - Pharos target identifier
+- `name`: String! - Target name
+- `gene`: String - Associated gene symbol
+- `accession`: String - Protein accession identifier
+- `structureRefId`: String! - Structure reference ID
+- `description`: String - Target description
+- `idgFamily`: String - IDG family classification
+- `idgTDL`: String - IDG target development level
+- `idgDevLevel`: String - IDG development level
+- `self`: String - Self reference URL
+- `drugIds`: [Int!]! - Array of associated drug IDs
+- `ligandIds`: [Int!]! - Array of associated ligand IDs
+- `drugs`: [PharosDrug] - Associated drugs (populated from drugIds)
+- `ligands`: [PharosLigand] - Associated ligands (populated from ligandIds)
+
+### PharosDrug
+- `id`: Int! - Drug identifier
+- `name`: String! - Drug name
+- `description`: String - Drug description
+- `self`: String - Self reference URL
+- `namespace`: String - Drug namespace
+- `structureRefId`: String - Structure reference ID
+- `idgDevLevel`: String - IDG development level
+
+### PharosLigand
+- `id`: Int! - Ligand identifier
+- `name`: String! - Ligand name
+- `description`: String - Ligand description
+- `self`: String - Self reference URL
+- `namespace`: String - Ligand namespace
+- `structureRefId`: String - Structure reference ID
+- `idgDevLevel`: String - IDG development level
+
+## Pharos Queries
+
+### Find Target by ID
+
+Find a specific Pharos target by its ID.
+
+**Query:**
+```graphql
+query($id: Int!) {
+  pharosTargetById(id: $id) {
+    id
+    name
+    gene
+    accession
+    description
+    idgFamily
+    idgTDL
+    drugs {
+      id
+      name
+      description
+    }
+    ligands {
+      id
+      name
+      description
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "id": 1234
+}
+```
+
+### Find Targets by IDs
+
+Find multiple Pharos targets by their IDs with pagination support.
+
+**Query:**
+```graphql
+query($ids: [Int!]!, $limit: Int, $start: Int) {
+  pharosTargetsByIds(ids: $ids, limit: $limit, start: $start) {
+    id
+    name
+    gene
+    accession
+    description
+    idgTDL
+    drugs {
+      id
+      name
+    }
+    ligands {
+      id
+      name
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "ids": [1234, 5678, 9012],
+  "limit": 50,
+  "start": 0
+}
+```
+
+### Find Targets by Gene Entrez ID
+
+Find Pharos targets associated with a specific gene via Entrez ID.
+
+**Query:**
+```graphql
+query($entrezId: Int!, $limit: Int, $start: Int) {
+  pharosTargetsByGeneEntrezId(entrezId: $entrezId, limit: $limit, start: $start) {
+    id
+    name
+    gene
+    accession
+    description
+    idgFamily
+    idgTDL
+    drugs {
+      id
+      name
+      description
+    }
+    ligands {
+      id
+      name
+      description
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "entrezId": 7157,
+  "limit": 100,
+  "start": 0
+}
+```
+
+### Combining Gene and Pharos Data
+
+To get both gene information and associated Pharos targets, use separate queries in a single GraphQL request:
+
+**Query:**
+```graphql
+query($entrezId: Int!) {
+  gene: geneByEntrezId(entrezId: $entrezId) {
+    entrezId
+    symbol
+    name
+    description
+  }
+  
+  pharosTargets: pharosTargetsByGeneEntrezId(entrezId: $entrezId) {
+    id
+    name
+    accession
+    description
+    idgFamily
+    idgTDL
+    drugs {
+      id
+      name
+    }
+    ligands {
+      id
+      name
+    }
+  }
+}
+```
+
+**Variables:**
+```json
+{
+  "entrezId": 7157
+}
+```
