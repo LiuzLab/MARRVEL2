@@ -1,0 +1,40 @@
+"""
+Significance information for a Clinvar variant
+"""
+type ClinvarSignificance {
+  description: String
+  lastEvaluated: String
+  reviewStatus: String
+}
+
+"""
+A Clinvar variant entry
+"""
+type Clinvar {
+  chr: String!
+  start: Int!
+  stop: Int!
+  ref: String
+  alt: String
+  uid: Int
+  condition: String
+  title: String
+  significance: ClinvarSignificance
+  band: String
+  interpretation: String
+  grch38Chr: String
+  grch38Start: Int
+  grch38Stop: Int
+  grch38Ref: String
+  grch38Alt: String
+}
+
+"""
+Summary counts of Clinvar variants by significance
+"""
+type ClinvarCounts {
+  pathogenic: Int!
+  likelyPathogenic: Int!
+  likelyBenign: Int!
+  benign: Int!
+}

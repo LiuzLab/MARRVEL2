@@ -1,0 +1,45 @@
+"""
+A Pharos drug
+"""
+type PharosDrug {
+  id: Int!
+  name: String!
+  description: String
+  self: String
+  namespace: String
+  structureRefId: String
+  idgDevLevel: String
+}
+
+"""
+A Pharos ligand
+"""
+type PharosLigand {
+  id: Int!
+  name: String!
+  description: String
+  self: String
+  namespace: String
+  structureRefId: String
+  idgDevLevel: String
+}
+
+"""
+A Pharos target
+"""
+type PharosTarget {
+  id: Int!
+  name: String!
+  gene: String
+  accession: String
+  structureRefId: String!
+  description: String
+  idgFamily: String
+  idgTDL: String
+  idgDevLevel: String
+  self: String
+  drugIds: [Int!]!
+  ligandIds: [Int!]!
+  drugs: [PharosDrug]
+  ligands: [PharosLigand]
+}
