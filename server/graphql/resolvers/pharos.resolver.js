@@ -24,16 +24,13 @@ const pharosResolvers = {
   pharosTargetsByIds: async (args) => {
     try {
       const { ids, limit = 100, start = 0 } = args;
-      
       if (ids.length === 0) {
         return [];
       }
-
       const targets = await PharosTargets
         .find({ id: { $in: ids } })
         .skip(start)
         .limit(limit);
-      
       return targets;
     } catch (error) {
       console.error('Error in pharosTargetsByIds resolver:', error);
@@ -44,13 +41,11 @@ const pharosResolvers = {
   pharosTargetsByGeneEntrezId: async (args) => {
     try {
       const { entrezId, limit = 100, start = 0 } = args;
-      
       // Use the existing controller logic to get targets by gene
       const gene = await Genes.findOne({ entrezId });
       if (!gene || !gene.pharosTargetIds || gene.pharosTargetIds.length === 0) {
         return [];
       }
-
       const targets = await PharosTargets
         .find({ id: { $in: gene.pharosTargetIds } })
         .skip(start)
@@ -70,11 +65,9 @@ const pharosResolvers = {
         if (!parent.drugIds || parent.drugIds.length === 0) {
           return [];
         }
-        
         const drugs = await PharosDrugs.find({
           id: { $in: parent.drugIds }
         });
-        
         return drugs;
       } catch (error) {
         console.error('Error resolving PharosTarget.drugs:', error);
@@ -87,11 +80,9 @@ const pharosResolvers = {
         if (!parent.ligandIds || parent.ligandIds.length === 0) {
           return [];
         }
-        
         const ligands = await PharosLigands.find({
           id: { $in: parent.ligandIds }
         });
-        
         return ligands;
       } catch (error) {
         console.error('Error resolving PharosTarget.ligands:', error);

@@ -46,7 +46,7 @@ const findByEnsemblId = async ({ ensemblId }) => {
       { 'xref.ensemblId': ensemblId },
       { _id: 0, clinVarIds: 0, dgvIds: 0, geno2mpIds: 0, gos: 0, phenotypes: 0 }
     ).lean();
-    
+
     if (!gene) {
       return null;
     }
@@ -55,7 +55,7 @@ const findByEnsemblId = async ({ ensemblId }) => {
     if (gene.alias && typeof gene.alias === 'string') {
       gene.alias = [gene.alias];
     }
-    
+
     // Handle omimId format
     if (gene.xref && gene.xref.omimId && gene.xref.omimId.length) {
       gene.xref.omimId = gene.xref.omimId[0];
@@ -77,7 +77,7 @@ const findByPrefix = async ({ prefix, taxonId, limit = 30 }) => {
       `^(${prefix.trim().split(/[^a-zA-Z0-9]+/g).join('|')})`,
       taxonId === 7227 ? '' : 'i'
     );
-    
+
     const genes = await Genes.find(
       { taxonId, symbol: symbolRegex },
       { _id: 0, clinVarIds: 0, gos: 0, dgvIds: 0, geno2mpIds: 0, phenotypes: 0 },
