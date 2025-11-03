@@ -10,6 +10,7 @@ const dioptResolvers = require('./resolvers/diopt.resolvers');
 const phenotypeOntologyResolvers = require('./resolvers/phenotype-ontology.resolvers');
 const pharosResolvers = require('./resolvers/pharos.resolver');
 const stringResolvers = require('./resolvers/string.resolvers');
+const dbnsfpResolvers = require('./resolvers/dbnsfp.resolvers');
 
 // Read schema files
 const clinvarTypeDefs = readFileSync(path.join(__dirname, 'schemas/clinvar.schema.graphql'), 'utf8');
@@ -18,6 +19,7 @@ const dioptTypeDefs = readFileSync(path.join(__dirname, 'schemas/diopt.schema.gr
 const phenotypeOntologyTypeDefs = readFileSync(path.join(__dirname, 'schemas/phenotype-ontology.schema.graphql'), 'utf8');
 const pharosTypeDefs = readFileSync(path.join(__dirname, 'schemas/pharos.schema.graphql'), 'utf8');
 const stringTypeDefs = readFileSync(path.join(__dirname, 'schemas/string.schema.graphql'), 'utf8');
+const dbnsfpTypeDefs = readFileSync(path.join(__dirname, 'schemas/dbnsfp.schema.graphql'), 'utf8');
 
 // Combine all schemas
 const typeDefs = `
@@ -27,6 +29,7 @@ const typeDefs = `
   ${phenotypeOntologyTypeDefs}
   ${pharosTypeDefs}
   ${stringTypeDefs}
+  ${dbnsfpTypeDefs}
 
   type Query {
     clinvarByGeneSymbol(symbol: String!): [Clinvar!]!
@@ -58,6 +61,9 @@ const typeDefs = `
     
     stringInteractionsByEnsemblId(ensemblId: String!, limit: Int = 100, start: Int = 0): [StringInteraction!]!
     stringInteractionBetweenProteins(ensemblId1: String!, ensemblId2: String!): StringInteraction
+
+    dbnsfpByVariant(chr: String!, pos: Int!, ref: String!, alt: String!, build: String!): DbNSFP
+    dbnsfpByPosition(chr: String!, pos: Int!, build: String!, limit: Int = 100, start: Int = 0): [DbNSFP!]!
   }
 `;
 
@@ -94,6 +100,9 @@ const rootValue = {
 
   stringInteractionsByEnsemblProteinId: stringResolvers.stringInteractionsByEnsemblProteinId,
   stringInteractionBetweenProteins: stringResolvers.stringInteractionBetweenProteins,
+
+  dbnsfpByVariant: dbnsfpResolvers.dbnsfpByVariant,
+  dbnsfpByPosition: dbnsfpResolvers.dbnsfpByPosition,
 
   // Type resolvers
   PharosTarget: pharosResolvers.PharosTarget,
