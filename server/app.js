@@ -10,6 +10,8 @@ const mongoose = require('mongoose');
 
 const http = require('http');
 
+const { ruruHTML } = require('ruru/server');
+
 const config = require('./config');
 
 // Middleware: Bodyparser
@@ -30,6 +32,18 @@ const routes = glob.sync(`${config.root}/routers/*.js`);
 routes.forEach((router) => {
   app.use('/data', require(router));
 });
+// Graphql
+app.all('/graphql', require('./graphql/graphqlHandler'));
+if (config.env !== 'production') {
+  // GraphiQL interface
+  app.get('/graphiql', (req, res) => {
+    const html = ruruHTML({
+      endpoint: '/graphql',
+      title: 'MARRVEL GraphiQL Interface',
+    });
+    res.send(html);
+  });
+}
 
 
 // Check liftOver Configuration
