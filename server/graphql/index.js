@@ -12,6 +12,8 @@
  * - Clinvar: findByGeneSymbol, findByGeneEntrezId, findByVariant, getCountsByEntrezId
  * - Gene: findByGeneSymbol, findByEntrezId, findByHgncId, findByEnsemblId,
  *         findByPrefix, findByGenomicLocation
+ * - Diopt: findAlignmentsByEntrezId, findDomainsByEntrezId, findOrthologsByEntrezId,
+ *          findOrthologsByTaxonIds
  */
 
 module.exports = {

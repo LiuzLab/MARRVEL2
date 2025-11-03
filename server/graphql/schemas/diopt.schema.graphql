@@ -1,0 +1,51 @@
+"""
+DIOPT alignment data entry
+"""
+type DioptAlignment {
+  entrezId: Int!
+  data: [DioptAlignmentData]
+}
+
+"""
+DIOPT alignment data structure
+"""
+type DioptAlignmentData {
+  sequence: String
+  style: [String]
+  position: Int
+}
+
+"""
+DIOPT domain entry
+"""
+type DioptDomain {
+  name: String!
+  start: String!
+  end: String!
+  proteinId: String
+  externalId: String
+}
+
+"""
+DIOPT domains for a gene
+"""
+type DioptDomainSet {
+  entrezId: Int!
+  domains: [DioptDomain!]!
+}
+
+"""
+DIOPT ortholog relationship
+"""
+type DioptOrtholog {
+  taxonId1: Int!
+  entrezId1: Int!
+  taxonId2: Int!
+  entrezId2: Int!
+  score: Int!
+  bestScore: Boolean!
+  bestScoreRev: Boolean
+  confidence: String!
+  gene1: Gene
+  gene2: Gene
+}

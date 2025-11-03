@@ -6,28 +6,35 @@ const path = require('path');
 // Import resolvers
 const clinvarResolvers = require('./resolvers/clinvar.resolvers');
 const geneResolvers = require('./resolvers/gene.resolvers');
+const dioptResolvers = require('./resolvers/diopt.resolvers');
 
 // Read schema files
 const clinvarTypeDefs = readFileSync(path.join(__dirname, 'schemas/clinvar.schema.graphql'), 'utf8');
 const geneTypeDefs = readFileSync(path.join(__dirname, 'schemas/gene.schema.graphql'), 'utf8');
+const dioptTypeDefs = readFileSync(path.join(__dirname, 'schemas/diopt.schema.graphql'), 'utf8');
 
 // Combine all schemas
 const typeDefs = `
   ${clinvarTypeDefs}
   ${geneTypeDefs}
+  ${dioptTypeDefs}
 
   type Query {
     clinvarByGeneSymbol(symbol: String!): [Clinvar!]!
     clinvarByGeneEntrezId(entrezId: Int!): [Clinvar!]!
     clinvarByVariant(variant: String!, build: String = "hg19"): Clinvar
     clinvarCountsByEntrezId(entrezId: Int!): ClinvarCounts!
-    
+
     geneBySymbol(symbol: String!, taxonId: Int!): Gene
     geneByEntrezId(entrezId: Int!): Gene
     geneByHgncId(hgncId: Int!): Gene
     geneByEnsemblId(ensemblId: String!): Gene
     genesByPrefix(prefix: String!, taxonId: Int!, limit: Int = 30): [Gene!]!
     genesByGenomicLocation(chr: String!, posStart: Int!, posStop: Int!, build: String = "hg19"): [Gene!]!
+
+    dioptAlignmentByEntrezId(entrezId: Int!): DioptAlignment
+    dioptDomainsByEntrezId(entrezId: Int!): DioptDomainSet!
+    dioptOrthologsByEntrezId(entrezId: Int!): [DioptOrtholog!]!
   }
 `;
 
@@ -47,6 +54,11 @@ const rootValue = {
   geneByEnsemblId: geneResolvers.findByEnsemblId,
   genesByPrefix: geneResolvers.findByPrefix,
   genesByGenomicLocation: geneResolvers.findByGenomicLocation,
+
+  dioptAlignmentByEntrezId: dioptResolvers.findAlignmentsByEntrezId,
+  dioptDomainsByEntrezId: dioptResolvers.findDomainsByEntrezId,
+  dioptOrthologsByEntrezId: dioptResolvers.findOrthologsByEntrezId,
+  dioptOrthologsByTaxonId: dioptResolvers.findOrthologsByTaxonIds,
 };
 
 // Create and export the GraphQL handler
