@@ -54,6 +54,8 @@ const typeDefs = `
     phenotypeOntologyByTaxonId(taxonId: Int!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
     phenotypeOntologyByNamespace(namespace: String!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
     phenotypeOntologyByCategory(categoryId: Int!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
+    phenotypeOntologyByEntrezId(entrezId: Int!): [PhenotypeOntology!]!
+    phenotypeOntologyByGeneSymbol(symbol: String!): [PhenotypeOntology!]!
     
     pharosTargetById(id: Int!): PharosTarget
     pharosTargetsByIds(ids: [Int!]!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
@@ -93,6 +95,8 @@ const rootValue = {
   phenotypeOntologyByTaxonId: phenotypeOntologyResolvers.findByTaxonId,
   phenotypeOntologyByNamespace: phenotypeOntologyResolvers.findByNamespace,
   phenotypeOntologyByCategory: phenotypeOntologyResolvers.findByCategory,
+  phenotypeOntologyByEntrezId: phenotypeOntologyResolvers.findByEntrezId,
+  phenotypeOntologyByGeneSymbol: phenotypeOntologyResolvers.findByGeneSymbol,
 
   pharosTargetById: pharosResolvers.pharosTargetById,
   pharosTargetsByIds: pharosResolvers.pharosTargetsByIds,
