@@ -1,4 +1,5 @@
 const PhenotypeOntologyTerms = require('../../models/phenotype-ontology-terms.model');
+const Genes = require('../../models/genes.model');
 
 /**
  * Find phenotype ontology term by PO ID
@@ -77,10 +78,42 @@ const findByCategory = async ({ categoryId, limit = 100, start = 0 }) => {
   }
 };
 
+/**
+ * Find both gene ontology and phenotype ontology terms by gene Entrez ID
+ */
+const findByEntrezId = async ({ entrezId }) => {
+  try {
+    const gene = await Genes.findOne({ entrezId }, '-_id phenotypes')
+      .populate('phenotypes.ontology');
+    return gene.phenotypes.map((e) => e.ontology);
+  } catch (error) {
+    console.error('Error fetching gene ontology by Entrez ID:', error);
+    throw new Error('Failed to fetch gene ontology by Entrez ID');
+  }
+};
+
+/*
+ * Find phenotype ontology terms by gene symbol
+ */
+const findByGeneSymbol = async ({ symbol }) => {
+  try {
+    const gene = await Genes.findOne({
+      taxonId: 9606,
+      symbol: symbol.toUpperCase()
+    }, '-_id phenotypes').populate('phenotypes.ontology');
+    return gene.phenotypes.map((e) => e.ontology);
+  } catch (error) {
+    console.error('Error fetching gene ontology by symbol:', error);
+    throw new Error('Failed to fetch gene ontology by symbol');
+  }
+};
+
 module.exports = {
   findByPoId,
   findByName,
   findByTaxonId,
   findByNamespace,
   findByCategory,
+  findByEntrezId,
+  findByGeneSymbol
 };
