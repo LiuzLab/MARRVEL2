@@ -12,6 +12,7 @@ const stringResolvers = {
       // Find all STRING interactions where ensemblId1 matches the provided ensemblId
       const interactions = await StringInteractions
         .find({ ensemblId1: ensemblId })
+        .sort({ _id: 1 })
         .skip(start)
         .limit(limit);
       return interactions;
