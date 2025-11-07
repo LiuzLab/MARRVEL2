@@ -61,7 +61,7 @@ const typeDefs = `
     pharosTargetsByIds(ids: [Int!]!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
     pharosTargetsByGeneEntrezId(entrezId: Int!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
 
-    stringInteractionsByEnsemblId(ensemblId: String!, limit: Int = 100, start: Int = 0): [StringInteraction!]!
+    stringInteractionsByEnsemblProteinId(ensemblId: String!, limit: Int = 100, start: Int = 0): [StringInteraction!]!
     stringInteractionBetweenProteins(ensemblId1: String!, ensemblId2: String!): StringInteraction
 
     dbnsfpByVariant(chr: String!, pos: Int!, ref: String!, alt: String!, build: String!): DbNSFP
