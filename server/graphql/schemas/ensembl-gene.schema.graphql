@@ -1,0 +1,8 @@
+"""
+Gene/transcript/protein ID information from Ensembl genes
+"""
+type EnsemblGene {
+  ensemblGeneId: String!
+  ensemblTranscriptId: [String!]
+  ensemblProteinId: [String!]
+}
