@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
 const stringInteractionSchema = mongoose.Schema({
   ensemblId1: {
@@ -21,6 +22,6 @@ const stringInteractionSchema = mongoose.Schema({
     type: Number,
     required: true
   }
-}, { collection: 'String.12.0' });
+}, { collection: `String.${config.stringVersion}` });
 
 module.exports = mongoose.model('StringInteractions', stringInteractionSchema);

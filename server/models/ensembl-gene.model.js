@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
 const ensemblGeneSchema = mongoose.Schema({
   ensemblId: {
@@ -8,5 +9,5 @@ const ensemblGeneSchema = mongoose.Schema({
   entrezId: Number,
   transcriptIds: [String],
   proteinIds: [String],
-}, { collection: 'EnsemblGene.GRCh38.p14' });
+}, { collection: `EnsemblGene.${config.ensemblHumanGeneVersion}` });
 module.exports = mongoose.model('EnsemblGene', ensemblGeneSchema);
