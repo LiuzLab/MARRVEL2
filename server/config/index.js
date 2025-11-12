@@ -77,6 +77,8 @@ config[env].liftover = {
   hg38Version: process.env.LIFTOVER_HG38_VERSION || 'hg38_201312',
   hg19Version: process.env.LIFTOVER_HG19_VERSION || 'hg19_200902',
 };
+config[env].stringVersion = process.env.STRING_VERSION || '12.0';
+config[env].ensemblHumanGeneVersion = process.env.ENSEMBL_HUMAN_GENE_VERSION || 'GRCh38.p14';
 config[env].liftoverCmdTool = {
   path: process.env.LIFTOVER_CMD_TOOL_PATH || 'liftOver',
   Human: {
