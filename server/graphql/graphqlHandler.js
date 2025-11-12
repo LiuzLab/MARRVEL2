@@ -62,8 +62,6 @@ const typeDefs = `
     pharosTargetsByGeneEntrezId(entrezId: Int!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
 
     stringInteractionsByEntrezId(entrezId: Int!, limit: Int = 100, start: Int = 0): [StringInteraction!]!
-    stringInteractionsByEnsemblProteinId(ensemblId: String!, limit: Int = 100, start: Int = 0): [StringInteraction!]!
-    stringInteractionBetweenProteins(ensemblId1: String!, ensemblId2: String!): StringInteraction
 
     dbnsfpByVariant(chr: String!, pos: Int!, ref: String!, alt: String!, build: String!): DbNSFP
     dbnsfpByPosition(chr: String!, pos: Int!, build: String!, limit: Int = 100, start: Int = 0): [DbNSFP!]!
@@ -104,8 +102,6 @@ const rootValue = {
   pharosTargetsByGeneEntrezId: pharosResolvers.pharosTargetsByGeneEntrezId,
 
   stringInteractionsByEntrezId: stringResolvers.stringInteractionsByEntrezId,
-  stringInteractionsByEnsemblProteinId: stringResolvers.stringInteractionsByEnsemblProteinId,
-  stringInteractionBetweenProteins: stringResolvers.stringInteractionBetweenProteins,
 
   dbnsfpByVariant: dbnsfpResolvers.dbnsfpByVariant,
   dbnsfpByPosition: dbnsfpResolvers.dbnsfpByPosition,
