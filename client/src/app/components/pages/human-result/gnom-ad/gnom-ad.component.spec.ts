@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GnomADComponent } from './gnom-ad.component';
 
@@ -6,7 +6,7 @@ describe('GnomADComponent', () => {
   let component: GnomADComponent;
   let fixture: ComponentFixture<GnomADComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GnomADComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Geno2mpGeneTableComponent } from './geno2mp-gene-table.component';
 
@@ -6,7 +6,7 @@ describe('Geno2mpGeneTableComponent', () => {
   let component: Geno2mpGeneTableComponent;
   let fixture: ComponentFixture<Geno2mpGeneTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ Geno2mpGeneTableComponent ]
     })

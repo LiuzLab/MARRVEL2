@@ -2,6 +2,7 @@ import { Directive, Output, EventEmitter, ElementRef, HostListener } from '@angu
 
 /* tslint:disable:directive-selector */
 @Directive({
+  standalone: false,
   selector: '[clickOutside]'
 })
 /* tslint:enable:directive-selector */

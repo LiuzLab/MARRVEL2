@@ -9,7 +9,7 @@
   </span>
 </h3>
 
-<mat-form-field style="margin-bottom: -1.25em" *ngIf="variant && gene" class="mt-3">
+<mat-form-field appearance="fill" style="margin-bottom: -1.25em" *ngIf="variant && gene" class="mt-3">
   <mat-label>Search by</mat-label>
   <mat-select [(value)]="searchBy">
     <mat-option value="gene" *ngIf="gene">

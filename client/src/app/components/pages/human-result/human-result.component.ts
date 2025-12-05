@@ -14,6 +14,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
 
 @Component({
+  standalone: false,
   selector: 'app-human-result',
   templateUrl: './human-result.component.html',
   styleUrls: ['./human-result.component.scss'],

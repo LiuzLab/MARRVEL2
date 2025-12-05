@@ -3,9 +3,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
-import 'rxjs/add/operator/first';
+import { Observable, forkJoin } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 import { Animations } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
@@ -13,6 +12,7 @@ import { DbNSFPData } from 'src/app/interfaces/data';
 import { of } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'app-batch',
   templateUrl: './batch.component.html',
   styleUrls: ['./batch.component.scss'],
@@ -134,11 +134,11 @@ export class BatchComponent implements OnInit {
                   this.wholeVarsHaveData += vTo - vFrom;
                   observer.next(res);
                 });
-            }).first()
+            }).pipe(first())
           );
         }
       }
-      Observable.forkJoin(...tasks).subscribe(results => {
+      forkJoin(tasks).subscribe(results => {
         this.tsvWholeDownloadUrl = this.getBlobUrl(fileType, results.flat());
         this.wholeLoading = false;
       });

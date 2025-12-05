@@ -6,6 +6,7 @@ import { DIOPTOrtholog } from 'src/app/interfaces/data';
 import { TAXONIDS, TAXONID_TO_INFO } from 'src/app/data/model-organisms';
 
 @Component({
+  standalone: false,
   selector: 'app-orthologs',
   templateUrl: './orthologs.component.html',
   styleUrls: ['./orthologs.component.scss']

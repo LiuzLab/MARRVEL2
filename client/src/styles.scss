@@ -42,24 +42,24 @@ h1, h2, h3, h4, h5 {
   margin: 0;
 }
 a, .link-primary {
-  color: $primary-900;
+  color: var(--mat-sys-primary);
   text-decoration: none;
   cursor: pointer;
 }
 a:hover, a:active, .link-primary:hover, .link-primary:active {
-  color: $primary-900;
+  color: var(--mat-sys-primary);
   text-decoration: underline;
   cursor: pointer;
 }
 .color-primary {
-  color: $primary;
+  color: var(--mat-sys-primary);
 }
 
 .bg-light-gray {
   background-color: #f8f8f8;
 }
 .bg-light-brand {
-  background-color: $primary-50;
+  background-color: var(--mat-sys-surface-container-low);
 }
 .bg-dark-gray {
   background-color: #222;
@@ -68,8 +68,10 @@ a:hover, a:active, .link-primary:hover, .link-primary:active {
   background-color: #0f0f0f;
 }
 
+.mat-unelevated-button.mat-primary,
 .mat-flat-button.mat-primary {
-  color: rgba(255,255,255,0.9);
+  color: var(--mat-sys-on-primary);
+  background-color: var(--mat-sys-primary);
 }
 
 /********************
@@ -154,10 +156,10 @@ span.mat-slide-toggle-content {
 }
 
 span.text-warning {
-  color: $accent !important;
+  color: var(--mat-sys-tertiary) !important;
 }
 span.text-error {
-  color: $warn !important;
+  color: var(--mat-sys-error) !important;
 }
 
 .text-monospace {
@@ -277,7 +279,7 @@ strong,
 
 .badge-primary {
   color: #fff;
-  background-color: $primary-700;
+  background-color: var(--mat-sys-primary);
 }
 .badge-secondary {
   color: #fff;
@@ -360,15 +362,15 @@ div.plot-tooltip {
 }
 .text-bold-blue {
   font-weight: 500;
-  color: $primary-700;
+  color: var(--mat-sys-primary);
 }
 
 .color-primary {
-  color:$primary-700
+  color: var(--mat-sys-primary)
 }
 
 #human-result-container .mat-button.mat-primary {
-  color: $primary-900 !important;
+  color: var(--mat-sys-primary) !important;
 }
 
 .button-big {

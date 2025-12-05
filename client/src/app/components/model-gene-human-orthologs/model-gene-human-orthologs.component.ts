@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
+  standalone: false,
   selector: 'app-model-gene-human-orthologs',
   templateUrl: './model-gene-human-orthologs.component.html',
   styleUrls: ['./model-gene-human-orthologs.component.scss']

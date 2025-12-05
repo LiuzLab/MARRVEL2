@@ -14,6 +14,7 @@ const PRIMARY_COLOR = '#7bd0cc';
 const WARN_COLOR = '#e5893e';
 
 @Component({
+  standalone: false,
   selector: 'app-ppi',
   templateUrl: './ppi.component.html',
   styleUrls: ['./ppi.component.scss'],

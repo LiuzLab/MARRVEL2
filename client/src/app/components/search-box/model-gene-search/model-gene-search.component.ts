@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 
@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Gene } from 'src/app/interfaces/gene';
 
 @Component({
+  standalone: false,
   selector: 'app-model-gene-search',
   templateUrl: './model-gene-search.component.html',
   styleUrls: ['./model-gene-search.component.scss']
@@ -18,7 +19,7 @@ export class ModelGeneSearchComponent implements OnInit {
 
   gene: Gene | null;
   geneKeyword: string | null;
-  geneInputCtrl = new FormControl();
+  geneInputCtrl = new UntypedFormControl();
   geneSuggestion = [];
   @ViewChild('geneInput', { static: true }) geneInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: true }) matAutocomplete: MatAutocomplete;

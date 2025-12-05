@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Observable } from 'rxjs/Observable';
-import { take } from 'rxjs/operators';
-import 'rxjs/add/observable/forkJoin';
-import 'rxjs/add/operator/first';
+import { Observable, forkJoin } from 'rxjs';
+import { take, first } from 'rxjs/operators';
 
 import { Animations } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
@@ -12,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
+  standalone: false,
   selector: 'app-multiple-genes',
   templateUrl: './multiple-genes.component.html',
   styleUrls: ['./multiple-genes.component.scss'],
@@ -100,7 +99,7 @@ export class MultipleGenesComponent implements OnInit {
                 this.wholeGenesHaveData += gTo - gFrom;
                 observer.next(res);
               });
-          }).first()
+          }).pipe(first())
         );
       }
     }
@@ -108,7 +107,7 @@ export class MultipleGenesComponent implements OnInit {
       this.tsvWholeDownloadUrl = this.getBlobUrl(fileType, dataToDownload);
       this.wholeLoading = false;
     } else {
-      Observable.forkJoin(...tasks).subscribe(results => {
+      forkJoin(tasks).subscribe(results => {
         for (const res of results) {
           dataToDownload = dataToDownload.concat(res);
         }

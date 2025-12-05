@@ -43,11 +43,11 @@
 <div id="alignment-highlight" class="row my-0" *ngIf="!loading && data && species">
   <div class="col-12" style="margin-bottom: -1.25em">
     Highlight from
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <input matInput type="number" [value]="highlightFrom" (change)="setHighlightFrom($event.target.value)">
     </mat-form-field>
     to
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <input matInput type="number" [value]="highlightTo" (change)="setHighlightTo($event.target.value)">
     </mat-form-field>
   </div>

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DbnsfpScoreCellComponent } from './dbnsfp-score-cell.component';
 
@@ -6,7 +6,7 @@ describe('DbnsfpScoreCellComponent', () => {
   let component: DbnsfpScoreCellComponent;
   let fixture: ComponentFixture<DbnsfpScoreCellComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DbnsfpScoreCellComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { VcfUploadBoxComponent } from './vcf-upload-box.component';
 
@@ -6,7 +6,7 @@ describe('VcfUploadBoxComponent', () => {
   let component: VcfUploadBoxComponent;
   let fixture: ComponentFixture<VcfUploadBoxComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ VcfUploadBoxComponent ]
     })

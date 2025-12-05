@@ -7,6 +7,7 @@ import { GeneService } from '../../../services/gene.service';
 import { HumanGene } from '../../../interfaces/gene';
 
 @Component({
+  standalone: false,
   selector: 'app-human-search',
   templateUrl: './human-search.component.html',
   styleUrls: ['./human-search.component.scss']

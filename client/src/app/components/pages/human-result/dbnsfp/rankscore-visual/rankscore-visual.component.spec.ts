@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RankscoreVisualComponent } from './rankscore-visual.component';
 
@@ -6,7 +6,7 @@ describe('RankscoreVisualComponent', () => {
   let component: RankscoreVisualComponent;
   let fixture: ComponentFixture<RankscoreVisualComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RankscoreVisualComponent ]
     })

@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Animations } from 'src/app/animations';
 
 @Component({
+  standalone: false,
   selector: 'app-pharos',
   templateUrl: './pharos.component.html',
   styleUrls: ['./pharos.component.scss'],

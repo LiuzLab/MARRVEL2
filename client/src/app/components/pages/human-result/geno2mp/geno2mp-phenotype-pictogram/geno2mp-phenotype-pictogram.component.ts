@@ -3,6 +3,7 @@ import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { CAT_TO_ICON } from '../../../../../category';
 
 @Component({
+  standalone: false,
   selector: 'app-geno2mp-phenotype-pictogram',
   templateUrl: './geno2mp-phenotype-pictogram.component.html',
   styleUrls: ['./geno2mp-phenotype-pictogram.component.scss']

@@ -4,6 +4,7 @@ import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
 
 @Component({
+  standalone: false,
   selector: 'app-gnom-ad-gene',
   templateUrl: './gnom-ad-gene.component.html',
   styleUrls: ['./gnom-ad-gene.component.scss']

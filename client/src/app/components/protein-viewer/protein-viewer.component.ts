@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, Element
 import * as molstar from 'molstar/build/viewer/molstar';
 
 @Component({
+  standalone: false,
   selector: 'app-protein-viewer',
   templateUrl: './protein-viewer.component.html',
   styleUrls: ['./protein-viewer.component.scss'],

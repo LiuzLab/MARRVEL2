@@ -13,6 +13,7 @@ import { FUNCANNO_TO_CAT_NUM, CAT_NUM_TO_CAT_NAME } from './categories';
 import { HPO_BROAD_TO_CAT } from '../../../../category';
 
 @Component({
+  standalone: false,
   selector: 'app-geno2mp',
   templateUrl: './geno2mp.component.html',
   styleUrls: ['./geno2mp.component.scss'],

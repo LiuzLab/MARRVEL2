@@ -2,6 +2,7 @@ import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core
 import { DOCUMENT } from '@angular/common';
 
 @Component({
+  standalone: false,
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']

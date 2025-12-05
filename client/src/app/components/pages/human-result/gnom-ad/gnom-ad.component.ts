@@ -6,6 +6,7 @@ import { Variant } from '../../../../interfaces/variant';
 import { GnomADVariantData } from 'src/app/interfaces/data';
 
 @Component({
+  standalone: false,
   selector: 'app-gnom-ad',
   templateUrl: './gnom-ad.component.html',
   styleUrls: ['./gnom-ad.component.scss']

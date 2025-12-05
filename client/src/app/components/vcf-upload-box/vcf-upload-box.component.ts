@@ -1,11 +1,12 @@
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 
 import { Animations } from 'src/app/animations';
 import { Router } from '@angular/router';
 
 @Component({
+  standalone: false,
   selector: 'app-vcf-upload-box',
   templateUrl: './vcf-upload-box.component.html',
   styleUrls: ['./vcf-upload-box.component.scss'],
@@ -15,19 +16,19 @@ export class VcfUploadBoxComponent implements OnInit {
   selectedInputType  = 'vcf';
 
   file: File | null = null;
-  fileFormGroup: FormGroup;
+  fileFormGroup: UntypedFormGroup;
   fileProgress = 0;
   parsing = false;
 
   @Output() dataChange: EventEmitter< any > = new EventEmitter();
 
   constructor(
-    fb: FormBuilder,
+    fb: UntypedFormBuilder,
     private api: ApiService,
     private router: Router
   ) {
     this.fileFormGroup = fb.group({
-      fileDisp: new FormControl('', (c: FormControl) => {
+      fileDisp: new UntypedFormControl('', (c: UntypedFormControl) => {
         return c.value ? null : { valid: false };
       })
     });

@@ -8,6 +8,7 @@ import { Variant } from '../../../../interfaces/variant';
 import { Animations } from 'src/app/animations';
 
 @Component({
+  standalone: false,
   selector: 'app-decipher',
   templateUrl: './decipher.component.html',
   styleUrls: ['./decipher.component.scss'],

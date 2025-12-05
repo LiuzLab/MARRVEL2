@@ -9,6 +9,7 @@ import { Animations } from 'src/app/animations';
 import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
 
 @Component({
+  standalone: false,
   selector: 'app-agr-expression',
   templateUrl: './agr-expression.component.html',
   styleUrls: ['./agr-expression.component.scss'],

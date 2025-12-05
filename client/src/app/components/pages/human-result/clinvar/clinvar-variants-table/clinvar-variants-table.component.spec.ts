@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ClinvarVariantsTableComponent } from './clinvar-variants-table.component';
 
@@ -6,7 +6,7 @@ describe('ClinvarVariantsTableComponent', () => {
   let component: ClinvarVariantsTableComponent;
   let fixture: ComponentFixture<ClinvarVariantsTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ClinvarVariantsTableComponent ]
     })

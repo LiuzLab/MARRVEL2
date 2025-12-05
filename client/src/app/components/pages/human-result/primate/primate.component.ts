@@ -8,6 +8,7 @@ import { Animations } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
+  standalone: false,
   selector: 'app-primate',
   templateUrl: './primate.component.html',
   styleUrls: ['./primate.component.scss'],

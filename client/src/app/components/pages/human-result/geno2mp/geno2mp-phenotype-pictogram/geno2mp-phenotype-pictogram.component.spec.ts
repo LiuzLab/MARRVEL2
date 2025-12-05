@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Geno2mpPhenotypePictogramComponent } from './geno2mp-phenotype-pictogram.component';
 
@@ -6,7 +6,7 @@ describe('Geno2mpPhenotypePictogramComponent', () => {
   let component: Geno2mpPhenotypePictogramComponent;
   let fixture: ComponentFixture<Geno2mpPhenotypePictogramComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ Geno2mpPhenotypePictogramComponent ]
     })

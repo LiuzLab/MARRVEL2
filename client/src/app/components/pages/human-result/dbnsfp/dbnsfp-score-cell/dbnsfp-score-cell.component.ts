@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-dbnsfp-score-cell',
   templateUrl: './dbnsfp-score-cell.component.html',
   styleUrls: ['./dbnsfp-score-cell.component.scss']

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ReverseAnnotationCandidatesComponent } from './reverse-annotation-candidates.component';
 
@@ -6,7 +6,7 @@ describe('ReverseAnnotationCandidatesComponent', () => {
   let component: ReverseAnnotationCandidatesComponent;
   let fixture: ComponentFixture<ReverseAnnotationCandidatesComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ReverseAnnotationCandidatesComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GtexBoxplotComponent } from './gtex-boxplot.component';
 
@@ -6,7 +6,7 @@ describe('GtexBoxplotComponent', () => {
   let component: GtexBoxplotComponent;
   let fixture: ComponentFixture<GtexBoxplotComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GtexBoxplotComponent ]
     })

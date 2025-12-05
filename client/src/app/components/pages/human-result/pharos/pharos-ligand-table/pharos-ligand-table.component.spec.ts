@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PharosLigandTableComponent } from './pharos-ligand-table.component';
 
@@ -6,7 +6,7 @@ describe('PharosLigandTableComponent', () => {
   let component: PharosLigandTableComponent;
   let fixture: ComponentFixture<PharosLigandTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PharosLigandTableComponent ]
     })

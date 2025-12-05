@@ -7,6 +7,7 @@ import { Gene } from './../../../../interfaces/gene';
 import { Animations } from './../../../../animations';
 
 @Component({
+  standalone: false,
   selector: 'app-diopt-alignment',
   templateUrl: './diopt-alignment.component.html',
   styleUrls: ['./diopt-alignment.component.scss'],

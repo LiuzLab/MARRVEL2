@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
+  standalone: false,
   selector: 'app-protein-domain',
   templateUrl: './protein-domain.component.html',
   styleUrls: ['./protein-domain.component.scss']

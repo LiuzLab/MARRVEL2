@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MailchimpComponent } from './mailchimp.component';
 
@@ -6,7 +6,7 @@ describe('MailchimpComponent', () => {
   let component: MailchimpComponent;
   let fixture: ComponentFixture<MailchimpComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MailchimpComponent ]
     })

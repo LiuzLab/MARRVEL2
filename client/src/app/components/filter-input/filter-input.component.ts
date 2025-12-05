@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-filter-input',
   templateUrl: './filter-input.component.html',
   styleUrls: ['./filter-input.component.scss']

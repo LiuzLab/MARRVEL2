@@ -15,7 +15,7 @@
 
     <div class="col-12 mt-3" *ngIf="!loading && (!data || !data.length)">
       <p>No ortholog candidates found</p>
-      <a mat-flat-button color="primary" routerLink="..">Back</a>
+      <a mat-unelevated-button color="primary" routerLink="..">Back</a>
     </div>
 
     <div class="col-12 mt-3" *ngIf="!loading && data && data.length">
@@ -49,7 +49,7 @@
             <td class="mat-cell" [ngClass]="{ 'color-primary font-weight-bold': ortholog.bestScoreRev }">{{ ortholog.bestScoreRev ? 'Yes' : 'No' }}</td>
             <td class="mat-cell">
               <a [attr.href]="'/human/gene/' + ortholog.gene2.entrezId"
-                mat-flat-button color="primary"
+                mat-unelevated-button color="primary"
               >MARRVEL it</a>
             </td>
           </tr>

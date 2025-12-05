@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
+  standalone: false,
   selector: 'app-pdbe',
   templateUrl: './pdbe.component.html',
   styleUrls: ['./pdbe.component.scss']

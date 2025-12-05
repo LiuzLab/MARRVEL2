@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-rankscore-visual',
   templateUrl: './rankscore-visual.component.html',
   styleUrls: ['./rankscore-visual.component.scss']

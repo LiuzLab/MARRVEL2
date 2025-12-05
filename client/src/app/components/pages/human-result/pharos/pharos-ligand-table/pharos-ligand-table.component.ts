@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
+  standalone: false,
   selector: 'app-pharos-ligand-table',
   templateUrl: './pharos-ligand-table.component.html',
   styleUrls: ['./pharos-ligand-table.component.scss']

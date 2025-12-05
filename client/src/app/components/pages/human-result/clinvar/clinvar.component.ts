@@ -9,6 +9,7 @@ import { Variant } from '../../../../interfaces/variant';
 import { Animations } from '../../../../animations';
 
 @Component({
+  standalone: false,
   selector: 'app-clinvar',
   templateUrl: './clinvar.component.html',
   styleUrls: ['./clinvar.component.scss'],

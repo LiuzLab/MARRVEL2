@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ForwardAnnotationComponent } from './forward-annotation.component';
 
@@ -6,7 +6,7 @@ describe('ForwardAnnotationComponent', () => {
   let component: ForwardAnnotationComponent;
   let fixture: ComponentFixture<ForwardAnnotationComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ForwardAnnotationComponent ]
     })

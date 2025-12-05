@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { ApiService } from '../../services/api.service';
@@ -7,6 +7,7 @@ import { ApiService } from '../../services/api.service';
 import { MULTIGENE_EXAMPLE } from './multiple-genes-example';
 
 @Component({
+  standalone: false,
   selector: 'app-multiple-gene-box',
   templateUrl: './multiple-gene-box.component.html',
   styleUrls: ['./multiple-gene-box.component.scss'],
@@ -15,7 +16,7 @@ export class MultipleGeneBoxComponent implements OnInit {
   genes: object[] = [];
 
   geneKeyword = '';
-  geneInputCtrl = new FormControl();
+  geneInputCtrl = new UntypedFormControl();
   geneSuggestion = [];
   selectedEntrezIds = {};
   @ViewChild('geneInput', { static: true }) geneInput: ElementRef<HTMLInputElement>;

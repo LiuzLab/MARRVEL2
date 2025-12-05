@@ -12,6 +12,7 @@ import { CATEGORIES } from 'src/app/category';
 import { Animations } from 'src/app/animations';
 
 @Component({
+  standalone: false,
   selector: 'app-decipher-disease',
   templateUrl: './decipher-disease.component.html',
   styleUrls: ['./decipher-disease.component.scss'],

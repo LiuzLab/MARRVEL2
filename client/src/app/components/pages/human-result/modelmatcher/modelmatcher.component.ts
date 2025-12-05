@@ -7,6 +7,7 @@ import { ModelMatcherData } from '../../../../interfaces/data';
 import { TAXONIDS, TAXONID_TO_INFO } from '../../../../data/model-organisms';
 
 @Component({
+  standalone: false,
   selector: 'app-modelmatcher',
   templateUrl: './modelmatcher.component.html',
   styleUrls: ['./modelmatcher.component.scss']

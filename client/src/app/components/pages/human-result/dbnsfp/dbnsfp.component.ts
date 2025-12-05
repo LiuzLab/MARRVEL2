@@ -8,6 +8,7 @@ import { Animations } from 'src/app/animations';
 import { DBNSFP_SCORES_CONFIG, ScoreDisplayConfig } from './dbnsfp-scores-config';
 
 @Component({
+  standalone: false,
   selector: 'app-dbnsfp',
   templateUrl: './dbnsfp.component.html',
   styleUrls: ['./dbnsfp.component.scss'],

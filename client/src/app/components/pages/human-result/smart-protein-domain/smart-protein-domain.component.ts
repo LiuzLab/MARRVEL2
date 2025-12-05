@@ -8,6 +8,7 @@ import { HumanGene } from '../../../../interfaces/gene';
 import { ApiService } from '../../../../services/api.service';
 
 @Component({
+  standalone: false,
   selector: 'app-smart-protein-domain',
   templateUrl: './smart-protein-domain.component.html',
   styleUrls: ['./smart-protein-domain.component.scss']

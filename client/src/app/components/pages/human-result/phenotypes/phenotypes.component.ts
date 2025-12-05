@@ -7,6 +7,7 @@ import { CATEGORIES, CAT_TO_ICON } from '../../../../category';
 import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
 
 @Component({
+  standalone: false,
   selector: 'app-phenotypes',
   templateUrl: './phenotypes.component.html',
   styleUrls: ['./phenotypes.component.scss'],

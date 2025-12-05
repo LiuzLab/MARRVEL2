@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline" class="w-100" id="modelGeneFormField">
+<mat-form-field appearance="fill" class="w-100" id="modelGeneFormField">
   <mat-label>Seleect Model Organism</mat-label>
   <mat-select [(ngModel)]="taxonId" (selectionChange)="onModelChange()">
     <mat-option value="10090">Mouse (<span class="font-italic">Mus musculus</span>)</mat-option>
@@ -12,19 +12,19 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="outline" class="w-100" id="geneInputFormField">
+<mat-form-field appearance="fill" class="w-100" id="geneInputFormField">
   <mat-label *ngIf="taxonId === '7227'">
     Official Gene Symbol (Case sensitive)
   </mat-label>
   <mat-label *ngIf="taxonId !== '7227'">
     Official Gene Symbol
   </mat-label>
-  <mat-chip-list #geneChipList aria-label="Model organism gene selected">
-    <mat-chip *ngIf="gene" removable (removed)="removeGene()">
+  <mat-chip-listbox #geneChipList aria-label="Model organism gene selected">
+    <mat-chip-option *ngIf="gene" removable (removed)="removeGene()">
       {{ gene.symbol }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
-  </mat-chip-list>
+    </mat-chip-option>
+  </mat-chip-listbox>
 
   <input matInput
     #geneInput

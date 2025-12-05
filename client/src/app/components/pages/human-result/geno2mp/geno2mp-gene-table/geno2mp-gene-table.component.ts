@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Geno2MPResult } from '../../../../../interfaces/data';
 
 @Component({
+  standalone: false,
   selector: 'app-geno2mp-gene-table',
   templateUrl: './geno2mp-gene-table.component.html',
   styleUrls: ['./geno2mp-gene-table.component.scss']

@@ -22,7 +22,7 @@
       <a class="e2e-trusted-url"
         role="button"
         [href]="tsvPageDownloadUrl"
-        mat-flat-button color="primary"
+        mat-unelevated-button color="primary"
         [disabled]="loading || !tsvPageDownloadUrl"
       >
         <mat-icon class="icon-18px mr-1 spin" *ngIf="loading || !tsvPageDownloadUrl">autorenew</mat-icon>
@@ -30,7 +30,7 @@
         Export this page (.tsv)
       </a>
       <button class="ml-1"
-        mat-flat-button color="primary"
+        mat-unelevated-button color="primary"
         *ngIf="!tsvWholeDownloadUrl"
         (click)="createDownloadUrl('.tsv', true)"
       >
@@ -38,7 +38,7 @@
         Start download all (.tsv)
       </button>
       <a class="ml-1 e2e-trusted-url" role="button"
-        mat-flat-button color="accent"
+        mat-unelevated-button color="accent"
         [href]="tsvWholeDownloadUrl"
         *ngIf="tsvWholeDownloadUrl"
         [@toggle]

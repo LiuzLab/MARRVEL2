@@ -27,6 +27,7 @@ const NAMESPACE_TO_GOID = {
 };
 
 @Component({
+  standalone: false,
   selector: 'app-gene-ontology',
   templateUrl: './gene-ontology.component.html',
   styleUrls: ['./gene-ontology.component.scss'],

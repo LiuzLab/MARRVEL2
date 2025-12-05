@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Animations } from './../../../../animations';
 
 @Component({
+  standalone: false,
   selector: 'app-omim',
   templateUrl: './omim.component.html',
   styleUrls: ['./omim.component.scss'],

@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-scroll-top-button',
   templateUrl: './scroll-top-button.component.html',
   styleUrls: ['./scroll-top-button.component.scss']

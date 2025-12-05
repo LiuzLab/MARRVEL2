@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
+  standalone: false,
   selector: 'app-reverse-annotation-candidates',
   templateUrl: './reverse-annotation-candidates.component.html',
   styleUrls: ['./reverse-annotation-candidates.component.scss']

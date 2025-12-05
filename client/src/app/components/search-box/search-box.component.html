@@ -14,7 +14,7 @@
       'col-12': !compact,
       'col-10 col-lg-5 pr-0': compact
     }" *ngIf="selectedInputType == 'gene'">
-      <mat-form-field appearance="outline" class="w-100" id="geneInputFormField">
+      <mat-form-field appearance="fill" class="w-100" id="geneInputFormField">
         <mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
         <mat-chip-list #geneChipList>
           <mat-chip
@@ -51,7 +51,7 @@
       'col-12': !compact,
       'col-10 col-lg-5 pr-0': compact
     }" *ngIf="selectedInputType == 'protein'">
-      <mat-form-field appearance="outline" class="w-100">
+      <mat-form-field appearance="fill" class="w-100">
         <mat-label>Human Protein</mat-label>
         <input matInput [(ngModel)]="protein">
       </mat-form-field>
@@ -70,14 +70,14 @@
           'col-10 col-lg-5 mt-2 pr-0': compact
         }"
         *ngIf="selectedInputType == 'gene'">
-      <mat-form-field appearance="outline" class="mr-2">
+      <mat-form-field appearance="fill" class="mr-2">
         <mat-label>Genome Build</mat-label>
         <mat-select matNativeControl required [(ngModel)]="genomeBuild">
           <mat-option value="hg19">hg19</mat-option>
           <mat-option value="hg38">hg38</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="flex-grow-1">
+      <mat-form-field appearance="fill" class="flex-grow-1">
         <mat-label>Human Variant</mat-label>
         <input matInput
           [formControl]="variantInputCtrl"
@@ -113,7 +113,7 @@
       'col-12 text-center': !compact,
       'col-2 pr-0 mt-2 text-left': compact
      }">
-      <button mat-flat-button	color="primary"
+      <button matButton="filled" color="primary"
         [ngClass]="{ 'button-compact': compact, 'button-big': !compact }"
         (click)="getResult()"
         [disabled]="!validateInput()"
@@ -122,7 +122,7 @@
         <mat-icon *ngIf="compact">search</mat-icon>
       </button>
 
-      <button class="ml-3 button-big" mat-stroked-button color="default" *ngIf="!compact" (click)="openYouTubeDialog()">
+      <button matButton="outlined" class="ml-3 button-big" color="default" *ngIf="!compact" (click)="openYouTubeDialog()">
         Tutorial video
       </button>
     </div>

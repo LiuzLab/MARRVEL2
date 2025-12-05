@@ -8,6 +8,7 @@ import { Variant } from '../../../../interfaces/variant';
 import { Animations } from 'src/app/animations';
 
 @Component({
+  standalone: false,
   selector: 'app-dgv',
   templateUrl: './dgv.component.html',
   styleUrls: ['./dgv.component.scss'],

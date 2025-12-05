@@ -10,9 +10,9 @@
 <div class="w-100" #domainPlotContainer>
   <div class="w-100" [ngClass]="{ 'd-none': loading || !data || !data.length }">
     <div class="w-100 mb-2 d-block mat-button-group">
-      <button mat-stroked-button color="primary" (click)="zoom(0.1)"><mat-icon>add</mat-icon></button>
-      <button mat-stroked-button color="primary" (click)="zoomRatio = 1; plot.reset()"><mat-icon>refresh</mat-icon></button>
-      <button mat-stroked-button color="primary" (click)="zoom(-0.1)"><mat-icon>remove</mat-icon></button>
+      <button mat-outlined-button color="primary" (click)="zoom(0.1)"><mat-icon>add</mat-icon></button>
+      <button mat-outlined-button color="primary" (click)="zoomRatio = 1; plot.reset()"><mat-icon>refresh</mat-icon></button>
+      <button mat-outlined-button color="primary" (click)="zoom(-0.1)"><mat-icon>remove</mat-icon></button>
     </div>
     <svg id="smart-domain"></svg>
   </div>

@@ -8,6 +8,7 @@ import { Point } from 'src/app/d3/interfaces';
 import { GroupedBoxplot } from 'src/app/d3/grouped-boxplot';
 
 @Component({
+  standalone: false,
   selector: 'app-gtex-boxplot',
   templateUrl: './gtex-boxplot.component.html',
   styleUrls: ['./gtex-boxplot.component.scss']

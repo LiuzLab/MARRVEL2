@@ -8,6 +8,7 @@ import { Variant } from '../../../../../interfaces/variant';
 import { ClinVarVarinat } from '../../../../../interfaces/data';
 
 @Component({
+  standalone: false,
   selector: 'app-clinvar-variants-table',
   templateUrl: './clinvar-variants-table.component.html',
   styleUrls: ['./clinvar-variants-table.component.scss']

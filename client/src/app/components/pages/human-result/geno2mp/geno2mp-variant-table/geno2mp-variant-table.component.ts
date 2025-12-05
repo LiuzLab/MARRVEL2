@@ -9,6 +9,7 @@ import { Animations } from '../../../../../animations';
 import { HPO_BROAD_TO_CAT } from './../../../../../category';
 
 @Component({
+  standalone: false,
   selector: 'app-geno2mp-variant-table',
   templateUrl: './geno2mp-variant-table.component.html',
   styleUrls: ['./geno2mp-variant-table.component.scss'],

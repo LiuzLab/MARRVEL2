@@ -24,6 +24,7 @@ interface TransVarForwardAnnotResult {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-forward-annotation',
   templateUrl: './forward-annotation.component.html',
   styleUrls: ['./forward-annotation.component.scss'],

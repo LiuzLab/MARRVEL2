@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-gnom-ad-gene-visual',
   templateUrl: './gnom-ad-gene-visual.component.html',
   styleUrls: ['./gnom-ad-gene-visual.component.scss']

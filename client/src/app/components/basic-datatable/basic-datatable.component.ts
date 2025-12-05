@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Animations } from '../../animations';
 
 @Component({
+  standalone: false,
   selector: 'app-basic-datatable',
   templateUrl: './basic-datatable.component.html',
   styleUrls: ['./basic-datatable.component.scss'],

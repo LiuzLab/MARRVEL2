@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -15,6 +15,7 @@ import { Animations } from 'src/app/animations';
 import { Gene, HumanGene } from 'src/app/interfaces/gene';
 
 @Component({
+  standalone: false,
   selector: 'app-youtube-dialog',
   templateUrl: 'youtube-dialog.html',
 })
@@ -30,6 +31,7 @@ export class YoutubeDialogComponent {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss'],
@@ -46,8 +48,8 @@ export class SearchBoxComponent implements OnInit {
   genomeBuild: 'hg19' | 'hg38' = 'hg38';
   modelGene: Gene | null = null;
 
-  geneInputCtrl = new FormControl();
-  variantInputCtrl = new FormControl('', [
+  geneInputCtrl = new UntypedFormControl();
+  variantInputCtrl = new UntypedFormControl('', [
     Validators.pattern(
         '(' +
           '^(Chr)?' +

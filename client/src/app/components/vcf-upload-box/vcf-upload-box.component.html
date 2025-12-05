@@ -27,7 +27,7 @@
       #displayInput
     >
     <button class="align-self-start"
-      mat-flat-button color="primary"
+      mat-unelevated-button color="primary"
       (click)="fileInput.click()"
     >
       <mat-icon>attachment</mat-icon>
@@ -45,7 +45,7 @@
   </mat-hint>
 </div>
 <div class="w-100 text-center">
-  <button mat-flat-button	color="primary"
+  <button mat-unelevated-button	color="primary"
     [disabled]="!file"
     (click)="processVCF()"
   >Upload</button>
