@@ -1,6 +1,6 @@
 <h3 class="d-inline-block my-0">Protein Domain from SMART</h3>
 <a class="d-inline-block mb-2 ml-3 align-middle" *ngIf="gene.uniprotKBId"
-  mat-button color="primary"
+  matButton color="primary"
   [attr.href]="'https://smart.embl.de/smart/show_motifs.pl?ID=' + gene.uniprotKBId"
   target="_blank">
   <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
@@ -10,9 +10,20 @@
 <div class="w-100" #domainPlotContainer>
   <div class="w-100" [ngClass]="{ 'd-none': loading || !data || !data.length }">
     <div class="w-100 mb-2 d-block mat-button-group">
-      <button mat-outlined-button color="primary" (click)="zoom(0.1)"><mat-icon>add</mat-icon></button>
-      <button mat-outlined-button color="primary" (click)="zoomRatio = 1; plot.reset()"><mat-icon>refresh</mat-icon></button>
-      <button mat-outlined-button color="primary" (click)="zoom(-0.1)"><mat-icon>remove</mat-icon></button>
+      <button matButton="outlined" color="primary"
+        class="mr-2"
+        (click)="zoom(0.1)">
+        <mat-icon class="mx-auto">add</mat-icon>
+      </button>
+      <button matButton="outlined" color="primary"
+        class="mr-2"
+        (click)="zoomRatio = 1; plot.reset()">
+        <mat-icon class="mx-auto">refresh</mat-icon>
+      </button>
+      <button matButton="outlined" color="primary"
+        (click)="zoom(-0.1)">
+        <mat-icon class="mx-auto">remove</mat-icon>
+      </button>
     </div>
     <svg id="smart-domain"></svg>
   </div>

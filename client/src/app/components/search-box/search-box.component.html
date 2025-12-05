@@ -16,23 +16,24 @@
     }" *ngIf="selectedInputType == 'gene'">
       <mat-form-field appearance="fill" class="w-100" id="geneInputFormField">
         <mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
-        <mat-chip-list #geneChipList>
-          <mat-chip
+        <mat-chip-grid #geneChipGrid>
+          <mat-chip-row
             *ngIf="gene"
-            removable
             (removed)="removeGene(gene)"
           >
             {{ gene.symbol }}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
+            <button matChipRemove aria-label="Remove gene">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </mat-chip-grid>
         <input matInput
           #geneInput
           [formControl]="geneInputCtrl"
           (keyup)="onGeneInput($event, geneInput.value)"
           (keyup.enter)="onEnterKey(geneInput.value)"
           [matAutocomplete]="auto"
-          [matChipInputFor]="geneChipList"
+          [matChipInputFor]="geneChipGrid"
           matChipInputAddOnBlur
           (matChipInputTokenEnd)="addGene($event)">
         <mat-hint align="start" *ngIf="!compact"><strong>Please use official HGNC Gene Symbol</strong></mat-hint>
@@ -70,14 +71,14 @@
           'col-10 col-lg-5 mt-2 pr-0': compact
         }"
         *ngIf="selectedInputType == 'gene'">
-      <mat-form-field appearance="fill" class="mr-2">
+      <mat-form-field class="mr-2">
         <mat-label>Genome Build</mat-label>
         <mat-select matNativeControl required [(ngModel)]="genomeBuild">
           <mat-option value="hg19">hg19</mat-option>
           <mat-option value="hg38">hg38</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="fill" class="flex-grow-1">
+      <mat-form-field class="flex-grow-1">
         <mat-label>Human Variant</mat-label>
         <input matInput
           [formControl]="variantInputCtrl"

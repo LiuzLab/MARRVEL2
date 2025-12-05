@@ -19,19 +19,21 @@
   <mat-label *ngIf="taxonId !== '7227'">
     Official Gene Symbol
   </mat-label>
-  <mat-chip-listbox #geneChipList aria-label="Model organism gene selected">
-    <mat-chip-option *ngIf="gene" removable (removed)="removeGene()">
+  <mat-chip-grid #geneChipGrid aria-label="Model organism gene selected">
+    <mat-chip-row *ngIf="gene" (removed)="removeGene()">
       {{ gene.symbol }}
-      <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip-option>
-  </mat-chip-listbox>
+      <button matChipRemove aria-label="Remove gene">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+  </mat-chip-grid>
 
   <input matInput
     #geneInput
     [formControl]="geneInputCtrl"
     (input)="onGeneInput($event)"
     [matAutocomplete]="auto"
-    [matChipInputFor]="geneChipList"
+    [matChipInputFor]="geneChipGrid"
     matChipInputAddOnBlur
     (matChipInputTokenEnd)="addGene($event)"
   >

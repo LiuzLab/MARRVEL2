@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../services/api.service';
@@ -52,7 +52,8 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
-    private variantService: VariantService
+    private variantService: VariantService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -77,6 +78,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
           .pipe(take(1))
           .subscribe((res) => {
             this.onGeneLoad(res);
+            this.cdr.detectChanges();
           });
       }
 
@@ -127,6 +129,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
                   this.geneLoading = false;
                   this.gene = null;
                 }
+                this.cdr.detectChanges();
               });
             return;
           }).catch((err) => {
@@ -134,6 +137,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
             console.log(err);
             this.geneLoading = false;
             this.gene = null;
+            this.cdr.detectChanges();
           });
       }
     });
@@ -218,6 +222,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   onGeneLoad(gene) {
     this.gene = gene;
     this.geneLoading = false;
+    this.cdr.detectChanges();
 
     this.getOMIM();
     this.getOrthologs();
