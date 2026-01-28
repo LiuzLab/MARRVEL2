@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
 const gnomADSchema = mongoose.Schema({
   chr: {
@@ -25,5 +26,5 @@ const gnomADSchema = mongoose.Schema({
     type: Number,
     select: false
   }
-}, { collection: 'GnomAD' });
+}, { collection: config.gnomad.variant.name });
 module.exports = mongoose.model('GnomAD', gnomADSchema);

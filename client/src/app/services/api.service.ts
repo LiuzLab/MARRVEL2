@@ -108,7 +108,7 @@ export class ApiService {
   }
 
   getGnomADVaraint(variant: Variant): Observable<any> {
-    const url = `${environment.apiHost}/data/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    const url = `${environment.apiHost}/data/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}?build=${variant.build || 'hg19'}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res: any) => {
         res = res || {};

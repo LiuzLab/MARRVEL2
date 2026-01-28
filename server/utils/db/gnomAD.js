@@ -96,3 +96,32 @@ exports.getByVariant = (variant, projection, build) => {
   });
 };
 
+// Query by hg38 for newer version for gnomAD (v3+)
+exports.getByVariantV2 = async (variant, projection, build) => {
+  projection = projection || {};
+  projection['_id'] = 0;
+
+  if (build === 'hg19') {
+    // need to liftOver to hg38
+    try {
+      variant = await utils.liftover.liftOverVariant(variant, 'hg19', 'hg38');
+    } catch (err) {
+      console.error('Error while liftOver hg19 to hg38 for getByVariantV2', err);
+      return null;
+    }
+  }
+  if (!variant || !variant.ref || !variant.alt) {
+    console.error('Error: liftOver returned null variant for getByVariantV2');
+    return null;
+  }
+
+  return GnomAD.findOne(
+    {
+      hg38Chr: variant.chr,
+      hg38Pos: variant.pos,
+      ref: variant.ref,
+      alt: variant.alt,
+    },
+    projection
+  ).lean();
+};
