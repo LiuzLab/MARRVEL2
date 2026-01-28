@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
 const gnomADSchema = mongoose.Schema({
   chr: {
     type: String,
-    required: true
+  },
+  hg38Chr: {
+    type: String,
   },
   pos: {
     type: Number,
-    required: true
+  },
+  hg38Pos: {
+    type: Number,
   },
   ref: {
     type: String,
@@ -21,9 +26,5 @@ const gnomADSchema = mongoose.Schema({
   genome: Object,
   transcripts: Array,
   lastUpdate: Date,
-  __v: {
-    type: Number,
-    select: false
-  }
-}, { collection: 'GnomAD' });
+}, { collection: config.gnomad.variant.name });
 module.exports = mongoose.model('GnomAD', gnomADSchema);

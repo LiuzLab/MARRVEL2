@@ -108,12 +108,14 @@ export class ApiService {
   }
 
   getGnomADVaraint(variant: Variant): Observable<any> {
-    const url = `${environment.apiHost}/data/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}`;
+    const url = `${environment.apiHost}/data/gnomAD/variant/${variant.chr}:${variant.pos}${variant.ref}>${variant.alt}?build=${variant.build || 'hg19'}`;
     return new Observable(observer => {
       this.http.get(url).subscribe((res: any) => {
         res = res || {};
         res.exome = res.exome || {};
         res.genome = res.genome || {};
+        res.exome.alleleNum = res.exome.alleleNum || res.exome.alleleNumber;
+        res.genome.alleleNum = res.genome.alleleNum || res.genome.alleleNumber;
         res.exome.alleleFreq = res.exome.alleleNum ? res.exome.alleleCount / res.exome.alleleNum : undefined;
         res.genome.alleleFreq = res.genome.alleleNum ? res.genome.alleleCount / res.genome.alleleNum : undefined;
         if (res.exome.alleleNum || res.genome.alleleNum) {
