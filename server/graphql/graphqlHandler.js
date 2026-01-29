@@ -8,6 +8,7 @@ const clinvarResolvers = require('./resolvers/clinvar.resolvers');
 const geneResolvers = require('./resolvers/gene.resolvers');
 const dioptResolvers = require('./resolvers/diopt.resolvers');
 const phenotypeOntologyResolvers = require('./resolvers/phenotype-ontology.resolvers');
+const goResolvers = require('./resolvers/go.resolvers');
 const pharosResolvers = require('./resolvers/pharos.resolver');
 const stringResolvers = require('./resolvers/string.resolvers');
 const dbnsfpResolvers = require('./resolvers/dbnsfp.resolvers');
@@ -17,6 +18,7 @@ const clinvarTypeDefs = readFileSync(path.join(__dirname, 'schemas/clinvar.schem
 const geneTypeDefs = readFileSync(path.join(__dirname, 'schemas/gene.schema.graphql'), 'utf8');
 const dioptTypeDefs = readFileSync(path.join(__dirname, 'schemas/diopt.schema.graphql'), 'utf8');
 const phenotypeOntologyTypeDefs = readFileSync(path.join(__dirname, 'schemas/phenotype-ontology.schema.graphql'), 'utf8');
+const goTypeDefs = readFileSync(path.join(__dirname, 'schemas/go.schema.graphql'), 'utf8');
 const pharosTypeDefs = readFileSync(path.join(__dirname, 'schemas/pharos.schema.graphql'), 'utf8');
 const stringTypeDefs = readFileSync(path.join(__dirname, 'schemas/string.schema.graphql'), 'utf8');
 const dbnsfpTypeDefs = readFileSync(path.join(__dirname, 'schemas/dbnsfp.schema.graphql'), 'utf8');
@@ -26,6 +28,7 @@ const typeDefs = `
   ${clinvarTypeDefs}
   ${geneTypeDefs}
   ${dioptTypeDefs}
+  ${goTypeDefs}
   ${phenotypeOntologyTypeDefs}
   ${pharosTypeDefs}
   ${stringTypeDefs}
@@ -48,19 +51,21 @@ const typeDefs = `
     dioptDomainsByEntrezId(entrezId: Int!): DioptDomainSet!
     dioptOrthologsByEntrezId(entrezId: Int!): [DioptOrtholog!]!
     dioptOrthologsByTaxonId(taxonId1: Int!, taxonId2: Int!, limit: Int = 100): [DioptOrtholog!]!
-    
+
     phenotypeOntologyByPoId(poId: String!): PhenotypeOntology
     phenotypeOntologyByName(name: String!, limit: Int = 50, start: Int = 0): [PhenotypeOntology!]!
     phenotypeOntologyByTaxonId(taxonId: Int!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
     phenotypeOntologyByNamespace(namespace: String!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
     phenotypeOntologyByCategory(categoryId: Int!, limit: Int = 100, start: Int = 0): [PhenotypeOntology!]!
     phenotypeOntologyByEntrezId(entrezId: Int!): [PhenotypeOntology!]!
+    goByEntrezId(entrezId: Int!): [GeneGO!]!
+
     phenotypeOntologyByGeneSymbol(symbol: String!): [PhenotypeOntology!]!
-    
+
     pharosTargetById(id: Int!): PharosTarget
     pharosTargetsByIds(ids: [Int!]!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
     pharosTargetsByGeneEntrezId(entrezId: Int!, limit: Int = 100, start: Int = 0): [PharosTarget!]!
-    
+
     stringInteractionsByEntrezId(entrezId: Int!, limit: Int = 100, start: Int = 0): [StringInteraction!]!
 
     dbnsfpByVariant(chr: String!, pos: Int!, ref: String!, alt: String!, build: String!): DbNSFP
@@ -90,6 +95,8 @@ const rootValue = {
   dioptOrthologsByEntrezId: dioptResolvers.findOrthologsByEntrezId,
 
   phenotypeOntologyByPoId: phenotypeOntologyResolvers.findByPoId,
+  goByEntrezId: goResolvers.findByEntrezId,
+
   phenotypeOntologyByName: phenotypeOntologyResolvers.findByName,
   phenotypeOntologyByTaxonId: phenotypeOntologyResolvers.findByTaxonId,
   phenotypeOntologyByNamespace: phenotypeOntologyResolvers.findByNamespace,

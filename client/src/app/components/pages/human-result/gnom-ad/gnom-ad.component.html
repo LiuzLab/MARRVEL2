@@ -5,7 +5,7 @@
 
   <span class="d-table-cell pl-2">
     <span *ngIf="data && data.exome && data.genome">
-      Chr{{ data.chr }}:{{ data.pos }} {{ data.ref }}>{{ data.alt }} is found
+      Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}>{{ variant.alt }} (hg38) is found
       <strong appUnit [count]="alleleCount" unit="time"></strong>
       in the control population (may contain adult-onset diseases).
       There are

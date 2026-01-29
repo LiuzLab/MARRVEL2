@@ -21,6 +21,9 @@ const config = {
         version: process.env.DECIPHER_DISEASE_VERSION,
         name: `DECIPHERDisease${process.env.DECIPHER_DISEASE_VERSION ? `.${process.env.DECIPHER_DISEASE_VERSION}` : ''}`
       }
+    },
+    gnomad: {
+      version: process.env.GNOMAD_VERSION || '2.1.1',
     }
   },
 
@@ -41,6 +44,9 @@ const config = {
         version: process.env.DECIPHER_DISEASE_VERSION,
         name: `DECIPHERDisease${process.env.DECIPHER_DISEASE_VERSION ? `.${process.env.DECIPHER_DISEASE_VERSION}` : ''}`
       }
+    },
+    gnomad: {
+      version: process.env.GNOMAD_VERSION || '2.1.1',
     }
   },
 
@@ -62,6 +68,9 @@ const config = {
         version: process.env.DECIPHER_DISEASE_VERSION,
         name: `DECIPHERDisease${process.env.DECIPHER_DISEASE_VERSION ? `.${process.env.DECIPHER_DISEASE_VERSION}` : ''}`
       }
+    },
+    gnomad: {
+      version: process.env.GNOMAD_VERSION || '2.1.1',
     }
   }
 };
@@ -72,7 +81,19 @@ config[env].mongo.url = `mongodb://${config[env].mongo.username}:${config[env].m
 }/${config[env].mongo.database}`;
 
 config[env].omim = require(path.join(rootPath, 'config/omim', `${env}.json`));
-
+config[env].gnomad.variant = {
+  name:
+    config[env].gnomad.version === '2.1.1'
+      ? 'GnomAD'
+      : `Gnomad.${config[env].gnomad.version}`,
+  defaultBuild: config[env].gnomad.version === '2.1.1' ? 'hg19' : 'hg38',
+};
+config[env].gnomad.gene = {
+  name:
+    config[env].gnomad.version === '2.1.1'
+      ? 'GnomADGene'
+      : `GnomadGene.${config[env].gnomad.version}`,
+};
 config[env].liftover = {
   hg38Version: process.env.LIFTOVER_HG38_VERSION || 'hg38_201312',
   hg19Version: process.env.LIFTOVER_HG19_VERSION || 'hg19_200902',

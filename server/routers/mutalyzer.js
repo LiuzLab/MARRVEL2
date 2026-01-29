@@ -5,7 +5,7 @@ const vv = require('../utils/vv');
 
 router.get('/mutalyzer/hgvs/:variant', (req, res) => {
   const variant = req.params.variant || '';
-  const build = req.params.build || 'hg19';
+  const build = req.query.build || 'hg19';
   vv.getGenomLocByHgvsVar(variant, build)
     .then((result) => {
       return res.json(result);
