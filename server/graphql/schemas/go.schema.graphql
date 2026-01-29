@@ -1,0 +1,23 @@
+"""
+A Gene Ontology term
+"""
+type GO {
+  id: String!
+  name: String
+  synonyms: [String]
+  is_a: [String]
+  namespace: String
+  def: String
+  agrSlimGoId: String
+}
+
+"""
+Gene Ontology with evidence information
+"""
+type GeneGO {
+  goId: String!
+  eviCode: String
+  date: String
+  assignedBy: String
+  ontology: GO
+}
