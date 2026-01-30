@@ -1,3 +1,4 @@
+const GOs = reuqire('../../models/go.model');
 const Genes = require('../../models/genes.model');
 
 /**
