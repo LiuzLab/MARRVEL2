@@ -84,10 +84,41 @@
           </ng-template>
         </div>
 
-        <div class="kpi" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')" *ngIf="variant">
+        <div class="kpi kpi-pred" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')" *ngIf="variant">
           <div class="kpi-label">Pred. Scores</div>
-          <div class="kpi-value kpi-muted">↓ see below</div>
-          <div class="kpi-sub">CADD · REVEL · SIFT</div>
+          <ng-container *ngIf="dbnsfpKpi; else predPending">
+            <div class="kpi-pred-row">
+              <span class="kpi-pred-name">CADD</span>
+              <span class="kpi-pred-val"
+                [class.kpi-danger]="dbnsfpKpi.cadd >= 20"
+                [class.kpi-warn]="dbnsfpKpi.cadd > 15 && dbnsfpKpi.cadd < 20"
+                [class.kpi-ok]="dbnsfpKpi.cadd !== null && dbnsfpKpi.cadd <= 10">
+                {{ dbnsfpKpi.cadd !== null ? (dbnsfpKpi.cadd | number:'1.1-1') : '—' }}
+              </span>
+            </div>
+            <div class="kpi-pred-row">
+              <span class="kpi-pred-name">REVEL</span>
+              <span class="kpi-pred-val"
+                [class.kpi-danger]="dbnsfpKpi.revel >= 0.75"
+                [class.kpi-warn]="dbnsfpKpi.revel > 0.25 && dbnsfpKpi.revel < 0.75"
+                [class.kpi-ok]="dbnsfpKpi.revel !== null && dbnsfpKpi.revel <= 0.25">
+                {{ dbnsfpKpi.revel !== null ? (dbnsfpKpi.revel | number:'1.2-2') : '—' }}
+              </span>
+            </div>
+            <div class="kpi-pred-row">
+              <span class="d-none d-lg-block kpi-pred-name">AlphaMissense</span>
+              <span class="d-block d-lg-none kpi-pred-name">AM</span>
+              <span class="kpi-pred-val"
+                [class.kpi-danger]="dbnsfpKpi.alphaMissense >= 0.564"
+                [class.kpi-warn]="dbnsfpKpi.alphaMissense > 0.34 && dbnsfpKpi.alphaMissense < 0.564"
+                [class.kpi-ok]="dbnsfpKpi.alphaMissense !== null && dbnsfpKpi.alphaMissense <= 0.34">
+                {{ dbnsfpKpi.alphaMissense !== null ? (dbnsfpKpi.alphaMissense | number:'1.2-2') : '—' }}
+              </span>
+            </div>
+          </ng-container>
+          <ng-template #predPending>
+            <div class="kpi-value kpi-muted">—</div>
+          </ng-template>
         </div>
 
         <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')">
@@ -324,7 +355,7 @@
             <div class="section-title">Prediction Scores</div>
             <span class="section-badge">dbNSFP</span>
           </div>
-          <app-dbnsfp [variant]="variant"></app-dbnsfp>
+          <app-dbnsfp [variant]="variant" (scoresReady)="dbnsfpKpi = $event"></app-dbnsfp>
         </section>
 
         <div class="section-divider" *ngIf="variant"></div>

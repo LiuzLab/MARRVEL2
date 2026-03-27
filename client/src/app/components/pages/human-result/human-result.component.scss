@@ -249,6 +249,33 @@
   }
 }
 
+/* ── Pred Scores KPI ── */
+.kpi-pred {
+  .kpi-pred-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .kpi-pred-name {
+    font-family: var(--hr-mono);
+    font-size: 9px;
+    color: var(--hr-text);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    flex-shrink: 0;
+  }
+
+  .kpi-pred-val {
+    font-family: var(--hr-mono);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+  }
+}
+
 /* ── Main 2-col layout ── */
 .main-layout {
   display: grid;

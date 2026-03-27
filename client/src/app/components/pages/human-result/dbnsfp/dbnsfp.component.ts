@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { Variant } from './../../../../interfaces/variant';
@@ -16,6 +16,7 @@ import { DBNSFP_SCORES_CONFIG, ScoreDisplayConfig } from './dbnsfp-scores-config
 })
 export class DbnsfpComponent implements OnInit {
   @Input() variant: Variant;
+  @Output() scoresReady = new EventEmitter<{ cadd: number | null; revel: number | null; alphaMissense: number | null }>();
 
   loading = false;
   data: DbNSFPData;
@@ -58,6 +59,12 @@ export class DbnsfpComponent implements OnInit {
         this.calcAvgRankscore(res);
         this.data = res;
         this.loading = false;
+        const cadd = res?.scores?.CADD?.phred ?? null;
+        const revelArr = res?.scores?.REVEL?.scores;
+        const revel = revelArr ? (this.max(revelArr) as number) || null : null;
+        const amArr = res?.scores?.AlphaMissense?.predictions;
+        const alphaMissense = amArr ? (this.max(amArr) as number) || null : null;
+        this.scoresReady.emit({ cadd, revel, alphaMissense });
       });
   }
 
