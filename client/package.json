@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "./node_modules/@angular/cli/bin/ng serve",
-    "build": "./node_modules/@angular/cli/bin/ng build --configuration=$ANGULAR_ENV",
+    "start": "./node_modules/@angular/cli/bin/ng.js serve",
+    "build": "./node_modules/@angular/cli/bin/ng.js build --configuration=$ANGULAR_ENV",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
