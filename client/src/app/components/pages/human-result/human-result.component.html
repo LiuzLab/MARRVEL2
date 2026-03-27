@@ -23,10 +23,7 @@
         <span class="hg38-tag" *ngIf="hg38Variant">hg38</span>
         <span class="variant-hgvs" *ngIf="variantInput && variantInput.indexOf(':c.') !== -1">{{ variantInput }}</span>
         <div class="identity-pills">
-          <span class="pill pill-info"
-            *ngIf="gnomadGeneData?.lof?.pLI !== null && gnomadGeneData?.lof?.pLI !== undefined">
-            pLI = {{ gnomadGeneData.lof.pLI | number:'1.2-2' }}
-          </span>
+
           <span class="pill pill-info" *ngIf="omimData?.length">
             {{ omimData[0]?.phenotypeList?.[0]?.phenotype || 'OMIM disease' }}
           </span>
@@ -121,31 +118,49 @@
           </ng-template>
         </div>
 
-        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')">
-          <div class="kpi-label">gnomAD AF</div>
-          <div class="kpi-value kpi-muted">↓ see below</div>
-          <div class="kpi-sub">population freq.</div>
-        </div>
-
-        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
-          *ngIf="gnomadGeneData?.lof?.pLI !== null && gnomadGeneData?.lof?.pLI !== undefined">
-          <div class="kpi-label">pLI</div>
-          <div class="kpi-value"
-            [class.kpi-danger]="gnomadGeneData.lof.pLI >= 0.9"
-            [class.kpi-warn]="gnomadGeneData.lof.pLI >= 0.5 && gnomadGeneData.lof.pLI < 0.9"
-            [class.kpi-ok]="gnomadGeneData.lof.pLI < 0.5">
-            {{ gnomadGeneData.lof.pLI | number:'1.2-2' }}
-          </div>
-          <div class="kpi-sub">{{ gnomadGeneData.lof.pLI >= 0.9 ? 'LoF intolerant' : 'LoF tolerant' }}</div>
+        <div class="kpi kpi-pred" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')">
+          <div class="kpi-label">gnomAD</div>
+          <ng-container *ngIf="gnomadKpi; else gnomadPending">
+            <div class="kpi-pred-row">
+              <span class="kpi-pred-name">AF</span>
+              <span class="kpi-pred-val" [class.kpi-ok]="gnomadKpi.af !== null && gnomadKpi.af >= 0.05">
+                {{ gnomadKpi.af !== null ? (gnomadKpi.af | number:'1.2-4') : '—' }}
+              </span>
+            </div>
+            <div class="kpi-pred-row">
+              <span class="kpi-pred-name">AC</span>
+              <span class="kpi-pred-val">{{ gnomadKpi.ac !== null ? gnomadKpi.ac : '—' }}</span>
+            </div>
+            <div class="kpi-pred-row">
+              <span class="kpi-pred-name">Hom</span>
+              <span class="kpi-pred-val">{{ gnomadKpi.homCount !== null ? gnomadKpi.homCount : '—' }}</span>
+            </div>
+          </ng-container>
+          <ng-template #gnomadPending>
+            <div class="kpi-value kpi-muted">—</div>
+          </ng-template>
         </div>
 
         <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
           *ngIf="gnomadGeneData?.lof?.oeUpper !== null && gnomadGeneData?.lof?.oeUpper !== undefined">
           <div class="kpi-label">LOEUF</div>
-          <div class="kpi-value" [class.kpi-warn]="gnomadGeneData.lof.oeUpper < 0.6">
+          <div class="kpi-value"
+            [class.kpi-danger]="gnomadGeneData.lof.oeUpper < 0.35"
+            [class.kpi-warn]="gnomadGeneData.lof.oeUpper >= 0.35 && gnomadGeneData.lof.oeUpper < 0.6">
             {{ gnomadGeneData.lof.oeUpper | number:'1.2-2' }}
           </div>
-          <div class="kpi-sub">obs/exp upper bound</div>
+          <div class="kpi-sub">LoF o/e upper bound</div>
+        </div>
+
+        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
+          *ngIf="gnomadGeneData?.mis?.z !== null && gnomadGeneData?.mis?.z !== undefined">
+          <div class="kpi-label">Mis Z</div>
+          <div class="kpi-value"
+            [class.kpi-danger]="gnomadGeneData.mis.z >= 3.09"
+            [class.kpi-warn]="gnomadGeneData.mis.z >= 2 && gnomadGeneData.mis.z < 3.09">
+            {{ gnomadGeneData.mis.z | number:'1.2-2' }}
+          </div>
+          <div class="kpi-sub">missense constraint</div>
         </div>
 
         <div class="kpi" [class.active]="activeSection === 'Geno2MP'" (click)="scrollToSection('Geno2MP')">
@@ -195,8 +210,8 @@
         <div class="sb-section-label">Control Databases</div>
         <div class="sb-item" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')">
           <span class="sb-name">gnomAD</span>
-          <span class="sb-badge sb-badge-info" *ngIf="gnomadGeneData?.lof?.pLI !== null && gnomadGeneData?.lof?.pLI !== undefined">
-            pLI {{ gnomadGeneData.lof.pLI | number:'1.1-1' }}
+          <span class="sb-badge sb-badge-info" *ngIf="gnomadGeneData?.lof?.oeUpper !== null && gnomadGeneData?.lof?.oeUpper !== undefined">
+            LOEUF {{ gnomadGeneData.lof.oeUpper | number:'1.2-2' }}
           </span>
           <span class="sb-badge" *ngIf="!gnomadGeneData">—</span>
         </div>
@@ -411,7 +426,7 @@
               </a>
             </div>
           </div>
-          <app-gnom-ad *ngIf="variant" [variant]="variant"></app-gnom-ad>
+          <app-gnom-ad *ngIf="variant" [variant]="variant" (afReady)="gnomadKpi = $event"></app-gnom-ad>
           <app-gnom-ad-gene *ngIf="gene" [gene]="gene"></app-gnom-ad-gene>
         </section>
 
