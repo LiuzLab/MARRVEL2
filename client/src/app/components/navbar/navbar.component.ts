@@ -8,6 +8,7 @@ import { ThemeService } from '../../services/theme.service';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
+  host: { style: 'position: sticky; top: 0; z-index: 100; display: block;' },
   animations: [
     trigger('toggle', [
       state('true', style({ opacity: 1, 'min-height': '12em' })),
