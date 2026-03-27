@@ -297,7 +297,7 @@
             <span *ngIf="!loading && data">
               <ul class="list-style-none my-1">
                 <li *ngFor="let go of data[idx].gos">
-                  <span class="label badge mr-1" [ngClass]="go.namespace" [matTooltip]="go.namespace">
+                  <span class="chip chip-secondary mr-1" [ngClass]="go.namespace" [matTooltip]="go.namespace">
                     {{ go.namespace === 'cellular_component' ? 'C' : (go.namespace === 'molecular_function' ? 'F' : 'P' ) }}
                   </span>
                   <a [attr.href]="'http://amigo.geneontology.org/amigo/term/' + go.goId" target="_blank">{{ go.name }}</a>

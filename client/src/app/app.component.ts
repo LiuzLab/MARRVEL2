@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   standalone: false,
@@ -9,5 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   navbarElevation = true;
 
-  constructor() { }
+  // Injecting here ensures ThemeService is created at app startup
+  // so the dark-theme class is applied to <html> before first render
+  constructor(readonly themeService: ThemeService) { }
 }

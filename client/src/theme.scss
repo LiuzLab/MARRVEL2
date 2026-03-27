@@ -13,7 +13,13 @@
 // Material 3 theming - use cyan palette as primary (closest to your brand color)
 html {
   color-scheme: light;
-  
+
+  // Navbar tokens — light theme
+  --nav-bg: #ffffff;
+  --nav-border: #e2e8f0;
+  --nav-link-color: rgba(30, 41, 59, 0.6);
+  --nav-link-hover: #1e293b;
+
   @include mat.theme((
     color: (
       primary: mat.$cyan-palette,
@@ -23,12 +29,43 @@ html {
     typography: Roboto,
     density: 0,
   ));
+
+  // Pin light-theme primary to brand teal
+  --mat-sys-primary: #7bd0cc;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #b2ebea;
+  --mat-sys-on-primary-container: #003735;
+
+  // Slide-toggle light theme tokens
+  --mat-slide-toggle-selected-track-color: #7bd0cc;
+  --mat-slide-toggle-selected-handle-color: #ffffff;
+  --mat-slide-toggle-unselected-track-color: #e0e0e0;
+  --mat-slide-toggle-unselected-handle-color: #79747e;
 }
 
-// Dark theme support
-.MARRVEL-dark-theme {
+// Global dark theme — activated by ThemeService via html.dark-theme class
+html.dark-theme {
   color-scheme: dark;
-  
+
+  // Navbar tokens — dark theme
+  --nav-bg: #161b22;
+  --nav-border: #2a3441;
+  --nav-link-color: rgba(226, 232, 240, 0.55);
+  --nav-link-hover: #e2e8f0;
+
+  @include mat.theme((
+    color: (
+      primary: mat.$cyan-palette,
+      tertiary: mat.$orange-palette,
+      theme-type: dark,
+    ),
+  ));
+
+  body {
+    background-color: #121212 !important;
+    color: rgba(255, 255, 255, 0.87) !important;
+  }
+
   a, .link-primary {
     color: var(--mat-sys-primary);
     text-decoration: none;
@@ -37,12 +74,54 @@ html {
   a:hover, a:active, .link-primary:hover, .link-primary:active {
     color: var(--mat-sys-primary-container);
     text-decoration: underline;
-    cursor: pointer;
   }
-  .color-primary {
-    color: var(--mat-sys-primary);
-  }
-  body, p, h1, h2, h3, h4, h5 { 
-    color: rgba(255,255,255, 0.4); 
-  }
+  .color-primary { color: var(--mat-sys-primary); }
+}
+
+// Legacy class kept for backwards compatibility
+.MARRVEL-dark-theme {
+  color-scheme: dark;
+  a, .link-primary { color: var(--mat-sys-primary); }
+  .color-primary { color: var(--mat-sys-primary); }
+}
+
+// Human-result page: light mode Material theme (default when not dark)
+app-human-result {
+  --mat-sys-primary: #2dd4bf;
+  --mat-sys-on-primary: #003733;
+  --mat-sys-primary-container: #9ef2e4;
+  --mat-sys-on-primary-container: #00201d;
+
+  a, .link-primary { color: var(--mat-sys-primary); }
+  .color-primary, .text-bold-blue { color: var(--mat-sys-primary); }
+}
+
+// Human-result page: dark mode — only when html.dark-theme class is present
+html.dark-theme app-human-result {
+  color-scheme: dark;
+
+  @include mat.theme((
+    color: (
+      primary: mat.$cyan-palette,
+      tertiary: mat.$orange-palette,
+      theme-type: dark,
+    ),
+  ));
+
+  // Pin primary to teal accent
+  --mat-sys-primary: #2dd4bf;
+  --mat-sys-on-primary: #003733;
+  --mat-sys-primary-container: #00504a;
+  --mat-sys-on-primary-container: #9ef2e4;
+
+  // Surface tokens matching our dark palette
+  --mat-sys-surface: #161b22;
+  --mat-sys-surface-container: #1c2330;
+  --mat-sys-surface-container-high: #242e3e;
+  --mat-sys-surface-container-highest: #2a3441;
+  --mat-sys-surface-container-low: #141920;
+  --mat-sys-on-surface: #e2e8f0;
+  --mat-sys-on-surface-variant: #b8c5d3;
+  --mat-sys-outline: #3d4f63;
+  --mat-sys-outline-variant: #2a3441;
 }

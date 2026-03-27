@@ -9,7 +9,7 @@
       {{ cand.annot }}
       (<span *ngFor="let trpt of cand.transcripts" class="trpt-wrapper">
         <a [attr.href]="trpt.extLink" target="_blank" class="align-middle">{{ trpt.transcriptId }}</a>
-        <span class="badge badge-secondary align-middle ml-1" style="font-size: 0.55rem;" *ngIf="trpt.isCanonical">Ensembl canonical</span>
+        <span class="chip chip-secondary" style="margin-left:0.25rem" *ngIf="trpt.isCanonical">Ensembl canonical</span>
       </span>)
     </span>
   </div>

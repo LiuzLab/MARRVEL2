@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
@@ -19,16 +18,6 @@ export class GeneService {
     if (taxonId) {
       params.taxonId = taxonId;
     }
-    return new Observable((obs) => {
-      this.http.get(url, { params })
-        .pipe(take(1))
-        .subscribe((res) => {
-          obs.next(res);
-          obs.complete();
-        }, (err) => {
-          obs.error(err);
-          obs.complete();
-        });
-    });
+    return this.http.get(url, { params });
   }
 }

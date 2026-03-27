@@ -1,411 +1,513 @@
-<div class="loading-fullscreen" *ngIf="geneLoading">
-  Loading ... {{ geneLoading }}
-</div>
+<div class="hr-page">
 
-<div class="d-flex" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh">
-  <div class="sidenav-content flex-grow-1 flex-column d-flex"
-    [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }">
-    <div>
-      <app-navbar showSearch="true" showMenuButton="true"></app-navbar>
-    </div>
-    <div class="flex-grow-1" style="overflow-x: hidden; overflow-y: auto;">
-      <div id="TOP"></div>
-      <div *ngIf="gene !== null || variant" class="container-fluid py-5 px-md-5">
-        <!-- Gene, Input information starts -->
-        <div class="row">
-          <div class="col-12">
-            <div class="title" *ngIf="!proteinInput">
-              <h1 *ngIf="geneEntrezId && gene">{{ gene.symbol }}</h1>
-              <h1 *ngIf="geneEntrezId && variant">&nbsp;/&nbsp;</h1>
-              <h1 *ngIf="variant">{{ variantString }}</h1>
-              <h1 *ngIf="variantInput && variantInput.indexOf(':c.') != -1">&nbsp;({{ variantInput }})</h1>
-            </div>
-            <div class="subtitle" *ngIf="hg38Variant">
-              <h4>
-                <span class="label">hg38</span>
-                Chr{{ hg38Variant.chr }}:{{ hg38Variant.pos }}
-                {{ hg38Variant.ref }}&gt;{{ hg38Variant.alt }}
-              </h4>
-            </div>
+  <!-- Navbar -->
+  <app-navbar showSearch="true"></app-navbar>
 
-            <div class="title" *ngIf="proteinInput">
-              <h1 class="d-block">{{ proteinInput }}</h1>
-              <h4 class="d-inline-block" style="font-weight: 300; font-size: 0.95em;" *ngIf="gene">
-                <span class="label">Gene</span>{{ gene.symbol }}
-              </h4>
-              <h4 class="d-inline-block ml-3" style="font-weight: 300; font-size: 0.95em;" *ngIf="variant">
-                <span class="label">Variant</span>{{ variantString }}
-              </h4>
-            </div>
-          </div>
-          <div class="col-12 mt-3" *ngIf="geneCandidates && geneCandidates.length">
-            <mat-form-field appearance="fill" style="margin-bottom: -1.25em">
-              <mat-label>Genes contain Chr{{ variant.chr }}:{{ variant.pos }}</mat-label>
-              <mat-select [value]="gene" (selectionChange)="onGeneSelectionChange($event)">
-                <mat-option *ngFor="let aGene of geneCandidates" [value]="aGene">
-                  {{ aGene.symbol }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+  <!-- Loading fullscreen -->
+  <div class="hr-loading" *ngIf="geneLoading">
+    <div class="hr-loading-spinner"></div>
+    <div class="hr-loading-text">Loading…</div>
+  </div>
 
-          <div class="col-12 subtitle mt-3" [@toggle]>
-            <ng-container *ngIf="variant" class="d-inline-block">
-              <a class="d-inline mr-2" target="_blank" [attr.href]="'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + variant.chr + ':' + variant.pos">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  UCSC Genome Browser
-                </button>
-              </a>
-            </ng-container>
-            <ng-container *ngIf="!variant && gene && gene.hg19Start && gene.hg19Stop" class="d-inline-block">
-              <a class="d-inline mr-2" target="_blank" [attr.href]="'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + gene.chr + '%3A' + gene.hg19Start + '-' + gene.hg19Stop">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  UCSC Genome Browser
-                </button>
-              </a>
-            </ng-container>
-            <ng-container *ngIf="gene" class="d-inline-block">
-              <a class="d-inline mr-2" target="_blank" [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId" *ngIf="gene.hgncId">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  HGNC
-                </button>
-              </a>
+  <ng-container *ngIf="!geneLoading && (gene || variant)">
 
-              <a class="d-inline mr-2" target="_blank" [attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  NCBI Gene
-                </button>
-              </a>
-
-              <a class="d-inline mr-2" target="_blank" [attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  MyGene2
-                </button>
-              </a>
-
-              <a class="d-inline mr-2" target="_blank"
-                *ngIf="gene.xref?.ensemblId?.length"
-                [attr.href]="'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=' + gene.xref.ensemblId">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  Ensembl
-                </button>
-              </a>
-
-              <a class="d-inline mr-2" target="_blank"
-                *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
-                [attr.href]="'https://www.uniprot.org/uniprotkb/' + gene.uniprotKBId">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  Uniprot
-                </button>
-              </a>
-
-              <a class="d-inline mr-2" target="_blank"
-                [attr.href]="'https://cellxgene.cziscience.com/gene-expression?ver=2&genes=' + gene.symbol">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  CZ CELLxGENE Discover
-                </button>
-              </a>
-
-              <a class="d-inline mr-2" target="_blank"
-                *ngIf="gene.xref?.ensemblId"
-                [attr.href]="'https://www.proteinatlas.org/' + gene.uniprotKBId">
-                <button matButton="filled" color="primary" class="mb-1 compact">
-                  <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                  The Human Protein Atlas
-                </button>
-              </a>
-            </ng-container>
-          </div>
-
-          <div class="col-12 subtitle mt-2" *ngIf="gene" [@toggle]>
-            <h4>
-              <span class="label">Gene Name</span>
-              {{ gene.name }}
-            </h4>
-            <h4 *ngIf="gene['alias']" [@toggle]>
-              <span class="label">Gene Aliases</span>
-              {{ gene.alias.join(', ') }}
-            </h4>
-          </div>
-          <div class="col-12" *ngIf="variant">
-            <app-forward-annotation [variant]="variant"></app-forward-annotation>
-          </div>
-
-
-          <div class="col-12 mt-3" *ngIf="gene && gene.entrezSummary" [@toggle]>
-            <h4 class="m-0 title">Entrez Summary of {{ gene.symbol }}</h4>
-            <p class="mt-3 mb-0">{{ gene.entrezSummary }} </p>
-          </div>
-
+    <!-- IDENTITY + KPI BAR -->
+    <div class="identity-bar">
+      <div class="identity-top">
+        <div class="variant-title">
+          <span class="gene-accent" *ngIf="gene">{{ gene.symbol }}</span>
+          <span class="title-sep" *ngIf="gene && (variant || proteinInput)"> / </span>
+          <span *ngIf="variant">{{ variantString }}</span>
+          <span *ngIf="proteinInput && !variant">{{ proteinInput }}</span>
         </div>
-        <!-- Gene, Input information ends -->
-
-        <!-- OMIM starts -->
-        <div class="row section mt-5" id="OMIM" *ngIf="geneLoading || gene" [@toggle]>
-          <div class="col-12" [ngClass]="{ 'skeleton': omimLoading }">
-            <h2 class="mb-1 text-uppercase">Disease Data</h2>
-            <app-omim *ngIf="gene" [gene]="gene" [loading]="omimLoading" [data]="omimData"></app-omim>
-          </div>
-        </div>
-        <!-- OMIM ends -->
-
-        <!-- dbNSFP starts -->
-        <div class="row section mt-5" id="DbNSFP" *ngIf="!geneLoading && variant" [@toggle]>
-          <div class="col-12">
-            <h2 class="mb-1 text-uppercase">Disease Data</h2>
-            <app-dbnsfp [variant]="variant"></app-dbnsfp>
-          </div>
-        </div>
-        <!-- dbNSFP ends -->
-
-        <!-- ClinVar starts -->
-        <div class="row section mt-5" id="ClinVar" *ngIf="!geneLoading && gene" [@toggle]>
-          <div class="col-12">
-            <h2 class="mb-1 text-uppercase">Disease Data</h2>
-            <app-clinvar [gene]="gene" [variant]="variant"></app-clinvar>
-          </div>
-        </div>
-        <!-- ClinVar ends -->
-
-        <!-- Geno2MP starts -->
-        <div class="row section mt-5" id="Geno2MP" *ngIf="!geneLoading" [@toggle]>
-          <div class="col-12">
-            <h2 class="mb-1 text-uppercase">Disease Data</h2>
-            <app-geno2mp [gene]="gene" [variant]="variant"></app-geno2mp>
-          </div>
-        </div>
-        <!-- Geno2MP ends -->
-
-        <!-- DECIPHER starts -->
-        <div class="row section mt-5" id="DECIPHER" *ngIf="!geneLoading" [@toggle]>
-          <div class="col-12">
-            <h2 class="mb-1 text-uppercase">Disease Data</h2>
-            <app-decipher-disease [gene]="gene" [variant]="variant"></app-decipher-disease>
-          </div>
-        </div>
-        <!-- DECIPHER ends -->
-
-        <mat-divider class="mt-5"></mat-divider>
-
-        <!-- gnomAD starts -->
-        <div class="row section mt-5" id="GnomAD">
-          <div class="col-12">
-            <h2 class="mb-1 text-uppercase">Control Data</h2>
-
-            <h3 class="mb-0">gnomAD</h3>
-          </div>
-
-          <!-- gnomAD variant -->
-          <div class="col-12 mt-3" *ngIf="variant" [@toggle]>
-            <h4 class="mt-0 mb-3 d-inline-block align-middle">
-              Population Allele Frequencies of {{ variantString }} from gnomAD
-            </h4>
-            <a class="mb-3 d-inline-block ml-3 align-middle"
-              href="https://gnomad.broadinstitute.org/variant/{{ variant.chr }}-{{ variant.pos }}-{{ variant.ref }}-{{ variant.alt }}?dataset=gnomad_r2_1"
-              target="_blank">
-              <button mat-button color="primary">
-                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                More on gnomAD
-              </button>
-            </a>
-            <app-gnom-ad [variant]="variant"></app-gnom-ad>
-          </div>
-
-          <!-- gnomAD gene -->
-          <div class="col-12 mt-3" *ngIf="!geneLoading && gene" [@toggle]>
-            <h4 class="mt-0 mb-3 d-inline-block align-middle">Control Population Summary of {{ gene.symbol }} from gnomAD</h4>
-            <a class="mb-3 d-inline-block ml-3 align-middle"
-              *ngIf="gene && gene.xref && gene.xref.ensemblId"
-              href="https://gnomad.broadinstitute.org/gene/{{ gene.xref.ensemblId }}?dataset=gnomad_r2_1"
-              target="_blank">
-              <button mat-button color="primary">
-                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                More on gnomAD
-              </button>
-            </a>
-            <app-gnom-ad-gene [gene]="gene"></app-gnom-ad-gene>
-          </div>
-        </div>
-        <!-- gnomAD ends -->
-
-        <!-- DGV starts -->
-        <div class="row section mt-5" id="DGV" *ngIf="!geneLoading && gene" [@toggle]>
-          <div class="col-12">
-            <h2 class="mb-1 text-uppercase">Control Data</h2>
-            <app-dgv *ngIf="gene" [gene]="gene"></app-dgv>
-          </div>
-        </div>
-        <!-- DGV ends -->
-
-        <!-- DECIPHER Control starts -->
-        <div class="row section mt-5" id="DECIPHER-Control" *ngIf="!geneLoading && gene" [@toggle]>
-          <div class="col-12">
-            <h2 class="mb-1 text-uppercase">Control Data</h2>
-            <app-decipher [variant]="variant" [gene]="gene"></app-decipher>
-          </div>
-        </div>
-        <!-- DECIPHER Control ends -->
-
-        <!-- DIOPT Ortholog starts -->
-        <div class="row section" id="orthologs">
-          <div class="col-12 mt-5" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
-            <app-orthologs [gene]="gene" [data]="orthologs"></app-orthologs>
-          </div>
-        </div>
-        <!-- DIOPT Ortholog ends -->
-
-        <div class="row section mt-5" id="expression" *ngIf="!geneLoading && gene" [@toggle]>
-          <div class="col-12">
-            <app-gtex-boxplot [gene]="gene"></app-gtex-boxplot>
-          </div>
-
-          <div class="col-12 mt-5">
-            <app-agr-expression [gene]="gene"></app-agr-expression>
-          </div>
-        </div>
-
-        <div class="row section mt-5" id="phenotypes" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
-          <div class="col-12">
-            <app-phenotypes [gene]="gene" [orthologs]="orthologs"></app-phenotypes>
-          </div>
-        </div>
-
-        <div class="row section mt-5" id="gene-ontology" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
-          <div class="col-12">
-            <h3 class="m-0">Gene Ontology</h3>
-            <app-gene-ontology [gene]="gene" [orthologs]="orthologs" *ngIf="gene"></app-gene-ontology>
-          </div>
-        </div>
-
-        <div class="row section mt-5" id="primate" [@toggle]>
-          <div class="col-12">
-            <app-primate [variant]="variant" [gene]="gene" *ngIf="!geneLoading"></app-primate>
-          </div>
-        </div>
-
-        <div *ngIf="!geneLoading && gene" [@toggle]>
-          <div class="row section mt-5" id="alignment">
-            <!-- SMART Domain starts -->
-            <div class="col-12">
-              <app-smart-protein-domain [gene]="gene"></app-smart-protein-domain>
-            </div>
-            <!-- SMART Domain ends -->
-
-            <!-- Alignment starts -->
-            <div class="col-12 mt-5" *ngIf="!smallScreen">
-              <app-diopt-alignment [gene]="gene"></app-diopt-alignment>
-            </div>
-          </div>
-          <!-- Alignment ends -->
-
-          <!-- PPI starts -->
-          <div class="row section mt-5" id="ppi">
-            <div class="col-12">
-              <h3 class="m-0">
-                Protein Interactions
-                <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle;">
-                  Beta
-                </span>
-              </h3>
-              <mat-progress-bar mode="indeterminate" class="w-100"
-                *ngIf="ppiLoading"></mat-progress-bar>
-              <app-ppi
-                [gene]="gene"
-                [data]="ppiData"
-                *ngIf="!ppiLoading && ppiData && ppiData.length"></app-ppi>
-              <p *ngIf="!ppiLoading && (!ppiData || !ppiData.length)">
-                No protein interaction data available
-              </p>
-            </div>
-          </div>
-          <!-- PPI ends -->
-
-          <!-- Protein structure starts -->
-          <div class="row section mt-5" id="protein-structure" *ngIf="!smallScreen">
-            <div class="col-12">
-              <h3 class="mt-0 d-block">
-                Human Protein Structure
-              </h3>
-            </div>
-
-            <div class="col-12 mt-3">
-              <app-pdbe [entrezId]="gene.entrezId"></app-pdbe>
-            </div>
-
-            <!-- Alphafold starts -->
-            <div class="col-12">
-              <h4 class="mt-0 mb-3 d-inline-block">
-                Protein Structure Prediction from AlphaFold for {{ gene.symbol }}
-                <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle;">
-                  Beta
-                </span>
-              </h4>
-              <a class="d-inline-block align-middle"
-                *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
-                [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
-                target="_blank"
-              >
-                <button mat-button color="primary">
-                  <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                  More on AlphaFold Protein Structure Database
-                </button>
-              </a>
-            </div>
-
-            <div class="col-12 mt-3">
-              <app-human-protein-structure
-                *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
-                [uniprotId]="gene.uniprotKBId"></app-human-protein-structure>
-
-              <p *ngIf="!gene.uniprotKBId || !gene.uniprotKBId.length">
-                No protein structure available
-              </p>
-            </div>
-            <!-- Alphafold ends -->
-          </div>
-          <!-- Protein structure ends -->
-
-          <!-- Pharos starts -->
-          <div class="row section mt-5" id="pharos">
-            <div class="col-12">
-              <app-pharos [gene]="gene"></app-pharos>
-            </div>
-          </div>
-          <!-- pharos control ends -->
-
-          <!-- Collaboration starts -->
-          <div class="row section mt-5" id="modelmatcher">
-            <div class="col-12">
-              <app-modelmatcher [gene]="gene"
-                *ngIf="!geneLoading"></app-modelmatcher>
-            </div>
-          </div>
-          <!-- Collaboration ends -->
+        <span class="hg38-tag" *ngIf="hg38Variant">hg38</span>
+        <span class="variant-hgvs" *ngIf="variantInput && variantInput.indexOf(':c.') !== -1">{{ variantInput }}</span>
+        <div class="identity-pills">
+          <span class="pill pill-info"
+            *ngIf="gnomadGeneData?.lof?.pLI !== null && gnomadGeneData?.lof?.pLI !== undefined">
+            pLI = {{ gnomadGeneData.lof.pLI | number:'1.2-2' }}
+          </span>
+          <span class="pill pill-info" *ngIf="omimData?.length">
+            {{ omimData[0]?.phenotypeList?.[0]?.phenotype || 'OMIM disease' }}
+          </span>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="sidenav-container"
-    [ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
-    *ngIf="!smallScreen">
-    <app-sidenav
-      [variant]="variantString"
-      [gene]="gene"
-      [sidenavOpened]="sidenavOpened"
-      (change)="toggleSidenav($event)"
-      [smallScreen]="smallScreen"
-    ></app-sidenav>
-  </div>
-</div>
 
-<app-scroll-top-button
-  [right]="sidenavOpened ? '262px' : '84px'"
-></app-scroll-top-button>
+      <!-- Gene-candidate selector -->
+      <div class="gene-selector" *ngIf="geneCandidates && geneCandidates.length > 1">
+        <mat-form-field appearance="outline" class="gene-select-field">
+          <mat-label>Gene containing {{ variant?.chr }}:{{ variant?.pos }}</mat-label>
+          <mat-select [value]="gene" (selectionChange)="onGeneSelectionChange($event)">
+            <mat-option *ngFor="let g of geneCandidates" [value]="g">{{ g.symbol }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- KPI STRIP -->
+      <div class="kpi-strip">
+        <div class="kpi" [class.active]="activeSection === 'OMIM'" (click)="scrollToSection('OMIM')">
+          <div class="kpi-label">OMIM</div>
+          <div class="kpi-value" *ngIf="omimData?.length">{{ omimData.length }} phenotype{{ omimData.length !== 1 ? 's' : '' }}</div>
+          <div class="kpi-value kpi-muted" *ngIf="!omimData?.length">—</div>
+          <div class="kpi-sub" *ngIf="omimData?.length">{{ omimData[0]?.phenotypeList?.[0]?.phenotype }}</div>
+        </div>
+
+        <div class="kpi" [class.active]="activeSection === 'ClinVar'" (click)="scrollToSection('ClinVar')" *ngIf="gene">
+          <div class="kpi-label">ClinVar</div>
+          <div class="kpi-value kpi-muted">↓ see below</div>
+          <div class="kpi-sub">by gene</div>
+        </div>
+
+        <div class="kpi" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')" *ngIf="variant">
+          <div class="kpi-label">Pred. Scores</div>
+          <div class="kpi-value kpi-muted">↓ see below</div>
+          <div class="kpi-sub">CADD · REVEL · SIFT</div>
+        </div>
+
+        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')">
+          <div class="kpi-label">gnomAD AF</div>
+          <div class="kpi-value kpi-muted">↓ see below</div>
+          <div class="kpi-sub">population freq.</div>
+        </div>
+
+        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
+          *ngIf="gnomadGeneData?.lof?.pLI !== null && gnomadGeneData?.lof?.pLI !== undefined">
+          <div class="kpi-label">pLI</div>
+          <div class="kpi-value"
+            [class.kpi-danger]="gnomadGeneData.lof.pLI >= 0.9"
+            [class.kpi-warn]="gnomadGeneData.lof.pLI >= 0.5 && gnomadGeneData.lof.pLI < 0.9"
+            [class.kpi-ok]="gnomadGeneData.lof.pLI < 0.5">
+            {{ gnomadGeneData.lof.pLI | number:'1.2-2' }}
+          </div>
+          <div class="kpi-sub">{{ gnomadGeneData.lof.pLI >= 0.9 ? 'LoF intolerant' : 'LoF tolerant' }}</div>
+        </div>
+
+        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
+          *ngIf="gnomadGeneData?.lof?.oeUpper !== null && gnomadGeneData?.lof?.oeUpper !== undefined">
+          <div class="kpi-label">LOEUF</div>
+          <div class="kpi-value" [class.kpi-warn]="gnomadGeneData.lof.oeUpper < 0.6">
+            {{ gnomadGeneData.lof.oeUpper | number:'1.2-2' }}
+          </div>
+          <div class="kpi-sub">obs/exp upper bound</div>
+        </div>
+
+        <div class="kpi" [class.active]="activeSection === 'Geno2MP'" (click)="scrollToSection('Geno2MP')">
+          <div class="kpi-label">Geno2MP</div>
+          <div class="kpi-value kpi-muted">↓ see below</div>
+          <div class="kpi-sub">phenotype profiles</div>
+        </div>
+
+        <div class="kpi" [class.active]="activeSection === 'orthologs'" (click)="scrollToSection('orthologs')" *ngIf="gene">
+          <div class="kpi-label">Orthologs</div>
+          <div class="kpi-value kpi-teal" *ngIf="orthologs?.length">{{ orthologs.length }}</div>
+          <div class="kpi-value kpi-muted" *ngIf="!orthologs?.length">—</div>
+          <div class="kpi-sub">model organisms</div>
+        </div>
+      </div>
+    </div><!-- identity-bar -->
+
+    <!-- MAIN LAYOUT -->
+    <div class="main-layout">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="hr-sidebar">
+        <div class="sb-section-label">Disease Databases</div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'OMIM'" (click)="scrollToSection('OMIM')">
+          <span class="sb-name">OMIM</span>
+          <span class="sb-badge sb-badge-info" *ngIf="omimData?.length">{{ omimData.length }}</span>
+          <span class="sb-badge" *ngIf="!omimData?.length">—</span>
+        </div>
+        <div class="sb-item" *ngIf="variant" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')">
+          <span class="sb-name">Pred. Scores</span>
+          <span class="sb-badge">dbNSFP</span>
+        </div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'ClinVar'" (click)="scrollToSection('ClinVar')">
+          <span class="sb-name">ClinVar</span>
+          <span class="sb-badge">variants</span>
+        </div>
+        <div class="sb-item" [class.active]="activeSection === 'Geno2MP'" (click)="scrollToSection('Geno2MP')">
+          <span class="sb-name">Geno2MP</span>
+          <span class="sb-badge sb-badge-info">cases</span>
+        </div>
+        <div class="sb-item" [class.active]="activeSection === 'DECIPHER'" (click)="scrollToSection('DECIPHER')">
+          <span class="sb-name">DECIPHER</span>
+          <span class="sb-badge">disease</span>
+        </div>
+
+        <div class="sb-divider"></div>
+        <div class="sb-section-label">Control Databases</div>
+        <div class="sb-item" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')">
+          <span class="sb-name">gnomAD</span>
+          <span class="sb-badge sb-badge-info" *ngIf="gnomadGeneData?.lof?.pLI !== null && gnomadGeneData?.lof?.pLI !== undefined">
+            pLI {{ gnomadGeneData.lof.pLI | number:'1.1-1' }}
+          </span>
+          <span class="sb-badge" *ngIf="!gnomadGeneData">—</span>
+        </div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'DGV'" (click)="scrollToSection('DGV')">
+          <span class="sb-name">DGV</span>
+          <span class="sb-badge">SVs</span>
+        </div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'DECIPHER-Control'" (click)="scrollToSection('DECIPHER-Control')">
+          <span class="sb-name">DECIPHER ctrl</span>
+          <span class="sb-badge">control</span>
+        </div>
+
+        <div class="sb-divider"></div>
+        <div class="sb-section-label">Model Organisms</div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'orthologs'" (click)="scrollToSection('orthologs')">
+          <span class="sb-name">Orthologs</span>
+          <span class="sb-badge sb-badge-info" *ngIf="orthologs?.length">{{ orthologs.length }}</span>
+        </div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'expression'" (click)="scrollToSection('expression')">
+          <span class="sb-name">Expression</span>
+          <span class="sb-badge">GTEx</span>
+        </div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'phenotypes'" (click)="scrollToSection('phenotypes')">
+          <span class="sb-name">Phenotypes</span>
+          <span class="sb-badge sb-badge-beta">Beta</span>
+        </div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'gene-ontology'" (click)="scrollToSection('gene-ontology')">
+          <span class="sb-name">Gene Ontology</span>
+          <span class="sb-badge">GO</span>
+        </div>
+        <div class="sb-item" [class.active]="activeSection === 'primate'" (click)="scrollToSection('primate')">
+          <span class="sb-name">Primate</span>
+          <span class="sb-badge sb-badge-beta">Beta</span>
+        </div>
+
+        <ng-container *ngIf="gene && !smallScreen">
+          <div class="sb-divider"></div>
+          <div class="sb-section-label">Protein</div>
+          <div class="sb-item" [class.active]="activeSection === 'alignment'" (click)="scrollToSection('alignment')">
+            <span class="sb-name">Domain / Align.</span>
+            <span class="sb-badge">SMART</span>
+          </div>
+          <div class="sb-item" [class.active]="activeSection === 'ppi'" (click)="scrollToSection('ppi')">
+            <span class="sb-name">Interactions</span>
+            <span class="sb-badge sb-badge-beta">Beta</span>
+          </div>
+          <div class="sb-item" [class.active]="activeSection === 'protein-structure'" (click)="scrollToSection('protein-structure')">
+            <span class="sb-name">Structure</span>
+            <span class="sb-badge sb-badge-beta">Beta</span>
+          </div>
+        </ng-container>
+
+        <div class="sb-divider"></div>
+        <div class="sb-section-label">More</div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'pharos'" (click)="scrollToSection('pharos')">
+          <span class="sb-name">Pharos</span>
+          <span class="sb-badge">drugs</span>
+        </div>
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'modelmatcher'" (click)="scrollToSection('modelmatcher')">
+          <span class="sb-name">ModelMatcher</span>
+          <span class="sb-badge sb-badge-beta">Beta</span>
+        </div>
+      </aside>
+
+      <!-- CONTENT AREA -->
+      <main class="content-area" #contentArea (scroll)="onContentScroll(contentArea)">
+
+        <!-- Gene Summary -->
+        <section class="hr-section" id="TOP">
+          <div class="section-header">
+            <div class="section-title">Gene Summary</div>
+            <div class="ext-links" *ngIf="gene">
+              <a class="ext-link" *ngIf="variant" target="_blank"
+                [attr.href]="'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + variant.chr + ':' + variant.pos">
+                ↗ UCSC
+              </a>
+              <a class="ext-link" *ngIf="!variant && gene.hg19Start" target="_blank"
+                [attr.href]="'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + gene.chr + '%3A' + gene.hg19Start + '-' + gene.hg19Stop">
+                ↗ UCSC
+              </a>
+              <a class="ext-link" *ngIf="gene.hgncId" target="_blank"
+                [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId">↗ HGNC</a>
+              <a class="ext-link" target="_blank"
+                [attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId">↗ NCBI Gene</a>
+              <a class="ext-link" *ngIf="gene.xref?.ensemblId" target="_blank"
+                [attr.href]="'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=' + gene.xref.ensemblId">↗ Ensembl</a>
+              <a class="ext-link" *ngIf="gene.uniprotKBId" target="_blank"
+                [attr.href]="'https://www.uniprot.org/uniprotkb/' + gene.uniprotKBId">↗ UniProt</a>
+              <a class="ext-link" target="_blank"
+                [attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol">↗ MyGene2</a>
+              <a class="ext-link" target="_blank"
+                [attr.href]="'https://cellxgene.cziscience.com/gene-expression?ver=2&genes=' + gene.symbol">↗ CELLxGENE</a>
+              <a class="ext-link" *ngIf="gene.uniprotKBId" target="_blank"
+                [attr.href]="'https://www.proteinatlas.org/' + gene.uniprotKBId">↗ HPA</a>
+            </div>
+          </div>
+
+          <div class="gene-card" *ngIf="gene">
+            <div class="gene-card-body">
+              <div class="gene-card-main">
+                <div class="gene-card-title">
+                  <span class="gene-symbol">{{ gene.symbol }}</span>
+                  <span class="gene-fullname-text">{{ gene.name }}</span>
+                </div>
+                <div class="gene-aliases" *ngIf="gene.alias?.length">
+                  <span class="alias-tag" *ngFor="let a of gene.alias">{{ a }}</span>
+                </div>
+                <p class="gene-summary-text" *ngIf="gene.entrezSummary">{{ gene.entrezSummary }}</p>
+              </div>
+              <div class="gene-card-facts">
+                <div class="fact-title">Quick Facts</div>
+                <div class="fact-row" *ngIf="gene.chr">
+                  <span class="fact-label">Chromosome</span>
+                  <span class="fact-value">{{ gene.chr }}</span>
+                </div>
+                <div class="fact-row" *ngIf="gene.hgncId">
+                  <span class="fact-label">HGNC ID</span>
+                  <span class="fact-value">{{ gene.hgncId }}</span>
+                </div>
+                <div class="fact-row">
+                  <span class="fact-label">Entrez ID</span>
+                  <span class="fact-value">{{ gene.entrezId }}</span>
+                </div>
+                <div class="fact-row" *ngIf="gene.uniprotKBId">
+                  <span class="fact-label">UniProt</span>
+                  <span class="fact-value">{{ gene.uniprotKBId }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="forward-annotation-wrap" *ngIf="variant">
+            <app-forward-annotation [variant]="variant"></app-forward-annotation>
+          </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- OMIM -->
+        <section class="hr-section" id="OMIM" *ngIf="gene">
+          <div class="section-header">
+            <div class="section-title">OMIM</div>
+            <div class="ext-links" *ngIf="gene.xref?.omimId">
+              <a class="ext-link" target="_blank"
+                [attr.href]="'https://www.omim.org/entry/' + gene.xref.omimId">↗ OMIM</a>
+            </div>
+          </div>
+          <app-omim [gene]="gene" [loading]="omimLoading" [data]="omimData"></app-omim>
+        </section>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- dbNSFP -->
+        <section class="hr-section" id="DbNSFP" *ngIf="variant">
+          <div class="section-header">
+            <div class="section-title">Prediction Scores</div>
+            <span class="section-badge">dbNSFP</span>
+          </div>
+          <app-dbnsfp [variant]="variant"></app-dbnsfp>
+        </section>
+
+        <div class="section-divider" *ngIf="variant"></div>
+
+        <!-- ClinVar -->
+        <section class="hr-section" id="ClinVar" *ngIf="gene">
+          <div class="section-header">
+            <div class="section-title">ClinVar</div>
+            <div class="ext-links">
+              <a class="ext-link" target="_blank"
+                [attr.href]="'https://www.ncbi.nlm.nih.gov/clinvar/?term=' + gene.entrezId + '%5BGene%20ID%5D'">↗ ClinVar</a>
+            </div>
+          </div>
+          <app-clinvar [gene]="gene" [variant]="variant"></app-clinvar>
+        </section>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- Geno2MP -->
+        <section class="hr-section" id="Geno2MP">
+          <div class="section-header">
+            <div class="section-title">Geno2MP</div>
+            <a class="ext-link" href="https://geno2mp.gs.washington.edu" target="_blank">↗ Geno2MP</a>
+          </div>
+          <app-geno2mp [gene]="gene" [variant]="variant"></app-geno2mp>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- DECIPHER Disease -->
+        <section class="hr-section" id="DECIPHER">
+          <div class="section-header">
+            <div class="section-title">DECIPHER — Disease</div>
+            <a class="ext-link" href="https://www.deciphergenomics.org" target="_blank">↗ DECIPHER</a>
+          </div>
+          <app-decipher-disease [gene]="gene" [variant]="variant"></app-decipher-disease>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- gnomAD -->
+        <section class="hr-section" id="GnomAD">
+          <div class="section-header">
+            <div class="section-title">gnomAD</div>
+            <div class="ext-links">
+              <a class="ext-link" *ngIf="variant" target="_blank"
+                [attr.href]="'https://gnomad.broadinstitute.org/variant/' + variant.chr + '-' + variant.pos + '-' + variant.ref + '-' + variant.alt + '?dataset=gnomad_r2_1'">
+                ↗ gnomAD variant
+              </a>
+              <a class="ext-link" *ngIf="gene?.xref?.ensemblId" target="_blank"
+                [attr.href]="'https://gnomad.broadinstitute.org/gene/' + gene.xref.ensemblId + '?dataset=gnomad_r2_1'">
+                ↗ gnomAD gene
+              </a>
+            </div>
+          </div>
+          <app-gnom-ad *ngIf="variant" [variant]="variant"></app-gnom-ad>
+          <app-gnom-ad-gene *ngIf="gene" [gene]="gene"></app-gnom-ad-gene>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- DGV -->
+        <section class="hr-section" id="DGV" *ngIf="gene">
+          <div class="section-header">
+            <div class="section-title">DGV</div>
+          </div>
+          <app-dgv [gene]="gene"></app-dgv>
+        </section>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- DECIPHER Control -->
+        <section class="hr-section" id="DECIPHER-Control" *ngIf="gene">
+          <div class="section-header">
+            <div class="section-title">DECIPHER — Control</div>
+          </div>
+          <app-decipher [variant]="variant" [gene]="gene"></app-decipher>
+        </section>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- Orthologs -->
+        <section class="hr-section" id="orthologs" *ngIf="gene && !orthologsLoading">
+          <div class="section-header">
+            <div class="section-title">Predicted Orthologs</div>
+            <span class="section-badge" *ngIf="orthologs?.length">{{ orthologs.length }} organisms</span>
+          </div>
+          <app-orthologs [gene]="gene" [data]="orthologs"></app-orthologs>
+        </section>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- Expression -->
+        <section class="hr-section" id="expression" *ngIf="gene">
+          <div class="section-header">
+            <div class="section-title">Expression</div>
+          </div>
+          <app-gtex-boxplot [gene]="gene"></app-gtex-boxplot>
+          <div class="mt-section">
+            <app-agr-expression [gene]="gene"></app-agr-expression>
+          </div>
+        </section>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- Phenotypes -->
+        <section class="hr-section" id="phenotypes" *ngIf="gene && !orthologsLoading">
+          <div class="section-header">
+            <div class="section-title">Phenotypes</div>
+            <span class="section-badge sb-badge-beta">Beta</span>
+          </div>
+          <app-phenotypes [gene]="gene" [orthologs]="orthologs"></app-phenotypes>
+        </section>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- Gene Ontology -->
+        <section class="hr-section" id="gene-ontology" *ngIf="gene && !orthologsLoading">
+          <div class="section-header">
+            <div class="section-title">Gene Ontology</div>
+          </div>
+          <app-gene-ontology [gene]="gene" [orthologs]="orthologs"></app-gene-ontology>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Primate -->
+        <section class="hr-section" id="primate">
+          <div class="section-header">
+            <div class="section-title">Primate Conservation</div>
+            <span class="section-badge sb-badge-beta">Beta</span>
+          </div>
+          <app-primate [variant]="variant" [gene]="gene"></app-primate>
+        </section>
+
+        <ng-container *ngIf="gene && !smallScreen">
+          <div class="section-divider"></div>
+
+          <!-- Protein Domain / Alignment -->
+          <section class="hr-section" id="alignment">
+            <div class="section-header">
+              <div class="section-title">Protein Domain &amp; Alignment</div>
+            </div>
+            <app-smart-protein-domain [gene]="gene"></app-smart-protein-domain>
+            <div class="mt-section">
+              <app-diopt-alignment [gene]="gene"></app-diopt-alignment>
+            </div>
+          </section>
+
+          <div class="section-divider"></div>
+
+          <!-- PPI -->
+          <section class="hr-section" id="ppi">
+            <div class="section-header">
+              <div class="section-title">Protein Interactions</div>
+              <span class="section-badge sb-badge-beta">Beta</span>
+            </div>
+            <mat-progress-bar mode="indeterminate" *ngIf="ppiLoading"></mat-progress-bar>
+            <app-ppi *ngIf="!ppiLoading && ppiData?.length" [gene]="gene" [data]="ppiData"></app-ppi>
+            <p class="empty-state" *ngIf="!ppiLoading && !ppiData?.length">No protein interaction data available.</p>
+          </section>
+
+          <div class="section-divider"></div>
+
+          <!-- Protein Structure -->
+          <section class="hr-section" id="protein-structure">
+            <div class="section-header">
+              <div class="section-title">Human Protein Structure</div>
+              <div class="ext-links" *ngIf="gene.uniprotKBId">
+                <a class="ext-link" target="_blank"
+                  [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId">↗ AlphaFold</a>
+              </div>
+            </div>
+            <app-pdbe [entrezId]="gene.entrezId"></app-pdbe>
+            <div class="mt-section">
+              <app-human-protein-structure *ngIf="gene.uniprotKBId"
+                [uniprotId]="gene.uniprotKBId">
+              </app-human-protein-structure>
+              <p class="empty-state" *ngIf="!gene.uniprotKBId">No protein structure available.</p>
+            </div>
+          </section>
+        </ng-container>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- Pharos -->
+        <section class="hr-section" id="pharos" *ngIf="gene">
+          <div class="section-header">
+            <div class="section-title">Pharos</div>
+          </div>
+          <app-pharos [gene]="gene"></app-pharos>
+        </section>
+
+        <div class="section-divider" *ngIf="gene"></div>
+
+        <!-- ModelMatcher -->
+        <section class="hr-section" id="modelmatcher" *ngIf="gene">
+          <div class="section-header">
+            <div class="section-title">ModelMatcher</div>
+            <span class="section-badge sb-badge-beta">Beta</span>
+          </div>
+          <app-modelmatcher [gene]="gene"></app-modelmatcher>
+        </section>
+
+        <div class="bottom-pad"></div>
+      </main>
+
+    </div><!-- main-layout -->
+  </ng-container>
+
+  <app-scroll-top-button></app-scroll-top-button>
+</div>

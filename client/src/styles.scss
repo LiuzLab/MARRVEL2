@@ -29,6 +29,113 @@
  * Misc.
  */
 
+/* ── Human-result page: suppress body scroll (fixed-height layout) ── */
+/* Using :has() to avoid overflow: hidden on every page */
+body:has(app-human-result) {
+  overflow: hidden;
+}
+
+
+/* ── Human-result page: base styles for native-HTML mat-table class tables ── */
+/* These layout rules are theme-neutral (no colors) */
+app-human-result table.mat-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+app-human-result table.mat-table .mat-header-row,
+app-human-result table.mat-table .mat-row {
+  display: table-row;
+  height: 48px;
+}
+app-human-result table.mat-table .mat-header-cell,
+app-human-result table.mat-table .mat-cell {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--hr-border);
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+app-human-result table.mat-table .mat-header-cell {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+app-human-result table.mat-table .mat-header-cell.number,
+app-human-result table.mat-table .mat-cell.number { text-align: right; }
+app-human-result table.mat-table .mat-row:last-child .mat-cell { border-bottom: none; }
+app-human-result table.mat-table .mat-row:hover { filter: brightness(0.97); }
+app-human-result .nowrap-fit-cell { white-space: nowrap; width: 1%; }
+
+/* ── Human-result page: dark-mode Material component overrides ── */
+/* Only applied when html.dark-theme class is present                  */
+html.dark-theme app-human-result .mat-mdc-table,
+html.dark-theme app-human-result .mat-table {
+  background: #161b22 !important; color: #c5cdd7 !important;
+}
+html.dark-theme app-human-result .mdc-data-table__row,
+html.dark-theme app-human-result .mat-mdc-row,
+html.dark-theme app-human-result .mat-row {
+  background: #161b22 !important; color: #c5cdd7 !important;
+}
+html.dark-theme app-human-result .mat-mdc-header-row,
+html.dark-theme app-human-result .mat-header-row {
+  background: #1c2330 !important; color: #e2e8f0 !important;
+}
+html.dark-theme app-human-result .mat-mdc-header-cell,
+html.dark-theme app-human-result .mat-header-cell {
+  color: #8b98a8 !important; border-bottom-color: #2a3441 !important; background: #1c2330 !important;
+}
+html.dark-theme app-human-result .mat-mdc-cell,
+html.dark-theme app-human-result .mat-cell {
+  color: #c5cdd7 !important; border-bottom-color: #2a3441 !important;
+}
+html.dark-theme app-human-result .mat-mdc-row:hover,
+html.dark-theme app-human-result .mat-row:hover { background: #1c2330 !important; }
+html.dark-theme app-human-result .mat-mdc-paginator,
+html.dark-theme app-human-result .mat-paginator {
+  background: #161b22 !important; color: #8b98a8 !important;
+}
+html.dark-theme app-human-result .mat-mdc-paginator .mat-mdc-select-value,
+html.dark-theme app-human-result .mat-mdc-paginator .mat-mdc-select-arrow,
+html.dark-theme app-human-result .mat-mdc-paginator .mat-mdc-paginator-range-label {
+  color: #b8c5d3 !important;
+}
+html.dark-theme app-human-result .mdc-form-field > label { color: #b8c5d3 !important; }
+html.dark-theme app-human-result .mat-expansion-panel {
+  background: #161b22 !important; color: #c5cdd7 !important;
+}
+html.dark-theme app-human-result .mat-expansion-panel-header { background: #1c2330 !important; }
+html.dark-theme app-human-result .mat-expansion-panel-header:hover { background: #242e3e !important; }
+html.dark-theme app-human-result .mat-expansion-panel-header-title { color: #e2e8f0 !important; }
+html.dark-theme app-human-result .mat-expansion-panel-header-description,
+html.dark-theme app-human-result .mat-expansion-panel-header .mat-expansion-indicator::after {
+  color: #8b98a8 !important; border-color: #8b98a8 !important;
+}
+html.dark-theme app-human-result .mat-expansion-panel .mat-expansion-panel-body {
+  background: #161b22 !important; color: #c5cdd7 !important;
+}
+
+/* ClinVar bar labels stay dark on colored bars in both themes */
+app-human-result .bar-chart .bar-label,
+app-human-result .bar-chart .bar-value { color: #1a1a1a !important; }
+
+
+/* ── Human-result page: normalize child component font sizes ── */
+app-human-result .content-area {
+  font-size: 13px;
+  h2 { font-size: 14px !important; font-weight: 500 !important; color: var(--hr-text) !important; }
+  h3 { font-size: 13px !important; font-weight: 500 !important; }
+  h4, h5, h6 { font-size: 12px !important; font-weight: 500 !important; }
+  p, td, th, li, span, label { font-size: 13px; }
+}
+
 html, body { height: 100%; }
 body {
   margin: 0;
@@ -279,25 +386,20 @@ strong,
 }
 
 
-.badge-primary {
-  color: #fff;
-  background-color: var(--mat-sys-primary);
-}
-.badge-secondary {
-  color: #fff;
-  background-color: #6c757d;
-}
-.badge {
+.chip {
   display: inline-block;
-  padding: .25em .4em;
-  font-size: 75%;
-  font-weight: 500;
+  align-self: center;
+  font-family: var(--hr-mono, 'IBM Plex Mono', 'Fira Mono', monospace);
+  font-size: 10px !important;
   line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  padding: 2px 6px;
+  border: 1px solid var(--hr-border, #e2e8f0);
+  border-radius: 3px;
+  color: var(--hr-text-muted, #94a3b8);
+}
+.chip-primary {
+  color: var(--mat-sys-primary, #7bd0cc);
+  border-color: var(--mat-sys-primary, #7bd0cc);
 }
 
 .loading-fullscreen {
