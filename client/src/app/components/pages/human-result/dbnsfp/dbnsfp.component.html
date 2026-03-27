@@ -55,7 +55,7 @@
             <span class="text-underline-dashed" [matTooltip]="scoreConfig.toolTooltip">
               {{ scoreConfig.displayName }}
             </span>
-            <span class="ml-1 badge badge-secondary" *ngIf="scoreConfig.version">{{ scoreConfig.version }}</span>
+            <span class="chip chip-secondary" style="margin-left:0.25rem" *ngIf="scoreConfig.version">{{ scoreConfig.version }}</span>
           </td>
           <td class="mat-cell number">
             <span class="text-underline-dashed"

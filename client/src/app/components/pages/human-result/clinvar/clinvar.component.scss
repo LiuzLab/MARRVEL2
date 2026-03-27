@@ -42,7 +42,7 @@
   overflow: hidden;
 }
 .bar-chart .bar:not(:last-child) {
-  border-right: solid 4px #ffffff;
+  border-right: solid 4px var(--hr-bg, #ffffff);
 }
 .bar-chart .bar .bar-label,
 .bar-chart .bar .bar-value {

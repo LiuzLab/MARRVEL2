@@ -1,6 +1,6 @@
 <h3 class="text-underline-dashed" matTooltip="We are currently developing a new feature to display gross phenotypes associated with each human or model organism gene based on information obtained from OMIM and model organism databases. This is still a b-version and any feedback will be appreciated.">
   Phenotypes
-  <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle;">
+  <span class="chip chip-primary" style="margin-left:0.25rem">
     Beta
   </span>
 </h3>
@@ -10,7 +10,7 @@
     [checked]="showOnlyBest"
     (change)="showOnlyBest = !showOnlyBest"
     color="primary">
-    Show only best DIOPT<span class="badge badge-secondary" style="margin-left: 2px; font-size: 0.4em; vertical-align: middle;">v8</span> score gene
+    Show only best DIOPT<span class="chip chip-secondary" style="margin-left:2px">v8</span> score gene
   </mat-slide-toggle>
 </div>
 
@@ -38,7 +38,7 @@
             <a [attr.href]="getTermDetailUrl(taxonId, aGenePheno.gene, true)" target="_blank" class="text-nowrap mr-1">
               {{ aGenePheno.gene.symbol }}
             </a>
-            <span class="badge badge-secondary" *ngIf="taxonId === 10090">MGI</span>
+            <span class="chip chip-secondary" *ngIf="taxonId === 10090">MGI</span>
           </div>
           <div class="ribbon-cell ribbon-diopt-score-cell">
             <span *ngIf="taxonIdToInfo[taxonId].maxScore">
@@ -58,7 +58,7 @@
             <a [attr.href]="'https://www.mousephenotype.org/data/genes/' + aGenePheno.gene.mgiId" target="_blank" class="text-nowrap mr-1">
               {{ aGenePheno.gene.symbol }}
             </a>
-            <span class="badge badge-secondary" *ngIf="taxonId === 10090">IMPC</span>
+            <span class="chip chip-secondary" *ngIf="taxonId === 10090">IMPC</span>
           </div>
           <div class="ribbon-cell ribbon-diopt-score-cell"></div>
           <div class="ribbon-cell ribbon-diopt-best-cell"></div>

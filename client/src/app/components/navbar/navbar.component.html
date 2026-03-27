@@ -30,7 +30,16 @@
 
   <span class="flex-spacer"></span>
 
-  <button class="nav-search-button d-none d-sm-block" *ngIf="showSearch"
+  <button class="theme-toggle-button"
+    mat-icon-button
+    [attr.aria-label]="themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+    [matTooltip]="themeService.isDark() ? 'Light mode' : 'Dark mode'"
+    (click)="themeService.toggle()"
+  >
+    <mat-icon>{{ themeService.isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+
+  <button class="nav-search-button nav-sm-only" *ngIf="showSearch"
     mat-icon-button aria-label="Do another search"
     (click)="searchOpened = !searchOpened"
   >
@@ -38,8 +47,8 @@
   </button>
 </mat-toolbar>
 
-<div class="nav-search-box d-none d-sm-block" *ngIf="searchOpened" [@toggle]="searchOpened">
-  <div class="container-fluid px-sm-5">
+<div class="nav-search-box nav-sm-only" *ngIf="searchOpened" [@toggle]="searchOpened">
+  <div class="nav-search-inner">
     <app-search-box [compact]="true"></app-search-box>
   </div>
 </div>

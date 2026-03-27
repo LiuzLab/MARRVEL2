@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   standalone: false,
@@ -23,7 +24,7 @@ export class NavbarComponent implements OnInit {
 
   searchOpened = false;
 
-  constructor() { }
+  constructor(public themeService: ThemeService) { }
 
   ngOnInit() {
   }

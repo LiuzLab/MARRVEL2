@@ -22,8 +22,8 @@ import { DIOPTOrtholog } from 'src/app/interfaces/data';
 })
 export class HumanResultComponent implements OnInit, AfterViewInit {
   geneLoading = true;
-  sidenavOpened = true;
   smallScreen = false;
+  activeSection = 'TOP';
 
   // Input
   geneEntrezId: number | null = null;
@@ -49,6 +49,8 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   ppiLoading = true;
   ppiData;
 
+  gnomadGeneData: any = null;
+
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
@@ -63,16 +65,15 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
       this.geneEntrezId = param.gene ? +param.gene : null;
       this.variantInput = param.variant || null;
       this.proteinInput = param.protein || null;
-      switch (this.route.snapshot.routeConfig?.path) {
-        case 'human/variant/hg38/:variant':
-          case 'human/gene/:gene/variant/hg38/:variant':
-          this.genomeBuild = 'hg38';
-          break;
-        default:
-          this.genomeBuild = 'hg19';
+
+      // Fix: child route paths are relative (no 'human/' prefix)
+      const routePath = this.route.snapshot.routeConfig?.path || '';
+      if (routePath.includes('hg38')) {
+        this.genomeBuild = 'hg38';
+      } else {
+        this.genomeBuild = 'hg19';
       }
 
-      // Get gene information from server
       if (this.geneEntrezId !== null) {
         this.api.getGeneByEntrezId(this.geneEntrezId)
           .pipe(take(1))
@@ -82,7 +83,6 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
           });
       }
 
-      // Parse variant and get gene from variant if there was no user input
       if (this.variantInput !== null && this.variantInput !== '') {
         this.parseVariant().toPromise()
           .then((variant: Variant) => {
@@ -91,33 +91,25 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
                 .pipe(take(1))
                 .toPromise()
                 .then((liftover) => {
-                  if (liftover.success) {
-                    this.hg38Variant = liftover.data;
-                  }
+                  if (liftover.success) { this.hg38Variant = liftover.data; }
                   return variant;
-                }).catch((err) => { throw err; });
+                });
             } else {
               this.hg38Variant = variant;
               return this.variantService.liftoverHg38ToHg19(variant)
                 .pipe(take(1))
                 .toPromise()
                 .then((liftover) => {
-                  if (liftover.success) {
-                    return liftover.data;
-                  }
+                  if (liftover.success) { return liftover.data; }
                   throw Error(liftover.error?.message);
-                }).catch((err) => { throw err; });
+                });
             }
-          }).then((hg19Variant: Variant) => {
+          })
+          .then((hg19Variant: Variant) => {
             this.variant = hg19Variant;
-            this.variantString = `Chr${ hg19Variant.chr}:` +
-              `${ hg19Variant.pos } ` +
-              `${ hg19Variant.ref }>${ hg19Variant.alt }`;
-            if (this.gene) {
-              this.geneLoading = false;
-              return;
+            this.variantString = `Chr${hg19Variant.chr}:${hg19Variant.pos} ${hg19Variant.ref}>${hg19Variant.alt}`;
+            if (this.gene) { this.geneLoading = false; return; }
 
-            }
             this.geneCandidates = null;
             this.api.getGeneByGenomicLocation(this.variant)
               .pipe(take(1))
@@ -131,10 +123,9 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
                 }
                 this.cdr.detectChanges();
               });
-            return;
-          }).catch((err) => {
-            // TODO: error
-            console.log(err);
+          })
+          .catch((err) => {
+            console.error(err);
             this.geneLoading = false;
             this.gene = null;
             this.cdr.detectChanges();
@@ -144,8 +135,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    document.body.style.overflow = 'hidden';
-    if (window.innerWidth <= 768) {   // md
+    if (window.innerWidth <= 768) {
       this.smallScreen = true;
     }
   }
@@ -158,24 +148,25 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
 
     this.gene = null;
     this.variant = null;
+    this.hg38Variant = null;
     this.variantString = null;
-
     this.geneCandidates = null;
 
     this.omimLoading = true;
     this.omimData = null;
-
     this.orthologsLoading = false;
     this.orthologs = null;
+    this.gnomadGeneData = null;
+    this.ppiLoading = true;
+    this.ppiData = null;
+    this.activeSection = 'TOP';
   }
 
-  parseVariant(): Observable< any > {
+  parseVariant(): Observable<any> {
     return new Observable((obs) => {
       const parsed = this.variantService.parse(this.variantInput);
       if (!parsed.valid) {
-        obs.error({
-          message: `Invalid variant ${ this.variantInput }`
-        });
+        obs.error({ message: `Invalid variant ${this.variantInput}` });
         obs.complete();
         return;
       }
@@ -189,28 +180,17 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
                 this.geneEntrezId = res.gene.entrezId;
                 this.onGeneLoad(res.gene);
               }
-              obs.next({
-                chr: res.chr,
-                pos: res.pos,
-                ref: res.ref,
-                alt: res.alt,
-              });
+              obs.next({ chr: res.chr, pos: res.pos, ref: res.ref, alt: res.alt });
               obs.complete();
-            }, (err) => {
-              obs.error(err);
-              obs.complete();
-            });
+            }, (err) => { obs.error(err); obs.complete(); });
           break;
         case 'coord':
           obs.next(parsed.variant);
           obs.complete();
           break;
         default:
-          obs.error({
-            message: `Invalid variant ${ this.variantInput }`
-          });
+          obs.error({ message: `Invalid variant ${this.variantInput}` });
           obs.complete();
-          break;
       }
     });
   }
@@ -226,42 +206,40 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
 
     this.getOMIM();
     this.getOrthologs();
-
     this.getPPI();
+    this.getGnomadGene();
+  }
+
+  getGnomadGene() {
+    if (!this.gene?.entrezId) { return; }
+    this.api.getGnomADGeneByEntrezId(this.gene.entrezId)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => { this.gnomadGeneData = res; this.cdr.detectChanges(); },
+        error: () => { this.gnomadGeneData = null; }
+      });
   }
 
   getPPI() {
     this.ppiLoading = true;
     this.api.getPPI(this.gene).subscribe({
-      next: (res) => {
-        this.ppiData = res;
-        this.ppiLoading = false;
-      },
-      error: (err) => {
-        console.log(err);
-        this.ppiData = null;
-        this.ppiLoading = false;
-      }
+      next: (res) => { this.ppiData = res; this.ppiLoading = false; },
+      error: () => { this.ppiData = null; this.ppiLoading = false; }
     });
   }
 
   getOMIM() {
-    if (!this.gene || !this.gene.xref || !this.gene.xref.omimId) {
+    if (!this.gene?.xref?.omimId) {
       this.omimData = null;
       this.omimLoading = false;
       return;
     }
-
     this.omimLoading = true;
     this.api.getOMIMByMimNumber(this.gene.xref.omimId)
       .pipe(take(1))
-      .subscribe(res => {
-        this.omimData = res;
-        this.omimLoading = false;
-      }, err => {
-        console.log(err);
-        this.omimData = null;
-        this.omimLoading = false;
+      .subscribe({
+        next: (res) => { this.omimData = res; this.omimLoading = false; },
+        error: () => { this.omimData = null; this.omimLoading = false; }
       });
   }
 
@@ -269,19 +247,33 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
     this.orthologsLoading = true;
     this.api.getOrthologByEntrezId(this.gene.entrezId)
       .pipe(take(1))
-      .subscribe((res) => {
-        this.orthologs = res;
-        this.orthologsLoading = false;
+      .subscribe({
+        next: (res) => { this.orthologs = res; this.orthologsLoading = false; },
+        error: () => { this.orthologsLoading = false; }
       });
   }
 
-  toggleSidenav(e) {
-    if ('sidenavOpened' in e) {
-      this.sidenavOpened = e.sidenavOpened;
-    } else {
-      const target = window.document.getElementById(e.scrollTo);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  scrollToSection(id: string) {
+    this.activeSection = id;
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  onContentScroll(contentEl: HTMLElement) {
+    const sections = [
+      'TOP','OMIM','DbNSFP','ClinVar','Geno2MP','DECIPHER',
+      'GnomAD','DGV','DECIPHER-Control','orthologs','expression',
+      'phenotypes','gene-ontology','primate','alignment','ppi',
+      'protein-structure','pharos','modelmatcher'
+    ];
+    const scrollTop = contentEl.scrollTop;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sections[i]);
+      if (el && el.offsetTop - contentEl.offsetTop <= scrollTop + 80) {
+        this.activeSection = sections[i];
+        break;
       }
     }
   }
