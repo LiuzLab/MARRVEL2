@@ -198,6 +198,57 @@
 .kpi-warn    { color: var(--hr-amber) !important; }
 .kpi-ok      { color: var(--hr-green) !important; }
 
+/* ── ClinVar KPI mini bar ── */
+.kpi-clinvar {
+  .kpi-clinvar-gene {
+    font-family: var(--hr-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--hr-text);
+    line-height: 1;
+    margin: 2px 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .kpi-clinvar-bar {
+    display: flex;
+    height: 20px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--hr-border);
+    width: 100%;
+
+    &--empty { background: var(--hr-border); }
+  }
+
+  .kpi-clinvar-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+
+    &.kpi-clinvar-p  { background: #c0392b; }
+    &.kpi-clinvar-lp { background: #e67e22; }
+    &.kpi-clinvar-lb { background: #27ae60; opacity: 0.6; }
+    &.kpi-clinvar-b  { background: #27ae60; }
+  }
+
+  .kpi-clinvar-seg-label {
+    font-family: var(--hr-mono);
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+}
+
 /* ── Main 2-col layout ── */
 .main-layout {
   display: grid;

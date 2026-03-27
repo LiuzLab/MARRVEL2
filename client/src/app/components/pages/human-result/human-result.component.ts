@@ -46,6 +46,8 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   orthologsLoading = false;
   orthologs: DIOPTOrtholog[] | null = null;
 
+  clinvarKpi: { significance: Record<string, number>; sigFourTotal: number } | null = null;
+
   ppiLoading = true;
   ppiData;
 

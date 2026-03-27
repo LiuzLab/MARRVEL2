@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
@@ -18,6 +18,7 @@ import { Animations } from '../../../../animations';
 export class ClinvarComponent implements OnInit {
   @Input() gene: HumanGene;
   @Input() variant: Variant;
+  @Output() significanceReady = new EventEmitter<{ significance: Record<string, number>; sigFourTotal: number }>();
 
   urlSearchTerm: string;
 
@@ -70,6 +71,7 @@ export class ClinvarComponent implements OnInit {
           this.significance['likely benign'] + this.significance['benign'];
         this.data = res;
         this.loading = false;
+        this.significanceReady.emit({ significance: this.significance, sigFourTotal: this.sigFourTotal });
       });
   }
 

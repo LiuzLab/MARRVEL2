@@ -52,10 +52,36 @@
           <div class="kpi-sub" *ngIf="omimData?.length">{{ omimData[0]?.phenotypeList?.[0]?.phenotype }}</div>
         </div>
 
-        <div class="kpi" [class.active]="activeSection === 'ClinVar'" (click)="scrollToSection('ClinVar')" *ngIf="gene">
+        <div class="kpi kpi-clinvar" [class.active]="activeSection === 'ClinVar'" (click)="scrollToSection('ClinVar')" *ngIf="gene">
           <div class="kpi-label">ClinVar</div>
-          <div class="kpi-value kpi-muted">↓ see below</div>
-          <div class="kpi-sub">by gene</div>
+          <div class="kpi-clinvar-gene">{{ gene.symbol }}</div>
+          <ng-container *ngIf="clinvarKpi?.sigFourTotal; else clinvarPending">
+            <div class="kpi-clinvar-bar">
+              <span class="kpi-clinvar-seg kpi-clinvar-p"
+                [style.width.%]="clinvarKpi.significance['pathogenic'] / clinvarKpi.sigFourTotal * 100"
+                title="Pathogenic">
+                <span class="kpi-clinvar-seg-label" *ngIf="clinvarKpi.significance['pathogenic']">{{ clinvarKpi.significance['pathogenic'] }}</span>
+              </span>
+              <span class="kpi-clinvar-seg kpi-clinvar-lp"
+                [style.width.%]="clinvarKpi.significance['likely pathogenic'] / clinvarKpi.sigFourTotal * 100"
+                title="Likely pathogenic">
+                <span class="kpi-clinvar-seg-label" *ngIf="clinvarKpi.significance['likely pathogenic']">{{ clinvarKpi.significance['likely pathogenic'] }}</span>
+              </span>
+              <span class="kpi-clinvar-seg kpi-clinvar-lb"
+                [style.width.%]="clinvarKpi.significance['likely benign'] / clinvarKpi.sigFourTotal * 100"
+                title="Likely benign">
+                <span class="kpi-clinvar-seg-label" *ngIf="clinvarKpi.significance['likely benign']">{{ clinvarKpi.significance['likely benign'] }}</span>
+              </span>
+              <span class="kpi-clinvar-seg kpi-clinvar-b"
+                [style.width.%]="clinvarKpi.significance['benign'] / clinvarKpi.sigFourTotal * 100"
+                title="Benign">
+                <span class="kpi-clinvar-seg-label" *ngIf="clinvarKpi.significance['benign']">{{ clinvarKpi.significance['benign'] }}</span>
+              </span>
+            </div>
+          </ng-container>
+          <ng-template #clinvarPending>
+            <div class="kpi-clinvar-bar kpi-clinvar-bar--empty"></div>
+          </ng-template>
         </div>
 
         <div class="kpi" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')" *ngIf="variant">
@@ -312,7 +338,7 @@
                 [attr.href]="'https://www.ncbi.nlm.nih.gov/clinvar/?term=' + gene.entrezId + '%5BGene%20ID%5D'">↗ ClinVar</a>
             </div>
           </div>
-          <app-clinvar [gene]="gene" [variant]="variant"></app-clinvar>
+          <app-clinvar [gene]="gene" [variant]="variant" (significanceReady)="clinvarKpi = $event"></app-clinvar>
         </section>
 
         <div class="section-divider" *ngIf="gene"></div>
