@@ -91,7 +91,7 @@
 }
 .variant-title {
   font-family: var(--hr-mono);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--hr-text);
   letter-spacing: -.01em;
@@ -100,7 +100,7 @@
 .title-sep   { color: var(--hr-text-muted); margin: 0 2px; }
 .hg38-tag {
   font-family: var(--hr-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--hr-text-muted);
   background: var(--hr-bg);
   border: 1px solid var(--hr-border);
@@ -109,7 +109,7 @@
 }
 .variant-hgvs {
   font-family: var(--hr-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--hr-text-sec);
 }
 .identity-pills {
@@ -124,7 +124,7 @@
 .pill {
   display: inline-flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 11px;
   font-family: var(--hr-mono);
   padding: 2px 8px;
   border-radius: 10px;
@@ -174,7 +174,7 @@
 }
 .kpi-label {
   font-family: var(--hr-mono);
-  font-size: 9px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--hr-text-muted);
@@ -184,13 +184,13 @@
 }
 .kpi-value {
   font-family: var(--hr-mono);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1;
   color: var(--hr-text);
 }
 .kpi-sub {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--hr-text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -205,7 +205,7 @@
 .kpi-clinvar {
   .kpi-clinvar-gene {
     font-family: var(--hr-mono);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--hr-text);
     line-height: 1;
@@ -243,7 +243,7 @@
 
   .kpi-clinvar-seg-label {
     font-family: var(--hr-mono);
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     color: #fff;
     line-height: 1;
@@ -263,7 +263,7 @@
 
   .kpi-pred-name {
     font-family: var(--hr-mono);
-    font-size: 9px;
+    font-size: 10px;
     color: var(--hr-text);
     font-weight: 600;
     text-transform: uppercase;
@@ -273,7 +273,7 @@
 
   .kpi-pred-val {
     font-family: var(--hr-mono);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     line-height: 1;
   }
@@ -283,7 +283,7 @@
 .kpi-tag {
   display: inline-block;
   font-family: var(--hr-mono);
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: .06em;
   padding: 1px 4px;
@@ -314,7 +314,7 @@
 }
 .sb-section-label {
   padding: 10px 14px 3px;
-  font-size: 9px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: .12em;
   color: var(--hr-text-muted);
@@ -340,13 +340,13 @@
   }
 }
 .sb-name {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--hr-text-sec);
   white-space: nowrap;
 }
 .sb-badge {
   font-family: var(--hr-mono);
-  font-size: 9px;
+  font-size: 10px;
   padding: 1px 5px;
   border-radius: 3px;
   background: var(--hr-surface2);
@@ -400,7 +400,7 @@
 }
 .section-title {
   font-family: var(--hr-mono);
-  font-size: 11px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: .1em;
   color: var(--hr-text-muted);
@@ -411,7 +411,7 @@
     content: '';
     display: inline-block;
     width: 3px;
-    height: 12px;
+    height: 14px;
     background: var(--hr-teal);
     border-radius: 2px;
     flex-shrink: 0;
@@ -419,7 +419,7 @@
 }
 .section-badge {
   font-family: var(--hr-mono);
-  font-size: 10px;
+  font-size: 11px;
   padding: 2px 7px;
   border-radius: 3px;
   background: var(--hr-surface2);
@@ -436,7 +436,7 @@
 .ext-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .ext-link {
   font-family: var(--hr-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--hr-text-sec);
   text-decoration: none;
   border: 1px solid var(--hr-border);
@@ -473,12 +473,12 @@
 }
 .gene-symbol {
   font-family: var(--hr-mono);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--hr-teal);
 }
 .gene-fullname-text {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--hr-text-sec);
 }
 .gene-aliases {
@@ -489,14 +489,14 @@
 }
 .alias-tag {
   font-family: var(--hr-mono);
-  font-size: 10px;
+  font-size: 11px;
   padding: 2px 6px;
   border: 1px solid var(--hr-border);
   border-radius: 3px;
   color: var(--hr-text-muted);
 }
 .gene-summary-text {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.7;
   color: var(--hr-text-sec);
   margin: 0;
@@ -507,7 +507,7 @@
 }
 .fact-title {
   font-family: var(--hr-mono);
-  font-size: 9px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: .1em;
   color: var(--hr-text-muted);
@@ -522,12 +522,12 @@
   &:last-child { border-bottom: none; }
 }
 .fact-label {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--hr-text-muted);
 }
 .fact-value {
   font-family: var(--hr-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--hr-text-sec);
 }
 
@@ -539,7 +539,7 @@
 
 /* empty state */
 .empty-state {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--hr-text-muted);
   font-style: italic;
   padding: 16px 0;

@@ -1,7 +1,7 @@
 @import 'src/styles/variables';
 
 .summary .label {
-  font-size: 0.85em;
+  font-size: 0.9em;
 }
 .summary .data {
   display: block;
@@ -51,12 +51,12 @@
   z-index: 8888;
 }
 .bar-chart .bar .bar-label {
-  font-size: 0.7em;
+  font-size: 0.75em;
   line-height: 1em;
   padding-top: 0.35em;
 }
 .bar-chart .bar .bar-value {
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: 500;
 }
 
