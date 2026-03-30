@@ -8,6 +8,7 @@ export class ThemeService {
 
   constructor() {
     this.applyClass(this.isDark());
+    this.listenToSystemTheme();
   }
 
   toggle() {
@@ -24,5 +25,18 @@ export class ThemeService {
     const stored = localStorage.getItem(this.STORAGE_KEY);
     if (stored) return stored === 'dark';
     return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+  }
+
+  private listenToSystemTheme(): void {
+    const mediaQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
+    if (!mediaQuery) return;
+
+    mediaQuery.addEventListener('change', (event) => {
+      // Only follow system changes if the user hasn't set a manual preference
+      if (!localStorage.getItem(this.STORAGE_KEY)) {
+        this.isDark.set(event.matches);
+        this.applyClass(event.matches);
+      }
+    });
   }
 }
