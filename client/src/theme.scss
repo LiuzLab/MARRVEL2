@@ -31,15 +31,24 @@ html {
   ));
 }
 
-// Primary overrides in a separate block so they come after the mixin output.
+// Primary + surface overrides in a separate block so they come after the mixin output.
 html {
-  --mat-sys-primary: #7bd0cc;
+  --mat-sys-primary: #69c7be;
   --mat-sys-on-primary: #ffffff;
   --mat-sys-primary-container: #b2ebea;
   --mat-sys-on-primary-container: #003735;
 
+  // Neutralize the cyan-tinted surfaces the mixin generates (#f7faf9 → white/neutral)
+  --mat-sys-background: #f8f8f8;
+  --mat-sys-surface: #ffffff;
+  --mat-sys-surface-container-lowest: #ffffff;
+  --mat-sys-surface-container-low: #f5f5f5;
+  --mat-sys-surface-container: #f0f0f0;
+  --mat-sys-surface-container-high: #e8e8e8;
+  --mat-sys-surface-container-highest: #e0e0e0;
+
   // Slide-toggle light theme tokens
-  --mat-slide-toggle-selected-track-color: #7bd0cc;
+  --mat-slide-toggle-selected-track-color: #69c7be;
   --mat-slide-toggle-selected-handle-color: #ffffff;
   --mat-slide-toggle-unselected-track-color: #e0e0e0;
   --mat-slide-toggle-unselected-handle-color: #79747e;
@@ -98,10 +107,10 @@ html.dark-theme {
 
 // Human-result page: light mode Material theme (default when not dark)
 app-human-result {
-  --mat-sys-primary: #2dd4bf;
+  --mat-sys-primary: #69c7be;
   --mat-sys-on-primary: #003733;
-  --mat-sys-primary-container: #9ef2e4;
-  --mat-sys-on-primary-container: #00201d;
+  --mat-sys-primary-container: #b2ebea;
+  --mat-sys-on-primary-container: #003735;
 
   a, .link-primary { color: var(--mat-sys-primary); }
   .color-primary, .text-bold-blue { color: var(--mat-sys-primary); }
