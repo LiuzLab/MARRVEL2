@@ -1,6 +1,8 @@
 <mat-toolbar class="nav">
   <a class="nav-link home" href="/">
-    <img alt="Home" src="../../../assets/img/marrvel.svg" title="Home" class="nav-logo">
+    <img alt="Home"
+         [src]="themeService.isDark() ? '../../../assets/img/marrvel_darkbg.svg' : '../../../assets/img/marrvel.svg'"
+         title="Home" class="nav-logo">
   </a>
 
   <div>

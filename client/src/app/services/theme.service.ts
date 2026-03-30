@@ -32,11 +32,10 @@ export class ThemeService {
     if (!mediaQuery) return;
 
     mediaQuery.addEventListener('change', (event) => {
-      // Only follow system changes if the user hasn't set a manual preference
-      if (!localStorage.getItem(this.STORAGE_KEY)) {
-        this.isDark.set(event.matches);
-        this.applyClass(event.matches);
-      }
+      // Always follow system theme changes; clear any stored manual preference
+      localStorage.removeItem(this.STORAGE_KEY);
+      this.isDark.set(event.matches);
+      this.applyClass(event.matches);
     });
   }
 }

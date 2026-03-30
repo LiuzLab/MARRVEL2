@@ -30,6 +30,9 @@ server/out-tsc
 **/logs/
 **/*.log
 
+# Claude Code
+.claude/launch.json
+
 # misc
 .env
 /.sass-cache

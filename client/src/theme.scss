@@ -48,8 +48,8 @@ html.dark-theme {
   color-scheme: dark;
 
   // Navbar tokens — dark theme
-  --nav-bg: #161b22;
-  --nav-border: #2a3441;
+  --nav-bg: #1e1e1e;
+  --nav-border: #333333;
   --nav-link-color: rgba(226, 232, 240, 0.55);
   --nav-link-hover: #e2e8f0;
 
@@ -115,13 +115,13 @@ html.dark-theme app-human-result {
   --mat-sys-on-primary-container: #9ef2e4;
 
   // Surface tokens matching our dark palette
-  --mat-sys-surface: #161b22;
-  --mat-sys-surface-container: #1c2330;
-  --mat-sys-surface-container-high: #242e3e;
-  --mat-sys-surface-container-highest: #2a3441;
-  --mat-sys-surface-container-low: #141920;
+  --mat-sys-surface: #1e1e1e;
+  --mat-sys-surface-container: #252525;
+  --mat-sys-surface-container-high: #2e2e2e;
+  --mat-sys-surface-container-highest: #333333;
+  --mat-sys-surface-container-low: #1a1a1a;
   --mat-sys-on-surface: #e2e8f0;
-  --mat-sys-on-surface-variant: #b8c5d3;
-  --mat-sys-outline: #3d4f63;
-  --mat-sys-outline-variant: #2a3441;
+  --mat-sys-on-surface-variant: #bbbbbb;
+  --mat-sys-outline: #555555;
+  --mat-sys-outline-variant: #333333;
 }

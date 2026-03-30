@@ -5,11 +5,11 @@
   color-scheme: inherit;   /* inherit from html so light-dark() resolves correctly */
 
   /* Surfaces */
-  --hr-bg:           light-dark(#f8fafc, #0d1117);
-  --hr-surface:      light-dark(#ffffff, #161b22);
-  --hr-surface2:     light-dark(#f1f5f9, #1c2330);
-  --hr-border:       light-dark(#e2e8f0, #2a3441);
-  --hr-border-bright:light-dark(#cbd5e1, #3d4f63);
+  --hr-bg:           light-dark(#f8fafc, #141414);
+  --hr-surface:      light-dark(#ffffff, #1e1e1e);
+  --hr-surface2:     light-dark(#f1f5f9, #252525);
+  --hr-border:       light-dark(#e2e8f0, #333333);
+  --hr-border-bright:light-dark(#cbd5e1, #444444);
 
   /* Accent palette — same in both modes */
   --hr-teal:         #2dd4bf;
