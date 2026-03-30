@@ -29,8 +29,10 @@ html {
     typography: Roboto,
     density: 0,
   ));
+}
 
-  // Pin light-theme primary to brand teal
+// Primary overrides in a separate block so they come after the mixin output.
+html {
   --mat-sys-primary: #7bd0cc;
   --mat-sys-on-primary: #ffffff;
   --mat-sys-primary-container: #b2ebea;
@@ -78,6 +80,15 @@ html.dark-theme {
   .color-primary { color: var(--mat-sys-primary); }
 }
 
+// Primary overrides must be in a separate block — @include mat.theme() above
+// generates its own html.dark-theme {} block that would otherwise win the cascade.
+html.dark-theme {
+  --mat-sys-primary: #69c7be;
+  --mat-sys-on-primary: #003733;
+  --mat-sys-primary-container: #1a4845;
+  --mat-sys-on-primary-container: #9ef2e4;
+}
+
 // Legacy class kept for backwards compatibility
 .MARRVEL-dark-theme {
   color-scheme: dark;
@@ -107,14 +118,17 @@ html.dark-theme app-human-result {
       theme-type: dark,
     ),
   ));
+}
 
-  // Pin primary to teal accent
-  --mat-sys-primary: #2dd4bf;
+// Overrides in a separate block so they come after the mixin output.
+html.dark-theme app-human-result {
+  // Pin primary to brand teal
+  --mat-sys-primary: #69c7be;
   --mat-sys-on-primary: #003733;
-  --mat-sys-primary-container: #00504a;
+  --mat-sys-primary-container: #1a4845;
   --mat-sys-on-primary-container: #9ef2e4;
 
-  // Surface tokens matching our dark palette
+  // Surface tokens matching our neutral dark palette
   --mat-sys-surface: #1e1e1e;
   --mat-sys-surface-container: #252525;
   --mat-sys-surface-container-high: #2e2e2e;
