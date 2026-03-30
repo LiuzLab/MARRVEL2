@@ -102,6 +102,12 @@ html.dark-theme {
   --mat-sys-on-primary: #003733;
   --mat-sys-primary-container: #1a4845;
   --mat-sys-on-primary-container: #9ef2e4;
+
+  // Slide-toggle dark theme tokens
+  --mat-slide-toggle-selected-track-color: #69c7be;
+  --mat-slide-toggle-selected-handle-color: #ffffff;
+  --mat-slide-toggle-unselected-track-color: #3a3a3a;
+  --mat-slide-toggle-unselected-handle-color: #9e9e9e;
 }
 
 // Legacy class kept for backwards compatibility
@@ -117,6 +123,10 @@ app-human-result {
   --mat-sys-on-primary: #003733;
   --mat-sys-primary-container: #b2ebea;
   --mat-sys-on-primary-container: #003735;
+
+  // Override slide-toggle handle color for light mode
+  --mat-slide-toggle-selected-handle-color: #ffffff;
+  --mdc-switch-selected-handle-color: #ffffff;
 
   a, .link-primary { color: var(--mat-sys-primary); }
   .color-primary, .text-bold-blue { color: var(--mat-sys-primary); }
@@ -142,6 +152,10 @@ html.dark-theme app-human-result {
   --mat-sys-on-primary: #003733;
   --mat-sys-primary-container: #1a4845;
   --mat-sys-on-primary-container: #9ef2e4;
+
+  // Slide-toggle dark theme tokens
+  --mat-slide-toggle-selected-handle-color: var(--mat-sys-on-primary);
+  --mdc-switch-selected-handle-color: var(--mat-sys-on-primary);
 
   // Surface tokens matching our neutral dark palette
   --mat-sys-surface: #1e1e1e;
