@@ -23,9 +23,8 @@
         <span class="hg38-tag" *ngIf="hg38Variant">hg38</span>
         <span class="variant-hgvs" *ngIf="variantInput && variantInput.indexOf(':c.') !== -1">{{ variantInput }}</span>
         <div class="identity-pills">
-
-          <span class="pill pill-info" *ngIf="omimData?.length">
-            {{ omimData[0]?.phenotypeList?.[0]?.phenotype || 'OMIM disease' }}
+          <span class="pill pill-info" *ngIf="omimData?.phenotypes?.length">
+            {{ omimData?.phenotypes?.[0]?.phenotype || 'OMIM disease' }}
           </span>
         </div>
       </div>
@@ -42,15 +41,32 @@
 
       <!-- KPI STRIP -->
       <div class="kpi-strip">
-        <div class="kpi" [class.active]="activeSection === 'OMIM'" (click)="scrollToSection('OMIM')">
-          <div class="kpi-label">OMIM</div>
-          <div class="kpi-value" *ngIf="omimData?.length">{{ omimData.length }} phenotype{{ omimData.length !== 1 ? 's' : '' }}</div>
-          <div class="kpi-value kpi-muted" *ngIf="!omimData?.length">—</div>
-          <div class="kpi-sub" *ngIf="omimData?.length">{{ omimData[0]?.phenotypeList?.[0]?.phenotype }}</div>
+        
+        <!-- 1. Gene Constraint (LOEUF) - GENE LEVEL -->
+        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
+          *ngIf="gnomadGeneData?.lof?.oeUpper !== null && gnomadGeneData?.lof?.oeUpper !== undefined"
+          matTooltip="Loss-of-function Observed/Expected Upper bound. <0.35 indicates gene is highly constrained (intolerant to LoF variants)."
+          matTooltipPosition="below">
+          <div class="kpi-label">GnomAD LOEUF<span class="kpi-tag">GENE</span></div>
+          <div class="kpi-value"
+            [class.kpi-danger]="gnomadGeneData.lof.oeUpper < 0.35"
+            [class.kpi-warn]="gnomadGeneData.lof.oeUpper >= 0.35 && gnomadGeneData.lof.oeUpper < 0.6"
+            [class.kpi-ok]="gnomadGeneData.lof.oeUpper >= 1.0">
+            {{ gnomadGeneData.lof.oeUpper | number:'1.2-2' }}
+          </div>
+          <div class="kpi-sub">
+            <span *ngIf="gnomadGeneData.lof.oeUpper < 0.35">Constrained</span>
+            <span *ngIf="gnomadGeneData.lof.oeUpper >= 0.35 && gnomadGeneData.lof.oeUpper < 1.0">Moderate</span>
+            <span *ngIf="gnomadGeneData.lof.oeUpper >= 1.0">Tolerant</span>
+          </div>
         </div>
 
-        <div class="kpi kpi-clinvar" [class.active]="activeSection === 'ClinVar'" (click)="scrollToSection('ClinVar')" *ngIf="gene">
-          <div class="kpi-label">ClinVar</div>
+        <!-- 2. ClinVar - GENE LEVEL -->
+        <div class="kpi kpi-clinvar" [class.active]="activeSection === 'ClinVar'" (click)="scrollToSection('ClinVar')" 
+          *ngIf="gene"
+          matTooltip="Gene-level ClinVar classifications. Shows distribution of pathogenic and benign variants reported for {{ gene?.symbol }}."
+          matTooltipPosition="below">
+          <div class="kpi-label">ClinVar<span class="kpi-tag">GENE</span></div>
           <div class="kpi-clinvar-gene">{{ gene.symbol }}</div>
           <ng-container *ngIf="clinvarKpi?.sigFourTotal; else clinvarPending">
             <div class="kpi-clinvar-bar">
@@ -81,8 +97,59 @@
           </ng-template>
         </div>
 
-        <div class="kpi kpi-pred" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')" *ngIf="variant">
-          <div class="kpi-label">Pred. Scores</div>
+        <!-- 3. Population Frequency (gnomAD) - VARIANT LEVEL -->
+        <div class="kpi kpi-pred" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')" 
+          *ngIf="variant"
+          matTooltip="Population allele frequency from gnomAD. Common variants (AF >0.5%) are generally benign for Mendelian disease. Homozygotes in healthy populations suggest benign."
+          matTooltipPosition="below">
+          <div class="kpi-label">gnomAD<span class="kpi-tag">VARIANT</span></div>
+          <ng-container *ngIf="gnomadKpi; else gnomadPending">
+            <div class="kpi-pred-row">
+              <span class="kpi-pred-name">AF</span>
+              <span class="kpi-pred-val" 
+                [class.kpi-ok]="gnomadKpi.af !== null && gnomadKpi.af >= 0.005"
+                [class.kpi-warn]="gnomadKpi.af !== null && gnomadKpi.af > 0 && gnomadKpi.af < 0.005">
+                {{ gnomadKpi.af !== null ? (gnomadKpi.af | number:'1.2-4') : '—' }}
+              </span>
+            </div>
+            <div class="kpi-pred-row">
+              <span class="kpi-pred-name">Hom</span>
+              <span class="kpi-pred-val" 
+                [class.kpi-ok]="gnomadKpi.homCount !== null && gnomadKpi.homCount > 0">
+                {{ gnomadKpi.homCount !== null ? gnomadKpi.homCount : '—' }}
+              </span>
+            </div>
+            <div class="kpi-pred-row">
+              <span class="kpi-pred-name">AC</span>
+              <span class="kpi-pred-val">{{ gnomadKpi.ac !== null ? gnomadKpi.ac : '—' }}</span>
+            </div>
+          </ng-container>
+          <ng-template #gnomadPending>
+            <div class="kpi-value kpi-muted">—</div>
+          </ng-template>
+        </div>
+
+        <!-- 4. Functional Consequence - VARIANT LEVEL -->
+        <div class="kpi" [class.active]="activeSection === 'Geno2MP'" (click)="scrollToSection('Geno2MP')" 
+          *ngIf="variant && funcAnnoKpi"
+          matTooltip="Variant functional consequence type. LoF variants (nonsense, frameshift, splice) in constrained genes have strong pathogenic evidence (ACMG PVS1)."
+          matTooltipPosition="below">
+          <div class="kpi-label">Geno2MP Consequence<span class="kpi-tag">VARIANT</span></div>
+          <div class="kpi-value" 
+            [class.kpi-danger]="funcAnnoKpi.categoryNum === 3"
+            [class.kpi-warn]="funcAnnoKpi.categoryNum === 2"
+            [class.kpi-ok]="funcAnnoKpi.categoryNum === 1 || funcAnnoKpi.categoryNum === 0">
+            {{ funcAnnoKpi.category || '—' }}
+          </div>
+          <div class="kpi-sub text-capitalize">{{ funcAnnoKpi.funcAnno || 'Unknown' }}</div>
+        </div>
+
+        <!-- 5. Prediction Scores - VARIANT LEVEL -->
+        <div class="kpi kpi-pred" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')" 
+          *ngIf="variant"
+          matTooltip="In silico pathogenicity predictions. CADD >20, REVEL >0.75, AlphaMissense >0.564 suggest deleterious. Multiple agreeing algorithms increase confidence."
+          matTooltipPosition="below">
+          <div class="kpi-label">Pred. Scores <span class="kpi-tag">VARIANT</span></div>
           <ng-container *ngIf="dbnsfpKpi; else predPending">
             <div class="kpi-pred-row">
               <span class="kpi-pred-name">CADD</span>
@@ -118,63 +185,18 @@
           </ng-template>
         </div>
 
-        <div class="kpi kpi-pred" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')">
-          <div class="kpi-label">gnomAD</div>
-          <ng-container *ngIf="gnomadKpi; else gnomadPending">
-            <div class="kpi-pred-row">
-              <span class="kpi-pred-name">AF</span>
-              <span class="kpi-pred-val" [class.kpi-ok]="gnomadKpi.af !== null && gnomadKpi.af >= 0.05">
-                {{ gnomadKpi.af !== null ? (gnomadKpi.af | number:'1.2-4') : '—' }}
-              </span>
-            </div>
-            <div class="kpi-pred-row">
-              <span class="kpi-pred-name">AC</span>
-              <span class="kpi-pred-val">{{ gnomadKpi.ac !== null ? gnomadKpi.ac : '—' }}</span>
-            </div>
-            <div class="kpi-pred-row">
-              <span class="kpi-pred-name">Hom</span>
-              <span class="kpi-pred-val">{{ gnomadKpi.homCount !== null ? gnomadKpi.homCount : '—' }}</span>
-            </div>
-          </ng-container>
-          <ng-template #gnomadPending>
-            <div class="kpi-value kpi-muted">—</div>
-          </ng-template>
-        </div>
-
-        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
-          *ngIf="gnomadGeneData?.lof?.oeUpper !== null && gnomadGeneData?.lof?.oeUpper !== undefined">
-          <div class="kpi-label">LOEUF</div>
-          <div class="kpi-value"
-            [class.kpi-danger]="gnomadGeneData.lof.oeUpper < 0.35"
-            [class.kpi-warn]="gnomadGeneData.lof.oeUpper >= 0.35 && gnomadGeneData.lof.oeUpper < 0.6">
-            {{ gnomadGeneData.lof.oeUpper | number:'1.2-2' }}
+        <!-- 6. OMIM Phenotypes - GENE LEVEL -->
+        <div class="kpi" [class.active]="activeSection === 'OMIM'" (click)="scrollToSection('OMIM')"
+          matTooltip="OMIM phenotypes associated with {{ gene?.symbol }}. Confirms gene-disease association."
+          matTooltipPosition="below">
+          <div class="kpi-label">OMIM <span class="kpi-tag">GENE</span></div>
+          <div class="kpi-value" *ngIf="omimData?.phenotypes?.length">{{ omimData.phenotypes.length }} phenotype{{ omimData.phenotypes.length !== 1 ? 's' : '' }}</div>
+          <div class="kpi-value kpi-muted" *ngIf="!omimData?.phenotypes?.length">—</div>
+          <div class="kpi-sub" *ngIf="omimData?.phenotypes?.length">
+            {{ omimData?.phenotypes?.[0]?.phenotype }}
           </div>
-          <div class="kpi-sub">LoF o/e upper bound</div>
         </div>
 
-        <div class="kpi" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
-          *ngIf="gnomadGeneData?.mis?.z !== null && gnomadGeneData?.mis?.z !== undefined">
-          <div class="kpi-label">Mis Z</div>
-          <div class="kpi-value"
-            [class.kpi-danger]="gnomadGeneData.mis.z >= 3.09"
-            [class.kpi-warn]="gnomadGeneData.mis.z >= 2 && gnomadGeneData.mis.z < 3.09">
-            {{ gnomadGeneData.mis.z | number:'1.2-2' }}
-          </div>
-          <div class="kpi-sub">missense constraint</div>
-        </div>
-
-        <div class="kpi" [class.active]="activeSection === 'Geno2MP'" (click)="scrollToSection('Geno2MP')">
-          <div class="kpi-label">Geno2MP</div>
-          <div class="kpi-value kpi-muted">↓ see below</div>
-          <div class="kpi-sub">phenotype profiles</div>
-        </div>
-
-        <div class="kpi" [class.active]="activeSection === 'orthologs'" (click)="scrollToSection('orthologs')" *ngIf="gene">
-          <div class="kpi-label">Orthologs</div>
-          <div class="kpi-value kpi-teal" *ngIf="orthologs?.length">{{ orthologs.length }}</div>
-          <div class="kpi-value kpi-muted" *ngIf="!orthologs?.length">—</div>
-          <div class="kpi-sub">model organisms</div>
-        </div>
       </div>
     </div><!-- identity-bar -->
 
@@ -395,7 +417,7 @@
             <div class="section-title">Geno2MP</div>
             <a class="ext-link" href="https://geno2mp.gs.washington.edu" target="_blank">↗ Geno2MP</a>
           </div>
-          <app-geno2mp [gene]="gene" [variant]="variant"></app-geno2mp>
+          <app-geno2mp [gene]="gene" [variant]="variant" (funcAnnoReady)="funcAnnoKpi = $event"></app-geno2mp>
         </section>
 
         <div class="section-divider"></div>

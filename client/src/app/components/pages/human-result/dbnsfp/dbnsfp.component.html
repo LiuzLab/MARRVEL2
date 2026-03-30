@@ -1,11 +1,4 @@
 <div class="row mb-3">
-  <div class="col-12">
-    <h3 class="d-inline-block align-middle">
-      Variant Functional Prediction Scores of
-      Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}
-      from dbNSFP
-    </h3>
-  </div>
 
   <div class="col-12 mt-3" *ngIf="!loading && data && rankAverage != null" [@toggle]>
     <div class="d-table comment">

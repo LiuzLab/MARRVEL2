@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx @angular/cli@10 update @angular/core@10 @angular/cli@10 --allow-dirty --force)",
+      "Bash(npm config:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx @angular/cli@11 update @angular/core@11 @angular/cli@11 --allow-dirty --force)"
+    ]
+  }
+}

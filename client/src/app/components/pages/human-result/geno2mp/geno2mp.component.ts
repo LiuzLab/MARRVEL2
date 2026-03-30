@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { take } from 'rxjs/operators';
 
@@ -22,6 +22,7 @@ import { HPO_BROAD_TO_CAT } from '../../../../category';
 export class Geno2mpComponent implements OnInit {
   @Input() variant: Variant | null;
   @Input() gene: HumanGene | null;
+  @Output() funcAnnoReady = new EventEmitter<{ funcAnno: string | null; category: string | null; categoryNum: number | null }>();
 
   searchBy = 'gene';
 
@@ -88,6 +89,18 @@ export class Geno2mpComponent implements OnInit {
           this.variantData = res;
           this.loading = false;
           this.countPhenotypes([ this.variantData ]);
+          
+          // Emit functional consequence for KPI
+          if (res && res.funcAnno) {
+            const catNum = FUNCANNO_TO_CAT_NUM[res.funcAnno];
+            this.funcAnnoReady.emit({
+              funcAnno: res.funcAnno,
+              category: CAT_NUM_TO_CAT_NAME[catNum],
+              categoryNum: catNum
+            });
+          } else {
+            this.funcAnnoReady.emit({ funcAnno: null, category: null, categoryNum: null });
+          }
         });
     }
   }

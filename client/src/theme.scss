@@ -10,6 +10,12 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
+// define brand color as variable
+:root {
+  --MARRVEL-brand-color: #69c7be;
+}
+
+
 // Material 3 theming - use cyan palette as primary (closest to your brand color)
 html {
   color-scheme: light;

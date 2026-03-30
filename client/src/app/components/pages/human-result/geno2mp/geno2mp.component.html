@@ -1,28 +1,4 @@
 <div class="row">
-  <div class="col-12">
-    <h3 class="d-inline-block align-middle">Geno2MP</h3>
-
-    <a class="d-inline-block ml-3 align-middle"
-      *ngIf="searchBy == 'variant' && variant"
-      href="http://geno2mp.gs.washington.edu/Geno2MP/#/gene/{{ variant.chr }}%253A{{ variant.pos }}/chrLoc/{{ variant.pos }}/{{ variant.pos }}/{{ variant.chr }}"
-      target="_blank"
-    >
-      <button mat-button color="primary">
-        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-        More on Geno2MP
-      </button>
-    </a>
-    <a class="d-inline-block ml-3 align-middle"
-      *ngIf="searchBy == 'gene' && gene"
-      href="http://geno2mp.gs.washington.edu/Geno2MP/#/gene/{{ gene.symbol }}/gene/0/0/0"
-      target="_blank"
-    >
-      <button mat-button color="primary">
-        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-        More on Geno2MP
-      </button>
-    </a>
-  </div>
 </div>
 
 <div class="row mt-3" *ngIf="gene && variant">

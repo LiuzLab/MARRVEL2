@@ -49,6 +49,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   clinvarKpi: { significance: Record<string, number>; sigFourTotal: number } | null = null;
   dbnsfpKpi: { cadd: number | null; revel: number | null; alphaMissense: number | null } | null = null;
   gnomadKpi: { af: number | null; ac: number | null; homCount: number | null } | null = null;
+  funcAnnoKpi: { funcAnno: string | null; category: string | null; categoryNum: number | null } | null = null;
 
   ppiLoading = true;
   ppiData;

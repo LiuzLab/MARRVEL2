@@ -178,6 +178,9 @@
   text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--hr-text-muted);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.125rem;
 }
 .kpi-value {
   font-family: var(--hr-mono);
@@ -274,6 +277,21 @@
     font-weight: 600;
     line-height: 1;
   }
+}
+
+/* ── GENE/VARIANT tags ── */
+.kpi-tag {
+  display: inline-block;
+  font-family: var(--hr-mono);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  padding: 1px 4px;
+  border-radius: 2px;
+  margin-left: 4px;
+  color: var(--hr-text-muted);
+  background: var(--hr-border);
+  opacity: 0.7;
 }
 
 /* ── Main 2-col layout ── */

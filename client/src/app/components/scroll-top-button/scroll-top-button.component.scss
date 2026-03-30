@@ -2,9 +2,11 @@
   position: fixed;
   right: 12px;
   bottom: 12px;
-  right: 84px;
   z-index: 1030;
   transition: 0.1s;
+  .mat-mdc-mini-fab {
+    background-color: var(--MARRVEL-brand-color);
+  }
 }
 #scroll-to-top .mat-icon {
   color: #fff;
