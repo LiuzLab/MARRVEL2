@@ -14,6 +14,13 @@
     <!-- IDENTITY + KPI BAR -->
     <div class="identity-bar">
       <div class="identity-top">
+        <!-- Sidebar toggle button -->
+        <button class="sidebar-toggle-btn" (click)="toggleSidebar()" 
+          [matTooltip]="sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+          matTooltipPosition="right">
+          <mat-icon>{{ sidebarCollapsed ? 'menu' : 'menu_open' }}</mat-icon>
+        </button>
+        
         <div class="variant-title">
           <span class="gene-accent" *ngIf="gene">{{ gene.symbol }}</span>
           <span class="title-sep" *ngIf="gene && (variant || proteinInput)"> / </span>
@@ -201,70 +208,96 @@
     </div><!-- identity-bar -->
 
     <!-- MAIN LAYOUT -->
-    <div class="main-layout">
+    <div class="main-layout" [class.sidebar-collapsed]="sidebarCollapsed">
 
       <!-- LEFT SIDEBAR -->
-      <aside class="hr-sidebar">
+      <aside class="hr-sidebar" [class.collapsed]="sidebarCollapsed">
         <div class="sb-section-label">Disease Databases</div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'OMIM'" (click)="scrollToSection('OMIM')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'OMIM'" (click)="scrollToSection('OMIM')"
+          [matTooltip]="sidebarCollapsed ? 'OMIM' : ''" matTooltipPosition="right" data-initial="O">
+          <span class="sb-initial">O</span>
           <span class="sb-name">OMIM</span>
           <span class="sb-badge sb-badge-info" *ngIf="omimData?.length">{{ omimData.length }}</span>
           <span class="sb-badge" *ngIf="!omimData?.length">—</span>
         </div>
-        <div class="sb-item" *ngIf="variant" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')">
+        <div class="sb-item" *ngIf="variant" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')"
+          [matTooltip]="sidebarCollapsed ? 'Prediction Scores' : ''" matTooltipPosition="right" data-initial="P">
+          <span class="sb-initial">P</span>
           <span class="sb-name">Pred. Scores</span>
           <span class="sb-badge">dbNSFP</span>
         </div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'ClinVar'" (click)="scrollToSection('ClinVar')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'ClinVar'" (click)="scrollToSection('ClinVar')"
+          [matTooltip]="sidebarCollapsed ? 'ClinVar' : ''" matTooltipPosition="right" data-initial="C">
+          <span class="sb-initial">C</span>
           <span class="sb-name">ClinVar</span>
           <span class="sb-badge">variants</span>
         </div>
-        <div class="sb-item" [class.active]="activeSection === 'Geno2MP'" (click)="scrollToSection('Geno2MP')">
+        <div class="sb-item" [class.active]="activeSection === 'Geno2MP'" (click)="scrollToSection('Geno2MP')"
+          [matTooltip]="sidebarCollapsed ? 'Geno2MP' : ''" matTooltipPosition="right" data-initial="G">
+          <span class="sb-initial">G</span>
           <span class="sb-name">Geno2MP</span>
           <span class="sb-badge sb-badge-info">cases</span>
         </div>
-        <div class="sb-item" [class.active]="activeSection === 'DECIPHER'" (click)="scrollToSection('DECIPHER')">
+        <div class="sb-item" [class.active]="activeSection === 'DECIPHER'" (click)="scrollToSection('DECIPHER')"
+          [matTooltip]="sidebarCollapsed ? 'DECIPHER' : ''" matTooltipPosition="right" data-initial="D">
+          <span class="sb-initial">D</span>
           <span class="sb-name">DECIPHER</span>
           <span class="sb-badge">disease</span>
         </div>
 
         <div class="sb-divider"></div>
         <div class="sb-section-label">Control Databases</div>
-        <div class="sb-item" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')">
+        <div class="sb-item" [class.active]="activeSection === 'GnomAD'" (click)="scrollToSection('GnomAD')"
+          [matTooltip]="sidebarCollapsed ? 'gnomAD' : ''" matTooltipPosition="right" data-initial="g">
+          <span class="sb-initial">g</span>
           <span class="sb-name">gnomAD</span>
           <span class="sb-badge sb-badge-info" *ngIf="gnomadGeneData?.lof?.oeUpper !== null && gnomadGeneData?.lof?.oeUpper !== undefined">
             LOEUF {{ gnomadGeneData.lof.oeUpper | number:'1.2-2' }}
           </span>
           <span class="sb-badge" *ngIf="!gnomadGeneData">—</span>
         </div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'DGV'" (click)="scrollToSection('DGV')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'DGV'" (click)="scrollToSection('DGV')"
+          [matTooltip]="sidebarCollapsed ? 'DGV' : ''" matTooltipPosition="right" data-initial="D">
+          <span class="sb-initial">D</span>
           <span class="sb-name">DGV</span>
           <span class="sb-badge">SVs</span>
         </div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'DECIPHER-Control'" (click)="scrollToSection('DECIPHER-Control')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'DECIPHER-Control'" (click)="scrollToSection('DECIPHER-Control')"
+          [matTooltip]="sidebarCollapsed ? 'DECIPHER Control' : ''" matTooltipPosition="right" data-initial="D">
+          <span class="sb-initial">D</span>
           <span class="sb-name">DECIPHER ctrl</span>
           <span class="sb-badge">control</span>
         </div>
 
         <div class="sb-divider"></div>
         <div class="sb-section-label">Model Organisms</div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'orthologs'" (click)="scrollToSection('orthologs')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'orthologs'" (click)="scrollToSection('orthologs')"
+          [matTooltip]="sidebarCollapsed ? 'Orthologs' : ''" matTooltipPosition="right" data-initial="O">
+          <span class="sb-initial">O</span>
           <span class="sb-name">Orthologs</span>
           <span class="sb-badge sb-badge-info" *ngIf="orthologs?.length">{{ orthologs.length }}</span>
         </div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'expression'" (click)="scrollToSection('expression')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'expression'" (click)="scrollToSection('expression')"
+          [matTooltip]="sidebarCollapsed ? 'Expression' : ''" matTooltipPosition="right" data-initial="E">
+          <span class="sb-initial">E</span>
           <span class="sb-name">Expression</span>
           <span class="sb-badge">GTEx</span>
         </div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'phenotypes'" (click)="scrollToSection('phenotypes')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'phenotypes'" (click)="scrollToSection('phenotypes')"
+          [matTooltip]="sidebarCollapsed ? 'Phenotypes' : ''" matTooltipPosition="right" data-initial="P">
+          <span class="sb-initial">P</span>
           <span class="sb-name">Phenotypes</span>
           <span class="sb-badge sb-badge-beta">Beta</span>
         </div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'gene-ontology'" (click)="scrollToSection('gene-ontology')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'gene-ontology'" (click)="scrollToSection('gene-ontology')"
+          [matTooltip]="sidebarCollapsed ? 'Gene Ontology' : ''" matTooltipPosition="right" data-initial="G">
+          <span class="sb-initial">G</span>
           <span class="sb-name">Gene Ontology</span>
           <span class="sb-badge">GO</span>
         </div>
-        <div class="sb-item" [class.active]="activeSection === 'primate'" (click)="scrollToSection('primate')">
+        <div class="sb-item" [class.active]="activeSection === 'primate'" (click)="scrollToSection('primate')"
+          [matTooltip]="sidebarCollapsed ? 'Primate' : ''" matTooltipPosition="right" data-initial="P">
+          <span class="sb-initial">P</span>
           <span class="sb-name">Primate</span>
           <span class="sb-badge sb-badge-beta">Beta</span>
         </div>
@@ -272,15 +305,21 @@
         <ng-container *ngIf="gene && !smallScreen">
           <div class="sb-divider"></div>
           <div class="sb-section-label">Protein</div>
-          <div class="sb-item" [class.active]="activeSection === 'alignment'" (click)="scrollToSection('alignment')">
+          <div class="sb-item" [class.active]="activeSection === 'alignment'" (click)="scrollToSection('alignment')"
+            [matTooltip]="sidebarCollapsed ? 'Domain / Alignment' : ''" matTooltipPosition="right" data-initial="D">
+            <span class="sb-initial">D</span>
             <span class="sb-name">Domain / Align.</span>
             <span class="sb-badge">SMART</span>
           </div>
-          <div class="sb-item" [class.active]="activeSection === 'ppi'" (click)="scrollToSection('ppi')">
+          <div class="sb-item" [class.active]="activeSection === 'ppi'" (click)="scrollToSection('ppi')"
+            [matTooltip]="sidebarCollapsed ? 'Interactions' : ''" matTooltipPosition="right" data-initial="I">
+            <span class="sb-initial">I</span>
             <span class="sb-name">Interactions</span>
             <span class="sb-badge sb-badge-beta">Beta</span>
           </div>
-          <div class="sb-item" [class.active]="activeSection === 'protein-structure'" (click)="scrollToSection('protein-structure')">
+          <div class="sb-item" [class.active]="activeSection === 'protein-structure'" (click)="scrollToSection('protein-structure')"
+            [matTooltip]="sidebarCollapsed ? 'Structure' : ''" matTooltipPosition="right" data-initial="S">
+            <span class="sb-initial">S</span>
             <span class="sb-name">Structure</span>
             <span class="sb-badge sb-badge-beta">Beta</span>
           </div>
@@ -288,11 +327,15 @@
 
         <div class="sb-divider"></div>
         <div class="sb-section-label">More</div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'pharos'" (click)="scrollToSection('pharos')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'pharos'" (click)="scrollToSection('pharos')"
+          [matTooltip]="sidebarCollapsed ? 'Pharos' : ''" matTooltipPosition="right" data-initial="P">
+          <span class="sb-initial">P</span>
           <span class="sb-name">Pharos</span>
           <span class="sb-badge">drugs</span>
         </div>
-        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'modelmatcher'" (click)="scrollToSection('modelmatcher')">
+        <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'modelmatcher'" (click)="scrollToSection('modelmatcher')"
+          [matTooltip]="sidebarCollapsed ? 'ModelMatcher' : ''" matTooltipPosition="right" data-initial="M">
+          <span class="sb-initial">M</span>
           <span class="sb-name">ModelMatcher</span>
           <span class="sb-badge sb-badge-beta">Beta</span>
         </div>
@@ -300,35 +343,35 @@
 
       <!-- CONTENT AREA -->
       <main class="content-area" #contentArea (scroll)="onContentScroll(contentArea)">
-
+        <!-- External links -->
+        <div class="ext-links" *ngIf="gene">
+          <a class="ext-link" *ngIf="variant" target="_blank"
+            [attr.href]="'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + variant.chr + ':' + variant.pos">
+            ↗ UCSC
+          </a>
+          <a class="ext-link" *ngIf="!variant && gene.hg19Start" target="_blank"
+            [attr.href]="'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + gene.chr + '%3A' + gene.hg19Start + '-' + gene.hg19Stop">
+            ↗ UCSC
+          </a>
+          <a class="ext-link" *ngIf="gene.hgncId" target="_blank"
+            [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId">↗ HGNC</a>
+          <a class="ext-link" target="_blank"
+            [attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId">↗ NCBI Gene</a>
+          <a class="ext-link" *ngIf="gene.xref?.ensemblId" target="_blank"
+            [attr.href]="'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=' + gene.xref.ensemblId">↗ Ensembl</a>
+          <a class="ext-link" *ngIf="gene.uniprotKBId" target="_blank"
+            [attr.href]="'https://www.uniprot.org/uniprotkb/' + gene.uniprotKBId">↗ UniProt</a>
+          <a class="ext-link" target="_blank"
+            [attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol">↗ MyGene2</a>
+          <a class="ext-link" target="_blank"
+            [attr.href]="'https://cellxgene.cziscience.com/gene-expression?ver=2&genes=' + gene.symbol">↗ CELLxGENE</a>
+          <a class="ext-link" *ngIf="gene.uniprotKBId" target="_blank"
+            [attr.href]="'https://www.proteinatlas.org/' + gene.uniprotKBId">↗ HPA</a>
+        </div>
         <!-- Gene Summary -->
         <section class="hr-section" id="TOP">
           <div class="section-header">
             <div class="section-title">Gene Summary</div>
-            <div class="ext-links" *ngIf="gene">
-              <a class="ext-link" *ngIf="variant" target="_blank"
-                [attr.href]="'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + variant.chr + ':' + variant.pos">
-                ↗ UCSC
-              </a>
-              <a class="ext-link" *ngIf="!variant && gene.hg19Start" target="_blank"
-                [attr.href]="'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' + gene.chr + '%3A' + gene.hg19Start + '-' + gene.hg19Stop">
-                ↗ UCSC
-              </a>
-              <a class="ext-link" *ngIf="gene.hgncId" target="_blank"
-                [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId">↗ HGNC</a>
-              <a class="ext-link" target="_blank"
-                [attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId">↗ NCBI Gene</a>
-              <a class="ext-link" *ngIf="gene.xref?.ensemblId" target="_blank"
-                [attr.href]="'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=' + gene.xref.ensemblId">↗ Ensembl</a>
-              <a class="ext-link" *ngIf="gene.uniprotKBId" target="_blank"
-                [attr.href]="'https://www.uniprot.org/uniprotkb/' + gene.uniprotKBId">↗ UniProt</a>
-              <a class="ext-link" target="_blank"
-                [attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol">↗ MyGene2</a>
-              <a class="ext-link" target="_blank"
-                [attr.href]="'https://cellxgene.cziscience.com/gene-expression?ver=2&genes=' + gene.symbol">↗ CELLxGENE</a>
-              <a class="ext-link" *ngIf="gene.uniprotKBId" target="_blank"
-                [attr.href]="'https://www.proteinatlas.org/' + gene.uniprotKBId">↗ HPA</a>
-            </div>
           </div>
 
           <div class="gene-card" *ngIf="gene">

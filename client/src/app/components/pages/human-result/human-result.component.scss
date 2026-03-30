@@ -36,6 +36,7 @@
   --hr-navbar-h:     64px;
   --hr-identity-h:   88px;
   --hr-sidebar-w:    220px;
+  --hr-sidebar-collapsed-w: 48px;
 }
 
 /* ── Page root ── */
@@ -77,7 +78,7 @@
 .identity-bar {
   background: var(--hr-surface);
   border-bottom: 1px solid var(--hr-border);
-  padding: 12px 20px 0;
+  padding: 12px 12px 0;
   position: sticky;
   top: var(--hr-navbar-h);
   z-index: 90;
@@ -88,6 +89,42 @@
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 10px;
+}
+
+/* Sidebar toggle button (circular) in identity bar */
+.sidebar-toggle-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--hr-border);
+  background: var(--hr-surface);
+  color: var(--hr-text-sec);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+  align-self: center;
+  margin-bottom: -4px;
+  
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  &:hover {
+    background: var(--hr-teal-dim2);
+    border-color: var(--hr-teal);
+    color: var(--hr-teal);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
 }
 .variant-title {
   font-family: var(--hr-mono);
@@ -143,7 +180,7 @@
 .kpi-strip {
   display: flex;
   gap: 1px;
-  margin: 0 -20px;
+  margin: 0 -12px;
   background: var(--hr-border);
   overflow-x: auto;
   border-top: 1px solid var(--hr-border);
@@ -301,6 +338,29 @@
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  transition: grid-template-columns 0.3s ease;
+  
+  &.sidebar-collapsed {
+    grid-template-columns: var(--hr-sidebar-collapsed-w) 1fr;
+  }
+}
+
+/* Initial letter badge (shown when collapsed) */
+.sb-initial {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--hr-surface2);
+  color: var(--hr-text);
+  font-family: var(--hr-mono);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--hr-border);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
 /* ── Sidebar ── */
@@ -308,9 +368,32 @@
   background: var(--hr-surface);
   border-right: 1px solid var(--hr-border);
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px 0;
   scrollbar-width: thin;
   scrollbar-color: var(--hr-border-bright) transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  width: var(--hr-sidebar-w);
+  
+  &.collapsed {
+    width: var(--hr-sidebar-collapsed-w);
+    
+    .sb-section-label,
+    .sb-name,
+    .sb-badge {
+      display: none;
+    }
+    
+    .sb-item {
+      justify-content: center;
+      padding: 6px 0;
+    }
+    
+    .sb-initial {
+      display: flex;
+    }
+  }
 }
 .sb-section-label {
   padding: 10px 14px 3px;
@@ -319,6 +402,7 @@
   letter-spacing: .12em;
   color: var(--hr-text-muted);
   font-family: var(--hr-mono);
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 .sb-item {
   display: flex;
@@ -329,20 +413,33 @@
   border-left: 2px solid transparent;
   transition: all .12s;
   gap: 6px;
+  position: relative;
+  
   &:hover {
     background: var(--hr-surface2);
     border-left-color: var(--hr-border-bright);
+    
+    .sb-initial {
+      background: var(--hr-border-bright);
+      border-color: var(--hr-border-bright);
+    }
   }
   &.active {
     background: var(--hr-teal-dim2);
     border-left-color: var(--hr-teal);
     .sb-name { color: var(--hr-teal); }
+    .sb-initial {
+      background: var(--hr-teal);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(45,212,191,.4);
+    }
   }
 }
 .sb-name {
   font-size: 13px;
   color: var(--hr-text-sec);
   white-space: nowrap;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 .sb-badge {
   font-family: var(--hr-mono);
@@ -352,6 +449,7 @@
   background: var(--hr-surface2);
   color: var(--hr-text-muted);
   flex-shrink: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 .sb-badge-info   { background: var(--hr-teal-dim);   color: var(--hr-teal); }
 .sb-badge-path   { background: var(--hr-red-dim);    color: var(--hr-red); }
@@ -361,6 +459,12 @@
   height: 1px;
   background: var(--hr-border);
   margin: 6px 0;
+  transition: opacity 0.3s ease;
+  
+  .hr-sidebar.collapsed & {
+    opacity: 0.3;
+    margin: 6px 8px;
+  }
 }
 
 /* ── Content area ── */

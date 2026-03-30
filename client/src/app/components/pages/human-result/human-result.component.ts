@@ -24,6 +24,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   geneLoading = true;
   smallScreen = false;
   activeSection = 'TOP';
+  sidebarCollapsed = false;
 
   // Input
   geneEntrezId: number | null = null;
@@ -281,5 +282,9 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
         break;
       }
     }
+  }
+
+  toggleSidebar() {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 }
