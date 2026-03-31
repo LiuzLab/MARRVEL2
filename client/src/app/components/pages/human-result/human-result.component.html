@@ -301,7 +301,7 @@
           [matTooltip]="sidebarCollapsed ? 'Phenotypes' : ''" matTooltipPosition="right" data-initial="P">
           <span class="sb-initial">P</span>
           <span class="sb-name">Phenotypes</span>
-          <span class="sb-badge sb-badge-beta">Beta</span>
+          <span class="sb-badge sb-badge-accent">Beta</span>
         </div>
         <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'gene-ontology'" (click)="scrollToSection('gene-ontology')"
           [matTooltip]="sidebarCollapsed ? 'Gene Ontology' : ''" matTooltipPosition="right" data-initial="G">
@@ -312,7 +312,7 @@
           [matTooltip]="sidebarCollapsed ? 'Primate' : ''" matTooltipPosition="right" data-initial="P">
           <span class="sb-initial">P</span>
           <span class="sb-name">Primate</span>
-          <span class="sb-badge sb-badge-beta">Beta</span>
+          <span class="sb-badge sb-badge-accent">Beta</span>
         </div>
 
         <ng-container *ngIf="gene && !smallScreen">
@@ -327,13 +327,13 @@
             [matTooltip]="sidebarCollapsed ? 'Interactions' : ''" matTooltipPosition="right" data-initial="I">
             <span class="sb-initial">I</span>
             <span class="sb-name">Interactions</span>
-            <span class="sb-badge sb-badge-beta">Beta</span>
+            <span class="sb-badge sb-badge-accent">Beta</span>
           </div>
           <div class="sb-item" [class.active]="activeSection === 'protein-structure'" (click)="scrollToSection('protein-structure')"
             [matTooltip]="sidebarCollapsed ? 'Structure' : ''" matTooltipPosition="right" data-initial="S">
             <span class="sb-initial">S</span>
             <span class="sb-name">Structure</span>
-            <span class="sb-badge sb-badge-beta">Beta</span>
+            <span class="sb-badge sb-badge-accent">Beta</span>
           </div>
         </ng-container>
 
@@ -349,7 +349,7 @@
           [matTooltip]="sidebarCollapsed ? 'ModelMatcher' : ''" matTooltipPosition="right" data-initial="M">
           <span class="sb-initial">M</span>
           <span class="sb-name">ModelMatcher</span>
-          <span class="sb-badge sb-badge-beta">Beta</span>
+          <span class="sb-badge sb-badge-accent">Beta</span>
         </div>
       </aside>
 
@@ -398,7 +398,7 @@
                   <span class="gene-fullname-text">{{ gene.name }}</span>
                 </div>
                 <div class="gene-aliases" *ngIf="gene.alias?.length">
-                  <span class="alias-tag" *ngFor="let a of gene.alias">{{ a }}</span>
+                  <span class="alias-tag" *ngFor="let alias of gene.alias">{{ alias }}</span>
                 </div>
                 <p class="gene-summary-text" *ngIf="gene.entrezSummary">{{ gene.entrezSummary }}</p>
               </div>
@@ -447,6 +447,7 @@
           <div class="section-header">
             <div class="section-title">Prediction Scores</div>
             <span class="section-badge">dbNSFP</span>
+            <div class="flex-grow-1"></div>
           </div>
           <app-dbnsfp [variant]="variant" (scoresReady)="dbnsfpKpi = $event"></app-dbnsfp>
         </section>
@@ -514,6 +515,7 @@
         <section class="hr-section" id="DGV" *ngIf="gene">
           <div class="section-header">
             <div class="section-title">DGV</div>
+            <a class="ext-link" href="http://dgv.tcag.ca/gb2/gbrowse/dgv2_hg19/?name={{ gene.symbol }};search=Search" target="_blank">↗ DGV</a>
           </div>
           <app-dgv [gene]="gene"></app-dgv>
         </section>
@@ -524,6 +526,7 @@
         <section class="hr-section" id="DECIPHER-Control" *ngIf="gene">
           <div class="section-header">
             <div class="section-title">DECIPHER — Control</div>
+            <a class="ext-link" href="https://www.deciphergenomics.org/gene/{{ gene.symbol }}" target="_blank">↗ DECIPHER</a>
           </div>
           <app-decipher [variant]="variant" [gene]="gene"></app-decipher>
         </section>
@@ -534,7 +537,9 @@
         <section class="hr-section" id="orthologs" *ngIf="gene && !orthologsLoading">
           <div class="section-header">
             <div class="section-title">Predicted Orthologs</div>
-            <span class="section-badge" *ngIf="orthologs?.length">{{ orthologs.length }} organisms</span>
+            <div class="ext-links">
+              <a class="ext-link" href="https://monarchinitiative.org/gene/HGNC:{{ gene.hgncId }}#compare" target="_blank">↗ Monarch Initiative</a>
+            </div>
           </div>
           <app-orthologs [gene]="gene" [data]="orthologs"></app-orthologs>
         </section>
@@ -548,6 +553,10 @@
           </div>
           <app-gtex-boxplot [gene]="gene"></app-gtex-boxplot>
           <div class="mt-section">
+            <!--Make an exception here and double the margin due to graphics padding-->
+            &nbsp;
+          </div>
+          <div class="mt-section">
             <app-agr-expression [gene]="gene"></app-agr-expression>
           </div>
         </section>
@@ -558,7 +567,9 @@
         <section class="hr-section" id="phenotypes" *ngIf="gene && !orthologsLoading">
           <div class="section-header">
             <div class="section-title">Phenotypes</div>
-            <span class="section-badge sb-badge-beta">Beta</span>
+            <span class="section-badge sb-badge-accent"
+              matTooltip="We are currently developing a new feature to display gross phenotypes associated with each human or model organism gene based on information obtained from OMIM and model organism databases. This is still a beta-version and any feedback will be appreciated.">Beta</span>
+            <div class="flex-grow-1"></div>
           </div>
           <app-phenotypes [gene]="gene" [orthologs]="orthologs"></app-phenotypes>
         </section>
@@ -579,7 +590,10 @@
         <section class="hr-section" id="primate">
           <div class="section-header">
             <div class="section-title">Primate Conservation</div>
-            <span class="section-badge sb-badge-beta">Beta</span>
+            <span class="section-badge sb-badge-accent">Beta</span>
+            <div class="ext-links">
+              <a class="ext-link" href="https://www.hgsc.bcm.edu/non-human-primates/rhesus-monkey-genome-project" target="_blank">↗ HGSC</a>
+            </div>
           </div>
           <app-primate [variant]="variant" [gene]="gene"></app-primate>
         </section>
@@ -591,6 +605,12 @@
           <section class="hr-section" id="alignment">
             <div class="section-header">
               <div class="section-title">Protein Domain &amp; Alignment</div>
+              <div class="ext-links">
+                <a class="ext-link" *ngIf="gene.uniprotKBId" target="_blank"
+                  [attr.href]="'https://smart.embl.de/smart/show_motifs.pl?ID=' + gene.uniprotKBId">↗ SMART</a>
+                <a class="ext-link" target="_blank"
+                  [attr.href]="'http://www.flyrnai.org/tools/diopt/web/getAlignmentTarget/9606/' + gene.entrezId">↗ DIOPT</a>
+              </div>
             </div>
             <app-smart-protein-domain [gene]="gene"></app-smart-protein-domain>
             <div class="mt-section">
@@ -604,7 +624,8 @@
           <section class="hr-section" id="ppi">
             <div class="section-header">
               <div class="section-title">Protein Interactions</div>
-              <span class="section-badge sb-badge-beta">Beta</span>
+              <span class="section-badge sb-badge-accent">Beta</span>
+              <div class="flex-grow-1"></div>
             </div>
             <mat-progress-bar mode="indeterminate" *ngIf="ppiLoading"></mat-progress-bar>
             <app-ppi *ngIf="!ppiLoading && ppiData?.length" [gene]="gene" [data]="ppiData"></app-ppi>
@@ -617,6 +638,8 @@
           <section class="hr-section" id="protein-structure">
             <div class="section-header">
               <div class="section-title">Human Protein Structure</div>
+              <span class="section-badge sb-badge-accent">Beta</span>
+              <div class="flex-grow-1"></div>
               <div class="ext-links" *ngIf="gene.uniprotKBId">
                 <a class="ext-link" target="_blank"
                   [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId">↗ AlphaFold</a>
@@ -638,6 +661,10 @@
         <section class="hr-section" id="pharos" *ngIf="gene">
           <div class="section-header">
             <div class="section-title">Pharos</div>
+            <div class="ext-links">
+              <a class="ext-link" target="_blank"
+                [attr.href]="'https://pharos.nih.gov/targets?q=' + gene.symbol">↗ PHAROS</a>
+            </div>
           </div>
           <app-pharos [gene]="gene"></app-pharos>
         </section>
@@ -648,7 +675,11 @@
         <section class="hr-section" id="modelmatcher" *ngIf="gene">
           <div class="section-header">
             <div class="section-title">ModelMatcher</div>
-            <span class="section-badge sb-badge-beta">Beta</span>
+            <span class="section-badge sb-badge-accent">Beta</span>
+            <div class="ext-links">
+              <a class="ext-link" target="_blank"
+                [attr.href]="'https://www.modelmatcher.net:8443/search?symbol=' + gene.symbol + '&taxonId=9606&orthologTaxonId=&iSearch=true'">↗ ModelMatcher</a>
+            </div>
           </div>
           <app-modelmatcher [gene]="gene"></app-modelmatcher>
         </section>

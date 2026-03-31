@@ -1,5 +1,9 @@
 <div class="row mb-5" *ngIf="domainData">
   <div class="col-12">
+    <h3 class="mt-0 mb-0">
+      Human Gene Protein Domains for {{ gene? gene.symbol : '' }}&nbsp;
+      <span class="section-badge">DIOPT v{{ versionName }}</span>
+    </h3>
     <app-protein-domain
       *ngIf="!loading && domainData"
       [data]="domainData"
@@ -14,7 +18,11 @@
 
 <div class="row">
   <div class="col-12">
-    <mat-icon class="d-inline-block" matTooltip="In general, the longest transcript is used to generate the multiple protein alignment. To examine a specific amino acid(s), enter the number of amino acid of interest below and select the organisms of interest. These amino acids will be highlighted in blue/green." style="vertical-align: middle; font-size: 18px; width: 18px; height: 18px; margin-bottom: 4px;">help</mat-icon>
+    <h3 class="mt-0">
+      Multiple Protein Alignment for {{ gene? gene.symbol : '' }}
+      <mat-icon class="ml-1" matTooltip="In general, the longest transcript is used to generate the multiple protein alignment. To examine a specific amino acid(s), enter the number of amino acid of interest below and select the organisms of interest. These amino acids will be highlighted in blue/green." style="vertical-align: middle; font-size: 18px; width: 18px; height: 18px; margin-bottom: 4px;">help</mat-icon>
+      <span class="section-badge ml-2">DIOPT v{{ versionName }}</span>
+    </h3>
   </div>
 </div>
 
@@ -45,7 +53,7 @@
   </div>
 </div>
 
-<div class="mt-3 w-100 text-monospace" style="overflow-x: scroll; font-size: 0.9em;"
+<div class="mt-3 w-100 text-monospace" style="overflow-x: auto; white-space: nowrap; font-size: 0.9em;"
   *ngIf="!loading && data"
   [innerHtml]="getHtml()"
 >

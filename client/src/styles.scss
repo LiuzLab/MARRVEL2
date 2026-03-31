@@ -527,3 +527,63 @@ $overflowValues: auto, hidden, scroll;
   list-style-type: none;
   padding-left: 0;
 }
+
+.section-badge {
+  font-family: var(--hr-mono);
+  font-size: 11px !important;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: var(--hr-surface2);
+  color: var(--hr-text-muted);
+  border: 1px solid var(--hr-border);
+
+  &.sb-badge-accent {
+    background: var(--hr-purple-dim);
+    color: var(--hr-purple);
+    border-color: transparent;
+  }
+}
+
+/* ── Shared tag styles (accessible from child components) ── */
+app-human-result .tag-default,
+app-human-result .alias-tag {
+  font-family: var(--hr-mono);
+  font-size: 11px;
+  padding: 2px 6px;
+  border: 1px solid var(--hr-border);
+  border-radius: 3px;
+  color: var(--hr-text-muted);
+  display: inline-block;
+}
+
+/* External links */
+app-human-result .ext-links {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: end;
+  margin-left: auto;
+}
+
+app-human-result .content-area > .ext-links {
+  margin-bottom: 8px;
+}
+
+app-human-result .ext-link {
+  font-family: var(--hr-mono);
+  font-size: 11px;
+  color: var(--hr-text-sec);
+  text-decoration: none;
+  border: 1px solid var(--hr-border);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all .12s;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: var(--hr-teal);
+    color: var(--hr-teal);
+    background: var(--hr-teal-dim2);
+  }
+}

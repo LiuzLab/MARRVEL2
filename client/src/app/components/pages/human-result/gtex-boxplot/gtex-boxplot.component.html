@@ -1,3 +1,9 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h3 class="my-0">Human Expression of {{ gene ? gene.symbol : '' }} from GTEx</h3>
+  <a class="ext-link" target="_blank"
+    [attr.href]="'https://gtexportal.org/home/gene/' + gene.symbol">↗ GTEx</a>
+</div>
+
 <div class="w-100 scroll-x">
   <svg id="boxplot" #boxplot [attr.width]="width" [attr.height]="height"></svg>
 </div>
