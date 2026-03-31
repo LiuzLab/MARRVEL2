@@ -69,7 +69,8 @@ app-human-result table.mat-table .mat-header-cell {
 }
 app-human-result table.mat-table .mat-header-cell.number,
 app-human-result table.mat-table .mat-cell.number { text-align: right; }
-app-human-result table.mat-table .mat-row:last-child .mat-cell { border-bottom: none; }
+app-human-result table.mat-table .mat-row:last-child .mat-cell,
+app-human-result table.mat-table .mat-row:last-child .mat-header-cell { border-bottom: none; }
 app-human-result table.mat-table .mat-row:hover { filter: brightness(0.97); }
 app-human-result .nowrap-fit-cell { white-space: nowrap; width: 1%; }
 
