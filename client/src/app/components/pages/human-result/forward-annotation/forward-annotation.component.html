@@ -4,18 +4,14 @@
 </span>
 
 <!-- Full: gene summary section -->
-<div class="d-flex w-100" *ngIf="!compact && candidates" [@toggle]>
-  <div>
-    <span class="d-inline-block mr-2" style="font-weight: 500; font-size: 0.85em; line-height: 1.6; color: rgba(0, 0, 0, 0.6);">
-      Protein Change
-    </span>
-  </div>
-  <div class="flex-grow-1">
-    <span *ngFor="let cand of candidates" class="annot-wrapper">
+<div class="fa-wrap" *ngIf="!compact && candidates" [@toggle]>
+  <span class="fa-label">Protein Change</span>
+  <div class="fa-list">
+    <span *ngFor="let cand of candidates" class="fa-annot">
       {{ cand.annot }}
-      (<span *ngFor="let trpt of cand.transcripts" class="trpt-wrapper">
-        <a [attr.href]="trpt.extLink" target="_blank" class="">{{ trpt.transcriptId }}</a>
-        <span class="chip chip-secondary" style="margin-left:0.25rem" *ngIf="trpt.isCanonical">Ensembl canonical</span>
+      (<span *ngFor="let trpt of cand.transcripts" class="fa-trpt">
+        <a [attr.href]="trpt.extLink" target="_blank">{{ trpt.transcriptId }}</a>
+        <span class="chip chip-primary" *ngIf="trpt.isCanonical">Ensembl canonical</span>
       </span>)
     </span>
   </div>

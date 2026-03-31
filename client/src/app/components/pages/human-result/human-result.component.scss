@@ -543,7 +543,13 @@
 }
 
 /* External links */
-.ext-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.ext-links {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: end;
+}
 .ext-link {
   font-family: var(--hr-mono);
   font-size: 11px;

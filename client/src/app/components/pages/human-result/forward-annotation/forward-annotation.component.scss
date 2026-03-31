@@ -1,19 +1,46 @@
+:host {
+  display: contents;
+}
+
 .variant-protein {
   font-family: var(--hr-mono);
   font-weight: 500;
   color: var(--hr-text-sec);
 }
-.annot-wrapper {
+
+.fa-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+}
+
+.fa-label {
+  display: none;
+}
+
+.fa-annot {
   display: flex;
   align-items: center;
-  font-weight: 300;
-  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--hr-mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--hr-text-sec);
 }
-.trpt-wrapper {
+
+.fa-trpt {
+  font-size: 11px;
+  vertical-align: middle;
   &:not(:last-child) {
-    margin-right: 0.5rem;
+    margin-right: 0.3rem;
     &::after {
       content: ",";
     }
+  }
+
+  a {
+    color: var(--hr-teal);
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
   }
 }
