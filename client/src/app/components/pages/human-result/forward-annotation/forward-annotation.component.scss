@@ -1,12 +1,15 @@
+.variant-protein {
+  font-family: var(--hr-mono);
+  font-weight: 500;
+  color: var(--hr-text-sec);
+}
 .annot-wrapper {
+  display: flex;
+  align-items: center;
   font-weight: 300;
-  font-size: 0.9em;
-  line-height: 1.6;
   color: rgba(0, 0, 0, 0.6);
 }
 .trpt-wrapper {
-  font-size: 0.85rem;
-  vertical-align: middle;
   &:not(:last-child) {
     margin-right: 0.5rem;
     &::after {

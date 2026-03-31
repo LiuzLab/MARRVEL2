@@ -147,14 +147,20 @@
 .variant-hgvs {
   font-family: var(--hr-mono);
   font-size: 12px;
-  color: var(--hr-text-sec);
+  color: var(--hr-text-muted);
 }
 .identity-pills {
   display: flex;
   gap: 6px;
   align-items: center;
   margin-left: auto;
-  flex-wrap: wrap;
+  min-width: 0;
+  .pill {
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 /* Annotation pills */
@@ -636,7 +642,7 @@
 }
 
 /* Forward annotation wrapper */
-.forward-annotation-wrap { margin-top: 12px; }
+.forward-annotation-wrap { margin: 12px 0; }
 
 /* mt-section helper */
 .mt-section { margin-top: 20px; }

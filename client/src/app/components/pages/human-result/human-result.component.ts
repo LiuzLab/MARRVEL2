@@ -38,6 +38,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   hg38Variant: Variant | null = null;
   variantString: string | null = null;
 
+
   // Data from server
   geneCandidates: HumanGene[] | null = null;
 

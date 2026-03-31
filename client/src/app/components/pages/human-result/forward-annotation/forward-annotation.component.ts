@@ -32,6 +32,7 @@ interface TransVarForwardAnnotResult {
 })
 export class ForwardAnnotationComponent implements OnInit {
   @Input() variant: Variant;
+  @Input() compact = false;
   candidates;
 
   constructor(private apiService: ApiService) { }

@@ -28,9 +28,12 @@
           <span *ngIf="proteinInput && !variant">{{ proteinInput }}</span>
         </div>
         <span class="hg38-tag" *ngIf="hg38Variant">hg38</span>
+        <app-forward-annotation *ngIf="variant" [variant]="variant" [compact]="true"></app-forward-annotation>
         <span class="variant-hgvs" *ngIf="variantInput && variantInput.indexOf(':c.') !== -1">{{ variantInput }}</span>
         <div class="identity-pills">
-          <span class="pill pill-info" *ngIf="omimData?.phenotypes?.length">
+          <span class="pill pill-info" *ngIf="omimData?.phenotypes?.length"
+            [matTooltip]="omimData?.phenotypes?.[0]?.phenotype"
+            matTooltipPosition="below">
             {{ omimData?.phenotypes?.[0]?.phenotype || 'OMIM disease' }}
           </span>
         </div>
@@ -383,6 +386,10 @@
             <div class="section-title">Gene Summary</div>
           </div>
 
+          <div class="forward-annotation-wrap" *ngIf="variant">
+            <app-forward-annotation [variant]="variant"></app-forward-annotation>
+          </div>
+
           <div class="gene-card" *ngIf="gene">
             <div class="gene-card-body">
               <div class="gene-card-main">
@@ -417,9 +424,6 @@
             </div>
           </div>
 
-          <div class="forward-annotation-wrap" *ngIf="variant">
-            <app-forward-annotation [variant]="variant"></app-forward-annotation>
-          </div>
         </section>
 
         <div class="section-divider"></div>
