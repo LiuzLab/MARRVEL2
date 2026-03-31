@@ -82,52 +82,54 @@ app-human-result table.mat-table .mat-row:hover { filter: brightness(0.97); }
 app-human-result .nowrap-fit-cell { white-space: nowrap; width: 1%; }
 
 /* ── Human-result page: dark-mode Material component overrides ── */
-/* Only applied when html.dark-theme class is present                  */
+/* Only applied when html.dark-theme class is present.              */
+/* Colors use --hr-* tokens (defined on :host in the component)     */
+/* and --mat-sys-* surface tokens (defined in theme.scss).          */
 html.dark-theme app-human-result .mat-mdc-table,
 html.dark-theme app-human-result .mat-table {
-  background: #1e1e1e !important; color: #c5cdd7 !important;
+  background: var(--hr-surface) !important; color: var(--hr-text) !important;
 }
 html.dark-theme app-human-result .mdc-data-table__row,
 html.dark-theme app-human-result .mat-mdc-row,
 html.dark-theme app-human-result .mat-row {
-  background: #1e1e1e !important; color: #c5cdd7 !important;
+  background: var(--hr-surface) !important; color: var(--hr-text) !important;
 }
 html.dark-theme app-human-result .mat-mdc-header-row,
 html.dark-theme app-human-result .mat-header-row {
-  background: #252525 !important; color: #e2e8f0 !important;
+  background: var(--hr-surface2) !important; color: var(--hr-text) !important;
 }
 html.dark-theme app-human-result .mat-mdc-header-cell,
 html.dark-theme app-human-result .mat-header-cell {
-  color: #999999 !important; border-bottom-color: #333333 !important; background: #252525 !important;
+  color: var(--hr-text-muted) !important; border-bottom-color: var(--hr-border) !important; background: var(--hr-surface2) !important;
 }
 html.dark-theme app-human-result .mat-mdc-cell,
 html.dark-theme app-human-result .mat-cell {
-  color: #c5cdd7 !important; border-bottom-color: #333333 !important;
+  color: var(--hr-text) !important; border-bottom-color: var(--hr-border) !important;
 }
 html.dark-theme app-human-result .mat-mdc-row:hover,
-html.dark-theme app-human-result .mat-row:hover { background: #252525 !important; }
+html.dark-theme app-human-result .mat-row:hover { background: var(--hr-surface2) !important; }
 html.dark-theme app-human-result .mat-mdc-paginator,
 html.dark-theme app-human-result .mat-paginator {
-  background: #1e1e1e !important; color: #999999 !important;
+  background: var(--hr-surface) !important; color: var(--hr-text-muted) !important;
 }
 html.dark-theme app-human-result .mat-mdc-paginator .mat-mdc-select-value,
 html.dark-theme app-human-result .mat-mdc-paginator .mat-mdc-select-arrow,
 html.dark-theme app-human-result .mat-mdc-paginator .mat-mdc-paginator-range-label {
-  color: #bbbbbb !important;
+  color: var(--hr-text-sec) !important;
 }
-html.dark-theme app-human-result .mdc-form-field > label { color: #bbbbbb !important; }
+html.dark-theme app-human-result .mdc-form-field > label { color: var(--hr-text-sec) !important; }
 html.dark-theme app-human-result .mat-expansion-panel {
-  background: #1e1e1e !important; color: #c5cdd7 !important;
+  background: var(--hr-surface) !important; color: var(--hr-text) !important;
 }
-html.dark-theme app-human-result .mat-expansion-panel-header { background: #252525 !important; }
-html.dark-theme app-human-result .mat-expansion-panel-header:hover { background: #2e2e2e !important; }
-html.dark-theme app-human-result .mat-expansion-panel-header-title { color: #e2e8f0 !important; }
+html.dark-theme app-human-result .mat-expansion-panel-header { background: var(--hr-surface2) !important; }
+html.dark-theme app-human-result .mat-expansion-panel-header:hover { background: var(--hr-border-bright) !important; }
+html.dark-theme app-human-result .mat-expansion-panel-header-title { color: var(--hr-text) !important; }
 html.dark-theme app-human-result .mat-expansion-panel-header-description,
 html.dark-theme app-human-result .mat-expansion-panel-header .mat-expansion-indicator::after {
-  color: #999999 !important; border-color: #999999 !important;
+  color: var(--hr-text-muted) !important; border-color: var(--hr-text-muted) !important;
 }
 html.dark-theme app-human-result .mat-expansion-panel .mat-expansion-panel-body {
-  background: #1e1e1e !important; color: #c5cdd7 !important;
+  background: var(--hr-surface) !important; color: var(--hr-text) !important;
 }
 
 /* ClinVar bar labels stay dark on colored bars in both themes */
@@ -273,10 +275,10 @@ $sides: (top, bottom, left, right); // Leave this variable alone
  }
 
 .text-highlight {
-  background-color: rgba(105, 200, 190, 0.6) !important;
+  background-color: color-mix(in srgb, var(--mat-sys-primary, #69c7be) 60%, transparent) !important;
 }
 .text-highlight-accent {
-  background-color: rgba(229, 137, 62, 0.6) !important;
+  background-color: color-mix(in srgb, var(--mat-sys-secondary, #8b5cf6) 60%, transparent) !important;
 }
 
 .text-underline-dashed {
@@ -350,11 +352,11 @@ strong,
  * Table
  */
 .mat-table {
-  background: #fbfbfb !important;
+  background: var(--mat-sys-surface-container-lowest, #fbfbfb) !important;
 }
 
 .mat-paginator {
-  background-color: #fbfbfb !important;
+  background-color: var(--mat-sys-surface-container-lowest, #fbfbfb) !important;
 }
 
 .mat-table .mat-row:hover {

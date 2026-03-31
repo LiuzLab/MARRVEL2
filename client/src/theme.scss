@@ -44,6 +44,12 @@ html {
   --mat-sys-primary-container: #b2ebea;
   --mat-sys-on-primary-container: #003735;
 
+  // Accent: violet/purple secondary role
+  --mat-sys-secondary: #8b5cf6;
+  --mat-sys-on-secondary: #ffffff;
+  --mat-sys-secondary-container: #ede9fe;
+  --mat-sys-on-secondary-container: #4c1d95;
+
   // Neutralize the cyan-tinted surfaces the mixin generates (#f7faf9 → white/neutral)
   --mat-sys-background: #f8f8f8;
   --mat-sys-surface: #ffffff;
@@ -103,6 +109,12 @@ html.dark-theme {
   --mat-sys-primary-container: #1a4845;
   --mat-sys-on-primary-container: #9ef2e4;
 
+  // Accent: violet/purple secondary role (dark)
+  --mat-sys-secondary: #a78bfa;
+  --mat-sys-on-secondary: #2e1065;
+  --mat-sys-secondary-container: #4c1d95;
+  --mat-sys-on-secondary-container: #ede9fe;
+
   // Slide-toggle dark theme tokens
   --mat-slide-toggle-selected-track-color: #69c7be;
   --mat-slide-toggle-selected-handle-color: #ffffff;
@@ -123,6 +135,12 @@ app-human-result {
   --mat-sys-on-primary: #003733;
   --mat-sys-primary-container: #b2ebea;
   --mat-sys-on-primary-container: #003735;
+
+  // Accent: violet/purple secondary role
+  --mat-sys-secondary: #8b5cf6;
+  --mat-sys-on-secondary: #ffffff;
+  --mat-sys-secondary-container: #ede9fe;
+  --mat-sys-on-secondary-container: #4c1d95;
 
   // Override slide-toggle handle color for light mode
   --mat-slide-toggle-selected-handle-color: #ffffff;
@@ -152,6 +170,12 @@ html.dark-theme app-human-result {
   --mat-sys-on-primary: #003733;
   --mat-sys-primary-container: #1a4845;
   --mat-sys-on-primary-container: #9ef2e4;
+
+  // Accent: violet/purple secondary role (dark)
+  --mat-sys-secondary: #a78bfa;
+  --mat-sys-on-secondary: #2e1065;
+  --mat-sys-secondary-container: #4c1d95;
+  --mat-sys-on-secondary-container: #ede9fe;
 
   // Slide-toggle dark theme tokens
   --mat-slide-toggle-selected-handle-color: var(--mat-sys-on-primary);

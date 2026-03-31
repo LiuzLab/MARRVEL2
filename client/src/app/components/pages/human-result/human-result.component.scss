@@ -13,17 +13,25 @@
 
   /* Accent palette — same in both modes */
   --hr-teal:         #2dd4bf;
-  --hr-teal-dim:     rgba(45,212,191,.12);
-  --hr-teal-dim2:    rgba(45,212,191,.06);
+  --hr-teal-dim:     color-mix(in srgb, var(--hr-teal) 12%, transparent);
+  --hr-teal-dim2:    color-mix(in srgb, var(--hr-teal) 6%, transparent);
+  --hr-teal-glow:    color-mix(in srgb, var(--hr-teal) 40%, transparent);
   --hr-amber:        #f59e0b;
-  --hr-amber-dim:    rgba(245,158,11,.12);
+  --hr-amber-dim:    color-mix(in srgb, var(--hr-amber) 12%, transparent);
   --hr-red:          #ef4444;
-  --hr-red-dim:      rgba(239,68,68,.12);
+  --hr-red-dim:      color-mix(in srgb, var(--hr-red) 12%, transparent);
   --hr-green:        #22c55e;
-  --hr-green-dim:    rgba(34,197,94,.10);
+  --hr-green-dim:    color-mix(in srgb, var(--hr-green) 10%, transparent);
   --hr-blue:         #3b82f6;
-  --hr-purple:       #8b5cf6;
-  --hr-purple-dim:   rgba(139,92,246,.15);
+  /* Purple: references theme secondary (accent) so it stays in sync with the design system */
+  --hr-purple:       var(--mat-sys-secondary);
+  --hr-purple-dim:   color-mix(in srgb, var(--mat-sys-secondary) 15%, transparent);
+
+  /* ClinVar pathogenicity segment colors */
+  --hr-clinvar-p:    #c0392b;
+  --hr-clinvar-lp:   #e67e22;
+  --hr-clinvar-lb:   rgba(39,174,96,.6);
+  --hr-clinvar-b:    #27ae60;
 
   /* Text */
   --hr-text:         light-dark(#1e293b, #e2e8f0);
@@ -278,10 +286,10 @@
     overflow: hidden;
     transition: width 0.3s ease;
 
-    &.kpi-clinvar-p  { background: #c0392b; }
-    &.kpi-clinvar-lp { background: #e67e22; }
-    &.kpi-clinvar-lb { background: #27ae60; opacity: 0.6; }
-    &.kpi-clinvar-b  { background: #27ae60; }
+    &.kpi-clinvar-p  { background: var(--hr-clinvar-p); }
+    &.kpi-clinvar-lp { background: var(--hr-clinvar-lp); }
+    &.kpi-clinvar-lb { background: var(--hr-clinvar-b); opacity: 0.6; }
+    &.kpi-clinvar-b  { background: var(--hr-clinvar-b); }
   }
 
   .kpi-clinvar-seg-label {
@@ -437,7 +445,7 @@
     .sb-initial {
       background: var(--hr-teal);
       color: #fff;
-      box-shadow: 0 0 8px rgba(45,212,191,.4);
+      box-shadow: 0 0 8px var(--hr-teal-glow);
     }
   }
 }
