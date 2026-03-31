@@ -217,8 +217,20 @@
           [matTooltip]="sidebarCollapsed ? 'OMIM' : ''" matTooltipPosition="right" data-initial="O">
           <span class="sb-initial">O</span>
           <span class="sb-name">OMIM</span>
-          <span class="sb-badge sb-badge-info" *ngIf="omimData?.length">{{ omimData.length }}</span>
-          <span class="sb-badge" *ngIf="!omimData?.length">—</span>
+          @if (omimData?.phenotypes?.length) {
+            <span class="sb-badge sb-badge-info" *ngIf="omimData?.phenotypes?.length">
+              {{ omimData.phenotypes.length }}
+              Phenotype{{ omimData.phenotypes.length !== 1 ? 's' : '' }}
+            </span>
+          } @else if (omimData?.allelicVariants?.length) {
+            <span class="sb-badge sb-badge-info" *ngIf="omimData?.allelicVariants?.length">
+              {{ omimData.allelicVariants.length }}
+              Allelic Variant{{ omimData.allelicVariants.length !== 1 ? 's' : '' }}
+            </span>
+          }
+          @else {
+            <span class="sb-badge" *ngIf="!omimData?.length">No Phenotypes</span>
+          }
         </div>
         <div class="sb-item" *ngIf="variant" [class.active]="activeSection === 'DbNSFP'" (click)="scrollToSection('DbNSFP')"
           [matTooltip]="sidebarCollapsed ? 'Prediction Scores' : ''" matTooltipPosition="right" data-initial="P">
@@ -230,19 +242,21 @@
           [matTooltip]="sidebarCollapsed ? 'ClinVar' : ''" matTooltipPosition="right" data-initial="C">
           <span class="sb-initial">C</span>
           <span class="sb-name">ClinVar</span>
-          <span class="sb-badge">variants</span>
+          <!--span class="sb-badge">variants</span-->
         </div>
         <div class="sb-item" [class.active]="activeSection === 'Geno2MP'" (click)="scrollToSection('Geno2MP')"
           [matTooltip]="sidebarCollapsed ? 'Geno2MP' : ''" matTooltipPosition="right" data-initial="G">
           <span class="sb-initial">G</span>
           <span class="sb-name">Geno2MP</span>
-          <span class="sb-badge sb-badge-info">cases</span>
+          <span class="sb-badge sb-badge-info" *ngIf="geno2mpCaseCount > 0">
+            {{ geno2mpCaseCount }} case{{ geno2mpCaseCount !== 1 ? 's' : '' }}
+          </span>
+          <span class="sb-badge" *ngIf="geno2mpCaseCount === 0">no cases</span>
         </div>
         <div class="sb-item" [class.active]="activeSection === 'DECIPHER'" (click)="scrollToSection('DECIPHER')"
           [matTooltip]="sidebarCollapsed ? 'DECIPHER' : ''" matTooltipPosition="right" data-initial="D">
           <span class="sb-initial">D</span>
           <span class="sb-name">DECIPHER</span>
-          <span class="sb-badge">disease</span>
         </div>
 
         <div class="sb-divider"></div>
@@ -260,13 +274,11 @@
           [matTooltip]="sidebarCollapsed ? 'DGV' : ''" matTooltipPosition="right" data-initial="D">
           <span class="sb-initial">D</span>
           <span class="sb-name">DGV</span>
-          <span class="sb-badge">SVs</span>
         </div>
         <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'DECIPHER-Control'" (click)="scrollToSection('DECIPHER-Control')"
           [matTooltip]="sidebarCollapsed ? 'DECIPHER Control' : ''" matTooltipPosition="right" data-initial="D">
           <span class="sb-initial">D</span>
           <span class="sb-name">DECIPHER ctrl</span>
-          <span class="sb-badge">control</span>
         </div>
 
         <div class="sb-divider"></div>
@@ -275,13 +287,12 @@
           [matTooltip]="sidebarCollapsed ? 'Orthologs' : ''" matTooltipPosition="right" data-initial="O">
           <span class="sb-initial">O</span>
           <span class="sb-name">Orthologs</span>
-          <span class="sb-badge sb-badge-info" *ngIf="orthologs?.length">{{ orthologs.length }}</span>
         </div>
         <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'expression'" (click)="scrollToSection('expression')"
           [matTooltip]="sidebarCollapsed ? 'Expression' : ''" matTooltipPosition="right" data-initial="E">
           <span class="sb-initial">E</span>
           <span class="sb-name">Expression</span>
-          <span class="sb-badge">GTEx</span>
+          <!--span class="sb-badge">GTEx</span-->
         </div>
         <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'phenotypes'" (click)="scrollToSection('phenotypes')"
           [matTooltip]="sidebarCollapsed ? 'Phenotypes' : ''" matTooltipPosition="right" data-initial="P">
@@ -293,7 +304,6 @@
           [matTooltip]="sidebarCollapsed ? 'Gene Ontology' : ''" matTooltipPosition="right" data-initial="G">
           <span class="sb-initial">G</span>
           <span class="sb-name">Gene Ontology</span>
-          <span class="sb-badge">GO</span>
         </div>
         <div class="sb-item" [class.active]="activeSection === 'primate'" (click)="scrollToSection('primate')"
           [matTooltip]="sidebarCollapsed ? 'Primate' : ''" matTooltipPosition="right" data-initial="P">
@@ -309,7 +319,6 @@
             [matTooltip]="sidebarCollapsed ? 'Domain / Alignment' : ''" matTooltipPosition="right" data-initial="D">
             <span class="sb-initial">D</span>
             <span class="sb-name">Domain / Align.</span>
-            <span class="sb-badge">SMART</span>
           </div>
           <div class="sb-item" [class.active]="activeSection === 'ppi'" (click)="scrollToSection('ppi')"
             [matTooltip]="sidebarCollapsed ? 'Interactions' : ''" matTooltipPosition="right" data-initial="I">
@@ -329,9 +338,9 @@
         <div class="sb-section-label">More</div>
         <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'pharos'" (click)="scrollToSection('pharos')"
           [matTooltip]="sidebarCollapsed ? 'Pharos' : ''" matTooltipPosition="right" data-initial="P">
-          <span class="sb-initial">P</span>
-          <span class="sb-name">Pharos</span>
-          <span class="sb-badge">drugs</span>
+          <span class="sb-initial">D</span>
+          <span class="sb-name">Drugs</span>
+          <span class="sb-badge">Pharos</span>
         </div>
         <div class="sb-item" *ngIf="gene" [class.active]="activeSection === 'modelmatcher'" (click)="scrollToSection('modelmatcher')"
           [matTooltip]="sidebarCollapsed ? 'ModelMatcher' : ''" matTooltipPosition="right" data-initial="M">
@@ -460,7 +469,7 @@
             <div class="section-title">Geno2MP</div>
             <a class="ext-link" href="https://geno2mp.gs.washington.edu" target="_blank">↗ Geno2MP</a>
           </div>
-          <app-geno2mp [gene]="gene" [variant]="variant" (funcAnnoReady)="funcAnnoKpi = $event"></app-geno2mp>
+          <app-geno2mp [gene]="gene" [variant]="variant" (funcAnnoReady)="funcAnnoKpi = $event" (caseCountReady)="geno2mpCaseCount = $event"></app-geno2mp>
         </section>
 
         <div class="section-divider"></div>

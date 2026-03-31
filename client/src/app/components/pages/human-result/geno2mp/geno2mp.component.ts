@@ -23,6 +23,7 @@ export class Geno2mpComponent implements OnInit {
   @Input() variant: Variant | null;
   @Input() gene: HumanGene | null;
   @Output() funcAnnoReady = new EventEmitter<{ funcAnno: string | null; category: string | null; categoryNum: number | null }>();
+  @Output() caseCountReady = new EventEmitter<number>();
 
   searchBy = 'gene';
 
@@ -71,6 +72,7 @@ export class Geno2mpComponent implements OnInit {
           }
           this.geneData = res;
           this.loading = false;
+          this.caseCountReady.emit(Object.values(this.geneSummary).reduce((a, b) => a + b, 0));
         });
     }
 
@@ -89,6 +91,7 @@ export class Geno2mpComponent implements OnInit {
           this.variantData = res;
           this.loading = false;
           this.countPhenotypes([ this.variantData ]);
+          this.caseCountReady.emit(res?.hpoProfiles?.length ?? 0);
           
           // Emit functional consequence for KPI
           if (res && res.funcAnno) {

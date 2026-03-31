@@ -51,6 +51,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   dbnsfpKpi: { cadd: number | null; revel: number | null; alphaMissense: number | null } | null = null;
   gnomadKpi: { af: number | null; ac: number | null; homCount: number | null } | null = null;
   funcAnnoKpi: { funcAnno: string | null; category: string | null; categoryNum: number | null } | null = null;
+  geno2mpCaseCount: number | null = null;
 
   ppiLoading = true;
   ppiData;
