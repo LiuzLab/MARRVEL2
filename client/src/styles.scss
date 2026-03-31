@@ -36,6 +36,13 @@ body:has(app-human-result) {
 }
 
 
+/* ── Human-result page: Angular Material MDC table outline color ── */
+/* Override the MDC custom property so real mat-tables use the same light border */
+app-human-result {
+  --mat-table-row-item-outline-color: var(--hr-border);
+  --mat-table-header-row-item-outline-color: var(--hr-border);
+}
+
 /* ── Human-result page: base styles for native-HTML mat-table class tables ── */
 /* These layout rules are theme-neutral (no colors) */
 app-human-result table.mat-table {
