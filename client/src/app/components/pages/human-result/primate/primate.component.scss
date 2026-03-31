@@ -10,9 +10,7 @@
   }
 }
 
-td:first-child, th:first-child {
+.mat-cell, .mat-header-cell {
   padding-left: 24px;
-}
-td:last-child, th:last-child {
   padding-right: 24px;
 }

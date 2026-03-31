@@ -479,7 +479,6 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 0;
   scrollbar-width: thin;
   scrollbar-color: var(--hr-border-bright) transparent;
 }
@@ -549,6 +548,11 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: end;
+}
+
+/* Standalone ext-links row at top of content area */
+.content-area > .ext-links {
+  margin-bottom: 8px;
 }
 .ext-link {
   font-family: var(--hr-mono);
@@ -648,7 +652,7 @@
 }
 
 /* Forward annotation wrapper */
-.forward-annotation-wrap { margin: 12px 0; }
+.forward-annotation-wrap { margin: 16px 0; }
 
 /* mt-section helper */
 .mt-section { margin-top: 20px; }
