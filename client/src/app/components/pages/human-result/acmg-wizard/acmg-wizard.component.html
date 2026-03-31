@@ -1,0 +1,173 @@
+<div class="wizard-root">
+
+  <!-- Header -->
+  <div class="wizard-header">
+    <div class="wizard-title">
+      <span class="wizard-title-icon">⬡</span>
+      ACMG/AMP Variant Classification
+      <span class="wizard-subtitle">Richards et al. 2015</span>
+    </div>
+    <button class="wizard-close" (click)="close()" aria-label="Close">✕</button>
+  </div>
+
+  <!-- Loading state -->
+  <div class="wizard-loading" *ngIf="phase === 'loading'">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading variant data…</div>
+  </div>
+
+  <!-- Main layout: log + active panel -->
+  <div class="wizard-body" *ngIf="phase !== 'loading'">
+
+    <!-- LEFT: Criterion log -->
+    <div class="wizard-log">
+      <div class="log-scroll">
+        <ng-container *ngFor="let step of steps; let i = index">
+          <div class="criterion-card"
+               [class.card-active]="i === activeIndex && phase !== 'done'"
+               [class.card-met]="step.status === 'met'"
+               [class.card-not-met]="step.status === 'not_met'"
+               [class.card-na]="step.status === 'na'"
+               [class.card-scanning]="step.status === 'scanning'"
+               [class.card-waiting]="step.status === 'waiting_input'"
+               [@cardEnter]>
+
+            <div class="card-left">
+              <span class="tier-badge"
+                    [style.background-color]="tierColor(step.criterion.tier, step.criterion.direction)">
+                {{ step.criterion.code }}
+              </span>
+              <div class="card-text">
+                <div class="card-label">{{ step.criterion.label }}</div>
+                <div class="card-evidence" *ngIf="step.evidenceText && step.status !== 'scanning' && step.status !== 'waiting_input'">
+                  {{ step.evidenceText }}
+                </div>
+                <div class="card-scanning-dots" *ngIf="step.status === 'scanning'">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-status-icon">
+              <span *ngIf="step.status === 'met'" class="icon-met">✓</span>
+              <span *ngIf="step.status === 'not_met'" class="icon-not-met">✗</span>
+              <span *ngIf="step.status === 'na'" class="icon-na">—</span>
+              <span *ngIf="step.status === 'scanning'" class="icon-scan">…</span>
+              <span *ngIf="step.status === 'waiting_input'" class="icon-wait">?</span>
+            </div>
+
+          </div>
+        </ng-container>
+
+        <!-- Spacer so last card scrolls above the summary -->
+        <div style="height: 24px"></div>
+      </div>
+    </div><!-- wizard-log -->
+
+    <!-- RIGHT: Active panel -->
+    <div class="wizard-panel">
+
+      <!-- Running / scanning -->
+      <div class="panel-scanning" *ngIf="phase === 'running' && activeStep">
+        <div class="scanning-label">Evaluating</div>
+        <div class="scanning-code" [style.color]="tierColor(activeStep.criterion.tier, activeStep.criterion.direction)">
+          {{ activeStep.criterion.code }}
+        </div>
+        <div class="scanning-desc">{{ activeStep.criterion.label }}</div>
+        <div class="scanning-wave">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- User input question -->
+      <div class="panel-question" *ngIf="phase === 'paused' && activeStep" [@questionSlide]>
+        <div class="question-code" [style.color]="tierColor(activeStep.criterion.tier, activeStep.criterion.direction)">
+          {{ activeStep.criterion.code }}
+          <span class="question-tier-label">{{ activeStep.criterion.tier }}</span>
+        </div>
+        <div class="question-text">{{ activeStep.criterion.question }}</div>
+        <div class="question-context" *ngIf="activeStep.criterion.questionContext">
+          {{ activeStep.criterion.questionContext }}
+        </div>
+        <div class="question-buttons">
+          <button class="btn-answer btn-yes" (click)="answerQuestion(true)">Yes</button>
+          <button class="btn-answer btn-no" (click)="answerQuestion(false)">No</button>
+          <button class="btn-answer btn-uncertain" (click)="answerQuestion(null)">Uncertain</button>
+        </div>
+      </div>
+
+      <!-- Done / summary -->
+      <div class="panel-summary" *ngIf="phase === 'done'" [@summaryEnter]>
+        <div class="summary-label">Final Classification</div>
+        <div class="summary-verdict" [style.color]="classificationBg">
+          {{ classification }}
+        </div>
+
+        <div class="summary-counts" *ngIf="scoreDisplay">
+          <div class="count-group count-group-path">
+            <div class="count-group-label">Pathogenic evidence</div>
+            <div class="count-chips">
+              <span class="count-chip chip-pvs" *ngIf="scoreDisplay.pvs > 0">PVS ×{{ scoreDisplay.pvs }}</span>
+              <span class="count-chip chip-ps"  *ngIf="scoreDisplay.ps  > 0">PS ×{{ scoreDisplay.ps }}</span>
+              <span class="count-chip chip-pm"  *ngIf="scoreDisplay.pm  > 0">PM ×{{ scoreDisplay.pm }}</span>
+              <span class="count-chip chip-pp"  *ngIf="scoreDisplay.pp  > 0">PP ×{{ scoreDisplay.pp }}</span>
+              <span class="count-chip chip-none" *ngIf="scoreDisplay.pvs + scoreDisplay.ps + scoreDisplay.pm + scoreDisplay.pp === 0">none</span>
+            </div>
+          </div>
+          <div class="count-group count-group-ben">
+            <div class="count-group-label">Benign evidence</div>
+            <div class="count-chips">
+              <span class="count-chip chip-ba" *ngIf="scoreDisplay.ba > 0">BA ×{{ scoreDisplay.ba }}</span>
+              <span class="count-chip chip-bs" *ngIf="scoreDisplay.bs > 0">BS ×{{ scoreDisplay.bs }}</span>
+              <span class="count-chip chip-bp" *ngIf="scoreDisplay.bp > 0">BP ×{{ scoreDisplay.bp }}</span>
+              <span class="count-chip chip-none" *ngIf="scoreDisplay.ba + scoreDisplay.bs + scoreDisplay.bp === 0">none</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-met" *ngIf="metPathogenic.length || metBenign.length">
+          <div class="met-row" *ngIf="metPathogenic.length">
+            <span class="met-row-label">Met (pathogenic):</span>
+            <span class="met-codes met-path">{{ metPathogenic.join(', ') }}</span>
+          </div>
+          <div class="met-row" *ngIf="metBenign.length">
+            <span class="met-row-label">Met (benign):</span>
+            <span class="met-codes met-ben">{{ metBenign.join(', ') }}</span>
+          </div>
+        </div>
+
+        <div class="summary-disclaimer">
+          This is a computational aid based on available data. Clinical geneticist review is required for final classification.
+        </div>
+      </div>
+
+      <!-- Idle (before first step) -->
+      <div class="panel-idle" *ngIf="phase === 'running' && !activeStep">
+        <div class="idle-dots"><span></span><span></span><span></span></div>
+      </div>
+
+    </div><!-- wizard-panel -->
+
+  </div><!-- wizard-body -->
+
+  <!-- Bottom tally bar -->
+  <div class="wizard-tally" *ngIf="phase !== 'loading'">
+    <div class="tally-path">
+      <span class="tally-label path-label">Pathogenic</span>
+      <span class="tally-chip chip-pvs" *ngIf="livePvs > 0" title="Very Strong">PVS×{{ livePvs }}</span>
+      <span class="tally-chip chip-ps"  *ngIf="livePs  > 0" title="Strong">PS×{{ livePs }}</span>
+      <span class="tally-chip chip-pm"  *ngIf="livePm  > 0" title="Moderate">PM×{{ livePm }}</span>
+      <span class="tally-chip chip-pp"  *ngIf="livePp  > 0" title="Supporting">PP×{{ livePp }}</span>
+      <span class="tally-empty" *ngIf="livePvs + livePs + livePm + livePp === 0">—</span>
+    </div>
+    <div class="tally-divider">|</div>
+    <div class="tally-ben">
+      <span class="tally-label ben-label">Benign</span>
+      <span class="tally-chip chip-ba" *ngIf="liveBa > 0" title="Stand-Alone">BA×{{ liveBa }}</span>
+      <span class="tally-chip chip-bs" *ngIf="liveBs > 0" title="Strong">BS×{{ liveBs }}</span>
+      <span class="tally-chip chip-bp" *ngIf="liveBp > 0" title="Supporting">BP×{{ liveBp }}</span>
+      <span class="tally-empty" *ngIf="liveBa + liveBs + liveBp === 0">—</span>
+    </div>
+  </div>
+
+</div>

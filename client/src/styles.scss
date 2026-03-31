@@ -503,3 +503,15 @@ $overflowValues: auto, hidden, scroll;
   list-style-type: none;
   padding-left: 0;
 }
+
+// ACMG Wizard dialog — no padding, dark background
+.acmg-dialog-panel .mat-mdc-dialog-container {
+  padding: 0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+.acmg-dialog-panel .mdc-dialog__surface {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}

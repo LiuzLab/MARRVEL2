@@ -11,7 +11,9 @@ import { Variant } from '../../../interfaces/variant';
 
 import { Animations } from 'src/app/animations';
 import { MatSelectChange } from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
+import { AcmgWizardComponent, AcmgWizardData, AcmgSavedResult } from './acmg-wizard/acmg-wizard.component';
 
 @Component({
   standalone: false,
@@ -54,12 +56,14 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
   ppiData;
 
   gnomadGeneData: any = null;
+  acmgResult: AcmgSavedResult | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
     private variantService: VariantService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -112,6 +116,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
           .then((hg19Variant: Variant) => {
             this.variant = hg19Variant;
             this.variantString = `Chr${hg19Variant.chr}:${hg19Variant.pos} ${hg19Variant.ref}>${hg19Variant.alt}`;
+            this.restoreAcmgResult(hg19Variant);
             if (this.gene) { this.geneLoading = false; return; }
 
             this.geneCandidates = null;
@@ -164,6 +169,7 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
     this.ppiLoading = true;
     this.ppiData = null;
     this.activeSection = 'TOP';
+    this.acmgResult = null;
   }
 
   parseVariant(): Observable<any> {
@@ -255,6 +261,40 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
         next: (res) => { this.orthologs = res; this.orthologsLoading = false; },
         error: () => { this.orthologsLoading = false; }
       });
+  }
+
+  openAcmgWizard(): void {
+    const data: AcmgWizardData = {
+      variant: this.variant,
+      gene: this.gene,
+      gnomadKpi: this.gnomadKpi,
+      gnomadGeneData: this.gnomadGeneData,
+      clinvarKpi: this.clinvarKpi,
+      dbnsfpKpi: this.dbnsfpKpi,
+    };
+    const ref = this.dialog.open(AcmgWizardComponent, {
+      data,
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      panelClass: 'acmg-dialog-panel',
+    });
+    ref.afterClosed().subscribe((result: AcmgSavedResult | undefined) => {
+      if (result) {
+        this.acmgResult = result;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  private restoreAcmgResult(variant: Variant): void {
+    const key = `acmg_v1_${variant.chr}-${variant.pos}-${variant.ref}-${variant.alt}`;
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        this.acmgResult = JSON.parse(raw) as AcmgSavedResult;
+        this.cdr.detectChanges();
+      }
+    } catch { /* ignore */ }
   }
 
   scrollToSection(id: string) {

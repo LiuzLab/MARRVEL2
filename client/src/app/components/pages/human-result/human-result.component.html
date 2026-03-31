@@ -175,6 +175,20 @@
           <div class="kpi-value kpi-muted" *ngIf="!orthologs?.length">—</div>
           <div class="kpi-sub">model organisms</div>
         </div>
+
+        <button class="kpi kpi-acmg-btn" *ngIf="variant" (click)="openAcmgWizard()"
+          [class.kpi-acmg-done]="!!acmgResult">
+          <div class="kpi-label">ACMG</div>
+          <ng-container *ngIf="!acmgResult">
+            <div class="kpi-value kpi-teal">Classify</div>
+            <div class="kpi-sub">2015 guidelines</div>
+          </ng-container>
+          <ng-container *ngIf="acmgResult">
+            <div class="kpi-value acmg-classification-tag"
+              [attr.data-class]="acmgResult.classification">{{ acmgResult.classification }}</div>
+            <div class="kpi-sub">click to review</div>
+          </ng-container>
+        </button>
       </div>
     </div><!-- identity-bar -->
 

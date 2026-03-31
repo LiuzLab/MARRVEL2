@@ -1,0 +1,599 @@
+// ─── ACMG Wizard — dark terminal aesthetic ────────────────────────────────────
+
+$bg:         #0d1117;
+$surface:    #161b22;
+$border:     #30363d;
+$text:       #e6edf3;
+$text-muted: #7d8590;
+$teal:       #69c7be;
+
+// tier palette
+$pvs: #b71c1c;
+$ps:  #d32f2f;
+$pm:  #f57c00;
+$pp:  #ffa726;
+$ba:  #1b5e20;
+$bs:  #388e3c;
+$bp:  #66bb6a;
+
+// ─── Root ─────────────────────────────────────────────────────────────────────
+.wizard-root {
+  display: flex;
+  flex-direction: column;
+  background: $bg;
+  color: $text;
+  height: 90vh;
+  width: 900px;
+  max-width: 100vw;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+.wizard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: $surface;
+  border-bottom: 1px solid $border;
+  flex-shrink: 0;
+}
+
+.wizard-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: $teal;
+}
+
+.wizard-title-icon {
+  font-size: 18px;
+  opacity: .8;
+}
+
+.wizard-subtitle {
+  font-size: 11px;
+  font-weight: 400;
+  color: $text-muted;
+  letter-spacing: .05em;
+}
+
+.wizard-close {
+  background: none;
+  border: none;
+  color: $text-muted;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 150ms, color 150ms;
+
+  &:hover {
+    background: #ffffff15;
+    color: $text;
+  }
+}
+
+// ─── Loading ──────────────────────────────────────────────────────────────────
+.wizard-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: $text-muted;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid $border;
+  border-top-color: $teal;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 13px;
+  letter-spacing: .05em;
+}
+
+// ─── Body (two-column) ────────────────────────────────────────────────────────
+.wizard-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+// ─── Log column ───────────────────────────────────────────────────────────────
+.wizard-log {
+  flex: 0 0 55%;
+  border-right: 1px solid $border;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.log-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: $border; border-radius: 2px; }
+}
+
+// ─── Criterion card ───────────────────────────────────────────────────────────
+.criterion-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid $border;
+  background: $surface;
+  transition: opacity 300ms, border-color 300ms, background 300ms;
+  opacity: .65;
+
+  &.card-active {
+    opacity: 1;
+    border-color: $teal;
+    background: #161b22;
+    box-shadow: 0 0 0 1px #{$teal}33;
+  }
+
+  &.card-met {
+    opacity: .9;
+    border-color: #388e3c88;
+    background: #388e3c0f;
+  }
+
+  &.card-not-met {
+    opacity: .45;
+    border-color: $border;
+  }
+
+  &.card-na {
+    opacity: .3;
+  }
+
+  &.card-scanning {
+    opacity: 1;
+    border-color: $teal;
+    animation: cardPulse 1.2s ease-in-out infinite;
+  }
+
+  &.card-waiting {
+    opacity: 1;
+    border-color: #ffa726aa;
+    box-shadow: 0 0 0 2px #ffa72620;
+  }
+}
+
+@keyframes cardPulse {
+  0%, 100% { box-shadow: 0 0 0 0px #{$teal}33; }
+  50%       { box-shadow: 0 0 0 4px #{$teal}22; }
+}
+
+.card-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.tier-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: #fff;
+  margin-top: 1px;
+  text-shadow: 0 1px 2px #0004;
+}
+
+.card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-label {
+  font-size: 12px;
+  line-height: 1.4;
+  color: $text;
+  white-space: normal;
+}
+
+.card-evidence {
+  font-size: 10.5px;
+  color: $text-muted;
+  margin-top: 3px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+// scanning dots
+.card-scanning-dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+
+  span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: $teal;
+    animation: dotBounce 1s ease-in-out infinite;
+
+    &:nth-child(2) { animation-delay: .15s; }
+    &:nth-child(3) { animation-delay: .3s; }
+  }
+}
+
+@keyframes dotBounce {
+  0%, 100% { opacity: .3; transform: translateY(0); }
+  50%       { opacity: 1;  transform: translateY(-3px); }
+}
+
+// status icon
+.card-status-icon {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  padding-top: 1px;
+}
+
+.icon-met     { color: #66bb6a; }
+.icon-not-met { color: #555; }
+.icon-na      { color: #444; font-size: 11px; }
+.icon-scan    { color: $teal; animation: blink 900ms step-end infinite; }
+.icon-wait    { color: #ffa726; animation: blink 700ms step-end infinite; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .2; }
+}
+
+// ─── Right panel ─────────────────────────────────────────────────────────────
+.wizard-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+// scanning panel
+.panel-scanning {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.scanning-label {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.scanning-code {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+.scanning-desc {
+  font-size: 12px;
+  color: $text-muted;
+  max-width: 240px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.scanning-wave {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+
+  span {
+    display: block;
+    width: 6px;
+    height: 24px;
+    border-radius: 3px;
+    background: $teal;
+    animation: wave 1s ease-in-out infinite;
+
+    &:nth-child(1) { animation-delay: 0s; }
+    &:nth-child(2) { animation-delay: .1s; }
+    &:nth-child(3) { animation-delay: .2s; }
+    &:nth-child(4) { animation-delay: .3s; }
+    &:nth-child(5) { animation-delay: .4s; }
+  }
+}
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(.3); opacity: .4; }
+  50%       { transform: scaleY(1);  opacity: 1; }
+}
+
+// ─── Question panel ───────────────────────────────────────────────────────────
+.panel-question {
+  background: $surface;
+  border: 1px solid #ffa72655;
+  border-radius: 10px;
+  padding: 24px;
+  max-width: 340px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 0 24px #ffa72614;
+}
+
+.question-code {
+  font-size: 22px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.question-tier-label {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 12px;
+  background: #ffa72622;
+  color: #ffa726;
+  letter-spacing: .08em;
+}
+
+.question-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: $text;
+}
+
+.question-context {
+  font-size: 10.5px;
+  color: $text-muted;
+  line-height: 1.55;
+  border-left: 2px solid $border;
+  padding-left: 10px;
+}
+
+.question-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-answer {
+  flex: 1;
+  padding: 9px 0;
+  border-radius: 6px;
+  border: 1px solid $border;
+  background: transparent;
+  color: $text;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms, color 150ms;
+  font-family: inherit;
+
+  &:hover { background: #ffffff10; }
+}
+
+.btn-yes {
+  border-color: #388e3c88;
+  &:hover { background: #388e3c20; color: #66bb6a; border-color: #388e3c; }
+}
+
+.btn-no {
+  border-color: #d32f2f88;
+  &:hover { background: #d32f2f20; color: #ef5350; border-color: #d32f2f; }
+}
+
+.btn-uncertain {
+  border-color: $border;
+  &:hover { background: #ffffff10; }
+}
+
+// ─── Summary panel ────────────────────────────────────────────────────────────
+.panel-summary {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.summary-label {
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.summary-verdict {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.summary-counts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.count-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.count-group-label {
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.count-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.count-chip {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 12px;
+  letter-spacing: .04em;
+}
+
+.chip-pvs { background: #{$pvs}22; color: lighten($pvs, 20%); border: 1px solid #{$pvs}66; }
+.chip-ps  { background: #{$ps}22;  color: lighten($ps, 20%);  border: 1px solid #{$ps}66; }
+.chip-pm  { background: #{$pm}22;  color: lighten($pm, 10%);  border: 1px solid #{$pm}66; }
+.chip-pp  { background: #{$pp}22;  color: $pp;                border: 1px solid #{$pp}66; }
+.chip-ba  { background: #{$ba}22;  color: lighten($ba, 30%);  border: 1px solid #{$ba}66; }
+.chip-bs  { background: #{$bs}22;  color: lighten($bs, 20%);  border: 1px solid #{$bs}66; }
+.chip-bp  { background: #{$bp}22;  color: $bp;                border: 1px solid #{$bp}66; }
+.chip-none { color: $text-muted; font-size: 11px; }
+
+.summary-met {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  background: #ffffff06;
+  border-radius: 6px;
+  border: 1px solid $border;
+}
+
+.met-row {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+
+.met-row-label {
+  color: $text-muted;
+  flex-shrink: 0;
+}
+
+.met-path { color: #ef9a9a; font-weight: 600; }
+.met-ben  { color: #a5d6a7; font-weight: 600; }
+
+.summary-disclaimer {
+  font-size: 9.5px;
+  color: $text-muted;
+  line-height: 1.55;
+  border-top: 1px solid $border;
+  padding-top: 10px;
+}
+
+// idle
+.panel-idle {
+  .idle-dots {
+    display: flex;
+    gap: 6px;
+
+    span {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: $border;
+      animation: dotBounce 1s ease-in-out infinite;
+      &:nth-child(2) { animation-delay: .15s; }
+      &:nth-child(3) { animation-delay: .3s; }
+    }
+  }
+}
+
+// ─── Bottom tally bar ─────────────────────────────────────────────────────────
+.wizard-tally {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: $surface;
+  border-top: 1px solid $border;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  font-size: 11px;
+}
+
+.tally-path, .tally-ben {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tally-label {
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.path-label { color: #ef9a9a; }
+.ben-label  { color: #a5d6a7; }
+
+.tally-divider {
+  color: $border;
+  font-size: 16px;
+}
+
+.tally-chip {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  letter-spacing: .04em;
+  transition: background 300ms;
+}
+
+// reuse count-chip colors for tally
+.tally-chip.chip-pvs { @extend .chip-pvs; }
+.tally-chip.chip-ps  { @extend .chip-ps; }
+.tally-chip.chip-pm  { @extend .chip-pm; }
+.tally-chip.chip-pp  { @extend .chip-pp; }
+.tally-chip.chip-ba  { @extend .chip-ba; }
+.tally-chip.chip-bs  { @extend .chip-bs; }
+.tally-chip.chip-bp  { @extend .chip-bp; }
+
+.tally-empty { color: $text-muted; }
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+@media (max-width: 640px) {
+  .wizard-root { width: 100vw; height: 100vh; border-radius: 0; }
+  .wizard-body { flex-direction: column; }
+  .wizard-log  { flex: 0 0 50%; border-right: none; border-bottom: 1px solid $border; }
+  .wizard-panel { padding: 16px; }
+}

@@ -36,6 +36,7 @@ import { ModelmatcherComponent } from '../../components/pages/human-result/model
 import { PpiComponent } from '../../components/pages/human-result/ppi/ppi.component';
 import { HumanProteinStructureComponent } from '../../components/pages/human-result/human-protein-structure/human-protein-structure.component';
 import { OrthologsComponent } from '../../components/pages/human-result/orthologs/orthologs.component';
+import { AcmgWizardComponent } from '../../components/pages/human-result/acmg-wizard/acmg-wizard.component';
 import { ProteinViewerComponent } from '../../components/protein-viewer/protein-viewer.component';
 import { ReverseAnnotationCandidatesComponent } from '../../components/reverse-annotation-candidates/reverse-annotation-candidates.component';
 import { BatchComponent } from '../../components/pages/batch/batch.component';
@@ -85,6 +86,7 @@ import { MultipleGeneBoxComponent } from '../../components/multiple-gene-box/mul
     MultipleGenesComponent,
     VcfUploadBoxComponent,
     MultipleGeneBoxComponent,
+    AcmgWizardComponent,
   ],
   imports: [
     SharedModule,

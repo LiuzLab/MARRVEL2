@@ -194,6 +194,34 @@
 }
 .kpi-muted   { color: var(--hr-text-muted) !important; }
 .kpi-teal    { color: var(--hr-teal) !important; }
+.kpi-acmg-btn {
+  border: none;
+  border-left: 1px solid var(--hr-border);
+  font-family: inherit;
+  text-align: left;
+  outline: none;
+  &:hover { background: var(--hr-surface2); }
+  &::after { background: var(--hr-teal) !important; }
+
+  &.kpi-acmg-done {
+    border-left-color: var(--hr-teal);
+  }
+}
+
+.acmg-classification-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+
+  &[data-class="Pathogenic"]         { color: #ef5350; background: rgba(239,83,80,.12); }
+  &[data-class="Likely Pathogenic"]  { color: #ef5350; background: rgba(239,83,80,.08); }
+  &[data-class="Benign"]             { color: #66bb6a; background: rgba(102,187,106,.12); }
+  &[data-class="Likely Benign"]      { color: #66bb6a; background: rgba(102,187,106,.08); }
+  &[data-class="VUS"]                { color: #ffa726; background: rgba(255,167,38,.12); }
+}
 .kpi-danger  { color: var(--hr-red) !important; }
 .kpi-warn    { color: var(--hr-amber) !important; }
 .kpi-ok      { color: var(--hr-green) !important; }
