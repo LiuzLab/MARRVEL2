@@ -423,7 +423,6 @@
               </div>
             </div>
           </div>
-
         </section>
 
         <div class="section-divider"></div>
@@ -495,17 +494,17 @@
           <div class="section-header">
             <div class="section-title">gnomAD</div>
             <div class="ext-links">
-              <a class="ext-link" *ngIf="variant" target="_blank"
-                [attr.href]="'https://gnomad.broadinstitute.org/variant/' + variant.chr + '-' + variant.pos + '-' + variant.ref + '-' + variant.alt + '?dataset=gnomad_r2_1'">
+              <a class="ext-link" *ngIf="hg38Variant" target="_blank"
+                [attr.href]="'https://gnomad.broadinstitute.org/variant/' + hg38Variant.chr + '-' + hg38Variant.pos + '-' + hg38Variant.ref + '-' + hg38Variant.alt + '?dataset=gnomad_r4'">
                 ↗ gnomAD variant
               </a>
               <a class="ext-link" *ngIf="gene?.xref?.ensemblId" target="_blank"
-                [attr.href]="'https://gnomad.broadinstitute.org/gene/' + gene.xref.ensemblId + '?dataset=gnomad_r2_1'">
+                [attr.href]="'https://gnomad.broadinstitute.org/gene/' + gene.xref.ensemblId + '?dataset=gnomad_r4'">
                 ↗ gnomAD gene
               </a>
             </div>
           </div>
-          <app-gnom-ad *ngIf="variant" [variant]="variant" (afReady)="gnomadKpi = $event"></app-gnom-ad>
+          <app-gnom-ad *ngIf="hg38Variant" [variant]="hg38Variant" (afReady)="gnomadKpi = $event"></app-gnom-ad>
           <app-gnom-ad-gene *ngIf="gene" [gene]="gene"></app-gnom-ad-gene>
         </section>
 

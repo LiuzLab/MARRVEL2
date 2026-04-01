@@ -66,6 +66,8 @@ console.log(`Running @ ${config.env}`);
 console.log(`DECIPHER control data using collection ${config.decipher.control.name}`);
 console.log(`DECIPEHR disease data using collection ${config.decipher.disease.name}`);
 console.log(`DECIPHER disease access is restricted to ${config.decipher.disease.allowedReferer}`);
+console.log(`gnomAD data using version ${config.gnomad.version} ` +
+  `(collections: ${config.gnomad.variant.name}, ${config.gnomad.gene.name})`);
 
 const httpServer = http.createServer(app);
 // Mongoose

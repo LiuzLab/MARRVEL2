@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+const config = require('../config');
 
 const gnomADGeneSchema = mongoose.Schema({
   geneId: {
@@ -16,5 +17,5 @@ const gnomADGeneSchema = mongoose.Schema({
     type: Number,
     select: false
   }
-}, { collection: 'GnomADGene' });
+}, { collection: config.gnomad.gene.name });
 module.exports = mongoose.model('GnomADGene', gnomADGeneSchema);

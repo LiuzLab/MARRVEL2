@@ -25,6 +25,9 @@ export class GnomADComponent implements OnInit {
   ngOnInit() {
     if (this.variant) {
       this.loading = true;
+
+      this.variant.build = this.variant.build || 'hg38';    // Assume hg38 for gnomAD
+
       this.api.getGnomADVaraint(this.variant)
         .pipe(take(1))
         .subscribe((res) => {
