@@ -20,14 +20,31 @@
           matTooltipPosition="right">
           <mat-icon>{{ sidebarCollapsed ? 'menu' : 'menu_open' }}</mat-icon>
         </button>
-        
-        <div class="variant-title">
-          <span class="gene-accent" *ngIf="gene">{{ gene.symbol }}</span>
-          <span class="title-sep" *ngIf="gene && (variant || proteinInput)"> / </span>
-          <span *ngIf="variant">{{ variantString }}</span>
-          <span *ngIf="proteinInput && !variant">{{ proteinInput }}</span>
+
+        <div class="variant-block">
+          <div class="variant-title-row">
+            <div class="variant-title">
+              <span class="gene-accent" *ngIf="gene">{{ gene.symbol }}</span>
+              <span class="title-sep" *ngIf="gene && (variant || proteinInput)"> / </span>
+              <span *ngIf="hg38Variant">Chr{{ hg38Variant.chr }}:{{ hg38Variant.pos }} {{ hg38Variant.ref }}&gt;{{ hg38Variant.alt }}</span>
+              <span *ngIf="!hg38Variant && variant">{{ variantString }}</span>
+              <span *ngIf="proteinInput && !variant">{{ proteinInput }}</span>
+            </div>
+            <span class="hg38-tag" *ngIf="hg38Variant">hg38</span>
+            <span class="hg38-tag" *ngIf="variant && !hg38Variant">hg19</span>
+            @if (hg38Variant && genomeBuild === 'hg19' && variant) {
+            <div class="liftover-note d-none d-lg-inline-block">
+              Lifted from Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }} (hg19)
+            </div>
+            <div class="liftover-note d-none d-md-inline-block d-lg-none">
+              {{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }} (hg19)
+            </div>
+            <div class="liftover-note d-inline-block d-md-none">
+              Lifted
+            </div>
+            }
+          </div>
         </div>
-        <span class="hg38-tag" *ngIf="hg38Variant">hg38</span>
         <app-forward-annotation *ngIf="variant" [variant]="variant" [compact]="true"></app-forward-annotation>
         <span class="variant-hgvs" *ngIf="variantInput && variantInput.indexOf(':c.') !== -1">{{ variantInput }}</span>
         <div class="identity-pills">

@@ -93,9 +93,8 @@
 }
 .identity-top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
@@ -134,12 +133,31 @@
     transform: scale(0.95);
   }
 }
+.variant-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.variant-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
 .variant-title {
   font-family: var(--hr-mono);
   font-size: 20px;
   font-weight: 600;
   color: var(--hr-text);
   letter-spacing: -.01em;
+}
+.liftover-note {
+  font-family: var(--hr-mono);
+  font-size: 11px;
+  color: var(--hr-text-muted);
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .gene-accent { color: var(--hr-teal); }
 .title-sep   { color: var(--hr-text-muted); margin: 0 2px; }
