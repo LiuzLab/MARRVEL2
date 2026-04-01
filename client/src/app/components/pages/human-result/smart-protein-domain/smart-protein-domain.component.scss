@@ -1,0 +1,18 @@
+:host {
+  color-scheme: inherit;
+
+  // ::ng-deep pierces Angular encapsulation to reach D3-generated elements.
+  // Scoped to :host so it doesn't leak outside this component.
+  ::ng-deep #smart-domain .tick text {
+    fill: var(--hr-text-sec);
+  }
+
+  ::ng-deep #smart-domain .tick line {
+    stroke: var(--hr-text-sec);
+  }
+
+  // Middle track line — the only direct <line> child of the wrapper <g>
+  ::ng-deep #smart-domain > g > g:nth-child(3) > line {
+    stroke: var(--hr-text-sec);
+  }
+}

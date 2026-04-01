@@ -1,12 +1,20 @@
-.fill-white {
-  fill: white;
+:host {
+  color-scheme: inherit;
 }
-.fill-yellow {                                                                                                                    
-  fill: yellow;
+
+svg text {
+  fill: var(--hr-text-sec);
 }
-.fill-orange {
-  fill: orange;
+
+svg line {
+  stroke: var(--hr-text-sec);
 }
-.fill-red {
-  fill: red;
+
+svg circle, svg path {
+  stroke: var(--hr-text-sec);
 }
+
+.fill-white  { fill: white; }
+.fill-yellow { fill: yellow; }
+.fill-orange { fill: orange; }
+.fill-red    { fill: red; }

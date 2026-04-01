@@ -1,0 +1,17 @@
+:host {
+  color-scheme: inherit;
+}
+
+// CSS rules override SVG presentation attributes, so these beat the hardcoded fill/stroke values.
+// Variables come from the human-result host and cascade down through the DOM.
+svg text {
+  fill: var(--hr-text-sec);
+}
+
+svg line {
+  stroke: var(--hr-text-sec);
+}
+
+svg circle {
+  stroke: var(--hr-text-muted);
+}
