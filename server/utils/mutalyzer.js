@@ -10,7 +10,8 @@ const getGeneByRefSeqId = (sid) => {
       uri: `https://mutalyzer.nl/api/reference_model/?reference_id=${encodeURIComponent(sid)}`,
       headers: {
         'content-type': 'application/json'
-      }
+      },
+      timeout: 15000
     }).then((str) => {
       let ref;
       try {
@@ -63,7 +64,8 @@ exports.getGenomLocByHgvsVar = async (variant, build) => {
       uri: `https://mutalyzer.nl/api/normalize/${encodeURIComponent(variant)}`,
       headers: {
         'content-type': 'application/json'
-      }
+      },
+      timeout: 15000
     }).then((respStr) => {
       let resp;
       try {

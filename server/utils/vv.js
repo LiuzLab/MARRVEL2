@@ -13,7 +13,8 @@ exports.getGenomLocByHgvsVar = (variant, build) => {
       uri: `https://rest.variantvalidator.org/VariantValidator/variantvalidator/${build}/${encodeURIComponent(variant)}/all`,
       headers: {
         'content-type': 'application/json'
-      }
+      },
+      timeout: 15000
     }).then(async (respStr) => {
       let resp;
       try {

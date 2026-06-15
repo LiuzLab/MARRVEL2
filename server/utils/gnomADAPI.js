@@ -28,7 +28,7 @@ const queryByGene = (gene, referenceGenome) => {
       operationName: 'Gene',
       query: geneQuery,
       variables: filter
-    } }).then((res) => {
+    }, timeout: { request: 15000 } }).then((res) => {
       let data;
       try {
         data = JSON.parse(res?.body || '').data.gene;
@@ -97,7 +97,7 @@ const queryByVariant = (variantId, referenceGenome, datasetId) => {
       referenceGenome,
       datasetId
     }
-  } }).json().then((res) => {
+  }, timeout: { request: 15000 } }).json().then((res) => {
     if (res.data == null || res.data.variant == null) {
       return null;
     } else {

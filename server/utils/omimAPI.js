@@ -12,7 +12,8 @@ exports.queryByMimNumber = (mimNumber) => {
         apiKey
       },
       headers: { 'User-Agent': 'Request-Promise' },
-      json: true
+      json: true,
+      timeout: 10000
     })
       .then((res) => {
         if (!res.omim.entryList || !res.omim.entryList.length || !res.omim.entryList[0].entry) {

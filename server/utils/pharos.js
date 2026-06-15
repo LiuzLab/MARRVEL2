@@ -88,6 +88,7 @@ fragment ligandCardFields on Ligand {
         Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
+      timeout: 10000,
       responseType: 'json'
     }).then((res) => {
       const data = JSON.parse(CircularJSON.stringify(res)) || {};

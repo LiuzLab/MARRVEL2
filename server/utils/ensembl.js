@@ -10,7 +10,8 @@ const queryHumanVariationById = (vid) => {
         'content-type': 'application/json'
       },
       headers: { 'User-Agent': 'Request-Promise' },
-      json: true
+      json: true,
+      timeout: 10000
     }).then((res) => {
       resolve(res);
     }).catch((err) => {
@@ -52,7 +53,7 @@ exports.queryLookupByEnsemblId = (ensemblId) => {
       reject(new Error('Invalid Ensembl ID'));
     } else {
       const url = `https://grch37.rest.ensembl.org/lookup/id/${ensemblId}`;
-      got.get(url, { headers: { 'content-type': 'application/json' } })
+      got.get(url, { headers: { 'content-type': 'application/json' }, timeout: { request: 10000 } })
         .json()
         .then((res) => {
           resolve(res);
