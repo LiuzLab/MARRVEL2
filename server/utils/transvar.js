@@ -24,7 +24,7 @@ const appendGene = (data) => {
 const executeTransvar = (option) => {
   return new Promise((resolve, reject) => {
     const { spawn } = require('child_process');
-    const proc = spawn(transvarPath, option);
+    const proc = spawn(transvarPath, option, { timeout: 30000, killSignal: 'SIGKILL' });
 
     let stdout = '';
     const stderr = [];
@@ -37,7 +37,11 @@ const executeTransvar = (option) => {
       stderr.push(err);
     });
 
-    proc.on('close', (code) => {
+    proc.on('close', (code, signal) => {
+      if (signal) {
+        reject(new Error(`transvar process was killed (signal: ${signal})`));
+        return;
+      }
       resolve({
         code,
         stdout,
