@@ -7,6 +7,7 @@ services:
 
   server:
     image: zhandongliulab/marrvel-server
+    restart: unless-stopped
     working_dir: /MARRVEL/server
     volumes:
       - "${LOCAL_BASE}/.env:/MARRVEL/server/.env"
